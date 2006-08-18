@@ -51,6 +51,9 @@ distclean: clean
 .dependencies: *.c 
 	@$(CC) $(CFLAGS) $(INCLUDES) -MM *.c > .dependencies
 
+documentation:: *.c *.h toke.doxygen
+	@doxygen toke.doxygen
+
 .PHONY: all clean distclean 
 
 -include .dependencies
