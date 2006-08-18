@@ -1,3 +1,27 @@
+/*
+ *                     OpenBIOS - free your system!
+ *                         ( romheaders utility )
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
+ *  Standard for Boot (Initialization Configuration) Firmware.
+ *
+ *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; version 2 of the License.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
+ *
+ */
 
 
 #include <stdio.h>
@@ -11,9 +35,6 @@
 #define u32 unsigned int
 
 #define PCI_DATA_HDR (u32) ( ('R' << 24) | ('I' << 16) | ('C' << 8) | 'P' )
-
-char *rom=NULL;
-size_t romlen=0;
 
 typedef struct {
 	u16	signature;
@@ -37,6 +58,8 @@ typedef struct {
 	u16	reserved_2;
 } pci_data_t;
 
+char *rom=NULL;
+size_t romlen=0;
 
 /* make this endian safe without fancy system headers */
 static u16 little_word(u16 val)
