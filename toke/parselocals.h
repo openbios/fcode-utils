@@ -1,13 +1,11 @@
-#ifndef _TOKE_TOKE_H
-#define _TOKE_TOKE_H
+#ifndef _TOKE_LOCALX_H
+#define _TOKE_LOCALX_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  toke.h - tokenizer base macros.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,24 +26,23 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
+ *
+ *     Function Prototypes / External definitions for Parsing
+ *          functions for IBM-style Local Values in Tokenizer
+ *
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
- **************************************************************************** */
-
-
-#include "types.h"
-
-
-/* ************************************************************************** *
- *
- *      Global Variables Exported
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
  *
  **************************************************************************** */
 
-extern bool verbose;
-extern bool noerrors;
-extern bool fload_list;
-extern bool dependency_list;
+#include "ticvocab.h"
 
-#endif   /* _TOKE_TOKE_H */
+void declare_locals ( bool ignoring);
+tic_hdr_t *lookup_local( char *lname);
+bool exists_as_local( char *stat_name );
+bool create_local_alias(char *new_name, char *old_name);
+void assign_local ( void );
+void finish_locals ( void );
+void forget_locals ( void );
+
+#endif   /*  _TOKE_LOCALX_H    */

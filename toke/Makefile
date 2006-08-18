@@ -1,11 +1,12 @@
 #
-#                     OpenBIOS - free your system! 
-#                         ( FCode tokenizer )
-#                          
-#  This program is part of a free implementation of the IEEE 1275-1994 
+#                     OpenBIOS - free your system!
+#                             ( Utilities )
+#
+#  This program is part of a free implementation of the IEEE 1275-1994
 #  Standard for Boot (Initialization Configuration) Firmware.
 #
-#  Copyright (C) 2001-2005  Stefan Reinauer, <stepan@openbios.org>
+#  Copyright (C) 2001-2006  Stefan Reinauer <stepan@openbios.org>
+#  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,52 +22,39 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
-ARCH     := $(shell uname -m | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/ -e s/x86_64/amd64/)
-TOPDIR   := $(shell /bin/pwd)
-BUILDDIR ?= $(TOPDIR)/obj-$(ARCH)
-VPATH    := $(BUILDDIR)
+PROGRAM = toke
 
-include $(TOPDIR)/Rules.make
+CC      = gcc
+STRIP	= strip
+INCLUDES = -I../shared
+#CFLAGS  = -O2 -g -Wall 
+CFLAGS  = -Os -Wall -Wno-pointer-sign -DSYS_IS_GNU_Linux
+LDFLAGS = 
 
-CC     = gcc
-CFLAGS = -O2 -Wall -W -ansi -pedantic
-# CFLAGS = -O -g -Wall -ansi -pedantic
+OBJS  = clflags.o conditl.o devnode.o dictionary.o emit.o errhandler.o     \
+        flowcontrol.o macros.o nextfcode.o parselocals.o scanner.o stack.o \
+	stream.o strsubvocab.o ticvocab.o toke.o tokzesc.o tracesyms.o     \
+	usersymbols.o ../shared/classcodes.o
 
-# CFLAGS := $(CFLAGS) -DDEBUG_SCANNER
-# CFLAGS := $(CFLAGS) -DDEBUG_DSTACK
+all: .dependencies $(PROGRAM)
 
-OBJECTS= toke.o stack.o stream.o dictionary.o macros.o scanner.o emit.o
+$(PROGRAM): $(OBJS)
+	$(CC) -o $(PROGRAM) $(OBJS) $(LDFLAGS)
+	$(STRIP) -s $(PROGRAM)
 
-.SUFFIXES: .c .o
-
-all: main toke
-	@cd $(BUILDDIR) && strip toke
-	@echo -e "\nOpenBIOS tokenizer toke build finished\n"
-
-# main should go to rules.make
-main:
-	@echo -e "\nWelcome to toke, the OpenBIOS fcode tokenizer.."
-	@test -r $(BUILDDIR) || ( mkdir -p $(BUILDDIR); \
-	  echo -e "\nCreating build directory $(BUILDDIR)" )
-
-toke: $(OBJECTS)
-	@echo -n "  linking tokenizer executable... "
-	@cd $(BUILDDIR) && $(CC) $(CFLAGS) -o $@ $^
-	@echo -e "\tok"
-	
 clean:
-	@test ! -d $(BUILDDIR) && \
-		echo "Architecture $(ARCH) is already clean." || \
-		( 						 \
-			echo "Cleaning up architecture $(ARCH)"; \
-			rm -rf $(BUILDDIR)			 \
-			rm forth.dict.core			 \
-		)
+	rm -f $(OBJS) *~
 
-toke.o:       toke.c toke.h stack.h stream.h emit.h
-dictionary.o: dictionary.c toke.h dictionary.h
-emit.o:       emit.c toke.h stack.h
-macros.o:     macros.c toke.h
-scanner.o:    scanner.c toke.h stack.h stream.h dictionary.h
-stack.o:      stack.c toke.h stack.h
-stream.o:     stream.c toke.h
+distclean: clean
+	rm -f $(PROGRAM) .dependencies
+	
+.dependencies: *.c 
+	@$(CC) $(CFLAGS) $(INCLUDES) -MM *.c > .dependencies
+
+.PHONY: all clean distclean 
+
+-include .dependencies
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@ 
+

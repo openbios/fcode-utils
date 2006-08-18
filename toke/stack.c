@@ -24,93 +24,203 @@
  *
  */
 
+/* **************************************************************************
+ *         Modifications made in 2005 by IBM Corporation
+ *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+ *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ **************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "toke.h"
 #include "stack.h"
+#include "scanner.h"
+#include "errhandler.h"
+
+/* **************************************************************************
+ *
+ *          Global Variables Imported
+ *              statbuf          The word just read from the input stream
+ *
+ **************************************************************************** */
 
 
-#define GUARD_STACK
-#define EXIT_STACKERR
+/* **************************************************************************
+ *
+ *          Global Variables Exported
+ *              dstack         Pointer to current item on top of Data Stack
+ *
+ **************************************************************************** */
 
-#ifdef GLOBALSTACK
-#define STATIC static
-#else
-#define STATIC
-#endif
-STATIC long *dstack,*startdstack,*enddstack;
-#undef STATIC
+long *dstack;
+
+/* **************************************************************************
+ *
+ *      Local/Static Pointers  .....      to  ...         -> Points to ...
+ *          startdstack         Start of data-stack area  -> last possible item
+ *          enddstack           End of data-stack area    -> past first item
+ *
+ *************************************************************************** */
+
+static long *startdstack;
+static long *enddstack;
+
+void clear_stack(void)
+{
+    dstack = enddstack;
+}
 
 /* internal stack functions */
 
-int init_stack(void)
+void init_stack(void)
 {
-	startdstack=enddstack=malloc(MAX_ELEMENTS*sizeof(long));
-	enddstack+=MAX_ELEMENTS;
+	startdstack = safe_malloc(MAX_ELEMENTS*sizeof(long), "initting stack");
+	enddstack = startdstack + MAX_ELEMENTS;
 	dstack=enddstack;
-	return 0;
 }
 
-#ifdef GLOBALSTACK 
-
-#ifdef GUARD_STACK
-static void stackerror(int stat)
+/*  Input Param:  stat   TRUE = Underflow, FALSE = Overflow   */
+static void stackerror(bool stat)
 {
-  	printf ("FATAL: stack %sflow\n",
-		(stat)?"under":"over" );
-#ifdef EXIT_STACKERR
-	exit(-1);
-#endif
+    /*
+     *   Because all of our stack operations are protected and
+     *       we have no risk of the  dstack  pointer going into
+     *       invalid territory, this error needs not be  FATAL.
+     */
+    tokenization_error ( TKERROR , "stack %sflow at or near  %s \n",
+	 (stat)?"under":"over" , statbuf );
 }
-#endif
+
+/*
+ *  Return TRUE if the stack depth is equal to or greater than
+ *      the supplied minimum requirement.  If not, print an error.
+ */
+bool min_stack_depth(int mindep)
+{
+    bool retval = TRUE ;
+    long *stack_result;
+
+    stack_result = dstack + mindep;
+    /*
+     *  The above appears counter-intuitive.  However, C compensates
+     *      for the size of the object of a pointer when it handles
+     *      address arithmetic.  A more explicit expression that would
+     *      yield the same result, might look something like this:
+     *
+     *        (long *)((int)dstack + (mindep * sizeof(long)))
+     *
+     *  I doubt that that form would yield tighter code, or otherwise
+     *      represent any material advantage...
+     */
+
+    if ( stack_result > enddstack )
+    {
+	retval = FALSE;
+	stackerror(TRUE);
+    }
+
+    return ( retval );
+}
+
+/*
+ *  Return TRUE if the stack has room for the supplied # of items
+ */
+static bool room_on_stack_for(int newdep)
+{
+    bool retval = TRUE ;
+    long *stack_result;
+
+    stack_result = dstack - newdep;
+    /*  See above note about "counter-intuitive" pointer address arithmetic  */
+
+    if ( stack_result < startdstack )
+    {
+	retval = FALSE;
+	stackerror(FALSE);
+    }
+
+    return ( retval );
+}
 
 void dpush(long data)
 {
 #ifdef DEBUG_DSTACK
 	printf("dpush: sp=%p, data=0x%lx, ", dstack, data);
 #endif
-	*(--dstack)=data;
-#ifdef GUARD_STACK
-	if (dstack<startdstack) stackerror(0);
-#endif
+	if ( room_on_stack_for(1) )
+	{
+	    --dstack;
+	    *(dstack)=data;
+	}
 }
 
 long dpop(void)
 {
-  	long val;
+  	long val = 0;
 #ifdef DEBUG_DSTACK
 	printf("dpop: sp=%p, data=0x%lx, ",dstack, *dstack);
 #endif
-	val=*(dstack++);
-#ifdef GUARD_STACK
-	if (dstack>enddstack) stackerror(1);
-#endif
+	if ( min_stack_depth(1) )
+	{
+	    val=*(dstack);
+	    dstack++;
+	}
 	return val;
 }
 
 long dget(void)
 {
-	return *(dstack);
+  	long val = 0;
+	if ( min_stack_depth(1) )
+	{
+	    val = *(dstack);
+	}
+	return val;
 }
-#endif
 
-/* Stack helper functions */
-
-u8 *get_stackstring(void)
+long stackdepth(void)
 {
-	long size;
-	u8   *fstring, *retstring;
+    long depth;
 
-	size=dpop();
-	fstring=(u8 *)dpop();
+    depth = enddstack - dstack;
+    /*
+     *  Again, C's address arithmetic compensation comes into play.
+     *      See the note at  min_stack_depth()
+     *
+     *  A more explicit equivalent expression might look like this:
+     *
+     *        (((long int)enddstack - (long int)dstack) / sizeof(long))
+     *
+     *  I doubt any material advantage with that one either...
+     */
 
-	retstring=malloc(size+1);
-	strncpy((char *)retstring, (const char *)fstring, size);
-	retstring[size]=0;
+    return (depth);
+}
 
-	return retstring;
+void swap(void)
+{
+    long nos_temp;    /*  Next-On-Stack temp  */
+    if ( min_stack_depth(2) )
+    {
+	nos_temp = dstack[1];
+	dstack[1]= dstack[0];
+	dstack[0]= nos_temp;
+    }
+}
+
+void two_swap(void)
+{
+    long two_deep, three_deep;
+    if ( min_stack_depth(4) )
+    {
+	two_deep   = dstack[2];
+	three_deep = dstack[3];
+	dstack[2]  = dstack[0];
+	dstack[3]  = dstack[1];
+	dstack[1]  = three_deep;
+	dstack[0]  = two_deep;
+    }
 }
 
 

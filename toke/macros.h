@@ -1,13 +1,11 @@
-#ifndef _TOKE_TOKE_H
-#define _TOKE_TOKE_H
+#ifndef _TOKE_MACROS_H
+#define _TOKE_MACROS_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  toke.h - tokenizer base macros.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,24 +26,33 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
+ *
+ *      Prototypes for functions that operate on the  MACROS vocabulary,
+ *          which is implemented as a String-Substitution-type vocab.
+ *
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
  **************************************************************************** */
 
 
 #include "types.h"
-
+#include "ticvocab.h"
 
 /* ************************************************************************** *
  *
- *      Global Variables Exported
+ *      Function Prototypes / Functions Exported:
  *
  **************************************************************************** */
 
-extern bool verbose;
-extern bool noerrors;
-extern bool fload_list;
-extern bool dependency_list;
+void init_macros( tic_hdr_t **tic_vocab_ptr );
+void add_user_macro( void);
+void skip_user_macro( tic_bool_param_t pfield );
+#if  0  /*  What's this doing here?  */
+char *lookup_macro(char *name);
+bool exists_as_macro(char *name);
+bool create_macro_alias( char *new_name, char *old_name );
+void reset_macros_vocab( void );
+#endif  /*  What's this doing here?  */
 
-#endif   /* _TOKE_TOKE_H */
+#endif   /*  _TOKE_MACROS_H    */

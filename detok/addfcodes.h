@@ -1,13 +1,11 @@
-#ifndef _TOKE_TOKE_H
-#define _TOKE_TOKE_H
+#ifndef _DETOK_VSFCODES_H
+#define _DETOK_VSFCODES_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  toke.h - tokenizer base macros.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,24 +26,23 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
- *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
+ *      Header for function for entering Vendor-Specific FCodes
+ *          to detokenizer.
+ *
+ *      (C) Copyright 2006 IBM Corporation.  All Rights Reserved.
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
  **************************************************************************** */
-
 
 #include "types.h"
 
-
 /* ************************************************************************** *
  *
- *      Global Variables Exported
+ *      Function Prototypes / Functions Exported:
  *
  **************************************************************************** */
 
-extern bool verbose;
-extern bool noerrors;
-extern bool fload_list;
-extern bool dependency_list;
+bool add_fcodes_from_list( char *vf_file_name);
 
-#endif   /* _TOKE_TOKE_H */
+#endif   /*  _DETOK_VSFCODES_H    */

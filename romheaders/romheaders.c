@@ -23,6 +23,11 @@
  *
  */
 
+/* **************************************************************************
+ *         Modifications made in 2005 by IBM Corporation
+ *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+ *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ **************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,60 +35,32 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define u8  unsigned char
-#define u16 unsigned short
-#define u32 unsigned int
-
-#define PCI_DATA_HDR (u32) ( ('R' << 24) | ('I' << 16) | ('C' << 8) | 'P' )
-
-typedef struct {
-	u16	signature;
-	u8	reserved[0x16];
-	u16	dptr;
-} rom_header_t;
-
-typedef struct {
-	u32	signature;
-	u16	vendor;
-	u16	device;
-	u16	reserved_1;
-	u16	dlen;
-	u8	drevision;
-	u8	class_hi;
-	u16	class_lo;
-	u16	ilen;
-	u16	irevision;
-	u8	type;
-	u8	indicator;
-	u16	reserved_2;
-} pci_data_t;
+#include "pcihdr.h"
 
 char *rom=NULL;
 size_t romlen=0;
 
-/* make this endian safe without fancy system headers */
-static u16 little_word(u16 val)
-{
-	u8 *ptr=(u8 *)&val;
-	return (ptr[0]|(ptr[1]<<8));
-}
+/*  Prototypes for functions exported from  shared/classcodes.c   */
 
-static u16 little_dword(u16 val)
-{
-	u8 *ptr=(u8 *)&val;
-	return (ptr[0]|(ptr[1]<<8)|(ptr[2]<<16)|(ptr[3]<<24));
-}
+char *pci_device_class_name(u32 code);
+char *pci_code_type_name(unsigned char code);
 
-/* dump the rom headers */
+/*  Functions local to this file:
+	    int dump_rom_header(rom_header_t *data);
+	    int dump_pci_data(pci_data_t *data);
+	    void dump_platform_extensions(u8 type, rom_header_t *data);
+ */
+
 static int dump_rom_header(rom_header_t *data)
-{
-	u16 sig=little_word(data->signature);
+{   /*  Return TRUE for "no problem"  */
+	const u16 pci_header_signature = 0x55aa;
+	u16 sig=BIG_ENDIAN_WORD_FETCH(data->signature);
 	int i;
 	
 	printf ("PCI Expansion ROM Header:\n");
 	
-	printf ("  Signature: 0x%02x%02x (%s)\n", 
-			sig&0xff,sig>>8,sig==0xaa55?"Ok":"Not Ok");
+	printf ("  Signature: 0x%04x (%s)\n", 
+			sig, sig == pci_header_signature ? "Ok":"Not Ok");
 	
 	printf ("  CPU unique data:");
 	for (i=0;i<16;i++) {
@@ -92,97 +69,41 @@ static int dump_rom_header(rom_header_t *data)
 	}
 	
 	printf ("\n  Pointer to PCI Data Structure: 0x%04x\n\n",
-						little_word(data->dptr));
+				LITTLE_ENDIAN_WORD_FETCH(data->data_ptr));
 
-	return (sig==0xaa55);
+	return (sig == pci_header_signature);
 }
 
 static int dump_pci_data(pci_data_t *data)
-{
-	u32 sig=little_dword(data->signature);
-	u32 classcode=(data->class_hi<<16)|(little_word(data->class_lo));
+{   /*  Return TRUE for "no problem"  */
+	const u32 pci_data_hdr = PCI_DATA_HDR ;
+
+	u32 sig      = BIG_ENDIAN_LONG_FETCH(data->signature);
+	u32 classcode= CLASS_CODE_FETCH(data->class_code);
+	u32 dlen     = (u32)LITTLE_ENDIAN_WORD_FETCH(data->dlen);
+	u32 ilen     = (u32)LITTLE_ENDIAN_WORD_FETCH(data->ilen);
 	
 	printf("PCI Data Structure:\n");
-	printf("  Signature: '%c%c%c%c' (%s)\n", sig&0xff,(sig>>8)&0xff,
-			(sig>>16)&0xff, sig>>24, sig==PCI_DATA_HDR?"Ok":"Not Ok");
-	printf("  Vendor ID: 0x%04x\n", little_word(data->vendor));
-	printf("  Device ID: 0x%04x\n", little_word(data->device));
-	printf("  Reserved: 0x%04x\n", little_word(data->reserved_1));
-	printf("  PCI Data Structure Length: 0x%04x (%d bytes)\n", 
-			little_word(data->dlen), little_word(data->dlen));
+	printf("  Signature: 0x%04x '%c%c%c%c' ", sig,
+			sig>>24,(sig>>16)&0xff, (sig>>8)&0xff, sig&0xff);
+	printf("(%s)\n", sig == pci_data_hdr ?"Ok":"Not Ok");
+
+	printf("  Vendor ID: 0x%04x\n", LITTLE_ENDIAN_WORD_FETCH(data->vendor));
+	printf("  Device ID: 0x%04x\n", LITTLE_ENDIAN_WORD_FETCH(data->device));
+	printf("  Vital Product Data:  0x%04x\n",
+	                                   LITTLE_ENDIAN_WORD_FETCH(data->vpd));
+	printf("  PCI Data Structure Length: 0x%04x (%d bytes)\n", dlen, dlen);
 	printf("  PCI Data Structure Revision: 0x%02x\n", data->drevision);
-	printf("  Class Code: 0x%06x (",classcode);
-	switch (classcode) {
-	case 0x0100:
-		printf("SCSI Storage");
-		break;
-	case 0x0101:
-		printf("IDE Storage");
-		break;
-	case 0x0103:
-		printf("IPI Storage");
-		break;
-	case 0x0104:
-		printf("RAID Storage");
-		break;
-	case 0x0180:
-		printf("Storage");
-		break;
-		
-	case 0x0200:
-		printf("Ethernet");
-		break;
-	case 0x0201:
-		printf("Token Ring");
-		break;
-	case 0x0202:
-		printf("FDDI");
-		break;
-	case 0x0203:
-		printf("ATM");
-		break;
-	case 0x0280:
-		printf("Network");
-		
-	case 0x0300:
-		printf("VGA Display");
-		break;
-	case 0x0301:
-		printf("XGA Display");
-		break;
-	case 0x0302:
-		printf("3D Display");
-		break;
-	case 0x0380:
-		printf("Display");
-		break;
-		
-	default:
-		printf("unkown");
-	}
-	printf(")\n  Image Length: 0x%04x blocks (%d bytes)\n", 
-			little_word(data->ilen), little_word(data->ilen)*512);
+	printf("  Class Code: 0x%06x (%s)\n",classcode,
+					 pci_device_class_name(classcode));
+	printf("  Image Length: 0x%04x blocks (%d bytes)\n", ilen, ilen*512);
 	printf("  Revision Level of Code/Data: 0x%04x\n",
-			little_word(data->irevision));
-	printf("  Code Type: 0x%02x (", data->type);
-	switch (data->type) {
-	case 0:
-		printf("Intel x86");
-		break;
-	case 1: 
-		printf("Open Firmware");
-		break;
-	case 2:
-		printf("HP PA Risc");
-		break;
-	case 3:
-		printf("Intel EFI (unofficial)");
-		break;
-	default:
-		printf("unknown as of PCI specs 2.2");
-	}
-	printf(")\n  Indicator: 0x%02x %s\n", data->indicator,
-			data->indicator&0x80?"(last image in rom)":"");
+			(u32)LITTLE_ENDIAN_WORD_FETCH(data->irevision));
+	printf("  Code Type: 0x%02x (%s)\n", data->code_type,
+					  pci_code_type_name(data->code_type) );
+	printf("  Last-Image Flag: 0x%02x (%slast image in rom)\n",
+			data->last_image_flag,
+			data->last_image_flag&0x80?"":"not ");
 	printf("  Reserved: 0x%04x\n\n", little_word(data->reserved_2));
 
 	return (sig==PCI_DATA_HDR);
@@ -225,7 +146,7 @@ static void dump_platform_extensions(u8 type, rom_header_t *data)
 			printf( "  Entry point for INIT function:"
 				" 0x%x\n\n",entry);
 		} else
-			printf( "  Unable to determin entry point for INIT"
+			printf( "  Unable to determine entry point for INIT"
 				" function. Please report.\n\n");
 		
 		break;
@@ -252,9 +173,9 @@ int main(int argc, char **argv)
 
 	if (argc!=2) {
 		printf ("\nUsage: %s <romimage.img>\n",argv[0]);
-		printf ("\nromheaders dumps pci option rom headers "
+		printf ("\n  romheaders dumps pci option rom headers "
 				"according to PCI \n"
-				"specs 2.2 in human readable form\n\n");
+				"  specs 2.2 in human readable form\n\n");
 		return -1;
 	}
 	
@@ -290,23 +211,25 @@ int main(int argc, char **argv)
 	do {
 		printf("\nImage %d:\n",i);
 		if (!dump_rom_header(rom_header)) {
-			printf("Error occured. Bailing out.\n");
+			printf("Rom Header error occured. Bailing out.\n");
 			break;
 		}
 		
-		pci_data=(pci_data_t *)(rom+little_word(rom_header->dptr));
+		pci_data = (pci_data_t *)((char *)rom_header +
+			     LITTLE_ENDIAN_WORD_FETCH(rom_header->data_ptr));
 		
 		if (!dump_pci_data(pci_data)) {
-			printf("Error occured. Bailing out.\n");
+			printf("PCI Data error occured. Bailing out.\n");
 			break;
 		}
 		
-		dump_platform_extensions(pci_data->type, rom_header);
+		dump_platform_extensions(pci_data->code_type, rom_header);
 		
-		rom_header+=little_word(pci_data->ilen)*512;
+		rom_header = (rom_header_t *)((char *)rom_header +
+				LITTLE_ENDIAN_WORD_FETCH(pci_data->ilen)*512);
 		i++;
-	} while ((pci_data->indicator&0x80)!=0x80 &&
-			romlen<(unsigned long)rom_header-(unsigned long)romlen);
+	} while ((pci_data->last_image_flag&0x80)!=0x80 &&
+			(char *)rom_header < rom+(int)romlen );
 
 	return 0;
 }

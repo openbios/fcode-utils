@@ -1,13 +1,11 @@
-#ifndef _TOKE_STACK_H
-#define _TOKE_STACK_H
+#ifndef _TOKE_NEXTFCODE_H
+#define _TOKE_NEXTFCODE_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  stack.h - prototypes and defines for handling the stacks.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,21 +26,17 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
- *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
+ *      Function Prototypes for Managing FCode Assignment Pointer 
+ *         and for Detection of Overlapping-FCode Error in Tokenizer
+ *
+ *      (C) Copyright 2006 IBM Corporation.  All Rights Reserved.
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
  **************************************************************************** */
 
 #include "types.h"
 
-/* ************************************************************************** *
- *
- *      Macros:
- *          MAX_ELEMENTS          Size of stack area, in "elements"
- *
- **************************************************************************** */
-
-#define MAX_ELEMENTS 1024
 
 /* ************************************************************************** *
  *
@@ -50,7 +44,8 @@
  *
  **************************************************************************** */
 
-extern long *dstack;
+extern u16  nextfcode;         /*  The next FCode-number to be assigned      */
+
 
 /* ************************************************************************** *
  *
@@ -58,16 +53,28 @@ extern long *dstack;
  *
  **************************************************************************** */
 
-void dpush(long data);
-long dpop(void);
-long dget(void);
+void reset_fcode_ranges( void);
+void list_fcode_ranges( bool final_tally);
+void set_next_fcode( u16  new_fcode);
+void assigning_fcode( void);
+void bump_fcode( void);
 
-void clear_stack(void);
-void init_stack(void);
+/* **************************************************************************
+ *
+ *          Macros:
+ *
+ *          FCODE_START             Standard-specified starting number for
+ *                                      user-generated FCodes.
+ *
+ *          FCODE_LIMIT             Standard-specified maximum number for
+ *                                      FCodes of any origin.
+ *
+ *      I know these are not likely to change, but I still feel better
+ *          making them named symbols, just on General Principles...
+ *
+ **************************************************************************** */
 
-bool min_stack_depth(int mindep);   /*  TRUE if no error  */
-long stackdepth(void);
-void swap(void);
-void two_swap(void);
+#define FCODE_START  0x0800
+#define FCODE_LIMIT  0x0fff
 
-#endif   /*  _TOKE_STACK_H    */
+#endif   /*  _TOKE_NEXTFCODE_H    */

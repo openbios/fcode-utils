@@ -1,3 +1,6 @@
+#ifndef _UTILS_DETOK_DETOK_H
+#define _UTILS_DETOK_DETOK_H
+
 /*
  *                     OpenBIOS - free your system! 
  *                            ( detokenizer )
@@ -24,10 +27,49 @@
  *
  */
 
-#define u8 unsigned char
-#define u16 unsigned short
-#define u32 unsigned int
-#define s16 short
-#define bool int
-#define TRUE (-1)
-#define FALSE (0)
+/* **************************************************************************
+ *         Modifications made in 2005 by IBM Corporation
+ *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+ *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ **************************************************************************** */
+
+#include "types.h"
+
+/*  Prototypes for functions exported from
+ *   detok.c  decode.c  printformats.c  pcihdr.c  and  dictionary.c
+ */
+
+void add_token(u16 number, char *name);
+void init_dictionary(void);
+void reset_dictionary(void);
+void freeze_dictionary(void);
+char *lookup_token(u16 number);
+
+void detokenize(void);
+
+void printremark(char *str);
+
+int handle_pci_header ( u8  *data_ptr );
+void handle_pci_filler(u8 *filler_ptr);
+
+
+/*  External declarations for variables defined in or used by
+ *   detok.c  decode.c  printformats.c  pcihdr.c  and  dictionary.c
+ */
+extern bool verbose;
+extern bool decode_all;
+extern bool show_linenumbers;
+extern bool show_offsets;
+
+extern bool check_tok_seq;
+
+extern u16 fcode;
+extern bool offs16;
+extern bool end_found;
+extern unsigned int linenum;
+
+extern u8 *pci_image_end;
+extern unsigned int token_streampos;
+extern u16 last_defined_token;
+
+#endif   /*  _UTILS_DETOK_DETOK_H    */

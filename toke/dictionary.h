@@ -1,3 +1,6 @@
+#ifndef _TOKE_DICTIONARY_H
+#define _TOKE_DICTIONARY_H
+
 /*
  *                     OpenBIOS - free your system! 
  *                         ( FCode tokenizer )
@@ -24,81 +27,152 @@
  *
  */
 
-#define COLON		0x01
-#define SEMICOLON	0x02
-#define TOKENIZE	0x03
-#define AGAIN		0x04
-#define ALIAS		0x05
-#define GETTOKEN 	0x06
-#define ASCII		0x07
-#define BEGIN		0x08
-#define BUFFER		0x09
-#define CASE		0x0a
-#define CONST		0x0b
-#define CONTROL		0x0c
-#define CREATE		0x0d
-#define DECIMAL		0x0e
-#define DEFER		0x0f
-#define CDO		0x10
-#define DO		0x11
-#define ELSE		0x12
-#define ENDCASE		0x13
-#define ENDOF		0x14
-#define EXTERNAL	0x15
-#define FIELD		0x16
-#define HEADERLESS	0x17
-#define HEADERS		0x18
-#define HEX		0x19
-#define IF		0x1a
-#define CLEAVE		0x1b
-#define LEAVE		0x1c
-#define CLOOP		0x1d
-#define LOOP		0x1e
-#define OCTAL		0x1f
-#define OF		0x20
-#define REPEAT		0x21
-#define THEN		0x22
-#define TO		0x23
-#define UNTIL		0x24
-#define VALUE		0x25
-#define VARIABLE	0x26	
-#define WHILE		0x27
-#define OFFSET16	0x28	
-#define BEGINTOK	0x29	
-#define EMITBYTE	0x2a	
-#define ENDTOK		0x2b
-#define FLOAD		0x2c
-#define STRING		0x2d
-#define PSTRING		0x2e
-#define PBSTRING	0x2f
-#define SSTRING		0x30
-#define RECURSIVE	0x31
-#define HEXVAL		0x32
-#define DECVAL		0x33
-#define OCTVAL		0x34
+/* **************************************************************************
+ *         Modifications made in 2005 by IBM Corporation
+ *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+ *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ **************************************************************************** */
 
-#define END0		0xdb
-#define END1		0xdc
-#define CHAR		0xdd
-#define CCHAR		0xde
-#define ABORTTXT	0xdf
+/* **************************************************************************
+ *
+ *      Numeric values for FWord-type vocabulary entries.  Used by the
+ *          big "switch" statement in handle_internal(); a subset are 
+ *          also used as "definer-type" values associated with various
+ *          types of definitions.
+ *
+ **************************************************************************** */
 
-#define NEXTFCODE	0xef
+typedef enum fword_token {
+      UNSPECIFIED  = 0xBAADD00D ,  /*  Default (absence-of) "definer"        */
+      COMMON_FWORD = 0xC0EDC0DE ,  /*  Definer indicating a "shared" FWord   */
+      BI_FWRD_DEFN = 0xB1F4409D ,  /*  Definer indicating a "built-in FWord" */
+      COLON = 1 ,
+      SEMICOLON ,
+      TICK ,
+      AGAIN ,
+      ALIAS ,
+      BRACK_TICK ,
+      F_BRACK_TICK ,
+      ASCII ,
+      BEGIN ,
+      BUFFER ,
+      CASE ,
+      CONST ,
+      CONTROL ,
+      CREATE ,
+      DECIMAL ,
+      DEFER ,
+      DEFINED ,
+      CDO ,
+      DO ,
+      ELSE ,
+      ENDCASE ,
+      ENDOF ,
+      EXTERNAL ,
+      INSTANCE ,
+      FIELD ,
+      NEW_DEVICE ,
+      FINISH_DEVICE ,
+      FLITERAL ,
+      HEADERLESS ,
+      HEADERS ,
+      HEX ,
+      IF ,
+      UNLOOP ,
+      LEAVE ,
+      LOOP_I ,
+      LOOP_J ,
+      LOOP ,
+      PLUS_LOOP ,
+      OCTAL ,
+      OF ,
+      REPEAT ,
+      THEN ,
+      TO ,
+      IS ,
+      UNTIL ,
+      VALUE ,
+      VARIABLE ,
+      WHILE ,
+      OFFSET16 ,
+      ESCAPETOK ,
+      EMITBYTE ,
+      FLOAD ,
+      STRING ,
+      PSTRING ,
+      PBSTRING ,
+      SSTRING ,
+      RECURSIVE ,
+      RECURSE ,
+      RET_STK_FETCH ,
+      RET_STK_FROM ,
+      RET_STK_TO ,
+      HEXVAL ,
+      DECVAL ,
+      OCTVAL ,
 
-#define ENCODEFILE	0xf0
+       ret_stk_from ,
+     ASC_NUM ,          /*  Convert char seq to number  */
+      ASC_LEFT_NUM ,     /*  same, only left-justified.  */
 
-#define FCODE_V1	0xf1
-#define FCODE_V3	0xf2
-#define NOTLAST		0xf3
-#define PCIREV		0xf4
-#define PCIHDR		0xf5
-#define PCIEND		0xf6
-#define START0		0xf7
-#define START1		0xf8
-#define START2		0xf9
-#define START4		0xfa
-#define VERSION1	0xfb
-#define FCODE_TIME	0xfc
-#define FCODE_DATE	0xfd
-#define FCODE_V2	0xfe
-#define FCODE_END	0xff
+      CONDL_ENDER ,      /*  Conditional "[THEN] / [ENDIF]" variants  */
+      CONDL_ELSE ,       /*  Conditional "[ELSE]" directive variants  */
+
+      PUSH_FCODE ,	/*  Save the FCode Assignment number  */
+      POP_FCODE ,	/*  Retrieve the FCode Assignment number  */
+      RESET_FCODE ,	/*  Reset FCode Ass't nr and overlap checking  */
+
+      CURLY_BRACE ,      /*  Support for IBM-style Locals  */
+      DASH_ARROW ,
+      LOCAL_VAL ,
+      EXIT ,
+
+      FUNC_NAME ,
+      IFILE_NAME ,
+      ILINE_NUM ,
+
+      CL_FLAG ,
+      SHOW_CL_FLAGS ,
+
+      OVERLOAD ,
+      ALLOW_MULTI_LINE ,
+      MACRO_DEF ,
+      GLOB_SCOPE ,
+      DEV_SCOPE ,
+
+      /*  This value has to be adjusted
+       *      so that  FCODE_END  comes
+       *      out to be  0xff
+       */
+      END0 = 0xd7 ,      /*   0xd7   */
+      END1 ,             /*   0xd8   */
+      CHAR ,             /*   0xd9   */
+      CCHAR ,            /*   0xda   */
+      ABORTTXT ,         /*   0xdb   */
+
+      NEXTFCODE ,        /*   0xdc   */
+
+      ENCODEFILE ,       /*   0xdd   */
+
+      FCODE_V1 ,         /*   0xde   */
+      FCODE_V3 ,         /*   0xdf   */
+      NOTLAST ,          /*   0xef   */
+      ISLAST ,           /*   0xf0   */
+      SETLAST ,          /*   0xf1   */
+      PCIREV ,           /*   0xf2   */
+      PCIHDR ,           /*   0xf3   */
+      PCIEND ,           /*   0xf4   */
+      RESETSYMBS ,       /*   0xf5   */
+      SAVEIMG ,          /*   0xf6   */
+      START0 ,           /*   0xf7   */
+      START1 ,           /*   0xf8   */
+      START2 ,           /*   0xf9   */
+      START4 ,           /*   0xfa   */
+      VERSION1 ,         /*   0xfb   */
+      FCODE_TIME ,       /*   0xfc   */
+      FCODE_DATE ,       /*   0xfd   */
+      FCODE_V2 ,         /*   0xfe   */
+      FCODE_END = 0xff   /*   0xff   */
+}  fwtoken ;
+
+#endif   /*  _TOKE_DICTIONARY_H    */

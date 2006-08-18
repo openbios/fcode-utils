@@ -1,13 +1,11 @@
-#ifndef _TOKE_STACK_H
-#define _TOKE_STACK_H
+#ifndef _TOKE_DEVNODE_H
+#define _TOKE_DEVNODE_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  stack.h - prototypes and defines for handling the stacks.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,21 +26,40 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
+ *
+ *      External/Prototype/Structure definitions for device-node management
+ *
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
  **************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "types.h"
+#include "ticvocab.h"
 
-/* ************************************************************************** *
- *
- *      Macros:
- *          MAX_ELEMENTS          Size of stack area, in "elements"
+/* **************************************************************************
+ *          Structure Name:    device_node_t
+ *                        Data for managing a device node; pointers
+ *                            to vocabs, data for messaging.
+ *                            
+ *   Fields:
+ *       parent_node         Pointer to similar data for parent node 
+ *       line_no             Copy of Line Number where "new-device" was invoked
+ *       ifile_name          Name of Input File where "new-device" was invoked
+ *       tokens_vocab        Pointer to vocab for this device's tokens
  *
  **************************************************************************** */
 
-#define MAX_ELEMENTS 1024
+typedef struct device_node {
+        struct device_node *parent_node ;
+	char *ifile_name ;
+	unsigned int line_no ;
+	tic_hdr_t *tokens_vocab ;
+} device_node_t;
+
 
 /* ************************************************************************** *
  *
@@ -50,24 +67,20 @@
  *
  **************************************************************************** */
 
-extern long *dstack;
+extern char default_top_dev_ifile_name[];
+extern device_node_t *current_device_node;
+extern tic_hdr_t **current_definitions;
 
 /* ************************************************************************** *
  *
  *      Function Prototypes / Functions Exported:
  *
  **************************************************************************** */
+void new_device_vocab( void );
+void delete_device_vocab( void );
+void finish_device_vocab( void );
+char *in_what_node(device_node_t *the_node);
+void show_node_start( void);
+bool exists_in_ancestor( char *m_name);
 
-void dpush(long data);
-long dpop(void);
-long dget(void);
-
-void clear_stack(void);
-void init_stack(void);
-
-bool min_stack_depth(int mindep);   /*  TRUE if no error  */
-long stackdepth(void);
-void swap(void);
-void two_swap(void);
-
-#endif   /*  _TOKE_STACK_H    */
+#endif   /*  _TOKE_DEVNODE_H    */

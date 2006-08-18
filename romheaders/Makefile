@@ -21,20 +21,21 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
-
 CC  = gcc
-CFLAGS= -O2 -Wall -W -ansi
+CFLAGS= -O2 -Wall -W -ansi -I../shared
 
-.SUFFIXES: .c .o
+SOURCES = romheaders.c ../shared/classcodes.c
+
+.SUFFIXES: .c
 
 all: romheaders
 
-romheaders: romheaders.o
-	$(CC) $(CFLAGS) romheaders.o -o romheaders
+romheaders: $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES) -o $@
 	strip romheaders
 	
 clean:
-	rm -f *.o
+	rm -f *~
 
 distclean: clean
 	rm -f romheaders

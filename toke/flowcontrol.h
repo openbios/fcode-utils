@@ -1,13 +1,11 @@
-#ifndef _TOKE_TOKE_H
-#define _TOKE_TOKE_H
+#ifndef _TOKE_FLOWCONTROL_H
+#define _TOKE_FLOWCONTROL_H
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  toke.h - tokenizer base macros.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,13 +26,14 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
+ *
+ *      External Variables and Function Prototypes for Support Functions
+ *          used in tokenizing FORTH Flow-Control structures.
+ *
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
+ *
  **************************************************************************** */
-
-
-#include "types.h"
 
 
 /* ************************************************************************** *
@@ -43,9 +42,33 @@
  *
  **************************************************************************** */
 
-extern bool verbose;
-extern bool noerrors;
-extern bool fload_list;
-extern bool dependency_list;
+extern int control_stack_depth;
+ 
+/* ************************************************************************** *
+ *
+ *      Function Prototypes / Functions Exported:
+ *
+ **************************************************************************** */
 
-#endif   /* _TOKE_TOKE_H */
+void emit_if( void );
+void emit_then( void );
+void emit_else( void );
+void emit_begin( void );
+void emit_again( void );
+void emit_until( void );
+void emit_while( void );
+void emit_repeat( void );
+void mark_do( void );
+void resolve_loop( void );
+void emit_case( void );
+void emit_of( void );
+void emit_endof( void );
+void emit_endcase( void );
+
+void announce_control_structs( int severity, char *call_cond,
+				          unsigned int abs_token_limit);
+void clear_control_structs_to_limit( char *call_cond,
+				          unsigned int abs_token_limit);
+void clear_control_structs( char *call_cond);
+
+#endif   /*  _TOKE_FLOWCONTROL_H    */

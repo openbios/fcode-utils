@@ -24,58 +24,76 @@
  *
  */
 
+/* **************************************************************************
+ *         Modifications made in 2005 by IBM Corporation
+ *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+ *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
+ **************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
 #ifdef __GLIBC__
 #define _GNU_SOURCE
 #include <getopt.h>
-#else
-/* Some systems seem to have an incomplete unistd.h.
- * We need to define getopt() and optind for them.
- */
-extern int optind;
-int getopt(int argc, char * const argv[], const char *optstring);
 #endif
 
 #include "detok.h"
 #include "stream.h"
+#include "addfcodes.h"
 
 #define DETOK_VERSION "0.6.1"
 
-/* prototypes for dictionary handling */
-void init_dictionary(void);
-void decode_token(u16 token);
-/* prototype for detokenizer function */
-int  detokenize(void);
+#define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
-extern unsigned int decode_all, verbose, linenumbers;
+bool verbose = FALSE ;
+bool decode_all = FALSE ;
+bool show_linenumbers = FALSE ;
+bool show_offsets = FALSE ;
 
-void print_copyright(void)
+/*   Param is FALSE when beginning to detokenize,
+ *       TRUE preceding error-exit   */
+static void print_copyright(bool is_error)
 {
-        printf( "Welcome to the OpenBIOS detokenizer v%s\ndetok Copyright"
+	typedef void (*vfunct)();  /*  Pointer to function returning void  */
+	vfunct pfunct ;
+	char buffr[512];
+
+	sprintf( buffr,
+		"Welcome to the OpenBIOS detokenizer v%s\ndetok Copyright"
 		"(c) 2001-2005 by Stefan Reinauer.\nWritten by Stefan "
 		"Reinauer, <stepan@openbios.org>\n" "This program is "
 		"free software; you may redistribute it under the terms of\n"
 		"the GNU General Public License.  This program has absolutely"
 					" no warranty.\n\n" ,DETOK_VERSION);
+
+	pfunct = ( is_error ? (vfunct)printf : printremark );
+
+        (*pfunct) ( buffr );
+
+        (*pfunct) ( IBM_COPYR "\n" );
 }
 
-void usage(char *name)
+static void usage(char *name)
 {
 	printf( "usage: %s [OPTION]... [FCODE-FILE]...\n\n"
 		"         -v, --verbose     print fcode numbers\n"
 		"         -a, --all         don't stop at end0\n"
 		"         -n, --linenumbers print line numbers\n"
 		"         -o, --offsets     print byte offsets\n"
+		"         -f, --fcodes      add FCodes from list-file\n"
 		"         -h, --help        print this help text\n\n", name);
 }
 
 int main(int argc, char **argv)
 {
 	int c;
-	const char *optstring="vhano?";
+	const char *optstring="vhanof:?";
+	int linenumbers = 0;
+	bool add_vfcodes = FALSE;
+	char *vfc_filnam = NULL;
 
 	while (1) {
 #ifdef __GLIBC__
@@ -86,6 +104,7 @@ int main(int argc, char **argv)
 			{ "all", 0, 0, 'a' },
 			{ "linenumbers", 0, 0, 'n' },
 			{ "offsets", 0, 0, 'o' },
+			{ "fcodes", 1, 0, 'f' },
 			{ 0, 0, 0, 0 }
 		};
 
@@ -99,24 +118,31 @@ int main(int argc, char **argv)
 
 		switch (c) {
 		case 'v':
-			verbose=1;
+			verbose=TRUE;
 			break;
 		case 'a':
-			decode_all=1;
+			decode_all=TRUE;
 			break;
 		case 'n':
 			linenumbers|=1;
+			show_linenumbers = TRUE;
 			break;
 		case 'o':
 			linenumbers|=2;
+			show_linenumbers = TRUE;
+			show_offsets = TRUE;
+			break;
+		case 'f':
+			add_vfcodes = TRUE;
+			vfc_filnam = optarg;
 			break;
 		case 'h':
 		case '?':
-			print_copyright();
+			print_copyright(TRUE);
 			usage(argv[0]);
 			return 0;		
 		default:
-			print_copyright();
+			print_copyright(TRUE);
 			printf ("%s: unknown option.\n",argv[0]);
 			usage(argv[0]);
 			return 1;
@@ -124,13 +150,14 @@ int main(int argc, char **argv)
 	}
 
 	if (verbose)
-		print_copyright();
+		print_copyright(FALSE);
 	
 	if (linenumbers>2)
-		printf("Line numbers will be disabled in favour of offsets.\n");
+		printremark(
+		    "Line numbers will be disabled in favour of offsets.\n");
 	
 	if (optind >= argc) {
-		print_copyright();
+		print_copyright(TRUE);
 		printf ("%s: filename missing.\n",argv[0]);
 		usage(argv[0]);
 		return 1;
@@ -138,6 +165,14 @@ int main(int argc, char **argv)
 	
 	init_dictionary();
 	
+	if ( add_vfcodes )
+	{
+	    if ( add_fcodes_from_list( vfc_filnam) )
+	    {
+	        freeze_dictionary();
+	    }
+	}
+
 	while (optind < argc) {
 		
 		if (init_stream(argv[optind])) {

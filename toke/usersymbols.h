@@ -1,13 +1,12 @@
-#ifndef _TOKE_TOKE_H
-#define _TOKE_TOKE_H
+#ifndef _TOKE_USERSYMBOLS_H
+#define _TOKE_USERSYMBOLS_H
+
 
 /*
- *                     OpenBIOS - free your system! 
+ *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
- *                          
- *  toke.h - tokenizer base macros.  
- *  
- *  This program is part of a free implementation of the IEEE 1275-1994 
+ *
+ *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
  *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
@@ -28,24 +27,20 @@
  */
 
 /* **************************************************************************
- *         Modifications made in 2005 by IBM Corporation
+ *
+ *      Prototype/External Declarations for general-purpose functions
+ *          for support of User-defined command-line compilation-control
+ *          symbols, as defined in  usersymbols.c
+ *
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
- *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
- **************************************************************************** */
-
-
-#include "types.h"
-
-
-/* ************************************************************************** *
- *
- *      Global Variables Exported
+ *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
  *
  **************************************************************************** */
 
-extern bool verbose;
-extern bool noerrors;
-extern bool fload_list;
-extern bool dependency_list;
+void add_user_symbol(char *raw_symb);
+char *lookup_user_symbol(char *symb_nam);
+bool exists_as_user_symbol(char *symb_nam);
+void eval_user_symbol(char *symbol );
+void list_user_symbols(void );
 
-#endif   /* _TOKE_TOKE_H */
+#endif   /* _TOKE_USERSYMBOLS_H    */
