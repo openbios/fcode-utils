@@ -1,5 +1,5 @@
-\  Test a Paren-Message that is not terminated at all and the number
-\      of characters until the end of file exceeds the buffer.
+\  Test a Paren-Message that is not terminated at all and whose
+\      number of characters until the end of file exceeds the buffer.
 \  A Paren-Message does not have the string-escape sequences.
 \  Enter Tokenizer-escape mode
 \      then define the required  test-token  as alias to  .(

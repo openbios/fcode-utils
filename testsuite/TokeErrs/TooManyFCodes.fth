@@ -1,6 +1,6 @@
 \  Test overlapping FCode # error checking, and reaching the max allowable.
 
-\  Updated Wed, 14 Jun 2006 at 12:54 PDT by David L. Paktor
+\  Updated Wed, 06 Sep 2006 at 18:23 PDT by David L. Paktor
 
 \  A macro to force showing the current  nextfcode
 global-definitions
@@ -18,11 +18,11 @@ headers
 
 0 constant  my_zero
 fload OneTwoFive.fth
-    fcode-push
+  fcode-push f[ f['] eleven   next-fcode  ]f fcode-pop  fcode-push
 #message" one_twenty-six"    126 constant  one_hundred_and_twenty-six
 #message" one_twenty-seven"  127 constant  one_hundred_and_twenty-seven
 #message" one_twenty-eight"  128 constant  one_hundred_and_twenty-eight
-
+             f[ f['] eleven   emit-fcode  ]f
     show-next-fcode
 
     new-device
@@ -33,7 +33,7 @@ fload OneTwoFive.fth
 	#message" one_twenty-seven"  127 constant  one_hundred_and_twenty-seven
 	#message" one_twenty-eight"  128 constant  one_hundred_and_twenty-eight
 
-	show-next-fcode
+	f[ fcode-push f['] eleven   next-fcode ]f  fcode-pop
     finish-device
 
     new-device
@@ -50,7 +50,7 @@ fload OneTwoFive.fth
     new-device
 	fcode-pop
 	0 constant  my_zero
-	fload OneTwoFive.fth
+	fload OneTwoFive.fth f[ fcode-push f['] eleven next-fcode fcode-pop ]f 
 	f[  fcode-push constant dev-2-lap   ]f
 	#message" one_twenty-six"    126 constant  one_hundred_and_twenty-six
 	#message" one_twenty-seven"  127 constant  one_hundred_and_twenty-seven
@@ -136,10 +136,13 @@ fload OneTwoFive.fth
 
 \  This next one pushes the FCode # over the limit and causes a crash.
 \  Let's leave ourselves a way around that, so we can use this in other ways
-\  Allow a command-line symbol called nocrash to prevent this.
+\  Allow a command-line symbol called NoCrash to prevent this.
 [ifndef] NoCrash
     #message" one_twenty-eight"  128 constant  one_hundred_and_twenty-eight
 	show-next-fcode
+[else] \  Otherwise, let's do this test:
+    #message" Overflow the data-stack."
+    f[  decimal   fload  TooManyPushes.fth  f]
 [endif]
 
 fcode-end

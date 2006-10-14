@@ -77,7 +77,7 @@
 	: [else]  ."  Don't do it" ;  [message]  Fake [else] got through
 	create [else]   [message]  Fake [else] got through
 	h# defeca8e constant [else]   [message]  Fake [else] got through
-	h# beeffece value [else]   [message]  Fake [else] got through
+	h# -41100132 value [else]   [message]  Fake [else] got through
 	d# 64  buffer: [else]   [message]  Fake [else] got through
 	 struct
 	 /l field [else] [message]  Fake [else] got through
@@ -85,7 +85,7 @@
 	defer [else]    [message]  Fake [else] got through
 	 ['] [else]     [message]  Fake [else] got through
 	   to [else]    [message]  Fake [else] got through
-	 ['] [else]
+	 ['] [else]   alias moomoo [else]
 	   is [else]    [message]  Fake [else] got through
 	   : say-what ( tony vinnie looie -- 
 	                   -- marie )

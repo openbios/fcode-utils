@@ -1,4 +1,4 @@
-\  Test an Ess-Quote that is not terminated at all and the number
+\  Test an Ess-Quote that is not terminated at all and whose number
 \      of characters until the end of file exceeds the buffer.
 \  An Ess-Quote does not have the string-escape sequences.
 \  Define the required  test-token  as alias to  S"

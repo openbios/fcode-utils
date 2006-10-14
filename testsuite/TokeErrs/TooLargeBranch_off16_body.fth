@@ -118,45 +118,45 @@
 ." Oh, one hundred and fifty Bottles of Beer on the wall," cr
 ."     one hundred and fifty Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-nine Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-nine Bottles of Beer on the wall," cr
-."     one hundred and fourty-nine Bottles of Beer!," cr
+." one hundred and forty-nine Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-nine Bottles of Beer on the wall," cr
+."     one hundred and forty-nine Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-eight Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-eight Bottles of Beer on the wall," cr
-."     one hundred and fourty-eight Bottles of Beer!," cr
+." one hundred and forty-eight Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-eight Bottles of Beer on the wall," cr
+."     one hundred and forty-eight Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-seven Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-seven Bottles of Beer on the wall," cr
-."     one hundred and fourty-seven Bottles of Beer!," cr
+." one hundred and forty-seven Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-seven Bottles of Beer on the wall," cr
+."     one hundred and forty-seven Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-six Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-six Bottles of Beer on the wall," cr
-."     one hundred and fourty-six Bottles of Beer!," cr
+." one hundred and forty-six Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-six Bottles of Beer on the wall," cr
+."     one hundred and forty-six Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-five Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-five Bottles of Beer on the wall," cr
-."     one hundred and fourty-five Bottles of Beer!," cr
+." one hundred and forty-five Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-five Bottles of Beer on the wall," cr
+."     one hundred and forty-five Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-four Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-four Bottles of Beer on the wall," cr
-."     one hundred and fourty-four Bottles of Beer!," cr
+." one hundred and forty-four Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-four Bottles of Beer on the wall," cr
+."     one hundred and forty-four Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-three Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-three Bottles of Beer on the wall," cr
-."     one hundred and fourty-three Bottles of Beer!," cr
+." one hundred and forty-three Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-three Bottles of Beer on the wall," cr
+."     one hundred and forty-three Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-two Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-two Bottles of Beer on the wall," cr
-."     one hundred and fourty-two Bottles of Beer!," cr
+." one hundred and forty-two Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-two Bottles of Beer on the wall," cr
+."     one hundred and forty-two Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty-one Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty-one Bottles of Beer on the wall," cr
-."     one hundred and fourty-one Bottles of Beer!," cr
+." one hundred and forty-one Bottles of Beer on the wall." cr
+." Oh, one hundred and forty-one Bottles of Beer on the wall," cr
+."     one hundred and forty-one Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." one hundred and fourty Bottles of Beer on the wall." cr
-." Oh, one hundred and fourty Bottles of Beer on the wall," cr
-."     one hundred and fourty Bottles of Beer!," cr
+." one hundred and forty Bottles of Beer on the wall." cr
+." Oh, one hundred and forty Bottles of Beer on the wall," cr
+."     one hundred and forty Bottles of Beer!," cr
 ." Take one down and pass it around," cr
 ." one hundred and thirty-nine Bottles of Beer on the wall." cr
 ." Oh, one hundred and thirty-nine Bottles of Beer on the wall," cr
@@ -518,45 +518,45 @@
 ." Oh, fifty Bottles of Beer on the wall," cr
 ."     fifty Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-nine Bottles of Beer on the wall." cr
-." Oh, fourty-nine Bottles of Beer on the wall," cr
-."     fourty-nine Bottles of Beer!," cr
+." forty-nine Bottles of Beer on the wall." cr
+." Oh, forty-nine Bottles of Beer on the wall," cr
+."     forty-nine Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-eight Bottles of Beer on the wall." cr
-." Oh, fourty-eight Bottles of Beer on the wall," cr
-."     fourty-eight Bottles of Beer!," cr
+." forty-eight Bottles of Beer on the wall." cr
+." Oh, forty-eight Bottles of Beer on the wall," cr
+."     forty-eight Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-seven Bottles of Beer on the wall." cr
-." Oh, fourty-seven Bottles of Beer on the wall," cr
-."     fourty-seven Bottles of Beer!," cr
+." forty-seven Bottles of Beer on the wall." cr
+." Oh, forty-seven Bottles of Beer on the wall," cr
+."     forty-seven Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-six Bottles of Beer on the wall." cr
-." Oh, fourty-six Bottles of Beer on the wall," cr
-."     fourty-six Bottles of Beer!," cr
+." forty-six Bottles of Beer on the wall." cr
+." Oh, forty-six Bottles of Beer on the wall," cr
+."     forty-six Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-five Bottles of Beer on the wall." cr
-." Oh, fourty-five Bottles of Beer on the wall," cr
-."     fourty-five Bottles of Beer!," cr
+." forty-five Bottles of Beer on the wall." cr
+." Oh, forty-five Bottles of Beer on the wall," cr
+."     forty-five Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-four Bottles of Beer on the wall." cr
-." Oh, fourty-four Bottles of Beer on the wall," cr
-."     fourty-four Bottles of Beer!," cr
+." forty-four Bottles of Beer on the wall." cr
+." Oh, forty-four Bottles of Beer on the wall," cr
+."     forty-four Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-three Bottles of Beer on the wall." cr
-." Oh, fourty-three Bottles of Beer on the wall," cr
-."     fourty-three Bottles of Beer!," cr
+." forty-three Bottles of Beer on the wall." cr
+." Oh, forty-three Bottles of Beer on the wall," cr
+."     forty-three Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-two Bottles of Beer on the wall." cr
-." Oh, fourty-two Bottles of Beer on the wall," cr
-."     fourty-two Bottles of Beer!," cr
+." forty-two Bottles of Beer on the wall." cr
+." Oh, forty-two Bottles of Beer on the wall," cr
+."     forty-two Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty-one Bottles of Beer on the wall." cr
-." Oh, fourty-one Bottles of Beer on the wall," cr
-."     fourty-one Bottles of Beer!," cr
+." forty-one Bottles of Beer on the wall." cr
+." Oh, forty-one Bottles of Beer on the wall," cr
+."     forty-one Bottles of Beer!," cr
 ." Take one down and pass it around," cr
-." fourty Bottles of Beer on the wall." cr
-." Oh, fourty Bottles of Beer on the wall," cr
-."     fourty Bottles of Beer!," cr
+." forty Bottles of Beer on the wall." cr
+." Oh, forty Bottles of Beer on the wall," cr
+."     forty Bottles of Beer!," cr
 ." Take one down and pass it around," cr
 ." thirty-nine Bottles of Beer on the wall." cr
 ." Oh, thirty-nine Bottles of Beer on the wall," cr

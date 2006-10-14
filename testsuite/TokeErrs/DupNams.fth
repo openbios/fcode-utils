@@ -33,7 +33,7 @@ fcode-version2
 
 : noop  ."  Op?  No!" ;
 [macro] zoop noop message" I Care."
-: poop  h# defeca8e  ;
+: poop  h# -21013572  ;
 
     new-device
        : zoop  ." Nothing like the other zoop"  croop ;
@@ -74,8 +74,18 @@ fcode-version2
        finish-device
 
     finish-device
-
+start4  \  Let's just stick in an extra, and another error besides...
 fcode-end
 
-\  Let's just stick in an extra...
+\ And a few false-starts and ends...
 fcode-end
+
+start0
+   ." What does this button do?"
+end1
+
+start2
+   ." Oh, was I not supposed to touch that?"
+end0
+
+save-image poop.fc   \  Not gonna happen anyway...

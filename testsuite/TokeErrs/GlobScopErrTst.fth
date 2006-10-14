@@ -73,7 +73,7 @@ new-device    [message] Missing a finish-device
      garbanzo
 ;
 
-h# deadc0de  instance value quaack   [message] Instance should be legit here.
+h# DEADc0de  instance value quaack   [message] Instance should be legit here.
 
 global-definitions
 

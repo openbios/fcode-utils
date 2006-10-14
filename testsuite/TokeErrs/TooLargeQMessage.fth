@@ -1,5 +1,5 @@
-\  Test a Quote-Message that is not terminated at all and the number
-\      of characters until the end of file exceeds the buffer.
+\  Test a Quote-Message that is not terminated at all and whose
+\      number of characters until the end of file exceeds the buffer.
 \  A Quote-Message has the string-escape sequences.
 \  Define the required  test-token  as alias to  #message"
 \      then FLOAD the test-body file.

@@ -1,5 +1,5 @@
-\  Test an Abort-Quote whose body is not terminated at all and the number
-\      of characters until the end of file exceeds the buffer.
+\  Test an Abort-Quote whose body is not terminated at all and whose
+\      number of characters until the end of file exceeds the buffer.
 \  Abort-Quote may be dis-allowed.  This test allows it.
 \  Define the required  test-token  as alias to  abort"
 \      then FLOAD the test-body file.

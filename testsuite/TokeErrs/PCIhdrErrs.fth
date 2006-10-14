@@ -1,6 +1,6 @@
 \  Basic PCI-Headers Errors test.
 
-\  Updated Wed, 25 May 2005 at 17:30 by David L. Paktor
+\  Updated Thu, 31 Aug 2006 at 13:27 PDT by David L. Paktor
 
 
 hex
@@ -26,3 +26,6 @@ fcode-end
 
 pci-header-end
 
+\  This is another...
+
+pci-header-end

@@ -1,4 +1,4 @@
-\  Test a P-Quote that is not terminated at all and the number
+\  Test a P-Quote that is not terminated at all and whose number
 \      of characters until the end of file exceeds the buffer.
 \  A P-Quote has  the string-escape sequences.
 \  Define the required  test-token  as alias to  ."

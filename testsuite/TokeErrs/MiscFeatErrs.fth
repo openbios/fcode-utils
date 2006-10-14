@@ -3,10 +3,10 @@
 
 [flag] Local-Values
 f[  ."  This is a test"  ]f
-fcode-version2
+fcode-version1
 
 fload LocalValuesSupport.fth
-
+noop  noop  noop
 headers
 
 [char] G emit
@@ -32,8 +32,8 @@ control [ emit
 	[macro] swell bell
     device-definitions
 [macro] yell  bell 
-
-bell
+offset16
+bell  offset16
 : factl ( n -- n! )
     ?dup 0= if 1 factl
     control G to bell

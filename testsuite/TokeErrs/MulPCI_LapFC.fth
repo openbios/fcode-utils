@@ -1,12 +1,12 @@
 \  Combine Multiple PCI headers with overlapping FCodes.
-\  Updated Wed, 14 Jun 2006 at 12:04 PDT by David L. Paktor
+\  Updated Fri, 01 Sep 2006 at 12:55 PDT by David L. Paktor
 
 \  We already have a source with overlapping FCodes in two FCode blocks
 \  We just have to wrap it in multiple PCI headers.
 \  Also, we have to make sure to define  NoCrash  as a command-line symbol
 \  While we're at it, let's also create another switchable behavior:
 \  If the command-line symbol  RangeTwo  is defined, it should have 
-\      a value in the form of a hex number (We'll tace care of the "hex")
+\      a value in the form of a hex number (We'll take care of the "hex")
 \      which will, in a roundabout way, become the starting FCode for
 \      the second loading of the common Source.
 \  We'll save the symbol in a roundabout manner that will test whether
@@ -37,11 +37,11 @@ h#  20109     \   Bogus Class Code
 fload TooManyFCodes.fth
 
 
-[ifdef] RangeTwo
+\  Generate an error or two if  RangeTwo  is not DEFINED.  It's harmless
      f[
 	[DEFINED]  RangeTwo  constant SecondRangeFCode
       ]f
-[endif]
+\  because all the other references to  SecondRangeFCode  are conditioned...
 
 \  Try it once before and once after...    
 [ifndef]  NoReset  fcode-reset [else] #message" Not resetting..." [endif]

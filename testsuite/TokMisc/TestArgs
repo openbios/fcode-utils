@@ -8,7 +8,7 @@
 #          Lines that have no label, no switches, and no script
 #              do not need any commas.
 
-#  Updated Thu, 06 Jul 2006 at 13:16 PDT by David L. Paktor
+#  Updated Thu, 07 Sep 2006 at 11:49 PDT by David L. Paktor
 
 MiscFeatures ,  ,  -i
 MiscFeatures , applabq ,  -i -f NOSUN-ABORT-Quote
@@ -46,7 +46,9 @@ HeadrSettings
 HeadrSettings , alwyshdr , -f always-heADERs
 HeadrSettings , alwyextl , -f alwaYS-External
 HeadrSettings , alwaysboth , -f always-headers -f always-external
-FlagsHelp , , -f HELP
+FlagsHelp , Hlp , -f HELP
+FlagsHelp ,  , -o FlagsHelp.fc FlagsHelp.fth
+FlagsHelp , UnkOpt , -Z
 FlagsHelp , Chg , -f noHex-remark-ESCAPE -f Always-Headers -f help
 FlagsHelp , noChg , -f noLocal-Values -f help
 FlagsHelp , chgNoHlp , -f noHex-remark-escape -f Always-Headers -f noHelp
@@ -55,6 +57,7 @@ FlgReset , Solo
 FlgReset  FlgReset_1  FlgReset_2
 FlgReset  FlgReset_1  FlgReset_2 , AlwExt , -f Always-External
 AllMacros , , , ExamAllMacs.scr
+AllBiFCTypes
 
 #  A little more set-up for Batch Test
 UserMacros ,  ,  , cp UserMacros.fth UserMacros_cpy1.fth

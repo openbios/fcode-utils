@@ -1,5 +1,5 @@
 \ LocalTest.fth
-\    Updated Wed, 25 Jan 2006 at 14:33 PST by David L. Paktor
+\    Updated Thu, 31 Aug 2006 at 15:33 PDT by David L. Paktor
 
 fcode-version2
 
@@ -9,7 +9,7 @@ fcode-version2
     fload LocalValuesSupport.fth
 [endif]
 
-h# deaf constant dean
+h# Deaf constant dean
 
 : faber ( n3 n2 n1 -- alloc-addr size $addr,len )
      { _otter _weasel _skunk ; _muskrat _mole }
@@ -58,6 +58,31 @@ f[
 : ordinary ( -- )
    123 456 789 miracle
 ;
+
+ { _don't _allow _this ; _ever }
  
+ F[
+      { _nor _this ; _either }
+ ]F
+
+\  And the "unterminated" tests
+
+: ahnold ( the unterminator )
+    fload UntermLocalDecl.fth
+    }  \  Does this conclude it okay?  (No, it's extraneous...)
+    _green _goose +  dup 
+    -> _souvenirs
+    fload UntermLocalAssgmnt.fth
+    _souvenirs
+;
+
+\  Once more, out of context:
+fload UntermLocalDecl.fth
+fload UntermLocalAssgmnt.fth   _souvenirs
+
+\  And another couple of corner-cases:
+    fload UntermDefn.fth  moopoop
+F[  fload UntermDefn.fth  poop-de-moo  ]F
+
 fcode-end
 
