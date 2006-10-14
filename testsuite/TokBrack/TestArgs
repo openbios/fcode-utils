@@ -1,0 +1,20 @@
+#  Automated Test Arguments file for TokBrack category
+#  (That's short for "Tokenizer Bracket";
+#       it refers to the Tokenizer Escape state.)
+
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command with arguments (but no commas).
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+
+#  Updated Wed, 08 Mar 2006 at 19:11 PST by David L. Paktor
+
+#  Might as well get the date-and-time one out of the way first...
+TokBrkTst_02 , , -i -l
+TokBrkTst_01 , , -i
+TokBrkTst_01 , alwyshdr , -i -f ALWays-heADers
+TokBrkTst_03
+TokBrkErrTst_01 , , -i
