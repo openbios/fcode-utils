@@ -37,7 +37,7 @@
  *      The syntax for user-defined command-line compilation-control symbols
  *          is <NAME>[=<VALUE>]
  *
- *      The name is always required; the equal-sign and value is optional.
+ *      The name is always required; the equal-sign and value are optional.
  *          If you wish the "value" to contain spaces or quotes, you can
  *          accomplish that using the shell escape conventions.
  *
@@ -65,11 +65,9 @@
  *
  *      Functions Exported:
  *          add_user_symbol            Add a user-defined symbol to the list
- *          lookup_user_symbol         Look for a user-defined symbol, return
- *                                         the assigned value.
  *          exists_as_user_symbol      Confirm whether a given name exists
  *                                         as a user-defined symbol.
- *          eval_user_symbol           Tokenize the value assigned to a user
+ *          eval_user_symbol           Evaluate the value assigned to a user
  *                                         symbol.
  *          list_user_symbols          Print the list of user-defined symbols
  *                                         for the Logfile.
@@ -90,7 +88,7 @@
  *              were created on the command-line; if we ever allow symbols
  *              to be defined in the Source file, they should be as volatile
  *              as anything else that comes from a source file...
- *           Putting source-file-derived user-defined symbols into the Global
+ *           Appending source-file-derived user-defined symbols to the Global
  *              Vocabulary could be a quasi-simple way to accomplish this.)
  *
  *          Enable the definition of user-symbols from the Source file, using
@@ -150,7 +148,7 @@ static int user_symbol_count = 0;
  *         Memory Allocated:
  *             for the string(s) and the new entry
  *         When Freed?
- *             Never.  Well, only on termination of the program.  User-defined
+ *             Never.  Well, upon termination of the program.  User-defined
  *                 symbols endure for the entire batch of tokenizations.
  *
  *      Process Explanation:
@@ -183,33 +181,6 @@ void add_user_symbol(char *raw_symb)
 
 /* **************************************************************************
  *
- *      Function name:  lookup_user_symbol
- *      Synopsis:       Look for the given name as user-defined symbol, return
- *                          the assigned value.
- *
- *      Inputs:
- *         Parameters:
- *             symb_nam             The name for which to look.
- *         Local Static Variables:
- *             user_symbol_list     Pointer to the list of user-defined symbols.
- *
- *      Outputs:
- *         Returned Value:          Pointer to the "value" string, or NULL
- *                                      pointer if the name was not found.
- *                                  May also be NULL if "value" is NULL.
- *
- **************************************************************************** */
- 
-char *lookup_user_symbol(char *symb_nam)
-{
-    char *symb_valu;
-
-    symb_valu = lookup_str_sub(symb_nam, user_symbol_list );
-    return (symb_valu);
-}
-
-/* **************************************************************************
- *
  *      Function name:  exists_as_user_symbol
  *      Synopsis:       Confirm whether a given name exists
  *                      as a user-defined symbol.
@@ -236,7 +207,7 @@ bool exists_as_user_symbol(char *symb_nam)
 /* **************************************************************************
  *
  *      Function name:  eval_user_symbol
- *      Synopsis:       Tokenize the value assigned to a user-symbol.
+ *      Synopsis:       Evaluate the value assigned to a user-symbol.
  *
  *      Associated Tokenizer directive (synonyms):      [DEFINED]
  *                                                      #DEFINED
@@ -251,7 +222,7 @@ bool exists_as_user_symbol(char *symb_nam)
  *
  *      Inputs:
  *         Parameters:       
- *             symbol               The User-Defined-Symbol to evaluate
+ *             symb_nam             Name of the User-Defined-Symbol to evaluate
  *         Local Static Variables:
  *             user_symbol_list     Pointer to the list of user-defined symbols.
  *
@@ -262,13 +233,15 @@ bool exists_as_user_symbol(char *symb_nam)
  *      Error Detection:
  *          Calling routine is responsible for verifying that the user-symbol
  *              is on the same line as the directive.
- *          WARNING if the symbol is not found or has no assigned value. 
+ *          ERROR if the symbol is not found
+ *          WARNING if the symbol has no assigned value. 
  *
  *      Process Explanation:
- *          Look up the parameter in the User Symbol List, and retrieve
- *              its associated value.
- *          If it is not found, or if it has no associated value, issue
- *              a WARNING and do nothing further.  Otherwise...
+ *          Look up the parameter in the User Symbol List,
+ *          If it is not found, issue an ERROR and do nothing further.
+ *          If it is found, attempt to retrieve its associated value
+ *          If it has no associated value, issue a WARNING and
+ *              do nothing further.  Otherwise...
  *          Interpret the associated value as though it were source.
  *
  *      Still to be done:
@@ -277,16 +250,26 @@ bool exists_as_user_symbol(char *symb_nam)
  *
  **************************************************************************** */
 
-void eval_user_symbol(char *symbol )
+void eval_user_symbol( char *symb_nam)
 {
-    char *symb_valu;
-    symb_valu = lookup_user_symbol(symbol );
-    if ( symb_valu == NULL )
+    str_sub_vocab_t *found = NULL;
+
+
+    found = lookup_str_sub( symb_nam, user_symbol_list );
+    if ( found == NULL )
     {
-        tokenization_error ( WARNING,
-	    "No value assigned to command-line symbol %s\n", symbol );
+        tokenization_error ( TKERROR,
+	    "Command-line symbol %s is not defined.\n", symb_nam); 
     }else{
-	eval_string( symb_valu );
+	char *symb_valu = found->alias;
+
+	if ( symb_valu == NULL )
+	{
+            tokenization_error ( WARNING,
+		"No value assigned to command-line symbol %s\n", symb_nam );
+	}else{
+	    eval_string( symb_valu );
+	}
     }
 
 }
@@ -311,12 +294,29 @@ void eval_user_symbol(char *symbol )
  *          We will:
  *              Allocate a temporary array of pointers.
  *              Step backwards through the linked-list of symbols, and
- *                  enter their pointers into the array.
+ *                  enter their pointers into the array.  The array order
+ *                  reflects the backward-linked order of the linked-list
+ *                  of symbols is kept and searched,
  *              Collect the maximum length of the symbol names.
- *              Step through the array in the reverse order, printing
- *                  as we go.
- *                  Use the max name length to space the equal-signs evenly 
+ *              Step through the array in the reverse order, to follow the
+ *                  order in which the symbols were defined.
+ *                  Check for a duplicate of the current symbol name:
+ *                      Look backwards through the array, at the names we
+ *                          have not yet printed, which were defined later.
+ *                          Since the later-defined value will prevail, the
+ *                          notation should be on the earlier one.
+ *                  Print the current name
+ *                  Use the maximum name-length to space the equal-signs or
+ *                      duplicate-name notation, as required, evenly.
  *              Free the temporary array.
+ *
+ *      Revision History:
+ *          Updated Thu, 07 Sep 2006 by David L. Paktor
+ *              Report duplicated symbol names.
+ *
+ *      Still to be done:
+ *          Space the duplicate-name notation evenly; line it up past
+ *               the longest name-with-value.
  *
  **************************************************************************** */
 
@@ -346,15 +346,45 @@ void list_user_symbols(void )
 	printf("\nUser-Defined Symbols:\n");
 	while ( indx > 0 )
 	{
+	    bool is_dup;
+	    int dup_srch_indx;
 	    indx--;
 	    curr = symb_ptr[indx];
+
+	    /*  Detect duplicate names.  */
+	    dup_srch_indx = indx;
+	    is_dup = FALSE;
+	    while ( dup_srch_indx > 0 )
+	    {
+		str_sub_vocab_t *dup_cand;
+		dup_srch_indx--;
+		dup_cand = symb_ptr[dup_srch_indx];
+		if ( strcmp( curr->name, dup_cand->name) == 0 )
+		{
+		    is_dup = TRUE;
+		    break;
+		}
+	    }
+
 	    printf("\t%s",curr->name);
-	    if ( curr->alias != NULL )
+
+	    if ( ( curr->alias != NULL ) || is_dup )
 	    {
 	        int strindx;
 		for ( strindx = strlen(curr->name) ;
-		      strindx < maxlen ; strindx++ ) printf(" ");
+		      strindx < maxlen ;
+		      strindx++ )
+		{
+		    printf(" ");
+		}
+	    }
+	    if ( curr->alias != NULL )
+	    {
 		printf(" = %s",curr->alias);
+	    }
+	    if ( is_dup )
+	    {
+		printf(" *** Over-ridden" );
 	    }
 	    printf("\n");
 	}

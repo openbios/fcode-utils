@@ -212,61 +212,6 @@ tic_hdr_t *lookup_core_word( char *tname)
 
 /* **************************************************************************
  *
- *      Function name:  exists_in_core
- *      Synopsis:       Confirm whether the given name exists in the
- *                      Global (aka "core") Vocabulary.  Search the
- *                      Global Vocabulary exclusively.
- *
- *      Inputs:
- *         Parameters:
- *             name                      The name for which to look
- *         Local Static Variables:
- *             global_voc_dict_ptr       "Tail" of Global Vocabulary
- *
- *      Outputs:
- *         Returned Value:               TRUE if name is found.
- *
- **************************************************************************** */
-
-bool exists_in_core( char *name)
-{
-    return exists_in_tic_vocab( name, global_voc_dict_ptr );
-}
-
-/* **************************************************************************
- *
- *      Function name:  handle_core_word
- *      Synopsis:       Perform a function in the "Global" Vocabulary and
- *                      indicate whether the name is valid.
- *
- *      Inputs:
- *         Parameters:
- *             tname                     The name to handle
- *         Local Static Variables:
- *             global_voc_dict_ptr       "Tail" of Global Vocabulary
- *
- *      Outputs:
- *         Returned Value:   TRUE if the given name is valid in Global Vocab
- *
- *      Error Detection:
- *          If the name is not in the "Global" Vocabulary, let the calling
- *              routine determine whether to print an error message or to
- *              try it out as a number.
- *
- **************************************************************************** */
-
-bool handle_core_word( char *tname )
-{
-    bool retval;
-
-    retval = handle_tic_vocab( tname, global_voc_dict_ptr );
-
-    return ( retval ) ;
-}
-
-
-/* **************************************************************************
- *
  *      Function name:  create_core_alias
  *      Synopsis:       Create, in the "Global" ("core") Vocabulary, an entry
  *                          for NEW_NAME that behaves the same as the latest
@@ -617,41 +562,6 @@ bool exists_in_current( char *tname)
     bool retval = BOOLVAL ( found != NULL);
     return( retval);
 	}
-
-
-/* **************************************************************************
- *
- *      Function name:  handle_current
- *      Synopsis:       Perform a function in the current device-node vocab,
- *                      if one is in effect, or in the "Global" Vocabulary.
- *                      Indicate whether the name is valid.
- *
- *      Inputs:
- *         Parameters:
- *             tname                      The name to handle
- *         Global Variables:
- *             current_definitions        Device-Node (or Global) Vocabulary
- *                                            currently in effect.
- *             scope_is_global            TRUE if "global" scope is in effect
- *         Local Static Variables:
- *
- *      Outputs:
- *         Returned Value:                TRUE if the given name is valid
- *
- **************************************************************************** */
-
-bool handle_current( char *tname )
-{
-    bool retval = handle_tic_vocab( tname, *current_definitions );
-
-    if ( INVERSE(retval) && INVERSE(scope_is_global) )
-    {
-	retval = handle_core_word( tname );
-    }
-    return ( retval );
-
-}
-
 
 /* **************************************************************************
  *
@@ -1775,41 +1685,6 @@ tic_hdr_t *lookup_shared_word( char *tname)
     return ( retval );
 
 }
-
-/* **************************************************************************
- *
- *      Function name:  handle_shared_word
- *      Synopsis:       Perform the function associated with the given name
- *                      only if it is a "Shared Word".  Indicate if it was.
- *
- *      Inputs:
- *         Parameters:
- *             tname                The "target" name for which to look
- *
- *      Outputs:
- *         Returned Value:          TRUE if the name is a valid "Shared Word"
- *
- *      Extraneous Remarks:
- *          This is very similar to a call to  handle_tic_vocab() except
- *              for the additional filtering for a "Shared Word" definer.
- *
- **************************************************************************** */
-
-bool handle_shared_word( char *tname )
-{
-    tic_hdr_t *found ;
-    bool retval = FALSE;
-    
-    found = lookup_shared_word( tname );
-    if ( found != NULL )
-    {
-        found->funct(found->pfield);
-	retval = TRUE;
-    }
-
-    return ( retval ) ;
-}
-
 
 /* **************************************************************************
  *

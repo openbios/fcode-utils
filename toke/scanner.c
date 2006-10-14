@@ -3243,7 +3243,7 @@ static bool create_word(fwtoken definer)
     bool retval = FALSE;
     char *defn_type_name;
 
-    /*  If already inside a colon, ERROR and discontinueprocessing    */
+    /*  If already inside a colon, ERROR and discontinue processing    */
     /*  If an alias to a definer is used, show the name of the alias  */
     if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) ) 
     {
@@ -5011,9 +5011,9 @@ void handle_internal( tic_param_t pfield)
 	
 	case VERSION1:
 	case FCODE_V1:
+		fcode_starter( "version1", 1, FALSE) ;
 		tokenization_error( INFO, "Using version1 header "
 		    "(8-bit offsets).\n");
-		fcode_starter( "version1", 1, FALSE) ;
 		break;
 	
 	case START1:

@@ -41,9 +41,7 @@
 void init_tokz_esc_vocab( void );
 bool create_tokz_esc_alias(char *new_name, char *old_name);
 void enter_tokz_esc( void );
-bool handle_tokz_esc( char *tname );
 tic_hdr_t *lookup_tokz_esc(char *name);
-bool exists_in_tokz_esc(char *name);
 void reset_tokz_esc( void );
 void pop_next_fcode( void);
 

@@ -36,10 +36,6 @@
  *      Functions Exported:
  *          init_tokz_esc_vocab      Initialize the relevant vocabulary.
  *          enter_tokz_esc           Enter "Tokenizer Escape" mode
- *          handle_tokz_esc          Perform a function in the
- *                                       "Tokenizer Escape" Vocabulary
- *          exists_in_tokz_esc       Confirm whether a given name exists in 
- *                                       the "Tokz_Esc_Vocabulary"
  *          create_tokz_esc_alias    Add an alias to "Tokenizer Escape" space
  *          reset_tokz_esc           Reset the "Tokenizer Escape" Vocabulary
  *                                      to its "Built-In" position.
@@ -605,37 +601,6 @@ void init_tokz_esc_vocab ( void )
 
 /* **************************************************************************
  *
- *      Function name:  handle_tokz_esc
- *      Synopsis:       Perform a function in the "Tokenizer Escape" Vocabulary
- *                      Indicate whether the name is valid in this vocabulary.
- *                      Handle "Tokenizer Escape" aliases implicitly.
- *
- *      Inputs:
- *         Parameters:
- *             tname                The name to handle
- *         Global Variables:  
- *             tokz_esc_vocab       Pointer to "Tokenizer Escape" Vocabulary 
- *
- *      Outputs:
- *         Returned Value:   TRUE if the given name is valid in tokz_esc
- *
- *      Process Explanation:
- *          Find the name and execute its associated function.
- *          If the name is not in the "Tokenizer Escape" Vocabulary,
- *              let the calling routine determine whether to try it
- *              out as a number or to print an error message.
- *
- **************************************************************************** */
-
-bool handle_tokz_esc( char *tname )
-{
-    bool retval = handle_tic_vocab( tname, tokz_esc_vocab );
-    return ( retval ) ;
-}
-
-
-/* **************************************************************************
- *
  *      Function name:  lookup_tokz_esc
  *      Synopsis:       Return a pointer to the data-structure of the named
  *                      word in the"Tokenizer Escape" Vocabulary
@@ -654,30 +619,6 @@ bool handle_tokz_esc( char *tname )
 tic_hdr_t *lookup_tokz_esc(char *name)
 {
     tic_hdr_t *retval = lookup_tic_entry( name, tokz_esc_vocab );
-    return ( retval );
-}
-
-
-/* **************************************************************************
- *
- *      Function name:  exists_in_tokz_esc
- *      Synopsis:       Confirm whether a given name exists in the
- *                          "Tokenizer Escape" Vocabulary
- *
- *      Inputs:
- *         Parameters:
- *             name                 The given name to confirm
- *         Global Variables:  
- *             tokz_esc_vocab       Pointer to "Tokenizer Escape" Vocabulary  
- *
- *      Outputs:
- *         Returned Value:     TRUE if name is found,
- *
- **************************************************************************** */
-
-bool exists_in_tokz_esc(char *name)
-{
-    bool retval = exists_in_tic_vocab( name, tokz_esc_vocab );
     return ( retval );
 }
 

@@ -38,7 +38,6 @@
  **************************************************************************** */
 
 void add_user_symbol(char *raw_symb);
-char *lookup_user_symbol(char *symb_nam);
 bool exists_as_user_symbol(char *symb_nam);
 void eval_user_symbol(char *symbol );
 void list_user_symbols(void );

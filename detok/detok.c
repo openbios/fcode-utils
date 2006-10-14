@@ -184,6 +184,7 @@ int main(int argc, char **argv)
 		close_stream();
 		
 		optind++;
+		reset_dictionary();
 	}
 	
 	printf("\n");

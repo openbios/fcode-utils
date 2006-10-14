@@ -206,7 +206,7 @@ static void output_token_name(void)
 	 *            or
 	 *  b) detok is in verbose mode.
 	 */
-       if ( tname == unnamed )
+       if ( strcmp( tname, unnamed) == 0 )
        {
 		printf("[0x%03x] ", fcode);
        } else {
@@ -355,7 +355,7 @@ static void new_token(void)
 	output_token();
 	token = next_token();
 	printf("0x%03x\n",token);
-	add_token(token, (char *)unnamed);
+	add_token(token, strdup(unnamed));
 }
 
 static void named_token(void)

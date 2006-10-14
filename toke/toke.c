@@ -46,7 +46,7 @@
 #include "stack.h"
 #include "emit.h"
 
-#define TOKE_VERSION "1.0.0"
+#define TOKE_VERSION "1.0.1"
 
 #include "vocabfuncts.h"
 #include "scanner.h"

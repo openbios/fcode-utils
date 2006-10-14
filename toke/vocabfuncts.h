@@ -56,8 +56,6 @@ extern bool scope_is_global;
 
 
 tic_hdr_t *lookup_core_word( char *tname);
-bool exists_in_core( char *name);
-bool handle_core_word( char *tname );
 bool create_core_alias( char *new_name, char *old_name);
 
 void enter_global_scope( void );
@@ -65,7 +63,6 @@ void resume_device_scope( void );
 
 tic_hdr_t *lookup_current( char *name);
 bool exists_in_current( char *tname);
-bool handle_current( char *tname );
 tic_hdr_t *lookup_in_dev_node( char *tname);
 void add_to_current( char *name,
                            TIC_P_DEFLT_TYPE fc_token,
@@ -81,7 +78,6 @@ bool entry_is_token( tic_hdr_t *test_entry );
 void token_entry_warning( tic_hdr_t *t_entry);
 
 tic_hdr_t *lookup_shared_word( char *tname);
-bool handle_shared_word( char *tname );
 tic_hdr_t *lookup_shared_f_exec_word( char *tname);
 
 void init_dictionary( void );

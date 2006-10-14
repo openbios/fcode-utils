@@ -55,31 +55,12 @@ typedef struct str_sub_vocab {
 	struct str_sub_vocab *next;
 } str_sub_vocab_t;
 
-#if  0     /*  On the way out   */
-/*
- *          BUILTIN_STR_SUB        Add an entry to the initial Str-Sub vocab.
- *
- *      Arguments:  (Both are strings)
- *          princ         Principal name by which the string is known
- *          subst         Substitution-string that replaces the Principal.
- */
-#define BUILTIN_STR_SUB(princ, subst)    \
-     { princ , subst , (str_sub_vocab_t *)NULL  }
-#endif     /*  On the way out   */
 
-
-void init_str_sub_vocab( str_sub_vocab_t *str_sub_vocab_tbl,
-			            int max_indx);
 void add_str_sub_entry( char *ename,
                         	    char *subst_str,
 			        	str_sub_vocab_t **str_sub_vocab );
-char *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab );
-bool create_str_sub_alias(char *new_name,
-                        	     char *old_name,
-			        	 str_sub_vocab_t **str_sub_vocab );
+str_sub_vocab_t *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab );
 bool exists_in_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab );
-void reset_str_sub_vocab( str_sub_vocab_t **str_sub_vocab ,
-	        		     str_sub_vocab_t *reset_position );
 
 
 #endif   /*  _TOKE_STRSUBVOCAB_H    */
