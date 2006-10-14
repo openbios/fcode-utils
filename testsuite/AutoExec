@@ -1,0 +1,164 @@
+#!  /bin/csh -f
+#
+#  Part of automation of the testing process for the Tokenizer/De-Tokenizer
+#  Automate Execution of Tokenizing and De-Tokenizing the various test-cases
+
+#  Updated Thu, 09 Feb 2006 at 13:10 PST by David L. Paktor
+
+#  Run this from the parent-directory of the various Test categories.
+#  Sym-links to the binaries should be here.
+
+#  Each Test category directory must have a TestArgs file,
+#      formatted as follows:
+#          Lines starting with  #  (Pound-sign Space) are comments,
+#              and are ignored
+#          Blank lines are also allowed, and are also ignored
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command, to be run after, for specific
+#                     verification of this Test.  Arguments can also
+#                     be included in this field, as long as they have
+#                     no commas.
+#          An unspecified intermediate field must be represented as
+#               an empty field separated by commas from the fields
+#               preceding and following.
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+#          The -v (verbose) switch will always be used and does not need
+#              to be explicitly specified.  However, if the "script-command"
+#              field starts with +V (case-sensitive), then the -v (verbose)
+#              switch will not be used.
+#
+#          The Test-file base-name field may have multiple base-names,
+#              to run a multiple-file batch command.
+#          If a multiple-file batch is run:
+#              The Result-file label will apply only to the Log file.
+
+#  To Do:
+#          Contrive a way to run the second through last input files as
+#              separate individual jobs (with same command-line switches)
+#          This needs to be co-ordinated with the Auto-Compare script:
+#              It will need to compare the .FC files from the batch with
+#                   those from the individual runs.
+
+
+#  Initial error-checking:
+if ( ( ! -x ./toke ) || ( ! -x ./detok ) ) then
+    echo 'Starting in wrong directory.  Executable toke and detok are not here.'
+    exit 1
+endif
+
+set TArgFiles = `find . -name TestArgs -exec expr {} : '\./\(.*\)' \;`
+if ( $#TArgFiles == 0 ) then
+    echo 'No TestArgs files found in subdirectories.'
+    echo 'Starting in wrong directory?'
+    exit 1
+endif
+
+set parent  = `pwd`
+set tokex  = `pwd`/toke
+set detokex  = `pwd`/detok
+set romhdrex = `pwd`/romheaders
+
+set chirren = `echo $TArgFiles | tr ' ' \\012 | sed -e 'sX/[^/]*$XXg'`
+
+#  The "verbose" flag is now a variable.
+set vflg = '-v'
+
+#  Let's show a progress-downcount and time, stamps and elapsed.
+#  Find the count; leave the max number on display:
+set cnt = `egrep '^[^#].*' $TArgFiles | wc -l`
+echo ''
+set starttime = `date +'%T'`
+echo $starttime
+echo $cnt
+
+foreach dir ( $chirren )
+   cd $dir
+   set lindxmax = `cat TestArgs | wc -l`
+   set lindx = 0
+   while ( $lindx < $lindxmax )
+      @ lindx++
+      set targline = `sed -n ${lindx}p TestArgs`
+      if ( $#targline == 0 ) continue
+      if ( "$targline[1]" == "#" ) continue
+      set ttargs = `echo $targline | awk -F , '{print $1}'`
+#  One more error-check:
+      set tfths = ''
+      set fcfils = ''
+      unset FMissing
+      foreach tfth ( $ttargs )
+	  if ( ! -f ${tfth}.fth ) then
+             echo File Not found: ${dir}/${tfth}.fth
+             echo Please update ${dir}/TestArgs file, line $lindx
+	     set FMissing
+	  endif
+	  set tfths = ( $tfths ${tfth}.fth )
+	  set fcfils = ( $fcfils ${tfth}.fc )
+      end
+      if ( $?FMissing ) continue
+
+      set ttarg = $ttargs[1]
+
+      set outfile = ''
+      set label = `echo $targline | awk -F , '{print $2}'`
+      if ( "$label" != "" ) then
+	 set label = .$label
+	 if ( $#tfths == 1 ) then
+	    set fcfils = ${ttarg}${label}.fc
+	    set outfile = ( -o $fcfils )
+	 endif
+      endif
+#  We don't set the switches as a shell-variable because we might
+#      need to preserve quoted groupings that have embedded spaces.
+
+#  Collect the script-command.
+#  Awkward place to expect a  "+V"  option, but it'll have to serve....
+      set scriptcmd = `echo $targline | awk -F , '{print $4}'`
+      if ( $#scriptcmd > 0 ) then
+	 if ( "$scriptcmd[1]" == "+V" ) then
+            set vflg = ""
+	    if ( $#scriptcmd == 1 ) then
+	       set scriptcmd = ""
+	    else
+	       set scriptcmd = ( $scriptcmd[2-] )
+	    endif
+	 endif
+      endif
+
+      echo -n X${cnt}' ' | tr X \\015
+      @ cnt--
+
+#  Now do it.
+      set doromhdr = 0
+      echo toke $vflg `sed -n ${lindx}p TestArgs | awk -F , '{print $3}'` $outfile ${tfths} >& ${ttarg}${label}.Log
+      echo '' >>& ${ttarg}${label}.Log
+      eval $tokex $vflg `sed -n ${lindx}p TestArgs | awk -F , '{print $3}'` $outfile ${tfths} >>& ${ttarg}${label}.Log
+      set vflg = '-v'
+
+      foreach fcfil ( $fcfils )
+	 if ( -f ${fcfil} ) then
+	    $detokex -v -o ${fcfil} > ${fcfil:r}.DeTok
+	    set doromhdr = `grep 'PCI Header identified' ${fcfil:r}.DeTok | wc -l`
+	    if ( $doromhdr ) then
+	       $romhdrex ${fcfil} > ${fcfil:r}.RomHdr
+	    endif
+	 endif
+      end
+
+
+      if ( "$scriptcmd" != "" ) then
+	 eval $scriptcmd
+      endif
+
+   end
+   cd $parent
+end
+#  Clear the display-line
+echo -n X'   'X | tr X \\015
+#  Show time, stamps and elapsed.
+date +'%T'
+echo $starttime ' (Started)'
+

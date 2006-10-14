@@ -1,0 +1,183 @@
+#!  /bin/csh -f
+#
+#  Part of automation of the testing process for the Tokenizer/De-Tokenizer
+#  Automate Comparison of results of Auto-Execution of the various test-cases
+
+#  Updated Fri, 16 Jun 2006 at 12:12 PDT by David L. Paktor
+
+#  To Do:
+#    Conditional comparison of .DeTok files:
+#        Detect difference in .fc file, but do not display
+#        Display differences in .Log file
+#        If difference detected in .fc file, display mssg
+#        Otherwise, detect difference in .DeTok file and display mssg
+#        If either diff detected in .fc  or in .DeTok file, show .DeTok  diffs
+#        Display differences in .RomHdr
+#
+#    Compare the source (.fth) files (for regression testing...)
+
+#  Usage:
+#  Run this from the parent-directory of the various Test categories.
+#  This script uses the same  TestArgs  files that were used by
+#     (and described in) the  AutoExec  script.
+#
+#  This script needs a shell environment variable called  CygTestLogs
+#      whose value is the path to the parent-directory that contains
+#      the results of Auto-Execution of the various test-cases under
+#      Cygwin, which is the "Gold Standard" to which the other
+#      platforms' results will be compared.
+#
+#  This script accepts an optional environment variable called  LogFilesDiff
+#      which may be set to change the number of lines by which two .Log
+#      files are expected to differ (due to different compilation-signatures)
+#      If this is not supplied in the environment, a default will be provided. 
+#
+#  This script compares only one platform's results at a time;
+#      the parent-directory that contains the Auto-Execution  results
+#      for the platform to be compared should be the current directory.
+#
+#  This script displays both operational errors and detected discrepancies
+#      in Standard Output and also collects the same in a log file whose
+#      name is  AutoComp.Log.<time-and-date-stamp>
+#
+#  A secondary output file, called AutoComp.TKdiffs.<time-and-date-stamp>
+#      is produced; it can be "source"d to cause a sequential  tkdiff  of
+#      the detected discrepancies
+
+
+#  Set the number of lines by which two .Log files are expected to differ.
+#      (this is due to different compilation-signature lines)
+set LogFilesDiffLines = 6
+#  Over-ride with optional shell env't variable called  LogFilesDiff
+if ( $?LogFilesDiff ) then
+    set notallnumbers = `echo $LogFilesDiff | tr '0-9' ' '`
+    if ( "$notallnumbers" == "" ) then
+        set LogFilesDiffLines = $LogFilesDiff
+    endif
+endif
+
+#  Preliminary error checking:
+if ( ! $?CygTestLogs ) then
+    echo 'Please define a shell environment variable called  CygTestLogs'
+    echo '    whose value is the path to the Cygwin test-results directory.'
+    exit 1
+endif
+
+set TArgFiles = `find . -name TestArgs -exec expr {} : '\./\(.*\)' \;`
+if ( $#TArgFiles == 0 ) then
+    echo 'No TestArgs files found in subdirectories.'
+    echo 'Starting in wrong directory?'
+    exit 2
+endif
+
+set TArgReslts = `find $CygTestLogs -name TestArgs -exec expr {} : $CygTestLogs/'\(.*\)' \;`
+if ( $#TArgReslts != $#TArgFiles ) then
+    echo 'Number of TestArgs files in CygTestLogs ('$CygTestLogs') directory'
+    echo '    does not match those found under current directory.'
+    echo 'Please correct discrepancy and try again.'
+    exit 4
+endif
+
+if ( "$TArgReslts" != "$TArgFiles" ) then
+    echo 'List of TestArgs files in CygTestLogs ('$CygTestLogs') directory'
+    echo '    does not match those found under current directory.'
+    echo 'Please correct discrepancy and try again.'
+    exit 8
+endif
+
+#  Let's save mismatch identifiers:
+set datemark = `date '+%y%m%d.%H%M%S'`
+set ErrResltFil = AutoComp.Log.$datemark
+set ScriptResltFil = AutoComp.TKdiffs.$datemark
+
+#  Let's show a progress-downcount
+#  Find the count of actual tests; leave the max number on display:
+set cnt = `egrep '^[^#].*' $TArgFiles | wc -l`
+echo ''
+echo $cnt
+
+foreach TArgFil ( $TArgFiles )
+   set dir = $TArgFil:h
+
+   set lindxmax = `cat $TArgFil | wc -l`
+   set lindx = 0
+   while ( $lindx < $lindxmax )
+      @ lindx++
+      set targline = `sed -n ${lindx}p $TArgFil`
+      if ( $#targline == 0 ) continue
+      if ( "$targline[1]" == "#" ) continue
+      set ttarg = $dir/$targline[1]
+#  One more error-check:
+      if ( ! -f ${ttarg}.fth ) then
+         echo File Not found: ${ttarg}.fth
+         echo Please update ${TArgFil} file, line $lindx
+	 continue
+      endif
+
+      set label = `echo $targline | awk -F , '{print $2}'`
+      if ( "$label" != "" ) set label = .$label 
+
+#  Now begins the real fun...
+#  Show a running down-count
+      echo -n X${cnt}' ' | tr X \\015
+      @ cnt--
+
+#  Check the extensions that are text-type files
+      foreach txext ( Log RomHdr fl fl.missing )
+#  Is the file in both?
+	 if ( -f $CygTestLogs/${ttarg}${label}.${txext} && ! -f ${ttarg}${label}.${txext} ) then
+             echo Missing ${ttarg}${label}.${txext} | tee -a $ErrResltFil
+	 else
+             if ( -f ${ttarg}${label}.${txext} ) then
+		set lim = 0
+		set fxext = `echo $txext | tr '.' '_'`
+		if ( `eval echo '$?'${fxext}FilesDiffLines` ) then
+		    set lim = `eval echo '$'${fxext}FilesDiffLines`
+		endif
+		set logdiff = `diff {,$CygTestLogs/}${ttarg}${label}.${txext} | wc -l`
+		if ( $logdiff > $lim ) then
+	            echo ${ttarg}${label}.${txext} files differ. | tee -a $ErrResltFil
+		    diff {$CygTestLogs/,}${ttarg}${label}.${txext} | tee -a $ErrResltFil
+	            echo  'tkdiff {$CygTestLogs/,}'${ttarg}${label}.${txext} >> $ScriptResltFil
+		endif
+	     endif
+	 endif
+      end
+
+#  Now, check the FCode file.
+#  If there's an FCode file in the reference directory ($CygTestLogs)
+#      there should be one in the directory under test.
+      if ( -f $CygTestLogs/${ttarg}${label}.fc && ! -f ${ttarg}${label}.fc ) then
+          echo Missing ${ttarg}${label}.fc | tee -a $ErrResltFil
+      else
+#  Is there an FCode file in the directory under test?
+          unset ShowDetokDiffs
+	  if ( -f ${ttarg}${label}.fc ) then
+	     set bindiff = `cmp {,$CygTestLogs/}${ttarg}${label}.fc`
+	     if ( "$bindiff" != "" ) then
+		echo "$bindiff" | tee -a $ErrResltFil
+#  If the binaries are different, show the difference in the DeTok form
+#  If the DeTok form is missing, it's an even stranger error!
+		if ( ! -f $CygTestLogs/${ttarg}${label}.DeTok || ! -f ${ttarg}${label}.DeTok ) then
+		    echo Missing DeTok file for ${ttarg}${label} | tee -a $ErrResltFil
+		else
+		    set ShowDetokDiffs
+		endif
+	     else
+#  Even if the binaries are not different,
+#      check for changes in in the DeTok form
+	     set detokdiff = `diff {,$CygTestLogs/}${ttarg}${label}.DeTok | wc -l`
+	     if ( $detokdiff > 0 ) set ShowDetokDiffs
+	     endif
+	  endif
+	  if ( $?ShowDetokDiffs ) then
+	    echo ${ttarg}${label}.DeTok files differ. | tee -a $ErrResltFil
+	    diff {$CygTestLogs/,}${ttarg}${label}.DeTok | tee -a $ErrResltFil
+	    echo  'tkdiff {$CygTestLogs/,}'${ttarg}${label}.DeTok >> $ScriptResltFil
+	  endif
+      endif
+
+   end
+end
+
+
