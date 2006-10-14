@@ -82,31 +82,31 @@ int init_stream(char *name)
 {
 	FILE *infile;
 	struct stat finfo;
-	
-	if (stat(name,&finfo))
+
+	if (stat(name, &finfo))
 		return -1;
-	
-	indata=malloc(finfo.st_size);
+
+	indata = malloc(finfo.st_size);
 	if (!indata)
 		return -1;
 
-        infile=fopen(name,"r");
-        if (!infile)
-                return -1;
+	infile = fopen(name, "r");
+	if (!infile)
+		return -1;
 
-	if (fread(indata, finfo.st_size, 1, infile)!=1) {
+	if (fread(indata, finfo.st_size, 1, infile) != 1) {
 		free(indata);
 		return -1;
 	}
 
 	fclose(infile);
-       
-	pc=indata; 
+
+	pc = indata;
 	fc_start = indata;
-	max=pc+finfo.st_size;
-	
+	max = pc + finfo.st_size;
+
 	stream_max = finfo.st_size;
-	
+
 	return 0;
 }
 
@@ -121,7 +121,7 @@ int init_stream(char *name)
 void init_fcode_block(void)
 {
 	fc_start = pc;
-	linenum = 1 ;
+	linenum = 1;
 }
 
 
@@ -133,7 +133,7 @@ void close_stream(void)
 
 int get_streampos(void)
 {
-	return (int)( pc - fc_start );
+	return (int) (pc - fc_start);
 }
 
 void set_streampos(int pos)
@@ -170,23 +170,21 @@ void set_streampos(int pos)
 
 static void throw_eof(bool premature)
 {
-    char yoo = 'U';
-    char eee = 'E';
-    if ( premature)
-    {
-        printf("Premature ");
-	yoo = 'u';
-	eee = 'e';
-    }
-    if ( ! end_found )
-    {
-        printf("%cnexpected ",yoo);
-	eee = 'e';
-    }
-    printf("%cnd of file.\n",eee);
-    longjmp(eof_exception, -1);
+	char yoo = 'U';
+	char eee = 'E';
+	if (premature) {
+		printf("Premature ");
+		yoo = 'u';
+		eee = 'e';
+	}
+	if (!end_found) {
+		printf("%cnexpected ", yoo);
+		eee = 'e';
+	}
+	printf("%cnd of file.\n", eee);
+	longjmp(eof_exception, -1);
 }
-	
+
 /* **************************************************************************
  *
  *      Function name:  get_bytes
@@ -230,18 +228,16 @@ static void throw_eof(bool premature)
 
 static u8 *get_bytes(int nbytes)
 {
-   u8 *retval = pc;
-   if ( pc == max )
-   {
-       throw_eof(FALSE);
-   }
-   if ( pc + nbytes > max )
-   {
-       throw_eof(TRUE);
-   }
-   pc += nbytes;
-   return( retval);
-        }
+	u8 *retval = pc;
+	if (pc == max) {
+		throw_eof(FALSE);
+	}
+	if (pc + nbytes > max) {
+		throw_eof(TRUE);
+	}
+	pc += nbytes;
+	return (retval);
+}
 
 
 /* **************************************************************************
@@ -254,11 +250,11 @@ static u8 *get_bytes(int nbytes)
 
 bool more_to_go(void)
 {
-    bool retval;
-    retval = INVERSE( pc == max );
-    return( retval);
+	bool retval;
+	retval = INVERSE(pc == max);
+	return (retval);
 }
- 
+
 
 /* **************************************************************************
  *
@@ -275,64 +271,62 @@ bool more_to_go(void)
  *             token_streampos             Streampos() of token just gotten
  *
  **************************************************************************** */
- 
+
 u16 next_token(void)
 {
-        u16 tok;
-        token_streampos = get_streampos();
-        tok = *(get_bytes(1));
-	if ( tok != 0x00 &&  tok < 0x10)
-	{
-                tok<<=8;
-              tok |= *(get_bytes(1));     
-        }
-        fcode=tok;
-    return(tok);
+	u16 tok;
+	token_streampos = get_streampos();
+	tok = *(get_bytes(1));
+	if (tok != 0x00 && tok < 0x10) {
+		tok <<= 8;
+		tok |= *(get_bytes(1));
+	}
+	fcode = tok;
+	return (tok);
 }
 
 u32 get_num32(void)
 {
-        u32 retval;
+	u32 retval;
 	u8 *num_str;
- 
+
 	num_str = get_bytes(4);
 	retval = BIG_ENDIAN_LONG_FETCH(num_str);
- 
-        return ( retval);
+
+	return (retval);
 }
 
 u16 get_num16(void)
 {
-        u16 retval;
+	u16 retval;
 	u8 *num_str;
- 
-        num_str = get_bytes(2);
+
+	num_str = get_bytes(2);
 	retval = BIG_ENDIAN_WORD_FETCH(num_str);
- 
-        return ( retval);
+
+	return (retval);
 }
- 
+
 u8 get_num8(void)
 {
-        u8  inbyte;
+	u8 inbyte;
 
 	inbyte = *(get_bytes(1));
-        return(inbyte);
+	return (inbyte);
 }
 
 s16 get_offset(void)
 {
-        s16 retval;
-        if (offs16)
-        {
-	    retval = (s16)get_num16();
-	}else{
-	    retval = (s16)get_num8();
-	    /*  Make sure it's sign-extended  */
-	    retval |= ( retval & 0x80 ) ? 0xff00 : 0 ;
+	s16 retval;
+	if (offs16) {
+		retval = (s16) get_num16();
+	} else {
+		retval = (s16) get_num8();
+		/*  Make sure it's sign-extended  */
+		retval |= (retval & 0x80) ? 0xff00 : 0;
 	}
- 
-        return (retval);
+
+	return (retval);
 }
 
 /* **************************************************************************
@@ -360,14 +354,14 @@ s16 get_offset(void)
  *
  **************************************************************************** */
 
-u8 *get_string(u8 *len)
+u8 *get_string(u8 * len)
 {
-    char *retval;
+	char *retval;
 
-    *len = get_num8();
-    retval = get_bytes((int)*len);
- 
-    return (retval); 
+	*len = get_num8();
+	retval = get_bytes((int) *len);
+
+	return (retval);
 }
 
 
@@ -405,23 +399,23 @@ u8 *get_string(u8 *len)
  *
  **************************************************************************** */
 
-char *get_name(u8 *len)
+char *get_name(u8 * len)
 {
-    char *str_start;
-    char *retval;
-    u8 sav_byt;
- 
-    str_start = get_string( len );
+	char *str_start;
+	char *retval;
+	u8 sav_byt;
 
-    sav_byt = *pc;
-    *pc = 0;
+	str_start = get_string(len);
 
-    retval = strdup(str_start);
-    *pc = sav_byt;
- 
-    return (retval);
-        }
- 
+	sav_byt = *pc;
+	*pc = 0;
+
+	retval = strdup(str_start);
+	*pc = sav_byt;
+
+	return (retval);
+}
+
 /* **************************************************************************
  *
  *      Function name:  calc_checksum
@@ -452,25 +446,24 @@ char *get_name(u8 *len)
 
 u16 calc_checksum(void)
 {
-    u16 retval = 0;
-    u8 *cksmptr;
-    u8 *save_pc;
-    u32 fc_blk_len;
-    int indx;
+	u16 retval = 0;
+	u8 *cksmptr;
+	u8 *save_pc;
+	u32 fc_blk_len;
+	int indx;
 
-    save_pc = pc;
+	save_pc = pc;
 
-    fc_blk_len = get_num32();            /* Read len */
-    cksmptr = get_bytes(fc_blk_len-8);   /*  Make sure we have all our data  */
+	fc_blk_len = get_num32();	/* Read len */
+	cksmptr = get_bytes(fc_blk_len - 8);	/*  Make sure we have all our data  */
 
-    for ( indx = 8; indx < fc_blk_len; indx++)
-    {
-	retval += *cksmptr++;
+	for (indx = 8; indx < fc_blk_len; indx++) {
+		retval += *cksmptr++;
+	}
+
+	pc = save_pc;
+	return (retval);
 }
-
-    pc = save_pc;
-    return( retval);
-} 
 
 
 /* **************************************************************************
@@ -510,7 +503,7 @@ u16 calc_checksum(void)
 void adjust_for_pci_header(void)
 {
 	int pci_header_size;
-	
+
 	pci_header_size = handle_pci_header(pc);
 	pci_image_found = pci_header_size > 0 ? TRUE : FALSE;
 	pc += pci_header_size;
@@ -543,14 +536,13 @@ void adjust_for_pci_header(void)
 
 void adjust_for_pci_filler(void)
 {
-    if ( pci_image_found )
-    {
-        int pci_filler_len;
-	u8 *pci_filler_ptr;
+	if (pci_image_found) {
+		int pci_filler_len;
+		u8 *pci_filler_ptr;
 
-	pci_filler_len = pci_image_end - pc;
-	pci_filler_ptr = get_bytes(pci_filler_len);
-	handle_pci_filler( pci_filler_ptr );
-	pci_image_found = FALSE;
-    }
+		pci_filler_len = pci_image_end - pc;
+		pci_filler_ptr = get_bytes(pci_filler_len);
+		handle_pci_filler(pci_filler_ptr);
+		pci_image_found = FALSE;
+	}
 }

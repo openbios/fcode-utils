@@ -46,16 +46,16 @@ void adjust_for_pci_header(void);
 void adjust_for_pci_filler(void);
 void init_fcode_block(void);
 
-int  get_streampos(void);
+int get_streampos(void);
 void set_streampos(int pos);
 
 u16 next_token(void);
-u8  get_num8(void);
+u8 get_num8(void);
 u16 get_num16(void);
 u32 get_num32(void);
 s16 get_offset(void);
-u8 *get_string(u8 *len);
-char *get_name(u8 *len);
+u8 *get_string(u8 * len);
+char *get_name(u8 * len);
 u16 calc_checksum(void);
 
 /*  External declarations for variables defined in   stream.c   */
@@ -65,4 +65,4 @@ extern u8 *indata;
 extern u8 *pc;
 extern u8 *max;
 
-#endif   /*  _UTILS_DETOK_STREAM_H    */
+#endif				/*  _UTILS_DETOK_STREAM_H    */

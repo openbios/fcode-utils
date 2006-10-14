@@ -97,17 +97,15 @@ static char *vfc_buf_end;
  *
  **************************************************************************** */
 
-static void skip_whitespace( char **string_line_ptr)
+static void skip_whitespace(char **string_line_ptr)
 {
-    char *cur_char_ptr = *string_line_ptr;
-    for ( ; *cur_char_ptr != 0 ; cur_char_ptr++ )
-    {
-	if ( (*cur_char_ptr != '\t') && (*cur_char_ptr != ' ') )
-	{
-	    *string_line_ptr = cur_char_ptr;
-	    break;
+	char *cur_char_ptr = *string_line_ptr;
+	for (; *cur_char_ptr != 0; cur_char_ptr++) {
+		if ((*cur_char_ptr != '\t') && (*cur_char_ptr != ' ')) {
+			*string_line_ptr = cur_char_ptr;
+			break;
+		}
 	}
-    }
 }
 
 /* **************************************************************************
@@ -134,24 +132,26 @@ static void skip_whitespace( char **string_line_ptr)
  *
  **************************************************************************** */
 
-static bool get_next_vfc_line( void )
+static bool get_next_vfc_line(void)
 {
-    bool retval = FALSE;   /*  TRUE = not at end yet  */
-    while ( vfc_remainder < vfc_buf_end )
-    {
-	current_vfc_line = vfc_remainder;
-	vfc_remainder = strchr( current_vfc_line, '\n');
-	*vfc_remainder = 0;
-	vfc_remainder++;
-	vfc_line_no++;
-	skip_whitespace( &current_vfc_line);
-	if ( *current_vfc_line == 0 )  continue;  /*  Blank line */
-	if ( *current_vfc_line == '#' )  continue;  /*  Comment  */
-	if ( *current_vfc_line == '\\' )  continue;  /*  Comment  */
-	retval = TRUE;
-	break;  /*  Found something  */
-    }
-    return( retval);
+	bool retval = FALSE;	/*  TRUE = not at end yet  */
+	while (vfc_remainder < vfc_buf_end) {
+		current_vfc_line = vfc_remainder;
+		vfc_remainder = strchr(current_vfc_line, '\n');
+		*vfc_remainder = 0;
+		vfc_remainder++;
+		vfc_line_no++;
+		skip_whitespace(&current_vfc_line);
+		if (*current_vfc_line == 0)
+			continue;	/*  Blank line */
+		if (*current_vfc_line == '#')
+			continue;	/*  Comment  */
+		if (*current_vfc_line == '\\')
+			continue;	/*  Comment  */
+		retval = TRUE;
+		break;		/*  Found something  */
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -176,20 +176,19 @@ static bool get_next_vfc_line( void )
  *
  **************************************************************************** */
 static bool did_not_splash = TRUE;
-static void vfc_splash( char *vf_file_name)
+static void vfc_splash(char *vf_file_name)
 {
-    if ( did_not_splash )
-    {
-	/*  Temporary substring buffer                */
-	/*  Guarantee that the malloc will be big enough.  */
-	char *strbfr = malloc( strlen( vf_file_name) +65 ) ;
-	sprintf( strbfr,
-	    "Reading additional FCodes from file:  %s\n",
-		vf_file_name);
-	printremark( strbfr);
-	free( strbfr);
-	did_not_splash = FALSE;
-    }
+	if (did_not_splash) {
+		/*  Temporary substring buffer                */
+		/*  Guarantee that the malloc will be big enough.  */
+		char *strbfr = malloc(strlen(vf_file_name) + 65);
+		sprintf(strbfr,
+			"Reading additional FCodes from file:  %s\n",
+			vf_file_name);
+		printremark(strbfr);
+		free(strbfr);
+		did_not_splash = FALSE;
+	}
 }
 
 /* **************************************************************************
@@ -240,104 +239,98 @@ static void vfc_splash( char *vf_file_name)
  *
  **************************************************************************** */
 
-bool add_fcodes_from_list( char *vf_file_name)
+bool add_fcodes_from_list(char *vf_file_name)
 {
-    bool retval = FALSE;
-    int added_fc_count = 0;
-    check_tok_seq = FALSE;
+	bool retval = FALSE;
+	int added_fc_count = 0;
+	check_tok_seq = FALSE;
 
-    if ( verbose )  vfc_splash( vf_file_name);
+	if (verbose)
+		vfc_splash(vf_file_name);
 
-    if ( init_stream( vf_file_name) != 0 )
-    {
-	char *strbfr = malloc( strlen( vf_file_name) +65 );
-	sprintf( strbfr,
-	    "Could not open Additional FCodes file:  %s\n",
-		vf_file_name);
-	printremark( strbfr);
-	free( strbfr);
-	exit(1);
-    }
-    vfc_remainder = indata;
-    vfc_buf_end = indata + stream_max -1;
-
-    while (  get_next_vfc_line() )
-    {
-	char vs_fc_name[36];
-	int  vs_fc_number;
-	int  scan_result;
-	char *lookup_result;
-	char *fc_name_cpy;
-
-	scan_result = sscanf( current_vfc_line, "0x%x %32s",
-	     &vs_fc_number, vs_fc_name);
-
-	if ( scan_result != 2 )   /*  Allow a capital  0X   */
-	{
-	    scan_result = sscanf( current_vfc_line, "0X%x %32s",
-		&vs_fc_number, vs_fc_name);
+	if (init_stream(vf_file_name) != 0) {
+		char *strbfr = malloc(strlen(vf_file_name) + 65);
+		sprintf(strbfr,
+			"Could not open Additional FCodes file:  %s\n",
+			vf_file_name);
+		printremark(strbfr);
+		free(strbfr);
+		exit(1);
 	}
-	if ( scan_result != 2 )   /*  Try it without the  0x   */
-	{
-	    scan_result = sscanf( current_vfc_line, "%x %32s",
-		&vs_fc_number, vs_fc_name);
+	vfc_remainder = indata;
+	vfc_buf_end = indata + stream_max - 1;
+
+	while (get_next_vfc_line()) {
+		char vs_fc_name[36];
+		int vs_fc_number;
+		int scan_result;
+		char *lookup_result;
+		char *fc_name_cpy;
+
+		scan_result = sscanf(current_vfc_line, "0x%x %32s",
+				     &vs_fc_number, vs_fc_name);
+
+		if (scan_result != 2) {	/*  Allow a capital  0X   */
+			scan_result = sscanf(current_vfc_line, "0X%x %32s",
+					     &vs_fc_number, vs_fc_name);
+		}
+		if (scan_result != 2) {	/*  Try it without the  0x   */
+			scan_result = sscanf(current_vfc_line, "%x %32s",
+					     &vs_fc_number, vs_fc_name);
+		}
+
+		if (scan_result != 2) {	/*  That's it... */
+			char *strbfr =
+			    malloc(strlen(current_vfc_line) + 65);
+			vfc_splash(vf_file_name);
+			sprintf(strbfr,
+				"Line #%d, invalid format.  Ignoring:  %s\n",
+				vfc_line_no, current_vfc_line);
+			printremark(strbfr);
+			free(strbfr);
+			continue;
+		}
+
+		if ((vs_fc_number < 0x10) || (vs_fc_number > 0x7ff)) {
+			char *strbfr = malloc(85);
+			vfc_splash(vf_file_name);
+			sprintf(strbfr,
+				"Line #%d, FCode number out of range:  0x%x  Ignoring.\n",
+				vfc_line_no, vs_fc_number);
+			printremark(strbfr);
+			free(strbfr);
+			continue;
+		}
+
+		lookup_result = lookup_token((u16) vs_fc_number);
+		if (strcmp(lookup_result, "ferror") != 0) {
+			char *strbfr = malloc(strlen(lookup_result) + 85);
+			vfc_splash(vf_file_name);
+			sprintf(strbfr,
+				"Line #%d.  FCode number 0x%x is already "
+				"defined as %s  Ignoring.\n",
+				vfc_line_no, vs_fc_number, lookup_result);
+			printremark(strbfr);
+			free(strbfr);
+			continue;
+		}
+
+		/*  We've passed all the tests!  */
+		fc_name_cpy = strdup(vs_fc_name);
+		add_token((u16) vs_fc_number, fc_name_cpy);
+		added_fc_count++;
+		retval = TRUE;
 	}
 
-	if ( scan_result != 2 )   /*  That's it... */
-	{
-	    char *strbfr = malloc( strlen( current_vfc_line) +65 );
-	    vfc_splash( vf_file_name);
-	    sprintf( strbfr,
-		"Line #%d, invalid format.  Ignoring:  %s\n",
-		    vfc_line_no, current_vfc_line);
-	    printremark( strbfr);
-	    free( strbfr);
-	    continue;
+	if (verbose) {
+		char *strbfr = malloc(85);
+		sprintf(strbfr,
+			"Added %d FCode numbers\n", added_fc_count);
+		printremark(strbfr);
+		free(strbfr);
 	}
 
-	if ( ( vs_fc_number < 0x10 ) || ( vs_fc_number > 0x7ff ) )
-	{
-	    char *strbfr = malloc( 85 );
-	    vfc_splash( vf_file_name);
-	    sprintf( strbfr,
-		"Line #%d, FCode number out of range:  0x%x  Ignoring.\n",
-		    vfc_line_no, vs_fc_number);
-	    printremark( strbfr);
-	    free( strbfr);
-	    continue;
-	}
-
-	lookup_result = lookup_token( (u16)vs_fc_number);
-	if ( strcmp( lookup_result, "ferror") != 0 )
-	{
-	    char *strbfr = malloc( strlen( lookup_result) + 85 );
-	    vfc_splash( vf_file_name);
-	    sprintf( strbfr,
-		"Line #%d.  FCode number 0x%x is already "
-		    "defined as %s  Ignoring.\n",
-			vfc_line_no, vs_fc_number, lookup_result);
-	    printremark( strbfr);
-	    free( strbfr);
-	    continue;
-	}
-
-	/*  We've passed all the tests!  */
-	fc_name_cpy = strdup( vs_fc_name);
-	add_token( (u16)vs_fc_number, fc_name_cpy);
-	added_fc_count++;
-	retval = TRUE;
-    }
-
-    if ( verbose )
-    {
-	char *strbfr = malloc( 85 );
-        sprintf( strbfr,
-	    "Added %d FCode numbers\n", added_fc_count);
-	printremark( strbfr);
-	free( strbfr);
-    }
-
-    close_stream();
-    check_tok_seq = TRUE;
-    return( retval);
+	close_stream();
+	check_tok_seq = TRUE;
+	return (retval);
 }

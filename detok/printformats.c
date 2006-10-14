@@ -84,57 +84,54 @@
  *
  **************************************************************************** */
 
-void printremark ( char *str)
+void printremark(char *str)
 {
-    char *strtmp ;          /*  Temporary pointer to current substring    */
-    int substrlen ;         /*  Length of current substring               */
-    char *substrend ;       /*  Pointer to end of current substring       */
-    char *strend ;          /*  Pointer to end of given string            */
+	char *strtmp;		/*  Temporary pointer to current substring    */
+	int substrlen;		/*  Length of current substring               */
+	char *substrend;	/*  Pointer to end of current substring       */
+	char *strend;		/*  Pointer to end of given string            */
 
-    char *strbfr ;          /*  Temporary substring buffer                */
+	char *strbfr;		/*  Temporary substring buffer                */
 
-    /*  Guarantee that the malloc will be big enough.  */
-    strbfr = (char *)malloc(strlen((char *)str)+1);
-    if ( !strbfr )
-    {
-        printf ("No memory.\n");
-        exit(-1);
-    }
+	/*  Guarantee that the malloc will be big enough.  */
+	strbfr = (char *) malloc(strlen((char *) str) + 1);
+	if (!strbfr) {
+		printf("No memory.\n");
+		exit(-1);
+	}
 
 
-    strtmp = str;
-    strend = &str[strlen(str)];
+	strtmp = str;
+	strend = &str[strlen(str)];
 
-    /* ******************************************************************
-     *
-     *      Isolate the current substring; allow that the given
-     *      string might not be terminated with a new-line. 
-     *
-     *      The  strend  pointer provides a convenient means to
-     *      test for when we've reached the end.
-     *
-     ******************************************************************** */
+	/* ******************************************************************
+	 *
+	 *      Isolate the current substring; allow that the given
+	 *      string might not be terminated with a new-line. 
+	 *
+	 *      The  strend  pointer provides a convenient means to
+	 *      test for when we've reached the end.
+	 *
+	 ******************************************************************** */
 
-   while ( strtmp < strend  )
-    {
-        substrend = strchr(strtmp , '\n');
-        substrlen = ( substrend ? (substrend-strtmp) : strlen(strtmp) );
+	while (strtmp < strend) {
+		substrend = strchr(strtmp, '\n');
+		substrlen = (substrend ? (substrend - strtmp) : strlen(strtmp));
 
-        strncpy (strbfr, strtmp, substrlen);
-        /* **********************************************************
-         * 
-         *  strncpy() does not append a terminating null character,
-         *  so we have to.
-         *
-         ************************************************************ */
-        strbfr[substrlen] = (char)0;
+		strncpy(strbfr, strtmp, substrlen);
+		/* **********************************************************
+		 * 
+		 *  strncpy() does not append a terminating null character,
+		 *  so we have to.
+		 *
+		 ************************************************************ */
+		strbfr[substrlen] = (char) 0;
 
-        printf("\\  %s\n",strbfr);
+		printf("\\  %s\n", strbfr);
 
-        strtmp = &strtmp[ substrlen + ( substrend ? 1 : 0 ) ] ;
+		strtmp = &strtmp[substrlen + (substrend ? 1 : 0)];
 
-    }
+	}
 
-    free(strbfr) ;
+	free(strbfr);
 }
-

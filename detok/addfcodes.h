@@ -43,6 +43,6 @@
  *
  **************************************************************************** */
 
-bool add_fcodes_from_list( char *vf_file_name);
+bool add_fcodes_from_list(char *vf_file_name);
 
-#endif   /*  _DETOK_VSFCODES_H    */
+#endif				/*  _DETOK_VSFCODES_H    */

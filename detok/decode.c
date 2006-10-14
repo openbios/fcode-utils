@@ -39,7 +39,7 @@
 #include "detok.h"
 #include "stream.h"
 
-static int indent;    /*  Current level of indentation   */
+static int indent;		/*  Current level of indentation   */
 
 /* **************************************************************************
  *
@@ -53,71 +53,71 @@ static int indent;    /*  Current level of indentation   */
  *
  **************************************************************************** */
 
-static bool ended_okay = TRUE;    /*  FALSE if finished prematurely  */
+static bool ended_okay = TRUE;	/*  FALSE if finished prematurely  */
 
-bool offs16=TRUE;
+bool offs16 = TRUE;
 unsigned int linenum;
-bool end_found=FALSE;
-unsigned int token_streampos;   /*  Streampos() of currently-gotten token  */
+bool end_found = FALSE;
+unsigned int token_streampos;	/*  Streampos() of currently-gotten token  */
 u16 last_defined_token = 0;
 
 jmp_buf eof_exception;
 
 static int fclen;
-static const char *unnamed = "(unnamed-fcode)" ;
+static const char *unnamed = "(unnamed-fcode)";
 
-static void decode_indent(void) 
+static void decode_indent(void)
 {
 	int i;
-	if (indent<0) {
+	if (indent < 0) {
 #ifdef DEBUG_INDENT
 		printf("detok: error in indentation code.\n");
 #endif
-		indent=0;
+		indent = 0;
 	}
-	for (i=0; i<indent; i++)
-		printf ("    ");
+	for (i = 0; i < indent; i++)
+		printf("    ");
 }
-	
+
 /*  Print forth string ( [len] char[0] ... char[len] ) */
 static void pretty_print_string(void)
 {
-    u8 len;
-    u8 *strptr;
-    int indx;
-    bool in_parens = FALSE ;  /*  Are we already inside parentheses?  */
+	u8 len;
+	u8 *strptr;
+	int indx;
+	bool in_parens = FALSE;	/*  Are we already inside parentheses?  */
 
-    strptr = get_string( &len );
+	strptr = get_string(&len);
 
-    printf("( len=%s%x", len >= 10 ? "0x":"", len);
-    if ( len >= 10 )   printf(" [%d bytes]", len);
-    printf(" )\n");
-    if (show_linenumbers)  printf("        ");
-    decode_indent();
+	printf("( len=%s%x", len >= 10 ? "0x" : "", len);
+	if (len >= 10)
+		printf(" [%d bytes]", len);
+	printf(" )\n");
+	if (show_linenumbers)
+		printf("        ");
+	decode_indent();
 	printf("\" ");
 
-    for ( indx = 0; indx < len; indx++ )
-    {
-	u8 c = *strptr++;
+	for (indx = 0; indx < len; indx++) {
+		u8 c = *strptr++;
 		if (isprint(c)) {
-	    if ( in_parens )
-	    {
+			if (in_parens) {
 				printf(" )");
-		in_parens = FALSE;
+				in_parens = FALSE;
 			}
-			printf("%c",c);
-	    /*  Quote-mark must escape itself  */
-	    if ( c == '"' ) printf("%c",c);
+			printf("%c", c);
+			/*  Quote-mark must escape itself  */
+			if (c == '"')
+				printf("%c", c);
 		} else {
-	    if ( !in_parens )
-	    {
+			if (!in_parens) {
 				printf("\"(");
-		in_parens = TRUE;
+				in_parens = TRUE;
 			}
-			printf(" %02x",c);
+			printf(" %02x", c);
 		}
 	}
-    if ( in_parens )
+	if (in_parens)
 		printf(" )");
 	printf("\"");
 }
@@ -125,7 +125,8 @@ static void pretty_print_string(void)
 static void decode_lines(void)
 {
 	if (show_linenumbers) {
-		printf("%6d: ",show_offsets ? token_streampos : linenum++);
+		printf("%6d: ",
+		       show_offsets ? token_streampos : linenum++);
 	}
 }
 
@@ -176,29 +177,27 @@ static void output_token_name(void)
 	char *tname;
 
 	/*  Run error detection only if last_defined_token was assigned  */
-	if ( (fcode > last_defined_token) && (last_defined_token > 0) )
-	{
-	    char temp_buf[80];
-	    int buf_pos;
-	    u8 top_byte = fcode >> 8;
-	    printf ("Invalid token:  [0x%03x]\n", fcode);
-	    sprintf(temp_buf, "Backing up over first byte, which is ");
-	    buf_pos = strlen(temp_buf);
-	    if ( top_byte < 10 )
-	    {
-	        sprintf(&temp_buf[buf_pos], " %02x", top_byte);
-	    }else{
-	        sprintf( &temp_buf[buf_pos], "0x%02x ( =dec %d)",
-		    top_byte, top_byte);
+	if ((fcode > last_defined_token) && (last_defined_token > 0)) {
+		char temp_buf[80];
+		int buf_pos;
+		u8 top_byte = fcode >> 8;
+		printf("Invalid token:  [0x%03x]\n", fcode);
+		sprintf(temp_buf, "Backing up over first byte, which is ");
+		buf_pos = strlen(temp_buf);
+		if (top_byte < 10) {
+			sprintf(&temp_buf[buf_pos], " %02x", top_byte);
+		} else {
+			sprintf(&temp_buf[buf_pos], "0x%02x ( =dec %d)",
+				top_byte, top_byte);
+		}
+		printremark(temp_buf);
+		set_streampos(token_streampos + 1);
+		return;
 	}
-	    printremark(temp_buf);
-	    set_streampos(token_streampos+1);
-	    return;
-}
 
-	
+
 	tname = lookup_token(fcode);
-	printf ("%s ", tname);
+	printf("%s ", tname);
 
 	/* The fcode number is interesting
 	 *  if either
@@ -206,18 +205,16 @@ static void output_token_name(void)
 	 *            or
 	 *  b) detok is in verbose mode.
 	 */
-       if ( strcmp( tname, unnamed) == 0 )
-       {
+	if (strcmp(tname, unnamed) == 0) {
 		printf("[0x%03x] ", fcode);
-       } else {
-	    if ( verbose )
-	    {
-		/*  If the token is named,
-		 *  show its fcode number in
-		 *  the syntax of a FORTH Comment
-		 */
-		printf("( 0x%03x ) ", fcode);
-	    }
+	} else {
+		if (verbose) {
+			/*  If the token is named,
+			 *  show its fcode number in
+			 *  the syntax of a FORTH Comment
+			 */
+			printf("( 0x%03x ) ", fcode);
+		}
 	}
 }
 
@@ -290,13 +287,13 @@ static void output_token(void)
 
 static s16 decode_offset(void)
 {
-        s16 offs;
+	s16 offs;
 	int dest;
 	bool invalid_dest;
 	int streampos = get_streampos();
 
 	output_token();
-        offs=get_offset();
+	offs = get_offset();
 
 	/*  The target-destination is the source-byte offset
 	 *      at which the FCode-offset is found, plus
@@ -311,34 +308,32 @@ static s16 decode_offset(void)
 	 *      theoretically possible, so we'll treat it as valid.
 	 *  An offset of zero is also, of course, invalid.
 	 */
-	invalid_dest = BOOLVAL ( (dest <= 0)
-	                      || (dest > stream_max)
-	                      || (offs == 0) );
+	invalid_dest = BOOLVAL((dest <= 0)
+			       || (dest > stream_max)
+			       || (offs == 0));
 
 	/*  Show the offset in hex and again as a signed decimal number.   */
-	if ( offs16 )
-	{
-	    printf("0x%04x (", (u16)(offs & 0xffff) );
-	}else{
-	    printf("0x%02x (",  (u8)(offs & 0x00ff) );
+	if (offs16) {
+		printf("0x%04x (", (u16) (offs & 0xffff));
+	} else {
+		printf("0x%02x (", (u8) (offs & 0x00ff));
 	}
-	if ( (offs < 0) || (offs > 9) )  printf(" =dec %d", offs);
+	if ((offs < 0) || (offs > 9))
+		printf(" =dec %d", offs);
 	/*  If we're showing source-byte offsets, show targets of offsets  */
-	if ( show_offsets || invalid_dest )
-	{
-	    printf("  dest = %d ",dest);
+	if (show_offsets || invalid_dest) {
+		printf("  dest = %d ", dest);
 	}
 	printf(")\n");
 
-	if ( invalid_dest )
-	{
-	    if (offs == 0) 
-	    {
-	      printremark("Error:  Unresolved offset.");
-	    }else{
-	      printremark("Error:  Invalid offset.  Ignoring...");
-	      set_streampos( streampos);
-	    }
+	if (invalid_dest) {
+		if (offs == 0) {
+			printremark("Error:  Unresolved offset.");
+		} else {
+			printremark
+			    ("Error:  Invalid offset.  Ignoring...");
+			set_streampos(streampos);
+		}
 	}
 	return offs;
 }
@@ -346,7 +341,7 @@ static s16 decode_offset(void)
 static void decode_default(void)
 {
 	output_token();
-	printf ("\n");
+	printf("\n");
 }
 
 static void new_token(void)
@@ -354,7 +349,7 @@ static void new_token(void)
 	u16 token;
 	output_token();
 	token = next_token();
-	printf("0x%03x\n",token);
+	printf("0x%03x\n", token);
 	add_token(token, strdup(unnamed));
 }
 
@@ -362,14 +357,14 @@ static void named_token(void)
 {
 	u16 token;
 	u8 len;
-	u8* string;
+	u8 *string;
 
 	output_token();
 	/* get forth string ( [len] [char0] ... [charn] ) */
-	string=get_name(&len);
+	string = get_name(&len);
 	token = next_token();
 	printf("%s 0x%03x\n", string, token);
-	add_token(token,string);
+	add_token(token, string);
 }
 
 static void bquote(void)
@@ -385,21 +380,21 @@ static void blit(void)
 	u32 lit;
 
 	output_token();
-	lit=get_num32();
-	printf("0x%x\n",lit);
+	lit = get_num32();
+	printf("0x%x\n", lit);
 }
 
 static void offset16(void)
 {
 	decode_default();
-	offs16=TRUE;
+	offs16 = TRUE;
 }
 
 static void decode_branch(void)
 {
 	s16 offs;
-	offs=decode_offset();
-	if (offs>=0)
+	offs = decode_offset();
+	if (offs >= 0)
 		indent++;
 	else
 		indent--;
@@ -412,7 +407,7 @@ static void decode_two(void)
 	output_token();
 	token = next_token();
 	output_token_name();
-	printf ("\n");
+	printf("\n");
 }
 
 /* **************************************************************************
@@ -428,37 +423,36 @@ static void decode_two(void)
 
 static void decode_start(void)
 {
-	u8  fcformat;
-	u16 fcchecksum, checksum=0;
+	u8 fcformat;
+	u16 fcchecksum, checksum = 0;
 
 	output_token();
-	printf("  ( %d-bit offsets)\n", offs16 ? 16 : 8 );
-	
-        token_streampos = get_streampos();
+	printf("  ( %d-bit offsets)\n", offs16 ? 16 : 8);
+
+	token_streampos = get_streampos();
 	decode_lines();
-        fcformat=get_num8();
+	fcformat = get_num8();
 	printf("  format:    0x%02x\n", fcformat);
- 
-	
-        /* Check for checksum correctness. */
-	
-        token_streampos = get_streampos();
+
+
+	/* Check for checksum correctness. */
+
+	token_streampos = get_streampos();
 	decode_lines();
-        fcchecksum=get_num16();        /*  Read the stored checksum  */
-	checksum = calc_checksum();    /*  Calculate the actual checksum  */
-	
-	if ( fcchecksum==checksum )
-	{
+	fcchecksum = get_num16();	/*  Read the stored checksum  */
+	checksum = calc_checksum();	/*  Calculate the actual checksum  */
+
+	if (fcchecksum == checksum) {
 		printf("  checksum:  0x%04x (Ok)\n", fcchecksum);
 	} else {
 		printf("  checksum should be:  0x%04x, but is 0x%04x\n",
-			checksum,fcchecksum);
+		       checksum, fcchecksum);
 	}
 
-        token_streampos = get_streampos();
+	token_streampos = get_streampos();
 	decode_lines();
-	fclen=get_num32();
-        printf("  len:       0x%04x ( %d bytes)\n", fclen, fclen);
+	fclen = get_num32();
+	printf("  len:       0x%04x ( %d bytes)\n", fclen, fclen);
 }
 
 
@@ -476,13 +470,13 @@ static void decode_start(void)
 
 static void decode_token(u16 token)
 {
-    bool handy_flag = TRUE;
+	bool handy_flag = TRUE;
 	switch (token) {
 	case 0x0b5:
 		new_token();
 		break;
-	case 0x0b6:    /*   Named Token  */
-	case 0x0ca:    /*   External Token  */
+	case 0x0b6:		/*   Named Token  */
+	case 0x0ca:		/*   External Token  */
 		named_token();
 		break;
 	case 0x012:
@@ -494,52 +488,52 @@ static void decode_token(u16 token)
 	case 0x0cc:
 		offset16();
 		break;
-	case 0x013: /* bbranch */
-	case 0x014: /* b?branch */
+	case 0x013:		/* bbranch */
+	case 0x014:		/* b?branch */
 		decode_branch();
 		break;
-	case 0x0b7: /* b(:) */
-	case 0x0b1: /* b(<mark) */
-	case 0x0c4: /* b(case) */
+	case 0x0b7:		/* b(:) */
+	case 0x0b1:		/* b(<mark) */
+	case 0x0c4:		/* b(case) */
 		decode_default();
 		indent++;
 		break;
-	case 0x0c2: /* b(;) */
-	case 0x0b2: /* b(>resolve) */
-	case 0x0c5: /* b(endcase) */
+	case 0x0c2:		/* b(;) */
+	case 0x0b2:		/* b(>resolve) */
+	case 0x0c5:		/* b(endcase) */
 		indent--;
 		decode_default();
 		break;
-	case 0x015: /* b(loop) */
-	case 0x016: /* b(+loop) */
-	case 0x0c6: /* b(endof) */
+	case 0x015:		/* b(loop) */
+	case 0x016:		/* b(+loop) */
+	case 0x0c6:		/* b(endof) */
 		indent--;
 		decode_offset();
 		break;
-	case 0x017: /* b(do) */
-	case 0x018: /* b/?do) */
-	case 0x01c: /* b(of) */
+	case 0x017:		/* b(do) */
+	case 0x018:		/* b/?do) */
+	case 0x01c:		/* b(of) */
 		decode_offset();
 		indent++;
 		break;
-	case 0x011: /* b(') */
-	case 0x0c3: /* b(to) */
+	case 0x011:		/* b(') */
+	case 0x0c3:		/* b(to) */
 		decode_two();
 		break;
-	case 0x0fd: /* version1 */
+	case 0x0fd:		/* version1 */
 		handy_flag = FALSE;
-	case 0x0f0: /* start0 */
-	case 0x0f1: /* start1 */
-	case 0x0f2: /* start2 */
-	case 0x0f3: /* start4 */
+	case 0x0f0:		/* start0 */
+	case 0x0f1:		/* start1 */
+	case 0x0f2:		/* start2 */
+	case 0x0f3:		/* start4 */
 		offs16 = handy_flag;
 		printremark("Unexpected FCode-Block Starter.");
 		decode_start();
 		printremark("  Ignoring length field.");
 		break;
-	case    0:  /* end0  */
-	case 0xff:  /* end1  */
-		end_found=TRUE;
+	case 0:		/* end0  */
+	case 0xff:		/* end1  */
+		end_found = TRUE;
 		decode_default();
 		break;
 	default:
@@ -582,38 +576,37 @@ static void decode_token(u16 token)
 
 static void decode_fcode_header(void)
 {
-    long err_pos;
-    u16 token;
+	long err_pos;
+	u16 token;
 
-    err_pos = get_streampos();
-    indent = 0;
-    token = next_token();
-    offs16=TRUE;
-    switch (token)
-    {
-	case 0x0fd: /* version1 */
-		offs16=FALSE;
-	case 0x0f0: /* start0 */
-	case 0x0f1: /* start1 */
-	case 0x0f2: /* start2 */
-	case 0x0f3: /* start4 */
-	    decode_start();
+	err_pos = get_streampos();
+	indent = 0;
+	token = next_token();
+	offs16 = TRUE;
+	switch (token) {
+	case 0x0fd:		/* version1 */
+		offs16 = FALSE;
+	case 0x0f0:		/* start0 */
+	case 0x0f1:		/* start1 */
+	case 0x0f2:		/* start2 */
+	case 0x0f3:		/* start4 */
+		decode_start();
 		break;
 	default:
-	    {
-		char temp_bufr[128] = 
-			"Invalid FCode Start Byte.  Ignoring FCode header." ;
-		set_streampos( err_pos );
-		fclen = max - pc;
-		printf("\n");
-		if (show_linenumbers)
 		{
-		    sprintf( &(temp_bufr[strlen(temp_bufr)]),
-		    "  Remaining len = 0x%04x ( %d bytes)", fclen, fclen); 
+			char temp_bufr[128] =
+			    "Invalid FCode Start Byte.  Ignoring FCode header.";
+			set_streampos(err_pos);
+			fclen = max - pc;
+			printf("\n");
+			if (show_linenumbers) {
+				sprintf(&(temp_bufr[strlen(temp_bufr)]),
+					"  Remaining len = 0x%04x ( %d bytes)",
+					fclen, fclen);
+			}
+			printremark(temp_bufr);
 		}
-		printremark( temp_bufr );
 	}
-}
 }
 
 /* **************************************************************************
@@ -654,45 +647,42 @@ static void decode_fcode_header(void)
 static void decode_fcode_block(void)
 {
 	u16 token;
-    unsigned int fc_block_start;
-    unsigned int fc_block_end;
-	
-    end_found = FALSE;
-    fc_block_start = get_streampos();
-	
-    decode_fcode_header();
+	unsigned int fc_block_start;
+	unsigned int fc_block_end;
 
-    fc_block_end = fc_block_start + fclen;
-    
-    while ( ( !end_found || decode_all )
-         && ( get_streampos() < fc_block_end  ) )
-    {
-	token = next_token();
+	end_found = FALSE;
+	fc_block_start = get_streampos();
+
+	decode_fcode_header();
+
+	fc_block_end = fc_block_start + fclen;
+
+	while ((!end_found || decode_all)
+	       && (get_streampos() < fc_block_end)) {
+		token = next_token();
 		decode_token(token);
-    }
-    if ( !end_found )
-    {
-	printremark("FCode-ender not found");
-    }
-    {
-	char temp_bufr[80];
-	/*  Don't use  fclen  here, in case it got corrupted
-	 *      by an "Unexpected FCode-Block Starter"
-	 */
-	if ( get_streampos() == fc_block_end  )
-	{
-	    sprintf( temp_bufr,
-		"Detokenization finished normally after %d bytes.",
-		     fc_block_end - fc_block_start );
-	}else{
-	    sprintf( temp_bufr,
-		"Detokenization finished prematurely after %d of %d bytes.",
-		     get_streampos() - fc_block_start,
-			 fc_block_end - fc_block_start );
-	    ended_okay = FALSE;
 	}
-	printremark( temp_bufr );
-    }
+	if (!end_found) {
+		printremark("FCode-ender not found");
+	}
+	{
+		char temp_bufr[80];
+		/*  Don't use  fclen  here, in case it got corrupted
+		 *      by an "Unexpected FCode-Block Starter"
+		 */
+		if (get_streampos() == fc_block_end) {
+			sprintf(temp_bufr,
+				"Detokenization finished normally after %d bytes.",
+				fc_block_end - fc_block_start);
+		} else {
+			sprintf(temp_bufr,
+				"Detokenization finished prematurely after %d of %d bytes.",
+				get_streampos() - fc_block_start,
+				fc_block_end - fc_block_start);
+			ended_okay = FALSE;
+		}
+		printremark(temp_bufr);
+	}
 }
 
 /* **************************************************************************
@@ -725,35 +715,35 @@ static void decode_fcode_block(void)
 
 static bool another_fcode_block(void)
 {
-    bool retval = FALSE;
-    u16 token;
+	bool retval = FALSE;
+	u16 token;
 
-    token = next_token();
-    set_streampos( token_streampos );
+	token = next_token();
+	set_streampos(token_streampos);
 
-    switch (token)
-    {
-	case 0x0fd: /* version1 */
-	case 0x0f0: /* start0 */
-	case 0x0f1: /* start1 */
-	case 0x0f2: /* start2 */
-	case 0x0f3: /* start4 */
-	    retval = TRUE;
-	    printremark("Subsequent FCode Block detected.  Detokenizing.");
-	    break;
-	case 0:    /* Start of a zero-fill field  */
-	    /* retval already = FALSE .  Nothing else to be done.  */
-	    break;
+	switch (token) {
+	case 0x0fd:		/* version1 */
+	case 0x0f0:		/* start0 */
+	case 0x0f1:		/* start1 */
+	case 0x0f2:		/* start2 */
+	case 0x0f3:		/* start4 */
+		retval = TRUE;
+		printremark
+		    ("Subsequent FCode Block detected.  Detokenizing.");
+		break;
+	case 0:		/* Start of a zero-fill field  */
+		/* retval already = FALSE .  Nothing else to be done.  */
+		break;
 	default:
-	    {
-		char temp_bufr[80];
-		sprintf( temp_bufr,
-		    "Unexpected token, 0x%02x, after end of FCode block.",
-		    token);
-		printremark( temp_bufr);
-	    }
-    }
-    return ( retval );
+		{
+			char temp_bufr[80];
+			sprintf(temp_bufr,
+				"Unexpected token, 0x%02x, after end of FCode block.",
+				token);
+			printremark(temp_bufr);
+		}
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -767,33 +757,29 @@ static bool another_fcode_block(void)
 
 void detokenize(void)
 {
-    fclen = stream_max;
+	fclen = stream_max;
 
-    if ( setjmp(eof_exception) == 0 )
-    {
-	while ( more_to_go() )
-	{
-	    if ( ended_okay )
-	    {
-		init_fcode_block();
-	    }
-	    ended_okay = TRUE;
+	if (setjmp(eof_exception) == 0) {
+		while (more_to_go()) {
+			if (ended_okay) {
+				init_fcode_block();
+			}
+			ended_okay = TRUE;
 
-	    adjust_for_pci_header();
+			adjust_for_pci_header();
 
-	    /*   Allow for multiple FCode Blocks within the PCI image.
-	     *   The first one had better be a valid block, but the
-	     *   next may or may not be...
-	     */
-	    do
-	    {
-		decode_fcode_block();
-	    }  while  ( another_fcode_block() );
+			/*   Allow for multiple FCode Blocks within the PCI image.
+			 *   The first one had better be a valid block, but the
+			 *   next may or may not be...
+			 */
+			do {
+				decode_fcode_block();
+			} while (another_fcode_block());
 
-	    adjust_for_pci_filler();
+			adjust_for_pci_filler();
 
+		}
 	}
-    }
 
 
 }

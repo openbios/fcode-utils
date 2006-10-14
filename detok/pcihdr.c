@@ -136,18 +136,17 @@ static int pci_image_len = 0;
  *
  **************************************************************************** */
 
-static int is_pci_header ( rom_header_t *pci_rom_hdr )
+static int is_pci_header(rom_header_t * pci_rom_hdr)
 {
-    const u16 pci_header_signature = 0x55aa;
-    int retval ;
+	const u16 pci_header_signature = 0x55aa;
+	int retval;
 
-    retval = 0;
+	retval = 0;
 
-    if ( BIG_ENDIAN_WORD_FETCH(pci_rom_hdr->signature) == pci_header_signature )
-    {
-        retval = LITTLE_ENDIAN_WORD_FETCH(pci_rom_hdr->data_ptr);
-    }
-    return(retval);
+	if (BIG_ENDIAN_WORD_FETCH(pci_rom_hdr->signature) == pci_header_signature) {
+		retval = LITTLE_ENDIAN_WORD_FETCH(pci_rom_hdr->data_ptr);
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -196,19 +195,18 @@ static int is_pci_header ( rom_header_t *pci_rom_hdr )
  *
  **************************************************************************** */
 
-static int is_pci_data_struct ( pci_data_t *pci_data_ptr )
+static int is_pci_data_struct(pci_data_t * pci_data_ptr)
 {
-    int retval ;
+	int retval;
 
-    retval = 0;
+	retval = 0;
 
-    if (BIG_ENDIAN_LONG_FETCH(pci_data_ptr->signature) == PCI_DATA_HDR)
-    {
-        retval = LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->dlen);
-    }
-    return(retval);
+	if (BIG_ENDIAN_LONG_FETCH(pci_data_ptr->signature) == PCI_DATA_HDR) {
+		retval = LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->dlen);
+	}
+	return (retval);
 }
- 
+
 
 /* **************************************************************************
  *
@@ -226,16 +224,16 @@ static int is_pci_data_struct ( pci_data_t *pci_data_ptr )
  *
  **************************************************************************** */
 
-static void announce_pci_hdr ( rom_header_t *pci_rom_hdr )
+static void announce_pci_hdr(rom_header_t * pci_rom_hdr)
 {
-    char temp_buf[80];
-    u32  temp;
+	char temp_buf[80];
+	u32 temp;
 
-    printremark ( "PCI Header identified");
-    temp=(u32)LITTLE_ENDIAN_WORD_FETCH(pci_rom_hdr->data_ptr);
-    sprintf(temp_buf, "  Offset to Data Structure = 0x%04x (%d)\n",
-        temp, temp);
-    printremark ( temp_buf );
+	printremark("PCI Header identified");
+	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_rom_hdr->data_ptr);
+	sprintf(temp_buf, "  Offset to Data Structure = 0x%04x (%d)\n",
+		temp, temp);
+	printremark(temp_buf);
 }
 
 /* **************************************************************************
@@ -266,57 +264,56 @@ static void announce_pci_hdr ( rom_header_t *pci_rom_hdr )
  *
  **************************************************************************** */
 
-static void announce_pci_data_struct ( pci_data_t *pci_data_ptr )
+static void announce_pci_data_struct(pci_data_t * pci_data_ptr)
 {
-    char temp_buf[80];
-    u32  temp;
+	char temp_buf[80];
+	u32 temp;
 
-    printremark ( "PCI Data Structure identified");
+	printremark("PCI Data Structure identified");
 
-    temp=(u32)LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->dlen);
-    sprintf(temp_buf, "  Data Structure Length = 0x%04x (%d)\n", temp, temp);
-    printremark ( temp_buf );
+	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->dlen);
+	sprintf(temp_buf, "  Data Structure Length = 0x%04x (%d)\n", temp, temp);
+	printremark(temp_buf);
 
-    sprintf(temp_buf, "  Vendor ID: 0x%04x\n",
-            LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->vendor));
-    printremark ( temp_buf );
+	sprintf(temp_buf, "  Vendor ID: 0x%04x\n",
+		LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->vendor));
+	printremark(temp_buf);
 
-    sprintf(temp_buf, "  Device ID: 0x%04x\n",
-            LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->device));
-    printremark ( temp_buf );
+	sprintf(temp_buf, "  Device ID: 0x%04x\n",
+		LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->device));
+	printremark(temp_buf);
 
-    temp=(u32)CLASS_CODE_FETCH(pci_data_ptr->class_code);
-    sprintf(temp_buf, "  Class Code: 0x%06x  (%s)",
-            temp,  pci_device_class_name(temp));
-    printremark ( temp_buf );
+	temp = (u32) CLASS_CODE_FETCH(pci_data_ptr->class_code);
+	sprintf(temp_buf, "  Class Code: 0x%06x  (%s)",
+		temp, pci_device_class_name(temp));
+	printremark(temp_buf);
 
-    temp=(u32)LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->vpd);
-    if ( temp != 0 )
-    {
-	sprintf(temp_buf, "  Vital Prod Data: 0x%02x\n", temp);
-	printremark ( temp_buf );
-    }
+	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->vpd);
+	if (temp != 0) {
+		sprintf(temp_buf, "  Vital Prod Data: 0x%02x\n", temp);
+		printremark(temp_buf);
+	}
 
-    temp=(u32)LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->irevision);
-    if ( temp != 0 )
-    {
-	sprintf(temp_buf, "  Image Revision: 0x%02x\n", temp);
-	printremark ( temp_buf );
-    }
+	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->irevision);
+	if (temp != 0) {
+		sprintf(temp_buf, "  Image Revision: 0x%02x\n", temp);
+		printremark(temp_buf);
+	}
 
-    sprintf(temp_buf, "  Code Type: 0x%02x (%s)\n", pci_data_ptr->code_type,
-             pci_code_type_name(pci_data_ptr->code_type) );
-    printremark ( temp_buf );
+	sprintf(temp_buf, "  Code Type: 0x%02x (%s)\n",
+		pci_data_ptr->code_type,
+		pci_code_type_name(pci_data_ptr->code_type));
+	printremark(temp_buf);
 
-    temp=(u32)LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->ilen);
-    pci_image_len = temp*512;
-    sprintf(temp_buf, "  Image Length: 0x%04x blocks (%d bytes)\n",
-                    temp, pci_image_len);
-    printremark ( temp_buf );
+	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->ilen);
+	pci_image_len = temp * 512;
+	sprintf(temp_buf, "  Image Length: 0x%04x blocks (%d bytes)\n",
+		temp, pci_image_len);
+	printremark(temp_buf);
 
-    sprintf(temp_buf, "  %sast PCI Image.\n",
-        pci_data_ptr->last_image_flag&&0x80 != 0 ? "L" : "Not l");
-    printremark ( temp_buf );
+	sprintf(temp_buf, "  %sast PCI Image.\n",
+		pci_data_ptr->last_image_flag && 0x80 != 0 ? "L" : "Not l");
+	printremark(temp_buf);
 
 }
 
@@ -369,46 +366,42 @@ static void announce_pci_data_struct ( pci_data_t *pci_data_ptr )
  *
  **************************************************************************** */
 
-int handle_pci_header ( u8  *data_ptr )
+int handle_pci_header(u8 * data_ptr)
 {
-    int hdrlen;
-    int data_struc_len;
-    /*  int retval;  */  /*  Not needed until we handle error cases...  */
+	int hdrlen;
+	int data_struc_len;
+	/*  int retval;  *//*  Not needed until we handle error cases...  */
 
-    data_struc_len = 0;
+	data_struc_len = 0;
 
-    hdrlen = is_pci_header( (rom_header_t *)data_ptr );
-    /*  retval = hdrlen;  */  /*  Not needed yet...  */
-    if ( hdrlen < 0 )
-    {
-        /*  Handle error case...  */
-        /*  Leave null for now...  */
-        /*  It might need to do a premature EXIT here...  */
-    } else {
-        /* if hdrlen == 0 then we don't need to check a Data Structure  */
-        if ( hdrlen > 0 )
-        {
-            announce_pci_hdr ( (rom_header_t *)data_ptr );
-            data_struc_len = is_pci_data_struct(
-                        (pci_data_t *) &data_ptr[hdrlen] );
-            /*
-             *  A Data Structure Length of Zero would be an error
-             *  that could be detected by  is_pci_data_struct()
-             */ 
-            if ( data_struc_len <= 0 )
-            {
-                /*  Handle error case...  */
-                /*  Leave null for now...  */
-                /*  It might need to do a premature EXIT here...  */
-                /*  retval = -1;   */  /*  Not needed yet...  */
-            } else {
-                announce_pci_data_struct ( (pci_data_t *) &data_ptr[hdrlen] );
-		pci_image_end = data_ptr + pci_image_len;
-                /* retval = hdrlen+data_struc_len; */ /*  Not needed yet... */
-            }
-        }
-    }
-    return (hdrlen+data_struc_len);
+	hdrlen = is_pci_header((rom_header_t *) data_ptr);
+	/*  retval = hdrlen;  *//*  Not needed yet...  */
+	if (hdrlen < 0) {
+		/*  Handle error case...  */
+		/*  Leave null for now...  */
+		/*  It might need to do a premature EXIT here...  */
+	} else {
+		/* if hdrlen == 0 then we don't need to check a Data Structure  */
+		if (hdrlen > 0) {
+			announce_pci_hdr((rom_header_t *) data_ptr);
+			data_struc_len = is_pci_data_struct((pci_data_t *) & data_ptr[hdrlen]);
+			/*
+			 *  A Data Structure Length of Zero would be an error
+			 *  that could be detected by  is_pci_data_struct()
+			 */
+			if (data_struc_len <= 0) {
+				/*  Handle error case...  */
+				/*  Leave null for now...  */
+				/*  It might need to do a premature EXIT here...  */
+				/*  retval = -1;   *//*  Not needed yet...  */
+			} else {
+				announce_pci_data_struct((pci_data_t *) & data_ptr[hdrlen]);
+				pci_image_end = data_ptr + pci_image_len;
+				/* retval = hdrlen+data_struc_len; *//*  Not needed yet... */
+			}
+		}
+	}
+	return (hdrlen + data_struc_len);
 }
 
 
@@ -445,34 +438,30 @@ int handle_pci_header ( u8  *data_ptr )
  *
  **************************************************************************** */
 
-void handle_pci_filler(u8 *filler_ptr)
+void handle_pci_filler(u8 * filler_ptr)
 {
-    u8 *scan_ptr;
-    int filler_len;
-    char temp_buf[80];
-    bool all_zero = TRUE;
-    u8 filler_byte = *filler_ptr;
+	u8 *scan_ptr;
+	int filler_len;
+	char temp_buf[80];
+	bool all_zero = TRUE;
+	u8 filler_byte = *filler_ptr;
 
-    filler_len = pci_image_end - filler_ptr;
+	filler_len = pci_image_end - filler_ptr;
 
-    for ( scan_ptr = filler_ptr;
-        scan_ptr < pci_image_end;
-	    filler_byte = *(++scan_ptr) )
-    {
-	if ( filler_byte != 0 )
-	{
-	    all_zero = FALSE;
-	    break;
-	}    
-    }
-    
-    if ( all_zero )
-    {
-	sprintf(temp_buf, "PCI Image padded with %d bytes of zero", filler_len);
-    }else{
-	sprintf(temp_buf, "PCI Image padding-field of %d bytes "
-	    "had first non-zero byte at offset %ld",
-		 filler_len, scan_ptr - filler_ptr );
-    }
-    printremark ( temp_buf );
+	for (scan_ptr = filler_ptr;
+	     scan_ptr < pci_image_end; filler_byte = *(++scan_ptr)) {
+		if (filler_byte != 0) {
+			all_zero = FALSE;
+			break;
+		}
+	}
+
+	if (all_zero) {
+		sprintf(temp_buf, "PCI Image padded with %d bytes of zero", filler_len);
+	} else {
+		sprintf(temp_buf, "PCI Image padding-field of %d bytes "
+			"had first non-zero byte at offset %ld",
+			filler_len, scan_ptr - filler_ptr);
+	}
+	printremark(temp_buf);
 }

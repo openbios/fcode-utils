@@ -49,8 +49,8 @@ void detokenize(void);
 
 void printremark(char *str);
 
-int handle_pci_header ( u8  *data_ptr );
-void handle_pci_filler(u8 *filler_ptr);
+int handle_pci_header(u8 * data_ptr);
+void handle_pci_filler(u8 * filler_ptr);
 
 
 /*  External declarations for variables defined in or used by
@@ -72,4 +72,4 @@ extern u8 *pci_image_end;
 extern unsigned int token_streampos;
 extern u16 last_defined_token;
 
-#endif   /*  _UTILS_DETOK_DETOK_H    */
+#endif				/*  _UTILS_DETOK_DETOK_H    */

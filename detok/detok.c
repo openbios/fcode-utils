@@ -51,47 +51,47 @@
 		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
-bool verbose = FALSE ;
-bool decode_all = FALSE ;
-bool show_linenumbers = FALSE ;
-bool show_offsets = FALSE ;
+bool verbose = FALSE;
+bool decode_all = FALSE;
+bool show_linenumbers = FALSE;
+bool show_offsets = FALSE;
 
 /*   Param is FALSE when beginning to detokenize,
  *       TRUE preceding error-exit   */
 static void print_copyright(bool is_error)
 {
-	typedef void (*vfunct)();  /*  Pointer to function returning void  */
-	vfunct pfunct ;
+	typedef void (*vfunct) ();	/*  Pointer to function returning void  */
+	vfunct pfunct;
 	char buffr[512];
 
-	sprintf( buffr,
-		"Welcome to detok - OpenBIOS detokenizer v" DETOK_VERSION "\n"
-                CORE_COPYR "\n" IBM_COPYR "\n"
-		"Written by Stefan Reinauer, <stepan@openbios.org>\n" 
+	sprintf(buffr,
+		"Welcome to detok - OpenBIOS detokenizer v" DETOK_VERSION "\n" 
+		CORE_COPYR "\n" IBM_COPYR "\n"
+		"Written by Stefan Reinauer, <stepan@openbios.org>\n"
 		"This program is free software; you may redistribute it "
 		"under the terms of\nthe GNU General Public License v2. This "
-		"program has absolutely no warranty.\n\n" );
+		"program has absolutely no warranty.\n\n");
 
-	pfunct = ( is_error ? (vfunct)printf : printremark );
+	pfunct = (is_error ? (vfunct) printf : printremark);
 
-        (*pfunct) ( buffr );
+	(*pfunct) (buffr);
 }
 
 static void usage(char *name)
 {
-	printf( "usage: %s [OPTION]... [FCODE-FILE]...\n\n"
-		"         -v, --verbose     print fcode numbers\n"
-		"         -a, --all         don't stop at end0\n"
-		"         -n, --linenumbers print line numbers\n"
-		"         -o, --offsets     print byte offsets\n"
-		"         -f, --fcodes      add FCodes from list-file\n"
-		"         -h, --help        print this help text\n\n", name);
+	printf("usage: %s [OPTION]... [FCODE-FILE]...\n\n"
+	       "         -v, --verbose     print fcode numbers\n"
+	       "         -a, --all         don't stop at end0\n"
+	       "         -n, --linenumbers print line numbers\n"
+	       "         -o, --offsets     print byte offsets\n"
+	       "         -f, --fcodes      add FCodes from list-file\n"
+	       "         -h, --help        print this help text\n\n", name);
 }
 
 int main(int argc, char **argv)
 {
 	int c;
-	const char *optstring="vhanof:?";
+	const char *optstring = "vhanof:?";
 	int linenumbers = 0;
 	bool add_vfcodes = FALSE;
 	char *vfc_filnam = NULL;
@@ -100,36 +100,36 @@ int main(int argc, char **argv)
 #ifdef __GLIBC__
 		int option_index = 0;
 		static struct option long_options[] = {
-			{ "verbose", 0, 0, 'v' },
-			{ "help", 0, 0, 'h' },
-			{ "all", 0, 0, 'a' },
-			{ "linenumbers", 0, 0, 'n' },
-			{ "offsets", 0, 0, 'o' },
-			{ "fcodes", 1, 0, 'f' },
-			{ 0, 0, 0, 0 }
+			{"verbose", 0, 0, 'v'},
+			{"help", 0, 0, 'h'},
+			{"all", 0, 0, 'a'},
+			{"linenumbers", 0, 0, 'n'},
+			{"offsets", 0, 0, 'o'},
+			{"fcodes", 1, 0, 'f'},
+			{0, 0, 0, 0}
 		};
 
-		c = getopt_long (argc, argv, optstring,
-				 long_options, &option_index);
+		c = getopt_long(argc, argv, optstring,
+				long_options, &option_index);
 #else
-		c = getopt (argc, argv, optstring);
+		c = getopt(argc, argv, optstring);
 #endif
 		if (c == -1)
 			break;
 
 		switch (c) {
 		case 'v':
-			verbose=TRUE;
+			verbose = TRUE;
 			break;
 		case 'a':
-			decode_all=TRUE;
+			decode_all = TRUE;
 			break;
 		case 'n':
-			linenumbers|=1;
+			linenumbers |= 1;
 			show_linenumbers = TRUE;
 			break;
 		case 'o':
-			linenumbers|=2;
+			linenumbers |= 2;
 			show_linenumbers = TRUE;
 			show_offsets = TRUE;
 			break;
@@ -141,10 +141,10 @@ int main(int argc, char **argv)
 		case '?':
 			print_copyright(TRUE);
 			usage(argv[0]);
-			return 0;		
+			return 0;
 		default:
 			print_copyright(TRUE);
-			printf ("%s: unknown option.\n",argv[0]);
+			printf("%s: unknown option.\n", argv[0]);
 			usage(argv[0]);
 			return 1;
 		}
@@ -152,44 +152,41 @@ int main(int argc, char **argv)
 
 	if (verbose)
 		print_copyright(FALSE);
-	
-	if (linenumbers>2)
-		printremark(
-		    "Line numbers will be disabled in favour of offsets.\n");
-	
+
+	if (linenumbers > 2)
+		printremark
+		    ("Line numbers will be disabled in favour of offsets.\n");
+
 	if (optind >= argc) {
 		print_copyright(TRUE);
-		printf ("%s: filename missing.\n",argv[0]);
+		printf("%s: filename missing.\n", argv[0]);
 		usage(argv[0]);
 		return 1;
 	}
-	
+
 	init_dictionary();
-	
-	if ( add_vfcodes )
-	{
-	    if ( add_fcodes_from_list( vfc_filnam) )
-	    {
-	        freeze_dictionary();
-	    }
+
+	if (add_vfcodes) {
+		if (add_fcodes_from_list(vfc_filnam)) {
+			freeze_dictionary();
+		}
 	}
 
 	while (optind < argc) {
-		
+
 		if (init_stream(argv[optind])) {
-			printf ("Could not open file \"%s\".\n",argv[optind]);
+			printf("Could not open file \"%s\".\n", argv[optind]);
 			optind++;
 			continue;
 		}
 		detokenize();
 		close_stream();
-		
+
 		optind++;
 		reset_dictionary();
 	}
-	
+
 	printf("\n");
-	
+
 	return 0;
 }
-
