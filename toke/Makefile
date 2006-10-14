@@ -27,9 +27,15 @@ PROGRAM = toke
 CC      = gcc
 STRIP	= strip
 INCLUDES = -I../shared
+
+# No coverage:
 #CFLAGS  = -O2 -g -Wall 
 CFLAGS  = -Os -Wall -Wno-pointer-sign -DSYS_IS_GNU_Linux
-LDFLAGS = 
+LDFLAGS =
+
+# Coverage:
+#CFLAGS  = -O2 -fprofile-arcs -ftest-coverage -Wall -Wno-pointer-sign -DSYS_IS_GNU_Linux
+#LDFLAGS = -lgcov
 
 OBJS  = clflags.o conditl.o devnode.o dictionary.o emit.o errhandler.o     \
         flowcontrol.o macros.o nextfcode.o parselocals.o scanner.o stack.o \
