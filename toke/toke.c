@@ -102,7 +102,7 @@ static void print_copyright(void)
 	printf( "Welcome to toke - OpenBIOS tokenizer v" TOKE_VERSION "\n"
 		CORE_COPYR "\n" IBM_COPYR "\n"
 		"This program is free software; you may redistribute it "
-		"under the terms of\nthe GNU General Public License. This "
+		"under the terms of\nthe GNU General Public License v2. This "
 		"program has absolutely no warranty.\n\n");
 #ifdef DEVEL
         /*  Temporary hack during development... */

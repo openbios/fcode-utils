@@ -7,7 +7,8 @@
  *  This program is part of a free implementation of the IEEE 1275-1994 
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2001-2006 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,8 +45,10 @@
 #include "stream.h"
 #include "addfcodes.h"
 
-#define DETOK_VERSION "0.6.1"
+#define DETOK_VERSION "1.0.0"
 
+#define CORE_COPYR   "(C) Copyright 2001-2006 Stefan Reinauer.\n" \
+		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
 bool verbose = FALSE ;
@@ -62,18 +65,16 @@ static void print_copyright(bool is_error)
 	char buffr[512];
 
 	sprintf( buffr,
-		"Welcome to the OpenBIOS detokenizer v%s\ndetok Copyright"
-		"(c) 2001-2005 by Stefan Reinauer.\nWritten by Stefan "
-		"Reinauer, <stepan@openbios.org>\n" "This program is "
-		"free software; you may redistribute it under the terms of\n"
-		"the GNU General Public License.  This program has absolutely"
-					" no warranty.\n\n" ,DETOK_VERSION);
+		"Welcome to detok - OpenBIOS detokenizer v" DETOK_VERSION "\n"
+                CORE_COPYR "\n" IBM_COPYR "\n"
+		"Written by Stefan Reinauer, <stepan@openbios.org>\n" 
+		"This program is free software; you may redistribute it "
+		"under the terms of\nthe GNU General Public License v2. This "
+		"program has absolutely no warranty.\n\n" );
 
 	pfunct = ( is_error ? (vfunct)printf : printremark );
 
         (*pfunct) ( buffr );
-
-        (*pfunct) ( IBM_COPYR "\n" );
 }
 
 static void usage(char *name)
