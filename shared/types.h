@@ -39,6 +39,19 @@
  *
  **************************************************************************** */
 
+#if defined(__ppc__) && defined(__APPLE__)
+#include <sys/types.h>
+
+typedef int8_t s8;
+typedef u_int8_t u8;
+
+typedef int16_t s16;
+typedef u_int16_t u16;
+
+typedef int32_t s32;
+typedef u_int32_t u32;
+
+#else
 
 #include <asm/types.h>
 
@@ -50,6 +63,7 @@ typedef __u16   u16;
 
 typedef __s32   s32;
 typedef __u32   u32;
+#endif
 
 #ifdef FALSE            /*  Hack for AIX.     */
 #undef FALSE
