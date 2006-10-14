@@ -45,8 +45,8 @@
 
 
 #  Initial error-checking:
-if ( ( ! -x ./toke ) || ( ! -x ./detok ) ) then
-    echo 'Starting in wrong directory.  Executable toke and detok are not here.'
+if ( ( ! -x ./toke ) || ( ! -x ./detok ) || ( ! -x ./romheaders ) ) then
+    echo 'Starting in wrong directory.  Executable toke, detok and romheaders are not here.'
     exit 1
 endif
 
