@@ -49,7 +49,7 @@ tests: all
 	cp toke/toke testsuite
 	cp detok/detok testsuite
 	cp romheaders/romheaders testsuite
-	make -C testsuite all
+	make -C testsuite all CygTestLogs=`pwd`/testsuite/testlogs
 
 
 .PHONY: all clean distclean toke detok romheaders tests

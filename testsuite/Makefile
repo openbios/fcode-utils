@@ -1,7 +1,11 @@
-all:
+all: tests compare
+
+tests:
 	@echo "starting testsuite"
 	@csh AutoExec
 
+compare:
+	CygTestLogs=$(CygTestLogs) csh AutoCompare
 
 clean:
 	find . -name "*.DeTok" -a ! -name "*.OldTkzr.DeTok" -exec rm -f \{\} \;
@@ -14,3 +18,6 @@ clean:
 
 distclean: clean
 	rm -f toke detok romheaders
+	rm -f AutoComp.Log.*
+	rm -f AutoComp.TKdiffs.*
+
