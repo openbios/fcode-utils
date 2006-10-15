@@ -27,9 +27,18 @@ PROGRAM = detok
 CC      = gcc
 STRIP	= strip
 INCLUDES = -I../shared
-#CFLAGS  = -O2 -g -Wall 
-CFLAGS  = -Os -Wall -Wno-pointer-sign 
+
+# Normal Flags:
+CFLAGS  = -O2 -Wall -Wno-pointer-sign 
 LDFLAGS = 
+
+# Coverage:
+#CFLAGS  := $(CFLAGS) -fprofile-arcs -ftest-coverage
+#LDFLAGS := $(LDFLAGS) -lgcov
+
+# Debugging:
+#CFLAGS := $(CFLAGS) -g
+
 
 OBJS  = addfcodes.o decode.o detok.o dictionary.o pcihdr.o printformats.o \
         stream.o ../shared/classcodes.o

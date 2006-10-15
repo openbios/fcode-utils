@@ -4,9 +4,9 @@ all:
 
 
 clean:
-	find . -name "*.DeTok" -exec rm -f \{\} \;
-	find . -name "*.Log" -a ! -name "*..OldTkzr.Log" -exec rm -f \{\} \;
-	find . -name "*.fc" -exec rm -f \{\} \;
+	find . -name "*.DeTok" -a ! -name "*.OldTkzr.DeTok" -exec rm -f \{\} \;
+	find . -name "*.Log" -a ! -name "*.OldTkzr.Log" -exec rm -f \{\} \;
+	find . -name "*.fc" -a ! -name "*.OldTkzr.fc" -exec rm -f \{\} \;
 	find . -name "*.fl" -exec rm -f \{\} \;
 	find . -name "*.RomHdr" -exec rm -f \{\} \;
 	find . -name "*.P" -exec rm -f \{\} \;

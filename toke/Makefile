@@ -28,14 +28,16 @@ CC      = gcc
 STRIP	= strip
 INCLUDES = -I../shared
 
-# No coverage:
-#CFLAGS  = -O2 -g -Wall 
-CFLAGS  = -Os -Wall -Wno-pointer-sign -fno-strict-aliasing -DSYS_IS_GNU_Linux
+# Normal flags
+CFLAGS  = -O2 -Wall -Wno-pointer-sign -fno-strict-aliasing -DSYS_IS_GNU_Linux
 LDFLAGS =
 
 # Coverage:
-#CFLAGS  = -O2 -fprofile-arcs -ftest-coverage -Wall -Wno-pointer-sign -DSYS_IS_GNU_Linux
-#LDFLAGS = -lgcov
+#CFLAGS  := $(CFLAGS) -fprofile-arcs -ftest-coverage
+#LDFLAGS := $(LDFLAGS) -lgcov
+
+# Debugging:
+# CFLAGS  := $(CFLAGS) -g
 
 OBJS  = clflags.o conditl.o devnode.o dictionary.o emit.o errhandler.o     \
         flowcontrol.o macros.o nextfcode.o parselocals.o scanner.o stack.o \

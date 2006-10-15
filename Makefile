@@ -42,6 +42,8 @@ distclean: clean
 	make -C detok distclean
 	make -C romheaders distclean
 	make -C testsuite distclean
+	find . -name "*.gcda" -exec rm -f \{\} \;
+	find . -name "*.gcno" -exec rm -f \{\} \;
 
 tests: all
 	cp toke/toke testsuite
