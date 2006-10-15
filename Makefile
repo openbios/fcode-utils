@@ -35,13 +35,20 @@ clean:
 	make -C toke clean
 	make -C detok clean
 	make -C romheaders clean
+	make -C testsuite clean
 
 distclean: clean
 	make -C toke distclean
 	make -C detok distclean
 	make -C romheaders distclean
+	make -C testsuite distclean
+
+tests: all
+	cp toke/toke testsuite
+	cp detok/detok testsuite
+	cp romheaders/romheaders testsuite
+	make -C testsuite all
 
 
-
-.PHONY: all clean distclean toke detok romheaders
+.PHONY: all clean distclean toke detok romheaders tests
 

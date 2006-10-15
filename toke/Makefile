@@ -30,7 +30,7 @@ INCLUDES = -I../shared
 
 # No coverage:
 #CFLAGS  = -O2 -g -Wall 
-CFLAGS  = -Os -Wall -Wno-pointer-sign -DSYS_IS_GNU_Linux
+CFLAGS  = -Os -Wall -Wno-pointer-sign -fno-strict-aliasing -DSYS_IS_GNU_Linux
 LDFLAGS =
 
 # Coverage:
