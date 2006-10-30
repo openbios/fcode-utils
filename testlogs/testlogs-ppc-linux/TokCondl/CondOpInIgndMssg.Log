@@ -1,0 +1,21 @@
+toke -v CondOpInIgndMssg.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  CondOpInIgndMssg.fth   Binary output to CondOpInIgndMssg.fc 
+Advisory:  File CondOpInIgndMssg.fth, Line 11.  FCODE-VERSION2 encountered; processing...
+Advisory:  File CondOpInIgndMssg.fth, Line 15.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File CondOpInIgndMssg.fth, Line 17.  (Output Position = 8).  Terminating Global Scope definitions; resuming Device-node definitions.
+Error:  File CondOpInIgndMssg.fth, Line 42.  (Output Position = 8).  Conditional without conclusion; started on line 24
+Warning:  File CondOpInIgndMssg.fth, Line 42.  (Output Position = 8).  End-of-file encountered without END0 or FCODE-END.  Supplying END0
+toke: checksum is 0x0000 (9 bytes).  No FCodes assigned.
+Tokenization Completed.  1 Error, 1 Warning, 3 Advisories.
+Suppressing binary output.

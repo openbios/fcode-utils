@@ -1,0 +1,98 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x4fa7 (Ok)
+     4:   len:       0x0102 ( 258 bytes)
+     8: named-token ( 0x0b6 ) (sis 0x800
+    16: b(create) ( 0x0bb ) 
+    17: b(lit) ( 0x010 ) 0x6
+    22: c, ( 0x0d0 ) 
+    23: b(lit) ( 0x010 ) 0x8
+    28: c, ( 0x0d0 ) 
+    29: b(lit) ( 0x010 ) 0xc
+    34: c, ( 0x0d0 ) 
+    35: named-token ( 0x0b6 ) err-shoot) 0x801
+    49: b(:) ( 0x0b7 ) 
+    50:     b(lit) ( 0x010 ) 0xdefeca8e
+    55:     base ( 0x0a0 ) 
+    56:     @ ( 0x06d ) 
+    57:     swap ( 0x049 ) 
+    58:     b(lit) ( 0x010 ) 0x10
+    63:     base ( 0x0a0 ) 
+    64:     ! ( 0x072 ) 
+    65:     . ( 0x09d ) 
+    66:     base ( 0x0a0 ) 
+    67:     ! ( 0x072 ) 
+    68: b(;) ( 0x0c2 ) 
+    69: named-token ( 0x0b6 ) eatit( 0x802
+    79: b(:) ( 0x0b7 ) 
+    80:     b(lit) ( 0x010 ) 0xfeedface
+    85:     base ( 0x0a0 ) 
+    86:     @ ( 0x06d ) 
+    87:     swap ( 0x049 ) 
+    88:     b(lit) ( 0x010 ) 0x10
+    93:     base ( 0x0a0 ) 
+    94:     ! ( 0x072 ) 
+    95:     . ( 0x09d ) 
+    96:     base ( 0x0a0 ) 
+    97:     ! ( 0x072 ) 
+    98:     cr ( 0x092 ) 
+    99: b(;) ( 0x0c2 ) 
+   100: named-token ( 0x0b6 ) open 0x803
+   108: b(:) ( 0x0b7 ) 
+   109:     err-shoot) ( 0x801 ) 
+   111:     b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                    "  No dice, Cholly."
+   130:     type ( 0x090 ) 
+   131:     cr ( 0x092 ) 
+   132:     eatit( ( 0x802 ) 
+   134:     0 ( 0x0a5 ) 
+   135: b(;) ( 0x0c2 ) 
+   136: b(") ( 0x012 ) ( len=3 )
+                " sis"
+   141: encode-string ( 0x114 ) 
+   143: b(") ( 0x012 ) ( len=4 )
+                " name"
+   149: property ( 0x110 ) 
+   151: finish-device ( 0x127 ) 
+   153: new-device ( 0x11f ) 
+   155: named-token ( 0x0b6 ) eatit( 0x804
+   165: b(:) ( 0x0b7 ) 
+   166:     b(lit) ( 0x010 ) 0x900df00d
+   171:     base ( 0x0a0 ) 
+   172:     @ ( 0x06d ) 
+   173:     swap ( 0x049 ) 
+   174:     b(lit) ( 0x010 ) 0x10
+   179:     base ( 0x0a0 ) 
+   180:     ! ( 0x072 ) 
+   181:     . ( 0x09d ) 
+   182:     base ( 0x0a0 ) 
+   183:     ! ( 0x072 ) 
+   184:     cr ( 0x092 ) 
+   185: b(;) ( 0x0c2 ) 
+   186: named-token ( 0x0b6 ) open 0x805
+   194: b(:) ( 0x0b7 ) 
+   195:     b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                    "  I'm sorry, Dave.  I can't do that."
+   232:     type ( 0x090 ) 
+   233:     cr ( 0x092 ) 
+   234:     eatit( ( 0x804 ) 
+   236:     0 ( 0x0a5 ) 
+   237: b(;) ( 0x0c2 ) 
+   238: b(") ( 0x012 ) ( len=7 )
+                " boombah"
+   247: encode-string ( 0x114 ) 
+   249: b(") ( 0x012 ) ( len=4 )
+                " name"
+   255: property ( 0x110 ) 
+   257: end0 ( 0x000 ) 
+\  Detokenization finished normally after 258 bytes.
+End of file.
+

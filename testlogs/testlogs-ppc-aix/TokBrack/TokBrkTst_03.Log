@@ -1,0 +1,20 @@
+toke -v TokBrkTst_03.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  TokBrkTst_03.fth   Binary output to TokBrkTst_03.fc 
+Advisory:  File TokBrkTst_03.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Message:  File TokBrkTst_03.fth, Line 10.  (Output Position = 8).   This is a message
+Advisory:  File TokBrkTst_03.fth, Line 16.  (Output Position = 18).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File TokBrkTst_03.fth, Line 18.  (Output Position = 18).  END0 encountered; processing...
+toke: checksum is 0x0026 (19 bytes).  No FCodes assigned.
+Tokenization Completed.  3 Advisories, 1 Message.
+toke: wrote 19 bytes to bytecode file 'TokBrkTst_03.fc'

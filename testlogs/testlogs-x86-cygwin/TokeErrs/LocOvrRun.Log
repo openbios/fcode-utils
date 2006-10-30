@@ -1,0 +1,156 @@
+toke -v -i -f Local-Values -l -I. -I../TokoLoco LocOvrRun.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  LocOvrRun.fth   Binary output to LocOvrRun.fc   FLoad-list to LocOvrRun.fl 
+Advisory:  File was found in ./LocOvrRun.fth
+Advisory:  File LocOvrRun.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File LocOvrRun.fth, Line 9.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File LocOvrRun.fth, Line 9.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Advisory:  File LocOvrRun.fth, Line 12.  (Output Position = 431).  FLOADing LocOvrRun_01.fth
+Advisory:  File LocOvrRun.fth, Line 12.  (Output Position = 431).  File was found in ./LocOvrRun_01.fth
+Warning:  File LocOvrRun_01.fth, Line 10.  (Output Position = 444).  Unterminated comment in definition of  DUCKSOUP  , which started on line 4
+Error:  File LocOvrRun_01.fth, Line 5.  (Output Position = 444).  Unterminated Local-Values Declaration in definition of  DUCKSOUP  , which started on line 4
+Advisory:  File LocOvrRun.fth, Line 17.  (Output Position = 452).  FLOADing LocOvrRun_02.fth
+Advisory:  File LocOvrRun.fth, Line 17.  (Output Position = 452).  File was found in ./LocOvrRun_02.fth
+Warning:  File LocOvrRun_02.fth, Line 8.  (Output Position = 464).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocOvrRun_02.fth, Line 14.  (Output Position = 464).  Cannot declare ." as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 14.  (Output Position = 464).  Cannot declare " as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 14.  (Output Position = 464).  Cannot declare _curly as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 14.  (Output Position = 464).  Cannot declare .h as a Local-Name; it's already defined as a MACRO in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 14.  (Output Position = 464).  Cannot declare cr as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 15.  (Output Position = 464).  Cannot declare ." as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 15.  (Output Position = 464).  Cannot declare " as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 15.  (Output Position = 464).  Cannot declare _moe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 15.  (Output Position = 464).  Cannot declare .d as a Local-Name; it's already defined as a MACRO in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 15.  (Output Position = 464).  Cannot declare cr as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 16.  (Output Position = 464).  Cannot declare ." as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 16.  (Output Position = 464).  Cannot declare " as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 16.  (Output Position = 464).  Cannot declare _larry as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 16.  (Output Position = 464).  Cannot declare . as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 17.  (Output Position = 464).  Cannot declare _curly as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 17.  (Output Position = 464).  Cannot declare _moe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 17.  (Output Position = 464).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 17.  (Output Position = 464).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 17.  (Output Position = 464).  Cannot declare _shemp as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 18.  (Output Position = 464).  Cannot declare _larry as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 18.  (Output Position = 464).  Cannot declare _moe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 18.  (Output Position = 464).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 18.  (Output Position = 464).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 18.  (Output Position = 464).  Cannot declare _besser as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 19.  (Output Position = 464).  Cannot declare _besser as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 19.  (Output Position = 464).  Cannot declare _curly as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 19.  (Output Position = 464).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 19.  (Output Position = 464).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 19.  (Output Position = 464).  Cannot declare _joe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 20.  (Output Position = 464).  Cannot declare _joe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 20.  (Output Position = 464).  Cannot declare _besser as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 20.  (Output Position = 464).  Cannot declare 8 as a Local-Name; it's a number.
+Error:  File LocOvrRun_02.fth, Line 20.  (Output Position = 464).  Cannot declare type as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 20.  (Output Position = 464).  Cannot declare free-mem as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare _moe as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare _larry as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare 8 as a Local-Name; it's a number.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare faber as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare type as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 21.  (Output Position = 464).  Cannot declare free-mem as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare _curly as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare _besser as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare 8 as a Local-Name; it's a number.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare faber as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare type as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 22.  (Output Position = 464).  Cannot declare free-mem as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_02.fth, Line 23.  (Output Position = 464).  Cannot declare _larry as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_02.fth, Line 23.  (Output Position = 464).  Cannot declare _shemp as a Local-Name; it's already defined as a Local Value name.
+Warning:  File LocOvrRun_02.fth, Line 24.  (Output Position = 464).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocOvrRun_02.fth, Line 24.  (Output Position = 464).  Excess separator -- ; -- found in Local-Values declaration in definition of  MIRACLE  , which started on line 4
+Error:  File LocOvrRun_02.fth, Line 5.  (Output Position = 464).  Unterminated Local-Values Declaration in definition of  MIRACLE  , which started on line 4
+Advisory:  File LocOvrRun.fth, Line 22.  (Output Position = 472).  FLOADing LocOvrRun_03.fth
+Advisory:  File LocOvrRun.fth, Line 22.  (Output Position = 472).  File was found in ./LocOvrRun_03.fth
+Error:  File LocOvrRun_03.fth, Line 9.  (Output Position = 485).  Cannot declare 2dup as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 9.  (Output Position = 485).  Cannot declare < as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 9.  (Output Position = 485).  Cannot declare if as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 9.  (Output Position = 485).  Cannot declare swap as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 9.  (Output Position = 485).  Cannot declare then as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 10.  (Output Position = 485).  Cannot declare 2dup as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 10.  (Output Position = 485).  Cannot declare / as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 10.  (Output Position = 485).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 10.  (Output Position = 485).  Cannot declare _gummo as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_03.fth, Line 11.  (Output Position = 485).  Cannot declare 2dup as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 11.  (Output Position = 485).  Cannot declare - as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 11.  (Output Position = 485).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 11.  (Output Position = 485).  Cannot declare _karl as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_03.fth, Line 12.  (Output Position = 485).  Cannot declare * as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 12.  (Output Position = 485).  Cannot declare -> as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_03.fth, Line 12.  (Output Position = 485).  Cannot declare q as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_03.fth, Line 13.  (Output Position = 485).  Cannot declare _karl as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_03.fth, Line 13.  (Output Position = 485).  Cannot declare _gummo as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_03.fth, Line 13.  (Output Position = 485).  Cannot declare q as a Local-Name; it's already defined as a Local Value name.
+Warning:  File LocOvrRun_03.fth, Line 14.  (Output Position = 485).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocOvrRun_03.fth, Line 4.  (Output Position = 485).  Unterminated Local-Values Declaration in definition of  COCONUTS  , which started on line 3
+Message:  File LocOvrRun.fth, Line 24.  (Output Position = 485).   Back to main file
+Advisory:  File LocOvrRun.fth, Line 29.  (Output Position = 489).  FLOADing LocOvrRun_04.fth
+Advisory:  File LocOvrRun.fth, Line 29.  (Output Position = 489).  File was found in ./LocOvrRun_04.fth
+Warning:  File LocOvrRun_04.fth, Line 6.  (Output Position = 536).  Declaring Locals after the body of a Colon-definition has begun is not recommended.
+Error:  File LocOvrRun_04.fth, Line 10.  (Output Position = 536).  Cannot declare _zeppo as a Local-Name; it's already defined as a Local Value name.
+Warning:  File LocOvrRun_04.fth, Line 11.  (Output Position = 536).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocOvrRun_04.fth, Line 11.  (Output Position = 536).  Excess separator -- ; -- found in Local-Values declaration in definition of  CLUCKPOOP  , which started on line 4
+Warning:  File LocOvrRun_04.fth, Line 12.  (Output Position = 536).  Multi-line Local-Values declaration, started on line 6 in definition of  CLUCKPOOP  , which started on line 4
+Warning:  File LocOvrRun_04.fth, Line 22.  (Output Position = 637).  Declaring Locals after the body of a Colon-definition has begun is not recommended.
+Error:  File LocOvrRun_04.fth, Line 28.  (Output Position = 637).  Cannot declare _groucho as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 28.  (Output Position = 637).  Cannot declare _harpo as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 28.  (Output Position = 637).  Cannot declare * as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 29.  (Output Position = 637).  Cannot declare _chico as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 29.  (Output Position = 637).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare _groucho as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare _zeppo as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare = as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare if as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare swap as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare exit as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 30.  (Output Position = 637).  Cannot declare then as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 31.  (Output Position = 637).  Cannot declare _groucho as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 31.  (Output Position = 637).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 31.  (Output Position = 637).  Cannot declare swap as a Local-Name; it's already defined in the core vocabulary.
+Error:  File LocOvrRun_04.fth, Line 31.  (Output Position = 637).  Cannot declare _zeppo as a Local-Name; it's already defined as a Local Value name.
+Error:  File LocOvrRun_04.fth, Line 31.  (Output Position = 637).  Cannot declare + as a Local-Name; it's already defined in the core vocabulary.
+Warning:  File LocOvrRun_04.fth, Line 32.  (Output Position = 637).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocOvrRun_04.fth, Line 32.  (Output Position = 637).  Excess separator -- ; -- found in Local-Values declaration in definition of  HORSE-FEATHERS  , which started on line 19
+Error:  File LocOvrRun_04.fth, Line 22.  (Output Position = 637).  Unterminated Local-Values Declaration in definition of  HORSE-FEATHERS  , which started on line 19
+Advisory:  File LocOvrRun.fth, Line 31.  (Output Position = 637).  FCODE-END encountered; processing...
+Error:  File LocOvrRun_04.fth, Line 19.  (Output Position = 638).  Unterminated Colon Definition of HORSE-FEATHERS
+toke: checksum is 0xccff (638 bytes).  Last assigned FCode = 0x811
+Tokenization Completed.  93 Errors, 9 Warnings, 13 Advisories, 1 Message.
+Error-detection over-ridden; producing binary output.
+toke: wrote 638 bytes to bytecode file 'LocOvrRun.fc'

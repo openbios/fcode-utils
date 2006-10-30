@@ -1,0 +1,55 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x9a72 (Ok)
+     4:   len:       0x01cf ( 463 bytes)
+     8: named-token ( 0x0b6 ) NotTasty 0x800
+    20: b(create) ( 0x0bb ) 
+    21: b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                " Begin Nest Test Test"
+    43: type ( 0x090 ) 
+    44: b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                " Doesn't exist, level 1"
+    68: type ( 0x090 ) 
+    69: b(") ( 0x012 ) ( len=0x28 [40 bytes] )
+                " Doesn't exist and doesn't exist, level 2"
+   111: type ( 0x090 ) 
+   112: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " Resumes non-existence, level 1"
+   144: b(") ( 0x012 ) ( len=0x25 [37 bytes] )
+                " Doesn't exist and not exists, level 2"
+   183: type ( 0x090 ) 
+   184: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " Still doesn't exist, level 1"
+   214: type ( 0x090 ) 
+   215: b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                " Middle of Nest Test Test"
+   241: type ( 0x090 ) 
+   242: b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                " Not exists, pass 2, level 1"
+   271: type ( 0x090 ) 
+   272: b(") ( 0x012 ) ( len=0x2d [45 bytes] )
+                " Not exists and doesn't exist, pass 2, level 2"
+   319: type ( 0x090 ) 
+   320: b(") ( 0x012 ) ( len=0x26 [38 bytes] )
+                " Resumes non-existence, pass 2, level 1"
+   360: b(") ( 0x012 ) ( len=0x2a [42 bytes] )
+                " Not exists and not exists, pass 2, level 2"
+   404: type ( 0x090 ) 
+   405: b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                " Still not exists, pass 2, level 1"
+   440: type ( 0x090 ) 
+   441: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " End Nest Test Test"
+   461: type ( 0x090 ) 
+   462: end0 ( 0x000 ) 
+\  Detokenization finished normally after 463 bytes.
+End of file.
+

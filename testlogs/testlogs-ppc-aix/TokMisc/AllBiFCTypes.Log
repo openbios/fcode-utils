@@ -1,0 +1,40 @@
+toke -v AllBiFCTypes.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  AllBiFCTypes.fth   Binary output to AllBiFCTypes.fc 
+Advisory:  File AllBiFCTypes.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Message:  File AllBiFCTypes.fth, Line 12.  (Output Position = 8).   Constants.  Should generate errors
+Error:  File AllBiFCTypes.fth, Line 13.  (Output Position = 13).  Cannot apply  TO  to  -1 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 14.  (Output Position = 20).  Cannot apply  TO  to  -1 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 15.  (Output Position = 27).  Cannot apply  TO  to  0 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 16.  (Output Position = 34).  Cannot apply  TO  to  0 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 17.  (Output Position = 41).  Cannot apply  TO  to  0 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 18.  (Output Position = 48).  Cannot apply  TO  to  1 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 19.  (Output Position = 55).  Cannot apply  TO  to  2 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 20.  (Output Position = 62).  Cannot apply  TO  to  3 , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 21.  (Output Position = 69).  Cannot apply  TO  to  BELL , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 22.  (Output Position = 76).  Cannot apply  TO  to  BL , which is defined as a CONSTANT.
+Error:  File AllBiFCTypes.fth, Line 23.  (Output Position = 83).  Cannot apply  TO  to  BS , which is defined as a CONSTANT.
+Message:  File AllBiFCTypes.fth, Line 25.  (Output Position = 85).   Defer Words.  Should generate no errors
+Message:  File AllBiFCTypes.fth, Line 38.  (Output Position = 140).   Value Words.  Should generate no errors
+Message:  File AllBiFCTypes.fth, Line 55.  (Output Position = 260).   Variables.  Should generate errors
+Warning:  File AllBiFCTypes.fth, Line 56.  (Output Position = 265).  Applying TO to a VARIABLE (#line) is not recommended; use  !  instead.
+Warning:  File AllBiFCTypes.fth, Line 57.  (Output Position = 272).  Applying TO to a VARIABLE (#out) is not recommended; use  !  instead.
+Warning:  File AllBiFCTypes.fth, Line 58.  (Output Position = 279).  Applying TO to a VARIABLE (base) is not recommended; use  !  instead.
+Warning:  File AllBiFCTypes.fth, Line 59.  (Output Position = 286).  Applying TO to a VARIABLE (mask) is not recommended; use  !  instead.
+Warning:  File AllBiFCTypes.fth, Line 60.  (Output Position = 294).  Applying TO to a VARIABLE (span) is not recommended; use  !  instead.
+Warning:  File AllBiFCTypes.fth, Line 61.  (Output Position = 301).  Applying TO to a VARIABLE (state) is not recommended; use  !  instead.
+Message:  File AllBiFCTypes.fth, Line 63.  (Output Position = 303).  Using ['] on words that are both FWords and FCodes should generate no errors
+Advisory:  File AllBiFCTypes.fth, Line 71.  (Output Position = 320).  FCODE-END encountered; processing...
+toke: checksum is 0x43cb (321 bytes).  No FCodes assigned.
+Tokenization Completed.  11 Errors, 6 Warnings, 2 Advisories, 5 Messages.
+Suppressing binary output.

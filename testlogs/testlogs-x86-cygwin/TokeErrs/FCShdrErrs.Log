@@ -1,0 +1,20 @@
+toke -v -i FCShdrErrs.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  FCShdrErrs.fth   Binary output to FCShdrErrs.fc 
+Advisory:  File FCShdrErrs.fth, Line 11.  (Output Position = 16).  FCODE-VERSION2 encountered; processing...
+Error:  File FCShdrErrs.fth, Line 11.  (Output Position = 16).  Cannot create FCode header after FCode output has begun.
+Advisory:  File FCShdrErrs.fth, Line 17.  (Output Position = 51).  FCODE-END encountered; processing...
+toke: checksum is 0x0926 (36 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  1 Error, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 52 bytes to bytecode file 'FCShdrErrs.fc'

@@ -1,0 +1,92 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x64c6 (Ok)
+     4:   len:       0x0146 ( 326 bytes)
+     8: -1 ( 0x0a4 ) 
+     9: new-token ( 0x0b5 ) 0x800
+    12: b(constant) ( 0x0ba ) 
+    13: b(lit) ( 0x010 ) 0x64
+    18: external-token ( 0x0ca ) pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz 0x801
+    95: b(constant) ( 0x0ba ) 
+    96: b(lit) ( 0x010 ) 0x3760
+   101: named-token ( 0x0b6 ) whatsis 0x802
+   112: b(constant) ( 0x0ba ) 
+   113: new-token ( 0x0b5 ) 0x803
+   116: b(:) ( 0x0b7 ) 
+   117:     b(lit) ( 0x010 ) 0x64
+   122: b(;) ( 0x0c2 ) 
+   123: (unnamed-fcode) [0x803] 
+   125: 2 ( 0x0a7 ) 
+   126: * ( 0x020 ) 
+   127: new-token ( 0x0b5 ) 0x804
+   130: b(constant) ( 0x0ba ) 
+   131: instance ( 0x0c0 ) 
+   132: new-token ( 0x0b5 ) 0x805
+   135: b(:) ( 0x0b7 ) 
+   136:     (unnamed-fcode) [0x804] 
+   138:     b(') ( 0x011 ) pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz ( 0x801 ) 
+   141:     execute ( 0x01d ) 
+   142: b(;) ( 0x0c2 ) 
+   143: new-device ( 0x11f ) 
+   145: b(lit) ( 0x010 ) 0x50
+   150: new-token ( 0x0b5 ) 0x806
+   153: b(constant) ( 0x0ba ) 
+   154: named-token ( 0x0b6 ) brand-x-ice-cream 0x807
+   175: b(:) ( 0x0b7 ) 
+   176:     pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz ( 0x801 ) 
+   178:     dup ( 0x047 ) 
+   179:     b(lit) ( 0x010 ) 0x14
+   184:     - ( 0x01f ) 
+   185:     b(do) ( 0x017 ) 0x0007 (  dest = 193 )
+   188:         i ( 0x019 ) 
+   189:         . ( 0x09d ) 
+   190:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 188 )
+   193:     cr ( 0x092 ) 
+   194:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Nameless one..."
+   211:     type ( 0x090 ) 
+   212:     (unnamed-fcode) [0x806] 
+   214:     b(") ( 0x012 ) ( len=7 )
+                    " equals "
+   223:     type ( 0x090 ) 
+   224:     . ( 0x09d ) 
+   225:     cr ( 0x092 ) 
+   226:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    " But everyone likes an "
+   250:     type ( 0x090 ) 
+   251:     b(lit) ( 0x010 ) 0x1cec6ea3
+   256:     . ( 0x09d ) 
+   257:     . ( 0x09d ) 
+   258:     cr ( 0x092 ) 
+   259: b(;) ( 0x0c2 ) 
+   260: (unnamed-fcode) [0x800] 
+   262: b?branch ( 0x014 ) 0x0017 ( =dec 23  dest = 286 )
+   265:     b(lit) ( 0x010 ) 0xeb0
+   270:     named-token ( 0x0b6 ) whatsis 0x808
+   281:     b(constant) ( 0x0ba ) 
+   282:     bbranch ( 0x013 ) 0x0015 ( =dec 21  dest = 304 )
+   285:     b(>resolve) ( 0x0b2 ) 
+   286:     b(lit) ( 0x010 ) 0x176
+   291:     named-token ( 0x0b6 ) whatsis 0x809
+   302:     b(constant) ( 0x0ba ) 
+   303: b(>resolve) ( 0x0b2 ) 
+   304: finish-device ( 0x127 ) 
+   306: named-token ( 0x0b6 ) clone 0x80a
+   315: b(:) ( 0x0b7 ) 
+   316:     (unnamed-fcode) [0x803] 
+   318:     (unnamed-fcode) [0x805] 
+   320:     whatsis ( 0x802 ) 
+   322:     pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz ( 0x801 ) 
+   324: b(;) ( 0x0c2 ) 
+   325: end0 ( 0x000 ) 
+\  Detokenization finished normally after 326 bytes.
+End of file.
+

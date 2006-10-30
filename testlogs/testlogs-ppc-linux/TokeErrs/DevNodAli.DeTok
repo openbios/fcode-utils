@@ -1,0 +1,317 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xf14d (Ok)
+     4:   len:       0x032d ( 813 bytes)
+     8: b(lit) ( 0x010 ) 0x40
+    13: new-token ( 0x0b5 ) 0x800
+    16: b(constant) ( 0x0ba ) 
+    17: (unnamed-fcode) [0x800] 
+    19: cells ( 0x069 ) 
+    20: dup ( 0x047 ) 
+    21: instance ( 0x0c0 ) 
+    22: new-token ( 0x0b5 ) 0x801
+    25: b(buffer:) ( 0x0bd ) 
+    26: instance ( 0x0c0 ) 
+    27: new-token ( 0x0b5 ) 0x802
+    30: b(value) ( 0x0b8 ) 
+    31: new-token ( 0x0b5 ) 0x803
+    34: b(:) ( 0x0b7 ) 
+    35:     + ( 0x01e ) 
+    36:     cells ( 0x069 ) 
+    37:     (unnamed-fcode) [0x802] 
+    39:     swap ( 0x049 ) 
+    40:     - ( 0x01f ) 
+    41:     0< ( 0x036 ) 
+    42: b(;) ( 0x0c2 ) 
+    43: new-token ( 0x0b5 ) 0x804
+    46: b(:) ( 0x0b7 ) 
+    47:     cr ( 0x092 ) 
+    48:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   102:     type ( 0x090 ) 
+   103:     cr ( 0x092 ) 
+   104: b(;) ( 0x0c2 ) 
+   105: new-token ( 0x0b5 ) 0x805
+   108: b(:) ( 0x0b7 ) 
+   109:     (unnamed-fcode) [0x803] 
+   111:     b?branch ( 0x014 ) 0x0007 (  dest = 119 )
+   114:         (unnamed-fcode) [0x804] 
+   116:         abort ( 0x216 ) 
+   118:     b(>resolve) ( 0x0b2 ) 
+   119: b(;) ( 0x0c2 ) 
+   120: new-token ( 0x0b5 ) 0x806
+   123: b(:) ( 0x0b7 ) 
+   124:     cells ( 0x069 ) 
+   125:     (unnamed-fcode) [0x802] 
+   127:     swap ( 0x049 ) 
+   128:     - ( 0x01f ) 
+   129:     b(to) ( 0x0c3 ) (unnamed-fcode) [0x802] 
+   132: b(;) ( 0x0c2 ) 
+   133: new-token ( 0x0b5 ) 0x807
+   136: b(:) ( 0x0b7 ) 
+   137:     (unnamed-fcode) [0x802] 
+   139:     1 ( 0x0a6 ) 
+   140:     cells ( 0x069 ) 
+   141:     - ( 0x01f ) 
+   142:     dup ( 0x047 ) 
+   143:     b(to) ( 0x0c3 ) (unnamed-fcode) [0x802] 
+   146:     (unnamed-fcode) [0x801] 
+   148:     + ( 0x01e ) 
+   149:     ! ( 0x072 ) 
+   150: b(;) ( 0x0c2 ) 
+   151: new-token ( 0x0b5 ) 0x808
+   154: b(:) ( 0x0b7 ) 
+   155:     0 ( 0x0a5 ) 
+   156:     b(?do) ( 0x018 ) 0x0007 (  dest = 164 )
+   159:         (unnamed-fcode) [0x807] 
+   161:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 159 )
+   164: b(;) ( 0x0c2 ) 
+   165: new-token ( 0x0b5 ) 0x809
+   168: b(:) ( 0x0b7 ) 
+   169:     2dup ( 0x053 ) 
+   170:     (unnamed-fcode) [0x805] 
+   172:     (unnamed-fcode) [0x806] 
+   174:     (unnamed-fcode) [0x808] 
+   176: b(;) ( 0x0c2 ) 
+   177: new-token ( 0x0b5 ) 0x80a
+   180: b(:) ( 0x0b7 ) 
+   181:     cells ( 0x069 ) 
+   182:     (unnamed-fcode) [0x802] 
+   184:     + ( 0x01e ) 
+   185:     b(to) ( 0x0c3 ) (unnamed-fcode) [0x802] 
+   188: b(;) ( 0x0c2 ) 
+   189: new-token ( 0x0b5 ) 0x80b
+   192: b(:) ( 0x0b7 ) 
+   193:     cells ( 0x069 ) 
+   194:     (unnamed-fcode) [0x802] 
+   196:     + ( 0x01e ) 
+   197:     (unnamed-fcode) [0x801] 
+   199:     + ( 0x01e ) 
+   200: b(;) ( 0x0c2 ) 
+   201: new-token ( 0x0b5 ) 0x80c
+   204: b(:) ( 0x0b7 ) 
+   205:     (unnamed-fcode) [0x802] 
+   207:     >r ( 0x030 ) 
+   208:     catch ( 0x217 ) 
+   210:     r> ( 0x031 ) 
+   211:     b(to) ( 0x0c3 ) (unnamed-fcode) [0x802] 
+   214: b(;) ( 0x0c2 ) 
+   215: named-token ( 0x0b6 ) troop 0x80d
+   224: b(:) ( 0x0b7 ) 
+   225:     b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                    " Dup to my-self"
+   241:     type ( 0x090 ) 
+   242:     dup ( 0x047 ) 
+   243:     b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   246: b(;) ( 0x0c2 ) 
+   247: named-token ( 0x0b6 ) croup 0x80e
+   256: b(:) ( 0x0b7 ) 
+   257:     dup ( 0x047 ) 
+   258:     troop ( 0x80d ) 
+   260: b(;) ( 0x0c2 ) 
+   261: named-token ( 0x0b6 ) make-rope-name 0x80f
+   279: b(:) ( 0x0b7 ) 
+   280:     1 ( 0x0a6 ) 
+   281:     0 ( 0x0a5 ) 
+   282:     (unnamed-fcode) [0x809] 
+   284:     b(") ( 0x012 ) ( len=6 )
+                    " roper_"
+   292:     encode-string ( 0x114 ) 
+   294:     0 ( 0x0a5 ) 
+   295:     (unnamed-fcode) [0x80b] 
+   297:     @ ( 0x06d ) 
+   298:     dup ( 0x047 ) 
+   299:     abs ( 0x02d ) 
+   300:     <# ( 0x096 ) 
+   301:     u#s ( 0x09a ) 
+   302:     swap ( 0x049 ) 
+   303:     sign ( 0x098 ) 
+   304:     u#> ( 0x097 ) 
+   305:     encode-string ( 0x114 ) 
+   307:     encode+ ( 0x112 ) 
+   309:     device-name ( 0x201 ) 
+   311:     1 ( 0x0a6 ) 
+   312:     (unnamed-fcode) [0x80a] 
+   314: b(;) ( 0x0c2 ) 
+   315: named-token ( 0x0b6 ) slip-prop 0x810
+   328: b(:) ( 0x0b7 ) 
+   329:     1 ( 0x0a6 ) 
+   330:     0 ( 0x0a5 ) 
+   331:     (unnamed-fcode) [0x809] 
+   333:     0 ( 0x0a5 ) 
+   334:     (unnamed-fcode) [0x80b] 
+   336:     @ ( 0x06d ) 
+   337:     invert ( 0x026 ) 
+   338:     b(lit) ( 0x010 ) 0x18
+   343:     lshift ( 0x027 ) 
+   344:     0 ( 0x0a5 ) 
+   345:     (unnamed-fcode) [0x80b] 
+   347:     @ ( 0x06d ) 
+   348:     b(lit) ( 0x010 ) 0x10
+   353:     lshift ( 0x027 ) 
+   354:     + ( 0x01e ) 
+   355:     0 ( 0x0a5 ) 
+   356:     (unnamed-fcode) [0x80b] 
+   358:     @ ( 0x06d ) 
+   359:     invert ( 0x026 ) 
+   360:     1 ( 0x0a6 ) 
+   361:     rshift ( 0x028 ) 
+   362:     b(lit) ( 0x010 ) 0xff
+   367:     and ( 0x023 ) 
+   368:     b(lit) ( 0x010 ) 0x8
+   373:     lshift ( 0x027 ) 
+   374:     + ( 0x01e ) 
+   375:     0 ( 0x0a5 ) 
+   376:     (unnamed-fcode) [0x80b] 
+   378:     @ ( 0x06d ) 
+   379:     + ( 0x01e ) 
+   380:     encode-int ( 0x111 ) 
+   382:     b(") ( 0x012 ) ( len=8 )
+                    " slipknot"
+   392:     property ( 0x110 ) 
+   394:     1 ( 0x0a6 ) 
+   395:     (unnamed-fcode) [0x80a] 
+   397: b(;) ( 0x0c2 ) 
+   398: named-token ( 0x0b6 ) achin 0x811
+   407: b(create) ( 0x0bb ) 
+   408: b(lit) ( 0x010 ) 0x12
+   413: c, ( 0x0d0 ) 
+   414: b(lit) ( 0x010 ) 0x13
+   419: c, ( 0x0d0 ) 
+   420: b(lit) ( 0x010 ) 0x14
+   425: c, ( 0x0d0 ) 
+   426: b(lit) ( 0x010 ) 0x56
+   431: c, ( 0x0d0 ) 
+   432: b(lit) ( 0x010 ) 0x43
+   437: c, ( 0x0d0 ) 
+   438: b(lit) ( 0x010 ) 0x50
+   443: c, ( 0x0d0 ) 
+   444: b(lit) ( 0x010 ) 0x54
+   449: c, ( 0x0d0 ) 
+   450: 0 ( 0x0a5 ) 
+   451: c, ( 0x0d0 ) 
+   452: named-token ( 0x0b6 ) make-name-and-prop 0x812
+   474: b(:) ( 0x0b7 ) 
+   475:     dup ( 0x047 ) 
+   476:     make-rope-name ( 0x80f ) 
+   478:     slip-prop ( 0x810 ) 
+   480: b(;) ( 0x0c2 ) 
+   481: named-token ( 0x0b6 ) tie-one-on 0x813
+   495: b(:) ( 0x0b7 ) 
+   496:     new-device ( 0x11f ) 
+   498:     make-name-and-prop ( 0x812 ) 
+   500: b(;) ( 0x0c2 ) 
+   501: named-token ( 0x0b6 ) spawn-offspring 0x814
+   520: b(:) ( 0x0b7 ) 
+   521:     achin ( 0x811 ) 
+   523:     b(<mark) ( 0x0b1 ) 
+   524:         dup ( 0x047 ) 
+   525:         c@ ( 0x071 ) 
+   526:         ?dup ( 0x050 ) 
+   527:         b?branch ( 0x014 ) 0x000c ( =dec 12  dest = 540 )
+   530:             tie-one-on ( 0x813 ) 
+   532:             finish-device ( 0x127 ) 
+   534:             1 ( 0x0a6 ) 
+   535:             + ( 0x01e ) 
+   536:             bbranch ( 0x013 ) 0xfff3 ( =dec -13  dest = 524 )
+   539:     b(>resolve) ( 0x0b2 ) 
+   540:     drop ( 0x046 ) 
+   541: b(;) ( 0x0c2 ) 
+   542: named-token ( 0x0b6 ) more-offs 0x815
+   555: b(:) ( 0x0b7 ) 
+   556:     b(") ( 0x012 ) ( len=7 )
+                    " YUMA"( 85 92 13 )"
+   565: b(;) ( 0x0c2 ) 
+   566: named-token ( 0x0b6 ) tap-it-out 0x816
+   580: b(:) ( 0x0b7 ) 
+   581:     finish-device ( 0x127 ) 
+   583:     1 ( 0x0a6 ) 
+   584:     + ( 0x01e ) 
+   585: b(;) ( 0x0c2 ) 
+   586: named-token ( 0x0b6 ) spawn-more 0x817
+   600: b(:) ( 0x0b7 ) 
+   601:     0 ( 0x0a5 ) 
+   602:     more-offs ( 0x815 ) 
+   604:     bounds ( 0x0ac ) 
+   605:     b(do) ( 0x017 ) 0x000d ( =dec 13  dest = 619 )
+   608:         new-device ( 0x11f ) 
+   610:         i ( 0x019 ) 
+   611:         c@ ( 0x071 ) 
+   612:         make-name-and-prop ( 0x812 ) 
+   614:         tap-it-out ( 0x816 ) 
+   616:     b(loop) ( 0x015 ) 0xfff7 ( =dec -9  dest = 608 )
+   619:     encode-int ( 0x111 ) 
+   621:     b(") ( 0x012 ) ( len=8 )
+                    " num-offs"
+   631:     property ( 0x110 ) 
+   633: b(;) ( 0x0c2 ) 
+   634: new-device ( 0x11f ) 
+   636: named-token ( 0x0b6 ) eek! 0x818
+   644: b(create) ( 0x0bb ) 
+   645: b(lit) ( 0x010 ) 0x18
+   650: c, ( 0x0d0 ) 
+   651: b(lit) ( 0x010 ) 0x17
+   656: c, ( 0x0d0 ) 
+   657: b(lit) ( 0x010 ) 0x80
+   662: c, ( 0x0d0 ) 
+   663: b(lit) ( 0x010 ) 0x79
+   668: c, ( 0x0d0 ) 
+   669: named-token ( 0x0b6 ) freek 0x819
+   678: b(:) ( 0x0b7 ) 
+   679:     eek! ( 0x818 ) 
+   681:     b(lit) ( 0x010 ) 0x4
+   686:     bounds ( 0x0ac ) 
+   687:     b(?do) ( 0x018 ) 0x0009 (  dest = 697 )
+   690:         i ( 0x019 ) 
+   691:         c@ ( 0x071 ) 
+   692:         . ( 0x09d ) 
+   693:         1 ( 0x0a6 ) 
+   694:     b(+loop) ( 0x016 ) 0xfffb ( =dec -5  dest = 690 )
+   697: b(;) ( 0x0c2 ) 
+   698: named-token ( 0x0b6 ) greek 0x81a
+   707: b(:) ( 0x0b7 ) 
+   708:     -1 ( 0x0a4 ) 
+   709:     b?branch ( 0x014 ) 0x0005 (  dest = 715 )
+   712:         freek ( 0x819 ) 
+   714:     b(>resolve) ( 0x0b2 ) 
+   715: b(;) ( 0x0c2 ) 
+   716: named-token ( 0x0b6 ) hierareek 0x81b
+   729: b(:) ( 0x0b7 ) 
+   730:     eek! ( 0x818 ) 
+   732:     freek ( 0x819 ) 
+   734:     greek ( 0x81a ) 
+   736: b(;) ( 0x0c2 ) 
+   737: named-token ( 0x0b6 ) ikey 0x81c
+   745: b(:) ( 0x0b7 ) 
+   746:     hierareek ( 0x81b ) 
+   748:     freek ( 0x819 ) 
+   750:     greek ( 0x81a ) 
+   752: b(;) ( 0x0c2 ) 
+   753: named-token ( 0x0b6 ) bad-refs 0x81d
+   765: b(:) ( 0x0b7 ) 
+   766: b(;) ( 0x0c2 ) 
+   767: finish-device ( 0x127 ) 
+   769: named-token ( 0x0b6 ) refs-good-again 0x81e
+   788: b(:) ( 0x0b7 ) 
+   789:     croup ( 0x80e ) 
+   791:     dup ( 0x047 ) 
+   792:     troop ( 0x80d ) 
+   794:     dup ( 0x047 ) 
+   795:     b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   798: b(;) ( 0x0c2 ) 
+   799: finish-device ( 0x127 ) 
+   801: named-token ( 0x0b6 ) spoof 0x81f
+   810: b(:) ( 0x0b7 ) 
+   811: b(;) ( 0x0c2 ) 
+   812: end0 ( 0x000 ) 
+\  Detokenization finished normally after 813 bytes.
+End of file.
+

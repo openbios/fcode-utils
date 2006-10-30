@@ -1,0 +1,37 @@
+toke -v -i ContErr0.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  ContErr0.fth   Binary output to ContErr0.fc 
+Advisory:  File ContErr0.fth, Line 8.  FCODE-VERSION2 encountered; processing...
+Error:  File ContErr0.fth, Line 17.  (Output Position = 67).  UNLOOP outside of  DO ... LOOP  structure in definition of  GARFIELD  , which started on line 12
+Error:  File ContErr0.fth, Line 18.  (Output Position = 94).  LEAVE outside of  DO ... LOOP  structure in definition of  GARFIELD  , which started on line 12
+Error:  File ContErr0.fth, Line 19.  (Output Position = 103).  The LOOP is mismatched with the BEGIN on line 14 in definition of  GARFIELD  , which started on line 12
+Error:  File ContErr0.fth, Line 19.  (Output Position = 103).  The LOOP is mismatched with the IF on line 13 in definition of  GARFIELD  , which started on line 12
+Error:  File ContErr0.fth, Line 28.  (Output Position = 230).  The AGAIN is mismatched with the ?DO on line 24 in definition of  ODIE  , which started on line 23
+Error:  File ContErr0.fth, Line 29.  (Output Position = 240).  The THEN is mismatched with the ?DO on line 24 in definition of  ODIE  , which started on line 23
+Error:  File ContErr0.fth, Line 35.  (Output Position = 293).  CONSTANT definition before completion of DO on line 34
+Error:  File ContErr0.fth, Line 36.  (Output Position = 355).  The AGAIN is mismatched with the DO on line 34
+Error:  File ContErr0.fth, Line 37.  (Output Position = 365).  The THEN is mismatched with the DO on line 34
+Error:  File ContErr0.fth, Line 51.  (Output Position = 538).  The word  EXIT  should not be used outside of a colon definition.
+Error:  File ContErr0.fth, Line 55.  (Output Position = 563).  CONSTANT definition before completion of ELSE on line 52
+Error:  File ContErr0.fth, Line 64.  (Output Position = 618).  The OF is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 65.  (Output Position = 631).  The OF is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 66.  (Output Position = 644).  The OF is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 67.  (Output Position = 662).  The OF is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 68.  (Output Position = 680).  The OF is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 70.  (Output Position = 717).  The ENDCASE is mismatched with the OF on line 63 in definition of  CRAZY-ACES  , which started on line 61
+Error:  File ContErr0.fth, Line 71.  (Output Position = 752).  End of colon-definition before completion of CASE on line 62 in definition of  CRAZY-ACES  , which started on line 61
+Advisory:  File ContErr0.fth, Line 73.  (Output Position = 753).  FCODE-END encountered; processing...
+toke: checksum is 0xf466 (754 bytes).  Last assigned FCode = 0x805
+Tokenization Completed.  18 Errors, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 754 bytes to bytecode file 'ContErr0.fc'

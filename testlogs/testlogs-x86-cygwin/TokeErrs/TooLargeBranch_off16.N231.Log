@@ -1,0 +1,23 @@
+toke -v -i -l -d "fld_cmd=fload TooLargeBranch_N231_body.fth" -o TooLargeBranch_off16.N231.fc TooLargeBranch_off16.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+User-Defined Symbols:
+	fld_cmd = fload TooLargeBranch_N231_body.fth
+
+Tokenizing  TooLargeBranch_off16.fth   Binary output to TooLargeBranch_off16.N231.fc   FLoad-list to TooLargeBranch_off16.N231.fl 
+Advisory:  File TooLargeBranch_off16.fth, Line 12.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBranch_off16.fth, Line 31.  (Output Position = 182).  FLOADing TooLargeBranch_N231_body.fth
+Message:  File TooLargeBranch_N231_body.fth, Line 1.  (Output Position = 182).  Starting out with 231 Bottles of Beer on the wall
+Advisory:  File TooLargeBranch_off16.fth, Line 67.  (Output Position = 33038).  FCODE-END encountered; processing...
+toke: checksum is 0x07ae (33039 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  3 Advisories, 1 Message.
+toke: wrote 33039 bytes to bytecode file 'TooLargeBranch_off16.N231.fc'

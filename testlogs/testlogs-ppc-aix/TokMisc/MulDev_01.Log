@@ -1,0 +1,48 @@
+toke -v -i MulDev_01.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  MulDev_01.fth   Binary output to MulDev_01.fc 
+Advisory:  File MulDev_01.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File MulDev_01.fth, Line 10.  (Output Position = 8).  RB! is a Global definition, but its alias, rc!, will only be defined in the top-level device-node, which began on line 6
+Message:  File MulDev_01.fth, Line 12.  (Output Position = 8).   Top-Level (root) device-node
+Message:  File MulDev_01.fth, Line 18.  (Output Position = 101).   Subsidiary (child) device-node
+Advisory:  File MulDev_01.fth, Line 19.  (Output Position = 101).  Encountered new-device.  Starting new device-node.
+Message:  File MulDev_01.fth, Line 23.  (Output Position = 183).   About to access method from parent node
+Error:  File MulDev_01.fth, Line 27.  (Output Position = 201).  Word  achin  is not in dictionary.
+Advisory:  File MulDev_01.fth, Line 27.  (Output Position = 201).  achin is defined as a CREATE in the top-level device-node, which began on line 6
+Message:  File MulDev_01.fth, Line 31.  (Output Position = 220).   about to end child node
+Advisory:  File MulDev_01.fth, Line 32.  (Output Position = 220).  Encountered finish-device.  Resetting definitions of device node that started on line 19
+Advisory:  File MulDev_01.fth, Line 32.  (Output Position = 220).  Resuming definitions since start of tokenization.
+Message:  File MulDev_01.fth, Line 33.  (Output Position = 222).   We can access methods from the root node now
+Message:  File MulDev_01.fth, Line 38.  (Output Position = 237).  create sibling node
+Advisory:  File MulDev_01.fth, Line 39.  (Output Position = 237).  Encountered new-device.  Starting new device-node.
+Warning:  File MulDev_01.fth, Line 52.  (Output Position = 259).  Multi-line string, started on line 42 in definition of  KINKY  , which started on line 41
+Error:  File MulDev_01.fth, Line 53.  (Output Position = 290).  Word  rc!  is not in dictionary.
+Advisory:  File MulDev_01.fth, Line 53.  (Output Position = 290).  rc! is defined in the top-level device-node, which began on line 6
+Message:  File MulDev_01.fth, Line 56.  (Output Position = 295).  creating nephew node
+Advisory:  File MulDev_01.fth, Line 57.  (Output Position = 295).  Encountered new-device.  Starting new device-node.  Suspending definitions of parent-device node that started on line 39
+Error:  File MulDev_01.fth, Line 59.  (Output Position = 306).  Word  kinky  is not in dictionary.
+Advisory:  File MulDev_01.fth, Line 59.  (Output Position = 306).  kinky is defined as a COLON in the device-node that started on line 39
+Message:  File MulDev_01.fth, Line 61.  (Output Position = 308).  creating great-nephew node
+Advisory:  File MulDev_01.fth, Line 62.  (Output Position = 308).  Encountered new-device.  Starting new device-node.  Suspending definitions of parent-device node that started on line 57
+Error:  File MulDev_01.fth, Line 65.  (Output Position = 319).  Word  jeeky  is not in dictionary.
+Advisory:  File MulDev_01.fth, Line 65.  (Output Position = 319).  jeeky is defined as a COLON in the top-level device-node, which began on line 6
+Error:  File MulDev_01.fth, Line 66.  (Output Position = 319).  Word  kinky  is not in dictionary.
+Advisory:  File MulDev_01.fth, Line 66.  (Output Position = 319).  kinky is defined as a COLON in the device-node that started on line 39
+Advisory:  File MulDev_01.fth, Line 69.  (Output Position = 321).  FCODE-END encountered; processing...
+Error:  File MulDev_01.fth, Line 69.  (Output Position = 322).  Missing FINISH-DEVICE for new device that started on line 62
+Error:  File MulDev_01.fth, Line 69.  (Output Position = 322).  Missing FINISH-DEVICE for new device that started on line 57
+Error:  File MulDev_01.fth, Line 69.  (Output Position = 322).  Missing FINISH-DEVICE for new device that started on line 39
+toke: checksum is 0x5cfb (322 bytes).  Last assigned FCode = 0x80d
+Tokenization Completed.  8 Errors, 1 Warning, 14 Advisories, 8 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 322 bytes to bytecode file 'MulDev_01.fc'

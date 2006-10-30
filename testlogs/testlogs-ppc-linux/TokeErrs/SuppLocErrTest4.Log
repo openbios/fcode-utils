@@ -1,0 +1,75 @@
+toke -v -i -f Local-Values -l -I. -I../TokoLoco SuppLocErrTest4.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  SuppLocErrTest4.fth   Binary output to SuppLocErrTest4.fc   FLoad-list to SuppLocErrTest4.fl 
+Advisory:  File was found in ./SuppLocErrTest4.fth
+Advisory:  File SuppLocErrTest4.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Advisory:  File SuppLocErrTest4.fth, Line 8.  (Output Position = 8).  CATCH is a Global definition, but its alias, snatch, will only be defined in the top-level device-node, which began on line 4
+Advisory:  File SuppLocErrTest4.fth, Line 12.  (Output Position = 38).  FLOADing LocalValuesSupport.fth
+Advisory:  File SuppLocErrTest4.fth, Line 12.  (Output Position = 38).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Warning:  File SuppLocErrTest4.fth, Line 15.  (Output Position = 446).  Duplicate definition:   dup  already exists in the core vocabulary.
+Warning:  File SuppLocErrTest4.fth, Line 22.  (Output Position = 467).  Multi-line Local-Values declaration, started on line 18 in definition of  DUCKSOUP  , which started on line 17
+Warning:  File SuppLocErrTest4.fth, Line 31.  (Output Position = 573).  Declaring Locals after the body of a Colon-definition has begun is not recommended.
+Error:  File SuppLocErrTest4.fth, Line 35.  (Output Position = 573).  Cannot declare _zeppo as a Local-Name; it's already defined as a Local Value name.
+Warning:  File SuppLocErrTest4.fth, Line 36.  (Output Position = 573).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File SuppLocErrTest4.fth, Line 36.  (Output Position = 573).  Excess separator -- ; -- found in Local-Values declaration in definition of  CLUCKPOOP  , which started on line 29
+Warning:  File SuppLocErrTest4.fth, Line 37.  (Output Position = 573).  Multi-line Local-Values declaration, started on line 31 in definition of  CLUCKPOOP  , which started on line 29
+Error:  File SuppLocErrTest4.fth, Line 49.  (Output Position = 647).  Cannot declare _zeppo as a Local-Name; it's already defined as a Local Value name.
+Warning:  File SuppLocErrTest4.fth, Line 50.  (Output Position = 647).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File SuppLocErrTest4.fth, Line 50.  (Output Position = 647).  Excess separator -- ; -- found in Local-Values declaration in definition of  NEIGHCLUCK  , which started on line 44
+Error:  File SuppLocErrTest4.fth, Line 52.  (Output Position = 647).  Cannot declare _karl as a Local-Name; it's already defined as a Local Value name.
+Warning:  File SuppLocErrTest4.fth, Line 52.  (Output Position = 647).  Multi-line Local-Values declaration, started on line 45 in definition of  NEIGHCLUCK  , which started on line 44
+Warning:  File SuppLocErrTest4.fth, Line 64.  (Output Position = 783).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File SuppLocErrTest4.fth, Line 65.  (Output Position = 787).  The word  INSTANCE  should not be used inside of a colon definition.
+Error:  File SuppLocErrTest4.fth, Line 66.  (Output Position = 788).  The word  CREATE  should not be used inside of a colon definition.
+Error:  File SuppLocErrTest4.fth, Line 74.  (Output Position = 828).  Word  _harpo  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 75.  (Output Position = 828).  Word  _chico  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 76.  (Output Position = 828).  Word  _groucho  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 77.  (Output Position = 828).  Word  _zeppo  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 78.  (Output Position = 828).  Word  _gummo  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 79.  (Output Position = 828).  Word  _karl  is not in dictionary.
+Warning:  File SuppLocErrTest4.fth, Line 84.  (Output Position = 870).  Declaring Locals after the body of a Colon-definition has begun is not recommended.
+Error:  File SuppLocErrTest4.fth, Line 88.  (Output Position = 904).  Excess Locals Declaration in definition of  SPAULDING  , which started on line 82
+Error:  File SuppLocErrTest4.fth, Line 89.  (Output Position = 916).  Word  _I'll  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 89.  (Output Position = 916).  Word  _never  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 89.  (Output Position = 916).  Word  _know  is not in dictionary.
+Error:  File SuppLocErrTest4.fth, Line 96.  (Output Position = 921).  COLON definition before completion of IF on line 95
+Warning:  File SuppLocErrTest4.fth, Line 99.  (Output Position = 962).  Declaring Locals after the body of a Colon-definition has begun is not recommended.
+Error:  File SuppLocErrTest4.fth, Line 99.  (Output Position = 962).  Local-Values Declaration encountered before completion of IF on line 98 in definition of  WIRE-FENCE  , which started on line 96
+Advisory:  File SuppLocErrTest4.fth, Line 111.  (Output Position = 1106).  FCODE-END encountered; processing...
+toke: checksum is 0x49d3 (1107 bytes).  Last assigned FCode = 0x814
+Tokenization Completed.  19 Errors, 10 Warnings, 6 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1107 bytes to bytecode file 'SuppLocErrTest4.fc'

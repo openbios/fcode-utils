@@ -1,0 +1,25 @@
+toke -v -i -l CStrEscOvflw.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  CStrEscOvflw.fth   Binary output to CStrEscOvflw.fc   FLoad-list to CStrEscOvflw.fl 
+Advisory:  File CStrEscOvflw.fth, Line 3.  Enabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File CStrEscOvflw.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File CStrEscOvflw.fth, Line 14.  (Output Position = 81).  FLOADing CStrEscOvflw_body_1.fth
+Advisory:  File CStrEscOvflw.fth, Line 16.  (Output Position = 111).  FLOADing CStrEscOvflw_body_2.fth
+Warning:  File CStrEscOvflw_body_2.fth, Line 10.  (Output Position = 111).  Unrecognized character, 0x0a, after \ in string.  Using it literally.
+Warning:  File CStrEscOvflw_body_2.fth, Line 10.  (Output Position = 111).  Unterminated string in definition of  FUNKY-STRING  , which started on line 10 of file CStrEscOvflw.fth
+Advisory:  File CStrEscOvflw.fth, Line 18.  (Output Position = 142).  FLOADing CStrEscOvflw_body_3.fth
+Warning:  File CStrEscOvflw_body_3.fth, Line 10.  (Output Position = 142).  Unterminated string in definition of  FUNKY-STRING  , which started on line 10 of file CStrEscOvflw.fth
+Advisory:  File CStrEscOvflw.fth, Line 23.  (Output Position = 194).  FCODE-END encountered; processing...
+toke: checksum is 0x41d5 (195 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  3 Warnings, 6 Advisories.
+toke: wrote 195 bytes to bytecode file 'CStrEscOvflw.fc'

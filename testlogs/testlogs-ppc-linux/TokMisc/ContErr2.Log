@@ -1,0 +1,32 @@
+toke -v -i ContErr2.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  ContErr2.fth   Binary output to ContErr2.fc 
+Advisory:  File ContErr2.fth, Line 7.  FCODE-VERSION2 encountered; processing...
+Error:  File ContErr2.fth, Line 24.  (Output Position = 143).  The THEN is mismatched with the CASE on line 16 in definition of  CRAPSKY  , which started on line 15
+Error:  File ContErr2.fth, Line 25.  (Output Position = 170).  The THEN is mismatched with the ENDOF on line 22 in definition of  CRAPSKY  , which started on line 15
+Error:  File ContErr2.fth, Line 26.  (Output Position = 197).  The THEN is mismatched with the ENDOF on line 20 in definition of  CRAPSKY  , which started on line 15
+Error:  File ContErr2.fth, Line 27.  (Output Position = 224).  The THEN is mismatched with the ENDOF on line 18 in definition of  CRAPSKY  , which started on line 15
+Error:  File ContErr2.fth, Line 34.  (Output Position = 296).  The ENDCASE is mismatched with the IF on line 32 in definition of  DUMPSKY  , which started on line 31
+Error:  File ContErr2.fth, Line 38.  (Output Position = 345).  Control-Stack underflow at ELSE in definition of  SNEAKSKY  , which started on line 37
+Error:  File ContErr2.fth, Line 45.  (Output Position = 411).  Control-Stack underflow at OF in definition of  GROPSKY  , which started on line 43
+Error:  File ContErr2.fth, Line 47.  (Output Position = 437).  Control-Stack underflow at THEN in definition of  GROPSKY  , which started on line 43
+Error:  File ContErr2.fth, Line 57.  (Output Position = 555).  The ENDOF is mismatched with the IF on line 55 in definition of  TRASHSKY  , which started on line 51
+Error:  File ContErr2.fth, Line 61.  (Output Position = 609).  End of colon-definition before completion of ENDOF on line 57 in definition of  TRASHSKY  , which started on line 51
+Error:  File ContErr2.fth, Line 70.  (Output Position = 756).  The ENDOF is mismatched with the IF on line 68 in definition of  SCHLOCKSKY  , which started on line 63
+Error:  File ContErr2.fth, Line 72.  (Output Position = 774).  End of colon-definition before completion of CASE on line 66 in definition of  SCHLOCKSKY  , which started on line 63
+Error:  File ContErr2.fth, Line 72.  (Output Position = 774).  End of colon-definition before completion of ENDOF on line 70 in definition of  SCHLOCKSKY  , which started on line 63
+Advisory:  File ContErr2.fth, Line 74.  (Output Position = 775).  FCODE-END encountered; processing...
+toke: checksum is 0x0069 (776 bytes).  Last assigned FCode = 0x805
+Tokenization Completed.  13 Errors, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 776 bytes to bytecode file 'ContErr2.fc'

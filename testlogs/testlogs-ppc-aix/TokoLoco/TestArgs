@@ -1,0 +1,29 @@
+#  Automated Test Arguments file for TokoLoco category
+#  (That's short for "Tokenizer Locals")
+
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command with arguments (but no commas).
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+
+#  All files in this category need the  -f Local-Values  switch
+#  Some will have additional variants.
+
+#  Updated Fri, 13 Oct 2006 at 16:19 PDT by David L. Paktor
+
+
+testNest   , ,  -f Local-Values  -l
+SupportedLocalTest  , ,  -f LOCAL-Values  -l
+SupportedLocalTest3  , ,  -f Local-VALUES  -l
+SupportedLocalTest4  , ,  -f Local-Values  -l
+testDevelSupport  , , -f local-values
+
+#  Additional variants:
+SupportedLocalTest  , nodupwrn ,  -f Local-VALUES -f NOWarn-if-DUPLicate -l
+SupportedLocalTest  , nolegacy ,  -f LoCAL-VALUes -f NoLV-Legacy-Separator -l
+SupportedLocalTest  , nolgcmsg ,  -f Local-ValUES -f NOLV-LEGAcy-Message -l
+SupportedLocalTest  , nolocals , -i -f noLocal-Values -l
+SupportedLocalTest3  , DefLocStgSiz ,  -f Local-VALUes -d '_loCAL-STORagE-SIZe_=h# 42' -l

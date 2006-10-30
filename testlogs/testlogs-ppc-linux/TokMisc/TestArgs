@@ -1,0 +1,79 @@
+#  Automated Test Arguments file for TokMisc category
+
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command with arguments (but no commas).
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+#                 A leading +V in the script-command field will suppress -v
+
+#  Updated Mon, 16 Oct 2006 at 17:22 PDT by David L. Paktor
+
+MiscFeatures ,  ,  -i
+MiscFeatures , applabq ,  -i -f NOSUN-ABORT-Quote
+MiscFeatures , noabrtq ,  -i -f noABort-quote
+MiscFeatures.DOS ,  ,  -i
+EncodTst
+StrAtEof , , -l
+#  Script is to help set up for Batch Test at end...
+StringsGenl ,  ,  , cp StringsGenl.fth StringsGenl_cpy1.fth ; cp StringsGenl_cpy1.fth StringsGenl_cpy2.fth
+StringsGenl , nocstesc , -f NOC-STYLe-string-escape
+StringsGenl , nohexrmk , -f noHex-remark-escape
+StringsGenl , noqbsrmk , -f NOSTRING-REMARK-ESCAPE
+BasicCont
+ExtCont
+ContErr0 ,  ,  -i
+ContErr1 ,  ,  -i
+ContErr2 ,  ,  -i
+ContErr3 ,  ,  -i
+MulDev ,  ,  -i
+MulDev_01 ,  ,  -i
+MulDev_02 ,  ,  -i -T jeeky -T kinky
+MulDev_02 , NoV ,  -T jeeky -T kinky , +V
+MinPCIHtst
+StrEscs
+StrEscs_01
+FlagSet ,  ,  -i
+FlagSet , badclf ,  -i -f McGillicuddy -f ORoark -f NoFrauBlucher
+TooLargeBufferMulPciFcb , , -l
+BranchOverNewBuffer , , -l
+AbrtQuot ,  ,  -i
+AbrtQuot , noabrtq  ,  -i -f NOabort-Quote
+AbrtQuot , applabq  ,  -i -f noSUN-abort-QUOte
+AbrtQuot , noabqthrw  ,  -i -f noABORT-Quote-Throw
+HeadrSettings
+HeadrSettings , alwyshdr , -f always-heADERs
+HeadrSettings , alwyextl , -f alwaYS-External
+HeadrSettings , alwaysboth , -f always-headers -f always-external
+FlagsHelp , Hlp , -f HELP
+FlagsHelp ,  , -o FlagsHelp.fc FlagsHelp.fth
+FlagsHelp , UnkOpt , -Z
+FlagsHelp , Chg , -f noHex-remark-ESCAPE -f Always-Headers -f help
+FlagsHelp , noChg , -f noLocal-Values -f help
+FlagsHelp , chgNoHlp , -f noHex-remark-escape -f Always-Headers -f noHelp
+FlagsHelp , JustNoHlp , -f noHelp
+FlgReset , Solo
+FlgReset  FlgReset_1  FlgReset_2
+FlgReset  FlgReset_1  FlgReset_2 , AlwExt , -f Always-External
+AllMacros , , , ExamAllMacs.scr
+AllBiFCTypes
+
+#  A little more set-up for Batch Test
+UserMacros ,  ,  , cp UserMacros.fth UserMacros_cpy1.fth
+
+BatchTst StringsGenl_cpy1 FlagSet ,  , -l  sub.w.dots/MulDev  ../TokeCommon/ZeroLen.bin ../TokeCommon/OneBeer.fth NoBeerAnywhere.fth , if ( "`cmp StringsGenl.fc StringsGenl_cpy1.fc`" != "" ) /bin/ls -l $PWD/StringsGenl.fc $PWD/StringsGenl_cpy1.fc >> BatchTst.Log ; diff StringsGenl.DeTok StringsGenl_cpy1.DeTok >> BatchTst.Log
+
+BatchTst StringsGenl_cpy2 FlagSet UserMacros_cpy1 , wIncLst , -I '' -I. -I../TokeCommon -P -l sub.w.dots/MulDev OneBeer.fth ZeroLen.bin NoBeerAnywhere.fth , if ( "`cmp StringsGenl.fc StringsGenl_cpy2.fc`" != "" ) /bin/ls -l $PWD/StringsGenl.fc $PWD/StringsGenl_cpy2.fc >> BatchTst.wIncLst.Log ; diff StringsGenl.DeTok StringsGenl_cpy2.DeTok >> BatchTst.wIncLst.Log
+
+BatchTst , FHelp , -I. -I../TokeCommon -l  -f help , if ( "`cmp UserMacros.fc UserMacros_cpy1.fc`" != "" )  /bin/ls -l $PWD/UserMacros.fc $PWD/UserMacros_cpy1.fc >> BatchTst.FHelp.Log ; diff UserMacros.DeTok UserMacros_cpy1.DeTok >> BatchTst.FHelp.Log
+
+#  Script is to clean up the "dross" from the above...
+BatchTst ,  Help , -I. -I../TokeCommon -l  -h , rm *_cpy*
+
+CaseTkns
+
+#  Vendor-Specific FCodes, just a little...
+VSFCtest 
+VSFCtest , VSfc , , DtkVSFcTst.scr VSFCtest.VSfc VendSpecFCodes

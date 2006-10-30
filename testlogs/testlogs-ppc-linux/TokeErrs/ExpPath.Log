@@ -1,0 +1,67 @@
+toke -v -i -l ExpPath.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  ExpPath.fth   Binary output to ExpPath.fc   FLoad-list to ExpPath.fl 
+Advisory:  File ExpPath.fth, Line 7.  FCODE-VERSION2 encountered; processing...
+Advisory:  File ExpPath.fth, Line 14.  (Output Position = 42).  FLOADing ${PWD:h}/TokeCommon/OneBeer.fth
+Advisory:  File ExpPath.fth, Line 14.  (Output Position = 42).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/TokeCommon/OneBeer.fth
+Error:  File ExpPath.fth, Line 14.  (Output Position = 42).  Could not access input file ${PWD:h}/TokeCommon/OneBeer.fth
+Advisory:  File ExpPath.fth, Line 18.  (Output Position = 77).  FLOADing ${PWD}/../TokeCommon/OneBeer.fth
+Advisory:  File ExpPath.fth, Line 18.  (Output Position = 77).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/OneBeer.fth
+Message:  File ${PWD}/../TokeCommon/OneBeer.fth, Line 1.  (Output Position = 77).  Starting out with one Bottle of Beer on the wall
+Advisory:  File ExpPath.fth, Line 30.  (Output Position = 275).  FLOADing $PWD/../NonExist/NonExist.fth
+Advisory:  File ExpPath.fth, Line 30.  (Output Position = 275).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../NonExist/NonExist.fth
+Error:  File ExpPath.fth, Line 30.  (Output Position = 275).  Could not access input file $PWD/../NonExist/NonExist.fth
+Message:  File ExpPath.fth, Line 31.  (Output Position = 275).  Fload an Unreadable file (No read Permissions)
+Advisory:  File ExpPath.fth, Line 32.  (Output Position = 275).  FLOADing ${PWD}/../TokeCommon/MyBeerAndYouCannotHaveIt.fth
+Advisory:  File ExpPath.fth, Line 32.  (Output Position = 275).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/MyBeerAndYouCannotHaveIt.fth
+Error:  File ExpPath.fth, Line 32.  (Output Position = 275).  Could not open file ${PWD}/../TokeCommon/MyBeerAndYouCannotHaveIt.fth for input.
+Message:  File ExpPath.fth, Line 33.  (Output Position = 275).  Fload a Zero-Length file (extension doesn't matter...)
+Advisory:  File ExpPath.fth, Line 34.  (Output Position = 275).  FLOADing ${PWD}/../TokeCommon/ZeroLen.bin
+Advisory:  File ExpPath.fth, Line 34.  (Output Position = 275).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/ZeroLen.bin
+Error:  File ExpPath.fth, Line 34.  (Output Position = 275).  Could not read input file ${PWD}/../TokeCommon/ZeroLen.bin
+Message:  File ExpPath.fth, Line 36.  (Output Position = 275).  FLoad with intentional syntax error
+Advisory:  File ExpPath.fth, Line 37.  (Output Position = 275).  FLOADing ${PWD/../TokeCommon/OneBeer.fth
+sh: -c: line 1: unexpected EOF while looking for matching `}'
+sh: -c: line 2: syntax error: unexpected end of file
+Error:  File ExpPath.fth, Line 37.  (Output Position = 275).  Expansion Syntax.
+Error:  File ExpPath.fth, Line 37.  (Output Position = 275).  Could not access input file ${PWD/../TokeCommon/OneBeer.fth
+Advisory:  File ExpPath.fth, Line 41.  (Output Position = 308).  ENCODing File $PWD/../TokeCommon/BinData.bin
+Advisory:  File ExpPath.fth, Line 41.  (Output Position = 308).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/BinData.bin
+Advisory:  File ExpPath.fth, Line 41.  (Output Position = 1274).  ENCODed 944 bytes.
+Message:  File ExpPath.fth, Line 45.  (Output Position = 1308).  Encode a NonExistent file
+Advisory:  File ExpPath.fth, Line 46.  (Output Position = 1308).  ENCODing File $PWD/../NonExist/NonExist.bin
+Advisory:  File ExpPath.fth, Line 46.  (Output Position = 1308).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../NonExist/NonExist.bin
+Error:  File ExpPath.fth, Line 46.  (Output Position = 1308).  Failed to open file $PWD/../NonExist/NonExist.bin for encoding
+Message:  File ExpPath.fth, Line 47.  (Output Position = 1308).  Encode an Unreadable file (No read Permissions)
+Advisory:  File ExpPath.fth, Line 48.  (Output Position = 1308).  ENCODing File $PWD/../TokeCommon/NoRead.bin
+Advisory:  File ExpPath.fth, Line 48.  (Output Position = 1308).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/NoRead.bin
+Error:  File ExpPath.fth, Line 48.  (Output Position = 1308).  Failed to open file $PWD/../TokeCommon/NoRead.bin for encoding
+Message:  File ExpPath.fth, Line 50.  (Output Position = 1308).  Encode with intentional syntax error
+Advisory:  File ExpPath.fth, Line 51.  (Output Position = 1308).  ENCODing File ${PWD/../TokeCommon/BinData.bin
+sh: -c: line 1: unexpected EOF while looking for matching `}'
+sh: -c: line 2: syntax error: unexpected end of file
+Error:  File ExpPath.fth, Line 51.  (Output Position = 1308).  Expansion Syntax.
+Error:  File ExpPath.fth, Line 51.  (Output Position = 1308).  Failed to open file ${PWD/../TokeCommon/BinData.bin for encoding
+Message:  File ExpPath.fth, Line 53.  (Output Position = 1308).  Is this a syntax error?  On some O/S'es but not others...
+Advisory:  File ExpPath.fth, Line 55.  (Output Position = 1342).  ENCODing File $PWD}/../TokeCommon/BinData.bin
+Advisory:  File ExpPath.fth, Line 55.  (Output Position = 1342).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs}/../TokeCommon/BinData.bin
+Error:  File ExpPath.fth, Line 55.  (Output Position = 1342).  Failed to open file $PWD}/../TokeCommon/BinData.bin for encoding
+Message:  File ExpPath.fth, Line 57.  (Output Position = 1342).  Encode a Zero length data file
+Advisory:  File ExpPath.fth, Line 59.  (Output Position = 1375).  ENCODing File $PWD/../TokeCommon/ZeroLen.bin
+Advisory:  File ExpPath.fth, Line 59.  (Output Position = 1375).  File name expanded to:  /gsa/ausgsa/home/d/l/dlpaktor/OpenBIOS_Tkzr/TestBed/PPC_GNU_Linux/TokeErrs/../TokeCommon/ZeroLen.bin
+Advisory:  File ExpPath.fth, Line 59.  (Output Position = 1375).  ENCODed 0 bytes.
+Advisory:  File ExpPath.fth, Line 63.  (Output Position = 1392).  FCODE-END encountered; processing...
+toke: checksum is 0x47b6 (1393 bytes).  No FCodes assigned.
+Tokenization Completed.  11 Errors, 26 Advisories, 9 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1393 bytes to bytecode file 'ExpPath.fc'

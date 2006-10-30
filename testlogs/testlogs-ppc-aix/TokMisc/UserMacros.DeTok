@@ -1,0 +1,60 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x43f3 (Ok)
+     4:   len:       0x00f6 ( 246 bytes)
+     8: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " Look, Ma!  No hands! Ooooops! "
+    40: type ( 0x090 ) 
+    41: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " Hey, Pa!  Hands! HaHa! "
+    66: type ( 0x090 ) 
+    67: named-token ( 0x0b6 ) surplus 0x800
+    78: b(:) ( 0x0b7 ) 
+    79:     b(lit) ( 0x010 ) 0x4
+    84:     + ( 0x01e ) 
+    85:     3 ( 0x0a8 ) 
+    86:     + ( 0x01e ) 
+    87:     2 ( 0x0a7 ) 
+    88:     + ( 0x01e ) 
+    89:     1 ( 0x0a6 ) 
+    90:     + ( 0x01e ) 
+    91: b(;) ( 0x0c2 ) 
+    92: named-token ( 0x0b6 ) sourpuss 0x801
+   104: b(:) ( 0x0b7 ) 
+   105:     b(lit) ( 0x010 ) 0x435055
+   110:     b(lit) ( 0x010 ) 0x43505500
+   115:     b(lit) ( 0x010 ) 0x49435550
+   120:     b(lit) ( 0x010 ) 0x49435550
+   125:     b(lit) ( 0x010 ) 0x41435550
+   130:     b(lit) ( 0x010 ) 0x41435550
+   135: b(;) ( 0x0c2 ) 
+   136: b(lit) ( 0x010 ) 0x435055
+   141: named-token ( 0x0b6 ) a#CPU 0x802
+   150: b(constant) ( 0x0ba ) 
+   151: b(lit) ( 0x010 ) 0x43505500
+   156: named-token ( 0x0b6 ) al#CPU 0x803
+   166: b(constant) ( 0x0ba ) 
+   167: b(lit) ( 0x010 ) 0x49435550
+   172: named-token ( 0x0b6 ) a#ICUP 0x804
+   182: b(constant) ( 0x0ba ) 
+   183: b(lit) ( 0x010 ) 0x49435550
+   188: named-token ( 0x0b6 ) al#ICUP 0x805
+   199: b(constant) ( 0x0ba ) 
+   200: b(lit) ( 0x010 ) 0x41435550
+   205: named-token ( 0x0b6 ) a#IPEEINACUP 0x806
+   221: b(constant) ( 0x0ba ) 
+   222: b(lit) ( 0x010 ) 0x41435550
+   227: named-token ( 0x0b6 ) al#IPEEINACUP 0x807
+   244: b(constant) ( 0x0ba ) 
+   245: end0 ( 0x000 ) 
+\  Detokenization finished normally after 246 bytes.
+End of file.
+

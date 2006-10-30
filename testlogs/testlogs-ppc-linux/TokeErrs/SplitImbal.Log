@@ -1,0 +1,25 @@
+toke -v -i -l SplitImbal.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  SplitImbal.fth   Binary output to SplitImbal.fc   FLoad-list to SplitImbal.fl 
+Advisory:  File SplitImbal.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File SplitImbal.fth, Line 13.  (Output Position = 22).  FLOADing SplitImbal_01.fth
+Advisory:  File SplitImbal.fth, Line 15.  (Output Position = 82).  FLOADing SplitImbal_02.fth
+Advisory:  File SplitImbal.fth, Line 21.  (Output Position = 116).  FLOADing SplitImbal_01.fth
+Advisory:  File SplitImbal.fth, Line 23.  (Output Position = 176).  FLOADing SplitImbal_01.fth
+Advisory:  File SplitImbal.fth, Line 24.  (Output Position = 236).  FLOADing SplitImbal_02.fth
+Error:  File SplitImbal.fth, Line 26.  (Output Position = 254).  End of colon-definition before completion of ?DO on line 5 of file SplitImbal_01.fth in definition of  SECONDDEFN  , which started on line 19
+Advisory:  File SplitImbal.fth, Line 29.  (Output Position = 255).  FCODE-END encountered; processing...
+toke: checksum is 0x56c4 (256 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  1 Error, 7 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 256 bytes to bytecode file 'SplitImbal.fc'

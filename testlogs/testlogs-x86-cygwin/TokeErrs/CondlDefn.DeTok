@@ -1,0 +1,61 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x3112 (Ok)
+     4:   len:       0x00b0 ( 176 bytes)
+     8: 0 ( 0x0a5 ) 
+     9: named-token ( 0x0b6 ) de-bug 0x800
+    19: b(value) ( 0x0b8 ) 
+    20: de-bug ( 0x800 ) 
+    22: b?branch ( 0x014 ) 0x004c ( =dec 76  dest = 99 )
+    25:     b(lit) ( 0x010 ) 0x273
+    30:     named-token ( 0x0b6 ) ugh-muck-a-luck-a 0x801
+    51:     b(constant) ( 0x0ba ) 
+    52:     3 ( 0x0a8 ) 
+    53:     0 ( 0x0a5 ) 
+    54:     b(do) ( 0x017 ) 0x0028 ( =dec 40  dest = 95 )
+    57:         i ( 0x019 ) 
+    58:         named-token ( 0x0b6 ) bug-off 0x802
+    69:         b(constant) ( 0x0ba ) 
+    70:         i ( 0x019 ) 
+    71:         b(lit) ( 0x010 ) 0x4
+    76:         * ( 0x020 ) 
+    77:         named-token ( 0x0b6 ) bug-bug 0x803
+    88:         b(constant) ( 0x0ba ) 
+    89:         * ( 0x020 ) 
+    90:         - ( 0x01f ) 
+    91:         . ( 0x09d ) 
+    92:     b(loop) ( 0x015 ) 0xffdc ( =dec -36  dest = 57 )
+    95:     bbranch ( 0x013 ) 0x001f ( =dec 31  dest = 127 )
+    98:     b(>resolve) ( 0x0b2 ) 
+    99:     b(lit) ( 0x010 ) 0x111
+   104:     named-token ( 0x0b6 ) ugh-muck-a-luck-a 0x804
+   125:     b(constant) ( 0x0ba ) 
+   126: b(>resolve) ( 0x0b2 ) 
+   127: named-token ( 0x0b6 ) shakshuka 0x805
+   140: b(:) ( 0x0b7 ) 
+   141:     de-bug ( 0x800 ) 
+   143:     b?branch ( 0x014 ) 0x0010 ( =dec 16  dest = 160 )
+   146:         b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                        " Bugging me"
+   158:         type ( 0x090 ) 
+   159:     b(>resolve) ( 0x0b2 ) 
+   160:     b(lit) ( 0x010 ) 0xbb
+   165:     de-bug ( 0x800 ) 
+   167:     b?branch ( 0x014 ) 0x0003 (  dest = 171 )
+   170:     b(>resolve) ( 0x0b2 ) 
+   171:     * ( 0x020 ) 
+   172:     - ( 0x01f ) 
+   173:     . ( 0x09d ) 
+   174: b(;) ( 0x0c2 ) 
+   175: end0 ( 0x000 ) 
+\  Detokenization finished normally after 176 bytes.
+End of file.
+

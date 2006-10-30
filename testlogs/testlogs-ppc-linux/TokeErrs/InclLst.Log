@@ -1,0 +1,80 @@
+toke -v -i -l -P -I .. -I ../TokBrack -I ../TokMisc -I ../TokeCommon -I ../TokoLoco -I ../TokCondl -I ../TokProdCpy -I ../TokeErrs -I /home/dlpaktor/HeyVern/DoYuhThink/ThisIsA/LongEnuffPathName/To/Make/The/Line/Really/Overflow -I . -I /home/dlpaktor/Hey/Vern/This/Path/Just/Fills/Up/TheLine/KnowWhudI/Mean -I ../TokeCommon -f noAbort-quote InclLst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	NoABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	.. ../TokBrack ../TokMisc ../TokeCommon ../TokoLoco ../TokCondl
+	../TokProdCpy ../TokeErrs
+	/home/dlpaktor/HeyVern/DoYuhThink/ThisIsA/LongEnuffPathName/To/Make/The/Line/Really/Overflow
+	. /home/dlpaktor/Hey/Vern/This/Path/Just/Fills/Up/TheLine/KnowWhudI/Mean
+	../TokeCommon
+
+Tokenizing  InclLst.fth   Binary output to InclLst.fc   FLoad-list to InclLst.fl   Dependency-list to InclLst.P 
+Advisory:  File was found in ../TokeErrs/InclLst.fth
+Advisory:  File InclLst.fth, Line 7.  FCODE-VERSION2 encountered; processing...
+Advisory:  File InclLst.fth, Line 13.  (Output Position = 22).  FLOADing OneBeer.fth
+Advisory:  File InclLst.fth, Line 13.  (Output Position = 22).  File was found in ../TokeCommon/OneBeer.fth
+Message:  File OneBeer.fth, Line 1.  (Output Position = 22).  Starting out with one Bottle of Beer on the wall
+Message:  File InclLst.fth, Line 16.  (Output Position = 220).  Fload a NonExistent file
+Advisory:  File InclLst.fth, Line 17.  (Output Position = 220).  FLOADing NonExist.fth
+Error:  File InclLst.fth, Line 17.  (Output Position = 220).  Could not access input file NonExist.fth
+Message:  File InclLst.fth, Line 18.  (Output Position = 220).  Fload an Unreadable file (No read Permissions)
+Advisory:  File InclLst.fth, Line 19.  (Output Position = 220).  FLOADing MyBeerAndYouCannotHaveIt.fth
+Error:  File InclLst.fth, Line 19.  (Output Position = 220).  Could not open file MyBeerAndYouCannotHaveIt.fth for input.
+Advisory:  File InclLst.fth, Line 19.  (Output Position = 220).  File was found in ../TokeCommon/MyBeerAndYouCannotHaveIt.fth
+Message:  File InclLst.fth, Line 20.  (Output Position = 220).  Fload a Zero-Length file (extension doesn't matter...)
+Advisory:  File InclLst.fth, Line 21.  (Output Position = 220).  FLOADing ZeroLen.bin
+Error:  File InclLst.fth, Line 21.  (Output Position = 220).  Could not read input file ZeroLen.bin
+Advisory:  File InclLst.fth, Line 21.  (Output Position = 220).  File was found in ../TokeCommon/ZeroLen.bin
+Advisory:  File InclLst.fth, Line 25.  (Output Position = 234).  ENCODing File BinData.bin
+Advisory:  File InclLst.fth, Line 25.  (Output Position = 234).  File was found in ../TokeCommon/BinData.bin
+Advisory:  File InclLst.fth, Line 25.  (Output Position = 1200).  ENCODed 944 bytes.
+Message:  File InclLst.fth, Line 29.  (Output Position = 1215).  Encode a NonExistent file
+Advisory:  File InclLst.fth, Line 30.  (Output Position = 1215).  ENCODing File NonExist.bin
+Error:  File InclLst.fth, Line 30.  (Output Position = 1215).  Failed to open file NonExist.bin for encoding
+Message:  File InclLst.fth, Line 31.  (Output Position = 1215).  Encode an Unreadable file (No read Permissions)
+Advisory:  File InclLst.fth, Line 32.  (Output Position = 1215).  ENCODing File NoRead.bin
+Error:  File InclLst.fth, Line 32.  (Output Position = 1215).  Failed to open file NoRead.bin for encoding
+Message:  File InclLst.fth, Line 34.  (Output Position = 1215).  Encode with intentional syntax error
+Advisory:  File InclLst.fth, Line 35.  (Output Position = 1215).  ENCODing File ${PWD/../TokeCommon/BinData.bin
+sh: -c: line 1: unexpected EOF while looking for matching `}'
+sh: -c: line 2: syntax error: unexpected end of file
+Error:  File InclLst.fth, Line 35.  (Output Position = 1215).  Expansion Syntax.
+Error:  File InclLst.fth, Line 35.  (Output Position = 1215).  Failed to open file ${PWD/../TokeCommon/BinData.bin for encoding
+Message:  File InclLst.fth, Line 37.  (Output Position = 1215).  Encode a Zero length data file
+Advisory:  File InclLst.fth, Line 39.  (Output Position = 1229).  ENCODing File ZeroLen.bin
+Advisory:  File InclLst.fth, Line 39.  (Output Position = 1229).  File was found in ../TokeCommon/ZeroLen.bin
+Advisory:  File InclLst.fth, Line 39.  (Output Position = 1229).  ENCODed 0 bytes.
+Advisory:  File InclLst.fth, Line 43.  (Output Position = 1246).  FCODE-END encountered; processing...
+toke: checksum is 0x17a0 (1247 bytes).  No FCodes assigned.
+Tokenization Completed.  7 Errors, 19 Advisories, 8 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1247 bytes to bytecode file 'InclLst.fc'

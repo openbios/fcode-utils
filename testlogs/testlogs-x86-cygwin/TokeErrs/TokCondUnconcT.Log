@@ -1,0 +1,24 @@
+toke -v -i -l TokCondUnconcT.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TokCondUnconcT.fth   Binary output to TokCondUnconcT.fc   FLoad-list to TokCondUnconcT.fl 
+Advisory:  File TokCondUnconcT.fth, Line 9.  FLOADing TokCondUnconc_01.fth
+Advisory:  File TokCondUnconc_01.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokCondUnconc_01.fth, Line 19.  (Output Position = 58).  FLOADing PooPsalah.fth
+Message:  File PooPsalah.fth, Line 6.  (Output Position = 94).   The TRUE path has wisely been chosen, Poopsalah!
+Error:  File TokCondUnconcT.fth, Line 12.  (Output Position = 198).  Conditional without conclusion; started on line 5 of file PooPsalah.fth
+Error:  File TokCondUnconcT.fth, Line 12.  (Output Position = 198).  Conditional without conclusion; started on line 8
+Warning:  File TokCondUnconcT.fth, Line 12.  (Output Position = 198).  End-of-file encountered without END0 or FCODE-END.  Supplying END0
+toke: checksum is 0x3e0b (199 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  2 Errors, 1 Warning, 3 Advisories, 1 Message.
+Error-detection over-ridden; producing binary output.
+toke: wrote 199 bytes to bytecode file 'TokCondUnconcT.fc'

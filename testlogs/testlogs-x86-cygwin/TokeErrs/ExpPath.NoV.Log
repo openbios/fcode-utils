@@ -1,0 +1,48 @@
+toke -i -l -P -o ExpPath.NoV.fc ExpPath.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  ExpPath.fth   Binary output to ExpPath.NoV.fc   FLoad-list to ExpPath.NoV.fl   Dependency-list to ExpPath.NoV.P 
+Error:  Could not open file ExpPath.NoV.fl for Load-List.
+Error:  Could not open file ExpPath.NoV.P for Dependency-List.
+Warning:  Could not open file ExpPath.NoV.fl.missing for Missing-Files List.
+Advisory:  File ExpPath.fth, Line 14.  (Output Position = 42).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/TokeCommon/OneBeer.fth
+Error:  File ExpPath.fth, Line 14.  (Output Position = 42).  Could not access input file ${PWD:h}/TokeCommon/OneBeer.fth
+Message:  File ${PWD}/../TokeCommon/OneBeer.fth, Line 1.  (Output Position = 77).  Starting out with one Bottle of Beer on the wall
+Advisory:  File ExpPath.fth, Line 30.  (Output Position = 275).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/../NonExist/NonExist.fth
+Error:  File ExpPath.fth, Line 30.  (Output Position = 275).  Could not access input file $PWD/../NonExist/NonExist.fth
+Message:  File ExpPath.fth, Line 31.  (Output Position = 275).  Fload an Unreadable file (No read Permissions)
+Advisory:  File ExpPath.fth, Line 32.  (Output Position = 275).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/../TokeCommon/MyBeerAndYouCannotHaveIt.fth
+Error:  File ExpPath.fth, Line 32.  (Output Position = 275).  Could not open file ${PWD}/../TokeCommon/MyBeerAndYouCannotHaveIt.fth for input.
+Message:  File ExpPath.fth, Line 33.  (Output Position = 275).  Fload a Zero-Length file (extension doesn't matter...)
+Advisory:  File ExpPath.fth, Line 34.  (Output Position = 275).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/../TokeCommon/ZeroLen.bin
+Error:  File ExpPath.fth, Line 34.  (Output Position = 275).  Could not read input file ${PWD}/../TokeCommon/ZeroLen.bin
+Message:  File ExpPath.fth, Line 36.  (Output Position = 275).  FLoad with intentional syntax error
+sh: -c: line 1: unexpected EOF while looking for matching `}'
+sh: -c: line 2: syntax error: unexpected end of file
+Error:  File ExpPath.fth, Line 37.  (Output Position = 275).  Expansion Syntax.
+Error:  File ExpPath.fth, Line 37.  (Output Position = 275).  Could not access input file ${PWD/../TokeCommon/OneBeer.fth
+Message:  File ExpPath.fth, Line 45.  (Output Position = 1308).  Encode a NonExistent file
+Advisory:  File ExpPath.fth, Line 46.  (Output Position = 1308).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/../NonExist/NonExist.bin
+Error:  File ExpPath.fth, Line 46.  (Output Position = 1308).  Failed to open file $PWD/../NonExist/NonExist.bin for encoding
+Message:  File ExpPath.fth, Line 47.  (Output Position = 1308).  Encode an Unreadable file (No read Permissions)
+Advisory:  File ExpPath.fth, Line 48.  (Output Position = 1308).  File name expanded to:  /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/TokeErrs/../TokeCommon/NoRead.bin
+Error:  File ExpPath.fth, Line 48.  (Output Position = 1308).  Failed to open file $PWD/../TokeCommon/NoRead.bin for encoding
+Message:  File ExpPath.fth, Line 50.  (Output Position = 1308).  Encode with intentional syntax error
+sh: -c: line 1: unexpected EOF while looking for matching `}'
+sh: -c: line 2: syntax error: unexpected end of file
+Error:  File ExpPath.fth, Line 51.  (Output Position = 1308).  Expansion Syntax.
+Error:  File ExpPath.fth, Line 51.  (Output Position = 1308).  Failed to open file ${PWD/../TokeCommon/BinData.bin for encoding
+Message:  File ExpPath.fth, Line 53.  (Output Position = 1308).  Is this a syntax error?  On some O/S'es but not others...
+Message:  File ExpPath.fth, Line 57.  (Output Position = 2308).  Encode a Zero length data file
+Tokenization Completed.  12 Errors, 1 Warning, 6 Advisories, 9 Messages.
+Error-detection over-ridden; producing binary output.
+Could not open file ExpPath.NoV.fc for output.

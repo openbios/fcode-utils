@@ -1,0 +1,35 @@
+toke -v -d 'moogoo=TRUe' -l -o MulFCimg_01.MeT.fc MulFCimg_01.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+User-Defined Symbols:
+	moogoo = TRUe
+
+Tokenizing  MulFCimg_01.fth   Binary output to MulFCimg_01.MeT.fc   FLoad-list to MulFCimg_01.MeT.fl 
+Advisory:  File MulFCimg_01.fth, Line 17.  PCI header revision=0x5afe
+Advisory:  File MulFCimg_01.fth, Line 23.  (Output Position = 52).  PCI header vendor id=0xbeef, device id=0xc0de, class=090210
+Advisory:  File MulFCimg_01.fth, Line 31.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File MulFCimg_01.fth, Line 33.  (Output Position = 60).  (PCI-Block Position = 8).  FLOADing MulFCimg_01_Body.fth
+Advisory:  File MulFCimg_01_Body.fth, Line 16.  (Output Position = 131).  (PCI-Block Position = 79).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 6.  (Output Position = 167).  (PCI-Block Position = 115).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File MulFCimg_01.fth, Line 35.  (Output Position = 307).  (PCI-Block Position = 255).  FCODE-END encountered; processing...
+toke: checksum is 0x5142 (256 bytes).  Last assigned FCode = 0x803
+Advisory:  File MulFCimg_01.fth, Line 39.  (Output Position = 308).  (PCI-Block Position = 256).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File MulFCimg_01.fth, Line 45.  (Output Position = 308).  (PCI-Block Position = 256).  FCODE-VERSION2 encountered; processing...
+Advisory:  File MulFCimg_01.fth, Line 47.  (Output Position = 316).  (PCI-Block Position = 264).  FLOADing MulFCimg_01_Body.fth
+Advisory:  File MulFCimg_01_Body.fth, Line 16.  (Output Position = 387).  (PCI-Block Position = 335).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 20.  (Output Position = 423).  (PCI-Block Position = 371).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File MulFCimg_01.fth, Line 49.  (Output Position = 579).  (PCI-Block Position = 527).  FCODE-END encountered; processing...
+toke: checksum is 0x56e5 (272 bytes).  Last assigned FCode = 0x807
+Adding 444 bytes of zero padding to PCI image.
+
+Tokenization Completed.  11 Advisories, 2 Messages.
+toke: wrote 1024 bytes to bytecode file 'MulFCimg_01.MeT.fc'

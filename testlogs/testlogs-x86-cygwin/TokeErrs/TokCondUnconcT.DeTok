@@ -1,0 +1,42 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x3e0b (Ok)
+     4:   len:       0x00c7 ( 199 bytes)
+     8: new-token ( 0x0b5 ) 0x800
+    11: b(:) ( 0x0b7 ) 
+    12:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " This is the "
+    26:     type ( 0x090 ) 
+    27:     b(") ( 0x012 ) ( len=5 )
+                    " True "
+    34:     type ( 0x090 ) 
+    35:     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                    "  side of the test."
+    55:     type ( 0x090 ) 
+    56:     cr ( 0x092 ) 
+    57: b(;) ( 0x0c2 ) 
+    58: b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                " Begin Nested ""Constant"" Test Test"
+    93: type ( 0x090 ) 
+    94: b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                " Is True, level 1"
+   112: type ( 0x090 ) 
+   113: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " Is True and is True, level 2"
+   143: b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                " Middle of level 2"
+   162: type ( 0x090 ) 
+   163: b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                " Is True and is Not False, level 2"
+   198: end0 ( 0x000 ) 
+\  Detokenization finished normally after 199 bytes.
+End of file.
+

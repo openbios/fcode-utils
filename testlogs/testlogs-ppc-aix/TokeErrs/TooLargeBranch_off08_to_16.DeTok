@@ -1,0 +1,229 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: version1 ( 0x0fd )   ( 8-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xd74d (Ok)
+     4:   len:       0x0287 ( 647 bytes)
+     8: named-token ( 0x0b6 ) too-large-case 0x800
+    26: b(:) ( 0x0b7 ) 
+    27:     b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                    " Let's give it a large back-reference too."
+    70:     type ( 0x090 ) 
+    71:     b(<mark) ( 0x0b1 ) 
+    72:         b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                        " We've just begun"
+    90:         type ( 0x090 ) 
+    91:         b(") ( 0x012 ) ( len=7 )
+                        " 1 0 do "
+   100:         type ( 0x090 ) 
+   101:         cr ( 0x092 ) 
+   102:         1 ( 0x0a6 ) 
+   103:         0 ( 0x0a5 ) 
+   104:         b(do) ( 0x017 ) 0x34 ( =dec 52  dest = 157 )
+   106:             dup ( 0x047 ) 
+   107:             b(") ( 0x012 ) ( len=3 )
+                            " if "
+   112:             type ( 0x090 ) 
+   113:             cr ( 0x092 ) 
+   114:             b?branch ( 0x014 ) 0x0f ( =dec 15  dest = 130 )
+   116:                 dup ( 0x047 ) 
+   117:                 b(") ( 0x012 ) ( len=4 )
+                                " case"
+   123:                 type ( 0x090 ) 
+   124:                 b(case) ( 0x0c4 ) 
+   125:                     0 ( 0x0a5 ) 
+   126:                     b(of) ( 0x01c ) 0x19 ( =dec 25  dest = 152 )
+   128:                         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                                        "  Just a short case"
+   148:                         type ( 0x090 ) 
+   149:                         cr ( 0x092 ) 
+   150:                     b(endof) ( 0x0c6 ) 0xe2 ( =dec -30  dest = 121 )
+   152:                     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                                    " default.  The Big One!"
+   176:                     type ( 0x090 ) 
+   177:                     cr ( 0x092 ) 
+   178:                     b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                                    " Oh, one Bottle of Beer on the wall,"
+   215:                     type ( 0x090 ) 
+   216:                     cr ( 0x092 ) 
+   217:                     b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                                    "     one Bottle of Beer!,"
+   243:                     type ( 0x090 ) 
+   244:                     cr ( 0x092 ) 
+   245:                     b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                                    " Take it down and pass it around..."
+   281:                     type ( 0x090 ) 
+   282:                     cr ( 0x092 ) 
+   283:                     b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                                    " How dry I am!  How dry I am!"
+   313:                     type ( 0x090 ) 
+   314:                     cr ( 0x092 ) 
+   315:                     b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                                    " No body knows how dry I am."
+   344:                     type ( 0x090 ) 
+   345:                     cr ( 0x092 ) 
+   346:                     b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                                    " How ... Dry I ... Aaaammm."
+   374:                     type ( 0x090 ) 
+   375:                     cr ( 0x092 ) 
+   376:                 b(endcase) ( 0x0c5 ) 
+   377:                 b(") ( 0x012 ) ( len=4 )
+                                " then"
+   383:                 type ( 0x090 ) 
+   384:                 cr ( 0x092 ) 
+   385:             b(>resolve) ( 0x0b2 ) 
+   386:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Loop back and forward"
+   409:             type ( 0x090 ) 
+   410:             cr ( 0x092 ) 
+   411:         b(loop) ( 0x015 ) 0xce ( =dec -50  dest = 362 )
+   413:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        "  And here we are!"
+   432:         type ( 0x090 ) 
+   433:         cr ( 0x092 ) 
+   434:         exit ( 0x033 ) 
+   435:         b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                        "  Well, we needed some way out!"
+   467:         type ( 0x090 ) 
+   468:         cr ( 0x092 ) 
+   469:         bbranch ( 0x013 ) 0x72 ( =dec 114  dest = 584 )
+   471:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            "  Back to the fuchsia."
+   494:             type ( 0x090 ) 
+   495:             cr ( 0x092 ) 
+   496:         b(;) ( 0x0c2 ) 
+   497:         named-token ( 0x0b6 ) control-example 0x801
+   516:         b(:) ( 0x0b7 ) 
+   517:             b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                            "  Here's the beguine"
+   538:             type ( 0x090 ) 
+   539:             b(<mark) ( 0x0b1 ) 
+   540:                 dup ( 0x047 ) 
+   541:                 b(") ( 0x012 ) ( len=3 )
+                                " if "
+   546:                 type ( 0x090 ) 
+   547:                 b?branch ( 0x014 ) 0x37 ( =dec 55  dest = 603 )
+   549:                     dup ( 0x047 ) 
+   550:                     b(") ( 0x012 ) ( len=4 )
+                                    " case"
+   556:                     type ( 0x090 ) 
+   557:                     b(case) ( 0x0c4 ) 
+   558:                         0 ( 0x0a5 ) 
+   559:                         b(of) ( 0x01c ) 0x12 ( =dec 18  dest = 578 )
+   561:                             b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                                            "  Short case"
+   574:                             type ( 0x090 ) 
+   575:                             cr ( 0x092 ) 
+   576:                         b(endof) ( 0x0c6 ) 0x12 ( =dec 18  dest = 595 )
+   578:                         b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                                        "  No default."
+   592:                         type ( 0x090 ) 
+   593:                         cr ( 0x092 ) 
+   594:                     b(endcase) ( 0x0c5 ) 
+   595:                     b(") ( 0x012 ) ( len=4 )
+                                    " then"
+   601:                     type ( 0x090 ) 
+   602:                 b(>resolve) ( 0x0b2 ) 
+   603:                 b(") ( 0x012 ) ( len=7 )
+                                " Way out"
+   612:                 type ( 0x090 ) 
+   613:                 exit ( 0x033 ) 
+   614:                 b(") ( 0x012 ) ( len=9 )
+                                " Jump back"
+   625:                 type ( 0x090 ) 
+   626:                 bbranch ( 0x013 ) 0xa9 ( =dec -87  dest = 540 )
+   628:             b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                            "  Never do this"
+   644:             type ( 0x090 ) 
+   645:         b(;) ( 0x0c2 ) 
+   646:         end0 ( 0x000 ) 
+\  Detokenization finished normally after 647 bytes.
+\  Subsequent FCode Block detected.  Detokenizing.
+   647: start1 ( 0x0f1 )   ( 16-bit offsets)
+   648:   format:    0x08
+   649:   checksum:  0x8a47 (Ok)
+   651:   len:       0x01a7 ( 423 bytes)
+   655: named-token ( 0x0b6 ) odd-size-case 0x802
+   672: b(:) ( 0x0b7 ) 
+   673:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    " With a back-reference."
+   697:     type ( 0x090 ) 
+   698:     b(<mark) ( 0x0b1 ) 
+   699:         b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                        " We've begun"
+   712:         type ( 0x090 ) 
+   713:         dup ( 0x047 ) 
+   714:         b(") ( 0x012 ) ( len=8 )
+                        " blah-if "
+   724:         type ( 0x090 ) 
+   725:         b?branch ( 0x014 ) 0x0114 ( =dec 276  dest = 1002 )
+   728:             dup ( 0x047 ) 
+   729:             b(") ( 0x012 ) ( len=9 )
+                            " blah-case"
+   740:             type ( 0x090 ) 
+   741:             b(case) ( 0x0c4 ) 
+   742:                 0 ( 0x0a5 ) 
+   743:                 b(of) ( 0x01c ) 0x001b ( =dec 27  dest = 771 )
+   746:                     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                                    "  A very short case"
+   766:                     type ( 0x090 ) 
+   767:                     cr ( 0x092 ) 
+   768:                 b(endof) ( 0x0c6 ) 0x00db ( =dec 219  dest = 988 )
+   771:                 b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                                " A big default."
+   787:                 type ( 0x090 ) 
+   788:                 cr ( 0x092 ) 
+   789:                 b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                                " Oh, one Bottle of Beer on the wall,"
+   826:                 type ( 0x090 ) 
+   827:                 cr ( 0x092 ) 
+   828:                 b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                                "     one Bottle of Beer!,"
+   854:                 type ( 0x090 ) 
+   855:                 cr ( 0x092 ) 
+   856:                 b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                                " Take it down and pass it around..."
+   892:                 type ( 0x090 ) 
+   893:                 cr ( 0x092 ) 
+   894:                 b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                                " How dry I am!  How dry I am!"
+   924:                 type ( 0x090 ) 
+   925:                 cr ( 0x092 ) 
+   926:                 b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                                " No body knows how dry I am."
+   955:                 type ( 0x090 ) 
+   956:                 cr ( 0x092 ) 
+   957:                 b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                                " How ... Dry I ... Aaaammm."
+   985:                 type ( 0x090 ) 
+   986:                 cr ( 0x092 ) 
+   987:             b(endcase) ( 0x0c5 ) 
+   988:             b(") ( 0x012 ) ( len=9 )
+                            " blah-then"
+   999:             type ( 0x090 ) 
+  1000:             cr ( 0x092 ) 
+  1001:         b(>resolve) ( 0x0b2 ) 
+  1002:         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                        " blah-some way out."
+  1022:         type ( 0x090 ) 
+  1023:         exit ( 0x033 ) 
+  1024:         b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                        "  Back again"
+  1037:         type ( 0x090 ) 
+  1038:         cr ( 0x092 ) 
+  1039:         bbranch ( 0x013 ) 0xfeab ( =dec -341  dest = 699 )
+  1042:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    "  Done.  are you happy?"
+  1066:     type ( 0x090 ) 
+  1067:     cr ( 0x092 ) 
+  1068: b(;) ( 0x0c2 ) 
+  1069: end0 ( 0x000 ) 
+\  Detokenization finished normally after 423 bytes.
+End of file.
+

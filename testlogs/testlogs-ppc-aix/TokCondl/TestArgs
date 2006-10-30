@@ -1,0 +1,55 @@
+#  Automated Test Arguments file for TokCondl category
+#  (That's short for "Tokenizer Conditional";
+#       it refers to the Conditional Tokenization directives.)
+
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command with arguments (but no commas).
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+
+#  Updated Fri, 13 Oct 2006 at 16:19 PDT by David L. Paktor
+
+TokExstCondTstY , , -l
+TokExstCondTstN , , -l
+TokExstCondNadaTst , , -i -f Trace-Conditionals
+CondOpInIgndMssg
+TokCondMinTst
+TokCondErrs , , -i -f Trace-Conditionals
+TokConstCondTstT , , -l
+TokConstCondTstF , , -l
+DefCondTst , , -l
+MulPCIhdr , , -l
+MulPCIhdr , BERev , -f Big-End-PCI-Rev-Level
+MulFCimgTF , , -l
+MulFCimgFT , , -l
+MulPCI_FC , , -l
+MulPCI_FC , fpT , -l -d first-path=true
+MulPCI_FC , fpF , -l -d first-path=false -f Trace-Conditionals
+
+TokDefCondTst , NotDef
+TokDefCondTst , Def , -d NEStTest
+
+DefCondTst , NotDef , -l
+DefCondTst , DefTrue , -d 'moOGOO=TRue' -l
+DefCondTst , DefFalse , -d 'MOOGoo=faLSE' -l -f Trace-Conditionals
+
+DefCondTst2 , NotDef , -l
+DefCondTst2 , MeT , -d 'MOOgoo=true' -l
+DefCondTst2 , MeF , -d 'moogOO=FalsE' -l -f Trace-Conditionals
+
+CondAlias , NotDef , -i
+CondAlias , MeT , -d 'MOOgoo=true' -i
+CondAlias , MeF , -d 'moogOO=FalsE' -i -f Trace-Conditionals
+
+CondMacAlias , , -I . -I .. -I ../TokoLoco
+CondMacAlias , NoSpc , -f Trace-Conditionals -I. -I.. -I ../TokoLoco
+
+MulFCimg_01 , NotDef , -l
+MulFCimg_01 , MeT , -d 'moogoo=TRUe' -l
+MulFCimg_01 , MeF , -d 'moogoo=false' -l
+
+DupLoadTst , , -f Trace-Conditionals
+

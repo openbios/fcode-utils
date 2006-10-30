@@ -1,0 +1,60 @@
+toke -v -i FlagSet.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  FlagSet.fth   Binary output to FlagSet.fc 
+Advisory:  File FlagSet.fth, Line 5.  Enabling:  Print this "Help" message for the Special-Feature Flags
+Advisory:  File FlagSet.fth, Line 6.  Disabling:  Print this "Help" message for the Special-Feature Flags
+Advisory:  File FlagSet.fth, Line 8.  Enabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File FlagSet.fth, Line 9.  Disabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File FlagSet.fth, Line 10.  Enabling:  Allow Semicolon for Local Values Separator ("Legacy")
+Advisory:  File FlagSet.fth, Line 11.  Disabling:  Allow Semicolon for Local Values Separator ("Legacy")
+Advisory:  File FlagSet.fth, Line 12.  Enabling:  Display a Message when Semicolon is used as the Local Values Separator
+Advisory:  File FlagSet.fth, Line 13.  Disabling:  Display a Message when Semicolon is used as the Local Values Separator
+Advisory:  File FlagSet.fth, Line 14.  Enabling:  Allow ABORT" macro
+Advisory:  File FlagSet.fth, Line 15.  Disabling:  Allow ABORT" macro
+Advisory:  File FlagSet.fth, Line 16.  Enabling:  ABORT" with implicit IF ... THEN
+Advisory:  File FlagSet.fth, Line 17.  Disabling:  ABORT" with implicit IF ... THEN
+Advisory:  File FlagSet.fth, Line 18.  Enabling:  Allow "\ (Quote-Backslash) to interrupt string parsing
+Advisory:  File FlagSet.fth, Line 19.  Disabling:  Allow "\ (Quote-Backslash) to interrupt string parsing
+Advisory:  File FlagSet.fth, Line 20.  Enabling:  Allow \ (Backslash) to interrupt hex-sequence parsing within a string
+Advisory:  File FlagSet.fth, Line 21.  Disabling:  Allow \ (Backslash) to interrupt hex-sequence parsing within a string
+Advisory:  File FlagSet.fth, Line 22.  Enabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File FlagSet.fth, Line 23.  Disabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File FlagSet.fth, Line 24.  Enabling:  Override "headerless" and force to "headers"
+Advisory:  File FlagSet.fth, Line 25.  Disabling:  Override "headerless" and force to "headers"
+Advisory:  File FlagSet.fth, Line 26.  Enabling:  Override "headerless" and "headers" and force to "external"
+Advisory:  File FlagSet.fth, Line 27.  Disabling:  Override "headerless" and "headers" and force to "external"
+Advisory:  File FlagSet.fth, Line 28.  Enabling:  Display a WARNING message when a duplicate definition is made
+Advisory:  File FlagSet.fth, Line 29.  Disabling:  Display a WARNING message when a duplicate definition is made
+Message:  File FlagSet.fth, Line 31.  Special-Feature Flag settings:
+	NoLocal-Values
+	NoLV-Legacy-Separator
+	NoLV-Legacy-Message
+	NoABORT-Quote
+	NoSun-ABORT-Quote
+	  ABORT-Quote-Throw
+	NoString-remark-escape
+	NoHex-remark-escape
+	NoC-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	NoWarn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Error:  File FlagSet.fth, Line 33.  Unknown Special-Feature Flag:  MoreGimmeMore!
+Error:  File FlagSet.fth, Line 34.  Unknown Special-Feature Flag:  noMorePleaseNoMore!
+Nothing Tokenized.  2 Errors, 24 Advisories, 1 Message.

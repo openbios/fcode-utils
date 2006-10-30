@@ -1,0 +1,39 @@
+toke -v -i TokBrkErrTst_01.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TokBrkErrTst_01.fth   Binary output to TokBrkErrTst_01.fc 
+Advisory:  File TokBrkErrTst_01.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Error:  File TokBrkErrTst_01.fth, Line 8.  (Output Position = 13).  The word emit-byte is only recognized in tokenizer-escape mode.
+Error:  File TokBrkErrTst_01.fth, Line 11.  (Output Position = 13).  Word  rummidge  is not in dictionary.
+Advisory:  File TokBrkErrTst_01.fth, Line 17.  (Output Position = 18).  FCode-token Assignment Counter was 0x800; has been advanced to 0x802.
+Error:  File TokBrkErrTst_01.fth, Line 18.  (Output Position = 18).  Attempt to set next fcode to 0x1020, which violates limit specified by IEEE-1275.  Disallowing.
+Warning:  File TokBrkErrTst_01.fth, Line 19.  (Output Position = 18).  Value on stack for EMIT-BYTE command is 0x3682.  Truncating to 0x82.
+Error:  File TokBrkErrTst_01.fth, Line 23.  (Output Position = 37).  The word gummidge is not recognized in tokenizer-escape mode.
+Advisory:  File TokBrkErrTst_01.fth, Line 23.  (Output Position = 37).  gummidge is defined as a CONSTANT in the top-level device-node, which began on line 4
+Error:  File TokBrkErrTst_01.fth, Line 24.  (Output Position = 37).  Word  rummidge  is not in dictionary.
+Error:  File TokBrkErrTst_01.fth, Line 26.  (Output Position = 42).  The word emit-byte is only recognized in tokenizer-escape mode.
+Error:  File TokBrkErrTst_01.fth, Line 28.  (Output Position = 47).  ANSI Forth does not permit definition of names longer than 31 characters.
+Error:  File TokBrkErrTst_01.fth, Line 34.  (Output Position = 140).  stack underflow at or near  swap 
+Error:  File TokBrkErrTst_01.fth, Line 43.  (Output Position = 144).  The word poopoo is only recognized in tokenizer-escape mode.
+Error:  File TokBrkErrTst_01.fth, Line 44.  (Output Position = 144).  The word moopoo is only recognized in tokenizer-escape mode.
+Error:  File TokBrkErrTst_01.fth, Line 46.  (Output Position = 144).  Word  merde  is not in dictionary.
+Error:  File TokBrkErrTst_01.fth, Line 46.  (Output Position = 144).  stack underflow at or near  fliteral 
+Error:  File TokBrkErrTst_01.fth, Line 48.  (Output Position = 149).  Word  couterde  is not in dictionary.
+Error:  File TokBrkErrTst_01.fth, Line 48.  (Output Position = 149).  stack underflow at or near  fliteral 
+Advisory:  File TokBrkErrTst_01.fth, Line 51.  (Output Position = 154).  FCode-token Assignment Counter of 0x805 has been saved on stack.
+Warning:  File TokBrkErrTst_01.fth, Line 54.  (Output Position = 159).  Value on stack for FCODE-POP command is 0x46696e6b.  Truncating to 0x6e6b.
+Error:  File TokBrkErrTst_01.fth, Line 54.  (Output Position = 159).  Attempt to set next fcode to 0x6e6b, which violates limit specified by IEEE-1275.  Disallowing.
+Advisory:  File TokBrkErrTst_01.fth, Line 57.  (Output Position = 159).  END0 encountered; processing...
+toke: checksum is 0x29b1 (160 bytes).  FCodes assigned:  0x802 to 0x804
+Tokenization Completed.  15 Errors, 2 Warnings, 5 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 160 bytes to bytecode file 'TokBrkErrTst_01.fc'

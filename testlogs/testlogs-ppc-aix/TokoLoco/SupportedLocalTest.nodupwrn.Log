@@ -1,0 +1,46 @@
+toke -v -f Local-VALUES -f NOWarn-if-DUPLicate -l -o SupportedLocalTest.nodupwrn.fc SupportedLocalTest.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	NoWarn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  SupportedLocalTest.fth   Binary output to SupportedLocalTest.nodupwrn.fc   FLoad-list to SupportedLocalTest.nodupwrn.fl 
+Advisory:  File SupportedLocalTest.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File SupportedLocalTest.fth, Line 18.  (Output Position = 89).  FLOADing LocalValuesSupport.fth
+Warning:  File SupportedLocalTest.fth, Line 22.  (Output Position = 492).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Advisory:  File SupportedLocalTest.fth, Line 55.  (Output Position = 839).  FLOADing SupportedLocalTest2.fth
+Warning:  File SupportedLocalTest2.fth, Line 6.  (Output Position = 852).  Multi-line Local-Values declaration, started on line 5 in definition of  DUCKSOUP  , which started on line 4
+Warning:  File SupportedLocalTest2.fth, Line 14.  (Output Position = 932).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Warning:  File SupportedLocalTest2.fth, Line 17.  (Output Position = 932).  Multi-line Local-Values declaration, started on line 14 in definition of  COCONUTS  , which started on line 13
+Warning:  File SupportedLocalTest2.fth, Line 34.  (Output Position = 1072).  Multi-line Local-Values declaration, started on line 33 in definition of  DUMONT  , which started on line 32
+Warning:  File SupportedLocalTest.fth, Line 57.  (Output Position = 1107).  Applying H# to non-numeric value.  Ignoring.
+Advisory:  File SupportedLocalTest.fth, Line 59.  (Output Position = 1109).  FCODE-END encountered; processing...
+toke: checksum is 0x2ca3 (1110 bytes).  Last assigned FCode = 0x813
+Tokenization Completed.  6 Warnings, 4 Advisories.
+toke: wrote 1110 bytes to bytecode file 'SupportedLocalTest.nodupwrn.fc'

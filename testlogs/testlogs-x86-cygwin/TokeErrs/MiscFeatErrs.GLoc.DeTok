@@ -1,0 +1,335 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: version1 ( 0x0fd )   ( 8-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x01dc (Ok)
+     4:   len:       0x0392 ( 914 bytes)
+     8: b(lit) ( 0x010 ) 0x130
+    13: named-token ( 0x0b6 ) _local-storage-size_ 0x800
+    37: b(constant) ( 0x0ba ) 
+    38: noop ( 0x07b ) 
+    39: noop ( 0x07b ) 
+    40: noop ( 0x07b ) 
+    41: b(lit) ( 0x010 ) 0x47
+    46: emit ( 0x08f ) 
+    47: b(lit) ( 0x010 ) 0x7
+    52: emit ( 0x08f ) 
+    53: b(lit) ( 0x010 ) 0x1b
+    58: emit ( 0x08f ) 
+    59: named-token ( 0x0b6 ) bell 0x801
+    67: b(:) ( 0x0b7 ) 
+    68:     b(lit) ( 0x010 ) 0x47
+    73:     dup ( 0x047 ) 
+    74:     b(lit) ( 0x010 ) 0x7
+    79:     dup ( 0x047 ) 
+    80:     emit ( 0x08f ) 
+    81:     drop ( 0x046 ) 
+    82:     2drop ( 0x052 ) 
+    83: b(;) ( 0x0c2 ) 
+    84: named-token ( 0x0b6 ) factl 0x802
+    93: b(:) ( 0x0b7 ) 
+    94:     ?dup ( 0x050 ) 
+    95:     0= ( 0x034 ) 
+    96:     b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 109 )
+    98:         1 ( 0x0a6 ) 
+    99:         b(lit) ( 0x010 ) 0x7
+   104:         bell ( 0x801 ) 
+   106:         bbranch ( 0x013 ) 0x07 (  dest = 114 )
+   108:         b(>resolve) ( 0x0b2 ) 
+   109:         dup ( 0x047 ) 
+   110:         1 ( 0x0a6 ) 
+   111:         - ( 0x01f ) 
+   112:         * ( 0x020 ) 
+   113:     b(>resolve) ( 0x0b2 ) 
+   114: b(;) ( 0x0c2 ) 
+   115: offset16 ( 0x0cc ) 
+   116: bell ( 0x801 ) 
+   118: offset16 ( 0x0cc ) 
+   119: named-token ( 0x0b6 ) factl 0x803
+   128: b(:) ( 0x0b7 ) 
+   129:     ?dup ( 0x050 ) 
+   130:     0= ( 0x034 ) 
+   131:     b?branch ( 0x014 ) 0x0010 ( =dec 16  dest = 148 )
+   134:         1 ( 0x0a6 ) 
+   135:         factl ( 0x802 ) 
+   137:         b(lit) ( 0x010 ) 0x7
+   142:         bell ( 0x801 ) 
+   144:         bbranch ( 0x013 ) 0x000a ( =dec 10  dest = 155 )
+   147:         b(>resolve) ( 0x0b2 ) 
+   148:         dup ( 0x047 ) 
+   149:         1 ( 0x0a6 ) 
+   150:         - ( 0x01f ) 
+   151:         factl ( 0x803 ) 
+   153:         * ( 0x020 ) 
+   154:     b(>resolve) ( 0x0b2 ) 
+   155: b(;) ( 0x0c2 ) 
+   156: named-token ( 0x0b6 ) bell 0x804
+   164: b(:) ( 0x0b7 ) 
+   165:     ?dup ( 0x050 ) 
+   166:     b?branch ( 0x014 ) 0x000c ( =dec 12  dest = 179 )
+   169:         dup ( 0x047 ) 
+   170:         1 ( 0x0a6 ) 
+   171:         - ( 0x01f ) 
+   172:         bell ( 0x804 ) 
+   174:         + ( 0x01e ) 
+   175:         bbranch ( 0x013 ) 0x0007 (  dest = 183 )
+   178:         b(>resolve) ( 0x0b2 ) 
+   179:         0 ( 0x0a5 ) 
+   180:         bell ( 0x804 ) 
+   182:     b(>resolve) ( 0x0b2 ) 
+   183: b(;) ( 0x0c2 ) 
+   184: named-token ( 0x0b6 ) cussed 0x805
+   194: b(:) ( 0x0b7 ) 
+   195:     i ( 0x019 ) 
+   196:     j ( 0x01a ) 
+   197: b(;) ( 0x0c2 ) 
+   198: named-token ( 0x0b6 ) mussed 0x806
+   208: b(:) ( 0x0b7 ) 
+   209:     b(lit) ( 0x010 ) 0xa
+   214:     0 ( 0x0a5 ) 
+   215:     b(do) ( 0x017 ) 0x0007 (  dest = 223 )
+   218:         i ( 0x019 ) 
+   219:         . ( 0x09d ) 
+   220:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 218 )
+   223: b(;) ( 0x0c2 ) 
+   224: named-token ( 0x0b6 ) sussed 0x807
+   234: b(:) ( 0x0b7 ) 
+   235:     3 ( 0x0a8 ) 
+   236:     0 ( 0x0a5 ) 
+   237:     b(do) ( 0x017 ) 0x0015 ( =dec 21  dest = 259 )
+   240:         b(lit) ( 0x010 ) 0xa
+   245:         0 ( 0x0a5 ) 
+   246:         b(do) ( 0x017 ) 0x0009 (  dest = 256 )
+   249:             i ( 0x019 ) 
+   250:             . ( 0x09d ) 
+   251:             j ( 0x01a ) 
+   252:             . ( 0x09d ) 
+   253:         b(loop) ( 0x015 ) 0xfffb ( =dec -5  dest = 249 )
+   256:     b(loop) ( 0x015 ) 0xffef ( =dec -17  dest = 240 )
+   259: b(;) ( 0x0c2 ) 
+   260: named-token ( 0x0b6 ) trussed 0x808
+   271: b(:) ( 0x0b7 ) 
+   272:     3 ( 0x0a8 ) 
+   273:     2 ( 0x0a7 ) 
+   274:     b(lit) ( 0x010 ) 0xa
+   279:     0 ( 0x0a5 ) 
+   280:     b(do) ( 0x017 ) 0x001a ( =dec 26  dest = 307 )
+   283:         i ( 0x019 ) 
+   284:         . ( 0x09d ) 
+   285:         0 ( 0x0a5 ) 
+   286:         @ ( 0x06d ) 
+   287:         1 ( 0x0a6 ) 
+   288:         @ ( 0x06d ) 
+   289:         + ( 0x01e ) 
+   290:         i ( 0x019 ) 
+   291:         * ( 0x020 ) 
+   292:         dup ( 0x047 ) 
+   293:         2 ( 0x0a7 ) 
+   294:         @ ( 0x06d ) 
+   295:         * ( 0x020 ) 
+   296:         b(lit) ( 0x010 ) 0x4
+   301:         @ ( 0x06d ) 
+   302:         j ( 0x01a ) 
+   303:         . ( 0x09d ) 
+   304:     b(loop) ( 0x015 ) 0xffea ( =dec -22  dest = 283 )
+   307:     0 ( 0x0a5 ) 
+   308:     @ ( 0x06d ) 
+   309:     b(lit) ( 0x010 ) 0x4
+   314:     @ ( 0x06d ) 
+   315:     dup ( 0x047 ) 
+   316:     0 ( 0x0a5 ) 
+   317:     @ ( 0x06d ) 
+   318:     1 ( 0x0a6 ) 
+   319:     @ ( 0x06d ) 
+   320:     + ( 0x01e ) 
+   321:     2 ( 0x0a7 ) 
+   322:     @ ( 0x06d ) 
+   323:     * ( 0x020 ) 
+   324:     factl ( 0x803 ) 
+   326:     catch ( 0x217 ) 
+   328:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 368 )
+   331:         b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                        " Run in circles, scream and shout!"
+   366:         type ( 0x090 ) 
+   367:     b(>resolve) ( 0x0b2 ) 
+   368:     b(lit) ( 0x010 ) 0x5
+   373: b(;) ( 0x0c2 ) 
+   374: named-token ( 0x0b6 ) DMA-ALLOC 0x809
+   387: b(:) ( 0x0b7 ) 
+   388:     b(") ( 0x012 ) ( len=9 )
+                    " dma-alloc"
+   399:     $call-parent ( 0x209 ) 
+   401: b(;) ( 0x0c2 ) 
+   402: named-token ( 0x0b6 ) HOOBARTH 0x80a
+   414: b(:) ( 0x0b7 ) 
+   415:     b(") ( 0x012 ) ( len=8 )
+                    " hoobarth"
+   425:     $call-parent ( 0x209 ) 
+   427: b(;) ( 0x0c2 ) 
+   428: named-token ( 0x0b6 ) MY-END0 0x80b
+   439: b(:) ( 0x0b7 ) 
+   440:     b(') ( 0x011 ) end0 ( 0x000 ) 
+   442: b(;) ( 0x0c2 ) 
+   443: named-token ( 0x0b6 ) SETUP-HOOBARTH 0x80c
+   461: b(:) ( 0x0b7 ) 
+   462:     b(lit) ( 0x010 ) 0x40
+   467:     b(') ( 0x011 ) DMA-ALLOC ( 0x809 ) 
+   470:     catch ( 0x217 ) 
+   472:     b?branch ( 0x014 ) 0x000c ( =dec 12  dest = 485 )
+   475:         b(") ( 0x012 ) ( len=6 )
+                        " Fooey!"
+   483:         type ( 0x090 ) 
+   484:     b(>resolve) ( 0x0b2 ) 
+   485:     b(lit) ( 0x010 ) 0x50
+   490:     b(') ( 0x011 ) HOOBARTH ( 0x80a ) 
+   493:     catch ( 0x217 ) 
+   495:     b?branch ( 0x014 ) 0x000d ( =dec 13  dest = 509 )
+   498:         b(") ( 0x012 ) ( len=7 )
+                        " Ptooey!"
+   507:         type ( 0x090 ) 
+   508:     b(>resolve) ( 0x0b2 ) 
+   509:     b(') ( 0x011 ) roll ( 0x04f ) 
+   511:     b(') ( 0x011 ) MY-END0 ( 0x80b ) 
+   514: b(;) ( 0x0c2 ) 
+   515: named-token ( 0x0b6 ) another-end0 0x80d
+   531: b(:) ( 0x0b7 ) 
+   532:     b(') ( 0x011 ) MY-END0 ( 0x80b ) 
+   535: b(;) ( 0x0c2 ) 
+   536: new-device ( 0x11f ) 
+   538: named-token ( 0x0b6 ) hells 0x80e
+   547: b(:) ( 0x0b7 ) 
+   548:     b(lit) ( 0x010 ) 0x7
+   553: b(;) ( 0x0c2 ) 
+   554: finish-device ( 0x127 ) 
+   556: named-token ( 0x0b6 ) naught 0x80f
+   566: b(variable) ( 0x0b9 ) 
+   567: named-token ( 0x0b6 ) do-nothing 0x810
+   581: b(defer) ( 0x0bc ) 
+   582: b(lit) ( 0x010 ) 0x1e
+   587: named-token ( 0x0b6 ) thirty 0x811
+   597: b(value) ( 0x0b8 ) 
+   598: b(lit) ( 0x010 ) 0x28
+   603: named-token ( 0x0b6 ) forty 0x812
+   612: b(buffer:) ( 0x0bd ) 
+   613: b(lit) ( 0x010 ) 0x32
+   618: named-token ( 0x0b6 ) fifty 0x813
+   627: b(constant) ( 0x0ba ) 
+   628: named-token ( 0x0b6 ) three 0x814
+   637: b(create) ( 0x0bb ) 
+   638: 0 ( 0x0a5 ) 
+   639: , ( 0x0d3 ) 
+   640: 0 ( 0x0a5 ) 
+   641: , ( 0x0d3 ) 
+   642: 0 ( 0x0a5 ) 
+   643: , ( 0x0d3 ) 
+   644: 0 ( 0x0a5 ) 
+   645: b(lit) ( 0x010 ) 0x4
+   650: named-token ( 0x0b6 ) >four 0x815
+   659: b(field) ( 0x0be ) 
+   660: named-token ( 0x0b6 ) /four 0x816
+   669: b(constant) ( 0x0ba ) 
+   670: b(lit) ( 0x010 ) 0x810
+   675: get-token ( 0x0da ) 
+   676: b(lit) ( 0x010 ) 0x7b
+   681: set-token ( 0x0db ) 
+   682: named-token ( 0x0b6 ) peril 0x817
+   691: b(:) ( 0x0b7 ) 
+   692:     b(') ( 0x011 ) noop ( 0x07b ) 
+   694:     b(to) ( 0x0c3 ) do-nothing ( 0x810 ) 
+   697:     0 ( 0x0a5 ) 
+   698:     b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   701:     b(lit) ( 0x010 ) 0x64
+   706:     b(to) ( 0x0c3 ) thirty ( 0x811 ) 
+   709:     b(lit) ( 0x010 ) 0x5
+   714:     b(to) ( 0x0c3 ) naught ( 0x80f ) 
+   717:     b(lit) ( 0x010 ) 0x3c
+   722:     b(to) ( 0x0c3 ) fifty ( 0x813 ) 
+   725:     b(lit) ( 0x010 ) 0x9
+   730:     three ( 0x814 ) 
+   732:     b(lit) ( 0x010 ) 0x5
+   737:     >four ( 0x815 ) 
+   739:     b(lit) ( 0x010 ) 0x5a
+   744:     forty ( 0x812 ) 
+   746:     b(lit) ( 0x010 ) 0x5a
+   751:     b(lit) ( 0x010 ) 0x5a
+   756:     noop ( 0x07b ) 
+   757:     b(lit) ( 0x010 ) 0x1b
+   762:     drop ( 0x046 ) 
+   763:     2drop ( 0x052 ) 
+   764:     b(to) ( 0x0c3 ) do-nothing ( 0x810 ) 
+   767:     b(to) ( 0x0c3 ) do-nothing ( 0x810 ) 
+   770: b(;) ( 0x0c2 ) 
+   771: named-token ( 0x0b6 ) thirty 0x818
+   781: b(:) ( 0x0b7 ) 
+   782:     dup ( 0x047 ) 
+   783:     b(to) ( 0x0c3 ) thirty ( 0x811 ) 
+   786:     base ( 0x0a0 ) 
+   787:     @ ( 0x06d ) 
+   788:     swap ( 0x049 ) 
+   789:     b(lit) ( 0x010 ) 0xa
+   794:     base ( 0x0a0 ) 
+   795:     ! ( 0x072 ) 
+   796:     . ( 0x09d ) 
+   797:     base ( 0x0a0 ) 
+   798:     ! ( 0x072 ) 
+   799:     b(") ( 0x012 ) ( len=5 )
+                    " Dirty"
+   806:     type ( 0x090 ) 
+   807: b(;) ( 0x0c2 ) 
+   808: named-token ( 0x0b6 ) droop 0x819
+   817: b(:) ( 0x0b7 ) 
+   818:     0 ( 0x0a5 ) 
+   819:     b(?do) ( 0x018 ) 0x0006 (  dest = 826 )
+   822:         i ( 0x019 ) 
+   823:     b(loop) ( 0x015 ) 0xfffe ( =dec -2  dest = 822 )
+   826: b(;) ( 0x0c2 ) 
+   827: named-token ( 0x0b6 ) ploop 0x81a
+   836: b(:) ( 0x0b7 ) 
+   837:     fifty ( 0x813 ) 
+   839:     0 ( 0x0a5 ) 
+   840:     b(do) ( 0x017 ) 0x0008 (  dest = 849 )
+   843:         i ( 0x019 ) 
+   844:         drop ( 0x046 ) 
+   845:         2 ( 0x0a7 ) 
+   846:     b(+loop) ( 0x016 ) 0xfffc ( =dec -4  dest = 843 )
+   849:     b(lit) ( 0x010 ) 0x7f
+   854:     b?branch ( 0x014 ) 0x0004 (  dest = 859 )
+   857:         b(leave) ( 0x01b ) 
+   858:     b(>resolve) ( 0x0b2 ) 
+   859:     b(lit) ( 0x010 ) 0x1f7
+   864:     dup ( 0x047 ) 
+   865:     abs ( 0x02d ) 
+   866:     <# ( 0x096 ) 
+   867:     u#s ( 0x09a ) 
+   868:     swap ( 0x049 ) 
+   869:     sign ( 0x098 ) 
+   870:     u#> ( 0x097 ) 
+   871:     drop ( 0x046 ) 
+   872:     2drop ( 0x052 ) 
+   873:     0 ( 0x0a5 ) 
+   874:     max ( 0x02f ) 
+   875:     0 ( 0x0a5 ) 
+   876:     b(?do) ( 0x018 ) 0x0007 (  dest = 884 )
+   879:         bl ( 0x0a9 ) 
+   880:         emit ( 0x08f ) 
+   881:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 879 )
+   884:     abs ( 0x02d ) 
+   885:     b(lit) ( 0x010 ) 0x24
+   890:     b(to) ( 0x0c3 ) base ( 0x0a0 ) 
+   892: b(;) ( 0x0c2 ) 
+   893: b(") ( 0x012 ) ( len=0xd [13 bytes] )
+                " My parent is "
+   908: type ( 0x090 ) 
+   909: my-parent ( 0x20a ) 
+   911: u. ( 0x09b ) 
+   912: cr ( 0x092 ) 
+   913: end0 ( 0x000 ) 
+\  Detokenization finished normally after 914 bytes.
+End of file.
+

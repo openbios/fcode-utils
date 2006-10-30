@@ -1,0 +1,110 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x6556 (Ok)
+     4:   len:       0x0138 ( 312 bytes)
+     8: named-token ( 0x0b6 ) garfield 0x800
+    20: b(:) ( 0x0b7 ) 
+    21:     b(") ( 0x012 ) ( len=2 )
+                    " if"
+    25:     type ( 0x090 ) 
+    26:     b?branch ( 0x014 ) 0x0000 (  dest = 27 )
+\  Error:  Unresolved offset.
+    29:         b(") ( 0x012 ) ( len=5 )
+                        " begin"
+    36:         type ( 0x090 ) 
+    37:         b(<mark) ( 0x0b1 ) 
+    38:             b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                            " Question-Leave?"
+    55:             type ( 0x090 ) 
+    56:             b?branch ( 0x014 ) 0x0004 (  dest = 61 )
+    59:                 b(leave) ( 0x01b ) 
+    60:             b(>resolve) ( 0x0b2 ) 
+    61:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " 0 if unloop exit then"
+    84:             type ( 0x090 ) 
+    85:             0 ( 0x0a5 ) 
+    86:             b?branch ( 0x014 ) 0x0005 (  dest = 92 )
+    89:                 unloop ( 0x089 ) 
+    90:                 exit ( 0x033 ) 
+    91:             b(>resolve) ( 0x0b2 ) 
+    92:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Would you be leave..."
+   115:             type ( 0x090 ) 
+   116:             b(leave) ( 0x01b ) 
+   117:             b(") ( 0x012 ) ( len=5 )
+                            " loop?"
+   124:             type ( 0x090 ) 
+   125:         b(loop) ( 0x015 ) 0x0000 (  dest = 126 )
+\  Error:  Unresolved offset.
+   128:         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                        " Done with garfield"
+   148:         type ( 0x090 ) 
+   149:     b(;) ( 0x0c2 ) 
+   150:     named-token ( 0x0b6 ) jon 0x801
+   157:     b(:) ( 0x0b7 ) 
+   158:         b(") ( 0x012 ) ( len=5 )
+                        " begin"
+   165:         type ( 0x090 ) 
+   166:         b(<mark) ( 0x0b1 ) 
+   167:             b(") ( 0x012 ) ( len=2 )
+                            " if"
+   171:             type ( 0x090 ) 
+   172:             b?branch ( 0x014 ) 0x0000 (  dest = 173 )
+\  Error:  Unresolved offset.
+   175:                 b(") ( 0x012 ) ( len=5 )
+                                " endof"
+   182:                 type ( 0x090 ) 
+   183:             b(endof) ( 0x0c6 ) 0x0000 (  dest = 184 )
+\  Error:  Unresolved offset.
+   186:             b(") ( 0x012 ) ( len=5 )
+                            " again"
+   193:             type ( 0x090 ) 
+   194:             bbranch ( 0x013 ) 0xffe4 ( =dec -28  dest = 167 )
+   197:         b(") ( 0x012 ) ( len=4 )
+                        " then"
+   203:         type ( 0x090 ) 
+   204:     b(>resolve) ( 0x0b2 ) 
+   205:     b(") ( 0x012 ) ( len=4 )
+                    " ouch"
+   211:     type ( 0x090 ) 
+   212: b(;) ( 0x0c2 ) 
+   213: named-token ( 0x0b6 ) nermal 0x802
+   223: b(:) ( 0x0b7 ) 
+   224:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    " begin noop"
+   236:     type ( 0x090 ) 
+   237:     b(<mark) ( 0x0b1 ) 
+   238:         noop ( 0x07b ) 
+   239:         b(") ( 0x012 ) ( len=2 )
+                        " if"
+   243:         type ( 0x090 ) 
+   244:         b?branch ( 0x014 ) 0x0000 (  dest = 245 )
+\  Error:  Unresolved offset.
+   247:             b(") ( 0x012 ) ( len=5 )
+                            " endof"
+   254:             type ( 0x090 ) 
+   255:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 256 )
+\  Error:  Unresolved offset.
+   258:         b(") ( 0x012 ) ( len=4 )
+                        " loop"
+   264:         type ( 0x090 ) 
+   265:     b(loop) ( 0x015 ) 0x0000 (  dest = 266 )
+\  Error:  Unresolved offset.
+   268: b(;) ( 0x0c2 ) 
+   269: named-token ( 0x0b6 ) liz-the-vet 0x803
+   284: b(:) ( 0x0b7 ) 
+   285:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    " No concluding semicolon"
+   310:     type ( 0x090 ) 
+   311:     end0 ( 0x000 ) 
+\  Detokenization finished normally after 312 bytes.
+End of file.
+

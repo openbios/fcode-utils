@@ -1,0 +1,23 @@
+toke -v -i -l TooLargeBranch_off16.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TooLargeBranch_off16.fth   Binary output to TooLargeBranch_off16.fc   FLoad-list to TooLargeBranch_off16.fl 
+Advisory:  File TooLargeBranch_off16.fth, Line 12.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBranch_off16.fth, Line 29.  (Output Position = 182).  FLOADing TooLargeBranch_off16_body.fth
+Message:  File TooLargeBranch_off16_body.fth, Line 1.  (Output Position = 182).  Starting out with one hundred and seventy-nine Bottles of Beer on the wall
+Error:  File TooLargeBranch_off16.fth, Line 43.  (Output Position = 32862).  Branch offset is too large between AGAIN and the BEGIN on line 19 in definition of  TOO-LARGE-CASE  , which started on line 16
+Warning:  File TooLargeBranch_off16.fth, Line 43.  (Output Position = 32862).  Actual offset is 0xffff7fea (=dec -32790), but it will be coded as 0x7fea (=dec 32746).
+Advisory:  File TooLargeBranch_off16.fth, Line 67.  (Output Position = 33093).  FCODE-END encountered; processing...
+toke: checksum is 0x07d6 (33094 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  1 Error, 1 Warning, 3 Advisories, 1 Message.
+Error-detection over-ridden; producing binary output.
+toke: wrote 33094 bytes to bytecode file 'TooLargeBranch_off16.fc'

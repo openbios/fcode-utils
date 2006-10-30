@@ -1,0 +1,125 @@
+toke -v -i -f Local-Values -I. -I../TokoLoco -o LocalTest.NoLvSupp.fc LocalTest.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  LocalTest.fth   Binary output to LocalTest.NoLvSupp.fc 
+Advisory:  File was found in ./LocalTest.fth
+Advisory:  File LocalTest.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Warning:  File LocalTest.fth, Line 15.  (Output Position = 21).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocalTest.fth, Line 15.  (Output Position = 23).  Word  {push-locals}  is not in dictionary.
+Error:  File LocalTest.fth, Line 23.  (Output Position = 24).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 23.  (Output Position = 32).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 24.  (Output Position = 34).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 24.  (Output Position = 41).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 27.  (Output Position = 42).  The word 3dup is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 27.  (Output Position = 42).  3dup is defined as a MACRO in the core vocabulary.
+Error:  File LocalTest.fth, Line 28.  (Output Position = 42).  The word to is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 28.  (Output Position = 42).  to is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 28.  (Output Position = 42).  The word _otter is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 28.  (Output Position = 42).  _otter is defined as a Local Value name.
+Error:  File LocalTest.fth, Line 29.  (Output Position = 42).  The word _otter is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 29.  (Output Position = 42).  _otter is defined as a Local Value name.
+Error:  File LocalTest.fth, Line 32.  (Output Position = 42).  The word dean is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 32.  (Output Position = 42).  dean is defined as a CONSTANT in the top-level device-node, which began on line 4
+Error:  File LocalTest.fth, Line 35.  (Output Position = 43).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 36.  (Output Position = 59).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 37.  (Output Position = 79).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 37.  (Output Position = 81).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 37.  (Output Position = 87).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 38.  (Output Position = 94).  Word  {pop-locals}  is not in dictionary.
+Error:  File LocalTest.fth, Line 45.  (Output Position = 101).  Word  {push-locals}  is not in dictionary.
+Error:  File LocalTest.fth, Line 46.  (Output Position = 111).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 47.  (Output Position = 142).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 48.  (Output Position = 167).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 49.  (Output Position = 170).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 49.  (Output Position = 172).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 49.  (Output Position = 175).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 50.  (Output Position = 177).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 50.  (Output Position = 179).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 50.  (Output Position = 186).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 51.  (Output Position = 192).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 51.  (Output Position = 194).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 51.  (Output Position = 201).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 52.  (Output Position = 207).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 52.  (Output Position = 213).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 53.  (Output Position = 224).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 53.  (Output Position = 226).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 54.  (Output Position = 237).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 54.  (Output Position = 243).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 55.  (Output Position = 254).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 55.  (Output Position = 256).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 56.  (Output Position = 262).  Word  {pop-locals}  is not in dictionary.
+Error:  File LocalTest.fth, Line 62.  (Output Position = 285).  Can only declare Locals inside of a Colon-definition.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  The word { is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 65.  (Output Position = 285).  { is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  Word  _nor  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  Word  _this  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  The word ; is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 65.  (Output Position = 285).  ; is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  Word  _either  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 285).  Word  }  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 71.  (Output Position = 289).  FLOADing UntermLocalDecl.fth
+Advisory:  File LocalTest.fth, Line 71.  (Output Position = 289).  File was found in ./UntermLocalDecl.fth
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 289).  Unterminated Local-Values Declaration in definition of  AHNOLD  , which started on line 70 of file LocalTest.fth
+Error:  File LocalTest.fth, Line 72.  (Output Position = 289).  Word  }  is not in dictionary.
+Error:  File LocalTest.fth, Line 73.  (Output Position = 290).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 73.  (Output Position = 292).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 74.  (Output Position = 296).  Word  _{local}  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 75.  (Output Position = 297).  FLOADing UntermLocalAssgmnt.fth
+Advisory:  File LocalTest.fth, Line 75.  (Output Position = 297).  File was found in ./UntermLocalAssgmnt.fth
+Error:  File UntermLocalAssgmnt.fth, Line 7.  (Output Position = 297).  Unterminated Locals Assignment in definition of  AHNOLD  , which started on line 70 of file LocalTest.fth
+Error:  File LocalTest.fth, Line 76.  (Output Position = 298).  Word  _{local}  is not in dictionary.
+Error:  File LocalTest.fth, Line 77.  (Output Position = 300).  Word  {pop-locals}  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 80.  (Output Position = 301).  FLOADing UntermLocalDecl.fth
+Advisory:  File LocalTest.fth, Line 80.  (Output Position = 301).  File was found in ./UntermLocalDecl.fth
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 301).  Can only declare Locals inside of a Colon-definition.
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 301).  Unterminated misplaced Local-Values Declaration
+Advisory:  File LocalTest.fth, Line 81.  (Output Position = 301).  FLOADing UntermLocalAssgmnt.fth
+Advisory:  File LocalTest.fth, Line 81.  (Output Position = 301).  File was found in ./UntermLocalAssgmnt.fth
+Error:  File UntermLocalAssgmnt.fth, Line 7.  (Output Position = 301).  Unterminated Locals Assignment
+Error:  File LocalTest.fth, Line 81.  (Output Position = 301).  Word  _souvenirs  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 84.  (Output Position = 301).  FLOADing UntermDefn.fth
+Advisory:  File LocalTest.fth, Line 84.  (Output Position = 301).  File was found in ./UntermDefn.fth
+Error:  File UntermDefn.fth, Line 7.  (Output Position = 306).  Unterminated CONSTANT definition
+Error:  File LocalTest.fth, Line 84.  (Output Position = 306).  Word  moopoop  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 85.  (Output Position = 306).  FLOADing UntermDefn.fth
+Advisory:  File LocalTest.fth, Line 85.  (Output Position = 306).  File was found in ./UntermDefn.fth
+Error:  File UntermDefn.fth, Line 8.  (Output Position = 306).  Unterminated Constant definition
+Error:  File LocalTest.fth, Line 85.  (Output Position = 306).  Word  poop-de-moo  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 87.  (Output Position = 306).  FCODE-END encountered; processing...
+Warning:  File LocalTest.fth, Line 87.  (Output Position = 307).  Stack imbalance before end of tokenization.
+toke: checksum is 0x55d2 (307 bytes).  Last assigned FCode = 0x804
+Tokenization Completed.  61 Errors, 2 Warnings, 22 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 307 bytes to bytecode file 'LocalTest.NoLvSupp.fc'

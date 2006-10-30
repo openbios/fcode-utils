@@ -1,0 +1,102 @@
+toke -v -l -d first-path=false -f Trace-Conditionals -o MulPCI_FC.fpF.fc MulPCI_FC.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+User-Defined Symbols:
+	first-path = false
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	  Trace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  MulPCI_FC.fth   Binary output to MulPCI_FC.fpF.fc   FLoad-list to MulPCI_FC.fpF.fl 
+Advisory:  File MulPCI_FC.fth, Line 6.  Tokenization-Condition is False; Ignoring.
+Warning:  File MulPCI_FC.fth, Line 9.  Multi-line string, started on line 8
+Advisory:  File MulPCI_FC.fth, Line 11.  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 6
+Advisory:  File MulPCI_FC.fth, Line 13.  (Output Position = 52).  PCI header vendor id=0xb00b, device id=0xc0ed, class=090210
+Message:  File MulPCI_FC.fth, Line 16.  (Output Position = 52).  (PCI-Block Position = 0).  Loading first pass
+Advisory:  File MulPCI_FC.fth, Line 17.  (Output Position = 52).  (PCI-Block Position = 0).  PCI header not last image.
+Advisory:  File MulPCI_FC.fth, Line 19.  (Output Position = 52).  (PCI-Block Position = 0).  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 79).  (PCI-Block Position = 27).  Tokenization-Condition is False; Ignoring.
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 79).  (PCI-Block Position = 27).  Now Processing.  Encountered [ELSE] belonging to Conditional
+Advisory:  File TokConstCondTst01.fth, Line 15.  (Output Position = 87).  (PCI-Block Position = 35).  Concluding Conditional that started on line 14
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 110).  (PCI-Block Position = 58).  FLOADing BooBalah.fth
+Advisory:  File BooBalah.fth, Line 5.  (Output Position = 146).  (PCI-Block Position = 94).  Tokenization-Condition is False; Ignoring.
+Advisory:  File BooBalah.fth, Line 8.  (Output Position = 146).  (PCI-Block Position = 94).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 10.  (Output Position = 146).  (PCI-Block Position = 94).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 12.  (Output Position = 146).  (PCI-Block Position = 94).  Concluding Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 14.  (Output Position = 146).  (PCI-Block Position = 94).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 16.  (Output Position = 146).  (PCI-Block Position = 94).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 18.  (Output Position = 146).  (PCI-Block Position = 94).  Concluding Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 19.  (Output Position = 146).  (PCI-Block Position = 94).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 5
+Message:  File BooBalah.fth, Line 20.  (Output Position = 146).  (PCI-Block Position = 94).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File BooBalah.fth, Line 22.  (Output Position = 169).  (PCI-Block Position = 117).  Tokenization-Condition is False; Ignoring.
+Advisory:  File BooBalah.fth, Line 24.  (Output Position = 169).  (PCI-Block Position = 117).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 26.  (Output Position = 207).  (PCI-Block Position = 155).  Concluding Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 28.  (Output Position = 231).  (PCI-Block Position = 179).  Tokenization-Condition is True; Processing.
+Advisory:  File BooBalah.fth, Line 30.  (Output Position = 266).  (PCI-Block Position = 214).  Now Ignoring.  Encountered [ELSE] belonging to Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 32.  (Output Position = 266).  (PCI-Block Position = 214).  Concluding Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 33.  (Output Position = 266).  (PCI-Block Position = 214).  Concluding Conditional that started on line 5
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 281).  (PCI-Block Position = 229).  FCODE-END encountered; processing...
+toke: checksum is 0x48e4 (230 bytes).  Last assigned FCode = 0x801
+Adding 230 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Advisory:  File MulPCI_FC.fth, Line 24.  (Output Position = 512).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File MulPCI_FC.fth, Line 25.  (Output Position = 564).  PCI header vendor id=0xb00b, device id=0xfece, class=007112
+Message:  File MulPCI_FC.fth, Line 28.  (Output Position = 564).  (PCI-Block Position = 0).  Loading second pass
+Advisory:  File MulPCI_FC.fth, Line 29.  (Output Position = 564).  (PCI-Block Position = 0).  Last image for PCI header.
+Advisory:  File MulPCI_FC.fth, Line 31.  (Output Position = 564).  (PCI-Block Position = 0).  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 564).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 599).  (PCI-Block Position = 35).  Tokenization-Condition is True; Processing.
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 607).  (PCI-Block Position = 43).  Now Ignoring.  Encountered [ELSE] belonging to Conditional
+Advisory:  File TokConstCondTst01.fth, Line 15.  (Output Position = 607).  (PCI-Block Position = 43).  Concluding Conditional that started on line 14
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 630).  (PCI-Block Position = 66).  FLOADing BooBalah.fth
+Advisory:  File BooBalah.fth, Line 5.  (Output Position = 666).  (PCI-Block Position = 102).  Tokenization-Condition is True; Processing.
+Message:  File BooBalah.fth, Line 6.  (Output Position = 666).  (PCI-Block Position = 102).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File BooBalah.fth, Line 8.  (Output Position = 685).  (PCI-Block Position = 121).  Tokenization-Condition is True; Processing.
+Advisory:  File BooBalah.fth, Line 10.  (Output Position = 715).  (PCI-Block Position = 151).  Now Ignoring.  Encountered [ELSE] belonging to Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 12.  (Output Position = 715).  (PCI-Block Position = 151).  Concluding Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 14.  (Output Position = 735).  (PCI-Block Position = 171).  Tokenization-Condition is False; Ignoring.
+Advisory:  File BooBalah.fth, Line 16.  (Output Position = 735).  (PCI-Block Position = 171).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 18.  (Output Position = 770).  (PCI-Block Position = 206).  Concluding Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 19.  (Output Position = 770).  (PCI-Block Position = 206).  Now Ignoring.  Encountered [ELSE] belonging to Conditional that started on line 5
+Advisory:  File BooBalah.fth, Line 22.  (Output Position = 770).  (PCI-Block Position = 206).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 24.  (Output Position = 770).  (PCI-Block Position = 206).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 26.  (Output Position = 770).  (PCI-Block Position = 206).  Concluding Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 28.  (Output Position = 770).  (PCI-Block Position = 206).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 30.  (Output Position = 770).  (PCI-Block Position = 206).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 32.  (Output Position = 770).  (PCI-Block Position = 206).  Concluding Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 33.  (Output Position = 770).  (PCI-Block Position = 206).  Concluding Conditional that started on line 5
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 785).  (PCI-Block Position = 221).  FCODE-END encountered; processing...
+toke: checksum is 0x467e (222 bytes).  Last assigned FCode = 0x801
+Adding 238 bytes of zero padding to PCI image.
+
+Advisory:  File MulPCI_FC.fth, Line 35.  (Output Position = 1024).  Concluding Conditional that started on line 6
+Tokenization Completed.  1 Warning, 52 Advisories, 4 Messages.
+toke: wrote 1024 bytes to bytecode file 'MulPCI_FC.fpF.fc'

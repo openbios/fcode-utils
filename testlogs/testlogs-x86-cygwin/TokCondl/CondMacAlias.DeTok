@@ -1,0 +1,182 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xb751 (Ok)
+     4:   len:       0x0246 ( 582 bytes)
+     8: b(lit) ( 0x010 ) 0x40
+    13: named-token ( 0x0b6 ) _local-storage-size_ 0x800
+    37: b(constant) ( 0x0ba ) 
+    38: _local-storage-size_ ( 0x800 ) 
+    40: cells ( 0x069 ) 
+    41: dup ( 0x047 ) 
+    42: named-token ( 0x0b6 ) locals-storage 0x801
+    60: b(buffer:) ( 0x0bd ) 
+    61: named-token ( 0x0b6 ) locals-pointer 0x802
+    79: b(value) ( 0x0b8 ) 
+    80: named-token ( 0x0b6 ) not-enough-locals? 0x803
+   102: b(:) ( 0x0b7 ) 
+   103:     + ( 0x01e ) 
+   104:     cells ( 0x069 ) 
+   105:     locals-pointer ( 0x802 ) 
+   107:     swap ( 0x049 ) 
+   108:     - ( 0x01f ) 
+   109:     0< ( 0x036 ) 
+   110: b(;) ( 0x0c2 ) 
+   111: named-token ( 0x0b6 ) .not-enough-locals 0x804
+   133: b(:) ( 0x0b7 ) 
+   134:     cr ( 0x092 ) 
+   135:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   189:     type ( 0x090 ) 
+   190:     cr ( 0x092 ) 
+   191: b(;) ( 0x0c2 ) 
+   192: named-token ( 0x0b6 ) check-enough-locals 0x805
+   215: b(:) ( 0x0b7 ) 
+   216:     not-enough-locals? ( 0x803 ) 
+   218:     b?branch ( 0x014 ) 0x0007 (  dest = 226 )
+   221:         .not-enough-locals ( 0x804 ) 
+   223:         abort ( 0x216 ) 
+   225:     b(>resolve) ( 0x0b2 ) 
+   226: b(;) ( 0x0c2 ) 
+   227: named-token ( 0x0b6 ) push-uninitted-locals 0x806
+   252: b(:) ( 0x0b7 ) 
+   253:     cells ( 0x069 ) 
+   254:     locals-pointer ( 0x802 ) 
+   256:     swap ( 0x049 ) 
+   257:     - ( 0x01f ) 
+   258:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   261: b(;) ( 0x0c2 ) 
+   262: named-token ( 0x0b6 ) push-one-initted-local 0x807
+   288: b(:) ( 0x0b7 ) 
+   289:     locals-pointer ( 0x802 ) 
+   291:     1 ( 0x0a6 ) 
+   292:     cells ( 0x069 ) 
+   293:     - ( 0x01f ) 
+   294:     dup ( 0x047 ) 
+   295:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   298:     locals-storage ( 0x801 ) 
+   300:     + ( 0x01e ) 
+   301:     ! ( 0x072 ) 
+   302: b(;) ( 0x0c2 ) 
+   303: named-token ( 0x0b6 ) push-initted-locals 0x808
+   326: b(:) ( 0x0b7 ) 
+   327:     0 ( 0x0a5 ) 
+   328:     b(?do) ( 0x018 ) 0x0007 (  dest = 336 )
+   331:         push-one-initted-local ( 0x807 ) 
+   333:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 331 )
+   336: b(;) ( 0x0c2 ) 
+   337: named-token ( 0x0b6 ) {push-locals} 0x809
+   354: b(:) ( 0x0b7 ) 
+   355:     2dup ( 0x053 ) 
+   356:     check-enough-locals ( 0x805 ) 
+   358:     push-uninitted-locals ( 0x806 ) 
+   360:     push-initted-locals ( 0x808 ) 
+   362: b(;) ( 0x0c2 ) 
+   363: named-token ( 0x0b6 ) {pop-locals} 0x80a
+   379: b(:) ( 0x0b7 ) 
+   380:     cells ( 0x069 ) 
+   381:     locals-pointer ( 0x802 ) 
+   383:     + ( 0x01e ) 
+   384:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   387: b(;) ( 0x0c2 ) 
+   388: named-token ( 0x0b6 ) _{local} 0x80b
+   400: b(:) ( 0x0b7 ) 
+   401:     cells ( 0x069 ) 
+   402:     locals-pointer ( 0x802 ) 
+   404:     + ( 0x01e ) 
+   405:     locals-storage ( 0x801 ) 
+   407:     + ( 0x01e ) 
+   408: b(;) ( 0x0c2 ) 
+   409: named-token ( 0x0b6 ) catch 0x80c
+   418: b(:) ( 0x0b7 ) 
+   419:     locals-pointer ( 0x802 ) 
+   421:     >r ( 0x030 ) 
+   422:     catch ( 0x217 ) 
+   424:     r> ( 0x031 ) 
+   425:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   428: b(;) ( 0x0c2 ) 
+   429: named-token ( 0x0b6 ) contralto 0x80d
+   442: b(:) ( 0x0b7 ) 
+   443:     3 ( 0x0a8 ) 
+   444:     1 ( 0x0a6 ) 
+   445:     {push-locals} ( 0x809 ) 
+   447:     0 ( 0x0a5 ) 
+   448:     _{local} ( 0x80b ) 
+   450:     @ ( 0x06d ) 
+   451:     2 ( 0x0a7 ) 
+   452:     _{local} ( 0x80b ) 
+   454:     @ ( 0x06d ) 
+   455:     + ( 0x01e ) 
+   456:     1 ( 0x0a6 ) 
+   457:     _{local} ( 0x80b ) 
+   459:     @ ( 0x06d ) 
+   460:     * ( 0x020 ) 
+   461:     3 ( 0x0a8 ) 
+   462:     _{local} ( 0x80b ) 
+   464:     ! ( 0x072 ) 
+   465:     3 ( 0x0a8 ) 
+   466:     _{local} ( 0x80b ) 
+   468:     @ ( 0x06d ) 
+   469:     b(lit) ( 0x010 ) 0x4
+   474:     {pop-locals} ( 0x80a ) 
+   476: b(;) ( 0x0c2 ) 
+   477: named-token ( 0x0b6 ) alto 0x80e
+   485: b(:) ( 0x0b7 ) 
+   486:     3 ( 0x0a8 ) 
+   487:     1 ( 0x0a6 ) 
+   488:     {push-locals} ( 0x809 ) 
+   490:     0 ( 0x0a5 ) 
+   491:     _{local} ( 0x80b ) 
+   493:     @ ( 0x06d ) 
+   494:     2 ( 0x0a7 ) 
+   495:     _{local} ( 0x80b ) 
+   497:     @ ( 0x06d ) 
+   498:     * ( 0x020 ) 
+   499:     1 ( 0x0a6 ) 
+   500:     _{local} ( 0x80b ) 
+   502:     @ ( 0x06d ) 
+   503:     - ( 0x01f ) 
+   504:     dup ( 0x047 ) 
+   505:     3 ( 0x0a8 ) 
+   506:     _{local} ( 0x80b ) 
+   508:     ! ( 0x072 ) 
+   509:     b(lit) ( 0x010 ) 0x4
+   514:     {pop-locals} ( 0x80a ) 
+   516: b(;) ( 0x0c2 ) 
+   517: named-token ( 0x0b6 ) tenor 0x80f
+   526: b(:) ( 0x0b7 ) 
+   527:     3 ( 0x0a8 ) 
+   528:     2 ( 0x0a7 ) 
+   529:     {push-locals} ( 0x809 ) 
+   531:     1 ( 0x0a6 ) 
+   532:     _{local} ( 0x80b ) 
+   534:     @ ( 0x06d ) 
+   535:     2 ( 0x0a7 ) 
+   536:     _{local} ( 0x80b ) 
+   538:     @ ( 0x06d ) 
+   539:     + ( 0x01e ) 
+   540:     0 ( 0x0a5 ) 
+   541:     _{local} ( 0x80b ) 
+   543:     @ ( 0x06d ) 
+   544:     / ( 0x021 ) 
+   545:     b(lit) ( 0x010 ) 0x4
+   550:     _{local} ( 0x80b ) 
+   552:     ! ( 0x072 ) 
+   553:     b(lit) ( 0x010 ) 0x5
+   558:     {pop-locals} ( 0x80a ) 
+   560: b(;) ( 0x0c2 ) 
+   561: new-device ( 0x11f ) 
+   563: named-token ( 0x0b6 ) gumblefritz 0x810
+   578: b(create) ( 0x0bb ) 
+   579: finish-device ( 0x127 ) 
+   581: end0 ( 0x000 ) 
+\  Detokenization finished normally after 582 bytes.
+End of file.
+

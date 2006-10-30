@@ -1,0 +1,45 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x21fc (Ok)
+     4:   len:       0x0064 ( 100 bytes)
+     8: named-token ( 0x0b6 ) gnarggghhh! 0x800
+    23: b(:) ( 0x0b7 ) 
+    24:     2 ( 0x0a7 ) 
+    25:     1 ( 0x0a6 ) 
+    26:     0 ( 0x0a5 ) 
+    27:     @ ( 0x06d ) 
+    28:     1 ( 0x0a6 ) 
+    29:     @ ( 0x06d ) 
+    30:     + ( 0x01e ) 
+    31:     2 ( 0x0a7 ) 
+    32:     ! ( 0x072 ) 
+    33:     3 ( 0x0a8 ) 
+    34: b(;) ( 0x0c2 ) 
+    35: named-token ( 0x0b6 ) shmoo 0x801
+    44: b(variable) ( 0x0b9 ) 
+    45: b(lit) ( 0x010 ) 0x5417
+    50: named-token ( 0x0b6 ) merde 0x802
+    59: b(value) ( 0x0b8 ) 
+    60: b(lit) ( 0x010 ) 0x4ead
+    65: b(to) ( 0x0c3 ) merde ( 0x802 ) 
+    68: b(lit) ( 0x010 ) 0xf09e4ead
+    73: gnarggghhh! ( 0x800 ) 
+    75: b(lit) ( 0x010 ) 0xf09e4ead
+    80: gnarggghhh! ( 0x800 ) 
+    82: b(lit) ( 0x010 ) 0xf09e4ead
+    87: b(to) ( 0x0c3 ) shmoo ( 0x801 ) 
+    90: b(lit) ( 0x010 ) 0xf09e4ead
+    95: b(to) ( 0x0c3 ) 1 ( 0x0a6 ) 
+    97: merde ( 0x802 ) 
+    99: end0 ( 0x000 ) 
+\  Detokenization finished normally after 100 bytes.
+End of file.
+

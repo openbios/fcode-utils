@@ -1,0 +1,14 @@
+toke -v -o FlagsHelp.fc FlagsHelp.fth FlagsHelp.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+Cannot specify single output file name with multiple input file names.
+Please either remove output-file-name specification,
+or use multiple commands.

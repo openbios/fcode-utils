@@ -1,0 +1,41 @@
+#!  /bin/csh -f
+#
+#  Script to run detokenizer with Vendor-Specific FCodes.
+#   This worked just fine on the TestArgs command line, in the "script" field
+#      on CygWin and GNU_Linux, but gets jammed-up on AI
+#  So we have to pump it into a separate script.  Fooey!
+#
+#  Well, in for a penny and all that...X
+#  Let's make it a bit more general.
+#  First param is the base-name of both the input .fc file
+#      and the output .DeTok file
+#  Second param is the name of the Vendor-Specific FCodes file
+
+#  If it's already a script, might as well error-check
+alias onecr  'echo "" ; alias onecr true' 
+if ( $#argv < 1 ) then
+    onecr
+    echo $0 Missing First arg, Base-name of input .fc and output .DeTok files
+    set ERROR
+endif
+if ( $#argv < 2 ) then
+    onecr
+    echo $0 Missing Second arg, Name of the Vendor-Specific FCodes file
+    set ERROR
+endif
+if ( $?ERROR ) exit 1
+
+if ( ! -r $1.fc ) then
+    onecr
+    echo $0 Cannot read input file $1.fc
+    set ERROR
+endif
+if ( ! -r $2 ) then
+    onecr
+    echo $0 Cannot read Vendor-Specific FCodes file $2
+    set ERROR
+endif
+if ( $?ERROR ) exit 2
+
+
+../detok -v -o -f $2 $1.fc > $1.DeTok

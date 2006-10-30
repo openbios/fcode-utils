@@ -1,0 +1,42 @@
+toke -v -i ControlMismatch.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  ControlMismatch.fth   Binary output to ControlMismatch.fc 
+Advisory:  File ControlMismatch.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Error:  File ControlMismatch.fth, Line 11.  (Output Position = 26).  Control-Stack underflow at REPEAT
+Error:  File ControlMismatch.fth, Line 13.  (Output Position = 27).  Control-Stack underflow at UNTIL
+Error:  File ControlMismatch.fth, Line 17.  (Output Position = 47).  Control-Stack underflow at ELSE in definition of  ANAWANNA  , which started on line 15
+Error:  File ControlMismatch.fth, Line 19.  (Output Position = 53).  Control-Stack underflow at THEN in definition of  ANAWANNA  , which started on line 15
+Error:  File ControlMismatch.fth, Line 26.  (Output Position = 93).  The ELSE is mismatched with the BEGIN on line 25 in definition of  GRANADA  , which started on line 22
+Error:  File ControlMismatch.fth, Line 27.  (Output Position = 100).  The LOOP is mismatched with the ELSE on line 26 in definition of  GRANADA  , which started on line 22
+Error:  File ControlMismatch.fth, Line 27.  (Output Position = 100).  The LOOP is mismatched with the BEGIN on line 23 in definition of  GRANADA  , which started on line 22
+Error:  File ControlMismatch.fth, Line 34.  (Output Position = 144).  The ELSE is mismatched with the BEGIN on line 33 in definition of  OBKNOXIN  , which started on line 30
+Error:  File ControlMismatch.fth, Line 35.  (Output Position = 154).  The LOOP is mismatched with the ELSE on line 34 in definition of  OBKNOXIN  , which started on line 30
+Error:  File ControlMismatch.fth, Line 35.  (Output Position = 154).  The LOOP is mismatched with the BEGIN on line 31 in definition of  OBKNOXIN  , which started on line 30
+Error:  File ControlMismatch.fth, Line 42.  (Output Position = 203).  The ELSE is mismatched with the BEGIN on line 40 in definition of  TIXON  , which started on line 38
+Error:  File ControlMismatch.fth, Line 45.  (Output Position = 213).  The REPEAT is mismatched with the DO on line 39 in definition of  TIXON  , which started on line 38
+Error:  File ControlMismatch.fth, Line 50.  (Output Position = 234).  Control-Stack underflow at THEN in definition of  SPEW-AGNU  , which started on line 48
+Error:  File ControlMismatch.fth, Line 56.  (Output Position = 266).  End of colon-definition before completion of ELSE on line 54 in definition of  BUNK  , which started on line 52
+Error:  File ControlMismatch.fth, Line 60.  (Output Position = 282).  Control-Stack underflow at THEN in definition of  JUNK  , which started on line 58
+Error:  File ControlMismatch.fth, Line 65.  (Output Position = 301).  The ENDCASE is mismatched with the IF on line 64 in definition of  CLUNK  , which started on line 62
+Error:  File ControlMismatch.fth, Line 66.  (Output Position = 302).  The THEN is mismatched with the BEGIN on line 64 in definition of  CLUNK  , which started on line 62
+Error:  File ControlMismatch.fth, Line 67.  (Output Position = 303).  Control-Stack underflow at UNTIL in definition of  CLUNK  , which started on line 62
+Error:  File ControlMismatch.fth, Line 71.  (Output Position = 316).  Control-Stack underflow at ENDOF in definition of  SKUNK  , which started on line 70
+Error:  File ControlMismatch.fth, Line 73.  (Output Position = 317).  The word  SEMICOLON  should not be used outside of a colon definition.
+Error:  File ControlMismatch.fth, Line 75.  (Output Position = 317).  The word tokenizer[ is not recognized in tokenizer-escape mode.
+Advisory:  File ControlMismatch.fth, Line 75.  (Output Position = 317).  tokenizer[ is defined in the core vocabulary.
+Error:  File ControlMismatch.fth, Line 75.  (Output Position = 317).  The word ]tokenizer is only recognized in tokenizer-escape mode.
+Advisory:  File ControlMismatch.fth, Line 76.  (Output Position = 317).  FCODE-END encountered; processing...
+toke: checksum is 0x65dc (318 bytes).  Last assigned FCode = 0x808
+Tokenization Completed.  22 Errors, 3 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 318 bytes to bytecode file 'ControlMismatch.fc'

@@ -1,0 +1,24 @@
+toke -v -i TooLargeParen.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  TooLargeParen.fth   Binary output to TooLargeParen.fc 
+Advisory:  File TooLargeParen.fth, Line 9.  Initiating Global Scope definitions.
+Advisory:  File TooLargeParen.fth, Line 12.  START4 encountered; processing...
+Warning:  File TooLargeParen.fth, Line 12.  spread of 4 not supported.
+Advisory:  File TooLargeParen.fth, Line 18.  (Output Position = 19).  FLOADing LargeTextNoQte.fth
+Warning:  File LargeTextNoQte.fth, Line 12.  (Output Position = 19).  Unterminated comment in definition of  FOOBAR  , which started on line 17 of file TooLargeParen.fth
+Advisory:  File TooLargeParen.fth, Line 22.  (Output Position = 20).  FCODE-END encountered; processing...
+Warning:  File TooLargeParen.fth, Line 22.  (Output Position = 21).  No DEVICE-DEFINITIONS directive encountered before end.  Compensating...
+Advisory:  File TooLargeParen.fth, Line 22.  (Output Position = 21).  Terminating Global Scope definitions; resuming Device-node definitions.
+toke: checksum is 0x04b6 (21 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  3 Warnings, 5 Advisories.
+toke: wrote 21 bytes to bytecode file 'TooLargeParen.fc'

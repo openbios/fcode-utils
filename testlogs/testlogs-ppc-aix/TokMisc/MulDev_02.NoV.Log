@@ -1,0 +1,38 @@
+toke -T jeeky -T kinky -o MulDev_02.NoV.fc MulDev_02.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tracing these symbols:   jeeky   kinky
+
+Tokenizing  MulDev_02.fth   Binary output to MulDev_02.NoV.fc 
+Message:  File MulDev_02.fth, Line 14.  (Output Position = 8).   Top-Level (root) device-node
+Message:  File MulDev_02.fth, Line 20.  (Output Position = 101).   Subsidiary (child) device-node
+Message:  File MulDev_02.fth, Line 25.  (Output Position = 183).   About to access method from parent node
+Error:  File MulDev_02.fth, Line 29.  (Output Position = 201).  Word  achin  is not in dictionary.
+Message:  File MulDev_02.fth, Line 33.  (Output Position = 220).   about to end child node
+Message:  File MulDev_02.fth, Line 35.  (Output Position = 222).   We can access methods from the root node now
+Trace-Note:  File MulDev_02.fth, Line 36.  (Output Position = 222).  Creating jeeky (FCode token = 0x809) as a Headered COLON in the top-level device-node, which began on line 10
+Message:  File MulDev_02.fth, Line 40.  (Output Position = 237).  create sibling node
+Trace-Note:  File MulDev_02.fth, Line 43.  (Output Position = 249).  Creating kinky (FCode token = 0x80b) as a Headered COLON in the current device-node, which began on line 41
+Warning:  File MulDev_02.fth, Line 54.  (Output Position = 259).  Multi-line string, started on line 44 in definition of  KINKY  , which started on line 43
+Message:  File MulDev_02.fth, Line 58.  (Output Position = 297).  creating nephew node
+Trace-Note:  File MulDev_02.fth, Line 61.  (Output Position = 308).  Attempt to invoke (undefined) kinky.
+Error:  File MulDev_02.fth, Line 61.  (Output Position = 308).  Word  kinky  is not in dictionary.
+Message:  File MulDev_02.fth, Line 63.  (Output Position = 310).  creating great-nephew node
+Trace-Note:  File MulDev_02.fth, Line 67.  (Output Position = 321).  Attempt to invoke (undefined) jeeky.
+Error:  File MulDev_02.fth, Line 67.  (Output Position = 321).  Word  jeeky  is not in dictionary.
+Trace-Note:  File MulDev_02.fth, Line 68.  (Output Position = 321).  Attempt to invoke (undefined) kinky.
+Error:  File MulDev_02.fth, Line 68.  (Output Position = 321).  Word  kinky  is not in dictionary.
+Error:  File MulDev_02.fth, Line 71.  (Output Position = 324).  Missing FINISH-DEVICE for new device that started on line 64
+Error:  File MulDev_02.fth, Line 71.  (Output Position = 324).  Missing FINISH-DEVICE for new device that started on line 59
+Error:  File MulDev_02.fth, Line 71.  (Output Position = 324).  Missing FINISH-DEVICE for new device that started on line 41
+Tokenization Completed.  7 Errors, 1 Warning, 8 Messages, 5 Trace-Notes.
+Suppressing binary output.

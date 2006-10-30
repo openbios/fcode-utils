@@ -1,0 +1,30 @@
+toke -v -i ContErr1.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  ContErr1.fth   Binary output to ContErr1.fc 
+Advisory:  File ContErr1.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Error:  File ContErr1.fth, Line 24.  (Output Position = 60).  LEAVE outside of  DO ... LOOP  structure in definition of  GARFIELD  , which started on line 21
+Error:  File ContErr1.fth, Line 25.  (Output Position = 90).  UNLOOP outside of  DO ... LOOP  structure in definition of  GARFIELD  , which started on line 21
+Error:  File ContErr1.fth, Line 26.  (Output Position = 117).  LEAVE outside of  DO ... LOOP  structure in definition of  GARFIELD  , which started on line 21
+Error:  File ContErr1.fth, Line 27.  (Output Position = 126).  The LOOP is mismatched with the BEGIN on line 23 in definition of  GARFIELD  , which started on line 21
+Error:  File ContErr1.fth, Line 27.  (Output Position = 126).  The LOOP is mismatched with the IF on line 22 in definition of  GARFIELD  , which started on line 21
+Error:  File ContErr1.fth, Line 34.  (Output Position = 186).  The ENDOF is mismatched with the IF on line 33 in definition of  JON  , which started on line 31
+Error:  File ContErr1.fth, Line 36.  (Output Position = 205).  The THEN is mismatched with the ENDOF on line 34 in definition of  JON  , which started on line 31
+Error:  File ContErr1.fth, Line 43.  (Output Position = 258).  The ENDOF is mismatched with the IF on line 42 in definition of  NERMAL  , which started on line 40
+Error:  File ContErr1.fth, Line 44.  (Output Position = 266).  The LOOP is mismatched with the BEGIN on line 41 in definition of  NERMAL  , which started on line 40
+Error:  File ContErr1.fth, Line 44.  (Output Position = 266).  The LOOP is mismatched with the ENDOF on line 43 in definition of  NERMAL  , which started on line 40
+Advisory:  File ContErr1.fth, Line 50.  (Output Position = 311).  FCODE-END encountered; processing...
+Error:  File ContErr1.fth, Line 47.  (Output Position = 312).  Unterminated Colon Definition of LIZ-THE-VET
+toke: checksum is 0x6556 (312 bytes).  Last assigned FCode = 0x803
+Tokenization Completed.  11 Errors, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 312 bytes to bytecode file 'ContErr1.fc'

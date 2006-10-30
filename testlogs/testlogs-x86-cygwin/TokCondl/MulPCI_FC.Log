@@ -1,0 +1,22 @@
+toke -v -l MulPCI_FC.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  MulPCI_FC.fth   Binary output to MulPCI_FC.fc   FLoad-list to MulPCI_FC.fl 
+Warning:  File MulPCI_FC.fth, Line 9.  Multi-line string, started on line 8
+Message:  File MulPCI_FC.fth, Line 8.  
+
+	Add a command-line switch:
+		-d "first-path=<true|false>" 
+ 	then run this again.
+
+
+Nothing Tokenized.  1 Warning, 1 Message.

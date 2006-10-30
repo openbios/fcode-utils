@@ -1,0 +1,30 @@
+toke -v -i -l TooTooLargeBuffer.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TooTooLargeBuffer.fth   Binary output to TooTooLargeBuffer.fc   FLoad-list to TooTooLargeBuffer.fl 
+Advisory:  File TooTooLargeBuffer.fth, Line 7.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooTooLargeBuffer.fth, Line 23.  (Output Position = 182).  FLOADing TooTooLargeBuffer_body.fth
+Advisory:  File TooTooLargeBuffer_body.fth, Line 3697.  (Output Position = 131072).  Output Buffer overflow.  Relocating and increasing to 262144 bytes.
+Error:  File TooTooLargeBuffer.fth, Line 25.  (Output Position = 154).  Branch offset is too large between ENDCASE and the ENDOF on line 20 in definition of  TOO-LARGE-CASE  , which started on line 11
+Warning:  File TooTooLargeBuffer.fth, Line 25.  (Output Position = 154).  Actual offset is 0x1ff98 (=dec 130968), but it will be coded as 0xffffff98 (=dec -104).
+Error:  File TooTooLargeBuffer.fth, Line 27.  (Output Position = 116).  Branch offset is too large between THEN and the IF on line 17 in definition of  TOO-LARGE-CASE  , which started on line 11
+Warning:  File TooTooLargeBuffer.fth, Line 27.  (Output Position = 116).  Actual offset is 0x1ffc6 (=dec 131014), but it will be coded as 0xffffffc6 (=dec -58).
+Error:  File TooTooLargeBuffer.fth, Line 28.  (Output Position = 131156).  Branch offset is too large between LOOP and the DO on line 15 in definition of  TOO-LARGE-CASE  , which started on line 11
+Warning:  File TooTooLargeBuffer.fth, Line 28.  (Output Position = 131156).  Actual offset is 0xfffe0017 (=dec -131049), but it will be coded as 0x17 (=dec 23).
+Warning:  File TooTooLargeBuffer.fth, Line 28.  (Output Position = 105).  Actual offset is 0x1ffed (=dec 131053), but it will be coded as 0xffffffed (=dec -19).
+Error:  File TooTooLargeBuffer.fth, Line 34.  (Output Position = 131213).  Branch offset is too large between AGAIN and the BEGIN on line 14 in definition of  TOO-LARGE-CASE  , which started on line 11
+Warning:  File TooTooLargeBuffer.fth, Line 34.  (Output Position = 131213).  Actual offset is 0xfffdffbb (=dec -131141), but it will be coded as 0xffffffbb (=dec -69).
+Advisory:  File TooTooLargeBuffer.fth, Line 58.  (Output Position = 131444).  FCODE-END encountered; processing...
+toke: checksum is 0xd6a4 (131445 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  4 Errors, 5 Warnings, 4 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 131445 bytes to bytecode file 'TooTooLargeBuffer.fc'

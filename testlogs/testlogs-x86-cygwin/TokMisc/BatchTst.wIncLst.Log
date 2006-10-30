@@ -1,0 +1,137 @@
+toke -v -I '' -I. -I../TokeCommon -P -l sub.w.dots/MulDev OneBeer.fth ZeroLen.bin NoBeerAnywhere.fth BatchTst.fth StringsGenl_cpy2.fth FlagSet.fth UserMacros_cpy1.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Include-List:
+	 . ../TokeCommon
+
+Tokenizing  sub.w.dots/MulDev   Binary output to sub.w.dots/MulDev.fc   FLoad-list to sub.w.dots/MulDev.fl   Dependency-list to sub.w.dots/MulDev.P 
+Advisory:  File was found in sub.w.dots/MulDev
+Advisory:  File sub.w.dots/MulDev, Line 6.  \ is a Global definition, but its alias, //, will only be defined in the top-level device-node.
+Advisory:  File sub.w.dots/MulDev, Line 9.  FCODE-VERSION2 encountered; processing...
+Error:  File sub.w.dots/MulDev, Line 25.  (Output Position = 151).  Encountered finish-device without corresponding NEW-DEVICE.  Resetting definitions since start of tokenization.
+Advisory:  File sub.w.dots/MulDev, Line 26.  (Output Position = 153).  Encountered new-device.  Starting new device-node.
+Error:  File sub.w.dots/MulDev, Line 31.  (Output Position = 195).  Word  err-shoot)  is not in dictionary.
+Advisory:  File sub.w.dots/MulDev, Line 40.  (Output Position = 257).  FCODE-END encountered; processing...
+Error:  File sub.w.dots/MulDev, Line 40.  (Output Position = 258).  Missing FINISH-DEVICE for new device that started on line 26
+toke: checksum is 0x4fa7 (258 bytes).  Last assigned FCode = 0x805
+Tokenization Completed.  3 Errors, 5 Advisories.
+Suppressing binary output.
+
+Tokenizing  OneBeer.fth   Binary output to OneBeer.fc   FLoad-list to OneBeer.fl   Dependency-list to OneBeer.P 
+Advisory:  File was found in ../TokeCommon/OneBeer.fth
+Message:  File OneBeer.fth, Line 1.  Starting out with one Bottle of Beer on the wall
+Tokenization Completed.  1 Advisory, 1 Message.
+Could not open file OneBeer.fc for output.
+
+Tokenizing  ZeroLen.bin   Error:  Could not read input file ZeroLen.bin
+Advisory:  File was found in ../TokeCommon/ZeroLen.bin
+
+Tokenizing  NoBeerAnywhere.fth   Error:  Could not access input file NoBeerAnywhere.fth
+
+Tokenizing  BatchTst.fth   Error:  Could not read input file BatchTst.fth
+Advisory:  File was found in BatchTst.fth
+
+Tokenizing  StringsGenl_cpy2.fth   Binary output to StringsGenl_cpy2.fc   FLoad-list to StringsGenl_cpy2.fl   Dependency-list to StringsGenl_cpy2.P 
+Advisory:  File was found in StringsGenl_cpy2.fth
+Advisory:  File StringsGenl_cpy2.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Warning:  File StringsGenl_cpy2.fth, Line 10.  (Output Position = 8).  Multi-line string, started on line 9
+Warning:  File StringsGenl_cpy2.fth, Line 12.  (Output Position = 32).  Numeric String after \ overflows byte.  Using 0xa9.
+Warning:  File StringsGenl_cpy2.fth, Line 12.  (Output Position = 32).  Numeric String after \ overflows byte.  Using 0xce.
+Warning:  File StringsGenl_cpy2.fth, Line 14.  (Output Position = 56).  Unrecognized character, a, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 14.  (Output Position = 56).  Unrecognized character, c, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 15.  (Output Position = 78).  Numeric String after \ overflows byte.  Using 0xd8.
+Warning:  File StringsGenl_cpy2.fth, Line 20.  (Output Position = 183).  Unrecognized character, Q, after \ in string.  Using it literally.
+Advisory:  File StringsGenl_cpy2.fth, Line 25.  (Output Position = 347).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl_cpy2.fth, Line 31.  (Output Position = 379).  Multi-line string, started on line 28
+Advisory:  File StringsGenl_cpy2.fth, Line 32.  (Output Position = 411).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl_cpy2.fth, Line 33.  (Output Position = 414).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 34.  (Output Position = 440).  Unrecognized character, \, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 36.  (Output Position = 461).  Multi-line string, started on line 35
+Warning:  File StringsGenl_cpy2.fth, Line 38.  (Output Position = 480).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 38.  (Output Position = 480).  Multi-line string, started on line 37
+Advisory:  File StringsGenl_cpy2.fth, Line 39.  (Output Position = 490).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl_cpy2.fth, Line 41.  (Output Position = 493).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl_cpy2.fth, Line 41.  (Output Position = 493).  Multi-line string, started on line 40
+Advisory:  File StringsGenl_cpy2.fth, Line 42.  (Output Position = 517).  Substituting  TO  for deprecated  IS
+Advisory:  File StringsGenl_cpy2.fth, Line 47.  (Output Position = 545).  FCODE-END encountered; processing...
+toke: checksum is 0xac5a (546 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  15 Warnings, 7 Advisories.
+toke: wrote 546 bytes to bytecode file 'StringsGenl_cpy2.fc'
+
+Tokenizing  FlagSet.fth   Binary output to FlagSet.fc   FLoad-list to FlagSet.fl   Dependency-list to FlagSet.P 
+Advisory:  File was found in FlagSet.fth
+Advisory:  File FlagSet.fth, Line 5.  Enabling:  Print this "Help" message for the Special-Feature Flags
+Advisory:  File FlagSet.fth, Line 6.  Disabling:  Print this "Help" message for the Special-Feature Flags
+Advisory:  File FlagSet.fth, Line 8.  Enabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File FlagSet.fth, Line 9.  Disabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File FlagSet.fth, Line 10.  Enabling:  Allow Semicolon for Local Values Separator ("Legacy")
+Advisory:  File FlagSet.fth, Line 11.  Disabling:  Allow Semicolon for Local Values Separator ("Legacy")
+Advisory:  File FlagSet.fth, Line 12.  Enabling:  Display a Message when Semicolon is used as the Local Values Separator
+Advisory:  File FlagSet.fth, Line 13.  Disabling:  Display a Message when Semicolon is used as the Local Values Separator
+Advisory:  File FlagSet.fth, Line 14.  Enabling:  Allow ABORT" macro
+Advisory:  File FlagSet.fth, Line 15.  Disabling:  Allow ABORT" macro
+Advisory:  File FlagSet.fth, Line 16.  Enabling:  ABORT" with implicit IF ... THEN
+Advisory:  File FlagSet.fth, Line 17.  Disabling:  ABORT" with implicit IF ... THEN
+Advisory:  File FlagSet.fth, Line 18.  Enabling:  Allow "\ (Quote-Backslash) to interrupt string parsing
+Advisory:  File FlagSet.fth, Line 19.  Disabling:  Allow "\ (Quote-Backslash) to interrupt string parsing
+Advisory:  File FlagSet.fth, Line 20.  Enabling:  Allow \ (Backslash) to interrupt hex-sequence parsing within a string
+Advisory:  File FlagSet.fth, Line 21.  Disabling:  Allow \ (Backslash) to interrupt hex-sequence parsing within a string
+Advisory:  File FlagSet.fth, Line 22.  Enabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File FlagSet.fth, Line 23.  Disabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File FlagSet.fth, Line 24.  Enabling:  Override "headerless" and force to "headers"
+Advisory:  File FlagSet.fth, Line 25.  Disabling:  Override "headerless" and force to "headers"
+Advisory:  File FlagSet.fth, Line 26.  Enabling:  Override "headerless" and "headers" and force to "external"
+Advisory:  File FlagSet.fth, Line 27.  Disabling:  Override "headerless" and "headers" and force to "external"
+Advisory:  File FlagSet.fth, Line 28.  Enabling:  Display a WARNING message when a duplicate definition is made
+Advisory:  File FlagSet.fth, Line 29.  Disabling:  Display a WARNING message when a duplicate definition is made
+Message:  File FlagSet.fth, Line 31.  Special-Feature Flag settings:
+	NoLocal-Values
+	NoLV-Legacy-Separator
+	NoLV-Legacy-Message
+	NoABORT-Quote
+	NoSun-ABORT-Quote
+	  ABORT-Quote-Throw
+	NoString-remark-escape
+	NoHex-remark-escape
+	NoC-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	NoWarn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Error:  File FlagSet.fth, Line 33.  Unknown Special-Feature Flag:  MoreGimmeMore!
+Error:  File FlagSet.fth, Line 34.  Unknown Special-Feature Flag:  noMorePleaseNoMore!
+Nothing Tokenized.  2 Errors, 25 Advisories, 1 Message.
+Suppressing binary output.
+
+Tokenizing  UserMacros_cpy1.fth   Binary output to UserMacros_cpy1.fc   FLoad-list to UserMacros_cpy1.fl   Dependency-list to UserMacros_cpy1.P 
+Advisory:  File was found in UserMacros_cpy1.fth
+Advisory:  File UserMacros_cpy1.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Message:  File UserMacros_cpy1.fth, Line 15.  (Output Position = 67).  Look out, look out look out! ##Crash!# 
+Message:  File UserMacros_cpy1.fth, Line 16.  (Output Position = 67).  I'll never forget you #Leader of the Pack!#
+Advisory:  File UserMacros_cpy1.fth, Line 21.  (Output Position = 67).  FCode-token Assignment Counter is unchanged from 0x800.
+Message:  File UserMacros_cpy1.fth, Line 29.  (Output Position = 92).   Now for some fun
+Advisory:  File UserMacros_cpy1.fth, Line 46.  (Output Position = 245).  FCode-token Assignment Counter of 0x808 has been saved on stack.
+Advisory:  File UserMacros_cpy1.fth, Line 47.  (Output Position = 245).  FCode-token Assignment Counter was 0x808; has been reset to 0x800.
+Advisory:  File UserMacros_cpy1.fth, Line 48.  (Output Position = 245).  FCode-token Assignment Counter was 0x800; has been advanced to 0x808.
+Advisory:  File UserMacros_cpy1.fth, Line 51.  (Output Position = 245).  FCODE-END encountered; processing...
+toke: checksum is 0x43f3 (246 bytes).  FCodes assigned:
+    From 0x800 to 0x807 in the range that started on line 10
+    None assigned in the range that started on line 47
+    None assigned in the range that started on line 48
+Tokenization Completed.  7 Advisories, 3 Messages.
+toke: wrote 246 bytes to bytecode file 'UserMacros_cpy1.fc'

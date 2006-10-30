@@ -1,0 +1,137 @@
+toke -v -f Trace-Conditionals -I. -I.. -I ../TokoLoco -o CondMacAlias.NoSpc.fc CondMacAlias.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	  Trace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. .. ../TokoLoco
+
+Tokenizing  CondMacAlias.fth   Binary output to CondMacAlias.NoSpc.fc 
+Advisory:  File was found in ./CondMacAlias.fth
+Advisory:  File CondMacAlias.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File CondMacAlias.fth, Line 8.  (Output Position = 8).  FLOADing GlobalLocalValues.fth
+Advisory:  File CondMacAlias.fth, Line 8.  (Output Position = 8).  File was found in ../TokoLoco/GlobalLocalValues.fth
+Advisory:  File GlobalLocalValues.fth, Line 12.  (Output Position = 8).  Enabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File GlobalLocalValues.fth, Line 14.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File GlobalLocalValues.fth, Line 22.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File GlobalLocalValues.fth, Line 22.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Advisory:  File LocalValuesSupport.fth, Line 44.  (Output Position = 8).  Tokenization-Condition is False; Ignoring.
+Advisory:  File LocalValuesSupport.fth, Line 46.  (Output Position = 8).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 44
+Advisory:  File LocalValuesSupport.fth, Line 47.  (Output Position = 8).  Tokenization-Condition is False; Ignoring.
+Advisory:  File LocalValuesSupport.fth, Line 49.  (Output Position = 8).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 47
+Advisory:  File LocalValuesSupport.fth, Line 51.  (Output Position = 8).  Concluding Conditional that started on line 47
+Advisory:  File LocalValuesSupport.fth, Line 52.  (Output Position = 8).  Concluding Conditional that started on line 44
+Advisory:  File LocalValuesSupport.fth, Line 53.  (Output Position = 8).  Tokenization-Condition is True; Processing.
+Advisory:  File LocalValuesSupport.fth, Line 53.  (Output Position = 38).  Concluding Conditional
+Message:  File LocalValuesSupport.fth, Line 58.  (Output Position = 42).  Bypassed instance!
+Message:  File LocalValuesSupport.fth, Line 66.  (Output Position = 61).  Bypassed instance!
+Advisory:  File GlobalLocalValues.fth, Line 28.  (Output Position = 429).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File CondMacAlias.fth, Line 10.  (Output Position = 429).  Initiating Global Scope definitions.
+Advisory:  File CondMacAlias.fth, Line 30.  (Output Position = 429).  Terminating Global Scope definitions; resuming Device-node definitions.
+Message:  File CondMacAlias.fth, Line 34.  (Output Position = 429).   Didn't define  gumblefritz
+Advisory:  File CondMacAlias.fth, Line 36.  (Output Position = 429).  Tokenization-Condition is True; Processing.
+Message:  File CondMacAlias.fth, Line 37.  (Output Position = 429).   Can't ignore  fload.  What if it's got a balancing [endif] ?
+Message:  File CondMacAlias.fth, Line 38.  (Output Position = 429).  Or a balancing  [else]
+Advisory:  File CondMacAlias.fth, Line 39.  (Output Position = 429).  FLOADing CondMacAlias_01.fth
+Advisory:  File CondMacAlias.fth, Line 39.  (Output Position = 429).  File was found in ./CondMacAlias_01.fth
+Warning:  File CondMacAlias_01.fth, Line 7.  (Output Position = 429).  Multi-line comment, started on line 6
+Warning:  File CondMacAlias_01.fth, Line 14.  (Output Position = 429).  Multi-line comment, started on line 9
+Advisory:  File CondMacAlias_01.fth, Line 20.  (Output Position = 429).  Tokenization-Condition is True; Processing.
+Warning:  File CondMacAlias_01.fth, Line 22.  (Output Position = 429).  Multi-line string, started on line 21
+Message:  File CondMacAlias_01.fth, Line 21.  (Output Position = 429).   Dis is da TROO side of da test.  What [else]  ya gonna do?
+              Da message goes on ta heayuh!
+Message:  File CondMacAlias_01.fth, Line 23.  (Output Position = 429).   Yuh got anuddah message.
+             What [then] chum? 
+Warning:  File CondMacAlias_01.fth, Line 24.  (Output Position = 429).  Multi-line user-generated message, started on line 23
+Advisory:  File CondMacAlias_01.fth, Line 25.  (Output Position = 429).  Tokenization-Condition is True; Processing.
+Message:  File CondMacAlias_01.fth, Line 26.  (Output Position = 429).  Now yer in da TROO o' da TROO.  What [then] ?
+Advisory:  File CondMacAlias_01.fth, Line 27.  (Output Position = 429).  Now Ignoring.  Encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 25
+Advisory:  File CondMacAlias_01.fth, Line 29.  (Output Position = 429).  Concluding Conditional that started on line 25
+Message:  File CondMacAlias_01.fth, Line 30.  (Output Position = 429).  Back to da foist level o' da TROO.  Let's try sump'in'...
+Message:  File CondMacAlias_01.fth, Line 32.  (Output Position = 443).  No warning for multiline decl'n and none for comment
+Message:  File CondMacAlias_01.fth, Line 43.  (Output Position = 465).  Multiline warning for this comment
+Warning:  File CondMacAlias_01.fth, Line 45.  (Output Position = 465).  Multi-line comment, started on line 44 in definition of  CONTRALTO  , which started on line 31
+Message:  File CondMacAlias_01.fth, Line 49.  (Output Position = 486).  Warning for multiline decl'n but not comment
+Warning:  File CondMacAlias_01.fth, Line 53.  (Output Position = 486).  Multi-line Local-Values declaration, started on line 50 in definition of  ALTO  , which started on line 48
+Message:  File CondMacAlias_01.fth, Line 54.  (Output Position = 490).  Warning for this multiline comment
+Warning:  File CondMacAlias_01.fth, Line 55.  (Output Position = 490).  Multi-line comment, started on line 54 in definition of  ALTO  , which started on line 48
+Message:  File CondMacAlias_01.fth, Line 59.  (Output Position = 527).  No warning for multiline decl'n, but one for comment
+Warning:  File CondMacAlias_01.fth, Line 62.  (Output Position = 527).  Multi-line comment, started on line 61 in definition of  TENOR  , which started on line 58
+Advisory:  File CondMacAlias_01.fth, Line 69.  (Output Position = 561).  Now Ignoring.  Encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 20
+Warning:  File CondMacAlias_01.fth, Line 71.  (Output Position = 561).  Multi-line string, started on line 70
+Warning:  File CondMacAlias_01.fth, Line 73.  (Output Position = 561).  Multi-line user-generated message, started on line 72
+Advisory:  File CondMacAlias_01.fth, Line 74.  (Output Position = 561).  Tokenization-Condition is False, but Already Ignoring.
+Warning:  File CondMacAlias_01.fth, Line 91.  (Output Position = 561).  Multi-line comment, started on line 90
+Warning:  File CondMacAlias_01.fth, Line 102.  (Output Position = 561).  Multi-line Local-Values declaration, started on line 93
+Warning:  File CondMacAlias_01.fth, Line 106.  (Output Position = 561).  Multi-line comment, started on line 105
+Advisory:  File CondMacAlias_01.fth, Line 114.  (Output Position = 561).  While already ignoring, encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 74
+Advisory:  File CondMacAlias_01.fth, Line 116.  (Output Position = 561).  Concluding Conditional that started on line 74
+Advisory:  File CondMacAlias_01.fth, Line 118.  (Output Position = 561).  Concluding Conditional that started on line 20
+Advisory:  File CondMacAlias.fth, Line 40.  (Output Position = 561).  Now Ignoring.  Encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 36
+Advisory:  File CondMacAlias.fth, Line 43.  (Output Position = 561).  Concluding Conditional that started on line 36
+Advisory:  File CondMacAlias.fth, Line 45.  (Output Position = 561).  Encountered new-device.  Starting new device-node.
+Message:  File CondMacAlias.fth, Line 48.  (Output Position = 579).   Just defined  gumblefritz
+Advisory:  File CondMacAlias.fth, Line 50.  (Output Position = 579).  Tokenization-Condition is True; Processing.
+Advisory:  File CondMacAlias.fth, Line 52.  (Output Position = 579).  FLOADing CondMacAlias_01.fth
+Advisory:  File CondMacAlias.fth, Line 52.  (Output Position = 579).  File was found in ./CondMacAlias_01.fth
+Warning:  File CondMacAlias_01.fth, Line 7.  (Output Position = 579).  Multi-line comment, started on line 6
+Warning:  File CondMacAlias_01.fth, Line 14.  (Output Position = 579).  Multi-line comment, started on line 9
+Advisory:  File CondMacAlias_01.fth, Line 20.  (Output Position = 579).  Tokenization-Condition is False; Ignoring.
+Warning:  File CondMacAlias_01.fth, Line 22.  (Output Position = 579).  Multi-line string, started on line 21
+Warning:  File CondMacAlias_01.fth, Line 24.  (Output Position = 579).  Multi-line user-generated message, started on line 23
+Advisory:  File CondMacAlias_01.fth, Line 25.  (Output Position = 579).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File CondMacAlias_01.fth, Line 27.  (Output Position = 579).  While already ignoring, encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 25
+Advisory:  File CondMacAlias_01.fth, Line 29.  (Output Position = 579).  Concluding Conditional that started on line 25
+Warning:  File CondMacAlias_01.fth, Line 45.  (Output Position = 579).  Multi-line comment, started on line 44
+Warning:  File CondMacAlias_01.fth, Line 53.  (Output Position = 579).  Multi-line Local-Values declaration, started on line 50
+Warning:  File CondMacAlias_01.fth, Line 55.  (Output Position = 579).  Multi-line comment, started on line 54
+Advisory:  File CondMacAlias_01.fth, Line 69.  (Output Position = 579).  Now Processing.  Encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 20
+Warning:  File CondMacAlias_01.fth, Line 71.  (Output Position = 579).  Multi-line string, started on line 70
+Message:  File CondMacAlias_01.fth, Line 70.  (Output Position = 579).  Dis is da FLASE side of da test.  What ya gonna do [then] ? 
+              Ya gonna let da message go on ta heayuh!
+Message:  File CondMacAlias_01.fth, Line 72.  (Output Position = 579).  So dis is anuddah message.
+             What [else] chum? 
+Warning:  File CondMacAlias_01.fth, Line 73.  (Output Position = 579).  Multi-line user-generated message, started on line 72
+Advisory:  File CondMacAlias_01.fth, Line 74.  (Output Position = 579).  Tokenization-Condition is False; Ignoring.
+Warning:  File CondMacAlias_01.fth, Line 91.  (Output Position = 579).  Multi-line comment, started on line 90
+Warning:  File CondMacAlias_01.fth, Line 102.  (Output Position = 579).  Multi-line Local-Values declaration, started on line 93
+Warning:  File CondMacAlias_01.fth, Line 106.  (Output Position = 579).  Multi-line comment, started on line 105
+Advisory:  File CondMacAlias_01.fth, Line 114.  (Output Position = 579).  Now Processing.  Encountered [YOUNWHUDAHMY] belonging to Conditional that started on line 74
+Message:  File CondMacAlias_01.fth, Line 115.  (Output Position = 579).  Dis is da FLASE o' da FLASE.  Yer [then] should be absawbed bot' ways.
+Advisory:  File CondMacAlias_01.fth, Line 116.  (Output Position = 579).  Concluding Conditional that started on line 74
+Message:  File CondMacAlias_01.fth, Line 117.  (Output Position = 579).   Y'should be back to the FLASE side.  Okay, [then]
+Advisory:  File CondMacAlias_01.fth, Line 118.  (Output Position = 579).  Concluding Conditional that started on line 20
+Advisory:  File CondMacAlias.fth, Line 54.  (Output Position = 579).  Concluding Conditional that started on line 50
+Advisory:  File CondMacAlias.fth, Line 56.  (Output Position = 579).  Encountered finish-device.  Resetting definitions of device node that started on line 45
+Advisory:  File CondMacAlias.fth, Line 56.  (Output Position = 579).  Resuming definitions since start of tokenization.
+Advisory:  File CondMacAlias.fth, Line 58.  (Output Position = 581).  FCODE-END encountered; processing...
+toke: checksum is 0xb751 (582 bytes).  Last assigned FCode = 0x810
+Tokenization Completed.  25 Warnings, 50 Advisories, 19 Messages.
+toke: wrote 582 bytes to bytecode file 'CondMacAlias.NoSpc.fc'

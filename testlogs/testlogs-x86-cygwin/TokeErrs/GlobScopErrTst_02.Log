@@ -1,0 +1,75 @@
+toke -v -i -f Local-Values -I. -I../TokoLoco GlobScopErrTst_02.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  GlobScopErrTst_02.fth   Binary output to GlobScopErrTst_02.fc 
+Advisory:  File was found in ./GlobScopErrTst_02.fth
+Advisory:  File GlobScopErrTst_02.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File GlobScopErrTst_02.fth, Line 13.  (Output Position = 8).  [IFEXISTS] is a Global definition, but its alias, [testdict], will only be defined in the top-level device-node, which began on line 5
+Message:  File GlobScopErrTst_02.fth, Line 18.  (Output Position = 8).   Why a fence?
+Advisory:  File GlobScopErrTst_02.fth, Line 21.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File GlobScopErrTst_02.fth, Line 29.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File GlobScopErrTst_02.fth, Line 29.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Message:  File LocalValuesSupport.fth, Line 58.  (Output Position = 42).  Shminstance!
+Message:  File LocalValuesSupport.fth, Line 66.  (Output Position = 62).  Shminstance!
+Warning:  File GlobScopErrTst_02.fth, Line 42.  (Output Position = 527).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Message:  File GlobScopErrTst_02.fth, Line 42.  (Output Position = 538).  Expected error; scope is still global.
+Advisory:  File GlobScopErrTst_02.fth, Line 45.  (Output Position = 546).  Terminating Global Scope definitions; resuming Device-node definitions.
+Message:  File GlobScopErrTst_02.fth, Line 47.  (Output Position = 563).  Device scope in effect.  SB Legit.
+Warning:  File GlobScopErrTst_02.fth, Line 53.  (Output Position = 576).  Multi-line Local-Values declaration, started on line 49 in definition of  DUCKSOUP  , which started on line 48
+Advisory:  File GlobScopErrTst_02.fth, Line 61.  (Output Position = 655).  Initiating Global Scope definitions.
+Error:  File GlobScopErrTst_02.fth, Line 65.  (Output Position = 695).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst_02.fth, Line 65.  (Output Position = 695).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Error:  File GlobScopErrTst_02.fth, Line 68.  (Output Position = 696).  Global Scope is in effect; NEW-DEVICE not allowed.  Attempting to compensate...
+Advisory:  File GlobScopErrTst_02.fth, Line 68.  (Output Position = 696).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File GlobScopErrTst_02.fth, Line 68.  (Output Position = 696).  Encountered NEW-DEVICE.  Starting new device-node.
+Message:  File GlobScopErrTst_02.fth, Line 68.  (Output Position = 698).   Missing a finish-device
+Error:  File GlobScopErrTst_02.fth, Line 72.  (Output Position = 739).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst_02.fth, Line 72.  (Output Position = 739).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Message:  File GlobScopErrTst_02.fth, Line 76.  (Output Position = 759).  Instance should be legit here.
+Advisory:  File GlobScopErrTst_02.fth, Line 78.  (Output Position = 759).  Initiating Global Scope definitions.
+Error:  File GlobScopErrTst_02.fth, Line 82.  (Output Position = 791).  Word  fazooule!  is not in dictionary.
+Advisory:  File GlobScopErrTst_02.fth, Line 82.  (Output Position = 791).  fazooule! is defined as a COLON in the current device-node, which began on line 68
+Error:  File GlobScopErrTst_02.fth, Line 84.  (Output Position = 793).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst_02.fth, Line 84.  (Output Position = 793).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Error:  File GlobScopErrTst_02.fth, Line 87.  (Output Position = 794).  Global Scope is in effect; FINISH-DEVICE not allowed.  Attempting to compensate...
+Advisory:  File GlobScopErrTst_02.fth, Line 87.  (Output Position = 794).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File GlobScopErrTst_02.fth, Line 87.  (Output Position = 794).  Encountered FINISH-DEVICE.  Resetting definitions of device node that started on line 68
+Advisory:  File GlobScopErrTst_02.fth, Line 87.  (Output Position = 794).  Resuming definitions since start of tokenization.
+Error:  File GlobScopErrTst_02.fth, Line 89.  (Output Position = 796).  Encountered finish-device without corresponding NEW-DEVICE.  Resetting definitions since start of tokenization.
+Advisory:  File GlobScopErrTst_02.fth, Line 91.  (Output Position = 798).  FCODE-END encountered; processing...
+toke: checksum is 0xf5f9 (799 bytes).  Last assigned FCode = 0x814
+Tokenization Completed.  7 Errors, 2 Warnings, 19 Advisories, 7 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 799 bytes to bytecode file 'GlobScopErrTst_02.fc'

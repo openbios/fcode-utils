@@ -1,0 +1,42 @@
+toke -v -f NoObsolete-FCode-Warning -o ObsoFCodes.NoWarn.fc ObsoFCodes.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	NoObsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  ObsoFCodes.fth   Binary output to ObsoFCodes.NoWarn.fc 
+Advisory:  File ObsoFCodes.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Error:  File ObsoFCodes.fth, Line 22.  (Output Position = 24).  Cannot apply  [']  to  IF .
+Error:  File ObsoFCodes.fth, Line 25.  (Output Position = 32).  Cannot apply  TO  to  GROUP-CODE .
+Error:  File ObsoFCodes.fth, Line 56.  (Output Position = 99).  J outside of  DO ... DO ... LOOP ... LOOP  structure
+Advisory:  File ObsoFCodes.fth, Line 58.  (Output Position = 99).  FCODE-END encountered; processing...
+Error:  File ObsoFCodes.fth, Line 58.  (Output Position = 100).  End of tokenization before completion of IF on line 22
+toke: checksum is 0x126c (100 bytes).  No FCodes assigned.
+Tokenization Completed.  4 Errors, 2 Advisories.
+Suppressing binary output.

@@ -1,0 +1,246 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xe2a0 (Ok)
+     4:   len:       0x02f1 ( 753 bytes)
+     8: b(lit) ( 0x010 ) 0x20
+    13: drop ( 0x046 ) 
+    14: b(lit) ( 0x010 ) 0x20
+    19: drop ( 0x046 ) 
+    20: b(lit) ( 0x010 ) 0x20
+    25: drop ( 0x046 ) 
+    26: b(lit) ( 0x010 ) 0x20
+    31: b(lit) ( 0x010 ) 0x28
+    36: 2drop ( 0x052 ) 
+    37: b(lit) ( 0x010 ) 0x20
+    42: b(lit) ( 0x010 ) 0x20
+    47: 2drop ( 0x052 ) 
+    48: b(lit) ( 0x010 ) 0x20
+    53: b(lit) ( 0x010 ) 0x14
+    58: 2drop ( 0x052 ) 
+    59: b(lit) ( 0x010 ) 0x20
+    64: named-token ( 0x0b6 ) _local-storage-size_ 0x800
+    88: b(constant) ( 0x0ba ) 
+    89: _local-storage-size_ ( 0x800 ) 
+    91: cells ( 0x069 ) 
+    92: dup ( 0x047 ) 
+    93: instance ( 0x0c0 ) 
+    94: named-token ( 0x0b6 ) locals-storage 0x801
+   112: b(buffer:) ( 0x0bd ) 
+   113: instance ( 0x0c0 ) 
+   114: named-token ( 0x0b6 ) locals-pointer 0x802
+   132: b(value) ( 0x0b8 ) 
+   133: named-token ( 0x0b6 ) not-enough-locals? 0x803
+   155: b(:) ( 0x0b7 ) 
+   156:     + ( 0x01e ) 
+   157:     cells ( 0x069 ) 
+   158:     locals-pointer ( 0x802 ) 
+   160:     swap ( 0x049 ) 
+   161:     - ( 0x01f ) 
+   162:     0< ( 0x036 ) 
+   163: b(;) ( 0x0c2 ) 
+   164: named-token ( 0x0b6 ) .not-enough-locals 0x804
+   186: b(:) ( 0x0b7 ) 
+   187:     cr ( 0x092 ) 
+   188:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   242:     type ( 0x090 ) 
+   243:     cr ( 0x092 ) 
+   244: b(;) ( 0x0c2 ) 
+   245: named-token ( 0x0b6 ) check-enough-locals 0x805
+   268: b(:) ( 0x0b7 ) 
+   269:     not-enough-locals? ( 0x803 ) 
+   271:     b?branch ( 0x014 ) 0x0007 (  dest = 279 )
+   274:         .not-enough-locals ( 0x804 ) 
+   276:         abort ( 0x216 ) 
+   278:     b(>resolve) ( 0x0b2 ) 
+   279: b(;) ( 0x0c2 ) 
+   280: named-token ( 0x0b6 ) push-uninitted-locals 0x806
+   305: b(:) ( 0x0b7 ) 
+   306:     cells ( 0x069 ) 
+   307:     locals-pointer ( 0x802 ) 
+   309:     swap ( 0x049 ) 
+   310:     - ( 0x01f ) 
+   311:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   314: b(;) ( 0x0c2 ) 
+   315: named-token ( 0x0b6 ) push-one-initted-local 0x807
+   341: b(:) ( 0x0b7 ) 
+   342:     locals-pointer ( 0x802 ) 
+   344:     1 ( 0x0a6 ) 
+   345:     cells ( 0x069 ) 
+   346:     - ( 0x01f ) 
+   347:     dup ( 0x047 ) 
+   348:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   351:     locals-storage ( 0x801 ) 
+   353:     + ( 0x01e ) 
+   354:     ! ( 0x072 ) 
+   355: b(;) ( 0x0c2 ) 
+   356: named-token ( 0x0b6 ) push-initted-locals 0x808
+   379: b(:) ( 0x0b7 ) 
+   380:     0 ( 0x0a5 ) 
+   381:     b(?do) ( 0x018 ) 0x0007 (  dest = 389 )
+   384:         push-one-initted-local ( 0x807 ) 
+   386:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 384 )
+   389: b(;) ( 0x0c2 ) 
+   390: named-token ( 0x0b6 ) {push-locals} 0x809
+   407: b(:) ( 0x0b7 ) 
+   408:     2dup ( 0x053 ) 
+   409:     check-enough-locals ( 0x805 ) 
+   411:     push-uninitted-locals ( 0x806 ) 
+   413:     push-initted-locals ( 0x808 ) 
+   415: b(;) ( 0x0c2 ) 
+   416: named-token ( 0x0b6 ) {pop-locals} 0x80a
+   432: b(:) ( 0x0b7 ) 
+   433:     cells ( 0x069 ) 
+   434:     locals-pointer ( 0x802 ) 
+   436:     + ( 0x01e ) 
+   437:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   440: b(;) ( 0x0c2 ) 
+   441: named-token ( 0x0b6 ) _{local} 0x80b
+   453: b(:) ( 0x0b7 ) 
+   454:     cells ( 0x069 ) 
+   455:     locals-pointer ( 0x802 ) 
+   457:     + ( 0x01e ) 
+   458:     locals-storage ( 0x801 ) 
+   460:     + ( 0x01e ) 
+   461: b(;) ( 0x0c2 ) 
+   462: named-token ( 0x0b6 ) catch 0x80c
+   471: b(:) ( 0x0b7 ) 
+   472:     locals-pointer ( 0x802 ) 
+   474:     >r ( 0x030 ) 
+   475:     catch ( 0x217 ) 
+   477:     r> ( 0x031 ) 
+   478:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   481: b(;) ( 0x0c2 ) 
+   482: named-token ( 0x0b6 ) faber 0x80d
+   491: b(:) ( 0x0b7 ) 
+   492: b(;) ( 0x0c2 ) 
+   493: b(lit) ( 0x010 ) 0x28
+   498: * ( 0x020 ) 
+   499: alloc-mem ( 0x08b ) 
+   500: base ( 0x0a0 ) 
+   501: @ ( 0x06d ) 
+   502: swap ( 0x049 ) 
+   503: b(lit) ( 0x010 ) 0x10
+   508: base ( 0x0a0 ) 
+   509: ! ( 0x072 ) 
+   510: . ( 0x09d ) 
+   511: base ( 0x0a0 ) 
+   512: ! ( 0x072 ) 
+   513: type ( 0x090 ) 
+   514: base ( 0x0a0 ) 
+   515: @ ( 0x06d ) 
+   516: swap ( 0x049 ) 
+   517: b(lit) ( 0x010 ) 0xa
+   522: base ( 0x0a0 ) 
+   523: ! ( 0x072 ) 
+   524: . ( 0x09d ) 
+   525: base ( 0x0a0 ) 
+   526: ! ( 0x072 ) 
+   527: type ( 0x090 ) 
+   528: count ( 0x084 ) 
+   529: named-token ( 0x0b6 ) miracle 0x80e
+   540: b(:) ( 0x0b7 ) 
+   541:     b(") ( 0x012 ) ( len=6 )
+                    " Nyuk! "
+   549:     type ( 0x090 ) 
+   550:     base ( 0x0a0 ) 
+   551:     @ ( 0x06d ) 
+   552:     swap ( 0x049 ) 
+   553:     b(lit) ( 0x010 ) 0x10
+   558:     base ( 0x0a0 ) 
+   559:     ! ( 0x072 ) 
+   560:     . ( 0x09d ) 
+   561:     base ( 0x0a0 ) 
+   562:     ! ( 0x072 ) 
+   563:     cr ( 0x092 ) 
+   564:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " Why, you... "
+   578:     type ( 0x090 ) 
+   579:     base ( 0x0a0 ) 
+   580:     @ ( 0x06d ) 
+   581:     swap ( 0x049 ) 
+   582:     b(lit) ( 0x010 ) 0xa
+   587:     base ( 0x0a0 ) 
+   588:     ! ( 0x072 ) 
+   589:     . ( 0x09d ) 
+   590:     base ( 0x0a0 ) 
+   591:     ! ( 0x072 ) 
+   592:     cr ( 0x092 ) 
+   593:     b(") ( 0x012 ) ( len=6 )
+                    " Ouch! "
+   601:     type ( 0x090 ) 
+   602:     . ( 0x09d ) 
+   603:     + ( 0x01e ) 
+   604:     + ( 0x01e ) 
+   605:     + ( 0x01e ) 
+   606:     b(lit) ( 0x010 ) 0x8
+   611:     faber ( 0x80d ) 
+   613:     type ( 0x090 ) 
+   614:     free-mem ( 0x08c ) 
+   615:     b(lit) ( 0x010 ) 0x8
+   620:     faber ( 0x80d ) 
+   622:     type ( 0x090 ) 
+   623:     free-mem ( 0x08c ) 
+   624:     b(lit) ( 0x010 ) 0x8
+   629:     faber ( 0x80d ) 
+   631:     type ( 0x090 ) 
+   632:     free-mem ( 0x08c ) 
+   633: b(;) ( 0x0c2 ) 
+   634: named-token ( 0x0b6 ) ordinary 0x80f
+   646: b(:) ( 0x0b7 ) 
+   647:     b(lit) ( 0x010 ) 0x7b
+   652:     b(lit) ( 0x010 ) 0x1c8
+   657:     b(lit) ( 0x010 ) 0x315
+   662:     miracle ( 0x80e ) 
+   664: b(;) ( 0x0c2 ) 
+   665: named-token ( 0x0b6 ) ducksoup 0x810
+   677: b(:) ( 0x0b7 ) 
+   678:     * ( 0x020 ) 
+   679:     + ( 0x01e ) 
+   680:     = ( 0x03c ) 
+   681:     b?branch ( 0x014 ) 0x0005 (  dest = 687 )
+   684:         swap ( 0x049 ) 
+   685:         exit ( 0x033 ) 
+   686:     b(>resolve) ( 0x0b2 ) 
+   687:     + ( 0x01e ) 
+   688:     swap ( 0x049 ) 
+   689:     + ( 0x01e ) 
+   690: b(;) ( 0x0c2 ) 
+   691: named-token ( 0x0b6 ) coconuts 0x811
+   703: b(:) ( 0x0b7 ) 
+   704: b(;) ( 0x0c2 ) 
+   705: 2dup ( 0x053 ) 
+   706: < ( 0x03a ) 
+   707: b?branch ( 0x014 ) 0x0004 (  dest = 712 )
+   710:     swap ( 0x049 ) 
+   711: b(>resolve) ( 0x0b2 ) 
+   712: 2dup ( 0x053 ) 
+   713: / ( 0x021 ) 
+   714: 2dup ( 0x053 ) 
+   715: - ( 0x01f ) 
+   716: * ( 0x020 ) 
+   717: named-token ( 0x0b6 ) spaulding 0x812
+   730: b(:) ( 0x0b7 ) 
+   731:     - ( 0x01f ) 
+   732:     * ( 0x020 ) 
+   733:     / ( 0x021 ) 
+   734: b(;) ( 0x0c2 ) 
+   735: named-token ( 0x0b6 ) dumont 0x813
+   745: b(:) ( 0x0b7 ) 
+   746:     / ( 0x021 ) 
+   747:     - ( 0x01f ) 
+   748:     * ( 0x020 ) 
+   749: b(;) ( 0x0c2 ) 
+   750: ordinary ( 0x80f ) 
+   752: end0 ( 0x000 ) 
+\  Detokenization finished normally after 753 bytes.
+End of file.
+

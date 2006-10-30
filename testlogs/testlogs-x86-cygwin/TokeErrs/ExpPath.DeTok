@@ -1,0 +1,91 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x0879 (Ok)
+     4:   len:       0x0937 ( 2359 bytes)
+     8: b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                " ${PWD:h}/TokeCommon/OneBeer.fth"
+    41: type ( 0x090 ) 
+    42: b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                " ${PWD}/../TokeCommon/OneBeer.fth"
+    76: type ( 0x090 ) 
+    77: b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                " Oh, one Bottle of Beer on the wall,"
+   114: type ( 0x090 ) 
+   115: cr ( 0x092 ) 
+   116: b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                "     one Bottle of Beer!,"
+   142: type ( 0x090 ) 
+   143: cr ( 0x092 ) 
+   144: b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                " Take it down and pass it around..."
+   180: type ( 0x090 ) 
+   181: cr ( 0x092 ) 
+   182: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " How dry I am!  How dry I am!"
+   212: type ( 0x090 ) 
+   213: cr ( 0x092 ) 
+   214: b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                " No body knows how dry I am."
+   243: type ( 0x090 ) 
+   244: cr ( 0x092 ) 
+   245: b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                " How ... Dry I ... Aaaammm."
+   273: type ( 0x090 ) 
+   274: cr ( 0x092 ) 
+   275: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " $PWD/../TokeCommon/BinData.bin"
+   307: type ( 0x090 ) 
+   308: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " U"( 89 e5 83 ec 08 83 e4 f0 a1 )0@"( 85 c0 )t"( 01 cc d9 )}"( fe 0f b7 )E"( fe )%"( c0 f0 ff ff )f"( 89 )E"( fe 0f b7 )E"( fe 0d )?"( 03 )f"( 89 )E"( fe d9 )m"( fe c7 04 )$P"( 10 )@"( e8 81 01 c9 c3 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 83 ec 18 83 e4 f0 b8 83 c0 0f 83 c0 0f c1 e8 04 c1 e0 04 89 )E"( f0 8b )E"( f0 e8 1b 01 e8 a6 01 c6 )E"( f7 83 )}"( 08 01 7f 18 c7 04 )$ @"( e8 f0 01 c7 04 )$"( 01 e8 d4 01 8b )E"( 0c 83 c0 04 8b 89 )D$"( 04 c7 04 )$"( 10 ) @"( e8 cc 01 8b )E"( 0c 83 c0 08 8b 89 )D$"( 04 c7 04 )$"( 1c ) @"( e8 b4 01 c7 )D$"( 04 )( @"( 8b )E"( 0c 83 c0 04 8b 89 04 )$"( e8 )|"( 01 89 )E"( fc c7 )D$"( 04 )+ @"( 8b )E"( 0c 83 c0 08 8b 89 04 )$"( e8 )a"( 01 89 )E"( f8 83 )}"( fc )t"( 06 83 )}"( f8 )u"( 18 c7 04 )$. @"( e8 )f"( 01 c7 04 )$"( 02 e8 )J"( 01 8b )E"( fc 89 04 )$"( e8 1f 01 88 )E"( f7 )"
+   565: encode-bytes ( 0x115 ) 
+   567: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " "( 8b )E"( fc 0f bf )@"( 0c 83 e0 ) "( 85 c0 )t"( 02 eb 1b 80 )}"( f7 )t"( dc 8b )E"( f8 89 )D$"( 04 0f be )E"( f7 89 04 )$"( e8 e3 eb c7 8b )E"( f8 89 04 )$"( e8 c6 8b )E"( fc 89 04 )$"( e8 bb c7 04 )$"( e8 ef 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 )Q"( 89 e1 83 c1 08 )="( 10 )r"( 10 81 e9 10 83 09 )-"( 10 eb e9 ))"( c1 83 09 89 e0 89 cc 8b 08 8b )@"( 04 ff e0 90 90 90 )U1"( c0 89 e5 83 ec 18 89 )u"( fc 8b )u"( 08 89 )]"( f8 89 )D$"( 04 89 )4$"( e8 b3 83 ec 08 85 c0 )t"( 0d c7 04 )$"( ff 15 a4 )@@"( 81 ec c0 8d )\$"( 17 83 e3 f0 c7 03 89 )\$"( 04 89 )4$"( e8 80 83 ec 08 89 1c )$"( eb d3 90 90 90 90 90 90 90 90 ff )%"( 90 )@@"( 90 90 ff )%"( ac )@@"( 90 90 ff )%"( b4 )@@"( 90 90 ff )%"( b0 )@@"( 90 90 ff )%"( 94 )@@"( 90 90 90 90 90 90 90 90 90 90 ff )%"( a8 )@@"( 90 90 ff )%"( c0 )@@"( 90 90 )U1"( c0 89 e5 )S"( 83 ec )"
+   824: encode-bytes ( 0x115 ) 
+   826: encode+ ( 0x112 ) 
+   828: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " "( 04 8b )]"( 0c 85 db 0f 84 ef c7 )C"( 04 a8 )1"( c9 ba 84 c7 )C"( 08 ed 03 85 c0 c7 )C"( 0c 12 89 8b 80 89 93 84 c7 )C,"( e0 14 )@"( c7 )C0"( e8 14 )@"( c7 )C"( 14 14 )0@"( 0f 85 98 a1 98 )@@"( 89 )C"( 10 c7 )Cx"( 8b )E"( 08 c7 )CH"( b0 14 )@"( c7 )CL"( a0 14 )@"( 89 )C("( 8b )E"( c7 )CP"( 90 14 )@"( c7 )CT"( 80 14 )@"( c7 )C$"( 10 )0@"( 89 03 c7 )C"( 18 )p"( 14 )@"( c7 )C"( 1c )`"( 14 )@"( c7 )C P"( 14 )@"( c7 )CD@"( 14 )@"( c7 04 )$"( e8 82 01 89 )C|"( 83 ec 04 c7 )C4 @"( c7 )C8 @"( c7 )C<0@"( c7 )C@@0@"( e8 9b b8 01 8b )]"( fc c9 c2 08 8b 93 a4 a1 98 )@@"( 89 10 e9 )^"( ff ff ff c7 04 )$"( 08 e8 )!"( 01 89 c2 )1"( c0 83 fa ff )t"( d2 89 d3 b8 01 e9 f0 fe ff ff 90 90 90 90 90 90 90 90 90 90 90 90 ff )%"( a4 )@@"( 90 90 ff )%"( 94 )@@"( 90 90 )U"( 89 e5 8b )M"( 08 )V"( 8b )u"( 10 )S"( 8b )]"( 0c eb 0c 8b )Q"
+  1085: encode-bytes ( 0x115 ) 
+  1087: encode+ ( 0x112 ) 
+  1089: b(") ( 0x012 ) ( len=0xb3 [179 bytes] )
+                " "( 04 8b 01 83 c1 08 01 f2 01 02 )9"( d9 )r"( f0 )[^]"( c3 8d b6 8d bf )U"( ba )@"( 89 e5 b8 )P @"( 83 ec 0c 89 )T$"( 08 89 )D$"( 04 c7 04 )$P @"( e8 ac ff ff ff c9 c3 90 90 90 90 90 90 90 90 90 90 ff )%"( 9c )@@"( 90 90 ff )%"( c4 )@@"( 90 90 ff )%"( b8 )@@"( 90 90 ff )%"( bc )@@"( 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 ff )%"( a0 )@@"( 90 90 ff )%"( d4 )@@"( 90 90 ff ff ff ff ff ff ff ff )"
+  1270: encode-bytes ( 0x115 ) 
+  1272: encode+ ( 0x112 ) 
+  1274: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " $PWD/../TokeCommon/BinData.bin"
+  1306: property ( 0x110 ) 
+  1308: b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                " $PWD}/../TokeCommon/BinData.bin"
+  1341: type ( 0x090 ) 
+  1342: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " U"( 89 e5 83 ec 08 83 e4 f0 a1 )0@"( 85 c0 )t"( 01 cc d9 )}"( fe 0f b7 )E"( fe )%"( c0 f0 ff ff )f"( 89 )E"( fe 0f b7 )E"( fe 0d )?"( 03 )f"( 89 )E"( fe d9 )m"( fe c7 04 )$P"( 10 )@"( e8 81 01 c9 c3 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 83 ec 18 83 e4 f0 b8 83 c0 0f 83 c0 0f c1 e8 04 c1 e0 04 89 )E"( f0 8b )E"( f0 e8 1b 01 e8 a6 01 c6 )E"( f7 83 )}"( 08 01 7f 18 c7 04 )$ @"( e8 f0 01 c7 04 )$"( 01 e8 d4 01 8b )E"( 0c 83 c0 04 8b 89 )D$"( 04 c7 04 )$"( 10 ) @"( e8 cc 01 8b )E"( 0c 83 c0 08 8b 89 )D$"( 04 c7 04 )$"( 1c ) @"( e8 b4 01 c7 )D$"( 04 )( @"( 8b )E"( 0c 83 c0 04 8b 89 04 )$"( e8 )|"( 01 89 )E"( fc c7 )D$"( 04 )+ @"( 8b )E"( 0c 83 c0 08 8b 89 04 )$"( e8 )a"( 01 89 )E"( f8 83 )}"( fc )t"( 06 83 )}"( f8 )u"( 18 c7 04 )$. @"( e8 )f"( 01 c7 04 )$"( 02 e8 )J"( 01 8b )E"( fc 89 04 )$"( e8 1f 01 88 )E"( f7 )"
+  1599: encode-bytes ( 0x115 ) 
+  1601: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " "( 8b )E"( fc 0f bf )@"( 0c 83 e0 ) "( 85 c0 )t"( 02 eb 1b 80 )}"( f7 )t"( dc 8b )E"( f8 89 )D$"( 04 0f be )E"( f7 89 04 )$"( e8 e3 eb c7 8b )E"( f8 89 04 )$"( e8 c6 8b )E"( fc 89 04 )$"( e8 bb c7 04 )$"( e8 ef 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 )Q"( 89 e1 83 c1 08 )="( 10 )r"( 10 81 e9 10 83 09 )-"( 10 eb e9 ))"( c1 83 09 89 e0 89 cc 8b 08 8b )@"( 04 ff e0 90 90 90 )U1"( c0 89 e5 83 ec 18 89 )u"( fc 8b )u"( 08 89 )]"( f8 89 )D$"( 04 89 )4$"( e8 b3 83 ec 08 85 c0 )t"( 0d c7 04 )$"( ff 15 a4 )@@"( 81 ec c0 8d )\$"( 17 83 e3 f0 c7 03 89 )\$"( 04 89 )4$"( e8 80 83 ec 08 89 1c )$"( eb d3 90 90 90 90 90 90 90 90 ff )%"( 90 )@@"( 90 90 ff )%"( ac )@@"( 90 90 ff )%"( b4 )@@"( 90 90 ff )%"( b0 )@@"( 90 90 ff )%"( 94 )@@"( 90 90 90 90 90 90 90 90 90 90 ff )%"( a8 )@@"( 90 90 ff )%"( c0 )@@"( 90 90 )U1"( c0 89 e5 )S"( 83 ec )"
+  1858: encode-bytes ( 0x115 ) 
+  1860: encode+ ( 0x112 ) 
+  1862: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " "( 04 8b )]"( 0c 85 db 0f 84 ef c7 )C"( 04 a8 )1"( c9 ba 84 c7 )C"( 08 ed 03 85 c0 c7 )C"( 0c 12 89 8b 80 89 93 84 c7 )C,"( e0 14 )@"( c7 )C0"( e8 14 )@"( c7 )C"( 14 14 )0@"( 0f 85 98 a1 98 )@@"( 89 )C"( 10 c7 )Cx"( 8b )E"( 08 c7 )CH"( b0 14 )@"( c7 )CL"( a0 14 )@"( 89 )C("( 8b )E"( c7 )CP"( 90 14 )@"( c7 )CT"( 80 14 )@"( c7 )C$"( 10 )0@"( 89 03 c7 )C"( 18 )p"( 14 )@"( c7 )C"( 1c )`"( 14 )@"( c7 )C P"( 14 )@"( c7 )CD@"( 14 )@"( c7 04 )$"( e8 82 01 89 )C|"( 83 ec 04 c7 )C4 @"( c7 )C8 @"( c7 )C<0@"( c7 )C@@0@"( e8 9b b8 01 8b )]"( fc c9 c2 08 8b 93 a4 a1 98 )@@"( 89 10 e9 )^"( ff ff ff c7 04 )$"( 08 e8 )!"( 01 89 c2 )1"( c0 83 fa ff )t"( d2 89 d3 b8 01 e9 f0 fe ff ff 90 90 90 90 90 90 90 90 90 90 90 90 ff )%"( a4 )@@"( 90 90 ff )%"( 94 )@@"( 90 90 )U"( 89 e5 8b )M"( 08 )V"( 8b )u"( 10 )S"( 8b )]"( 0c eb 0c 8b )Q"
+  2119: encode-bytes ( 0x115 ) 
+  2121: encode+ ( 0x112 ) 
+  2123: b(") ( 0x012 ) ( len=0xb3 [179 bytes] )
+                " "( 04 8b 01 83 c1 08 01 f2 01 02 )9"( d9 )r"( f0 )[^]"( c3 8d b6 8d bf )U"( ba )@"( 89 e5 b8 )P @"( 83 ec 0c 89 )T$"( 08 89 )D$"( 04 c7 04 )$P @"( e8 ac ff ff ff c9 c3 90 90 90 90 90 90 90 90 90 90 ff )%"( 9c )@@"( 90 90 ff )%"( c4 )@@"( 90 90 ff )%"( b8 )@@"( 90 90 ff )%"( bc )@@"( 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 )U"( 89 e5 )]"( c3 90 90 90 90 90 90 90 90 90 90 90 ff )%"( a0 )@@"( 90 90 ff )%"( d4 )@@"( 90 90 ff ff ff ff ff ff ff ff )"
+  2304: encode-bytes ( 0x115 ) 
+  2306: encode+ ( 0x112 ) 
+  2308: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " $PWD/../TokeCommon/ZeroLen.bin"
+  2340: type ( 0x090 ) 
+  2341: b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                " That is all..."
+  2357: type ( 0x090 ) 
+  2358: end0 ( 0x000 ) 
+\  Detokenization finished normally after 2359 bytes.
+End of file.
+

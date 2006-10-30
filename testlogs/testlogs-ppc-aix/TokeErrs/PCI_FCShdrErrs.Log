@@ -1,0 +1,24 @@
+toke -v -i PCI_FCShdrErrs.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  PCI_FCShdrErrs.fth   Binary output to PCI_FCShdrErrs.fc 
+Advisory:  File PCI_FCShdrErrs.fth, Line 10.  PCI header revision=0xc020
+Advisory:  File PCI_FCShdrErrs.fth, Line 17.  (Output Position = 52).  PCI header vendor id=0xdec1, device id=0xc0ed, class=080201
+Advisory:  File PCI_FCShdrErrs.fth, Line 21.  (Output Position = 68).  (PCI-Block Position = 16).  FCODE-VERSION2 encountered; processing...
+Error:  File PCI_FCShdrErrs.fth, Line 21.  (Output Position = 68).  (PCI-Block Position = 16).  Cannot create FCode header after FCode output has begun.
+Advisory:  File PCI_FCShdrErrs.fth, Line 26.  (Output Position = 103).  (PCI-Block Position = 51).  FCODE-END encountered; processing...
+toke: checksum is 0x0926 (36 bytes).  Last assigned FCode = 0x800
+Adding 408 bytes of zero padding to PCI image.
+
+Tokenization Completed.  1 Error, 4 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 512 bytes to bytecode file 'PCI_FCShdrErrs.fc'

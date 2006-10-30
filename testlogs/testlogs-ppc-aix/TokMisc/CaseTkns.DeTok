@@ -1,0 +1,43 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x5819 (Ok)
+     4:   len:       0x011f ( 287 bytes)
+     8: b(lit) ( 0x010 ) 0x123
+    13: named-token ( 0x0b6 ) MiXeD-uP-CaSes-natch 0x800
+    37: b(constant) ( 0x0ba ) 
+    38: b(lit) ( 0x010 ) 0x456
+    43: named-token ( 0x0b6 ) mixed-up-to-lower-case 0x801
+    69: b(constant) ( 0x0ba ) 
+    70: b(") ( 0x012 ) ( len=0x26 [38 bytes] )
+                " But This sTrInG KeePS ItS MIxeD CaSEs."
+   110: type ( 0x090 ) 
+   111: b(lit) ( 0x010 ) 0x789
+   116: named-token ( 0x0b6 ) UP-MIXED-TO-UPPER-CASE 0x802
+   142: b(constant) ( 0x0ba ) 
+   143: b(") ( 0x012 ) ( len=0x26 [38 bytes] )
+                " THis StRiNG KeEpS ItS MiXeD CaSeS tOO."
+   183: type ( 0x090 ) 
+   184: b(lit) ( 0x010 ) 0xdefeca8e
+   189: new-token ( 0x0b5 ) 0x803
+   192: b(constant) ( 0x0ba ) 
+   193: b(lit) ( 0x010 ) 0xabc
+   198: named-token ( 0x0b6 ) mixed-back-to-lower-case 0x804
+   226: b(constant) ( 0x0ba ) 
+   227: b(lit) ( 0x010 ) 0xdef
+   232: named-token ( 0x0b6 ) mixed-but-still-to-lower 0x805
+   260: b(constant) ( 0x0ba ) 
+   261: b(lit) ( 0x010 ) 0xfed
+   266: named-token ( 0x0b6 ) BaCk-To-tHe-MiX 0x806
+   285: b(constant) ( 0x0ba ) 
+   286: end0 ( 0x000 ) 
+\  Detokenization finished normally after 287 bytes.
+End of file.
+

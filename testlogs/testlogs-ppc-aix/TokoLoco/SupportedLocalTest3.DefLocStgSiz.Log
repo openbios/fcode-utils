@@ -1,0 +1,43 @@
+toke -v -f Local-VALUes -d '_loCAL-STORagE-SIZe_=h# 42' -l -o SupportedLocalTest3.DefLocStgSiz.fc SupportedLocalTest3.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+User-Defined Symbols:
+	_loCAL-STORagE-SIZe_ = h# 42
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  SupportedLocalTest3.fth   Binary output to SupportedLocalTest3.DefLocStgSiz.fc   FLoad-list to SupportedLocalTest3.DefLocStgSiz.fl 
+Advisory:  File SupportedLocalTest3.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File SupportedLocalTest3.fth, Line 11.  (Output Position = 38).  FLOADing LocalValuesSupport.fth
+Warning:  File LocalValuesSupport.fth, Line 53.  (Output Position = 43).  Duplicate definition:   _local-storage-size_  already exists as a CONSTANT in the top-level device-node, which began on line 5 of file SupportedLocalTest3.fth
+Advisory:  File SupportedLocalTest3.fth, Line 21.  (Output Position = 533).  FCODE-END encountered; processing...
+toke: checksum is 0xab37 (534 bytes).  Last assigned FCode = 0x80e
+Tokenization Completed.  1 Warning, 3 Advisories.
+toke: wrote 534 bytes to bytecode file 'SupportedLocalTest3.DefLocStgSiz.fc'

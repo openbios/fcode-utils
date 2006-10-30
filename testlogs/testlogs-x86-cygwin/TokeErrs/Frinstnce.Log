@@ -1,0 +1,48 @@
+toke -v -i Frinstnce.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  Frinstnce.fth   Binary output to Frinstnce.fc 
+Advisory:  File Frinstnce.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Warning:  File Frinstnce.fth, Line 12.  (Output Position = 9).  COLON definition not modified by "INSTANCE" on line 10
+Warning:  File Frinstnce.fth, Line 13.  (Output Position = 25).  COLON definition not modified by "INSTANCE" on line 10
+Warning:  File Frinstnce.fth, Line 14.  (Output Position = 41).  COLON definition not modified by "INSTANCE" on line 10
+Warning:  File Frinstnce.fth, Line 15.  (Output Position = 60).  VARIABLE definition was modified by "INSTANCE" on line 10
+Warning:  File Frinstnce.fth, Line 19.  (Output Position = 71).  Unresolved "INSTANCE" on line 17
+Warning:  File Frinstnce.fth, Line 21.  (Output Position = 72).  Unresolved "INSTANCE" on line 19
+Advisory:  File Frinstnce.fth, Line 21.  (Output Position = 72).  Encountered new-device.  Starting new device-node.
+Warning:  File Frinstnce.fth, Line 22.  (Output Position = 74).  COLON definition not modified by "INSTANCE" on line 19
+Warning:  File Frinstnce.fth, Line 23.  (Output Position = 106).  COLON definition not modified by "INSTANCE" on line 19
+Warning:  File Frinstnce.fth, Line 24.  (Output Position = 134).  VALUE definition was modified by "INSTANCE" on line 19
+Warning:  File Frinstnce.fth, Line 28.  (Output Position = 146).  Unresolved "INSTANCE" on line 26
+Advisory:  File Frinstnce.fth, Line 28.  (Output Position = 146).  Encountered finish-device.  Resetting definitions of device node that started on line 21
+Advisory:  File Frinstnce.fth, Line 28.  (Output Position = 146).  Resuming definitions since start of tokenization.
+Error:  File Frinstnce.fth, Line 30.  (Output Position = 148).  Global Scope not allowed.  "Instance" is in effect; issued on line 26
+Warning:  File Frinstnce.fth, Line 31.  (Output Position = 153).  BUFFER definition was modified by "INSTANCE" on line 26
+Warning:  File Frinstnce.fth, Line 33.  (Output Position = 165).  DEVICE-DEFINITIONS -- Device-node Scope already in effect; ignoring.
+Advisory:  File Frinstnce.fth, Line 35.  (Output Position = 165).  Initiating Global Scope definitions.
+Error:  File Frinstnce.fth, Line 56.  (Output Position = 308).  The word  INSTANCE  should not be used inside of a colon definition.
+Warning:  File Frinstnce.fth, Line 60.  (Output Position = 312).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Advisory:  File Frinstnce.fth, Line 62.  (Output Position = 312).  Terminating Global Scope definitions; resuming Device-node definitions.
+Error:  File Frinstnce.fth, Line 66.  (Output Position = 326).  The word  INSTANCE  should not be used inside of a colon definition.
+Advisory:  File Frinstnce.fth, Line 70.  (Output Position = 330).  Encountered new-device.  Starting new device-node.
+Warning:  File Frinstnce.fth, Line 76.  (Output Position = 351).  Unresolved "INSTANCE" on line 72
+Error:  File Frinstnce.fth, Line 80.  (Output Position = 402).  The word  INSTANCE  should not be used inside of a colon definition.
+Warning:  File Frinstnce.fth, Line 85.  (Output Position = 407).  Unresolved "INSTANCE" on line 83
+Advisory:  File Frinstnce.fth, Line 85.  (Output Position = 407).  Encountered finish-device.  Resetting definitions of device node that started on line 70
+Advisory:  File Frinstnce.fth, Line 85.  (Output Position = 407).  Resuming definitions since start of tokenization.
+Warning:  File Frinstnce.fth, Line 87.  (Output Position = 409).  Unresolved "INSTANCE" on line 83
+Advisory:  File Frinstnce.fth, Line 89.  (Output Position = 410).  FCODE-END encountered; processing...
+Error:  File Frinstnce.fth, Line 89.  (Output Position = 411).  Unresolved "INSTANCE" on line 87
+toke: checksum is 0x8662 (411 bytes).  Last assigned FCode = 0x80e
+Tokenization Completed.  5 Errors, 16 Warnings, 10 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 411 bytes to bytecode file 'Frinstnce.fc'

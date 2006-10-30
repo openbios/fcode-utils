@@ -1,0 +1,44 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x3685 (Ok)
+     4:   len:       0x00b1 ( 177 bytes)
+     8: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " Hey, Pa!  Hands! HaHa! "
+    33: type ( 0x090 ) 
+    34: b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                " What's clover?"
+    50: type ( 0x090 ) 
+    51: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " Hey, Pa!  Hands! HaHa! "
+    76: type ( 0x090 ) 
+    77: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " Look out, look out look out! "( 0a )"
+   109: type ( 0x090 ) 
+   110: named-token ( 0x0b6 ) whatzit 0x800
+   121: b(:) ( 0x0b7 ) 
+   122:     b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                    " What's clover?"
+   138:     type ( 0x090 ) 
+   139:     dup ( 0x047 ) 
+   140:     b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                    " What's clover?"
+   156:     type ( 0x090 ) 
+   157:     dup ( 0x047 ) 
+   158:     2 ( 0x0a7 ) 
+   159:     + ( 0x01e ) 
+   160: b(;) ( 0x0c2 ) 
+   161: named-token ( 0x0b6 ) now-what? 0x801
+   174: b(:) ( 0x0b7 ) 
+   175: b(;) ( 0x0c2 ) 
+   176: end0 ( 0x000 ) 
+\  Detokenization finished normally after 177 bytes.
+End of file.
+

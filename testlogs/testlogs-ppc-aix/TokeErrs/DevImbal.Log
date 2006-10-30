@@ -1,0 +1,60 @@
+toke -v -i DevImbal.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  DevImbal.fth   Binary output to DevImbal.fc 
+Advisory:  File DevImbal.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Advisory:  File DevImbal.fth, Line 8.  (Output Position = 8).  RB! is a Global definition, but its alias, rc!, will only be defined in the top-level device-node, which began on line 4
+Message:  File DevImbal.fth, Line 10.  (Output Position = 8).   Top-Level (root) device-node
+Message:  File DevImbal.fth, Line 16.  (Output Position = 101).   Control structure starts here
+Message:  File DevImbal.fth, Line 19.  (Output Position = 122).   Forgot the "loop" here.
+Message:  File DevImbal.fth, Line 21.  (Output Position = 122).   Subsidiary (child) device-node
+Warning:  File DevImbal.fth, Line 22.  (Output Position = 122).  NEW-DEVICE encountered before completion of DO on line 17
+Advisory:  File DevImbal.fth, Line 22.  (Output Position = 122).  Encountered new-device.  Starting new device-node.
+Error:  File DevImbal.fth, Line 23.  (Output Position = 124).  CREATE definition before completion of DO on line 17
+Error:  File DevImbal.fth, Line 24.  (Output Position = 157).  COLON definition before completion of DO on line 17
+Error:  File DevImbal.fth, Line 24.  (Output Position = 167).  Word  eek!  is not in dictionary.
+Error:  File DevImbal.fth, Line 25.  (Output Position = 184).  COLON definition before completion of DO on line 17
+Error:  File DevImbal.fth, Line 26.  (Output Position = 208).  Word  greek  is not in dictionary.
+Error:  File DevImbal.fth, Line 27.  (Output Position = 221).  Word  freek  is not in dictionary.
+Message:  File DevImbal.fth, Line 31.  (Output Position = 245).   About to access method from parent node
+Error:  File DevImbal.fth, Line 32.  (Output Position = 245).  COLON definition before completion of DO on line 17
+Error:  File DevImbal.fth, Line 33.  (Output Position = 259).  Word  eek!  is not in dictionary.
+Error:  File DevImbal.fth, Line 34.  (Output Position = 259).  Word  freek  is not in dictionary.
+Error:  File DevImbal.fth, Line 35.  (Output Position = 259).  Word  achin  is not in dictionary.
+Advisory:  File DevImbal.fth, Line 35.  (Output Position = 259).  achin is defined as a CREATE in the top-level device-node, which began on line 4
+Error:  File DevImbal.fth, Line 36.  (Output Position = 259).  Word  greek  is not in dictionary.
+Error:  File DevImbal.fth, Line 38.  (Output Position = 260).  COLON definition before completion of DO on line 17
+Error:  File DevImbal.fth, Line 38.  (Output Position = 269).  Word  hierareek  is not in dictionary.
+Error:  File DevImbal.fth, Line 38.  (Output Position = 269).  Word  freek  is not in dictionary.
+Error:  File DevImbal.fth, Line 38.  (Output Position = 269).  Word  greek  is not in dictionary.
+Message:  File DevImbal.fth, Line 39.  (Output Position = 270).   about to end child node
+Message:  File DevImbal.fth, Line 40.  (Output Position = 270).  But first a bogus incomplete control structure
+Message:  File DevImbal.fth, Line 43.  (Output Position = 305).  "Forgot" the then here...
+Warning:  File DevImbal.fth, Line 44.  (Output Position = 305).  FINISH-DEVICE encountered before completion of IF on line 41
+Warning:  File DevImbal.fth, Line 44.  (Output Position = 305).  FINISH-DEVICE encountered before completion of DO on line 17
+Advisory:  File DevImbal.fth, Line 44.  (Output Position = 305).  Encountered finish-device.  Resetting definitions of device node that started on line 22
+Advisory:  File DevImbal.fth, Line 44.  (Output Position = 305).  Resuming definitions since start of tokenization.
+Message:  File DevImbal.fth, Line 45.  (Output Position = 307).   We can access methods from the root node now
+Error:  File DevImbal.fth, Line 46.  (Output Position = 307).  COLON definition before completion of IF on line 41
+Error:  File DevImbal.fth, Line 46.  (Output Position = 307).  COLON definition before completion of DO on line 17
+Message:  File DevImbal.fth, Line 50.  (Output Position = 322).  Proved our point I think.
+Message:  File DevImbal.fth, Line 52.  (Output Position = 322).  Another bogo-crol
+Message:  File DevImbal.fth, Line 55.  (Output Position = 365).   Missing repeat...
+Advisory:  File DevImbal.fth, Line 58.  (Output Position = 365).  FCODE-END encountered; processing...
+Error:  File DevImbal.fth, Line 58.  (Output Position = 366).  End of tokenization before completion of BEGIN on line 53
+Error:  File DevImbal.fth, Line 58.  (Output Position = 366).  End of tokenization before completion of WHILE on line 53
+Error:  File DevImbal.fth, Line 58.  (Output Position = 366).  End of tokenization before completion of IF on line 41
+Error:  File DevImbal.fth, Line 58.  (Output Position = 366).  End of tokenization before completion of DO on line 17
+toke: checksum is 0x7085 (366 bytes).  Last assigned FCode = 0x809
+Tokenization Completed.  21 Errors, 3 Warnings, 7 Advisories, 12 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 366 bytes to bytecode file 'DevImbal.fc'

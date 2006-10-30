@@ -1,0 +1,160 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xe8d0 (Ok)
+     4:   len:       0x02b2 ( 690 bytes)
+     8: b(lit) ( 0x010 ) 0x30
+    13: external-token ( 0x0ca ) _local-storage-size_ 0x800
+    37: b(constant) ( 0x0ba ) 
+    38: instance ( 0x0c0 ) 
+    39: named-token ( 0x0b6 ) gumbage 0x801
+    50: b(variable) ( 0x0b9 ) 
+    51: instance ( 0x0c0 ) 
+    52: named-token ( 0x0b6 ) guggley 0x802
+    63: b(variable) ( 0x0b9 ) 
+    64: instance ( 0x0c0 ) 
+    65: named-token ( 0x0b6 ) burglar 0x803
+    76: b(variable) ( 0x0b9 ) 
+    77: instance ( 0x0c0 ) 
+    78: named-token ( 0x0b6 ) hot-dog 0x804
+    89: b(variable) ( 0x0b9 ) 
+    90: named-token ( 0x0b6 ) update 0x805
+   100: b(:) ( 0x0b7 ) 
+   101:     b(") ( 0x012 ) ( len=0x38 [56 bytes] )
+                    " Updated Thu, 29 Sep 2005 at 11:34 PDT by David L. Paktor"
+   159: b(;) ( 0x0c2 ) 
+   160: _local-storage-size_ ( 0x800 ) 
+   162: cells ( 0x069 ) 
+   163: dup ( 0x047 ) 
+   164: instance ( 0x0c0 ) 
+   165: named-token ( 0x0b6 ) locals-storage 0x806
+   183: b(buffer:) ( 0x0bd ) 
+   184: instance ( 0x0c0 ) 
+   185: named-token ( 0x0b6 ) locals-pointer 0x807
+   203: b(value) ( 0x0b8 ) 
+   204: named-token ( 0x0b6 ) not-enough-locals? 0x808
+   226: b(:) ( 0x0b7 ) 
+   227:     + ( 0x01e ) 
+   228:     cells ( 0x069 ) 
+   229:     locals-pointer ( 0x807 ) 
+   231:     swap ( 0x049 ) 
+   232:     - ( 0x01f ) 
+   233:     0< ( 0x036 ) 
+   234: b(;) ( 0x0c2 ) 
+   235: named-token ( 0x0b6 ) .not-enough-locals 0x809
+   257: b(:) ( 0x0b7 ) 
+   258:     cr ( 0x092 ) 
+   259:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   313:     type ( 0x090 ) 
+   314:     cr ( 0x092 ) 
+   315: b(;) ( 0x0c2 ) 
+   316: named-token ( 0x0b6 ) check-enough-locals 0x80a
+   339: b(:) ( 0x0b7 ) 
+   340:     not-enough-locals? ( 0x808 ) 
+   342:     b?branch ( 0x014 ) 0x0007 (  dest = 350 )
+   345:         .not-enough-locals ( 0x809 ) 
+   347:         abort ( 0x216 ) 
+   349:     b(>resolve) ( 0x0b2 ) 
+   350: b(;) ( 0x0c2 ) 
+   351: named-token ( 0x0b6 ) push-uninitted-locals 0x80b
+   376: b(:) ( 0x0b7 ) 
+   377:     cells ( 0x069 ) 
+   378:     locals-pointer ( 0x807 ) 
+   380:     swap ( 0x049 ) 
+   381:     - ( 0x01f ) 
+   382:     b(to) ( 0x0c3 ) locals-pointer ( 0x807 ) 
+   385: b(;) ( 0x0c2 ) 
+   386: named-token ( 0x0b6 ) push-one-initted-local 0x80c
+   412: b(:) ( 0x0b7 ) 
+   413:     locals-pointer ( 0x807 ) 
+   415:     1 ( 0x0a6 ) 
+   416:     cells ( 0x069 ) 
+   417:     - ( 0x01f ) 
+   418:     dup ( 0x047 ) 
+   419:     b(to) ( 0x0c3 ) locals-pointer ( 0x807 ) 
+   422:     locals-storage ( 0x806 ) 
+   424:     + ( 0x01e ) 
+   425:     ! ( 0x072 ) 
+   426: b(;) ( 0x0c2 ) 
+   427: named-token ( 0x0b6 ) push-initted-locals 0x80d
+   450: b(:) ( 0x0b7 ) 
+   451:     0 ( 0x0a5 ) 
+   452:     b(?do) ( 0x018 ) 0x0007 (  dest = 460 )
+   455:         push-one-initted-local ( 0x80c ) 
+   457:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 455 )
+   460: b(;) ( 0x0c2 ) 
+   461: named-token ( 0x0b6 ) {push-locals} 0x80e
+   478: b(:) ( 0x0b7 ) 
+   479:     2dup ( 0x053 ) 
+   480:     check-enough-locals ( 0x80a ) 
+   482:     push-uninitted-locals ( 0x80b ) 
+   484:     push-initted-locals ( 0x80d ) 
+   486: b(;) ( 0x0c2 ) 
+   487: named-token ( 0x0b6 ) {pop-locals} 0x80f
+   503: b(:) ( 0x0b7 ) 
+   504:     cells ( 0x069 ) 
+   505:     locals-pointer ( 0x807 ) 
+   507:     + ( 0x01e ) 
+   508:     b(to) ( 0x0c3 ) locals-pointer ( 0x807 ) 
+   511: b(;) ( 0x0c2 ) 
+   512: named-token ( 0x0b6 ) _{local} 0x810
+   524: b(:) ( 0x0b7 ) 
+   525:     cells ( 0x069 ) 
+   526:     locals-pointer ( 0x807 ) 
+   528:     + ( 0x01e ) 
+   529:     locals-storage ( 0x806 ) 
+   531:     + ( 0x01e ) 
+   532: b(;) ( 0x0c2 ) 
+   533: named-token ( 0x0b6 ) catch 0x811
+   542: b(:) ( 0x0b7 ) 
+   543:     locals-pointer ( 0x807 ) 
+   545:     >r ( 0x030 ) 
+   546:     catch ( 0x217 ) 
+   548:     r> ( 0x031 ) 
+   549:     b(to) ( 0x0c3 ) locals-pointer ( 0x807 ) 
+   552: b(;) ( 0x0c2 ) 
+   553: 0 ( 0x0a5 ) 
+   554: instance ( 0x0c0 ) 
+   555: named-token ( 0x0b6 ) local-storage-depth 0x812
+   578: b(value) ( 0x0b8 ) 
+   579: 0 ( 0x0a5 ) 
+   580: external-token ( 0x0ca ) max-local-storage-size 0x813
+   606: b(value) ( 0x0b8 ) 
+   607: named-token ( 0x0b6 ) {pop-locals} 0x814
+   623: b(:) ( 0x0b7 ) 
+   624:     local-storage-depth ( 0x812 ) 
+   626:     over ( 0x048 ) 
+   627:     - ( 0x01f ) 
+   628:     b(to) ( 0x0c3 ) local-storage-depth ( 0x812 ) 
+   631:     {pop-locals} ( 0x80f ) 
+   633: b(;) ( 0x0c2 ) 
+   634: named-token ( 0x0b6 ) {push-locals} 0x815
+   651: b(:) ( 0x0b7 ) 
+   652:     2dup ( 0x053 ) 
+   653:     + ( 0x01e ) 
+   654:     local-storage-depth ( 0x812 ) 
+   656:     + ( 0x01e ) 
+   657:     dup ( 0x047 ) 
+   658:     b(to) ( 0x0c3 ) local-storage-depth ( 0x812 ) 
+   661:     max-local-storage-size ( 0x813 ) 
+   663:     max ( 0x02f ) 
+   664:     b(to) ( 0x0c3 ) max-local-storage-size ( 0x813 ) 
+   667:     {push-locals} ( 0x80e ) 
+   669: b(;) ( 0x0c2 ) 
+   670: named-token ( 0x0b6 ) downdate 0x816
+   682: b(:) ( 0x0b7 ) 
+   683:     b(') ( 0x011 ) update ( 0x805 ) 
+   686:     catch ( 0x811 ) 
+   688: b(;) ( 0x0c2 ) 
+   689: end0 ( 0x000 ) 
+\  Detokenization finished normally after 690 bytes.
+End of file.
+

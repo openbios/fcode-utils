@@ -1,0 +1,25 @@
+toke -v -i -o CondAlias.NotDef.fc CondAlias.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  CondAlias.fth   Binary output to CondAlias.NotDef.fc 
+Advisory:  File CondAlias.fth, Line 8.  [IFDEF] is a Global definition, but its alias, [dowegotit?], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 9.  [IFNDEF] is a Global definition, but its alias, [ifyouaintgot], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 10.  [IF] is a Global definition, but its alias, [izzatso?], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 11.  [ELSE] is a Global definition, but its alias, [udderwise], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 12.  [THEN] is a Global definition, but its alias, [donewidit], will only be defined in the top-level device-node.
+Message:  File CondAlias.fth, Line 19.  Y'gotta define MooGoo on da command-line.
+Message:  File CondAlias.fth, Line 20.  
+	It's eider  -D moogoo=true   or  -D moogoo=false
+Warning:  File CondAlias.fth, Line 37.  Multi-line string, started on line 36
+Message:  File CondAlias.fth, Line 41.  
+	Cuz if ya don' got dat MooGoo, it don't mean a t'ing...
+Nothing Tokenized.  1 Warning, 5 Advisories, 3 Messages.

@@ -1,0 +1,47 @@
+toke -v -f NOC-STYLe-string-escape -o StringsGenl.nocstesc.fc StringsGenl.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	NoC-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  StringsGenl.fth   Binary output to StringsGenl.nocstesc.fc 
+Advisory:  File StringsGenl.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Warning:  File StringsGenl.fth, Line 10.  (Output Position = 8).  Multi-line string, started on line 9
+Advisory:  File StringsGenl.fth, Line 25.  (Output Position = 398).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 31.  (Output Position = 430).  Multi-line string, started on line 28
+Advisory:  File StringsGenl.fth, Line 32.  (Output Position = 462).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 36.  (Output Position = 514).  Multi-line string, started on line 35
+Warning:  File StringsGenl.fth, Line 38.  (Output Position = 533).  Multi-line string, started on line 37
+Advisory:  File StringsGenl.fth, Line 39.  (Output Position = 544).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 41.  (Output Position = 547).  Multi-line string, started on line 40
+Advisory:  File StringsGenl.fth, Line 42.  (Output Position = 572).  Substituting  TO  for deprecated  IS
+Advisory:  File StringsGenl.fth, Line 47.  (Output Position = 600).  FCODE-END encountered; processing...
+toke: checksum is 0xbf33 (601 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  5 Warnings, 6 Advisories.
+toke: wrote 601 bytes to bytecode file 'StringsGenl.nocstesc.fc'

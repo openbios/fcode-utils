@@ -1,0 +1,57 @@
+toke -v -f noHex-remark-escape -o StringsGenl.nohexrmk.fc StringsGenl.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	NoHex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  StringsGenl.fth   Binary output to StringsGenl.nohexrmk.fc 
+Advisory:  File StringsGenl.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Warning:  File StringsGenl.fth, Line 10.  (Output Position = 8).  Multi-line string, started on line 9
+Warning:  File StringsGenl.fth, Line 12.  (Output Position = 32).  Numeric String after \ overflows byte.  Using 0xa9.
+Warning:  File StringsGenl.fth, Line 12.  (Output Position = 32).  Numeric String after \ overflows byte.  Using 0xce.
+Warning:  File StringsGenl.fth, Line 14.  (Output Position = 56).  Unrecognized character, a, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 14.  (Output Position = 56).  Unrecognized character, c, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 15.  (Output Position = 78).  Numeric String after \ overflows byte.  Using 0xd8.
+Warning:  File StringsGenl.fth, Line 20.  (Output Position = 183).  Unrecognized character, Q, after \ in string.  Using it literally.
+Advisory:  File StringsGenl.fth, Line 25.  (Output Position = 347).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 31.  (Output Position = 379).  Multi-line string, started on line 28
+Advisory:  File StringsGenl.fth, Line 32.  (Output Position = 411).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 33.  (Output Position = 414).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 34.  (Output Position = 440).  Unrecognized character, \, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 36.  (Output Position = 461).  Multi-line string, started on line 35
+Warning:  File StringsGenl.fth, Line 38.  (Output Position = 489).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 38.  (Output Position = 489).  Multi-line string, started on line 37
+Advisory:  File StringsGenl.fth, Line 39.  (Output Position = 499).  Substituting  TO  for deprecated  IS
+Warning:  File StringsGenl.fth, Line 41.  (Output Position = 502).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File StringsGenl.fth, Line 41.  (Output Position = 502).  Multi-line string, started on line 40
+Advisory:  File StringsGenl.fth, Line 42.  (Output Position = 526).  Substituting  TO  for deprecated  IS
+Advisory:  File StringsGenl.fth, Line 47.  (Output Position = 554).  FCODE-END encountered; processing...
+toke: checksum is 0xad8b (555 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  15 Warnings, 6 Advisories.
+toke: wrote 555 bytes to bytecode file 'StringsGenl.nohexrmk.fc'

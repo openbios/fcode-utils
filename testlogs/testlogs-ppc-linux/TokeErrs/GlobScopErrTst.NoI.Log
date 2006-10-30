@@ -1,0 +1,74 @@
+toke -v -f Local-Values -I. -I../TokoLoco -o GlobScopErrTst.NoI.fc GlobScopErrTst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  GlobScopErrTst.fth   Binary output to GlobScopErrTst.NoI.fc 
+Advisory:  File was found in ./GlobScopErrTst.fth
+Advisory:  File GlobScopErrTst.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File GlobScopErrTst.fth, Line 13.  (Output Position = 8).  [IFEXISTS] is a Global definition, but its alias, [testdict], will only be defined in the top-level device-node, which began on line 5
+Message:  File GlobScopErrTst.fth, Line 18.  (Output Position = 8).   Why a fence?
+Advisory:  File GlobScopErrTst.fth, Line 22.  (Output Position = 8).  INSTANCE is a Global definition, but its alias, generic-instance, will only be defined in the top-level device-node, which began on line 5
+Advisory:  File GlobScopErrTst.fth, Line 27.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File GlobScopErrTst.fth, Line 29.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File GlobScopErrTst.fth, Line 29.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Warning:  File LocalValuesSupport.fth, Line 58.  (Output Position = 42).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Warning:  File LocalValuesSupport.fth, Line 66.  (Output Position = 61).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Error:  File GlobScopErrTst.fth, Line 32.  (Output Position = 429).  Word  generic-instance  is not in dictionary.
+Advisory:  File GlobScopErrTst.fth, Line 32.  (Output Position = 429).  generic-instance is defined in the top-level device-node, which began on line 5
+Warning:  File GlobScopErrTst.fth, Line 42.  (Output Position = 525).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Message:  File GlobScopErrTst.fth, Line 42.  (Output Position = 536).  Expected error; scope is still global.
+Advisory:  File GlobScopErrTst.fth, Line 45.  (Output Position = 544).  Terminating Global Scope definitions; resuming Device-node definitions.
+Message:  File GlobScopErrTst.fth, Line 47.  (Output Position = 549).  Shminstance!
+Message:  File GlobScopErrTst.fth, Line 47.  (Output Position = 561).  Device scope in effect.  SB Legit.
+Warning:  File GlobScopErrTst.fth, Line 53.  (Output Position = 574).  Multi-line Local-Values declaration, started on line 49 in definition of  DUCKSOUP  , which started on line 48
+Advisory:  File GlobScopErrTst.fth, Line 61.  (Output Position = 653).  Initiating Global Scope definitions.
+Error:  File GlobScopErrTst.fth, Line 65.  (Output Position = 693).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst.fth, Line 65.  (Output Position = 693).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Error:  File GlobScopErrTst.fth, Line 68.  (Output Position = 694).  Global Scope is in effect; NEW-DEVICE not allowed.  Ignoring.
+Message:  File GlobScopErrTst.fth, Line 68.  (Output Position = 694).  Missing a finish-device
+Error:  File GlobScopErrTst.fth, Line 72.  (Output Position = 735).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst.fth, Line 72.  (Output Position = 735).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Warning:  File GlobScopErrTst.fth, Line 76.  (Output Position = 743).  Global Scope is in effect; INSTANCE not allowed.  Ignoring.
+Message:  File GlobScopErrTst.fth, Line 76.  (Output Position = 754).  Instance should be legit here.
+Warning:  File GlobScopErrTst.fth, Line 78.  (Output Position = 754).  GLOBAL-DEFINITIONS -- Global Scope already in effect; ignoring.
+Error:  File GlobScopErrTst.fth, Line 84.  (Output Position = 790).  Word  ducksoup  is not in dictionary.
+Advisory:  File GlobScopErrTst.fth, Line 84.  (Output Position = 790).  ducksoup is defined as a COLON in the top-level device-node, which began on line 5
+Error:  File GlobScopErrTst.fth, Line 87.  (Output Position = 791).  Global Scope is in effect; FINISH-DEVICE not allowed.  Ignoring.
+Error:  File GlobScopErrTst.fth, Line 89.  (Output Position = 791).  Global Scope is in effect; FINISH-DEVICE not allowed.  Ignoring.
+Advisory:  File GlobScopErrTst.fth, Line 91.  (Output Position = 791).  FCODE-END encountered; processing...
+Warning:  File GlobScopErrTst.fth, Line 91.  (Output Position = 792).  No DEVICE-DEFINITIONS directive encountered before end.  Compensating...
+Advisory:  File GlobScopErrTst.fth, Line 91.  (Output Position = 792).  Terminating Global Scope definitions; resuming Device-node definitions.
+toke: checksum is 0xf3a8 (792 bytes).  Last assigned FCode = 0x814
+Tokenization Completed.  7 Errors, 7 Warnings, 15 Advisories, 6 Messages.
+Suppressing binary output.

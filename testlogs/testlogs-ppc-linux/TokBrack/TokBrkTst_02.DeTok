@@ -1,0 +1,135 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+\  PCI Header identified
+\    Offset to Data Structure = 0x001c (28)
+\  PCI Data Structure identified
+\    Data Structure Length = 0x0018 (24)
+\    Vendor ID: 0x17d5
+\    Device ID: 0x5417
+\    Class Code: 0x020000  (Ethernet controller)
+\    Image Revision: 0xf2ed
+\    Code Type: 0x01 (Open Firmware)
+\    Image Length: 0x0001 blocks (512 bytes)
+\    Not last PCI Image.
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x6d39 (Ok)
+     4:   len:       0x017a ( 378 bytes)
+     8: b(lit) ( 0x010 ) 0x100a8020
+    13: b(lit) ( 0x010 ) 0xdefeca8e
+    18: b(lit) ( 0x010 ) 0xdefeca8e
+    23: named-token ( 0x0b6 ) poopoo 0x800
+    33: b(constant) ( 0x0ba ) 
+    34: b(lit) ( 0x010 ) 0xbeeffece
+    39: named-token ( 0x0b6 ) moopoo 0x801
+    49: b(constant) ( 0x0ba ) 
+    50: b(lit) ( 0x010 ) 0xdefeca8e
+    55: b(lit) ( 0x010 ) 0xbeeffece
+    60: b(lit) ( 0x010 ) 0x801
+    65: moopoo ( 0x801 ) 
+    67: poopoo ( 0x800 ) 
+    69: named-token ( 0x0b6 ) merde 0x802
+    78: b(:) ( 0x0b7 ) 
+    79:     b(') ( 0x011 ) moopoo ( 0x801 ) 
+    82:     b(') ( 0x011 ) poopoo ( 0x800 ) 
+    85:     moopoo ( 0x801 ) 
+    87:     b(lit) ( 0x010 ) 0x62
+    92:     b(lit) ( 0x010 ) 0x65
+    97:     b(lit) ( 0x010 ) 0x66
+   102:     b(") ( 0x012 ) ( len=5 )
+                    " Date "
+   109:     type ( 0x090 ) 
+   110:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    " 10/23/2006"
+   122:     type ( 0x090 ) 
+   123:     b(") ( 0x012 ) ( len=4 )
+                    " Time"
+   129:     type ( 0x090 ) 
+   130:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " 14:07:18 CDT"
+   144:     type ( 0x090 ) 
+   145:     cr ( 0x092 ) 
+   146:     b(") ( 0x012 ) ( len=4 )
+                    " Time"
+   152:     type ( 0x090 ) 
+   153:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " 14:07:18 CDT"
+   167:     type ( 0x090 ) 
+   168:     b(") ( 0x012 ) ( len=5 )
+                    " Date "
+   175:     type ( 0x090 ) 
+   176:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    " 10/23/2006"
+   188:     type ( 0x090 ) 
+   189:     cr ( 0x092 ) 
+   190:     b(") ( 0x012 ) ( len=3 )
+                    " In "
+   195:     type ( 0x090 ) 
+   196:     b(") ( 0x012 ) ( len=5 )
+                    " merde"
+   203:     type ( 0x090 ) 
+   204:     cr ( 0x092 ) 
+   205:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " This came from "
+   222:     type ( 0x090 ) 
+   223:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " TokBrkTst_02.fth"
+   241:     type ( 0x090 ) 
+   242:     b(") ( 0x012 ) ( len=6 )
+                    "  line "
+   250:     type ( 0x090 ) 
+   251:     b(lit) ( 0x010 ) 0x50
+   256:     base ( 0x0a0 ) 
+   257:     @ ( 0x06d ) 
+   258:     swap ( 0x049 ) 
+   259:     b(lit) ( 0x010 ) 0xa
+   264:     base ( 0x0a0 ) 
+   265:     ! ( 0x072 ) 
+   266:     . ( 0x09d ) 
+   267:     base ( 0x0a0 ) 
+   268:     ! ( 0x072 ) 
+   269:     cr ( 0x092 ) 
+   270: b(;) ( 0x0c2 ) 
+   271: b(lit) ( 0x010 ) 0x66
+   276: b(lit) ( 0x010 ) 0x65
+   281: b(lit) ( 0x010 ) 0x63
+   286: named-token ( 0x0b6 ) terde 0x803
+   295: b(:) ( 0x0b7 ) 
+   296:     b(") ( 0x012 ) ( len=3 )
+                    " In "
+   301:     type ( 0x090 ) 
+   302:     b(") ( 0x012 ) ( len=5 )
+                    " terde"
+   309:     type ( 0x090 ) 
+   310:     cr ( 0x092 ) 
+   311:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " This came from "
+   328:     type ( 0x090 ) 
+   329:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " TokBrkTst_02.fth"
+   347:     type ( 0x090 ) 
+   348:     b(") ( 0x012 ) ( len=6 )
+                    "  line "
+   356:     type ( 0x090 ) 
+   357:     b(lit) ( 0x010 ) 0x57
+   362:     base ( 0x0a0 ) 
+   363:     @ ( 0x06d ) 
+   364:     swap ( 0x049 ) 
+   365:     b(lit) ( 0x010 ) 0xa
+   370:     base ( 0x0a0 ) 
+   371:     ! ( 0x072 ) 
+   372:     . ( 0x09d ) 
+   373:     base ( 0x0a0 ) 
+   374:     ! ( 0x072 ) 
+   375:     cr ( 0x092 ) 
+   376: b(;) ( 0x0c2 ) 
+   377: end0 ( 0x000 ) 
+\  Detokenization finished normally after 378 bytes.
+\  PCI Image padded with 82 bytes of zero
+

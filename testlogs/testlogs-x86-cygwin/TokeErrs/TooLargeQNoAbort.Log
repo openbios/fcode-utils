@@ -1,0 +1,51 @@
+toke -v -f Local-Values TooLargeQNoAbort.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  TooLargeQNoAbort.fth   Binary output to TooLargeQNoAbort.fc 
+Advisory:  File TooLargeQNoAbort.fth, Line 9.  Disabling:  Allow ABORT" macro
+Advisory:  File TooLargeQNoAbort.fth, Line 11.  Initiating Global Scope definitions.
+Advisory:  File TooLargeQNoAbort.fth, Line 14.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeQNoAbort.fth, Line 20.  (Output Position = 22).  FLOADing LargeTextNoQte.fth
+Warning:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  Unterminated string in definition of  BARFALOT  , which started on line 18 of file TooLargeQNoAbort.fth
+Warning:  File LargeTextNoQte.fth, Line 56.  (Output Position = 22).  Multi-line string, started on line 12 in definition of  BARFALOT  , which started on line 18 of file TooLargeQNoAbort.fth
+Error:  File LargeTextNoQte.fth, Line 56.  (Output Position = 22).  get_string buffer overflow.  Max is 1023
+.Error:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  Unimplemented control word 'TEST-TOKEN'
+Message:  File TooLargeQNoAbort.fth, Line 27.  (Output Position = 37).  The abort" starts here.
+Warning:  File TooLargeQNoAbort.fth, Line 30.  (Output Position = 37).  Multi-line string, started on line 27 in definition of  OHFOOEY!  , which started on line 25
+Error:  File TooLargeQNoAbort.fth, Line 27.  (Output Position = 37).  Unimplemented control word 'ABORT"'
+Advisory:  File TooLargeQNoAbort.fth, Line 34.  (Output Position = 38).  FCODE-END encountered; processing...
+Warning:  File TooLargeQNoAbort.fth, Line 34.  (Output Position = 39).  No DEVICE-DEFINITIONS directive encountered before end.  Compensating...
+Advisory:  File TooLargeQNoAbort.fth, Line 34.  (Output Position = 39).  Terminating Global Scope definitions; resuming Device-node definitions.
+toke: checksum is 0x0c2c (39 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  3 Errors, 5 Warnings, 6 Advisories, 1 Message.
+Suppressing binary output.

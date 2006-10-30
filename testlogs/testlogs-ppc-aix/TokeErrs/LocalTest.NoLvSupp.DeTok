@@ -1,0 +1,180 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x55d2 (Ok)
+     4:   len:       0x0133 ( 307 bytes)
+     8: b(lit) ( 0x010 ) 0xdeaf
+    13: new-token ( 0x0b5 ) 0x800
+    16: b(constant) ( 0x0ba ) 
+    17: new-token ( 0x0b5 ) 0x801
+    20: b(:) ( 0x0b7 ) 
+    21:     3 ( 0x0a8 ) 
+    22:     2 ( 0x0a7 ) 
+    23:     2 ( 0x0a7 ) 
+    24:     @ ( 0x06d ) 
+    25:     b(lit) ( 0x010 ) 0x28
+    30:     * ( 0x020 ) 
+    31:     3 ( 0x0a8 ) 
+    32:     ! ( 0x072 ) 
+    33:     3 ( 0x0a8 ) 
+    34:     @ ( 0x06d ) 
+    35:     alloc-mem ( 0x08b ) 
+    36:     b(lit) ( 0x010 ) 0x4
+    41:     ! ( 0x072 ) 
+    42:     1 ( 0x0a6 ) 
+    43:     @ ( 0x06d ) 
+    44:     base ( 0x0a0 ) 
+    45:     @ ( 0x06d ) 
+    46:     swap ( 0x049 ) 
+    47:     b(lit) ( 0x010 ) 0x10
+    52:     base ( 0x0a0 ) 
+    53:     ! ( 0x072 ) 
+    54:     . ( 0x09d ) 
+    55:     base ( 0x0a0 ) 
+    56:     ! ( 0x072 ) 
+    57:     type ( 0x090 ) 
+    58:     0 ( 0x0a5 ) 
+    59:     @ ( 0x06d ) 
+    60:     base ( 0x0a0 ) 
+    61:     @ ( 0x06d ) 
+    62:     swap ( 0x049 ) 
+    63:     b(lit) ( 0x010 ) 0xa
+    68:     base ( 0x0a0 ) 
+    69:     ! ( 0x072 ) 
+    70:     . ( 0x09d ) 
+    71:     base ( 0x0a0 ) 
+    72:     ! ( 0x072 ) 
+    73:     type ( 0x090 ) 
+    74:     b(lit) ( 0x010 ) 0x4
+    79:     @ ( 0x06d ) 
+    80:     3 ( 0x0a8 ) 
+    81:     @ ( 0x06d ) 
+    82:     b(lit) ( 0x010 ) 0x4
+    87:     @ ( 0x06d ) 
+    88:     count ( 0x084 ) 
+    89:     b(lit) ( 0x010 ) 0x5
+    94: b(;) ( 0x0c2 ) 
+    95: new-token ( 0x0b5 ) 0x802
+    98: b(:) ( 0x0b7 ) 
+    99:     3 ( 0x0a8 ) 
+   100:     3 ( 0x0a8 ) 
+   101:     b(") ( 0x012 ) ( len=6 )
+                    " Nyuk! "
+   109:     type ( 0x090 ) 
+   110:     0 ( 0x0a5 ) 
+   111:     @ ( 0x06d ) 
+   112:     base ( 0x0a0 ) 
+   113:     @ ( 0x06d ) 
+   114:     swap ( 0x049 ) 
+   115:     b(lit) ( 0x010 ) 0x10
+   120:     base ( 0x0a0 ) 
+   121:     ! ( 0x072 ) 
+   122:     . ( 0x09d ) 
+   123:     base ( 0x0a0 ) 
+   124:     ! ( 0x072 ) 
+   125:     cr ( 0x092 ) 
+   126:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " Why, you... "
+   140:     type ( 0x090 ) 
+   141:     2 ( 0x0a7 ) 
+   142:     @ ( 0x06d ) 
+   143:     base ( 0x0a0 ) 
+   144:     @ ( 0x06d ) 
+   145:     swap ( 0x049 ) 
+   146:     b(lit) ( 0x010 ) 0xa
+   151:     base ( 0x0a0 ) 
+   152:     ! ( 0x072 ) 
+   153:     . ( 0x09d ) 
+   154:     base ( 0x0a0 ) 
+   155:     ! ( 0x072 ) 
+   156:     cr ( 0x092 ) 
+   157:     b(") ( 0x012 ) ( len=6 )
+                    " Ouch! "
+   165:     type ( 0x090 ) 
+   166:     1 ( 0x0a6 ) 
+   167:     @ ( 0x06d ) 
+   168:     . ( 0x09d ) 
+   169:     0 ( 0x0a5 ) 
+   170:     @ ( 0x06d ) 
+   171:     2 ( 0x0a7 ) 
+   172:     @ ( 0x06d ) 
+   173:     + ( 0x01e ) 
+   174:     3 ( 0x0a8 ) 
+   175:     ! ( 0x072 ) 
+   176:     1 ( 0x0a6 ) 
+   177:     @ ( 0x06d ) 
+   178:     2 ( 0x0a7 ) 
+   179:     @ ( 0x06d ) 
+   180:     + ( 0x01e ) 
+   181:     b(lit) ( 0x010 ) 0x4
+   186:     ! ( 0x072 ) 
+   187:     b(lit) ( 0x010 ) 0x4
+   192:     @ ( 0x06d ) 
+   193:     0 ( 0x0a5 ) 
+   194:     @ ( 0x06d ) 
+   195:     + ( 0x01e ) 
+   196:     b(lit) ( 0x010 ) 0x5
+   201:     ! ( 0x072 ) 
+   202:     b(lit) ( 0x010 ) 0x5
+   207:     @ ( 0x06d ) 
+   208:     b(lit) ( 0x010 ) 0x4
+   213:     @ ( 0x06d ) 
+   214:     b(lit) ( 0x010 ) 0x8
+   219:     (unnamed-fcode) [0x801] 
+   221:     type ( 0x090 ) 
+   222:     free-mem ( 0x08c ) 
+   223:     2 ( 0x0a7 ) 
+   224:     @ ( 0x06d ) 
+   225:     1 ( 0x0a6 ) 
+   226:     @ ( 0x06d ) 
+   227:     b(lit) ( 0x010 ) 0x8
+   232:     (unnamed-fcode) [0x801] 
+   234:     type ( 0x090 ) 
+   235:     free-mem ( 0x08c ) 
+   236:     0 ( 0x0a5 ) 
+   237:     @ ( 0x06d ) 
+   238:     b(lit) ( 0x010 ) 0x4
+   243:     @ ( 0x06d ) 
+   244:     b(lit) ( 0x010 ) 0x8
+   249:     (unnamed-fcode) [0x801] 
+   251:     type ( 0x090 ) 
+   252:     free-mem ( 0x08c ) 
+   253:     1 ( 0x0a6 ) 
+   254:     @ ( 0x06d ) 
+   255:     3 ( 0x0a8 ) 
+   256:     @ ( 0x06d ) 
+   257:     b(lit) ( 0x010 ) 0x6
+   262: b(;) ( 0x0c2 ) 
+   263: new-token ( 0x0b5 ) 0x803
+   266: b(:) ( 0x0b7 ) 
+   267:     b(lit) ( 0x010 ) 0x7b
+   272:     b(lit) ( 0x010 ) 0x1c8
+   277:     b(lit) ( 0x010 ) 0x315
+   282:     (unnamed-fcode) [0x802] 
+   284: b(;) ( 0x0c2 ) 
+   285: new-token ( 0x0b5 ) 0x804
+   288: b(:) ( 0x0b7 ) 
+   289:     0 ( 0x0a5 ) 
+   290:     @ ( 0x06d ) 
+   291:     1 ( 0x0a6 ) 
+   292:     @ ( 0x06d ) 
+   293:     + ( 0x01e ) 
+   294:     dup ( 0x047 ) 
+   295:     2 ( 0x0a7 ) 
+   296:     ! ( 0x072 ) 
+   297:     2 ( 0x0a7 ) 
+   298:     @ ( 0x06d ) 
+   299:     3 ( 0x0a8 ) 
+   300: b(;) ( 0x0c2 ) 
+   301: b(lit) ( 0x010 ) 0xbeeffece
+   306: end0 ( 0x000 ) 
+\  Detokenization finished normally after 307 bytes.
+End of file.
+

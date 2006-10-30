@@ -1,0 +1,84 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x4f21 (Ok)
+     4:   len:       0x00f0 ( 240 bytes)
+     8: named-token ( 0x0b6 ) goose 0x800
+    17: b(:) ( 0x0b7 ) 
+    18:     b(") ( 0x012 ) ( len=5 )
+                    " begin"
+    25:     type ( 0x090 ) 
+    26:     b(<mark) ( 0x0b1 ) 
+    27:         b(") ( 0x012 ) ( len=7 )
+                        " 4 until"
+    36:         type ( 0x090 ) 
+    37:         b(lit) ( 0x010 ) 0x4
+    42:         b?branch ( 0x014 ) 0xfff0 ( =dec -16  dest = 27 )
+    45:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Done with goose"
+    62:     type ( 0x090 ) 
+    63: b(;) ( 0x0c2 ) 
+    64: named-token ( 0x0b6 ) caboose 0x801
+    75: b(:) ( 0x0b7 ) 
+    76:     b(") ( 0x012 ) ( len=5 )
+                    " begin"
+    83:     type ( 0x090 ) 
+    84:     b(<mark) ( 0x0b1 ) 
+    85:         b(") ( 0x012 ) ( len=7 )
+                        " 5 while"
+    94:         type ( 0x090 ) 
+    95:         b(lit) ( 0x010 ) 0x5
+   100:         b?branch ( 0x014 ) 0x000f ( =dec 15  dest = 116 )
+   103:             b(") ( 0x012 ) ( len=6 )
+                            " repeat"
+   111:             type ( 0x090 ) 
+   112:             bbranch ( 0x013 ) 0xffe4 ( =dec -28  dest = 85 )
+   115:     b(>resolve) ( 0x0b2 ) 
+   116:     b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                    " Done with caboose"
+   135:     type ( 0x090 ) 
+   136: b(;) ( 0x0c2 ) 
+   137: named-token ( 0x0b6 ) fusbat 0x802
+   147: b(:) ( 0x0b7 ) 
+   148:     b(") ( 0x012 ) ( len=5 )
+                    " begin"
+   155:     type ( 0x090 ) 
+   156:     b(<mark) ( 0x0b1 ) 
+   157:         b(") ( 0x012 ) ( len=7 )
+                        " 1 while"
+   166:         type ( 0x090 ) 
+   167:         1 ( 0x0a6 ) 
+   168:         b?branch ( 0x014 ) 0x0032 ( =dec 50  dest = 219 )
+   171:             b(") ( 0x012 ) ( len=7 )
+                            " 2 while"
+   180:             type ( 0x090 ) 
+   181:             2 ( 0x0a7 ) 
+   182:             b?branch ( 0x014 ) 0x001a ( =dec 26  dest = 209 )
+   185:                 b(") ( 0x012 ) ( len=7 )
+                                " 3 until"
+   194:                 type ( 0x090 ) 
+   195:                 3 ( 0x0a8 ) 
+   196:                 b?branch ( 0x014 ) 0xffd8 ( =dec -40  dest = 157 )
+   199:             b(") ( 0x012 ) ( len=6 )
+                            " 2 then"
+   207:             type ( 0x090 ) 
+   208:         b(>resolve) ( 0x0b2 ) 
+   209:         b(") ( 0x012 ) ( len=6 )
+                        " 1 then"
+   217:         type ( 0x090 ) 
+   218:     b(>resolve) ( 0x0b2 ) 
+   219:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " Done with fusbat"
+   237:     type ( 0x090 ) 
+   238: b(;) ( 0x0c2 ) 
+   239: end0 ( 0x000 ) 
+\  Detokenization finished normally after 240 bytes.
+End of file.
+

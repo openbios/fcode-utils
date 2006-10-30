@@ -1,0 +1,35 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x542d (Ok)
+     4:   len:       0x00f2 ( 242 bytes)
+     8: named-token ( 0x0b6 ) sunny-de-light 0x800
+    26: b(:) ( 0x0b7 ) 
+    27:     b?branch ( 0x014 ) 0x005c ( =dec 92  dest = 120 )
+    30:         b(") ( 0x012 ) ( len=0x4f [79 bytes] )
+                        " Oh, this is the Sun-Style abort"" with a built-in quote and multi-line!  Cool..."
+   111:         type ( 0x090 ) 
+   112:         b(lit) ( 0x010 ) 0xfffffffe
+   117:         throw ( 0x218 ) 
+   119:     b(>resolve) ( 0x0b2 ) 
+   120: b(;) ( 0x0c2 ) 
+   121: named-token ( 0x0b6 ) apple-pi-alamo 0x801
+   139: b(:) ( 0x0b7 ) 
+   140:     b?branch ( 0x014 ) 0x0063 ( =dec 99  dest = 240 )
+   143:         b(") ( 0x012 ) ( len=0x57 [87 bytes] )
+                        " And this is the Apple-Style abort"" with also a multi-line and built-in quote.  Ho, hum."
+   232:         b(lit) ( 0x010 ) 0xfffffffe
+   237:         throw ( 0x218 ) 
+   239:     b(>resolve) ( 0x0b2 ) 
+   240: b(;) ( 0x0c2 ) 
+   241: end0 ( 0x000 ) 
+\  Detokenization finished normally after 242 bytes.
+End of file.
+

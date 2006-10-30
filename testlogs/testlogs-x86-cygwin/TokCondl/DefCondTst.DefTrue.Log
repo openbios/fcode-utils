@@ -1,0 +1,25 @@
+toke -v -d 'moOGOO=TRue' -l -o DefCondTst.DefTrue.fc DefCondTst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+User-Defined Symbols:
+	moOGOO = TRue
+
+Tokenizing  DefCondTst.fth   Binary output to DefCondTst.DefTrue.fc   FLoad-list to DefCondTst.DefTrue.fl 
+Warning:  File DefCondTst.fth, Line 11.  Multi-line string, started on line 10
+Advisory:  File DefCondTst.fth, Line 22.  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 58).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 6.  (Output Position = 94).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 213).  FCODE-END encountered; processing...
+toke: checksum is 0x4365 (214 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  1 Warning, 4 Advisories, 1 Message.
+toke: wrote 214 bytes to bytecode file 'DefCondTst.DefTrue.fc'

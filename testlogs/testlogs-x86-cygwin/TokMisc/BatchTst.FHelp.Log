@@ -1,0 +1,38 @@
+toke -v -I. -I../TokeCommon -l -f help -o BatchTst.FHelp.fc BatchTst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flags usage:
+  -f   FlagName   to enable the feature associated with FlagName,
+or
+  -f noFlagName   to disable the feature.
+
+Default   Flag-Name		  Feature:
+
+  no    Local-Values		Support IBM-style Local Values ("LV"s)
+        LV-Legacy-Separator	Allow Semicolon for Local Values Separator ("Legacy")
+        LV-Legacy-Message	Display a Message when Semicolon is used as the Local Values Separator
+        ABORT-Quote		Allow ABORT" macro
+        Sun-ABORT-Quote		ABORT" with implicit IF ... THEN
+        ABORT-Quote-Throw	Use -2 THROW in an Abort" phrase, rather than ABORT
+        String-remark-escape	Allow "\ (Quote-Backslash) to interrupt string parsing
+        Hex-remark-escape	Allow \ (Backslash) to interrupt hex-sequence parsing within a string
+        C-Style-string-escape	Allow \n \t and \xx\ for special chars in string parsing
+  no    Always-Headers		Override "headerless" and force to "headers"
+  no    Always-External		Override "headerless" and "headers" and force to "external"
+        Warn-if-Duplicate	Display a WARNING message when a duplicate definition is made
+        Obsolete-FCode-Warning	Display a WARNING message when an "obsolete" (per the Standard) FCode is used
+  no    Trace-Conditionals	Display ADVISORY messages about the state of Conditional Tokenization
+  no    Upper-Case-Token-Names	Convert Token-Names to UPPER-Case
+  no    Lower-Case-Token-Names	Convert Token-Names to lower-Case
+  no    Big-End-PCI-Rev-Level	Save the Vendor's Rev Level field of the PCI Header in Big-Endian format
+        Ret-Stk-Interp		Allow Return-Stack Operations during Interpretation
+        help			Print this "Help" message for the Special-Feature Flags

@@ -1,0 +1,39 @@
+toke -v -i UserMacroErrors.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  UserMacroErrors.fth   Binary output to UserMacroErrors.fc 
+Advisory:  File UserMacroErrors.fth, Line 5.  Initiating Global Scope definitions.
+Error:  File UserMacroErrors.fth, Line 7.  [MACRO] directive expects name and definition on the same line
+Error:  File UserMacroErrors.fth, Line 8.  [MACRO] directive expects name and definition on the same line
+Message:  File UserMacroErrors.fth, Line 13.   Are you ready?
+Advisory:  File UserMacroErrors.fth, Line 17.  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File UserMacroErrors.fth, Line 19.  FCODE-VERSION2 encountered; processing...
+Error:  File UserMacroErrors.fth, Line 26.  (Output Position = 77).  Unterminated Dot-Paren
+Warning:  File UserMacroErrors.fth, Line 27.  (Output Position = 110).  Unterminated string
+Message:  File UserMacroErrors.fth, Line 27.  (Output Position = 110).  I forgot
+
+Message:  File UserMacroErrors.fth, Line 31.  (Output Position = 139).  Faking a DUP here
+Error:  File UserMacroErrors.fth, Line 32.  (Output Position = 140).  Cannot apply  TO  to  HEYLOOKMEOVER , which is defined as a MACRO.
+Message:  File UserMacroErrors.fth, Line 33.  (Output Position = 157).  Faking a DUP here
+Error:  File UserMacroErrors.fth, Line 34.  (Output Position = 158).  Cannot apply  TO  to  2+ , which is defined as a MACRO.
+Error:  File UserMacroErrors.fth, Line 37.  (Output Position = 161).  Operator A# expects its target on the same line
+Message:  File UserMacroErrors.fth, Line 39.  (Output Position = 161).   Here comes a little bit of macro recursion.
+Warning:  File UserMacroErrors.fth, Line 40.  (Output Position = 161).  Duplicate definition:   foop  already exists in the core vocabulary.
+Message:  File UserMacroErrors.fth, Line 43.  (Output Position = 175).   Don't try this at home, kids...
+Message:  File UserMacroErrors.fth, Line 44.  (Output Position = 175).  Faking a DUP here
+Message:  File UserMacroErrors.fth, Line 44.  (Output Position = 175).  It's a call to dup, but which one?
+Error:  File UserMacroErrors.fth, Line 44.  (Output Position = 175).  Recursive invocation of macro named dup
+Advisory:  File UserMacroErrors.fth, Line 47.  (Output Position = 176).  FCODE-END encountered; processing...
+toke: checksum is 0x3685 (177 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  7 Errors, 2 Warnings, 4 Advisories, 8 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 177 bytes to bytecode file 'UserMacroErrors.fc'

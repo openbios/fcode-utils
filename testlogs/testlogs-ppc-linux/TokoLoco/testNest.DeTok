@@ -1,0 +1,249 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x429d (Ok)
+     4:   len:       0x03c6 ( 966 bytes)
+     8: instance ( 0x0c0 ) 
+     9: named-token ( 0x0b6 ) happy 0x800
+    18: b(variable) ( 0x0b9 ) 
+    19: instance ( 0x0c0 ) 
+    20: named-token ( 0x0b6 ) grumpy 0x801
+    30: b(variable) ( 0x0b9 ) 
+    31: instance ( 0x0c0 ) 
+    32: named-token ( 0x0b6 ) sleepy 0x802
+    42: b(variable) ( 0x0b9 ) 
+    43: instance ( 0x0c0 ) 
+    44: named-token ( 0x0b6 ) sneezy 0x803
+    54: b(variable) ( 0x0b9 ) 
+    55: instance ( 0x0c0 ) 
+    56: named-token ( 0x0b6 ) bashful 0x804
+    67: b(variable) ( 0x0b9 ) 
+    68: instance ( 0x0c0 ) 
+    69: named-token ( 0x0b6 ) dopey 0x805
+    78: b(variable) ( 0x0b9 ) 
+    79: instance ( 0x0c0 ) 
+    80: named-token ( 0x0b6 ) and_doc 0x806
+    91: b(variable) ( 0x0b9 ) 
+    92: instance ( 0x0c0 ) 
+    93: named-token ( 0x0b6 ) crappy 0x807
+   103: b(variable) ( 0x0b9 ) 
+   104: instance ( 0x0c0 ) 
+   105: named-token ( 0x0b6 ) dumpy 0x808
+   114: b(variable) ( 0x0b9 ) 
+   115: b(lit) ( 0x010 ) 0x30
+   120: external-token ( 0x0ca ) _local-storage-size_ 0x809
+   144: b(constant) ( 0x0ba ) 
+   145: instance ( 0x0c0 ) 
+   146: named-token ( 0x0b6 ) sleazy 0x80a
+   156: b(variable) ( 0x0b9 ) 
+   157: instance ( 0x0c0 ) 
+   158: named-token ( 0x0b6 ) cheapy 0x80b
+   168: b(variable) ( 0x0b9 ) 
+   169: instance ( 0x0c0 ) 
+   170: named-token ( 0x0b6 ) scruffy 0x80c
+   181: b(variable) ( 0x0b9 ) 
+   182: named-token ( 0x0b6 ) update 0x80d
+   192: b(:) ( 0x0b7 ) 
+   193:     b(") ( 0x012 ) ( len=0x38 [56 bytes] )
+                    " Updated Thu, 29 Sep 2005 at 11:34 PDT by David L. Paktor"
+   251: b(;) ( 0x0c2 ) 
+   252: _local-storage-size_ ( 0x809 ) 
+   254: cells ( 0x069 ) 
+   255: dup ( 0x047 ) 
+   256: instance ( 0x0c0 ) 
+   257: named-token ( 0x0b6 ) locals-storage 0x80e
+   275: b(buffer:) ( 0x0bd ) 
+   276: instance ( 0x0c0 ) 
+   277: named-token ( 0x0b6 ) locals-pointer 0x80f
+   295: b(value) ( 0x0b8 ) 
+   296: named-token ( 0x0b6 ) not-enough-locals? 0x810
+   318: b(:) ( 0x0b7 ) 
+   319:     + ( 0x01e ) 
+   320:     cells ( 0x069 ) 
+   321:     locals-pointer ( 0x80f ) 
+   323:     swap ( 0x049 ) 
+   324:     - ( 0x01f ) 
+   325:     0< ( 0x036 ) 
+   326: b(;) ( 0x0c2 ) 
+   327: named-token ( 0x0b6 ) .not-enough-locals 0x811
+   349: b(:) ( 0x0b7 ) 
+   350:     cr ( 0x092 ) 
+   351:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   405:     type ( 0x090 ) 
+   406:     cr ( 0x092 ) 
+   407: b(;) ( 0x0c2 ) 
+   408: named-token ( 0x0b6 ) check-enough-locals 0x812
+   431: b(:) ( 0x0b7 ) 
+   432:     not-enough-locals? ( 0x810 ) 
+   434:     b?branch ( 0x014 ) 0x0007 (  dest = 442 )
+   437:         .not-enough-locals ( 0x811 ) 
+   439:         abort ( 0x216 ) 
+   441:     b(>resolve) ( 0x0b2 ) 
+   442: b(;) ( 0x0c2 ) 
+   443: named-token ( 0x0b6 ) push-uninitted-locals 0x813
+   468: b(:) ( 0x0b7 ) 
+   469:     cells ( 0x069 ) 
+   470:     locals-pointer ( 0x80f ) 
+   472:     swap ( 0x049 ) 
+   473:     - ( 0x01f ) 
+   474:     b(to) ( 0x0c3 ) locals-pointer ( 0x80f ) 
+   477: b(;) ( 0x0c2 ) 
+   478: named-token ( 0x0b6 ) push-one-initted-local 0x814
+   504: b(:) ( 0x0b7 ) 
+   505:     locals-pointer ( 0x80f ) 
+   507:     1 ( 0x0a6 ) 
+   508:     cells ( 0x069 ) 
+   509:     - ( 0x01f ) 
+   510:     dup ( 0x047 ) 
+   511:     b(to) ( 0x0c3 ) locals-pointer ( 0x80f ) 
+   514:     locals-storage ( 0x80e ) 
+   516:     + ( 0x01e ) 
+   517:     ! ( 0x072 ) 
+   518: b(;) ( 0x0c2 ) 
+   519: named-token ( 0x0b6 ) push-initted-locals 0x815
+   542: b(:) ( 0x0b7 ) 
+   543:     0 ( 0x0a5 ) 
+   544:     b(?do) ( 0x018 ) 0x0007 (  dest = 552 )
+   547:         push-one-initted-local ( 0x814 ) 
+   549:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 547 )
+   552: b(;) ( 0x0c2 ) 
+   553: named-token ( 0x0b6 ) {push-locals} 0x816
+   570: b(:) ( 0x0b7 ) 
+   571:     2dup ( 0x053 ) 
+   572:     check-enough-locals ( 0x812 ) 
+   574:     push-uninitted-locals ( 0x813 ) 
+   576:     push-initted-locals ( 0x815 ) 
+   578: b(;) ( 0x0c2 ) 
+   579: named-token ( 0x0b6 ) {pop-locals} 0x817
+   595: b(:) ( 0x0b7 ) 
+   596:     cells ( 0x069 ) 
+   597:     locals-pointer ( 0x80f ) 
+   599:     + ( 0x01e ) 
+   600:     b(to) ( 0x0c3 ) locals-pointer ( 0x80f ) 
+   603: b(;) ( 0x0c2 ) 
+   604: named-token ( 0x0b6 ) _{local} 0x818
+   616: b(:) ( 0x0b7 ) 
+   617:     cells ( 0x069 ) 
+   618:     locals-pointer ( 0x80f ) 
+   620:     + ( 0x01e ) 
+   621:     locals-storage ( 0x80e ) 
+   623:     + ( 0x01e ) 
+   624: b(;) ( 0x0c2 ) 
+   625: named-token ( 0x0b6 ) catch 0x819
+   634: b(:) ( 0x0b7 ) 
+   635:     locals-pointer ( 0x80f ) 
+   637:     >r ( 0x030 ) 
+   638:     catch ( 0x217 ) 
+   640:     r> ( 0x031 ) 
+   641:     b(to) ( 0x0c3 ) locals-pointer ( 0x80f ) 
+   644: b(;) ( 0x0c2 ) 
+   645: named-token ( 0x0b6 ) downdate 0x81a
+   657: b(:) ( 0x0b7 ) 
+   658:     b(') ( 0x011 ) update ( 0x80d ) 
+   661:     catch ( 0x819 ) 
+   663: b(;) ( 0x0c2 ) 
+   664: named-token ( 0x0b6 ) whatsit3ya 0x81b
+   678: b(:) ( 0x0b7 ) 
+   679:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Sleazy is "
+   692:     type ( 0x090 ) 
+   693:     sleazy ( 0x80a ) 
+   695:     @ ( 0x06d ) 
+   696:     . ( 0x09d ) 
+   697:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Cheapy is "
+   710:     type ( 0x090 ) 
+   711:     cheapy ( 0x80b ) 
+   713:     @ ( 0x06d ) 
+   714:     . ( 0x09d ) 
+   715:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    "  Scruffy is "
+   729:     type ( 0x090 ) 
+   730:     scruffy ( 0x80c ) 
+   732:     @ ( 0x06d ) 
+   733:     . ( 0x09d ) 
+   734: b(;) ( 0x0c2 ) 
+   735: named-token ( 0x0b6 ) whatsit2ya 0x81c
+   749: b(:) ( 0x0b7 ) 
+   750:     whatsit3ya ( 0x81b ) 
+   752:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    "  And_doc is "
+   766:     type ( 0x090 ) 
+   767:     and_doc ( 0x806 ) 
+   769:     @ ( 0x06d ) 
+   770:     . ( 0x09d ) 
+   771:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Crappy is "
+   784:     type ( 0x090 ) 
+   785:     crappy ( 0x807 ) 
+   787:     @ ( 0x06d ) 
+   788:     . ( 0x09d ) 
+   789:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    "  Dumpy is "
+   801:     type ( 0x090 ) 
+   802:     dumpy ( 0x808 ) 
+   804:     @ ( 0x06d ) 
+   805:     . ( 0x09d ) 
+   806:     b(') ( 0x011 ) downdate ( 0x81a ) 
+   809:     catch ( 0x819 ) 
+   811: b(;) ( 0x0c2 ) 
+   812: named-token ( 0x0b6 ) whatsit1ya 0x81d
+   826: b(:) ( 0x0b7 ) 
+   827:     whatsit2ya ( 0x81c ) 
+   829:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Sneezy is "
+   842:     type ( 0x090 ) 
+   843:     sneezy ( 0x803 ) 
+   845:     @ ( 0x06d ) 
+   846:     . ( 0x09d ) 
+   847:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    "  Bashful is "
+   861:     type ( 0x090 ) 
+   862:     bashful ( 0x804 ) 
+   864:     @ ( 0x06d ) 
+   865:     . ( 0x09d ) 
+   866:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    "  Dopey is "
+   878:     type ( 0x090 ) 
+   879:     dopey ( 0x805 ) 
+   881:     @ ( 0x06d ) 
+   882:     . ( 0x09d ) 
+   883:     b(') ( 0x011 ) downdate ( 0x81a ) 
+   886:     catch ( 0x819 ) 
+   888: b(;) ( 0x0c2 ) 
+   889: named-token ( 0x0b6 ) whatsit0ya 0x81e
+   903: b(:) ( 0x0b7 ) 
+   904:     whatsit1ya ( 0x81d ) 
+   906:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    "  Happy is "
+   918:     type ( 0x090 ) 
+   919:     happy ( 0x800 ) 
+   921:     @ ( 0x06d ) 
+   922:     . ( 0x09d ) 
+   923:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Grumpy is "
+   936:     type ( 0x090 ) 
+   937:     grumpy ( 0x801 ) 
+   939:     @ ( 0x06d ) 
+   940:     . ( 0x09d ) 
+   941:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    "  Sleepy is "
+   954:     type ( 0x090 ) 
+   955:     sleepy ( 0x802 ) 
+   957:     @ ( 0x06d ) 
+   958:     . ( 0x09d ) 
+   959:     b(') ( 0x011 ) downdate ( 0x81a ) 
+   962:     catch ( 0x819 ) 
+   964: b(;) ( 0x0c2 ) 
+   965: end0 ( 0x000 ) 
+\  Detokenization finished normally after 966 bytes.
+End of file.
+

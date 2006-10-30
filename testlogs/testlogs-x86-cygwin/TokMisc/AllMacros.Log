@@ -1,0 +1,18 @@
+toke -v AllMacros.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  AllMacros.fth   Binary output to AllMacros.fc 
+Advisory:  File AllMacros.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File AllMacros.fth, Line 81.  (Output Position = 199).  FCODE-END encountered; processing...
+toke: checksum is 0x342a (200 bytes).  No FCodes assigned.
+Tokenization Completed.  2 Advisories.
+toke: wrote 200 bytes to bytecode file 'AllMacros.fc'

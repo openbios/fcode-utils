@@ -1,0 +1,5 @@
+${PWD:h}/TokeCommon/OneBeer.fth
+$PWD/../NonExist/NonExist.fth
+${PWD}/../TokeCommon/MyBeerAndYouCannotHaveIt.fth
+${PWD}/../TokeCommon/ZeroLen.bin
+${PWD/../TokeCommon/OneBeer.fth

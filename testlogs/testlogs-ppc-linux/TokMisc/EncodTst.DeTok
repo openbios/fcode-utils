@@ -1,0 +1,30 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x81cc (Ok)
+     4:   len:       0x0182 ( 386 bytes)
+     8: b(") ( 0x012 ) ( len=0xff [255 bytes] )
+                " This is the symphony that Schubert wrote and never finished"( 0a )This is the symphony that Schubert wrote and never ..."( 0a )Alma, tell us, all modern women are jealous."( 0a )Which of your magical wands got you Gustav and Walter and Franz?"( 0a )Away out here they got a name "
+   265: encode-bytes ( 0x115 ) 
+   267: b(") ( 0x012 ) ( len=0x5c [92 bytes] )
+                " for rain and wind and fire."( 0a )The rain is Tess, the fire's Joe and they call the wind Mariah."( 0a )"
+   361: encode-bytes ( 0x115 ) 
+   363: encode+ ( 0x112 ) 
+   365: named-token ( 0x0b6 ) whatnot 0x800
+   376: b(:) ( 0x0b7 ) 
+   377:     b?branch ( 0x014 ) 0x0006 (  dest = 384 )
+   380:         b(') ( 0x011 ) end0 ( 0x000 ) 
+   382:         execute ( 0x01d ) 
+   383:     b(>resolve) ( 0x0b2 ) 
+   384: b(;) ( 0x0c2 ) 
+   385: end0 ( 0x000 ) 
+\  Detokenization finished normally after 386 bytes.
+End of file.
+

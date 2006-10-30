@@ -1,0 +1,39 @@
+toke -v -i ToAtEnd.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  ToAtEnd.fth   Binary output to ToAtEnd.fc 
+Advisory:  File ToAtEnd.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File ToAtEnd.fth, Line 8.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File ToAtEnd.fth, Line 10.  (Output Position = 8).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File ToAtEnd.fth, Line 14.  (Output Position = 8).  Enabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File ToAtEnd.fth, Line 15.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Error:  File ToAtEnd.fth, Line 15.  (Output Position = 8).  Could not access input file LocalValuesSupport.fth
+Error:  File ToAtEnd.fth, Line 17.  (Output Position = 26).  Word  {push-locals}  is not in dictionary.
+Warning:  File ToAtEnd.fth, Line 18.  (Output Position = 26).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File ToAtEnd.fth, Line 19.  (Output Position = 27).  Word  _{local}  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 19.  (Output Position = 29).  Word  _{local}  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 19.  (Output Position = 32).  Word  _{local}  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 20.  (Output Position = 34).  Word  {pop-locals}  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 21.  (Output Position = 35).  Word  _cool  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 22.  (Output Position = 35).  Word  _gnarly  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 23.  (Output Position = 35).  Word  _dood  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 24.  (Output Position = 35).  Word  _hang_ten  is not in dictionary.
+Error:  File ToAtEnd.fth, Line 30.  (Output Position = 73).  Cannot apply  POO  to  GNARGGGHHH! , which is defined as a COLON.
+Error:  File ToAtEnd.fth, Line 31.  (Output Position = 80).  Cannot apply  TO  to  GNARGGGHHH! , which is defined as a COLON.
+Warning:  File ToAtEnd.fth, Line 32.  (Output Position = 87).  Applying POO to a VARIABLE (shmoo) is not recommended; use  !  instead.
+Error:  File ToAtEnd.fth, Line 33.  (Output Position = 95).  Cannot apply  POO  to  1 , which is defined as a CONSTANT.
+Error:  File ToAtEnd.fth, Line 34.  (Output Position = 99).  Unterminated POO
+Warning:  File ToAtEnd.fth, Line 35.  (Output Position = 99).  End-of-file encountered without END0 or FCODE-END.  Supplying END0
+toke: checksum is 0x21fc (100 bytes).  Last assigned FCode = 0x802
+Tokenization Completed.  14 Errors, 3 Warnings, 5 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 100 bytes to bytecode file 'ToAtEnd.fc'

@@ -1,0 +1,38 @@
+toke -v -f alwaYS-External -o HeadrSettings.alwyextl.fc HeadrSettings.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	  Always-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  HeadrSettings.fth   Binary output to HeadrSettings.alwyextl.fc 
+Advisory:  File HeadrSettings.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Advisory:  File HeadrSettings.fth, Line 20.  (Output Position = 183).  END0 encountered; processing...
+toke: checksum is 0x3a17 (184 bytes).  Last assigned FCode = 0x803
+Tokenization Completed.  2 Advisories.
+toke: wrote 184 bytes to bytecode file 'HeadrSettings.alwyextl.fc'

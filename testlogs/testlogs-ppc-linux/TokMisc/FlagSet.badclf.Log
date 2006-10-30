@@ -1,0 +1,35 @@
+toke -v -i -f McGillicuddy -f ORoark -f NoFrauBlucher -o FlagSet.badclf.fc FlagSet.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Unknown Special-Feature Flag:  McGillicuddy
+Unknown Special-Feature Flag:  ORoark
+Unknown Special-Feature Flag:  NoFrauBlucher
+Valid Special-Feature Flags are:
+	Local-Values
+	LV-Legacy-Separator
+	LV-Legacy-Message
+	ABORT-Quote
+	Sun-ABORT-Quote
+	ABORT-Quote-Throw
+	String-remark-escape
+	Hex-remark-escape
+	C-Style-string-escape
+	Always-Headers
+	Always-External
+	Warn-if-Duplicate
+	Obsolete-FCode-Warning
+	Trace-Conditionals
+	Upper-Case-Token-Names
+	Lower-Case-Token-Names
+	Big-End-PCI-Rev-Level
+	Ret-Stk-Interp
+	help

@@ -1,0 +1,308 @@
+toke -v -i -d NoCrash -d NoReset -d RangeTwo -o MulPCI_LapFC.NoRTwoVal.fc MulPCI_LapFC.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+User-Defined Symbols:
+	NoCrash
+	NoReset
+	RangeTwo
+
+Tokenizing  MulPCI_LapFC.fth   Binary output to MulPCI_LapFC.NoRTwoVal.fc 
+Advisory:  File MulPCI_LapFC.fth, Line 26.  PCI header revision=0xf2a7
+Advisory:  File MulPCI_LapFC.fth, Line 28.  PCI header not last image.
+Advisory:  File MulPCI_LapFC.fth, Line 33.  (Output Position = 52).  PCI header vendor id=0x1fed, device id=0x9009, class=020109
+Advisory:  File MulPCI_LapFC.fth, Line 37.  (Output Position = 52).  (PCI-Block Position = 0).  FLOADing TooManyFCodes.fth
+Advisory:  File TooManyFCodes.fth, Line 6.  (Output Position = 52).  (PCI-Block Position = 0).  Initiating Global Scope definitions.
+Advisory:  File TooManyFCodes.fth, Line 11.  (Output Position = 52).  (PCI-Block Position = 0).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File TooManyFCodes.fth, Line 13.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooManyFCodes.fth, Line 17.  (Output Position = 60).  (PCI-Block Position = 8).  FCode-token Assignment Counter of 0x800 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 17.  (Output Position = 60).  (PCI-Block Position = 8).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 20.  (Output Position = 73).  (PCI-Block Position = 21).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 2814).  (PCI-Block Position = 2762).  FCode-token Assignment Counter of 0x87e has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 2814).  (PCI-Block Position = 2762).  FCode-token Assignment Counter was 0x87e; has been reset to 0x80b.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 2814).  (PCI-Block Position = 2762).  FCode-token Assignment Counter was 0x80b; has been advanced to 0x87e.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 2814).  (PCI-Block Position = 2762).  FCode-token Assignment Counter of 0x87e has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 22.  (Output Position = 2814).  (PCI-Block Position = 2762).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 23.  (Output Position = 2850).  (PCI-Block Position = 2798).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 24.  (Output Position = 2888).  (PCI-Block Position = 2836).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 25.  (Output Position = 2926).  (PCI-Block Position = 2874).  Emitting FCode value of 0x80b
+Advisory:  File TooManyFCodes.fth, Line 26.  (Output Position = 2928).  (PCI-Block Position = 2876).  FCode-token Assignment Counter of 0x881 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 26.  (Output Position = 2928).  (PCI-Block Position = 2876).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 28.  (Output Position = 2928).  (PCI-Block Position = 2876).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 29.  (Output Position = 2930).  (PCI-Block Position = 2878).  Encountered FCODE-RESET.  Resetting FCode-token Assignment Counter.  FCodes assigned:
+    From 0x800 to 0x87d in the range that started on line 13
+    None assigned in the range that started on line 21
+    From 0x87e to 0x880 in the range that started on line 21
+Advisory:  File TooManyFCodes.fth, Line 31.  (Output Position = 2943).  (PCI-Block Position = 2891).  FLOADing OneTwoFive.fth
+Message:  File TooManyFCodes.fth, Line 32.  (Output Position = 5684).  (PCI-Block Position = 5632).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 33.  (Output Position = 5720).  (PCI-Block Position = 5668).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 34.  (Output Position = 5758).  (PCI-Block Position = 5706).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 5796).  (PCI-Block Position = 5744).  FCode-token Assignment Counter of 0x881 has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 5796).  (PCI-Block Position = 5744).  FCode-token Assignment Counter was 0x881; has been reset to 0x80b.
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 5796).  (PCI-Block Position = 5744).  FCode-token Assignment Counter was 0x80b; has been advanced to 0x881.
+Advisory:  File TooManyFCodes.fth, Line 37.  (Output Position = 5796).  (PCI-Block Position = 5744).  Encountered finish-device.  Resetting definitions of device node that started on line 28
+Advisory:  File TooManyFCodes.fth, Line 37.  (Output Position = 5796).  (PCI-Block Position = 5744).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 39.  (Output Position = 5798).  (PCI-Block Position = 5746).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 40.  (Output Position = 5800).  (PCI-Block Position = 5748).  FCode-token Assignment Counter was 0x881; has been advanced to 0x8c0.
+Advisory:  File TooManyFCodes.fth, Line 42.  (Output Position = 5813).  (PCI-Block Position = 5761).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 43.  (Output Position = 8554).  (PCI-Block Position = 8502).  FCode-token Assignment Counter of 0x93e has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 44.  (Output Position = 8554).  (PCI-Block Position = 8502).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 45.  (Output Position = 8590).  (PCI-Block Position = 8538).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 46.  (Output Position = 8628).  (PCI-Block Position = 8576).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 47.  (Output Position = 8666).  (PCI-Block Position = 8614).  FCode-token Assignment Counter of 0x941 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 47.  (Output Position = 8666).  (PCI-Block Position = 8614).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 48.  (Output Position = 8666).  (PCI-Block Position = 8614).  Encountered finish-device.  Resetting definitions of device node that started on line 39
+Advisory:  File TooManyFCodes.fth, Line 48.  (Output Position = 8666).  (PCI-Block Position = 8614).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 50.  (Output Position = 8668).  (PCI-Block Position = 8616).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 51.  (Output Position = 8670).  (PCI-Block Position = 8618).  FCode-token Assignment Counter was 0x941; has been reset to 0x87e.
+Error:  File TooManyFCodes.fth, Line 52.  (Output Position = 8671).  (PCI-Block Position = 8619).  Assigning FCode of 0x87e, which overlaps the range that started on line 29
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 8683).  (PCI-Block Position = 8631).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 11424).  (PCI-Block Position = 11372).  FCode-token Assignment Counter of 0x8fc has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 11424).  (PCI-Block Position = 11372).  FCode-token Assignment Counter was 0x8fc; has been reset to 0x889.
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 11424).  (PCI-Block Position = 11372).  FCode-token Assignment Counter was 0x889; has been advanced to 0x8fc.
+Advisory:  File TooManyFCodes.fth, Line 54.  (Output Position = 11424).  (PCI-Block Position = 11372).  FCode-token Assignment Counter of 0x8fc has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 55.  (Output Position = 11424).  (PCI-Block Position = 11372).  one_twenty-six
+Error:  File TooManyFCodes.fth, Line 55.  (Output Position = 11429).  (PCI-Block Position = 11377).  Assigning FCode of 0x8fc, which overlaps the range that started on line 40
+Message:  File TooManyFCodes.fth, Line 56.  (Output Position = 11460).  (PCI-Block Position = 11408).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 57.  (Output Position = 11498).  (PCI-Block Position = 11446).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 58.  (Output Position = 11536).  (PCI-Block Position = 11484).  FCode-token Assignment Counter of 0x8ff has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 58.  (Output Position = 11536).  (PCI-Block Position = 11484).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 59.  (Output Position = 11536).  (PCI-Block Position = 11484).  Encountered finish-device.  Resetting definitions of device node that started on line 50
+Advisory:  File TooManyFCodes.fth, Line 59.  (Output Position = 11536).  (PCI-Block Position = 11484).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 61.  (Output Position = 11538).  (PCI-Block Position = 11486).  FCode-token Assignment Counter of 0x8ff has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 67.  (Output Position = 11538).  (PCI-Block Position = 11486).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 68.  (Output Position = 11540).  (PCI-Block Position = 11488).  FCode-token Assignment Counter was 0x8ff; has been advanced to 0x93e.
+Error:  File TooManyFCodes.fth, Line 69.  (Output Position = 11541).  (PCI-Block Position = 11489).  Assigning FCode of 0x93e, which overlaps the range that started on line 40
+Advisory:  File TooManyFCodes.fth, Line 70.  (Output Position = 11553).  (PCI-Block Position = 11501).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 71.  (Output Position = 14294).  (PCI-Block Position = 14242).  FCode-token Assignment Counter of 0x9bc has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 72.  (Output Position = 14294).  (PCI-Block Position = 14242).  one_twenty-six
+Advisory:  File TooManyFCodes.fth, Line 73.  (Output Position = 14330).  (PCI-Block Position = 14278).  FCode-token Assignment Counter was 0x9bd; has been reset to 0x9bc.
+Message:  File TooManyFCodes.fth, Line 74.  (Output Position = 14330).  (PCI-Block Position = 14278).  one_twenty-seven
+Error:  File TooManyFCodes.fth, Line 74.  (Output Position = 14335).  (PCI-Block Position = 14283).  Assigning FCode of 0x9bc, which overlaps the range that started on line 68
+Advisory:  File TooManyFCodes.fth, Line 75.  (Output Position = 14368).  (PCI-Block Position = 14316).  Encountered finish-device.  Resetting definitions of device node that started on line 67
+Advisory:  File TooManyFCodes.fth, Line 75.  (Output Position = 14368).  (PCI-Block Position = 14316).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 76.  (Output Position = 14370).  (PCI-Block Position = 14318).  FCode-token Assignment Counter of 0x9bd has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 76.  (Output Position = 14370).  (PCI-Block Position = 14318).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 78.  (Output Position = 14370).  (PCI-Block Position = 14318).  FCODE-END encountered; processing...
+Warning:  File TooManyFCodes.fth, Line 78.  (Output Position = 14371).  (PCI-Block Position = 14319).  Stack imbalance before end of tokenization.
+toke: checksum is 0x7e4b (14319 bytes).  FCodes assigned:
+    From 0x800 to 0x880 in the range that started on line 29
+    None assigned in the range that started on line 36
+    None assigned in the range that started on line 36
+    From 0x8c0 to 0x940 in the range that started on line 40
+    From 0x87e to 0x8fb ***Overlap*** in the range that started on line 51
+    None assigned in the range that started on line 53
+    From 0x8fc to 0x8fe ***Overlap*** in the range that started on line 53
+    From 0x93e to 0x9bc ***Overlap*** in the range that started on line 68
+    From 0x9bc to 0x9bc ***Overlap*** in the range that started on line 73
+Advisory:  File TooManyFCodes.fth, Line 81.  (Output Position = 14371).  (PCI-Block Position = 14319).  Initiating Global Scope definitions.
+Advisory:  File TooManyFCodes.fth, Line 86.  (Output Position = 14371).  (PCI-Block Position = 14319).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File TooManyFCodes.fth, Line 88.  (Output Position = 14371).  (PCI-Block Position = 14319).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooManyFCodes.fth, Line 90.  (Output Position = 14379).  (PCI-Block Position = 14327).  FCode-token Assignment Counter of 0x9bd has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 90.  (Output Position = 14379).  (PCI-Block Position = 14327).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 91.  (Output Position = 14379).  (PCI-Block Position = 14327).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 94.  (Output Position = 14417).  (PCI-Block Position = 14365).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 96.  (Output Position = 14419).  (PCI-Block Position = 14367).  FCode-token Assignment Counter was 0x9be; has been reset to 0x800.
+Error:  File TooManyFCodes.fth, Line 97.  (Output Position = 14420).  (PCI-Block Position = 14368).  Assigning FCode of 0x800, which overlaps the range that started on line 29
+Advisory:  File TooManyFCodes.fth, Line 100.  (Output Position = 14432).  (PCI-Block Position = 14380).  Encountered FCODE-RESET.  Resetting FCode-token Assignment Counter.  FCodes assigned:
+    From 0x800 to 0x880 in the range that started on line 29
+    None assigned in the range that started on line 36
+    None assigned in the range that started on line 36
+    From 0x8c0 to 0x940 in the range that started on line 40
+    From 0x87e to 0x8fb ***Overlap*** in the range that started on line 51
+    None assigned in the range that started on line 53
+    From 0x8fc to 0x8fe ***Overlap*** in the range that started on line 53
+    From 0x93e to 0x9bc ***Overlap*** in the range that started on line 68
+    From 0x9bc to 0x9bc ***Overlap*** in the range that started on line 73
+    From 0x9bd to 0x9bd in the range that started on line 88
+    From 0x800 to 0x800 ***Overlap*** in the range that started on line 96
+Advisory:  File TooManyFCodes.fth, Line 101.  (Output Position = 14432).  (PCI-Block Position = 14380).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 103.  (Output Position = 17173).  (PCI-Block Position = 17121).  Encountered finish-device.  Resetting definitions of device node that started on line 94
+Advisory:  File TooManyFCodes.fth, Line 103.  (Output Position = 17173).  (PCI-Block Position = 17121).  Resuming definitions since start of tokenization.
+Error:  File TooManyFCodes.fth, Line 106.  (Output Position = 17175).  (PCI-Block Position = 17123).  stack underflow at or near  wanna-pop 
+Error:  File TooManyFCodes.fth, Line 107.  (Output Position = 17175).  (PCI-Block Position = 17123).  Attempt to set next fcode to 0x0, which violates limit specified by IEEE-1275.  Disallowing.
+Message:  File TooManyFCodes.fth, Line 110.  (Output Position = 17175).  (PCI-Block Position = 17123).  Could not use FCode pushed on other side of block
+Message:  File TooManyFCodes.fth, Line 111.  (Output Position = 17175).  (PCI-Block Position = 17123).  Try this...  
+Advisory:  File TooManyFCodes.fth, Line 111.  (Output Position = 17175).  (PCI-Block Position = 17123).  FCode-token Assignment Counter was 0x87d; has been advanced to 0x8ff.
+Advisory:  File TooManyFCodes.fth, Line 124.  (Output Position = 17175).  (PCI-Block Position = 17123).  FCode-token Assignment Counter was 0x8ff; has been advanced to 0xf80.
+Advisory:  File TooManyFCodes.fth, Line 129.  (Output Position = 17188).  (PCI-Block Position = 17136).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 131.  (Output Position = 19929).  (PCI-Block Position = 19877).  FCode-token Assignment Counter of 0xffe has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 131.  (Output Position = 19929).  (PCI-Block Position = 19877).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 132.  (Output Position = 19929).  (PCI-Block Position = 19877).  one_twenty-six
+Advisory:  File TooManyFCodes.fth, Line 133.  (Output Position = 19965).  (PCI-Block Position = 19913).  FCode-token Assignment Counter of 0xfff has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 133.  (Output Position = 19965).  (PCI-Block Position = 19913).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 134.  (Output Position = 19965).  (PCI-Block Position = 19913).  one_twenty-seven
+Advisory:  File TooManyFCodes.fth, Line 135.  (Output Position = 20003).  (PCI-Block Position = 19951).  FCode-token Assignment Counter of 0x1000 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 135.  (Output Position = 20003).  (PCI-Block Position = 19951).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 144.  (Output Position = 20003).  (PCI-Block Position = 19951).  Overflow the data-stack.
+Advisory:  File TooManyFCodes.fth, Line 145.  (Output Position = 20003).  (PCI-Block Position = 19951).  FLOADing TooManyPushes.fth
+Error:  File TooManyPushes.fth, Line 1025.  (Output Position = 20003).  (PCI-Block Position = 19951).  stack overflow at or near  3 
+Error:  File TooManyPushes.fth, Line 1026.  (Output Position = 20003).  (PCI-Block Position = 19951).  stack overflow at or near  2 
+Error:  File TooManyPushes.fth, Line 1027.  (Output Position = 20003).  (PCI-Block Position = 19951).  stack overflow at or near  1 
+Advisory:  File TooManyFCodes.fth, Line 148.  (Output Position = 20003).  (PCI-Block Position = 19951).  FCODE-END encountered; processing...
+Warning:  File TooManyFCodes.fth, Line 148.  (Output Position = 20004).  (PCI-Block Position = 19952).  Stack imbalance before end of tokenization.
+toke: checksum is 0x5231 (5633 bytes).  FCodes assigned:
+    From 0x800 to 0x87c in the range that started on line 100
+    None assigned in the range that started on line 111
+    From 0xf80 to 0xfff in the range that started on line 124
+Warning:  File MulPCI_LapFC.fth, Line 42.  (Output Position = 20004).  (PCI-Block Position = 19952).  No value assigned to command-line symbol RangeTwo
+Error:  File MulPCI_LapFC.fth, Line 42.  (Output Position = 20004).  (PCI-Block Position = 19952).  stack underflow at or near  SecondRangeFCode 
+Message:  File MulPCI_LapFC.fth, Line 47.  (Output Position = 20004).  (PCI-Block Position = 19952).  Not resetting...
+Adding 476 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Advisory:  File MulPCI_LapFC.fth, Line 53.  (Output Position = 20480).  PCI header revision=0xea57
+Advisory:  File MulPCI_LapFC.fth, Line 55.  (Output Position = 20480).  Last image for PCI header.
+Advisory:  File MulPCI_LapFC.fth, Line 60.  (Output Position = 20532).  PCI header vendor id=0xdeaf, device id=0x9021, class=010902
+Error:  File MulPCI_LapFC.fth, Line 67.  (Output Position = 20532).  (PCI-Block Position = 0).  Attempt to set next fcode to 0x0, which violates limit specified by IEEE-1275.  Disallowing.
+Advisory:  File MulPCI_LapFC.fth, Line 71.  (Output Position = 20532).  (PCI-Block Position = 0).  FLOADing TooManyFCodes.fth
+Advisory:  File TooManyFCodes.fth, Line 6.  (Output Position = 20532).  (PCI-Block Position = 0).  Initiating Global Scope definitions.
+Advisory:  File TooManyFCodes.fth, Line 11.  (Output Position = 20532).  (PCI-Block Position = 0).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File TooManyFCodes.fth, Line 13.  (Output Position = 20532).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooManyFCodes.fth, Line 17.  (Output Position = 20540).  (PCI-Block Position = 8).  FCode-token Assignment Counter of 0x800 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 17.  (Output Position = 20540).  (PCI-Block Position = 8).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 20.  (Output Position = 20553).  (PCI-Block Position = 21).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 23294).  (PCI-Block Position = 2762).  FCode-token Assignment Counter of 0x87e has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 23294).  (PCI-Block Position = 2762).  FCode-token Assignment Counter was 0x87e; has been reset to 0x80b.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 23294).  (PCI-Block Position = 2762).  FCode-token Assignment Counter was 0x80b; has been advanced to 0x87e.
+Advisory:  File TooManyFCodes.fth, Line 21.  (Output Position = 23294).  (PCI-Block Position = 2762).  FCode-token Assignment Counter of 0x87e has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 22.  (Output Position = 23294).  (PCI-Block Position = 2762).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 23.  (Output Position = 23330).  (PCI-Block Position = 2798).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 24.  (Output Position = 23368).  (PCI-Block Position = 2836).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 25.  (Output Position = 23406).  (PCI-Block Position = 2874).  Emitting FCode value of 0x80b
+Advisory:  File TooManyFCodes.fth, Line 26.  (Output Position = 23408).  (PCI-Block Position = 2876).  FCode-token Assignment Counter of 0x881 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 26.  (Output Position = 23408).  (PCI-Block Position = 2876).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 28.  (Output Position = 23408).  (PCI-Block Position = 2876).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 29.  (Output Position = 23410).  (PCI-Block Position = 2878).  Encountered FCODE-RESET.  Resetting FCode-token Assignment Counter.  FCodes assigned:
+    From 0x800 to 0x87d in the range that started on line 48 of file MulPCI_LapFC.fth
+    None assigned in the range that started on line 21
+    From 0x87e to 0x880 in the range that started on line 21
+Advisory:  File TooManyFCodes.fth, Line 31.  (Output Position = 23423).  (PCI-Block Position = 2891).  FLOADing OneTwoFive.fth
+Message:  File TooManyFCodes.fth, Line 32.  (Output Position = 26164).  (PCI-Block Position = 5632).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 33.  (Output Position = 26200).  (PCI-Block Position = 5668).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 34.  (Output Position = 26238).  (PCI-Block Position = 5706).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 26276).  (PCI-Block Position = 5744).  FCode-token Assignment Counter of 0x881 has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 26276).  (PCI-Block Position = 5744).  FCode-token Assignment Counter was 0x881; has been reset to 0x80b.
+Advisory:  File TooManyFCodes.fth, Line 36.  (Output Position = 26276).  (PCI-Block Position = 5744).  FCode-token Assignment Counter was 0x80b; has been advanced to 0x881.
+Advisory:  File TooManyFCodes.fth, Line 37.  (Output Position = 26276).  (PCI-Block Position = 5744).  Encountered finish-device.  Resetting definitions of device node that started on line 28
+Advisory:  File TooManyFCodes.fth, Line 37.  (Output Position = 26276).  (PCI-Block Position = 5744).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 39.  (Output Position = 26278).  (PCI-Block Position = 5746).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 40.  (Output Position = 26280).  (PCI-Block Position = 5748).  FCode-token Assignment Counter was 0x881; has been advanced to 0x8c0.
+Advisory:  File TooManyFCodes.fth, Line 42.  (Output Position = 26293).  (PCI-Block Position = 5761).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 43.  (Output Position = 29034).  (PCI-Block Position = 8502).  FCode-token Assignment Counter of 0x93e has been saved on stack.
+Warning:  File TooManyFCodes.fth, Line 43.  (Output Position = 29034).  (PCI-Block Position = 8502).  Duplicate definition:   dev-1-lap  already exists as a CONSTANT in Tokenizer-Escape mode.
+Message:  File TooManyFCodes.fth, Line 44.  (Output Position = 29034).  (PCI-Block Position = 8502).  one_twenty-six
+Message:  File TooManyFCodes.fth, Line 45.  (Output Position = 29070).  (PCI-Block Position = 8538).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 46.  (Output Position = 29108).  (PCI-Block Position = 8576).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 47.  (Output Position = 29146).  (PCI-Block Position = 8614).  FCode-token Assignment Counter of 0x941 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 47.  (Output Position = 29146).  (PCI-Block Position = 8614).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 48.  (Output Position = 29146).  (PCI-Block Position = 8614).  Encountered finish-device.  Resetting definitions of device node that started on line 39
+Advisory:  File TooManyFCodes.fth, Line 48.  (Output Position = 29146).  (PCI-Block Position = 8614).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 50.  (Output Position = 29148).  (PCI-Block Position = 8616).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 51.  (Output Position = 29150).  (PCI-Block Position = 8618).  FCode-token Assignment Counter was 0x941; has been reset to 0x87e.
+Error:  File TooManyFCodes.fth, Line 52.  (Output Position = 29151).  (PCI-Block Position = 8619).  Assigning FCode of 0x87e, which overlaps the range that started on line 29
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 29163).  (PCI-Block Position = 8631).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 31904).  (PCI-Block Position = 11372).  FCode-token Assignment Counter of 0x8fc has been saved on stack.
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 31904).  (PCI-Block Position = 11372).  FCode-token Assignment Counter was 0x8fc; has been reset to 0x889.
+Advisory:  File TooManyFCodes.fth, Line 53.  (Output Position = 31904).  (PCI-Block Position = 11372).  FCode-token Assignment Counter was 0x889; has been advanced to 0x8fc.
+Advisory:  File TooManyFCodes.fth, Line 54.  (Output Position = 31904).  (PCI-Block Position = 11372).  FCode-token Assignment Counter of 0x8fc has been saved on stack.
+Warning:  File TooManyFCodes.fth, Line 54.  (Output Position = 31904).  (PCI-Block Position = 11372).  Duplicate definition:   dev-2-lap  already exists as a CONSTANT in Tokenizer-Escape mode.
+Message:  File TooManyFCodes.fth, Line 55.  (Output Position = 31904).  (PCI-Block Position = 11372).  one_twenty-six
+Error:  File TooManyFCodes.fth, Line 55.  (Output Position = 31909).  (PCI-Block Position = 11377).  Assigning FCode of 0x8fc, which overlaps the range that started on line 40
+Message:  File TooManyFCodes.fth, Line 56.  (Output Position = 31940).  (PCI-Block Position = 11408).  one_twenty-seven
+Message:  File TooManyFCodes.fth, Line 57.  (Output Position = 31978).  (PCI-Block Position = 11446).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 58.  (Output Position = 32016).  (PCI-Block Position = 11484).  FCode-token Assignment Counter of 0x8ff has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 58.  (Output Position = 32016).  (PCI-Block Position = 11484).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 59.  (Output Position = 32016).  (PCI-Block Position = 11484).  Encountered finish-device.  Resetting definitions of device node that started on line 50
+Advisory:  File TooManyFCodes.fth, Line 59.  (Output Position = 32016).  (PCI-Block Position = 11484).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 61.  (Output Position = 32018).  (PCI-Block Position = 11486).  FCode-token Assignment Counter of 0x8ff has been saved on stack.
+Warning:  File TooManyFCodes.fth, Line 63.  (Output Position = 32018).  (PCI-Block Position = 11486).  Duplicate definition:   XFcBlkFcd  already exists as a CONSTANT in Tokenizer-Escape mode.
+Advisory:  File TooManyFCodes.fth, Line 67.  (Output Position = 32018).  (PCI-Block Position = 11486).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 68.  (Output Position = 32020).  (PCI-Block Position = 11488).  FCode-token Assignment Counter was 0x8ff; has been advanced to 0x93e.
+Error:  File TooManyFCodes.fth, Line 69.  (Output Position = 32021).  (PCI-Block Position = 11489).  Assigning FCode of 0x93e, which overlaps the range that started on line 40
+Advisory:  File TooManyFCodes.fth, Line 70.  (Output Position = 32033).  (PCI-Block Position = 11501).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 71.  (Output Position = 34774).  (PCI-Block Position = 14242).  FCode-token Assignment Counter of 0x9bc has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 72.  (Output Position = 34774).  (PCI-Block Position = 14242).  one_twenty-six
+Advisory:  File TooManyFCodes.fth, Line 73.  (Output Position = 34810).  (PCI-Block Position = 14278).  FCode-token Assignment Counter was 0x9bd; has been reset to 0x9bc.
+Message:  File TooManyFCodes.fth, Line 74.  (Output Position = 34810).  (PCI-Block Position = 14278).  one_twenty-seven
+Error:  File TooManyFCodes.fth, Line 74.  (Output Position = 34815).  (PCI-Block Position = 14283).  Assigning FCode of 0x9bc, which overlaps the range that started on line 68
+Advisory:  File TooManyFCodes.fth, Line 75.  (Output Position = 34848).  (PCI-Block Position = 14316).  Encountered finish-device.  Resetting definitions of device node that started on line 67
+Advisory:  File TooManyFCodes.fth, Line 75.  (Output Position = 34848).  (PCI-Block Position = 14316).  Resuming definitions since start of tokenization.
+Advisory:  File TooManyFCodes.fth, Line 76.  (Output Position = 34850).  (PCI-Block Position = 14318).  FCode-token Assignment Counter of 0x9bd has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 76.  (Output Position = 34850).  (PCI-Block Position = 14318).  ... and dropped off.
+Advisory:  File TooManyFCodes.fth, Line 78.  (Output Position = 34850).  (PCI-Block Position = 14318).  FCODE-END encountered; processing...
+Warning:  File TooManyFCodes.fth, Line 78.  (Output Position = 34851).  (PCI-Block Position = 14319).  Stack imbalance before end of tokenization.
+toke: checksum is 0x7e4b (14319 bytes).  FCodes assigned:
+    From 0x800 to 0x880 in the range that started on line 29
+    None assigned in the range that started on line 36
+    None assigned in the range that started on line 36
+    From 0x8c0 to 0x940 in the range that started on line 40
+    From 0x87e to 0x8fb ***Overlap*** in the range that started on line 51
+    None assigned in the range that started on line 53
+    From 0x8fc to 0x8fe ***Overlap*** in the range that started on line 53
+    From 0x93e to 0x9bc ***Overlap*** in the range that started on line 68
+    From 0x9bc to 0x9bc ***Overlap*** in the range that started on line 73
+Advisory:  File TooManyFCodes.fth, Line 81.  (Output Position = 34851).  (PCI-Block Position = 14319).  Initiating Global Scope definitions.
+Advisory:  File TooManyFCodes.fth, Line 86.  (Output Position = 34851).  (PCI-Block Position = 14319).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File TooManyFCodes.fth, Line 88.  (Output Position = 34851).  (PCI-Block Position = 14319).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooManyFCodes.fth, Line 90.  (Output Position = 34859).  (PCI-Block Position = 14327).  FCode-token Assignment Counter of 0x9bd has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 90.  (Output Position = 34859).  (PCI-Block Position = 14327).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 91.  (Output Position = 34859).  (PCI-Block Position = 14327).  one_twenty-eight
+Advisory:  File TooManyFCodes.fth, Line 94.  (Output Position = 34897).  (PCI-Block Position = 14365).  Encountered new-device.  Starting new device-node.
+Advisory:  File TooManyFCodes.fth, Line 96.  (Output Position = 34899).  (PCI-Block Position = 14367).  FCode-token Assignment Counter was 0x9be; has been reset to 0x800.
+Error:  File TooManyFCodes.fth, Line 97.  (Output Position = 34900).  (PCI-Block Position = 14368).  Assigning FCode of 0x800, which overlaps the range that started on line 29
+Advisory:  File TooManyFCodes.fth, Line 100.  (Output Position = 34912).  (PCI-Block Position = 14380).  Encountered FCODE-RESET.  Resetting FCode-token Assignment Counter.  FCodes assigned:
+    From 0x800 to 0x880 in the range that started on line 29
+    None assigned in the range that started on line 36
+    None assigned in the range that started on line 36
+    From 0x8c0 to 0x940 in the range that started on line 40
+    From 0x87e to 0x8fb ***Overlap*** in the range that started on line 51
+    None assigned in the range that started on line 53
+    From 0x8fc to 0x8fe ***Overlap*** in the range that started on line 53
+    From 0x93e to 0x9bc ***Overlap*** in the range that started on line 68
+    From 0x9bc to 0x9bc ***Overlap*** in the range that started on line 73
+    From 0x9bd to 0x9bd in the range that started on line 88
+    From 0x800 to 0x800 ***Overlap*** in the range that started on line 96
+Advisory:  File TooManyFCodes.fth, Line 101.  (Output Position = 34912).  (PCI-Block Position = 14380).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 103.  (Output Position = 37653).  (PCI-Block Position = 17121).  Encountered finish-device.  Resetting definitions of device node that started on line 94
+Advisory:  File TooManyFCodes.fth, Line 103.  (Output Position = 37653).  (PCI-Block Position = 17121).  Resuming definitions since start of tokenization.
+Error:  File TooManyFCodes.fth, Line 106.  (Output Position = 37655).  (PCI-Block Position = 17123).  stack underflow at or near  wanna-pop 
+Warning:  File TooManyFCodes.fth, Line 106.  (Output Position = 37655).  (PCI-Block Position = 17123).  Duplicate definition:   wanna-pop  already exists as a CONSTANT in Tokenizer-Escape mode.
+Error:  File TooManyFCodes.fth, Line 107.  (Output Position = 37655).  (PCI-Block Position = 17123).  Attempt to set next fcode to 0x0, which violates limit specified by IEEE-1275.  Disallowing.
+Message:  File TooManyFCodes.fth, Line 110.  (Output Position = 37655).  (PCI-Block Position = 17123).  Could not use FCode pushed on other side of block
+Message:  File TooManyFCodes.fth, Line 111.  (Output Position = 37655).  (PCI-Block Position = 17123).  Try this...  
+Advisory:  File TooManyFCodes.fth, Line 111.  (Output Position = 37655).  (PCI-Block Position = 17123).  FCode-token Assignment Counter was 0x87d; has been advanced to 0x8ff.
+Advisory:  File TooManyFCodes.fth, Line 124.  (Output Position = 37655).  (PCI-Block Position = 17123).  FCode-token Assignment Counter was 0x8ff; has been advanced to 0xf80.
+Advisory:  File TooManyFCodes.fth, Line 129.  (Output Position = 37668).  (PCI-Block Position = 17136).  FLOADing OneTwoFive.fth
+Advisory:  File TooManyFCodes.fth, Line 131.  (Output Position = 40409).  (PCI-Block Position = 19877).  FCode-token Assignment Counter of 0xffe has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 131.  (Output Position = 40409).  (PCI-Block Position = 19877).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 132.  (Output Position = 40409).  (PCI-Block Position = 19877).  one_twenty-six
+Advisory:  File TooManyFCodes.fth, Line 133.  (Output Position = 40445).  (PCI-Block Position = 19913).  FCode-token Assignment Counter of 0xfff has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 133.  (Output Position = 40445).  (PCI-Block Position = 19913).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 134.  (Output Position = 40445).  (PCI-Block Position = 19913).  one_twenty-seven
+Advisory:  File TooManyFCodes.fth, Line 135.  (Output Position = 40483).  (PCI-Block Position = 19951).  FCode-token Assignment Counter of 0x1000 has been saved on stack.
+Message:  File TooManyFCodes.fth, Line 135.  (Output Position = 40483).  (PCI-Block Position = 19951).  ... and dropped off.
+Message:  File TooManyFCodes.fth, Line 144.  (Output Position = 40483).  (PCI-Block Position = 19951).  Overflow the data-stack.
+Advisory:  File TooManyFCodes.fth, Line 145.  (Output Position = 40483).  (PCI-Block Position = 19951).  FLOADing TooManyPushes.fth
+Error:  File TooManyPushes.fth, Line 1025.  (Output Position = 40483).  (PCI-Block Position = 19951).  stack overflow at or near  3 
+Error:  File TooManyPushes.fth, Line 1026.  (Output Position = 40483).  (PCI-Block Position = 19951).  stack overflow at or near  2 
+Error:  File TooManyPushes.fth, Line 1027.  (Output Position = 40483).  (PCI-Block Position = 19951).  stack overflow at or near  1 
+Advisory:  File TooManyFCodes.fth, Line 148.  (Output Position = 40483).  (PCI-Block Position = 19951).  FCODE-END encountered; processing...
+Warning:  File TooManyFCodes.fth, Line 148.  (Output Position = 40484).  (PCI-Block Position = 19952).  Stack imbalance before end of tokenization.
+toke: checksum is 0x5231 (5633 bytes).  FCodes assigned:
+    From 0x800 to 0x87c in the range that started on line 100
+    None assigned in the range that started on line 111
+    From 0xf80 to 0xfff in the range that started on line 124
+Adding 476 bytes of zero padding to PCI image.
+
+Tokenization Completed.  22 Errors, 9 Warnings, 136 Advisories, 59 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 40960 bytes to bytecode file 'MulPCI_LapFC.NoRTwoVal.fc'

@@ -1,0 +1,23 @@
+toke -v CaseTkns.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  CaseTkns.fth   Binary output to CaseTkns.fc 
+Advisory:  File CaseTkns.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File CaseTkns.fth, Line 10.  (Output Position = 38).  Enabling:  Convert Token-Names to lower-Case
+Advisory:  File CaseTkns.fth, Line 15.  (Output Position = 111).  Enabling:  Convert Token-Names to UPPER-Case
+Advisory:  File CaseTkns.fth, Line 24.  (Output Position = 193).  Enabling:  Convert Token-Names to lower-Case
+Advisory:  File CaseTkns.fth, Line 28.  (Output Position = 227).  Disabling:  Convert Token-Names to UPPER-Case
+Advisory:  File CaseTkns.fth, Line 32.  (Output Position = 261).  Disabling:  Convert Token-Names to lower-Case
+Advisory:  File CaseTkns.fth, Line 36.  (Output Position = 286).  FCODE-END encountered; processing...
+toke: checksum is 0x5819 (287 bytes).  Last assigned FCode = 0x806
+Tokenization Completed.  7 Advisories.
+toke: wrote 287 bytes to bytecode file 'CaseTkns.fc'

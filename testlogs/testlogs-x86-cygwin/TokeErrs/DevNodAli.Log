@@ -1,0 +1,80 @@
+toke -v -i -l -I. -I../TokoLoco DevNodAli.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  DevNodAli.fth   Binary output to DevNodAli.fc   FLoad-list to DevNodAli.fl 
+Advisory:  File was found in ./DevNodAli.fth
+Advisory:  File DevNodAli.fth, Line 7.  Enabling:  Support IBM-style Local Values ("LV"s)
+Message:  File DevNodAli.fth, Line 8.  Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Advisory:  File DevNodAli.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Advisory:  File DevNodAli.fth, Line 12.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File DevNodAli.fth, Line 12.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Advisory:  File DevNodAli.fth, Line 24.  (Output Position = 215).  DUP is a Global definition, but its alias, foop, will only be defined in the top-level device-node, which began on line 10
+Advisory:  File DevNodAli.fth, Line 25.  (Output Position = 215).  MY-SELF is a Global definition, but its alias, pelf, will only be defined in the top-level device-node, which began on line 10
+Warning:  File DevNodAli.fth, Line 28.  (Output Position = 215).  Duplicate definition:   >>  already exists in the core vocabulary.
+Advisory:  File DevNodAli.fth, Line 28.  (Output Position = 215).  LSHIFT is a Global definition, but its alias, >>, will only be defined in the top-level device-node, which began on line 10
+Warning:  File DevNodAli.fth, Line 29.  (Output Position = 215).  Duplicate definition:   <<  already exists in the core vocabulary.
+Advisory:  File DevNodAli.fth, Line 29.  (Output Position = 215).  RSHIFT is a Global definition, but its alias, <<, will only be defined in the top-level device-node, which began on line 10
+Message:  File DevNodAli.fth, Line 68.  (Output Position = 501).   Define a method that creates subsidiaries...
+Warning:  File DevNodAli.fth, Line 83.  (Output Position = 556).  Multi-line string, started on line 80 in definition of  MORE-OFFS  , which started on line 79
+Message:  File DevNodAli.fth, Line 100.  (Output Position = 634).   Subsidiary (child) device-node
+Advisory:  File DevNodAli.fth, Line 101.  (Output Position = 634).  Encountered new-device.  Starting new device-node.
+Message:  File DevNodAli.fth, Line 105.  (Output Position = 716).   About to access method from parent node
+Error:  File DevNodAli.fth, Line 109.  (Output Position = 734).  Word  achin  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 109.  (Output Position = 734).  achin is defined as a CREATE in the top-level device-node, which began on line 10
+Error:  File DevNodAli.fth, Line 115.  (Output Position = 766).  Word  croup  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 115.  (Output Position = 766).  croup is defined as a COLON in the top-level device-node, which began on line 10
+Error:  File DevNodAli.fth, Line 116.  (Output Position = 766).  Word  foop  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 116.  (Output Position = 766).  foop is defined in the top-level device-node, which began on line 10
+Error:  File DevNodAli.fth, Line 117.  (Output Position = 766).  Word  snoop  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 117.  (Output Position = 766).  snoop is defined as a COLON in the top-level device-node, which began on line 10
+Error:  File DevNodAli.fth, Line 118.  (Output Position = 766).  Word  foop  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 118.  (Output Position = 766).  foop is defined in the top-level device-node, which began on line 10
+Error:  File DevNodAli.fth, Line 119.  (Output Position = 766).  Cannot apply  TO  to  PELF .
+Error:  File DevNodAli.fth, Line 119.  (Output Position = 766).  Word  pelf  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 119.  (Output Position = 766).  pelf is defined as a VALUE in the top-level device-node, which began on line 10
+Message:  File DevNodAli.fth, Line 122.  (Output Position = 767).   end child node
+Advisory:  File DevNodAli.fth, Line 123.  (Output Position = 767).  Encountered finish-device.  Resetting definitions of device node that started on line 101
+Advisory:  File DevNodAli.fth, Line 123.  (Output Position = 767).  Resuming definitions since start of tokenization.
+Message:  File DevNodAli.fth, Line 125.  (Output Position = 769).   Access methods from the root node again
+Message:  File DevNodAli.fth, Line 134.  (Output Position = 799).   An extra finish-device
+Error:  File DevNodAli.fth, Line 135.  (Output Position = 799).  Encountered finish-device without corresponding NEW-DEVICE.  Resetting definitions since start of tokenization.
+Message:  File DevNodAli.fth, Line 136.  (Output Position = 801).   Are we still here?
+Error:  File DevNodAli.fth, Line 139.  (Output Position = 811).  Word  bad-refs  is not in dictionary.
+Error:  File DevNodAli.fth, Line 140.  (Output Position = 811).  Word  foop  is not in dictionary.
+Error:  File DevNodAli.fth, Line 141.  (Output Position = 811).  Word  refs-good-again  is not in dictionary.
+Advisory:  File DevNodAli.fth, Line 146.  (Output Position = 812).  FCODE-END encountered; processing...
+toke: checksum is 0xf14d (813 bytes).  Last assigned FCode = 0x81f
+Tokenization Completed.  11 Errors, 3 Warnings, 19 Advisories, 8 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 813 bytes to bytecode file 'DevNodAli.fc'

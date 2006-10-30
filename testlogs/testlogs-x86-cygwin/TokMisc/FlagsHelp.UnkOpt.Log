@@ -1,0 +1,27 @@
+toke -v -Z -o FlagsHelp.UnkOpt.fc FlagsHelp.fth
+
+toke: unknown option -- Z
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+unknown options.
+usage: /home/dlpaktor/OpenBIOS_Tkzr/TestBed/X86_Cygwin/toke [-v] [-i] [-l] [-P] [-o target] <[-d name[=value]]> <[-f [no]flagname]> <[-I dir-path]> <[-T symbol]> <forth-file>
+
+  -v|--verbose          print Advisory messages
+  -i|--ignore-errors    don't suppress output after errors
+  -l|--load-list        create list of FLoaded file names
+  -P|--dependencies     create dePendency-list file
+  -o|--output-name      send output to filename given
+  -d|--define           create user-defined symbol
+  -f|--flag             set (or clear) Special-Feature flag
+  -I|--Include          add a directory to the Include-List
+  -T|--Trace            add a symbol to the Trace List
+  -h|--help             print this help message
+
+  -f|--flag    help     Help for Special-Feature flags

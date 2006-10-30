@@ -1,0 +1,70 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x51ae (Ok)
+     4:   len:       0x0117 ( 279 bytes)
+     8: b(lit) ( 0x010 ) 0x100a0810
+    13: b(lit) ( 0x010 ) 0x64
+    18: named-token ( 0x0b6 ) pele_yoetz_ne'ema'an_anochi_hu_ha'omer_v'oseh_v'ain_c'moni_bchol_ha_aretz 0x800
+    95: b(constant) ( 0x0ba ) 
+    96: pele_yoetz_ne'ema'an_anochi_hu_ha'omer_v'oseh_v'ain_c'moni_bchol_ha_aretz ( 0x800 ) 
+    98: 2 ( 0x0a7 ) 
+    99: * ( 0x020 ) 
+   100: named-token ( 0x0b6 ) clone 0x801
+   109: b(constant) ( 0x0ba ) 
+   110: b(lit) ( 0x010 ) 0xc
+   115: c, ( 0x0d0 ) 
+   116: b(lit) ( 0x010 ) 0x12
+   121: l, ( 0x0d2 ) 
+   122: b(lit) ( 0x010 ) 0xc
+   127: c, ( 0x0d0 ) 
+   128: named-token ( 0x0b6 ) yuttzer 0x802
+   139: b(:) ( 0x0b7 ) 
+   140:     b(lit) ( 0x010 ) 0xe
+   145:     b(lit) ( 0x010 ) 0x14
+   150:     b(lit) ( 0x010 ) 0x14
+   155:     b(lit) ( 0x010 ) 0xe
+   160: b(;) ( 0x0c2 ) 
+   161: b(lit) ( 0x010 ) 0x80
+   166: new-token ( 0x0b5 ) 0x803
+   169: b(constant) ( 0x0ba ) 
+   170: named-token ( 0x0b6 ) brand-x-ice-cream 0x804
+   191: b(:) ( 0x0b7 ) 
+   192:     pele_yoetz_ne'ema'an_anochi_hu_ha'omer_v'oseh_v'ain_c'moni_bchol_ha_aretz ( 0x800 ) 
+   194:     dup ( 0x047 ) 
+   195:     b(lit) ( 0x010 ) 0x20
+   200:     - ( 0x01f ) 
+   201:     b(do) ( 0x017 ) 0x0007 (  dest = 209 )
+   204:         i ( 0x019 ) 
+   205:         . ( 0x09d ) 
+   206:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 204 )
+   209:     cr ( 0x092 ) 
+   210:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Nameless one..."
+   227:     type ( 0x090 ) 
+   228:     (unnamed-fcode) [0x803] 
+   230:     b(") ( 0x012 ) ( len=7 )
+                    " equals "
+   239:     type ( 0x090 ) 
+   240:     . ( 0x09d ) 
+   241:     cr ( 0x092 ) 
+   242:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    " But everyone likes an "
+   266:     type ( 0x090 ) 
+   267:     b(lit) ( 0x010 ) 0x1cec6ea3
+   272:     . ( 0x09d ) 
+   273:     clone ( 0x801 ) 
+   275:     . ( 0x09d ) 
+   276:     cr ( 0x092 ) 
+   277: b(;) ( 0x0c2 ) 
+   278: end0 ( 0x000 ) 
+\  Detokenization finished normally after 279 bytes.
+End of file.
+

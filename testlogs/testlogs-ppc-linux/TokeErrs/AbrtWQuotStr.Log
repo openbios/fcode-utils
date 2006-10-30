@@ -1,0 +1,23 @@
+toke -v -i AbrtWQuotStr.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  AbrtWQuotStr.fth   Binary output to AbrtWQuotStr.fc 
+Advisory:  File AbrtWQuotStr.fth, Line 7.  FCODE-VERSION2 encountered; processing...
+Advisory:  File AbrtWQuotStr.fth, Line 12.  (Output Position = 27).  ABORT" in fcode not defined by IEEE 1275-1994
+Warning:  File AbrtWQuotStr.fth, Line 13.  (Output Position = 27).  Multi-line string, started on line 12 in definition of  SUNNY-DE-LIGHT  , which started on line 11
+Advisory:  File AbrtWQuotStr.fth, Line 17.  (Output Position = 121).  Disabling:  ABORT" with implicit IF ... THEN
+Advisory:  File AbrtWQuotStr.fth, Line 20.  (Output Position = 143).  ABORT" in fcode not defined by IEEE 1275-1994
+Warning:  File AbrtWQuotStr.fth, Line 21.  (Output Position = 143).  Multi-line string, started on line 20 in definition of  APPLE-PI-ALAMO  , which started on line 19
+Advisory:  File AbrtWQuotStr.fth, Line 26.  (Output Position = 241).  FCODE-END encountered; processing...
+toke: checksum is 0x542d (242 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  2 Warnings, 5 Advisories.
+toke: wrote 242 bytes to bytecode file 'AbrtWQuotStr.fc'

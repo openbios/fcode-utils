@@ -1,0 +1,158 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x65dc (Ok)
+     4:   len:       0x013e ( 318 bytes)
+     8: 2 ( 0x0a7 ) 
+     9: b(<mark) ( 0x0b1 ) 
+    10:     1 ( 0x0a6 ) 
+    11:     - ( 0x01f ) 
+    12:     dup ( 0x047 ) 
+    13:     b?branch ( 0x014 ) 0x000c ( =dec 12  dest = 26 )
+    16:         b(lit) ( 0x010 ) 0x4
+    21:         c, ( 0x0d0 ) 
+    22:         bbranch ( 0x013 ) 0xfff3 ( =dec -13  dest = 10 )
+    25: b(>resolve) ( 0x0b2 ) 
+    26: b?branch ( 0x014 ) 0x0000 (  dest = 27 )
+\  Error:  Unresolved offset.
+    29:     named-token ( 0x0b6 ) anawanna 0x800
+    41:     b(:) ( 0x0b7 ) 
+    42:         b(lit) ( 0x010 ) 0x123
+    47:         b(lit) ( 0x010 ) 0x456
+    52:     b(>resolve) ( 0x0b2 ) 
+    53: b(;) ( 0x0c2 ) 
+    54: named-token ( 0x0b6 ) granada 0x801
+    65: b(:) ( 0x0b7 ) 
+    66:     b(lit) ( 0x010 ) 0x789
+    71:     b(<mark) ( 0x0b1 ) 
+    72:         0 ( 0x0a5 ) 
+    73:         1 ( 0x0a6 ) 
+    74:         2 ( 0x0a7 ) 
+    75:         3 ( 0x0a8 ) 
+    76:         b(lit) ( 0x010 ) 0x1011
+    81:         b(<mark) ( 0x0b1 ) 
+    82:             2 ( 0x0a7 ) 
+    83:             1 ( 0x0a6 ) 
+    84:             0 ( 0x0a5 ) 
+    85:             3 ( 0x0a8 ) 
+    86:             2swap ( 0x055 ) 
+    87:             swap ( 0x049 ) 
+    88:             rot ( 0x04a ) 
+    89:             bbranch ( 0x013 ) 0x0000 (  dest = 90 )
+\  Error:  Unresolved offset.
+    92:             b(>resolve) ( 0x0b2 ) 
+    93:             3 ( 0x0a8 ) 
+    94:             1 ( 0x0a6 ) 
+    95:             0 ( 0x0a5 ) 
+    96:             2 ( 0x0a7 ) 
+    97:             2swap ( 0x055 ) 
+    98:             -rot ( 0x04b ) 
+    99:         b(loop) ( 0x015 ) 0x0000 (  dest = 100 )
+\  Error:  Unresolved offset.
+   102:         2 ( 0x0a7 ) 
+   103:         3 ( 0x0a8 ) 
+   104:         0 ( 0x0a5 ) 
+   105:         1 ( 0x0a6 ) 
+   106:     b(;) ( 0x0c2 ) 
+   107:     named-token ( 0x0b6 ) obknoxin 0x802
+   119:     b(:) ( 0x0b7 ) 
+   120:         b(lit) ( 0x010 ) 0x678
+   125:         b(<mark) ( 0x0b1 ) 
+   126:             0 ( 0x0a5 ) 
+   127:             1 ( 0x0a6 ) 
+   128:             2 ( 0x0a7 ) 
+   129:             3 ( 0x0a8 ) 
+   130:             b(lit) ( 0x010 ) 0x910
+   135:             b(<mark) ( 0x0b1 ) 
+   136:                 2 ( 0x0a7 ) 
+   137:                 1 ( 0x0a6 ) 
+   138:                 0 ( 0x0a5 ) 
+   139:                 3 ( 0x0a8 ) 
+   140:                 bbranch ( 0x013 ) 0x0000 (  dest = 141 )
+\  Error:  Unresolved offset.
+   143:                 b(>resolve) ( 0x0b2 ) 
+   144:                 3 ( 0x0a8 ) 
+   145:                 1 ( 0x0a6 ) 
+   146:                 0 ( 0x0a5 ) 
+   147:                 2 ( 0x0a7 ) 
+   148:                 b(lit) ( 0x010 ) 0x2512
+   153:             b(loop) ( 0x015 ) 0x0000 (  dest = 154 )
+\  Error:  Unresolved offset.
+   156:             2 ( 0x0a7 ) 
+   157:             3 ( 0x0a8 ) 
+   158:             0 ( 0x0a5 ) 
+   159:             1 ( 0x0a6 ) 
+   160:         b(;) ( 0x0c2 ) 
+   161:         named-token ( 0x0b6 ) tixon 0x803
+   170:         b(:) ( 0x0b7 ) 
+   171:             b(lit) ( 0x010 ) 0x987
+   176:             0 ( 0x0a5 ) 
+   177:             b(do) ( 0x017 ) 0x0000 (  dest = 178 )
+\  Error:  Unresolved offset.
+   180:                 0 ( 0x0a5 ) 
+   181:                 1 ( 0x0a6 ) 
+   182:                 2 ( 0x0a7 ) 
+   183:                 3 ( 0x0a8 ) 
+   184:                 b(lit) ( 0x010 ) 0x654
+   189:                 b(<mark) ( 0x0b1 ) 
+   190:                     3 ( 0x0a8 ) 
+   191:                     2 ( 0x0a7 ) 
+   192:                     1 ( 0x0a6 ) 
+   193:                     0 ( 0x0a5 ) 
+   194:                     b(lit) ( 0x010 ) 0xace
+   199:                     bbranch ( 0x013 ) 0x000d ( =dec 13  dest = 213 )
+   202:                     b(>resolve) ( 0x0b2 ) 
+   203:                     3 ( 0x0a8 ) 
+   204:                     0 ( 0x0a5 ) 
+   205:                     1 ( 0x0a6 ) 
+   206:                     2 ( 0x0a7 ) 
+   207:                     b(lit) ( 0x010 ) 0xfeed
+   212:                 b(>resolve) ( 0x0b2 ) 
+   213:             b(;) ( 0x0c2 ) 
+   214:             named-token ( 0x0b6 ) spew-agnu 0x804
+   227:             b(:) ( 0x0b7 ) 
+   228:                 b(lit) ( 0x010 ) 0x5417
+   233:             b(>resolve) ( 0x0b2 ) 
+   234:         b(;) ( 0x0c2 ) 
+   235:         named-token ( 0x0b6 ) bunk 0x805
+   243:         b(:) ( 0x0b7 ) 
+   244:             b(lit) ( 0x010 ) 0x543
+   249:             b?branch ( 0x014 ) 0x000b ( =dec 11  dest = 261 )
+   252:                 b(lit) ( 0x010 ) 0x345
+   257:                 bbranch ( 0x013 ) 0x0000 (  dest = 258 )
+\  Error:  Unresolved offset.
+   260:                 b(>resolve) ( 0x0b2 ) 
+   261:                 b(lit) ( 0x010 ) 0x789
+   266:             b(;) ( 0x0c2 ) 
+   267:             named-token ( 0x0b6 ) junk 0x806
+   275:             b(:) ( 0x0b7 ) 
+   276:                 b(lit) ( 0x010 ) 0xace
+   281:             b(>resolve) ( 0x0b2 ) 
+   282:         b(;) ( 0x0c2 ) 
+   283:         named-token ( 0x0b6 ) clunk 0x807
+   292:         b(:) ( 0x0b7 ) 
+   293:             0= ( 0x034 ) 
+   294:             b(<mark) ( 0x0b1 ) 
+   295:                 1 ( 0x0a6 ) 
+   296:                 - ( 0x01f ) 
+   297:                 ?dup ( 0x050 ) 
+   298:                 b?branch ( 0x014 ) 0x0000 (  dest = 299 )
+\  Error:  Unresolved offset.
+   301:                 b(>resolve) ( 0x0b2 ) 
+   302:                 b?branch ( 0x014 ) 0x0000 (  dest = 303 )
+\  Error:  Unresolved offset.
+   305:                 b(;) ( 0x0c2 ) 
+   306:                 named-token ( 0x0b6 ) skunk 0x808
+   315:                 b(:) ( 0x0b7 ) 
+   316:                 b(;) ( 0x0c2 ) 
+   317:                 end0 ( 0x000 ) 
+\  Detokenization finished normally after 318 bytes.
+End of file.
+

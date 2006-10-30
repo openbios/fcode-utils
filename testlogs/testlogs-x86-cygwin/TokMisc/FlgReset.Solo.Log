@@ -1,0 +1,45 @@
+toke -v -o FlgReset.Solo.fc FlgReset.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  FlgReset.fth   Binary output to FlgReset.Solo.fc 
+Message:  File FlgReset.fth, Line 2.   Flipping many switches
+Advisory:  File FlgReset.fth, Line 4.  Enabling:  Support IBM-style Local Values ("LV"s)
+Advisory:  File FlgReset.fth, Line 5.  Disabling:  Allow Semicolon for Local Values Separator ("Legacy")
+Advisory:  File FlgReset.fth, Line 6.  Disabling:  Display a Message when Semicolon is used as the Local Values Separator
+Advisory:  File FlgReset.fth, Line 7.  Disabling:  Allow ABORT" macro
+Advisory:  File FlgReset.fth, Line 8.  Disabling:  ABORT" with implicit IF ... THEN
+Advisory:  File FlgReset.fth, Line 9.  Disabling:  Allow "\ (Quote-Backslash) to interrupt string parsing
+Advisory:  File FlgReset.fth, Line 10.  Disabling:  Allow \n \t and \xx\ for special chars in string parsing
+Advisory:  File FlgReset.fth, Line 11.  Enabling:  Override "headerless" and force to "headers"
+Advisory:  File FlgReset.fth, Line 12.  Disabling:  Display a WARNING message when a duplicate definition is made
+Advisory:  File FlgReset.fth, Line 13.  Disabling:  Display a WARNING message when an "obsolete" (per the Standard) FCode is used
+Message:  File FlgReset.fth, Line 15.  Special-Feature Flag settings:
+	  Local-Values
+	NoLV-Legacy-Separator
+	NoLV-Legacy-Message
+	NoABORT-Quote
+	NoSun-ABORT-Quote
+	  ABORT-Quote-Throw
+	NoString-remark-escape
+	  Hex-remark-escape
+	NoC-Style-string-escape
+	  Always-Headers
+	NoAlways-External
+	NoWarn-if-Duplicate
+	NoObsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Nothing Tokenized.  10 Advisories, 2 Messages.

@@ -1,0 +1,108 @@
+#  Automated Test Arguments file for TokeErrs category
+#  (That's short for "Tokenizer Errors")
+
+#          Valid lines have four comma-separated fields:
+#                 Test-file base-name
+#                 Result-file label
+#                 Extra command-line switches
+#                 A script-command with arguments (but no commas).
+#          Lines that have no label, no switches, and no script
+#              do not need any commas.
+#                 A leading +V in the script-command field will suppress -v
+
+#  Most files in this category need the  -i  switch
+#  Some may have additional variants.
+
+#  Updated Wed, 18 Oct 2006 at 11:44 PDT by David L. Paktor
+
+MiscFeatErrs , , -i -I. -I..
+MiscFeatErrs , GLoc , -i -I. -I.. -d Global-Locals
+MiscFeatErrs , LocR , -i -I. -I.. -d Locals-Release
+MiscFeatErrs , GlLr , -i -I. -I.. -d Global-Locals -d Locals-Release
+MiscFeatErrs , Lss  , -i -I. -I.. -d _local-storage-size_=3022
+MiscFeatErrs , NoLss  , -i -I. -I.. -d _local-storage-size_
+LocalTest , NoLvSupp , -i -f Local-Values -I. -I../TokoLoco
+LocalTest , , -i -f Local-Values -I. -I../TokoLoco -f Always-Headers -d dont_omit_support
+LocalTest1 , ,   -f Local-Values -f noLV-Legacy-Message -I. -I../TokoLoco
+ControlMismatch , , -i
+SuppLocErrTest4 , , -i -f Local-Values -l -I. -I../TokoLoco
+testLocDevSupG , , -i -f Local-Values -I. -I../TokoLoco
+testLocDevSupG , SymSiz , -i -f Local-Values -d "_local-storage-size_= d# 120" -I. -I../TokoLoco
+PCIhdrErrs , , -i
+FCShdrErrs , , -i
+PCI_FCShdrErrs , , -i
+CommOvrRun , , -i -l
+LocOvrRun , , -i -f Local-Values -l -I. -I../TokoLoco
+SplitImbal , , -i -l
+TokCondUnconcF , , -i -l
+TokCondUnconcT , , -i -l
+TooLargeCase , , -i -l
+TooLargeBranch_off16 , , -i -l
+TooLargeBranch_off16 , N231 , -i -l -d "fld_cmd=fload TooLargeBranch_N231_body.fth"
+TooLargeBranch_off16 , N232 , -i -l -d "fld_cmd=fload TooLargeBranch_N232_body.fth"
+TooLargeBranch_off16 , N233 , -i -l -d "fld_cmd=fload TooLargeBranch_N233_body.fth"
+TooLargeBranch_off16 , V178 , -i -l -d "fld_cmd=fload TooLargeBranch_V178_body.fth"
+TooLargeBranch_off16 , V179 , -i -l -d "fld_cmd=fload TooLargeBranch_V179_body.fth"
+TooLargeBranch_off16 , V180 , -i -l -d "fld_cmd=fload TooLargeBranch_V180_body.fth"
+TooLargeBranch_off08 , , -i -l
+TooLargeBranch_off08 , V180 , -i -l -d "fld_cmd=fload TooLargeBranch_V180_body.fth"
+TooLargeBranch_off08_to_16 , , -i -l
+TooTooLargeBuffer , , -i -l
+UserMacroErrors , , -i
+CStrEscOvflw , , -i -l
+DevImbal , , -i
+DevNodAli , , -i -l -I. -I../TokoLoco
+DevNodAli_01 , , -i -l -I. -I../TokoLoco
+GlobScopErrTst , NoI , -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_01 , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_02 , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_03 , , -i -f Local-Values -I. -I../TokoLoco
+#  The script-fields below prepare for the  ExpPath InclLst and DePList  tests
+Frinstnce , , -i , touch ExpPath.NoV.{P,f{c,l{,.missing}}}
+Frinstnce , NoI , , chmod a-rw ../TokeCommon/{MyBeerAndYouCannotHaveIt.fth,NoRead.bin} ExpPath.NoV.{P,f{c,l{,.missing}}}
+
+#  We're now ready for the  ExpPath InclLst and DePList  tests
+
+ExpPath , NoV , -i -l -P , +V rm -f ExpPath.NoV.{P,f{c,l{,.missing}}}
+
+InclLst , , -i -l -P  -I .. -I ../TokBrack -I ../TokMisc -I ../TokeCommon -I ../TokoLoco -I ../TokCondl -I ../TokProdCpy -I ../TokeErrs -I /home/dlpaktor/HeyVern/DoYuhThink/ThisIsA/LongEnuffPathName/To/Make/The/Line/Really/Overflow -I . -I /home/dlpaktor/Hey/Vern/This/Path/Just/Fills/Up/TheLine/KnowWhudI/Mean -I ../TokeCommon  -f noAbort-quote
+
+#  The following must be the last in the set of  ExpPath and  InclLst  tests
+#  The script-field is to reset for next time, and to enable tar-ring the Log
+ExpPath , , -i -l , chmod a+r ../TokeCommon/{MyBeerAndYouCannotHaveIt.fth,NoRead.bin}
+
+#  Done with the  ExpPath and  InclLst  tests
+ToAtEnd , , -i
+ToAtEnd , WLocSup , -i -I . -I ../TokoLoco
+ObsoFCodes , , -i
+ObsoFCodes , NoWarn , -f NoObsolete-FCode-Warning
+
+TooLargePMessage
+TooLargePQuote , , -i 
+TooLargeQMessage
+TooLargeSQuote , , -i
+TooLargeParen , , -i 
+TooLargeQAbort
+TooLargeQNoAbort , , -f Local-Values
+
+AbrtWQuotStr , , -i
+
+#  The new "Trace" feature, and handling of duplicate and mis-scoped names...
+DupNams  , , -f Local-Values -T alley-oop -T boop -T croop -T doop -T drop -T dup -T foop -T floop -T gloop -T _harpo -T koop -T loop -T noop -T poop -T shtoop -T zoop -T fontbytes -T blink-screen -T base -T bell
+
+TooManyFCodes , , -l -o TooManyFCodes.fl
+TooManyFCodes , Reg , -i
+TooManyFCodes , NoCrash , -i -d NoCrash
+
+MulPCI_LapFC , , -i -d NoCrash
+MulPCI_LapFC , RngTwo , -i -d NoCrash=DupDefn -d NoCrash -d OIBeenToTheOasis=Twice -d RangeTwo=0941 -d NoCrash -d RangeTwo=0ace
+MulPCI_LapFC , RTwoNoRst , -i -d NoCrash -d RangeTwo=0ace -d NoReset
+MulPCI_LapFC , NoRst , -i -d NoCrash -d NoReset
+MulPCI_LapFC , NoRTwoVal , -i -d NoCrash -d NoReset -d RangeTwo
+
+RetStkDep , , -i
+CondlDefn , , -i
+
+DecodProp
+DecodProp , nrsi , -f noRet-Stk-Interp

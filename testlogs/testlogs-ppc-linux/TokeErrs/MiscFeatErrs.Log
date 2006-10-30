@@ -1,0 +1,128 @@
+toke -v -i -I. -I.. MiscFeatErrs.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Include-List:
+	. ..
+
+Tokenizing  MiscFeatErrs.fth   Binary output to MiscFeatErrs.fc 
+Advisory:  File was found in ./MiscFeatErrs.fth
+Advisory:  File MiscFeatErrs.fth, Line 4.  Enabling:  Support IBM-style Local Values ("LV"s)
+Message:  File MiscFeatErrs.fth, Line 5.   This is a test
+Advisory:  File MiscFeatErrs.fth, Line 6.  FCODE-VERSION1 encountered; processing...
+Advisory:  File MiscFeatErrs.fth, Line 6.  (Output Position = 8).  Using version1 header (8-bit offsets).
+Advisory:  File MiscFeatErrs.fth, Line 8.  (Output Position = 8).  Initiating Global Scope definitions.
+Advisory:  File MiscFeatErrs.fth, Line 12.  (Output Position = 38).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File MiscFeatErrs.fth, Line 14.  (Output Position = 38).  FLOADing TotalLocalValuesSupport.fth
+Error:  File MiscFeatErrs.fth, Line 14.  (Output Position = 38).  Could not access input file TotalLocalValuesSupport.fth
+Warning:  File MiscFeatErrs.fth, Line 18.  (Output Position = 41).  The word  [CHAR]  should not be used outside of a colon definition.  Use  CHAR  instead.
+Warning:  File MiscFeatErrs.fth, Line 21.  (Output Position = 59).  Duplicate definition:   bell  already exists as a CONSTANT in the core vocabulary.
+Warning:  File MiscFeatErrs.fth, Line 22.  (Output Position = 68).  The word  CHAR  should not be used inside of a colon definition.  Use  [CHAR]  instead.
+Error:  File MiscFeatErrs.fth, Line 29.  (Output Position = 84).  The word  RECURSIVE  should not be used outside of a colon definition.
+Error:  File MiscFeatErrs.fth, Line 32.  (Output Position = 104).  Cannot apply  TO  to  BELL , which is defined as a COLON.
+Error:  File MiscFeatErrs.fth, Line 33.  (Output Position = 112).  Word  factl  is not in dictionary.
+Advisory:  File MiscFeatErrs.fth, Line 36.  (Output Position = 115).  Initiating Global Scope definitions.
+Warning:  File MiscFeatErrs.fth, Line 37.  (Output Position = 115).  Duplicate definition:   bell  already exists as a CONSTANT in the core vocabulary.
+Advisory:  File MiscFeatErrs.fth, Line 39.  (Output Position = 115).  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File MiscFeatErrs.fth, Line 41.  (Output Position = 115).  Switching to 16-bit offsets.
+Warning:  File MiscFeatErrs.fth, Line 42.  (Output Position = 118).  Call of OFFSET16 is redundant.
+Warning:  File MiscFeatErrs.fth, Line 43.  (Output Position = 119).  Duplicate definition:   factl  already exists as a COLON in the top-level device-node, which began on line 6
+Error:  File MiscFeatErrs.fth, Line 45.  (Output Position = 142).  Cannot apply  TO  to  BELL , which is defined as a COLON.
+Error:  File MiscFeatErrs.fth, Line 49.  (Output Position = 156).  The word  RECURSE  should not be used outside of a colon definition.
+Warning:  File MiscFeatErrs.fth, Line 50.  (Output Position = 156).  Duplicate definition:   bell  already exists as a COLON in the top-level device-node, which began on line 6
+Error:  File MiscFeatErrs.fth, Line 52.  (Output Position = 180).  Cannot apply  TO  to  BELL , which is defined as a COLON.
+Error:  File MiscFeatErrs.fth, Line 56.  (Output Position = 196).  I outside of  DO ... LOOP  structure in definition of  CUSSED  , which started on line 55
+Error:  File MiscFeatErrs.fth, Line 57.  (Output Position = 197).  J outside of  DO ... DO ... LOOP ... LOOP  structure in definition of  CUSSED  , which started on line 55
+Error:  File MiscFeatErrs.fth, Line 63.  (Output Position = 274).  Word  {push-locals}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 65.  (Output Position = 286).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 65.  (Output Position = 288).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 65.  (Output Position = 293).  Cannot apply -> to d, only to a declared Local.
+Error:  File MiscFeatErrs.fth, Line 65.  (Output Position = 293).  Word  d  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 66.  (Output Position = 294).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 66.  (Output Position = 296).  Cannot apply  TO  to  _E , which is defined as a Local Value name.
+Error:  File MiscFeatErrs.fth, Line 66.  (Output Position = 301).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 67.  (Output Position = 303).  J outside of  DO ... DO ... LOOP ... LOOP  structure in definition of  TRUSSED  , which started on line 62
+Error:  File MiscFeatErrs.fth, Line 68.  (Output Position = 307).  Cannot apply  [']  to  _A , which is defined as a Local Value name.
+Error:  File MiscFeatErrs.fth, Line 68.  (Output Position = 308).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 69.  (Output Position = 309).  Cannot apply  f[']  to  _E , which is defined as a Local Value name.
+Error:  File MiscFeatErrs.fth, Line 69.  (Output Position = 314).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 70.  (Output Position = 315).  Cannot apply  f[']  to  _B , which is defined as a Local Value name.
+Error:  File MiscFeatErrs.fth, Line 70.  (Output Position = 315).  The word _b is not recognized in tokenizer-escape mode.
+Advisory:  File MiscFeatErrs.fth, Line 70.  (Output Position = 315).  _b is defined as a Local Value name.
+Advisory:  File MiscFeatErrs.fth, Line 71.  (Output Position = 315).  Emitting FCode value of 0x47
+Error:  File MiscFeatErrs.fth, Line 72.  (Output Position = 316).  Attempt to emit FCode value of 0xf, which violates limit specified by IEEE-1275.  Disallowing.
+Error:  File MiscFeatErrs.fth, Line 73.  (Output Position = 317).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 73.  (Output Position = 319).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 73.  (Output Position = 322).  Word  _{local}  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 73.  (Output Position = 324).  Operator ['] expects its target on the same line
+Error:  File MiscFeatErrs.fth, Line 75.  (Output Position = 373).  Word  {pop-locals}  is not in dictionary.
+Warning:  File MiscFeatErrs.fth, Line 78.  (Output Position = 374).  Duplicate definition:   DMA-ALLOC  already exists in the core vocabulary.
+Error:  File MiscFeatErrs.fth, Line 90.  (Output Position = 514).  Cannot apply  [']  to  BOGUS-CASE .
+Error:  File MiscFeatErrs.fth, Line 90.  (Output Position = 514).  Word  bogus-case  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 96.  (Output Position = 536).  The word  SEMICOLON  should not be used outside of a colon definition.
+Advisory:  File MiscFeatErrs.fth, Line 98.  (Output Position = 536).  Encountered new-device.  Starting new device-node.
+Error:  File MiscFeatErrs.fth, Line 100.  (Output Position = 548).  Word  bells  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 101.  (Output Position = 548).  Word  factl  is not in dictionary.
+Advisory:  File MiscFeatErrs.fth, Line 101.  (Output Position = 548).  factl is defined as a COLON in the top-level device-node, which began on line 6
+Error:  File MiscFeatErrs.fth, Line 102.  (Output Position = 548).  Word  yell  is not in dictionary.
+Advisory:  File MiscFeatErrs.fth, Line 102.  (Output Position = 548).  yell is defined as a MACRO in the top-level device-node, which began on line 6
+Message:  File MiscFeatErrs.fth, Line 103.  (Output Position = 548).  Beep-Beep Yu Rass!
+Error:  File MiscFeatErrs.fth, Line 104.  (Output Position = 553).  Cannot apply  TO  to  SWELL , which is defined as a MACRO.
+Message:  File MiscFeatErrs.fth, Line 104.  (Output Position = 553).  Beep-Beep Yu Rass!
+Advisory:  File MiscFeatErrs.fth, Line 106.  (Output Position = 554).  Encountered finish-device.  Resetting definitions of device node that started on line 98
+Advisory:  File MiscFeatErrs.fth, Line 106.  (Output Position = 554).  Resuming definitions since start of tokenization.
+Error:  File MiscFeatErrs.fth, Line 118.  (Output Position = 676).  Operator F['] expects its target on the same line
+Error:  File MiscFeatErrs.fth, Line 120.  (Output Position = 682).  Cannot apply  f[']  to  MOOGOOGAIPAN .
+Error:  File MiscFeatErrs.fth, Line 120.  (Output Position = 682).  Word  MooGooGaiPan  is not in dictionary.
+Message:  File MiscFeatErrs.fth, Line 121.  (Output Position = 682).   Just when you thought it couldn't get any wierder...
+Advisory:  File MiscFeatErrs.fth, Line 123.  (Output Position = 694).  Substituting  TO  for deprecated  IS
+Warning:  File MiscFeatErrs.fth, Line 124.  (Output Position = 697).  The word  OVERLOAD  should not be used inside of a colon definition.
+Advisory:  File MiscFeatErrs.fth, Line 125.  (Output Position = 706).  Substituting  TO  for deprecated  IS
+Advisory:  File MiscFeatErrs.fth, Line 126.  (Output Position = 714).  Substituting  TO  for deprecated  IS
+Warning:  File MiscFeatErrs.fth, Line 126.  (Output Position = 714).  Applying IS to a VARIABLE (naught) is not recommended; use  !  instead.
+Error:  File MiscFeatErrs.fth, Line 127.  (Output Position = 722).  Cannot apply  TO  to  FIFTY , which is defined as a CONSTANT.
+Error:  File MiscFeatErrs.fth, Line 128.  (Output Position = 730).  Cannot apply  TO  to  THREE , which is defined as a CREATE.
+Advisory:  File MiscFeatErrs.fth, Line 129.  (Output Position = 737).  Substituting  TO  for deprecated  IS
+Error:  File MiscFeatErrs.fth, Line 129.  (Output Position = 737).  Cannot apply  IS  to  >FOUR , which is defined as a FIELD.
+Error:  File MiscFeatErrs.fth, Line 130.  (Output Position = 744).  Cannot apply  TO  to  FORTY , which is defined as a BUFFER.
+Error:  File MiscFeatErrs.fth, Line 131.  (Output Position = 751).  Cannot apply  TO  to  NINETY .
+Error:  File MiscFeatErrs.fth, Line 131.  (Output Position = 751).  Word  ninety  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 132.  (Output Position = 756).  Cannot apply  TO  to  NOOP .
+Error:  File MiscFeatErrs.fth, Line 134.  (Output Position = 762).  Cannot apply  [']  to  3DROP , which is defined as a MACRO.
+Error:  File MiscFeatErrs.fth, Line 135.  (Output Position = 767).  Cannot apply  [']  to  NINETY .
+Error:  File MiscFeatErrs.fth, Line 135.  (Output Position = 767).  Word  ninety  is not in dictionary.
+Warning:  File MiscFeatErrs.fth, Line 138.  (Output Position = 771).  Duplicate definition:   thirty  already exists as a VALUE in the top-level device-node, which began on line 6
+Warning:  File MiscFeatErrs.fth, Line 141.  (Output Position = 786).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File MiscFeatErrs.fth, Line 141.  (Output Position = 786).  Operator ALIAS expects its target on the same line
+Error:  File MiscFeatErrs.fth, Line 143.  (Output Position = 807).  Word  .dec  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 147.  (Output Position = 818).  Word  twenty  is not in dictionary.
+Warning:  File MiscFeatErrs.fth, Line 150.  (Output Position = 818).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File MiscFeatErrs.fth, Line 150.  (Output Position = 818).  Operator ALIAS expects its target on the same line
+Error:  File MiscFeatErrs.fth, Line 151.  (Output Position = 818).  Word  .x  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 152.  (Output Position = 818).  The word .h is not recognized in tokenizer-escape mode.
+Advisory:  File MiscFeatErrs.fth, Line 152.  (Output Position = 818).  .h is defined as a MACRO in the core vocabulary.
+Error:  File MiscFeatErrs.fth, Line 154.  (Output Position = 823).  Word  .x  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 160.  (Output Position = 849).  The word five-seventeen is only recognized in tokenizer-escape mode.
+Error:  File MiscFeatErrs.fth, Line 161.  (Output Position = 854).  Cannot apply  TO  to  ?LEAVE , which is defined as a MACRO.
+Error:  File MiscFeatErrs.fth, Line 161.  (Output Position = 858).  LEAVE outside of  DO ... LOOP  structure in definition of  PLOOP  , which started on line 156
+Error:  File MiscFeatErrs.fth, Line 162.  (Output Position = 864).  Cannot apply  TO  to  (.) , which is defined as a MACRO.
+Error:  File MiscFeatErrs.fth, Line 163.  (Output Position = 871).  Cannot apply  [']  to  3DROP , which is defined as a MACRO.
+Error:  File MiscFeatErrs.fth, Line 164.  (Output Position = 873).  Cannot apply  TO  to  SPACES , which is defined as a MACRO.
+Error:  File MiscFeatErrs.fth, Line 165.  (Output Position = 884).  Cannot apply  f[']  to  EXTERNAL .
+Error:  File MiscFeatErrs.fth, Line 166.  (Output Position = 884).  Cannot apply  TO  to  ABS .
+Warning:  File MiscFeatErrs.fth, Line 168.  (Output Position = 890).  Applying TO to a VARIABLE (base) is not recommended; use  !  instead.
+Error:  File MiscFeatErrs.fth, Line 174.  (Output Position = 893).  Word  emit-date  is not in dictionary.
+Error:  File MiscFeatErrs.fth, Line 175.  (Output Position = 893).  Word  fedt  is not in dictionary.
+Advisory:  File MiscFeatErrs.fth, Line 180.  (Output Position = 913).  FCODE-END encountered; processing...
+toke: checksum is 0x01dc (914 bytes).  Last assigned FCode = 0x81a
+Tokenization Completed.  67 Errors, 14 Warnings, 23 Advisories, 4 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 914 bytes to bytecode file 'MiscFeatErrs.fc'

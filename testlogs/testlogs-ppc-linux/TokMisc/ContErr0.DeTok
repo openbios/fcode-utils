@@ -1,0 +1,190 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xf466 (Ok)
+     4:   len:       0x02f2 ( 754 bytes)
+     8: named-token ( 0x0b6 ) garfield 0x800
+    20: b(:) ( 0x0b7 ) 
+    21:     b(") ( 0x012 ) ( len=2 )
+                    " if"
+    25:     type ( 0x090 ) 
+    26:     b?branch ( 0x014 ) 0x0000 (  dest = 27 )
+\  Error:  Unresolved offset.
+    29:         b(") ( 0x012 ) ( len=5 )
+                        " begin"
+    36:         type ( 0x090 ) 
+    37:         b(<mark) ( 0x0b1 ) 
+    38:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " 0 if unloop exit then"
+    61:             type ( 0x090 ) 
+    62:             0 ( 0x0a5 ) 
+    63:             b?branch ( 0x014 ) 0x0005 (  dest = 69 )
+    66:                 unloop ( 0x089 ) 
+    67:                 exit ( 0x033 ) 
+    68:             b(>resolve) ( 0x0b2 ) 
+    69:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Would you be leave..."
+    92:             type ( 0x090 ) 
+    93:             b(leave) ( 0x01b ) 
+    94:             b(") ( 0x012 ) ( len=5 )
+                            " loop?"
+   101:             type ( 0x090 ) 
+   102:         b(loop) ( 0x015 ) 0x0000 (  dest = 103 )
+\  Error:  Unresolved offset.
+   105:         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                        " Done with garfield"
+   125:         type ( 0x090 ) 
+   126:     b(;) ( 0x0c2 ) 
+   127:     named-token ( 0x0b6 ) odie 0x801
+   135:     b(:) ( 0x0b7 ) 
+   136:         b(") ( 0x012 ) ( len=7 )
+                        " 0 0 ?do"
+   145:         type ( 0x090 ) 
+   146:         0 ( 0x0a5 ) 
+   147:         0 ( 0x0a5 ) 
+   148:         b(?do) ( 0x018 ) 0x0000 (  dest = 149 )
+\  Error:  Unresolved offset.
+   151:             b(") ( 0x012 ) ( len=6 )
+                            " i drop"
+   159:             type ( 0x090 ) 
+   160:             i ( 0x019 ) 
+   161:             drop ( 0x046 ) 
+   162:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            " zero if unloop exit then"
+   188:             type ( 0x090 ) 
+   189:             0 ( 0x0a5 ) 
+   190:             b?branch ( 0x014 ) 0x0005 (  dest = 196 )
+   193:                 unloop ( 0x089 ) 
+   194:                 exit ( 0x033 ) 
+   195:             b(>resolve) ( 0x0b2 ) 
+   196:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Who would be leave..."
+   219:             type ( 0x090 ) 
+   220:             b(leave) ( 0x01b ) 
+   221:             b(") ( 0x012 ) ( len=5 )
+                            " again"
+   228:             type ( 0x090 ) 
+   229:             bbranch ( 0x013 ) 0xffb1 ( =dec -79  dest = 151 )
+   232:         b(") ( 0x012 ) ( len=4 )
+                        " then"
+   238:         type ( 0x090 ) 
+   239:     b(>resolve) ( 0x0b2 ) 
+   240:     b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                    " Done with odie"
+   256:     type ( 0x090 ) 
+   257: b(;) ( 0x0c2 ) 
+   258: b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                "  Outside of colon"
+   277: type ( 0x090 ) 
+   278: b(") ( 0x012 ) ( len=6 )
+                " 1 0 do"
+   286: type ( 0x090 ) 
+   287: 1 ( 0x0a6 ) 
+   288: 0 ( 0x0a5 ) 
+   289: b(do) ( 0x017 ) 0x0000 (  dest = 290 )
+\  Error:  Unresolved offset.
+   292:     i ( 0x019 ) 
+   293:     named-token ( 0x0b6 ) what? 0x802
+   302:     b(constant) ( 0x0ba ) 
+   303:     b(") ( 0x012 ) ( len=0x28 [40 bytes] )
+                    " This is actually supposed to be legit..."
+   345:     type ( 0x090 ) 
+   346:     b(") ( 0x012 ) ( len=5 )
+                    " again"
+   353:     type ( 0x090 ) 
+   354:     bbranch ( 0x013 ) 0xffc1 ( =dec -63  dest = 292 )
+   357: b(") ( 0x012 ) ( len=4 )
+                " then"
+   363: type ( 0x090 ) 
+   364: b(>resolve) ( 0x0b2 ) 
+   365: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " Was that awful or what?"
+   390: type ( 0x090 ) 
+   391: b(lit) ( 0x010 ) 0x5000
+   396: named-token ( 0x0b6 ) /DHCP-SCRATCH 0x803
+   413: b(constant) ( 0x0ba ) 
+   414: /DHCP-SCRATCH ( 0x803 ) 
+   416: b(') ( 0x011 ) alloc-mem ( 0x08b ) 
+   418: b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                " dhcp-scratch alloc-mem"
+   442: type ( 0x090 ) 
+   443: cr ( 0x092 ) 
+   444: .s ( 0x09f ) 
+   445: cr ( 0x092 ) 
+   446: catch ( 0x217 ) 
+   448: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " catch dhcp-scratch alloc-mem"
+   478: type ( 0x090 ) 
+   479: cr ( 0x092 ) 
+   480: .s ( 0x09f ) 
+   481: cr ( 0x092 ) 
+   482: ?dup ( 0x050 ) 
+   483: b?branch ( 0x014 ) 0x003b ( =dec 59  dest = 543 )
+   486:     b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                    " alloc-mem Failed!!!"
+   507:     type ( 0x090 ) 
+   508:     cr ( 0x092 ) 
+   509:     .s ( 0x09f ) 
+   510:     cr ( 0x092 ) 
+   511:     throw ( 0x218 ) 
+   513:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    "  This is also worng..."
+   537:     type ( 0x090 ) 
+   538:     exit ( 0x033 ) 
+   539:     bbranch ( 0x013 ) 0x0029 ( =dec 41  dest = 581 )
+   542:     b(>resolve) ( 0x0b2 ) 
+   543:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " alloc-mem okay."
+   560:     type ( 0x090 ) 
+   561:     .s ( 0x09f ) 
+   562:     cr ( 0x092 ) 
+   563:     named-token ( 0x0b6 ) DHCP-SCRATCH 0x804
+   579:     b(constant) ( 0x0ba ) 
+   580: b(>resolve) ( 0x0b2 ) 
+   581: named-token ( 0x0b6 ) crazy-aces 0x805
+   595: b(:) ( 0x0b7 ) 
+   596:     b(case) ( 0x0c4 ) 
+   597:         0 ( 0x0a5 ) 
+   598:         b(of) ( 0x01c ) 0x0000 (  dest = 599 )
+\  Error:  Unresolved offset.
+   601:             b(") ( 0x012 ) ( len=0xd [13 bytes] )
+                            " And a-nutt'n'"
+   616:             type ( 0x090 ) 
+   617:             1 ( 0x0a6 ) 
+   618:             b(") ( 0x012 ) ( len=9 )
+                            " And a-won"
+   629:             type ( 0x090 ) 
+   630:             2 ( 0x0a7 ) 
+   631:             b(") ( 0x012 ) ( len=9 )
+                            " And a-too"
+   642:             type ( 0x090 ) 
+   643:             3 ( 0x0a8 ) 
+   644:             b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                            " And a-tree"
+   656:             type ( 0x090 ) 
+   657:             b(lit) ( 0x010 ) 0x4
+   662:             b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                            " and afford"
+   674:             type ( 0x090 ) 
+   675:             b(lit) ( 0x010 ) 0x5
+   680:             b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                            " Dat's enuff"
+   693:             type ( 0x090 ) 
+   694:             b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                            " It's not my default!"
+   716:             type ( 0x090 ) 
+   717:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            "  Just in case you end up here..."
+   751:             type ( 0x090 ) 
+   752:         b(;) ( 0x0c2 ) 
+   753:         end0 ( 0x000 ) 
+\  Detokenization finished normally after 754 bytes.
+End of file.
+

@@ -1,0 +1,114 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+\  PCI Header identified
+\    Offset to Data Structure = 0x001c (28)
+\  PCI Data Structure identified
+\    Data Structure Length = 0x0018 (24)
+\    Vendor ID: 0xbeef
+\    Device ID: 0xc0de
+\    Class Code: 0x090210  (unknown)
+\    Image Revision: 0x5afe
+\    Code Type: 0x01 (Open Firmware)
+\    Image Length: 0x0002 blocks (1024 bytes)
+\    Last PCI Image.
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x5142 (Ok)
+     4:   len:       0x0100 ( 256 bytes)
+     8: named-token ( 0x0b6 ) whatziz 0x800
+    19: b(:) ( 0x0b7 ) 
+    20:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " This is the "
+    34:     type ( 0x090 ) 
+    35:     b(") ( 0x012 ) ( len=5 )
+                    " True "
+    42:     type ( 0x090 ) 
+    43:     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                    "  side of the test."
+    63:     type ( 0x090 ) 
+    64:     cr ( 0x092 ) 
+    65: b(;) ( 0x0c2 ) 
+    66: named-token ( 0x0b6 ) wherezis 0x801
+    78: b(:) ( 0x0b7 ) 
+    79:     b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                    " Begin Nested ""Constant"" Test Test"
+   114:     type ( 0x090 ) 
+   115:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " Is True, level 1"
+   133:     type ( 0x090 ) 
+   134:     b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                    " Is True and is True, level 2"
+   164:     b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                    " Middle of level 2"
+   183:     type ( 0x090 ) 
+   184:     b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                    " Is True and is Not False, level 2"
+   219: b(;) ( 0x0c2 ) 
+   220: named-token ( 0x0b6 ) whoozis 0x802
+   231: b(:) ( 0x0b7 ) 
+   232:     whatziz ( 0x800 ) 
+   234:     wherezis ( 0x801 ) 
+   236: b(;) ( 0x0c2 ) 
+   237: named-token ( 0x0b6 ) whyzis 0x803
+   247: b(:) ( 0x0b7 ) 
+   248:     whoozis ( 0x802 ) 
+   250:     wherezis ( 0x801 ) 
+   252:     whatziz ( 0x800 ) 
+   254: b(;) ( 0x0c2 ) 
+   255: end0 ( 0x000 ) 
+\  Detokenization finished normally after 256 bytes.
+\  Subsequent FCode Block detected.  Detokenizing.
+   256: start1 ( 0x0f1 )   ( 16-bit offsets)
+   257:   format:    0x08
+   258:   checksum:  0x56e5 (Ok)
+   260:   len:       0x0110 ( 272 bytes)
+   264: named-token ( 0x0b6 ) whatziz 0x804
+   275: b(:) ( 0x0b7 ) 
+   276:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " This is the "
+   290:     type ( 0x090 ) 
+   291:     b(") ( 0x012 ) ( len=5 )
+                    " False"
+   298:     type ( 0x090 ) 
+   299:     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                    "  side of the test."
+   319:     type ( 0x090 ) 
+   320:     cr ( 0x092 ) 
+   321: b(;) ( 0x0c2 ) 
+   322: named-token ( 0x0b6 ) wherezis 0x805
+   334: b(:) ( 0x0b7 ) 
+   335:     b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                    " Begin Nested ""Constant"" Test Test"
+   370:     type ( 0x090 ) 
+   371:     b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                    " Is Not True, level 1"
+   393:     type ( 0x090 ) 
+   394:     b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                    " Is Not True and is Not True, level 2"
+   432:     b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                    " Middle of Not level 2"
+   455:     type ( 0x090 ) 
+   456:     b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                    " Is Not True and is False, level 2"
+   491: b(;) ( 0x0c2 ) 
+   492: named-token ( 0x0b6 ) whoozis 0x806
+   503: b(:) ( 0x0b7 ) 
+   504:     whatziz ( 0x804 ) 
+   506:     wherezis ( 0x805 ) 
+   508: b(;) ( 0x0c2 ) 
+   509: named-token ( 0x0b6 ) whyzis 0x807
+   519: b(:) ( 0x0b7 ) 
+   520:     whoozis ( 0x806 ) 
+   522:     wherezis ( 0x805 ) 
+   524:     whatziz ( 0x804 ) 
+   526: b(;) ( 0x0c2 ) 
+   527: end0 ( 0x000 ) 
+\  Detokenization finished normally after 272 bytes.
+\  PCI Image padded with 444 bytes of zero
+

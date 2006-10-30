@@ -1,0 +1,67 @@
+toke -v -i -T pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz -T whatsis TokBrkTst_04.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tracing these symbols:   pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz   whatsis
+
+Tokenizing  TokBrkTst_04.fth   Binary output to TokBrkTst_04.fc 
+Advisory:  File TokBrkTst_04.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokBrkTst_04.fth, Line 6.  (Output Position = 8).  Initiating Global Scope definitions.
+Trace-Note:  File TokBrkTst_04.fth, Line 10.  (Output Position = 13).  Failed to create whoosis as an ALIAS to whatsis
+Trace-Note:  File TokBrkTst_04.fth, Line 10.  (Output Position = 13).  Attempt to invoke (undefined) whatsis.
+Error:  File TokBrkTst_04.fth, Line 10.  (Output Position = 13).  Word  whatsis  is not in dictionary.
+Trace-Note:  File TokBrkTst_04.fth, Line 11.  (Output Position = 13).  Failed to create whatsis as an ALIAS to whoosis
+Error:  File TokBrkTst_04.fth, Line 11.  (Output Position = 13).  Word  whoosis  is not in dictionary.
+Trace-Note:  File TokBrkTst_04.fth, Line 16.  (Output Position = 18).  Creating pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x801) as an External CONSTANT with Global scope.
+Error:  File TokBrkTst_04.fth, Line 16.  (Output Position = 18).  ANSI Forth does not permit definition of names longer than 31 characters.
+Advisory:  File TokBrkTst_04.fth, Line 18.  (Output Position = 96).  Terminating Global Scope definitions; resuming Device-node definitions.
+Trace-Note:  File TokBrkTst_04.fth, Line 22.  (Output Position = 101).  Creating whatsis (FCode token = 0x802) as a Headered CONSTANT in the top-level device-node, which began on line 4
+Message:  File TokBrkTst_04.fth, Line 24.  (Output Position = 113).  Sync Up Diffs w/ prev. release.
+
+Trace-Note:  File TokBrkTst_04.fth, Line 25.  (Output Position = 113).  Creating whoosis as an ALIAS to pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x801), which is defined as a CONSTANT with Global scope.
+Trace-Note:  File TokBrkTst_04.fth, Line 25.  (Output Position = 113).  PELE_YOETZ_NE-EMA-AN_ANOCHI_HU_HA-OMER_V-OSEH_V-AIN_C-MONI_BCHOL_HA_ARETZ is a Global definition, but its alias, whoosis, will only be defined in the top-level device-node, which began on line 4
+Warning:  File TokBrkTst_04.fth, Line 27.  (Output Position = 113).  Multi-line string, started on line 26
+Message:  File TokBrkTst_04.fth, Line 26.  (Output Position = 113).  Sync Up again.
+
+Trace-Note:  File TokBrkTst_04.fth, Line 29.  (Output Position = 113).  Creating pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x803) as a Headerless COLON in the top-level device-node, which began on line 4
+Warning:  File TokBrkTst_04.fth, Line 29.  (Output Position = 113).  Duplicate definition:   pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz  already exists as a CONSTANT in the core vocabulary.
+Warning:  File TokBrkTst_04.fth, Line 29.  (Output Position = 113).  ANSI Forth does not permit definition of names longer than 31 characters.
+Trace-Note:  File TokBrkTst_04.fth, Line 32.  (Output Position = 123).  Invoking pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x803) defined as a COLON.
+Warning:  File TokBrkTst_04.fth, Line 36.  (Output Position = 132).  COLON definition not modified by "INSTANCE" on line 35
+Warning:  File TokBrkTst_04.fth, Line 36.  (Output Position = 132).  ANSI Forth does not permit definition of names longer than 31 characters.
+Trace-Note:  File TokBrkTst_04.fth, Line 38.  (Output Position = 138).  Invoking whoosis (FCode token = 0x801) defined as a CONSTANT.
+Warning:  File TokBrkTst_04.fth, Line 41.  (Output Position = 143).  Unresolved "INSTANCE" on line 35
+Advisory:  File TokBrkTst_04.fth, Line 41.  (Output Position = 143).  Encountered new-device.  Starting new device-node.
+Warning:  File TokBrkTst_04.fth, Line 42.  (Output Position = 150).  CONSTANT definition not modified by "INSTANCE" on line 35
+Warning:  File TokBrkTst_04.fth, Line 42.  (Output Position = 150).  ANSI Forth does not permit definition of names longer than 31 characters.
+Advisory:  File TokBrkTst_04.fth, Line 45.  (Output Position = 154).  ANSI Forth does not permit definition of names longer than 31 characters.
+Warning:  File TokBrkTst_04.fth, Line 48.  (Output Position = 154).  COLON definition not modified by "INSTANCE" on line 35
+Trace-Note:  File TokBrkTst_04.fth, Line 49.  (Output Position = 176).  Invoking pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x801) defined as a CONSTANT.
+Error:  File TokBrkTst_04.fth, Line 54.  (Output Position = 257).  Word  clone  is not in dictionary.
+Advisory:  File TokBrkTst_04.fth, Line 54.  (Output Position = 257).  clone is defined as a CONSTANT in the top-level device-node, which began on line 4
+Error:  File TokBrkTst_04.fth, Line 58.  (Output Position = 270).  CONSTANT definition before completion of IF on line 57
+Warning:  File TokBrkTst_04.fth, Line 58.  (Output Position = 270).  CONSTANT definition not modified by "INSTANCE" on line 35
+Trace-Note:  File TokBrkTst_04.fth, Line 58.  (Output Position = 270).  Failed to create whatsis (FCode token = 0x808)
+Error:  File TokBrkTst_04.fth, Line 60.  (Output Position = 291).  CONSTANT definition before completion of ELSE on line 59
+Warning:  File TokBrkTst_04.fth, Line 60.  (Output Position = 291).  CONSTANT definition not modified by "INSTANCE" on line 35
+Trace-Note:  File TokBrkTst_04.fth, Line 60.  (Output Position = 291).  Failed to create whatsis (FCode token = 0x809)
+Advisory:  File TokBrkTst_04.fth, Line 64.  (Output Position = 304).  Encountered finish-device.  Resetting definitions of device node that started on line 41
+Advisory:  File TokBrkTst_04.fth, Line 64.  (Output Position = 304).  Resuming definitions since start of tokenization.
+Warning:  File TokBrkTst_04.fth, Line 66.  (Output Position = 306).  COLON definition not modified by "INSTANCE" on line 35
+Trace-Note:  File TokBrkTst_04.fth, Line 67.  (Output Position = 316).  Invoking pele_yoetz_ne-ema-an_anochi_hu_ha-omer_v-oseh_v-ain_c-moni_bchol_ha_aretz (FCode token = 0x803) defined as a COLON.
+Trace-Note:  File TokBrkTst_04.fth, Line 69.  (Output Position = 320).  Invoking whatsis (FCode token = 0x802) defined as a CONSTANT.
+Trace-Note:  File TokBrkTst_04.fth, Line 70.  (Output Position = 322).  Invoking whoosis (FCode token = 0x801) defined as a CONSTANT.
+Advisory:  File TokBrkTst_04.fth, Line 73.  (Output Position = 325).  END0 encountered; processing...
+Error:  File TokBrkTst_04.fth, Line 73.  (Output Position = 326).  Unresolved "INSTANCE" on line 35
+toke: checksum is 0x64c6 (326 bytes).  Last assigned FCode = 0x80a
+Tokenization Completed.  7 Errors, 12 Warnings, 9 Advisories, 2 Messages, 16 Trace-Notes.
+Error-detection over-ridden; producing binary output.
+toke: wrote 326 bytes to bytecode file 'TokBrkTst_04.fc'

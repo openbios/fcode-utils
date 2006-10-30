@@ -1,0 +1,53 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x9d97 (Ok)
+     4:   len:       0x01e0 ( 480 bytes)
+     8: b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                " Begin Nest Test Test"
+    30: type ( 0x090 ) 
+    31: b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                " Isn't defined, level 1"
+    55: type ( 0x090 ) 
+    56: b(") ( 0x012 ) ( len=0x28 [40 bytes] )
+                " Isn't defined and isn't defined, level 2"
+    98: type ( 0x090 ) 
+    99: b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                " Resumes non-defined-ness, level 1"
+   134: b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                " Isn't defined and is not defined, level 2"
+   177: type ( 0x090 ) 
+   178: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " Still isn't defined, level 1"
+   208: type ( 0x090 ) 
+   209: b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                " Middle of Nest Test Test"
+   235: type ( 0x090 ) 
+   236: b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                " Is not defined, pass 2, level 1"
+   269: type ( 0x090 ) 
+   270: b(") ( 0x012 ) ( len=0x31 [49 bytes] )
+                " Is not defined and isn't defined, pass 2, level 2"
+   321: type ( 0x090 ) 
+   322: b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                " Resumes non-defined-ness, pass 2, level 1"
+   365: b(") ( 0x012 ) ( len=0x32 [50 bytes] )
+                " Is not defined and is not defined, pass 2, level 2"
+   417: type ( 0x090 ) 
+   418: b(") ( 0x012 ) ( len=0x25 [37 bytes] )
+                " Still is not defined, pass 2, level 1"
+   457: type ( 0x090 ) 
+   458: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " End Nest Test Test"
+   478: type ( 0x090 ) 
+   479: end0 ( 0x000 ) 
+\  Detokenization finished normally after 480 bytes.
+End of file.
+

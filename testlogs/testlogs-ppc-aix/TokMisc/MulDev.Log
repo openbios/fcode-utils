@@ -1,0 +1,24 @@
+toke -v -i MulDev.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  MulDev.fth   Binary output to MulDev.fc 
+Advisory:  File MulDev.fth, Line 6.  \ is a Global definition, but its alias, //, will only be defined in the top-level device-node.
+Advisory:  File MulDev.fth, Line 9.  FCODE-VERSION2 encountered; processing...
+Error:  File MulDev.fth, Line 25.  (Output Position = 151).  Encountered finish-device without corresponding NEW-DEVICE.  Resetting definitions since start of tokenization.
+Advisory:  File MulDev.fth, Line 26.  (Output Position = 153).  Encountered new-device.  Starting new device-node.
+Error:  File MulDev.fth, Line 31.  (Output Position = 195).  Word  err-shoot)  is not in dictionary.
+Advisory:  File MulDev.fth, Line 40.  (Output Position = 257).  FCODE-END encountered; processing...
+Error:  File MulDev.fth, Line 40.  (Output Position = 258).  Missing FINISH-DEVICE for new device that started on line 26
+toke: checksum is 0x4fa7 (258 bytes).  Last assigned FCode = 0x805
+Tokenization Completed.  3 Errors, 4 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 258 bytes to bytecode file 'MulDev.fc'

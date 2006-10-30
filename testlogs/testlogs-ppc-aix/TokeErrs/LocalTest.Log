@@ -1,0 +1,92 @@
+toke -v -i -f Local-Values -I. -I../TokoLoco -f Always-Headers -d dont_omit_support LocalTest.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+User-Defined Symbols:
+	dont_omit_support
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	  Always-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  LocalTest.fth   Binary output to LocalTest.fc 
+Advisory:  File was found in ./LocalTest.fth
+Advisory:  File LocalTest.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Advisory:  File LocalTest.fth, Line 9.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File LocalTest.fth, Line 9.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Warning:  File LocalTest.fth, Line 15.  (Output Position = 455).  Semicolon as separator in Locals declaration is deprecated in favor of '|'
+Error:  File LocalTest.fth, Line 27.  (Output Position = 486).  The word 3dup is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 27.  (Output Position = 486).  3dup is defined as a MACRO in the core vocabulary.
+Error:  File LocalTest.fth, Line 28.  (Output Position = 486).  The word to is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 28.  (Output Position = 486).  to is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 28.  (Output Position = 486).  The word _otter is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 28.  (Output Position = 486).  _otter is defined as a Local Value name.
+Error:  File LocalTest.fth, Line 29.  (Output Position = 486).  The word _otter is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 29.  (Output Position = 486).  _otter is defined as a Local Value name.
+Error:  File LocalTest.fth, Line 32.  (Output Position = 486).  The word dean is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 32.  (Output Position = 486).  dean is defined as a CONSTANT in the top-level device-node, which began on line 4
+Error:  File LocalTest.fth, Line 62.  (Output Position = 802).  Can only declare Locals inside of a Colon-definition.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  The word { is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 65.  (Output Position = 802).  { is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  Word  _nor  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  Word  _this  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  The word ; is not recognized in tokenizer-escape mode.
+Advisory:  File LocalTest.fth, Line 65.  (Output Position = 802).  ; is defined in the core vocabulary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  Word  _either  is not in dictionary.
+Error:  File LocalTest.fth, Line 65.  (Output Position = 802).  Word  }  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 71.  (Output Position = 813).  FLOADing UntermLocalDecl.fth
+Advisory:  File LocalTest.fth, Line 71.  (Output Position = 813).  File was found in ./UntermLocalDecl.fth
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 813).  Unterminated Local-Values Declaration in definition of  AHNOLD  , which started on line 70 of file LocalTest.fth
+Error:  File LocalTest.fth, Line 72.  (Output Position = 813).  Word  }  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 75.  (Output Position = 827).  FLOADing UntermLocalAssgmnt.fth
+Advisory:  File LocalTest.fth, Line 75.  (Output Position = 827).  File was found in ./UntermLocalAssgmnt.fth
+Error:  File UntermLocalAssgmnt.fth, Line 7.  (Output Position = 827).  Unterminated Locals Assignment in definition of  AHNOLD  , which started on line 70 of file LocalTest.fth
+Advisory:  File LocalTest.fth, Line 80.  (Output Position = 835).  FLOADing UntermLocalDecl.fth
+Advisory:  File LocalTest.fth, Line 80.  (Output Position = 835).  File was found in ./UntermLocalDecl.fth
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 835).  Can only declare Locals inside of a Colon-definition.
+Error:  File UntermLocalDecl.fth, Line 7.  (Output Position = 835).  Unterminated misplaced Local-Values Declaration
+Advisory:  File LocalTest.fth, Line 81.  (Output Position = 835).  FLOADing UntermLocalAssgmnt.fth
+Advisory:  File LocalTest.fth, Line 81.  (Output Position = 835).  File was found in ./UntermLocalAssgmnt.fth
+Error:  File UntermLocalAssgmnt.fth, Line 7.  (Output Position = 835).  Unterminated Locals Assignment
+Error:  File LocalTest.fth, Line 81.  (Output Position = 835).  Word  _souvenirs  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 84.  (Output Position = 835).  FLOADing UntermDefn.fth
+Advisory:  File LocalTest.fth, Line 84.  (Output Position = 835).  File was found in ./UntermDefn.fth
+Error:  File UntermDefn.fth, Line 7.  (Output Position = 840).  Unterminated CONSTANT definition
+Error:  File LocalTest.fth, Line 84.  (Output Position = 840).  Word  moopoop  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 85.  (Output Position = 840).  FLOADing UntermDefn.fth
+Advisory:  File LocalTest.fth, Line 85.  (Output Position = 840).  File was found in ./UntermDefn.fth
+Error:  File UntermDefn.fth, Line 8.  (Output Position = 840).  Unterminated Constant definition
+Error:  File LocalTest.fth, Line 85.  (Output Position = 840).  Word  poop-de-moo  is not in dictionary.
+Advisory:  File LocalTest.fth, Line 87.  (Output Position = 840).  FCODE-END encountered; processing...
+Warning:  File LocalTest.fth, Line 87.  (Output Position = 841).  Stack imbalance before end of tokenization.
+toke: checksum is 0xf53e (841 bytes).  Last assigned FCode = 0x811
+Tokenization Completed.  23 Errors, 2 Warnings, 24 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 841 bytes to bytecode file 'LocalTest.fc'

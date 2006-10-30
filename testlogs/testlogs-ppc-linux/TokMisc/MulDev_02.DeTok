@@ -1,0 +1,130 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x5d2e (Ok)
+     4:   len:       0x0144 ( 324 bytes)
+     8: named-token ( 0x0b6 ) achin 0x800
+    17: b(create) ( 0x0bb ) 
+    18: b(lit) ( 0x010 ) 0xc
+    23: c, ( 0x0d0 ) 
+    24: b(lit) ( 0x010 ) 0xd
+    29: c, ( 0x0d0 ) 
+    30: b(lit) ( 0x010 ) 0xe
+    35: c, ( 0x0d0 ) 
+    36: named-token ( 0x0b6 ) breakin 0x801
+    47: b(:) ( 0x0b7 ) 
+    48:     achin ( 0x800 ) 
+    50:     3 ( 0x0a8 ) 
+    51:     bounds ( 0x0ac ) 
+    52:     b(do) ( 0x017 ) 0x0008 (  dest = 61 )
+    55:         i ( 0x019 ) 
+    56:         c@ ( 0x071 ) 
+    57:         . ( 0x09d ) 
+    58:     b(loop) ( 0x015 ) 0xfffc ( =dec -4  dest = 55 )
+    61: b(;) ( 0x0c2 ) 
+    62: named-token ( 0x0b6 ) creakin 0x802
+    73: b(:) ( 0x0b7 ) 
+    74:     0 ( 0x0a5 ) 
+    75:     b?branch ( 0x014 ) 0x0005 (  dest = 81 )
+    78:         breakin ( 0x801 ) 
+    80:     b(>resolve) ( 0x0b2 ) 
+    81: b(;) ( 0x0c2 ) 
+    82: named-token ( 0x0b6 ) deacon 0x803
+    92: b(:) ( 0x0b7 ) 
+    93:     achin ( 0x800 ) 
+    95:     creakin ( 0x802 ) 
+    97:     drop ( 0x046 ) 
+    98:     breakin ( 0x801 ) 
+   100: b(;) ( 0x0c2 ) 
+   101: new-device ( 0x11f ) 
+   103: named-token ( 0x0b6 ) eek! 0x804
+   111: b(create) ( 0x0bb ) 
+   112: b(lit) ( 0x010 ) 0x12
+   117: c, ( 0x0d0 ) 
+   118: b(lit) ( 0x010 ) 0x11
+   123: c, ( 0x0d0 ) 
+   124: b(lit) ( 0x010 ) 0x50
+   129: c, ( 0x0d0 ) 
+   130: b(lit) ( 0x010 ) 0x4f
+   135: c, ( 0x0d0 ) 
+   136: named-token ( 0x0b6 ) freek 0x805
+   145: b(:) ( 0x0b7 ) 
+   146:     eek! ( 0x804 ) 
+   148:     b(lit) ( 0x010 ) 0x4
+   153:     bounds ( 0x0ac ) 
+   154:     b(?do) ( 0x018 ) 0x0009 (  dest = 164 )
+   157:         i ( 0x019 ) 
+   158:         c@ ( 0x071 ) 
+   159:         . ( 0x09d ) 
+   160:         1 ( 0x0a6 ) 
+   161:     b(+loop) ( 0x016 ) 0xfffb ( =dec -5  dest = 157 )
+   164: b(;) ( 0x0c2 ) 
+   165: named-token ( 0x0b6 ) greek 0x806
+   174: b(:) ( 0x0b7 ) 
+   175:     -1 ( 0x0a4 ) 
+   176:     b?branch ( 0x014 ) 0x0005 (  dest = 182 )
+   179:         freek ( 0x805 ) 
+   181:     b(>resolve) ( 0x0b2 ) 
+   182: b(;) ( 0x0c2 ) 
+   183: named-token ( 0x0b6 ) hierareek 0x807
+   196: b(:) ( 0x0b7 ) 
+   197:     eek! ( 0x804 ) 
+   199:     freek ( 0x805 ) 
+   201:     greek ( 0x806 ) 
+   203: b(;) ( 0x0c2 ) 
+   204: named-token ( 0x0b6 ) ikey 0x808
+   212: b(:) ( 0x0b7 ) 
+   213:     hierareek ( 0x807 ) 
+   215:     freek ( 0x805 ) 
+   217:     greek ( 0x806 ) 
+   219: b(;) ( 0x0c2 ) 
+   220: finish-device ( 0x127 ) 
+   222: named-token ( 0x0b6 ) jeeky 0x809
+   231: b(:) ( 0x0b7 ) 
+   232:     achin ( 0x800 ) 
+   234:     3 ( 0x0a8 ) 
+   235:     type ( 0x090 ) 
+   236: b(;) ( 0x0c2 ) 
+   237: new-device ( 0x11f ) 
+   239: 0 ( 0x0a5 ) 
+   240: named-token ( 0x0b6 ) inky 0x80a
+   248: b(value) ( 0x0b8 ) 
+   249: named-token ( 0x0b6 ) kinky 0x80b
+   258: b(:) ( 0x0b7 ) 
+   259:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " "( 03 )"""( 04 17 b7 0e 7f 0f 89 10 ff 18 )"""( 14 03 11 )"
+   277:     bounds ( 0x0ac ) 
+   278:     b(do) ( 0x017 ) 0x0011 ( =dec 17  dest = 296 )
+   281:         i ( 0x019 ) 
+   282:         c@ ( 0x071 ) 
+   283:         i ( 0x019 ) 
+   284:         1 ( 0x0a6 ) 
+   285:         + ( 0x01e ) 
+   286:         c@ ( 0x071 ) 
+   287:         inky ( 0x80a ) 
+   289:         + ( 0x01e ) 
+   290:         rb! ( 0x231 ) 
+   292:         2 ( 0x0a7 ) 
+   293:     b(+loop) ( 0x016 ) 0xfff3 ( =dec -13  dest = 281 )
+   296: b(;) ( 0x0c2 ) 
+   297: new-device ( 0x11f ) 
+   299: named-token ( 0x0b6 ) open 0x80c
+   307: b(:) ( 0x0b7 ) 
+   308:     -1 ( 0x0a4 ) 
+   309: b(;) ( 0x0c2 ) 
+   310: new-device ( 0x11f ) 
+   312: named-token ( 0x0b6 ) open 0x80d
+   320: b(:) ( 0x0b7 ) 
+   321:     -1 ( 0x0a4 ) 
+   322: b(;) ( 0x0c2 ) 
+   323: end0 ( 0x000 ) 
+\  Detokenization finished normally after 324 bytes.
+End of file.
+

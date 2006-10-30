@@ -1,0 +1,32 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x27bd (Ok)
+     4:   len:       0x0088 ( 136 bytes)
+     8: b(") ( 0x012 ) ( len=0x27 [39 bytes] )
+                " Starts Out okay  "( 09 05 12 13 ) And then what? "( 00 07 )"
+    49: named-token ( 0x0b6 ) fuddy 0x800
+    58: b(:) ( 0x0b7 ) 
+    59: b(;) ( 0x0c2 ) 
+    60: named-token ( 0x0b6 ) duddy 0x801
+    69: b(:) ( 0x0b7 ) 
+    70:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    " but where does it end?"
+    94:     type ( 0x090 ) 
+    95:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " Does it end?"
+   109:     type ( 0x090 ) 
+   110:     b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                    "  No, it does not..."( 0a );"( 0a )"
+   134:     type ( 0x090 ) 
+   135:     end0 ( 0x000 ) 
+\  Detokenization finished normally after 136 bytes.
+End of file.
+

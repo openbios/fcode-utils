@@ -1,0 +1,158 @@
+toke -v -i -f noLocal-Values -l -o SupportedLocalTest.nolocals.fc SupportedLocalTest.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  SupportedLocalTest.fth   Binary output to SupportedLocalTest.nolocals.fc   FLoad-list to SupportedLocalTest.nolocals.fl 
+Advisory:  File SupportedLocalTest.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File SupportedLocalTest.fth, Line 18.  (Output Position = 89).  FLOADing LocalValuesSupport.fth
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 492).  Unimplemented control word '{'
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 492).  Word  _otter  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 492).  Word  _weasel  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 492).  Word  _skunk  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 493).  Word  _muskrat  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 493).  Word  _mole  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 22.  (Output Position = 493).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 30.  (Output Position = 493).  Word  _skunk  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 30.  (Output Position = 499).  Unimplemented control word '->'
+Error:  File SupportedLocalTest.fth, Line 30.  (Output Position = 499).  Word  _muskrat  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 31.  (Output Position = 499).  Word  _muskrat  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 31.  (Output Position = 500).  Unimplemented control word '->'
+Error:  File SupportedLocalTest.fth, Line 31.  (Output Position = 500).  Word  _mole  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 32.  (Output Position = 500).  Word  _weasel  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 33.  (Output Position = 514).  Word  _otter  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 34.  (Output Position = 528).  Word  _mole  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 34.  (Output Position = 528).  Word  _muskrat  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 34.  (Output Position = 528).  Word  _mole  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 35.  (Output Position = 529).  The word  SEMICOLON  should not be used outside of a colon definition.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Unimplemented control word '{'
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _curly  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _larry  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _moe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  |  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _shemp  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _besser  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  _joe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 38.  (Output Position = 541).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 39.  (Output Position = 550).  Word  _curly  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 40.  (Output Position = 579).  Word  _moe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 41.  (Output Position = 602).  Word  _larry  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 42.  (Output Position = 603).  Word  _curly  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 42.  (Output Position = 603).  Word  _moe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 42.  (Output Position = 604).  Unimplemented control word '->'
+Error:  File SupportedLocalTest.fth, Line 42.  (Output Position = 604).  Word  _shemp  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 43.  (Output Position = 604).  Word  _larry  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 43.  (Output Position = 604).  Word  _moe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 43.  (Output Position = 605).  Unimplemented control word '->'
+Error:  File SupportedLocalTest.fth, Line 43.  (Output Position = 605).  Word  _besser  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 44.  (Output Position = 605).  Word  _besser  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 44.  (Output Position = 605).  Word  _curly  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 44.  (Output Position = 606).  Unimplemented control word '->'
+Error:  File SupportedLocalTest.fth, Line 44.  (Output Position = 606).  Word  _joe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 45.  (Output Position = 606).  Word  _joe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 45.  (Output Position = 606).  Word  _besser  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 46.  (Output Position = 615).  Word  _moe  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 46.  (Output Position = 615).  Word  _larry  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 47.  (Output Position = 624).  Word  _curly  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 47.  (Output Position = 624).  Word  _besser  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 48.  (Output Position = 633).  Word  _larry  is not in dictionary.
+Error:  File SupportedLocalTest.fth, Line 48.  (Output Position = 633).  Word  _shemp  is not in dictionary.
+Advisory:  File SupportedLocalTest.fth, Line 55.  (Output Position = 665).  FLOADing SupportedLocalTest2.fth
+Error:  File SupportedLocalTest2.fth, Line 5.  (Output Position = 678).  Unimplemented control word '{'
+Error:  File SupportedLocalTest2.fth, Line 5.  (Output Position = 678).  Word  _harpo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 5.  (Output Position = 678).  Word  _chico  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 6.  (Output Position = 678).  Word  _groucho  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 6.  (Output Position = 678).  Word  _zeppo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 6.  (Output Position = 678).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 7.  (Output Position = 678).  Word  _groucho  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 7.  (Output Position = 678).  Word  _harpo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 8.  (Output Position = 679).  Word  _chico  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 8.  (Output Position = 679).  Word  _zeppo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 9.  (Output Position = 680).  Word  _groucho  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 9.  (Output Position = 680).  Word  _zeppo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 10.  (Output Position = 687).  Word  _groucho  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 10.  (Output Position = 689).  Word  _zeppo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 14.  (Output Position = 704).  Unimplemented control word '{'
+Error:  File SupportedLocalTest2.fth, Line 14.  (Output Position = 705).  Word  q  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 15.  (Output Position = 705).  Word  _gummo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 16.  (Output Position = 705).  Word  _karl  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 17.  (Output Position = 705).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 19.  (Output Position = 714).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 19.  (Output Position = 714).  Word  _gummo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 20.  (Output Position = 716).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 20.  (Output Position = 716).  Word  _karl  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 21.  (Output Position = 717).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 21.  (Output Position = 717).  Word  q  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 22.  (Output Position = 717).  Word  _karl  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 22.  (Output Position = 717).  Word  _gummo  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 22.  (Output Position = 717).  Word  q  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 23.  (Output Position = 717).  The word  SEMICOLON  should not be used outside of a colon definition.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Unimplemented control word '{'
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  _lfn  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  _pjs  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  |  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  _ill  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  _never  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  _know  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 25.  (Output Position = 731).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 26.  (Output Position = 731).  Word  _pjs  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 26.  (Output Position = 731).  Word  _lfn  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 26.  (Output Position = 732).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 26.  (Output Position = 732).  Word  _never  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 27.  (Output Position = 732).  Word  _never  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 27.  (Output Position = 732).  Word  _pjs  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 27.  (Output Position = 733).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 27.  (Output Position = 733).  Word  _ill  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 28.  (Output Position = 733).  Word  _ill  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 28.  (Output Position = 733).  Word  _lfn  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 28.  (Output Position = 734).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 28.  (Output Position = 734).  Word  _know  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 29.  (Output Position = 734).  Word  _ill  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 29.  (Output Position = 734).  Word  _never  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 29.  (Output Position = 734).  Word  _know  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 33.  (Output Position = 746).  Unimplemented control word '{'
+Error:  File SupportedLocalTest2.fth, Line 33.  (Output Position = 746).  Word  _dont  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 33.  (Output Position = 746).  Word  _ask  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 34.  (Output Position = 746).  Word  |  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 34.  (Output Position = 746).  Word  _why  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 34.  (Output Position = 746).  Word  }  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 35.  (Output Position = 746).  Word  _ask  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 35.  (Output Position = 746).  Word  _dont  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 35.  (Output Position = 747).  Unimplemented control word '->'
+Error:  File SupportedLocalTest2.fth, Line 35.  (Output Position = 747).  Word  _why  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 36.  (Output Position = 747).  Word  _why  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 36.  (Output Position = 747).  Word  _ask  is not in dictionary.
+Error:  File SupportedLocalTest2.fth, Line 36.  (Output Position = 748).  Word  _dont  is not in dictionary.
+Warning:  File SupportedLocalTest.fth, Line 57.  (Output Position = 750).  Applying H# to non-numeric value.  Ignoring.
+Advisory:  File SupportedLocalTest.fth, Line 59.  (Output Position = 752).  FCODE-END encountered; processing...
+toke: checksum is 0xe2a0 (753 bytes).  Last assigned FCode = 0x813
+Tokenization Completed.  116 Errors, 1 Warning, 4 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 753 bytes to bytecode file 'SupportedLocalTest.nolocals.fc'

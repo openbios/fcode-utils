@@ -1,0 +1,57 @@
+toke -v -i MiscFeatures.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  MiscFeatures.fth   Binary output to MiscFeatures.fc 
+Advisory:  File MiscFeatures.fth, Line 4.  \ is a Global definition, but its alias, //, will only be defined in the top-level device-node.
+Advisory:  File MiscFeatures.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Advisory:  File MiscFeatures.fth, Line 14.  (Output Position = 26).  Initiating Global Scope definitions.
+Advisory:  File MiscFeatures.fth, Line 21.  (Output Position = 26).  Terminating Global Scope definitions; resuming Device-node definitions.
+Warning:  File MiscFeatures.fth, Line 28.  (Output Position = 54).  Duplicate definition:   bell  already exists as a CONSTANT in the core vocabulary.
+Warning:  File MiscFeatures.fth, Line 43.  (Output Position = 259).  Duplicate definition:   factl  already exists as a COLON in the top-level device-node, which began on line 5
+Advisory:  File MiscFeatures.fth, Line 64.  (Output Position = 555).  Substituting  TO  for deprecated  IS
+Advisory:  File MiscFeatures.fth, Line 65.  (Output Position = 563).  Substituting  TO  for deprecated  IS
+Advisory:  File MiscFeatures.fth, Line 66.  (Output Position = 571).  Substituting  TO  for deprecated  IS
+Warning:  File MiscFeatures.fth, Line 66.  (Output Position = 571).  Applying IS to a VARIABLE (naught) is not recommended; use  !  instead.
+Advisory:  File MiscFeatures.fth, Line 67.  (Output Position = 578).  ABORT" in fcode not defined by IEEE 1275-1994
+Warning:  File MiscFeatures.fth, Line 71.  (Output Position = 647).  Duplicate definition:   thirty  already exists as a VALUE in the top-level device-node, which began on line 5
+Warning:  File MiscFeatures.fth, Line 74.  (Output Position = 706).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Advisory:  File MiscFeatures.fth, Line 74.  (Output Position = 706).  .D is a Global definition, but its alias, .dec, will only be defined in the top-level device-node, which began on line 5
+Advisory:  File MiscFeatures.fth, Line 83.  (Output Position = 776).  Encountered new-device.  Starting new device-node.
+Warning:  File MiscFeatures.fth, Line 90.  (Output Position = 801).  Unresolved "INSTANCE" on line 88
+Advisory:  File MiscFeatures.fth, Line 90.  (Output Position = 801).  Encountered new-device.  Starting new device-node.  Suspending definitions of parent-device node that started on line 83
+Warning:  File MiscFeatures.fth, Line 94.  (Output Position = 812).  VARIABLE definition was modified by "INSTANCE" on line 88
+Error:  File MiscFeatures.fth, Line 100.  (Output Position = 895).  Word  cheryl  is not in dictionary.
+Advisory:  File MiscFeatures.fth, Line 100.  (Output Position = 895).  cheryl is defined as a VARIABLE in the device-node that started on line 83
+Warning:  File MiscFeatures.fth, Line 101.  (Output Position = 895).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File MiscFeatures.fth, Line 101.  (Output Position = 895).  Word  .dec  is not in dictionary.
+Warning:  File MiscFeatures.fth, Line 102.  (Output Position = 895).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File MiscFeatures.fth, Line 102.  (Output Position = 895).  Word  cheryl  is not in dictionary.
+Advisory:  File MiscFeatures.fth, Line 102.  (Output Position = 895).  cheryl is defined as a VARIABLE in the device-node that started on line 83
+Warning:  File MiscFeatures.fth, Line 103.  (Output Position = 895).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Advisory:  File MiscFeatures.fth, Line 103.  (Output Position = 895).  .H is a Global definition, but its alias, .heck, will only be defined in the current device-node, which began on line 90
+Advisory:  File MiscFeatures.fth, Line 106.  (Output Position = 938).  Encountered finish-device.  Resetting definitions of device node that started on line 90
+Advisory:  File MiscFeatures.fth, Line 106.  (Output Position = 938).  Resuming definitions of parent device-node that started on line 83
+Advisory:  File MiscFeatures.fth, Line 117.  (Output Position = 1068).  Encountered finish-device.  Resetting definitions of device node that started on line 83
+Advisory:  File MiscFeatures.fth, Line 117.  (Output Position = 1068).  Resuming definitions since start of tokenization.
+Advisory:  File MiscFeatures.fth, Line 120.  (Output Position = 1070).  : is a Global definition, but its alias, colon, will only be defined in the top-level device-node, which began on line 5
+Advisory:  File MiscFeatures.fth, Line 123.  (Output Position = 1070).  ; is a Global definition, but its alias, semicolon, will only be defined in the top-level device-node, which began on line 5
+Warning:  File MiscFeatures.fth, Line 131.  (Output Position = 1182).  ALIAS during colon-definition is not supported by IEEE 1275-1994
+Error:  File MiscFeatures.fth, Line 131.  (Output Position = 1182).  The word .h is not recognized in tokenizer-escape mode.
+Advisory:  File MiscFeatures.fth, Line 131.  (Output Position = 1182).  .h is defined as a MACRO in the core vocabulary.
+Message:  File MiscFeatures.fth, Line 132.  (Output Position = 1182).  Currently in definition of  DROOP  , which started on line 127
+Error:  File MiscFeatures.fth, Line 134.  (Output Position = 1187).  Word  .x  is not in dictionary.
+Message:  File MiscFeatures.fth, Line 136.  (Output Position = 1263).  After definition of  DROOP  , which started on line 127
+Advisory:  File MiscFeatures.fth, Line 146.  (Output Position = 1452).  FCODE-END encountered; processing...
+toke: checksum is 0xc405 (1453 bytes).  Last assigned FCode = 0x816
+Tokenization Completed.  5 Errors, 11 Warnings, 22 Advisories, 2 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1453 bytes to bytecode file 'MiscFeatures.fc'

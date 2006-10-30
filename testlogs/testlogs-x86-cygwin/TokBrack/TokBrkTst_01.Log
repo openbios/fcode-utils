@@ -1,0 +1,22 @@
+toke -v -i TokBrkTst_01.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TokBrkTst_01.fth   Binary output to TokBrkTst_01.fc 
+Advisory:  File TokBrkTst_01.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Error:  File TokBrkTst_01.fth, Line 17.  (Output Position = 18).  ANSI Forth does not permit definition of names longer than 31 characters.
+Warning:  File TokBrkTst_01.fth, Line 29.  (Output Position = 166).  ANSI Forth does not permit definition of names longer than 31 characters.
+Advisory:  File TokBrkTst_01.fth, Line 33.  (Output Position = 170).  ANSI Forth does not permit definition of names longer than 31 characters.
+Advisory:  File TokBrkTst_01.fth, Line 46.  (Output Position = 278).  END0 encountered; processing...
+toke: checksum is 0x51ae (279 bytes).  Last assigned FCode = 0x804
+Tokenization Completed.  1 Error, 1 Warning, 3 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 279 bytes to bytecode file 'TokBrkTst_01.fc'

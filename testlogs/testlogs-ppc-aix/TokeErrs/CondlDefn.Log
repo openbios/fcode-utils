@@ -1,0 +1,35 @@
+toke -v -i CondlDefn.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  CondlDefn.fth   Binary output to CondlDefn.fc 
+Advisory:  File CondlDefn.fth, Line 4.  FCODE-VERSION2 encountered; processing...
+Error:  File CondlDefn.fth, Line 9.  (Output Position = 30).  CONSTANT definition before completion of IF
+Error:  File CondlDefn.fth, Line 10.  (Output Position = 58).  CONSTANT definition before completion of DO
+Error:  File CondlDefn.fth, Line 10.  (Output Position = 58).  CONSTANT definition before completion of IF on line 9
+Error:  File CondlDefn.fth, Line 11.  (Output Position = 77).  CONSTANT definition before completion of DO on line 10
+Error:  File CondlDefn.fth, Line 11.  (Output Position = 77).  CONSTANT definition before completion of IF on line 9
+Error:  File CondlDefn.fth, Line 12.  (Output Position = 89).  Word  ugh-muck-a-luck-a  is not in dictionary.
+Error:  File CondlDefn.fth, Line 12.  (Output Position = 89).  Word  bug-bug  is not in dictionary.
+Error:  File CondlDefn.fth, Line 12.  (Output Position = 89).  Word  bug-off  is not in dictionary.
+Error:  File CondlDefn.fth, Line 15.  (Output Position = 104).  CONSTANT definition before completion of ELSE on line 14
+Error:  File CondlDefn.fth, Line 20.  (Output Position = 160).  Word  bug-bug  is not in dictionary.
+Error:  File CondlDefn.fth, Line 21.  (Output Position = 160).  Word  ugh-muck-a-luck-a  is not in dictionary.
+Error:  File CondlDefn.fth, Line 22.  (Output Position = 165).  The word  CONSTANT  should not be used inside of a colon definition.
+Error:  File CondlDefn.fth, Line 22.  (Output Position = 165).  Word  ugh-muck-a-luck-a  is not in dictionary.
+Error:  File CondlDefn.fth, Line 23.  (Output Position = 170).  The word  :  should not be used inside of a colon definition.
+Error:  File CondlDefn.fth, Line 23.  (Output Position = 170).  Word  ugh-muck-b-luck-b  is not in dictionary.
+Error:  File CondlDefn.fth, Line 24.  (Output Position = 171).  Word  bug-off  is not in dictionary.
+Advisory:  File CondlDefn.fth, Line 27.  (Output Position = 175).  FCODE-END encountered; processing...
+toke: checksum is 0x3112 (176 bytes).  Last assigned FCode = 0x805
+Tokenization Completed.  16 Errors, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 176 bytes to bytecode file 'CondlDefn.fc'

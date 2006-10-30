@@ -1,0 +1,251 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xf4be (Ok)
+     4:   len:       0x031d ( 797 bytes)
+     8: b(lit) ( 0x010 ) 0x40
+    13: named-token ( 0x0b6 ) _local-storage-size_ 0x800
+    37: b(constant) ( 0x0ba ) 
+    38: _local-storage-size_ ( 0x800 ) 
+    40: cells ( 0x069 ) 
+    41: dup ( 0x047 ) 
+    42: named-token ( 0x0b6 ) locals-storage 0x801
+    60: b(buffer:) ( 0x0bd ) 
+    61: named-token ( 0x0b6 ) locals-pointer 0x802
+    79: b(value) ( 0x0b8 ) 
+    80: named-token ( 0x0b6 ) not-enough-locals? 0x803
+   102: b(:) ( 0x0b7 ) 
+   103:     + ( 0x01e ) 
+   104:     cells ( 0x069 ) 
+   105:     locals-pointer ( 0x802 ) 
+   107:     swap ( 0x049 ) 
+   108:     - ( 0x01f ) 
+   109:     0< ( 0x036 ) 
+   110: b(;) ( 0x0c2 ) 
+   111: named-token ( 0x0b6 ) .not-enough-locals 0x804
+   133: b(:) ( 0x0b7 ) 
+   134:     cr ( 0x092 ) 
+   135:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " FATAL ERROR:  Local Values Usage exceeds allocation."
+   189:     type ( 0x090 ) 
+   190:     cr ( 0x092 ) 
+   191: b(;) ( 0x0c2 ) 
+   192: named-token ( 0x0b6 ) check-enough-locals 0x805
+   215: b(:) ( 0x0b7 ) 
+   216:     not-enough-locals? ( 0x803 ) 
+   218:     b?branch ( 0x014 ) 0x0007 (  dest = 226 )
+   221:         .not-enough-locals ( 0x804 ) 
+   223:         abort ( 0x216 ) 
+   225:     b(>resolve) ( 0x0b2 ) 
+   226: b(;) ( 0x0c2 ) 
+   227: named-token ( 0x0b6 ) push-uninitted-locals 0x806
+   252: b(:) ( 0x0b7 ) 
+   253:     cells ( 0x069 ) 
+   254:     locals-pointer ( 0x802 ) 
+   256:     swap ( 0x049 ) 
+   257:     - ( 0x01f ) 
+   258:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   261: b(;) ( 0x0c2 ) 
+   262: named-token ( 0x0b6 ) push-one-initted-local 0x807
+   288: b(:) ( 0x0b7 ) 
+   289:     locals-pointer ( 0x802 ) 
+   291:     1 ( 0x0a6 ) 
+   292:     cells ( 0x069 ) 
+   293:     - ( 0x01f ) 
+   294:     dup ( 0x047 ) 
+   295:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   298:     locals-storage ( 0x801 ) 
+   300:     + ( 0x01e ) 
+   301:     ! ( 0x072 ) 
+   302: b(;) ( 0x0c2 ) 
+   303: named-token ( 0x0b6 ) push-initted-locals 0x808
+   326: b(:) ( 0x0b7 ) 
+   327:     0 ( 0x0a5 ) 
+   328:     b(?do) ( 0x018 ) 0x0007 (  dest = 336 )
+   331:         push-one-initted-local ( 0x807 ) 
+   333:     b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 331 )
+   336: b(;) ( 0x0c2 ) 
+   337: named-token ( 0x0b6 ) {push-locals} 0x809
+   354: b(:) ( 0x0b7 ) 
+   355:     2dup ( 0x053 ) 
+   356:     check-enough-locals ( 0x805 ) 
+   358:     push-uninitted-locals ( 0x806 ) 
+   360:     push-initted-locals ( 0x808 ) 
+   362: b(;) ( 0x0c2 ) 
+   363: named-token ( 0x0b6 ) {pop-locals} 0x80a
+   379: b(:) ( 0x0b7 ) 
+   380:     cells ( 0x069 ) 
+   381:     locals-pointer ( 0x802 ) 
+   383:     + ( 0x01e ) 
+   384:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   387: b(;) ( 0x0c2 ) 
+   388: named-token ( 0x0b6 ) _{local} 0x80b
+   400: b(:) ( 0x0b7 ) 
+   401:     cells ( 0x069 ) 
+   402:     locals-pointer ( 0x802 ) 
+   404:     + ( 0x01e ) 
+   405:     locals-storage ( 0x801 ) 
+   407:     + ( 0x01e ) 
+   408: b(;) ( 0x0c2 ) 
+   409: named-token ( 0x0b6 ) catch 0x80c
+   418: b(:) ( 0x0b7 ) 
+   419:     locals-pointer ( 0x802 ) 
+   421:     >r ( 0x030 ) 
+   422:     catch ( 0x217 ) 
+   424:     r> ( 0x031 ) 
+   425:     b(to) ( 0x0c3 ) locals-pointer ( 0x802 ) 
+   428: b(;) ( 0x0c2 ) 
+   429: named-token ( 0x0b6 ) $CAT 0x80d
+   437: b(:) ( 0x0b7 ) 
+   438:     b(lit) ( 0x010 ) 0x5
+   443:     0 ( 0x0a5 ) 
+   444:     {push-locals} ( 0x809 ) 
+   446:     2 ( 0x0a7 ) 
+   447:     _{local} ( 0x80b ) 
+   449:     @ ( 0x06d ) 
+   450:     0 ( 0x0a5 ) 
+   451:     _{local} ( 0x80b ) 
+   453:     @ ( 0x06d ) 
+   454:     < ( 0x03a ) 
+   455:     b?branch ( 0x014 ) 0x0023 ( =dec 35  dest = 491 )
+   458:         3 ( 0x0a8 ) 
+   459:         _{local} ( 0x80b ) 
+   461:         @ ( 0x06d ) 
+   462:         1 ( 0x0a6 ) 
+   463:         _{local} ( 0x80b ) 
+   465:         @ ( 0x06d ) 
+   466:         2 ( 0x0a7 ) 
+   467:         _{local} ( 0x80b ) 
+   469:         @ ( 0x06d ) 
+   470:         + ( 0x01e ) 
+   471:         b(lit) ( 0x010 ) 0x4
+   476:         _{local} ( 0x80b ) 
+   478:         @ ( 0x06d ) 
+   479:         0 ( 0x0a5 ) 
+   480:         _{local} ( 0x80b ) 
+   482:         @ ( 0x06d ) 
+   483:         2 ( 0x0a7 ) 
+   484:         _{local} ( 0x80b ) 
+   486:         @ ( 0x06d ) 
+   487:         - ( 0x01f ) 
+   488:         min ( 0x02e ) 
+   489:         move ( 0x078 ) 
+   490:     b(>resolve) ( 0x0b2 ) 
+   491:     0 ( 0x0a5 ) 
+   492:     _{local} ( 0x80b ) 
+   494:     @ ( 0x06d ) 
+   495:     1 ( 0x0a6 ) 
+   496:     _{local} ( 0x80b ) 
+   498:     @ ( 0x06d ) 
+   499:     2 ( 0x0a7 ) 
+   500:     _{local} ( 0x80b ) 
+   502:     @ ( 0x06d ) 
+   503:     b(lit) ( 0x010 ) 0x4
+   508:     _{local} ( 0x80b ) 
+   510:     @ ( 0x06d ) 
+   511:     + ( 0x01e ) 
+   512:     0 ( 0x0a5 ) 
+   513:     _{local} ( 0x80b ) 
+   515:     @ ( 0x06d ) 
+   516:     min ( 0x02e ) 
+   517:     b(lit) ( 0x010 ) 0x5
+   522:     {pop-locals} ( 0x80a ) 
+   524: b(;) ( 0x0c2 ) 
+   525: named-token ( 0x0b6 ) fussel 0x80e
+   535: b(variable) ( 0x0b9 ) 
+   536: b(lit) ( 0x010 ) 0x3afe
+   541: fussel ( 0x80e ) 
+   543: ! ( 0x072 ) 
+   544: b(lit) ( 0x010 ) 0x5afe
+   549: noop ( 0x07b ) 
+   550: named-token ( 0x0b6 ) dumont 0x80f
+   560: b(value) ( 0x0b8 ) 
+   561: named-token ( 0x0b6 ) ducksoup 0x810
+   573: b(:) ( 0x0b7 ) 
+   574:     3 ( 0x0a8 ) 
+   575:     2 ( 0x0a7 ) 
+   576:     {push-locals} ( 0x809 ) 
+   578:     b(lit) ( 0x010 ) 0x40
+   583:     2 ( 0x0a7 ) 
+   584:     _{local} ( 0x80b ) 
+   586:     @ ( 0x06d ) 
+   587:     dup ( 0x047 ) 
+   588:     count ( 0x084 ) 
+   589:     dup ( 0x047 ) 
+   590:     3 ( 0x0a8 ) 
+   591:     _{local} ( 0x80b ) 
+   593:     ! ( 0x072 ) 
+   594:     0 ( 0x0a5 ) 
+   595:     _{local} ( 0x80b ) 
+   597:     @ ( 0x06d ) 
+   598:     dup ( 0x047 ) 
+   599:     count ( 0x084 ) 
+   600:     $CAT ( 0x80d ) 
+   602:     dup ( 0x047 ) 
+   603:     b(lit) ( 0x010 ) 0x4
+   608:     _{local} ( 0x80b ) 
+   610:     ! ( 0x072 ) 
+   611:     rot ( 0x04a ) 
+   612:     b(lit) ( 0x010 ) 0x4
+   617:     _{local} ( 0x80b ) 
+   619:     @ ( 0x06d ) 
+   620:     = ( 0x03c ) 
+   621:     b?branch ( 0x014 ) 0x000c ( =dec 12  dest = 634 )
+   624:         type ( 0x090 ) 
+   625:         b(lit) ( 0x010 ) 0x5
+   630:         {pop-locals} ( 0x80a ) 
+   632:         exit ( 0x033 ) 
+   633:     b(>resolve) ( 0x0b2 ) 
+   634:     2 ( 0x0a7 ) 
+   635:     _{local} ( 0x80b ) 
+   637:     @ ( 0x06d ) 
+   638:     + ( 0x01e ) 
+   639:     swap ( 0x049 ) 
+   640:     3 ( 0x0a8 ) 
+   641:     _{local} ( 0x80b ) 
+   643:     @ ( 0x06d ) 
+   644:     + ( 0x01e ) 
+   645:     b(lit) ( 0x010 ) 0x5
+   650:     {pop-locals} ( 0x80a ) 
+   652: b(;) ( 0x0c2 ) 
+   653: named-token ( 0x0b6 ) garbanzo 0x811
+   665: b(:) ( 0x0b7 ) 
+   666:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    " Should be unrecognized."
+   691:     type ( 0x090 ) 
+   692:     cr ( 0x092 ) 
+   693: b(;) ( 0x0c2 ) 
+   694: new-device ( 0x11f ) 
+   696: named-token ( 0x0b6 ) fazooule! 0x812
+   709: b(:) ( 0x0b7 ) 
+   710:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    "  Lima enter tain you..."
+   735:     type ( 0x090 ) 
+   736:     cr ( 0x092 ) 
+   737:     garbanzo ( 0x811 ) 
+   739: b(;) ( 0x0c2 ) 
+   740: b(lit) ( 0x010 ) 0xdeadc0de
+   745: instance ( 0x0c0 ) 
+   746: named-token ( 0x0b6 ) quaack 0x813
+   756: b(value) ( 0x0b8 ) 
+   757: named-token ( 0x0b6 ) frijoles 0x814
+   769: b(:) ( 0x0b7 ) 
+   770:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Holy ... beans?"
+   787:     type ( 0x090 ) 
+   788:     cr ( 0x092 ) 
+   789:     garbanzo ( 0x811 ) 
+   791: b(;) ( 0x0c2 ) 
+   792: finish-device ( 0x127 ) 
+   794: finish-device ( 0x127 ) 
+   796: end0 ( 0x000 ) 
+\  Detokenization finished normally after 797 bytes.
+End of file.
+

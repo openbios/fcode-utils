@@ -1,0 +1,29 @@
+toke -v -d 'MOOgoo=true' -i -o CondAlias.MeT.fc CondAlias.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+User-Defined Symbols:
+	MOOgoo = true
+
+Tokenizing  CondAlias.fth   Binary output to CondAlias.MeT.fc 
+Advisory:  File CondAlias.fth, Line 8.  [IFDEF] is a Global definition, but its alias, [dowegotit?], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 9.  [IFNDEF] is a Global definition, but its alias, [ifyouaintgot], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 10.  [IF] is a Global definition, but its alias, [izzatso?], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 11.  [ELSE] is a Global definition, but its alias, [udderwise], will only be defined in the top-level device-node.
+Advisory:  File CondAlias.fth, Line 12.  [THEN] is a Global definition, but its alias, [donewidit], will only be defined in the top-level device-node.
+Message:  File CondAlias.fth, Line 24.  Hey!  Y'got MooGoo!  Good for you!
+Message:  File CondAlias.fth, Line 26.  And guess what!  It's TRUE!  Drinks all around!
+Message:  File CondAlias.fth, Line 35.  Hey!  Did I menshun dat we got MooGoo?
+Warning:  File CondAlias.fth, Line 37.  Multi-line string, started on line 36
+Message:  File CondAlias.fth, Line 36.  
+	Yeah?  Well, so wut if I did?  I'm gonna menshun it again!
+	WE GOT MooGoo!!!
+Nothing Tokenized.  1 Warning, 5 Advisories, 4 Messages.

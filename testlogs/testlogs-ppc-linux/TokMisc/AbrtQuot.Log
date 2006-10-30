@@ -1,0 +1,24 @@
+toke -v -i AbrtQuot.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  AbrtQuot.fth   Binary output to AbrtQuot.fc 
+Advisory:  File AbrtQuot.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Error:  File AbrtQuot.fth, Line 14.  (Output Position = 57).  Word  gumfritsch  is not in dictionary.
+Error:  File AbrtQuot.fth, Line 15.  (Output Position = 57).  Unimplemented control word '{'
+Error:  File AbrtQuot.fth, Line 16.  (Output Position = 57).  Word  }  is not in dictionary.
+Advisory:  File AbrtQuot.fth, Line 17.  (Output Position = 62).  ABORT" in fcode not defined by IEEE 1275-1994
+Error:  File AbrtQuot.fth, Line 21.  (Output Position = 184).  Word  strumburkle  is not in dictionary.
+Advisory:  File AbrtQuot.fth, Line 24.  (Output Position = 185).  FCODE-END encountered; processing...
+toke: checksum is 0x3ca5 (186 bytes).  Last assigned FCode = 0x802
+Tokenization Completed.  4 Errors, 3 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 186 bytes to bytecode file 'AbrtQuot.fc'

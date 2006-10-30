@@ -1,0 +1,3121 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x7e4b (Ok)
+     4:   len:       0x37ef ( 14319 bytes)
+     8: 0 ( 0x0a5 ) 
+     9: named-token ( 0x0b6 ) my_zero 0x800
+    20: b(constant) ( 0x0ba ) 
+    21: 1 ( 0x0a6 ) 
+    22: named-token ( 0x0b6 ) one 0x801
+    29: b(constant) ( 0x0ba ) 
+    30: 2 ( 0x0a7 ) 
+    31: named-token ( 0x0b6 ) two 0x802
+    38: b(constant) ( 0x0ba ) 
+    39: 3 ( 0x0a8 ) 
+    40: named-token ( 0x0b6 ) three 0x803
+    49: b(constant) ( 0x0ba ) 
+    50: b(lit) ( 0x010 ) 0x4
+    55: named-token ( 0x0b6 ) four 0x804
+    63: b(constant) ( 0x0ba ) 
+    64: b(lit) ( 0x010 ) 0x5
+    69: named-token ( 0x0b6 ) five 0x805
+    77: b(constant) ( 0x0ba ) 
+    78: b(lit) ( 0x010 ) 0x6
+    83: named-token ( 0x0b6 ) six 0x806
+    90: b(constant) ( 0x0ba ) 
+    91: b(lit) ( 0x010 ) 0x7
+    96: named-token ( 0x0b6 ) seven 0x807
+   105: b(constant) ( 0x0ba ) 
+   106: b(lit) ( 0x010 ) 0x8
+   111: named-token ( 0x0b6 ) eight 0x808
+   120: b(constant) ( 0x0ba ) 
+   121: b(lit) ( 0x010 ) 0x9
+   126: named-token ( 0x0b6 ) nine 0x809
+   134: b(constant) ( 0x0ba ) 
+   135: b(lit) ( 0x010 ) 0xa
+   140: named-token ( 0x0b6 ) ten 0x80a
+   147: b(constant) ( 0x0ba ) 
+   148: b(lit) ( 0x010 ) 0xb
+   153: named-token ( 0x0b6 ) eleven 0x80b
+   163: b(constant) ( 0x0ba ) 
+   164: b(lit) ( 0x010 ) 0xc
+   169: named-token ( 0x0b6 ) twelve 0x80c
+   179: b(constant) ( 0x0ba ) 
+   180: b(lit) ( 0x010 ) 0xd
+   185: named-token ( 0x0b6 ) thirteen 0x80d
+   197: b(constant) ( 0x0ba ) 
+   198: b(lit) ( 0x010 ) 0xe
+   203: named-token ( 0x0b6 ) fourteen 0x80e
+   215: b(constant) ( 0x0ba ) 
+   216: b(lit) ( 0x010 ) 0xf
+   221: named-token ( 0x0b6 ) fifteen 0x80f
+   232: b(constant) ( 0x0ba ) 
+   233: b(lit) ( 0x010 ) 0x10
+   238: named-token ( 0x0b6 ) sixteen 0x810
+   249: b(constant) ( 0x0ba ) 
+   250: b(lit) ( 0x010 ) 0x11
+   255: named-token ( 0x0b6 ) seventeen 0x811
+   268: b(constant) ( 0x0ba ) 
+   269: b(lit) ( 0x010 ) 0x12
+   274: named-token ( 0x0b6 ) eighteen 0x812
+   286: b(constant) ( 0x0ba ) 
+   287: b(lit) ( 0x010 ) 0x13
+   292: named-token ( 0x0b6 ) nineteen 0x813
+   304: b(constant) ( 0x0ba ) 
+   305: b(lit) ( 0x010 ) 0x14
+   310: named-token ( 0x0b6 ) twenty 0x814
+   320: b(constant) ( 0x0ba ) 
+   321: b(lit) ( 0x010 ) 0x15
+   326: named-token ( 0x0b6 ) twenty-one 0x815
+   340: b(constant) ( 0x0ba ) 
+   341: b(lit) ( 0x010 ) 0x16
+   346: named-token ( 0x0b6 ) twenty-two 0x816
+   360: b(constant) ( 0x0ba ) 
+   361: b(lit) ( 0x010 ) 0x17
+   366: named-token ( 0x0b6 ) twenty-three 0x817
+   382: b(constant) ( 0x0ba ) 
+   383: b(lit) ( 0x010 ) 0x18
+   388: named-token ( 0x0b6 ) twenty-four 0x818
+   403: b(constant) ( 0x0ba ) 
+   404: b(lit) ( 0x010 ) 0x19
+   409: named-token ( 0x0b6 ) twenty-five 0x819
+   424: b(constant) ( 0x0ba ) 
+   425: b(lit) ( 0x010 ) 0x1a
+   430: named-token ( 0x0b6 ) twenty-six 0x81a
+   444: b(constant) ( 0x0ba ) 
+   445: b(lit) ( 0x010 ) 0x1b
+   450: named-token ( 0x0b6 ) twenty-seven 0x81b
+   466: b(constant) ( 0x0ba ) 
+   467: b(lit) ( 0x010 ) 0x1c
+   472: named-token ( 0x0b6 ) twenty-eight 0x81c
+   488: b(constant) ( 0x0ba ) 
+   489: b(lit) ( 0x010 ) 0x1d
+   494: named-token ( 0x0b6 ) twenty-nine 0x81d
+   509: b(constant) ( 0x0ba ) 
+   510: b(lit) ( 0x010 ) 0x1e
+   515: named-token ( 0x0b6 ) thirty 0x81e
+   525: b(constant) ( 0x0ba ) 
+   526: b(lit) ( 0x010 ) 0x1f
+   531: named-token ( 0x0b6 ) thirty-one 0x81f
+   545: b(constant) ( 0x0ba ) 
+   546: b(lit) ( 0x010 ) 0x20
+   551: named-token ( 0x0b6 ) thirty-two 0x820
+   565: b(constant) ( 0x0ba ) 
+   566: b(lit) ( 0x010 ) 0x21
+   571: named-token ( 0x0b6 ) thirty-three 0x821
+   587: b(constant) ( 0x0ba ) 
+   588: b(lit) ( 0x010 ) 0x22
+   593: named-token ( 0x0b6 ) thirty-four 0x822
+   608: b(constant) ( 0x0ba ) 
+   609: b(lit) ( 0x010 ) 0x23
+   614: named-token ( 0x0b6 ) thirty-five 0x823
+   629: b(constant) ( 0x0ba ) 
+   630: b(lit) ( 0x010 ) 0x24
+   635: named-token ( 0x0b6 ) thirty-six 0x824
+   649: b(constant) ( 0x0ba ) 
+   650: b(lit) ( 0x010 ) 0x25
+   655: named-token ( 0x0b6 ) thirty-seven 0x825
+   671: b(constant) ( 0x0ba ) 
+   672: b(lit) ( 0x010 ) 0x26
+   677: named-token ( 0x0b6 ) thirty-eight 0x826
+   693: b(constant) ( 0x0ba ) 
+   694: b(lit) ( 0x010 ) 0x27
+   699: named-token ( 0x0b6 ) thirty-nine 0x827
+   714: b(constant) ( 0x0ba ) 
+   715: b(lit) ( 0x010 ) 0x28
+   720: named-token ( 0x0b6 ) forty 0x828
+   729: b(constant) ( 0x0ba ) 
+   730: b(lit) ( 0x010 ) 0x29
+   735: named-token ( 0x0b6 ) forty-one 0x829
+   748: b(constant) ( 0x0ba ) 
+   749: b(lit) ( 0x010 ) 0x2a
+   754: named-token ( 0x0b6 ) forty-two 0x82a
+   767: b(constant) ( 0x0ba ) 
+   768: b(lit) ( 0x010 ) 0x2b
+   773: named-token ( 0x0b6 ) forty-three 0x82b
+   788: b(constant) ( 0x0ba ) 
+   789: b(lit) ( 0x010 ) 0x2c
+   794: named-token ( 0x0b6 ) forty-four 0x82c
+   808: b(constant) ( 0x0ba ) 
+   809: b(lit) ( 0x010 ) 0x2d
+   814: named-token ( 0x0b6 ) forty-five 0x82d
+   828: b(constant) ( 0x0ba ) 
+   829: b(lit) ( 0x010 ) 0x2e
+   834: named-token ( 0x0b6 ) forty-six 0x82e
+   847: b(constant) ( 0x0ba ) 
+   848: b(lit) ( 0x010 ) 0x2f
+   853: named-token ( 0x0b6 ) forty-seven 0x82f
+   868: b(constant) ( 0x0ba ) 
+   869: b(lit) ( 0x010 ) 0x30
+   874: named-token ( 0x0b6 ) forty-eight 0x830
+   889: b(constant) ( 0x0ba ) 
+   890: b(lit) ( 0x010 ) 0x31
+   895: named-token ( 0x0b6 ) forty-nine 0x831
+   909: b(constant) ( 0x0ba ) 
+   910: b(lit) ( 0x010 ) 0x32
+   915: named-token ( 0x0b6 ) fifty 0x832
+   924: b(constant) ( 0x0ba ) 
+   925: b(lit) ( 0x010 ) 0x33
+   930: named-token ( 0x0b6 ) fifty-one 0x833
+   943: b(constant) ( 0x0ba ) 
+   944: b(lit) ( 0x010 ) 0x34
+   949: named-token ( 0x0b6 ) fifty-two 0x834
+   962: b(constant) ( 0x0ba ) 
+   963: b(lit) ( 0x010 ) 0x35
+   968: named-token ( 0x0b6 ) fifty-three 0x835
+   983: b(constant) ( 0x0ba ) 
+   984: b(lit) ( 0x010 ) 0x36
+   989: named-token ( 0x0b6 ) fifty-four 0x836
+  1003: b(constant) ( 0x0ba ) 
+  1004: b(lit) ( 0x010 ) 0x37
+  1009: named-token ( 0x0b6 ) fifty-five 0x837
+  1023: b(constant) ( 0x0ba ) 
+  1024: b(lit) ( 0x010 ) 0x38
+  1029: named-token ( 0x0b6 ) fifty-six 0x838
+  1042: b(constant) ( 0x0ba ) 
+  1043: b(lit) ( 0x010 ) 0x39
+  1048: named-token ( 0x0b6 ) fifty-seven 0x839
+  1063: b(constant) ( 0x0ba ) 
+  1064: b(lit) ( 0x010 ) 0x3a
+  1069: named-token ( 0x0b6 ) fifty-eight 0x83a
+  1084: b(constant) ( 0x0ba ) 
+  1085: b(lit) ( 0x010 ) 0x3b
+  1090: named-token ( 0x0b6 ) fifty-nine 0x83b
+  1104: b(constant) ( 0x0ba ) 
+  1105: b(lit) ( 0x010 ) 0x3c
+  1110: named-token ( 0x0b6 ) sixty 0x83c
+  1119: b(constant) ( 0x0ba ) 
+  1120: b(lit) ( 0x010 ) 0x3d
+  1125: named-token ( 0x0b6 ) sixty-one 0x83d
+  1138: b(constant) ( 0x0ba ) 
+  1139: b(lit) ( 0x010 ) 0x3e
+  1144: named-token ( 0x0b6 ) sixty-two 0x83e
+  1157: b(constant) ( 0x0ba ) 
+  1158: b(lit) ( 0x010 ) 0x3f
+  1163: named-token ( 0x0b6 ) sixty-three 0x83f
+  1178: b(constant) ( 0x0ba ) 
+  1179: b(lit) ( 0x010 ) 0x40
+  1184: named-token ( 0x0b6 ) sixty-four 0x840
+  1198: b(constant) ( 0x0ba ) 
+  1199: b(lit) ( 0x010 ) 0x41
+  1204: named-token ( 0x0b6 ) sixty-five 0x841
+  1218: b(constant) ( 0x0ba ) 
+  1219: b(lit) ( 0x010 ) 0x42
+  1224: named-token ( 0x0b6 ) sixty-six 0x842
+  1237: b(constant) ( 0x0ba ) 
+  1238: b(lit) ( 0x010 ) 0x43
+  1243: named-token ( 0x0b6 ) sixty-seven 0x843
+  1258: b(constant) ( 0x0ba ) 
+  1259: b(lit) ( 0x010 ) 0x44
+  1264: named-token ( 0x0b6 ) sixty-eight 0x844
+  1279: b(constant) ( 0x0ba ) 
+  1280: b(lit) ( 0x010 ) 0x45
+  1285: named-token ( 0x0b6 ) sixty-nine 0x845
+  1299: b(constant) ( 0x0ba ) 
+  1300: b(lit) ( 0x010 ) 0x46
+  1305: named-token ( 0x0b6 ) seventy 0x846
+  1316: b(constant) ( 0x0ba ) 
+  1317: b(lit) ( 0x010 ) 0x47
+  1322: named-token ( 0x0b6 ) seventy-one 0x847
+  1337: b(constant) ( 0x0ba ) 
+  1338: b(lit) ( 0x010 ) 0x48
+  1343: named-token ( 0x0b6 ) seventy-two 0x848
+  1358: b(constant) ( 0x0ba ) 
+  1359: b(lit) ( 0x010 ) 0x49
+  1364: named-token ( 0x0b6 ) seventy-three 0x849
+  1381: b(constant) ( 0x0ba ) 
+  1382: b(lit) ( 0x010 ) 0x4a
+  1387: named-token ( 0x0b6 ) seventy-four 0x84a
+  1403: b(constant) ( 0x0ba ) 
+  1404: b(lit) ( 0x010 ) 0x4b
+  1409: named-token ( 0x0b6 ) seventy-five 0x84b
+  1425: b(constant) ( 0x0ba ) 
+  1426: b(lit) ( 0x010 ) 0x4c
+  1431: named-token ( 0x0b6 ) seventy-six 0x84c
+  1446: b(constant) ( 0x0ba ) 
+  1447: b(lit) ( 0x010 ) 0x4d
+  1452: named-token ( 0x0b6 ) seventy-seven 0x84d
+  1469: b(constant) ( 0x0ba ) 
+  1470: b(lit) ( 0x010 ) 0x4e
+  1475: named-token ( 0x0b6 ) seventy-eight 0x84e
+  1492: b(constant) ( 0x0ba ) 
+  1493: b(lit) ( 0x010 ) 0x4f
+  1498: named-token ( 0x0b6 ) seventy-nine 0x84f
+  1514: b(constant) ( 0x0ba ) 
+  1515: b(lit) ( 0x010 ) 0x50
+  1520: named-token ( 0x0b6 ) eighty 0x850
+  1530: b(constant) ( 0x0ba ) 
+  1531: b(lit) ( 0x010 ) 0x51
+  1536: named-token ( 0x0b6 ) eighty-one 0x851
+  1550: b(constant) ( 0x0ba ) 
+  1551: b(lit) ( 0x010 ) 0x52
+  1556: named-token ( 0x0b6 ) eighty-two 0x852
+  1570: b(constant) ( 0x0ba ) 
+  1571: b(lit) ( 0x010 ) 0x53
+  1576: named-token ( 0x0b6 ) eighty-three 0x853
+  1592: b(constant) ( 0x0ba ) 
+  1593: b(lit) ( 0x010 ) 0x54
+  1598: named-token ( 0x0b6 ) eighty-four 0x854
+  1613: b(constant) ( 0x0ba ) 
+  1614: b(lit) ( 0x010 ) 0x55
+  1619: named-token ( 0x0b6 ) eighty-five 0x855
+  1634: b(constant) ( 0x0ba ) 
+  1635: b(lit) ( 0x010 ) 0x56
+  1640: named-token ( 0x0b6 ) eighty-six 0x856
+  1654: b(constant) ( 0x0ba ) 
+  1655: b(lit) ( 0x010 ) 0x57
+  1660: named-token ( 0x0b6 ) eighty-seven 0x857
+  1676: b(constant) ( 0x0ba ) 
+  1677: b(lit) ( 0x010 ) 0x58
+  1682: named-token ( 0x0b6 ) eighty-eight 0x858
+  1698: b(constant) ( 0x0ba ) 
+  1699: b(lit) ( 0x010 ) 0x59
+  1704: named-token ( 0x0b6 ) eighty-nine 0x859
+  1719: b(constant) ( 0x0ba ) 
+  1720: b(lit) ( 0x010 ) 0x5a
+  1725: named-token ( 0x0b6 ) ninety 0x85a
+  1735: b(constant) ( 0x0ba ) 
+  1736: b(lit) ( 0x010 ) 0x5b
+  1741: named-token ( 0x0b6 ) ninety-one 0x85b
+  1755: b(constant) ( 0x0ba ) 
+  1756: b(lit) ( 0x010 ) 0x5c
+  1761: named-token ( 0x0b6 ) ninety-two 0x85c
+  1775: b(constant) ( 0x0ba ) 
+  1776: b(lit) ( 0x010 ) 0x5d
+  1781: named-token ( 0x0b6 ) ninety-three 0x85d
+  1797: b(constant) ( 0x0ba ) 
+  1798: b(lit) ( 0x010 ) 0x5e
+  1803: named-token ( 0x0b6 ) ninety-four 0x85e
+  1818: b(constant) ( 0x0ba ) 
+  1819: b(lit) ( 0x010 ) 0x5f
+  1824: named-token ( 0x0b6 ) ninety-five 0x85f
+  1839: b(constant) ( 0x0ba ) 
+  1840: b(lit) ( 0x010 ) 0x60
+  1845: named-token ( 0x0b6 ) ninety-six 0x860
+  1859: b(constant) ( 0x0ba ) 
+  1860: b(lit) ( 0x010 ) 0x61
+  1865: named-token ( 0x0b6 ) ninety-seven 0x861
+  1881: b(constant) ( 0x0ba ) 
+  1882: b(lit) ( 0x010 ) 0x62
+  1887: named-token ( 0x0b6 ) ninety-eight 0x862
+  1903: b(constant) ( 0x0ba ) 
+  1904: b(lit) ( 0x010 ) 0x63
+  1909: named-token ( 0x0b6 ) ninety-nine 0x863
+  1924: b(constant) ( 0x0ba ) 
+  1925: b(lit) ( 0x010 ) 0x64
+  1930: named-token ( 0x0b6 ) one_hundred 0x864
+  1945: b(constant) ( 0x0ba ) 
+  1946: b(lit) ( 0x010 ) 0x65
+  1951: named-token ( 0x0b6 ) one_hundred_and_one 0x865
+  1974: b(constant) ( 0x0ba ) 
+  1975: b(lit) ( 0x010 ) 0x66
+  1980: named-token ( 0x0b6 ) one_hundred_and_two 0x866
+  2003: b(constant) ( 0x0ba ) 
+  2004: b(lit) ( 0x010 ) 0x67
+  2009: named-token ( 0x0b6 ) one_hundred_and_three 0x867
+  2034: b(constant) ( 0x0ba ) 
+  2035: b(lit) ( 0x010 ) 0x68
+  2040: named-token ( 0x0b6 ) one_hundred_and_four 0x868
+  2064: b(constant) ( 0x0ba ) 
+  2065: b(lit) ( 0x010 ) 0x69
+  2070: named-token ( 0x0b6 ) one_hundred_and_five 0x869
+  2094: b(constant) ( 0x0ba ) 
+  2095: b(lit) ( 0x010 ) 0x6a
+  2100: named-token ( 0x0b6 ) one_hundred_and_six 0x86a
+  2123: b(constant) ( 0x0ba ) 
+  2124: b(lit) ( 0x010 ) 0x6b
+  2129: named-token ( 0x0b6 ) one_hundred_and_seven 0x86b
+  2154: b(constant) ( 0x0ba ) 
+  2155: b(lit) ( 0x010 ) 0x6c
+  2160: named-token ( 0x0b6 ) one_hundred_and_eight 0x86c
+  2185: b(constant) ( 0x0ba ) 
+  2186: b(lit) ( 0x010 ) 0x6d
+  2191: named-token ( 0x0b6 ) one_hundred_and_nine 0x86d
+  2215: b(constant) ( 0x0ba ) 
+  2216: b(lit) ( 0x010 ) 0x6e
+  2221: named-token ( 0x0b6 ) one_hundred_and_ten 0x86e
+  2244: b(constant) ( 0x0ba ) 
+  2245: b(lit) ( 0x010 ) 0x6f
+  2250: named-token ( 0x0b6 ) one_hundred_and_eleven 0x86f
+  2276: b(constant) ( 0x0ba ) 
+  2277: b(lit) ( 0x010 ) 0x70
+  2282: named-token ( 0x0b6 ) one_hundred_and_twelve 0x870
+  2308: b(constant) ( 0x0ba ) 
+  2309: b(lit) ( 0x010 ) 0x71
+  2314: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x871
+  2342: b(constant) ( 0x0ba ) 
+  2343: b(lit) ( 0x010 ) 0x72
+  2348: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x872
+  2376: b(constant) ( 0x0ba ) 
+  2377: b(lit) ( 0x010 ) 0x73
+  2382: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x873
+  2409: b(constant) ( 0x0ba ) 
+  2410: b(lit) ( 0x010 ) 0x74
+  2415: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x874
+  2442: b(constant) ( 0x0ba ) 
+  2443: b(lit) ( 0x010 ) 0x75
+  2448: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x875
+  2477: b(constant) ( 0x0ba ) 
+  2478: b(lit) ( 0x010 ) 0x76
+  2483: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x876
+  2511: b(constant) ( 0x0ba ) 
+  2512: b(lit) ( 0x010 ) 0x77
+  2517: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x877
+  2545: b(constant) ( 0x0ba ) 
+  2546: b(lit) ( 0x010 ) 0x78
+  2551: named-token ( 0x0b6 ) one_hundred_and_twenty 0x878
+  2577: b(constant) ( 0x0ba ) 
+  2578: b(lit) ( 0x010 ) 0x79
+  2583: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x879
+  2613: b(constant) ( 0x0ba ) 
+  2614: b(lit) ( 0x010 ) 0x7a
+  2619: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x87a
+  2649: b(constant) ( 0x0ba ) 
+  2650: b(lit) ( 0x010 ) 0x7b
+  2655: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x87b
+  2687: b(constant) ( 0x0ba ) 
+  2688: b(lit) ( 0x010 ) 0x7c
+  2693: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x87c
+  2724: b(constant) ( 0x0ba ) 
+  2725: b(lit) ( 0x010 ) 0x7d
+  2730: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x87d
+  2761: b(constant) ( 0x0ba ) 
+  2762: b(lit) ( 0x010 ) 0x7e
+  2767: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0x87e
+  2797: b(constant) ( 0x0ba ) 
+  2798: b(lit) ( 0x010 ) 0x7f
+  2803: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0x87f
+  2835: b(constant) ( 0x0ba ) 
+  2836: b(lit) ( 0x010 ) 0x80
+  2841: named-token ( 0x0b6 ) one_hundred_and_twenty-eight 0x880
+  2873: b(constant) ( 0x0ba ) 
+  2874: eleven ( 0x80b ) 
+  2876: new-device ( 0x11f ) 
+  2878: 0 ( 0x0a5 ) 
+  2879: named-token ( 0x0b6 ) my_zero 0x800
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2890: b(constant) ( 0x0ba ) 
+  2891: 1 ( 0x0a6 ) 
+  2892: named-token ( 0x0b6 ) one 0x801
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2899: b(constant) ( 0x0ba ) 
+  2900: 2 ( 0x0a7 ) 
+  2901: named-token ( 0x0b6 ) two 0x802
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2908: b(constant) ( 0x0ba ) 
+  2909: 3 ( 0x0a8 ) 
+  2910: named-token ( 0x0b6 ) three 0x803
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2919: b(constant) ( 0x0ba ) 
+  2920: b(lit) ( 0x010 ) 0x4
+  2925: named-token ( 0x0b6 ) four 0x804
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2933: b(constant) ( 0x0ba ) 
+  2934: b(lit) ( 0x010 ) 0x5
+  2939: named-token ( 0x0b6 ) five 0x805
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2947: b(constant) ( 0x0ba ) 
+  2948: b(lit) ( 0x010 ) 0x6
+  2953: named-token ( 0x0b6 ) six 0x806
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2960: b(constant) ( 0x0ba ) 
+  2961: b(lit) ( 0x010 ) 0x7
+  2966: named-token ( 0x0b6 ) seven 0x807
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2975: b(constant) ( 0x0ba ) 
+  2976: b(lit) ( 0x010 ) 0x8
+  2981: named-token ( 0x0b6 ) eight 0x808
+\  Warning:  New token # might overlap previously assigned token #(s).
+  2990: b(constant) ( 0x0ba ) 
+  2991: b(lit) ( 0x010 ) 0x9
+  2996: named-token ( 0x0b6 ) nine 0x809
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3004: b(constant) ( 0x0ba ) 
+  3005: b(lit) ( 0x010 ) 0xa
+  3010: named-token ( 0x0b6 ) ten 0x80a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3017: b(constant) ( 0x0ba ) 
+  3018: b(lit) ( 0x010 ) 0xb
+  3023: named-token ( 0x0b6 ) eleven 0x80b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3033: b(constant) ( 0x0ba ) 
+  3034: b(lit) ( 0x010 ) 0xc
+  3039: named-token ( 0x0b6 ) twelve 0x80c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3049: b(constant) ( 0x0ba ) 
+  3050: b(lit) ( 0x010 ) 0xd
+  3055: named-token ( 0x0b6 ) thirteen 0x80d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3067: b(constant) ( 0x0ba ) 
+  3068: b(lit) ( 0x010 ) 0xe
+  3073: named-token ( 0x0b6 ) fourteen 0x80e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3085: b(constant) ( 0x0ba ) 
+  3086: b(lit) ( 0x010 ) 0xf
+  3091: named-token ( 0x0b6 ) fifteen 0x80f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3102: b(constant) ( 0x0ba ) 
+  3103: b(lit) ( 0x010 ) 0x10
+  3108: named-token ( 0x0b6 ) sixteen 0x810
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3119: b(constant) ( 0x0ba ) 
+  3120: b(lit) ( 0x010 ) 0x11
+  3125: named-token ( 0x0b6 ) seventeen 0x811
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3138: b(constant) ( 0x0ba ) 
+  3139: b(lit) ( 0x010 ) 0x12
+  3144: named-token ( 0x0b6 ) eighteen 0x812
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3156: b(constant) ( 0x0ba ) 
+  3157: b(lit) ( 0x010 ) 0x13
+  3162: named-token ( 0x0b6 ) nineteen 0x813
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3174: b(constant) ( 0x0ba ) 
+  3175: b(lit) ( 0x010 ) 0x14
+  3180: named-token ( 0x0b6 ) twenty 0x814
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3190: b(constant) ( 0x0ba ) 
+  3191: b(lit) ( 0x010 ) 0x15
+  3196: named-token ( 0x0b6 ) twenty-one 0x815
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3210: b(constant) ( 0x0ba ) 
+  3211: b(lit) ( 0x010 ) 0x16
+  3216: named-token ( 0x0b6 ) twenty-two 0x816
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3230: b(constant) ( 0x0ba ) 
+  3231: b(lit) ( 0x010 ) 0x17
+  3236: named-token ( 0x0b6 ) twenty-three 0x817
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3252: b(constant) ( 0x0ba ) 
+  3253: b(lit) ( 0x010 ) 0x18
+  3258: named-token ( 0x0b6 ) twenty-four 0x818
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3273: b(constant) ( 0x0ba ) 
+  3274: b(lit) ( 0x010 ) 0x19
+  3279: named-token ( 0x0b6 ) twenty-five 0x819
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3294: b(constant) ( 0x0ba ) 
+  3295: b(lit) ( 0x010 ) 0x1a
+  3300: named-token ( 0x0b6 ) twenty-six 0x81a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3314: b(constant) ( 0x0ba ) 
+  3315: b(lit) ( 0x010 ) 0x1b
+  3320: named-token ( 0x0b6 ) twenty-seven 0x81b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3336: b(constant) ( 0x0ba ) 
+  3337: b(lit) ( 0x010 ) 0x1c
+  3342: named-token ( 0x0b6 ) twenty-eight 0x81c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3358: b(constant) ( 0x0ba ) 
+  3359: b(lit) ( 0x010 ) 0x1d
+  3364: named-token ( 0x0b6 ) twenty-nine 0x81d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3379: b(constant) ( 0x0ba ) 
+  3380: b(lit) ( 0x010 ) 0x1e
+  3385: named-token ( 0x0b6 ) thirty 0x81e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3395: b(constant) ( 0x0ba ) 
+  3396: b(lit) ( 0x010 ) 0x1f
+  3401: named-token ( 0x0b6 ) thirty-one 0x81f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3415: b(constant) ( 0x0ba ) 
+  3416: b(lit) ( 0x010 ) 0x20
+  3421: named-token ( 0x0b6 ) thirty-two 0x820
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3435: b(constant) ( 0x0ba ) 
+  3436: b(lit) ( 0x010 ) 0x21
+  3441: named-token ( 0x0b6 ) thirty-three 0x821
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3457: b(constant) ( 0x0ba ) 
+  3458: b(lit) ( 0x010 ) 0x22
+  3463: named-token ( 0x0b6 ) thirty-four 0x822
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3478: b(constant) ( 0x0ba ) 
+  3479: b(lit) ( 0x010 ) 0x23
+  3484: named-token ( 0x0b6 ) thirty-five 0x823
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3499: b(constant) ( 0x0ba ) 
+  3500: b(lit) ( 0x010 ) 0x24
+  3505: named-token ( 0x0b6 ) thirty-six 0x824
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3519: b(constant) ( 0x0ba ) 
+  3520: b(lit) ( 0x010 ) 0x25
+  3525: named-token ( 0x0b6 ) thirty-seven 0x825
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3541: b(constant) ( 0x0ba ) 
+  3542: b(lit) ( 0x010 ) 0x26
+  3547: named-token ( 0x0b6 ) thirty-eight 0x826
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3563: b(constant) ( 0x0ba ) 
+  3564: b(lit) ( 0x010 ) 0x27
+  3569: named-token ( 0x0b6 ) thirty-nine 0x827
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3584: b(constant) ( 0x0ba ) 
+  3585: b(lit) ( 0x010 ) 0x28
+  3590: named-token ( 0x0b6 ) forty 0x828
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3599: b(constant) ( 0x0ba ) 
+  3600: b(lit) ( 0x010 ) 0x29
+  3605: named-token ( 0x0b6 ) forty-one 0x829
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3618: b(constant) ( 0x0ba ) 
+  3619: b(lit) ( 0x010 ) 0x2a
+  3624: named-token ( 0x0b6 ) forty-two 0x82a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3637: b(constant) ( 0x0ba ) 
+  3638: b(lit) ( 0x010 ) 0x2b
+  3643: named-token ( 0x0b6 ) forty-three 0x82b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3658: b(constant) ( 0x0ba ) 
+  3659: b(lit) ( 0x010 ) 0x2c
+  3664: named-token ( 0x0b6 ) forty-four 0x82c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3678: b(constant) ( 0x0ba ) 
+  3679: b(lit) ( 0x010 ) 0x2d
+  3684: named-token ( 0x0b6 ) forty-five 0x82d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3698: b(constant) ( 0x0ba ) 
+  3699: b(lit) ( 0x010 ) 0x2e
+  3704: named-token ( 0x0b6 ) forty-six 0x82e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3717: b(constant) ( 0x0ba ) 
+  3718: b(lit) ( 0x010 ) 0x2f
+  3723: named-token ( 0x0b6 ) forty-seven 0x82f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3738: b(constant) ( 0x0ba ) 
+  3739: b(lit) ( 0x010 ) 0x30
+  3744: named-token ( 0x0b6 ) forty-eight 0x830
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3759: b(constant) ( 0x0ba ) 
+  3760: b(lit) ( 0x010 ) 0x31
+  3765: named-token ( 0x0b6 ) forty-nine 0x831
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3779: b(constant) ( 0x0ba ) 
+  3780: b(lit) ( 0x010 ) 0x32
+  3785: named-token ( 0x0b6 ) fifty 0x832
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3794: b(constant) ( 0x0ba ) 
+  3795: b(lit) ( 0x010 ) 0x33
+  3800: named-token ( 0x0b6 ) fifty-one 0x833
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3813: b(constant) ( 0x0ba ) 
+  3814: b(lit) ( 0x010 ) 0x34
+  3819: named-token ( 0x0b6 ) fifty-two 0x834
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3832: b(constant) ( 0x0ba ) 
+  3833: b(lit) ( 0x010 ) 0x35
+  3838: named-token ( 0x0b6 ) fifty-three 0x835
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3853: b(constant) ( 0x0ba ) 
+  3854: b(lit) ( 0x010 ) 0x36
+  3859: named-token ( 0x0b6 ) fifty-four 0x836
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3873: b(constant) ( 0x0ba ) 
+  3874: b(lit) ( 0x010 ) 0x37
+  3879: named-token ( 0x0b6 ) fifty-five 0x837
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3893: b(constant) ( 0x0ba ) 
+  3894: b(lit) ( 0x010 ) 0x38
+  3899: named-token ( 0x0b6 ) fifty-six 0x838
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3912: b(constant) ( 0x0ba ) 
+  3913: b(lit) ( 0x010 ) 0x39
+  3918: named-token ( 0x0b6 ) fifty-seven 0x839
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3933: b(constant) ( 0x0ba ) 
+  3934: b(lit) ( 0x010 ) 0x3a
+  3939: named-token ( 0x0b6 ) fifty-eight 0x83a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3954: b(constant) ( 0x0ba ) 
+  3955: b(lit) ( 0x010 ) 0x3b
+  3960: named-token ( 0x0b6 ) fifty-nine 0x83b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3974: b(constant) ( 0x0ba ) 
+  3975: b(lit) ( 0x010 ) 0x3c
+  3980: named-token ( 0x0b6 ) sixty 0x83c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  3989: b(constant) ( 0x0ba ) 
+  3990: b(lit) ( 0x010 ) 0x3d
+  3995: named-token ( 0x0b6 ) sixty-one 0x83d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4008: b(constant) ( 0x0ba ) 
+  4009: b(lit) ( 0x010 ) 0x3e
+  4014: named-token ( 0x0b6 ) sixty-two 0x83e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4027: b(constant) ( 0x0ba ) 
+  4028: b(lit) ( 0x010 ) 0x3f
+  4033: named-token ( 0x0b6 ) sixty-three 0x83f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4048: b(constant) ( 0x0ba ) 
+  4049: b(lit) ( 0x010 ) 0x40
+  4054: named-token ( 0x0b6 ) sixty-four 0x840
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4068: b(constant) ( 0x0ba ) 
+  4069: b(lit) ( 0x010 ) 0x41
+  4074: named-token ( 0x0b6 ) sixty-five 0x841
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4088: b(constant) ( 0x0ba ) 
+  4089: b(lit) ( 0x010 ) 0x42
+  4094: named-token ( 0x0b6 ) sixty-six 0x842
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4107: b(constant) ( 0x0ba ) 
+  4108: b(lit) ( 0x010 ) 0x43
+  4113: named-token ( 0x0b6 ) sixty-seven 0x843
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4128: b(constant) ( 0x0ba ) 
+  4129: b(lit) ( 0x010 ) 0x44
+  4134: named-token ( 0x0b6 ) sixty-eight 0x844
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4149: b(constant) ( 0x0ba ) 
+  4150: b(lit) ( 0x010 ) 0x45
+  4155: named-token ( 0x0b6 ) sixty-nine 0x845
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4169: b(constant) ( 0x0ba ) 
+  4170: b(lit) ( 0x010 ) 0x46
+  4175: named-token ( 0x0b6 ) seventy 0x846
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4186: b(constant) ( 0x0ba ) 
+  4187: b(lit) ( 0x010 ) 0x47
+  4192: named-token ( 0x0b6 ) seventy-one 0x847
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4207: b(constant) ( 0x0ba ) 
+  4208: b(lit) ( 0x010 ) 0x48
+  4213: named-token ( 0x0b6 ) seventy-two 0x848
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4228: b(constant) ( 0x0ba ) 
+  4229: b(lit) ( 0x010 ) 0x49
+  4234: named-token ( 0x0b6 ) seventy-three 0x849
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4251: b(constant) ( 0x0ba ) 
+  4252: b(lit) ( 0x010 ) 0x4a
+  4257: named-token ( 0x0b6 ) seventy-four 0x84a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4273: b(constant) ( 0x0ba ) 
+  4274: b(lit) ( 0x010 ) 0x4b
+  4279: named-token ( 0x0b6 ) seventy-five 0x84b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4295: b(constant) ( 0x0ba ) 
+  4296: b(lit) ( 0x010 ) 0x4c
+  4301: named-token ( 0x0b6 ) seventy-six 0x84c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4316: b(constant) ( 0x0ba ) 
+  4317: b(lit) ( 0x010 ) 0x4d
+  4322: named-token ( 0x0b6 ) seventy-seven 0x84d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4339: b(constant) ( 0x0ba ) 
+  4340: b(lit) ( 0x010 ) 0x4e
+  4345: named-token ( 0x0b6 ) seventy-eight 0x84e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4362: b(constant) ( 0x0ba ) 
+  4363: b(lit) ( 0x010 ) 0x4f
+  4368: named-token ( 0x0b6 ) seventy-nine 0x84f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4384: b(constant) ( 0x0ba ) 
+  4385: b(lit) ( 0x010 ) 0x50
+  4390: named-token ( 0x0b6 ) eighty 0x850
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4400: b(constant) ( 0x0ba ) 
+  4401: b(lit) ( 0x010 ) 0x51
+  4406: named-token ( 0x0b6 ) eighty-one 0x851
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4420: b(constant) ( 0x0ba ) 
+  4421: b(lit) ( 0x010 ) 0x52
+  4426: named-token ( 0x0b6 ) eighty-two 0x852
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4440: b(constant) ( 0x0ba ) 
+  4441: b(lit) ( 0x010 ) 0x53
+  4446: named-token ( 0x0b6 ) eighty-three 0x853
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4462: b(constant) ( 0x0ba ) 
+  4463: b(lit) ( 0x010 ) 0x54
+  4468: named-token ( 0x0b6 ) eighty-four 0x854
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4483: b(constant) ( 0x0ba ) 
+  4484: b(lit) ( 0x010 ) 0x55
+  4489: named-token ( 0x0b6 ) eighty-five 0x855
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4504: b(constant) ( 0x0ba ) 
+  4505: b(lit) ( 0x010 ) 0x56
+  4510: named-token ( 0x0b6 ) eighty-six 0x856
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4524: b(constant) ( 0x0ba ) 
+  4525: b(lit) ( 0x010 ) 0x57
+  4530: named-token ( 0x0b6 ) eighty-seven 0x857
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4546: b(constant) ( 0x0ba ) 
+  4547: b(lit) ( 0x010 ) 0x58
+  4552: named-token ( 0x0b6 ) eighty-eight 0x858
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4568: b(constant) ( 0x0ba ) 
+  4569: b(lit) ( 0x010 ) 0x59
+  4574: named-token ( 0x0b6 ) eighty-nine 0x859
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4589: b(constant) ( 0x0ba ) 
+  4590: b(lit) ( 0x010 ) 0x5a
+  4595: named-token ( 0x0b6 ) ninety 0x85a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4605: b(constant) ( 0x0ba ) 
+  4606: b(lit) ( 0x010 ) 0x5b
+  4611: named-token ( 0x0b6 ) ninety-one 0x85b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4625: b(constant) ( 0x0ba ) 
+  4626: b(lit) ( 0x010 ) 0x5c
+  4631: named-token ( 0x0b6 ) ninety-two 0x85c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4645: b(constant) ( 0x0ba ) 
+  4646: b(lit) ( 0x010 ) 0x5d
+  4651: named-token ( 0x0b6 ) ninety-three 0x85d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4667: b(constant) ( 0x0ba ) 
+  4668: b(lit) ( 0x010 ) 0x5e
+  4673: named-token ( 0x0b6 ) ninety-four 0x85e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4688: b(constant) ( 0x0ba ) 
+  4689: b(lit) ( 0x010 ) 0x5f
+  4694: named-token ( 0x0b6 ) ninety-five 0x85f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4709: b(constant) ( 0x0ba ) 
+  4710: b(lit) ( 0x010 ) 0x60
+  4715: named-token ( 0x0b6 ) ninety-six 0x860
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4729: b(constant) ( 0x0ba ) 
+  4730: b(lit) ( 0x010 ) 0x61
+  4735: named-token ( 0x0b6 ) ninety-seven 0x861
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4751: b(constant) ( 0x0ba ) 
+  4752: b(lit) ( 0x010 ) 0x62
+  4757: named-token ( 0x0b6 ) ninety-eight 0x862
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4773: b(constant) ( 0x0ba ) 
+  4774: b(lit) ( 0x010 ) 0x63
+  4779: named-token ( 0x0b6 ) ninety-nine 0x863
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4794: b(constant) ( 0x0ba ) 
+  4795: b(lit) ( 0x010 ) 0x64
+  4800: named-token ( 0x0b6 ) one_hundred 0x864
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4815: b(constant) ( 0x0ba ) 
+  4816: b(lit) ( 0x010 ) 0x65
+  4821: named-token ( 0x0b6 ) one_hundred_and_one 0x865
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4844: b(constant) ( 0x0ba ) 
+  4845: b(lit) ( 0x010 ) 0x66
+  4850: named-token ( 0x0b6 ) one_hundred_and_two 0x866
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4873: b(constant) ( 0x0ba ) 
+  4874: b(lit) ( 0x010 ) 0x67
+  4879: named-token ( 0x0b6 ) one_hundred_and_three 0x867
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4904: b(constant) ( 0x0ba ) 
+  4905: b(lit) ( 0x010 ) 0x68
+  4910: named-token ( 0x0b6 ) one_hundred_and_four 0x868
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4934: b(constant) ( 0x0ba ) 
+  4935: b(lit) ( 0x010 ) 0x69
+  4940: named-token ( 0x0b6 ) one_hundred_and_five 0x869
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4964: b(constant) ( 0x0ba ) 
+  4965: b(lit) ( 0x010 ) 0x6a
+  4970: named-token ( 0x0b6 ) one_hundred_and_six 0x86a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  4993: b(constant) ( 0x0ba ) 
+  4994: b(lit) ( 0x010 ) 0x6b
+  4999: named-token ( 0x0b6 ) one_hundred_and_seven 0x86b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5024: b(constant) ( 0x0ba ) 
+  5025: b(lit) ( 0x010 ) 0x6c
+  5030: named-token ( 0x0b6 ) one_hundred_and_eight 0x86c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5055: b(constant) ( 0x0ba ) 
+  5056: b(lit) ( 0x010 ) 0x6d
+  5061: named-token ( 0x0b6 ) one_hundred_and_nine 0x86d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5085: b(constant) ( 0x0ba ) 
+  5086: b(lit) ( 0x010 ) 0x6e
+  5091: named-token ( 0x0b6 ) one_hundred_and_ten 0x86e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5114: b(constant) ( 0x0ba ) 
+  5115: b(lit) ( 0x010 ) 0x6f
+  5120: named-token ( 0x0b6 ) one_hundred_and_eleven 0x86f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5146: b(constant) ( 0x0ba ) 
+  5147: b(lit) ( 0x010 ) 0x70
+  5152: named-token ( 0x0b6 ) one_hundred_and_twelve 0x870
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5178: b(constant) ( 0x0ba ) 
+  5179: b(lit) ( 0x010 ) 0x71
+  5184: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x871
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5212: b(constant) ( 0x0ba ) 
+  5213: b(lit) ( 0x010 ) 0x72
+  5218: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x872
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5246: b(constant) ( 0x0ba ) 
+  5247: b(lit) ( 0x010 ) 0x73
+  5252: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x873
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5279: b(constant) ( 0x0ba ) 
+  5280: b(lit) ( 0x010 ) 0x74
+  5285: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x874
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5312: b(constant) ( 0x0ba ) 
+  5313: b(lit) ( 0x010 ) 0x75
+  5318: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x875
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5347: b(constant) ( 0x0ba ) 
+  5348: b(lit) ( 0x010 ) 0x76
+  5353: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x876
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5381: b(constant) ( 0x0ba ) 
+  5382: b(lit) ( 0x010 ) 0x77
+  5387: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x877
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5415: b(constant) ( 0x0ba ) 
+  5416: b(lit) ( 0x010 ) 0x78
+  5421: named-token ( 0x0b6 ) one_hundred_and_twenty 0x878
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5447: b(constant) ( 0x0ba ) 
+  5448: b(lit) ( 0x010 ) 0x79
+  5453: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x879
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5483: b(constant) ( 0x0ba ) 
+  5484: b(lit) ( 0x010 ) 0x7a
+  5489: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x87a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5519: b(constant) ( 0x0ba ) 
+  5520: b(lit) ( 0x010 ) 0x7b
+  5525: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x87b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5557: b(constant) ( 0x0ba ) 
+  5558: b(lit) ( 0x010 ) 0x7c
+  5563: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x87c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5594: b(constant) ( 0x0ba ) 
+  5595: b(lit) ( 0x010 ) 0x7d
+  5600: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x87d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5631: b(constant) ( 0x0ba ) 
+  5632: b(lit) ( 0x010 ) 0x7e
+  5637: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0x87e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5667: b(constant) ( 0x0ba ) 
+  5668: b(lit) ( 0x010 ) 0x7f
+  5673: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0x87f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5705: b(constant) ( 0x0ba ) 
+  5706: b(lit) ( 0x010 ) 0x80
+  5711: named-token ( 0x0b6 ) one_hundred_and_twenty-eight 0x880
+\  Warning:  New token # might overlap previously assigned token #(s).
+  5743: b(constant) ( 0x0ba ) 
+  5744: finish-device ( 0x127 ) 
+  5746: new-device ( 0x11f ) 
+  5748: 0 ( 0x0a5 ) 
+  5749: named-token ( 0x0b6 ) my_zero 0x8c0
+\  Warning:  New token # out of sequence with previously assigned token #(s).
+  5760: b(constant) ( 0x0ba ) 
+  5761: 1 ( 0x0a6 ) 
+  5762: named-token ( 0x0b6 ) one 0x8c1
+  5769: b(constant) ( 0x0ba ) 
+  5770: 2 ( 0x0a7 ) 
+  5771: named-token ( 0x0b6 ) two 0x8c2
+  5778: b(constant) ( 0x0ba ) 
+  5779: 3 ( 0x0a8 ) 
+  5780: named-token ( 0x0b6 ) three 0x8c3
+  5789: b(constant) ( 0x0ba ) 
+  5790: b(lit) ( 0x010 ) 0x4
+  5795: named-token ( 0x0b6 ) four 0x8c4
+  5803: b(constant) ( 0x0ba ) 
+  5804: b(lit) ( 0x010 ) 0x5
+  5809: named-token ( 0x0b6 ) five 0x8c5
+  5817: b(constant) ( 0x0ba ) 
+  5818: b(lit) ( 0x010 ) 0x6
+  5823: named-token ( 0x0b6 ) six 0x8c6
+  5830: b(constant) ( 0x0ba ) 
+  5831: b(lit) ( 0x010 ) 0x7
+  5836: named-token ( 0x0b6 ) seven 0x8c7
+  5845: b(constant) ( 0x0ba ) 
+  5846: b(lit) ( 0x010 ) 0x8
+  5851: named-token ( 0x0b6 ) eight 0x8c8
+  5860: b(constant) ( 0x0ba ) 
+  5861: b(lit) ( 0x010 ) 0x9
+  5866: named-token ( 0x0b6 ) nine 0x8c9
+  5874: b(constant) ( 0x0ba ) 
+  5875: b(lit) ( 0x010 ) 0xa
+  5880: named-token ( 0x0b6 ) ten 0x8ca
+  5887: b(constant) ( 0x0ba ) 
+  5888: b(lit) ( 0x010 ) 0xb
+  5893: named-token ( 0x0b6 ) eleven 0x8cb
+  5903: b(constant) ( 0x0ba ) 
+  5904: b(lit) ( 0x010 ) 0xc
+  5909: named-token ( 0x0b6 ) twelve 0x8cc
+  5919: b(constant) ( 0x0ba ) 
+  5920: b(lit) ( 0x010 ) 0xd
+  5925: named-token ( 0x0b6 ) thirteen 0x8cd
+  5937: b(constant) ( 0x0ba ) 
+  5938: b(lit) ( 0x010 ) 0xe
+  5943: named-token ( 0x0b6 ) fourteen 0x8ce
+  5955: b(constant) ( 0x0ba ) 
+  5956: b(lit) ( 0x010 ) 0xf
+  5961: named-token ( 0x0b6 ) fifteen 0x8cf
+  5972: b(constant) ( 0x0ba ) 
+  5973: b(lit) ( 0x010 ) 0x10
+  5978: named-token ( 0x0b6 ) sixteen 0x8d0
+  5989: b(constant) ( 0x0ba ) 
+  5990: b(lit) ( 0x010 ) 0x11
+  5995: named-token ( 0x0b6 ) seventeen 0x8d1
+  6008: b(constant) ( 0x0ba ) 
+  6009: b(lit) ( 0x010 ) 0x12
+  6014: named-token ( 0x0b6 ) eighteen 0x8d2
+  6026: b(constant) ( 0x0ba ) 
+  6027: b(lit) ( 0x010 ) 0x13
+  6032: named-token ( 0x0b6 ) nineteen 0x8d3
+  6044: b(constant) ( 0x0ba ) 
+  6045: b(lit) ( 0x010 ) 0x14
+  6050: named-token ( 0x0b6 ) twenty 0x8d4
+  6060: b(constant) ( 0x0ba ) 
+  6061: b(lit) ( 0x010 ) 0x15
+  6066: named-token ( 0x0b6 ) twenty-one 0x8d5
+  6080: b(constant) ( 0x0ba ) 
+  6081: b(lit) ( 0x010 ) 0x16
+  6086: named-token ( 0x0b6 ) twenty-two 0x8d6
+  6100: b(constant) ( 0x0ba ) 
+  6101: b(lit) ( 0x010 ) 0x17
+  6106: named-token ( 0x0b6 ) twenty-three 0x8d7
+  6122: b(constant) ( 0x0ba ) 
+  6123: b(lit) ( 0x010 ) 0x18
+  6128: named-token ( 0x0b6 ) twenty-four 0x8d8
+  6143: b(constant) ( 0x0ba ) 
+  6144: b(lit) ( 0x010 ) 0x19
+  6149: named-token ( 0x0b6 ) twenty-five 0x8d9
+  6164: b(constant) ( 0x0ba ) 
+  6165: b(lit) ( 0x010 ) 0x1a
+  6170: named-token ( 0x0b6 ) twenty-six 0x8da
+  6184: b(constant) ( 0x0ba ) 
+  6185: b(lit) ( 0x010 ) 0x1b
+  6190: named-token ( 0x0b6 ) twenty-seven 0x8db
+  6206: b(constant) ( 0x0ba ) 
+  6207: b(lit) ( 0x010 ) 0x1c
+  6212: named-token ( 0x0b6 ) twenty-eight 0x8dc
+  6228: b(constant) ( 0x0ba ) 
+  6229: b(lit) ( 0x010 ) 0x1d
+  6234: named-token ( 0x0b6 ) twenty-nine 0x8dd
+  6249: b(constant) ( 0x0ba ) 
+  6250: b(lit) ( 0x010 ) 0x1e
+  6255: named-token ( 0x0b6 ) thirty 0x8de
+  6265: b(constant) ( 0x0ba ) 
+  6266: b(lit) ( 0x010 ) 0x1f
+  6271: named-token ( 0x0b6 ) thirty-one 0x8df
+  6285: b(constant) ( 0x0ba ) 
+  6286: b(lit) ( 0x010 ) 0x20
+  6291: named-token ( 0x0b6 ) thirty-two 0x8e0
+  6305: b(constant) ( 0x0ba ) 
+  6306: b(lit) ( 0x010 ) 0x21
+  6311: named-token ( 0x0b6 ) thirty-three 0x8e1
+  6327: b(constant) ( 0x0ba ) 
+  6328: b(lit) ( 0x010 ) 0x22
+  6333: named-token ( 0x0b6 ) thirty-four 0x8e2
+  6348: b(constant) ( 0x0ba ) 
+  6349: b(lit) ( 0x010 ) 0x23
+  6354: named-token ( 0x0b6 ) thirty-five 0x8e3
+  6369: b(constant) ( 0x0ba ) 
+  6370: b(lit) ( 0x010 ) 0x24
+  6375: named-token ( 0x0b6 ) thirty-six 0x8e4
+  6389: b(constant) ( 0x0ba ) 
+  6390: b(lit) ( 0x010 ) 0x25
+  6395: named-token ( 0x0b6 ) thirty-seven 0x8e5
+  6411: b(constant) ( 0x0ba ) 
+  6412: b(lit) ( 0x010 ) 0x26
+  6417: named-token ( 0x0b6 ) thirty-eight 0x8e6
+  6433: b(constant) ( 0x0ba ) 
+  6434: b(lit) ( 0x010 ) 0x27
+  6439: named-token ( 0x0b6 ) thirty-nine 0x8e7
+  6454: b(constant) ( 0x0ba ) 
+  6455: b(lit) ( 0x010 ) 0x28
+  6460: named-token ( 0x0b6 ) forty 0x8e8
+  6469: b(constant) ( 0x0ba ) 
+  6470: b(lit) ( 0x010 ) 0x29
+  6475: named-token ( 0x0b6 ) forty-one 0x8e9
+  6488: b(constant) ( 0x0ba ) 
+  6489: b(lit) ( 0x010 ) 0x2a
+  6494: named-token ( 0x0b6 ) forty-two 0x8ea
+  6507: b(constant) ( 0x0ba ) 
+  6508: b(lit) ( 0x010 ) 0x2b
+  6513: named-token ( 0x0b6 ) forty-three 0x8eb
+  6528: b(constant) ( 0x0ba ) 
+  6529: b(lit) ( 0x010 ) 0x2c
+  6534: named-token ( 0x0b6 ) forty-four 0x8ec
+  6548: b(constant) ( 0x0ba ) 
+  6549: b(lit) ( 0x010 ) 0x2d
+  6554: named-token ( 0x0b6 ) forty-five 0x8ed
+  6568: b(constant) ( 0x0ba ) 
+  6569: b(lit) ( 0x010 ) 0x2e
+  6574: named-token ( 0x0b6 ) forty-six 0x8ee
+  6587: b(constant) ( 0x0ba ) 
+  6588: b(lit) ( 0x010 ) 0x2f
+  6593: named-token ( 0x0b6 ) forty-seven 0x8ef
+  6608: b(constant) ( 0x0ba ) 
+  6609: b(lit) ( 0x010 ) 0x30
+  6614: named-token ( 0x0b6 ) forty-eight 0x8f0
+  6629: b(constant) ( 0x0ba ) 
+  6630: b(lit) ( 0x010 ) 0x31
+  6635: named-token ( 0x0b6 ) forty-nine 0x8f1
+  6649: b(constant) ( 0x0ba ) 
+  6650: b(lit) ( 0x010 ) 0x32
+  6655: named-token ( 0x0b6 ) fifty 0x8f2
+  6664: b(constant) ( 0x0ba ) 
+  6665: b(lit) ( 0x010 ) 0x33
+  6670: named-token ( 0x0b6 ) fifty-one 0x8f3
+  6683: b(constant) ( 0x0ba ) 
+  6684: b(lit) ( 0x010 ) 0x34
+  6689: named-token ( 0x0b6 ) fifty-two 0x8f4
+  6702: b(constant) ( 0x0ba ) 
+  6703: b(lit) ( 0x010 ) 0x35
+  6708: named-token ( 0x0b6 ) fifty-three 0x8f5
+  6723: b(constant) ( 0x0ba ) 
+  6724: b(lit) ( 0x010 ) 0x36
+  6729: named-token ( 0x0b6 ) fifty-four 0x8f6
+  6743: b(constant) ( 0x0ba ) 
+  6744: b(lit) ( 0x010 ) 0x37
+  6749: named-token ( 0x0b6 ) fifty-five 0x8f7
+  6763: b(constant) ( 0x0ba ) 
+  6764: b(lit) ( 0x010 ) 0x38
+  6769: named-token ( 0x0b6 ) fifty-six 0x8f8
+  6782: b(constant) ( 0x0ba ) 
+  6783: b(lit) ( 0x010 ) 0x39
+  6788: named-token ( 0x0b6 ) fifty-seven 0x8f9
+  6803: b(constant) ( 0x0ba ) 
+  6804: b(lit) ( 0x010 ) 0x3a
+  6809: named-token ( 0x0b6 ) fifty-eight 0x8fa
+  6824: b(constant) ( 0x0ba ) 
+  6825: b(lit) ( 0x010 ) 0x3b
+  6830: named-token ( 0x0b6 ) fifty-nine 0x8fb
+  6844: b(constant) ( 0x0ba ) 
+  6845: b(lit) ( 0x010 ) 0x3c
+  6850: named-token ( 0x0b6 ) sixty 0x8fc
+  6859: b(constant) ( 0x0ba ) 
+  6860: b(lit) ( 0x010 ) 0x3d
+  6865: named-token ( 0x0b6 ) sixty-one 0x8fd
+  6878: b(constant) ( 0x0ba ) 
+  6879: b(lit) ( 0x010 ) 0x3e
+  6884: named-token ( 0x0b6 ) sixty-two 0x8fe
+  6897: b(constant) ( 0x0ba ) 
+  6898: b(lit) ( 0x010 ) 0x3f
+  6903: named-token ( 0x0b6 ) sixty-three 0x8ff
+  6918: b(constant) ( 0x0ba ) 
+  6919: b(lit) ( 0x010 ) 0x40
+  6924: named-token ( 0x0b6 ) sixty-four 0x900
+  6938: b(constant) ( 0x0ba ) 
+  6939: b(lit) ( 0x010 ) 0x41
+  6944: named-token ( 0x0b6 ) sixty-five 0x901
+  6958: b(constant) ( 0x0ba ) 
+  6959: b(lit) ( 0x010 ) 0x42
+  6964: named-token ( 0x0b6 ) sixty-six 0x902
+  6977: b(constant) ( 0x0ba ) 
+  6978: b(lit) ( 0x010 ) 0x43
+  6983: named-token ( 0x0b6 ) sixty-seven 0x903
+  6998: b(constant) ( 0x0ba ) 
+  6999: b(lit) ( 0x010 ) 0x44
+  7004: named-token ( 0x0b6 ) sixty-eight 0x904
+  7019: b(constant) ( 0x0ba ) 
+  7020: b(lit) ( 0x010 ) 0x45
+  7025: named-token ( 0x0b6 ) sixty-nine 0x905
+  7039: b(constant) ( 0x0ba ) 
+  7040: b(lit) ( 0x010 ) 0x46
+  7045: named-token ( 0x0b6 ) seventy 0x906
+  7056: b(constant) ( 0x0ba ) 
+  7057: b(lit) ( 0x010 ) 0x47
+  7062: named-token ( 0x0b6 ) seventy-one 0x907
+  7077: b(constant) ( 0x0ba ) 
+  7078: b(lit) ( 0x010 ) 0x48
+  7083: named-token ( 0x0b6 ) seventy-two 0x908
+  7098: b(constant) ( 0x0ba ) 
+  7099: b(lit) ( 0x010 ) 0x49
+  7104: named-token ( 0x0b6 ) seventy-three 0x909
+  7121: b(constant) ( 0x0ba ) 
+  7122: b(lit) ( 0x010 ) 0x4a
+  7127: named-token ( 0x0b6 ) seventy-four 0x90a
+  7143: b(constant) ( 0x0ba ) 
+  7144: b(lit) ( 0x010 ) 0x4b
+  7149: named-token ( 0x0b6 ) seventy-five 0x90b
+  7165: b(constant) ( 0x0ba ) 
+  7166: b(lit) ( 0x010 ) 0x4c
+  7171: named-token ( 0x0b6 ) seventy-six 0x90c
+  7186: b(constant) ( 0x0ba ) 
+  7187: b(lit) ( 0x010 ) 0x4d
+  7192: named-token ( 0x0b6 ) seventy-seven 0x90d
+  7209: b(constant) ( 0x0ba ) 
+  7210: b(lit) ( 0x010 ) 0x4e
+  7215: named-token ( 0x0b6 ) seventy-eight 0x90e
+  7232: b(constant) ( 0x0ba ) 
+  7233: b(lit) ( 0x010 ) 0x4f
+  7238: named-token ( 0x0b6 ) seventy-nine 0x90f
+  7254: b(constant) ( 0x0ba ) 
+  7255: b(lit) ( 0x010 ) 0x50
+  7260: named-token ( 0x0b6 ) eighty 0x910
+  7270: b(constant) ( 0x0ba ) 
+  7271: b(lit) ( 0x010 ) 0x51
+  7276: named-token ( 0x0b6 ) eighty-one 0x911
+  7290: b(constant) ( 0x0ba ) 
+  7291: b(lit) ( 0x010 ) 0x52
+  7296: named-token ( 0x0b6 ) eighty-two 0x912
+  7310: b(constant) ( 0x0ba ) 
+  7311: b(lit) ( 0x010 ) 0x53
+  7316: named-token ( 0x0b6 ) eighty-three 0x913
+  7332: b(constant) ( 0x0ba ) 
+  7333: b(lit) ( 0x010 ) 0x54
+  7338: named-token ( 0x0b6 ) eighty-four 0x914
+  7353: b(constant) ( 0x0ba ) 
+  7354: b(lit) ( 0x010 ) 0x55
+  7359: named-token ( 0x0b6 ) eighty-five 0x915
+  7374: b(constant) ( 0x0ba ) 
+  7375: b(lit) ( 0x010 ) 0x56
+  7380: named-token ( 0x0b6 ) eighty-six 0x916
+  7394: b(constant) ( 0x0ba ) 
+  7395: b(lit) ( 0x010 ) 0x57
+  7400: named-token ( 0x0b6 ) eighty-seven 0x917
+  7416: b(constant) ( 0x0ba ) 
+  7417: b(lit) ( 0x010 ) 0x58
+  7422: named-token ( 0x0b6 ) eighty-eight 0x918
+  7438: b(constant) ( 0x0ba ) 
+  7439: b(lit) ( 0x010 ) 0x59
+  7444: named-token ( 0x0b6 ) eighty-nine 0x919
+  7459: b(constant) ( 0x0ba ) 
+  7460: b(lit) ( 0x010 ) 0x5a
+  7465: named-token ( 0x0b6 ) ninety 0x91a
+  7475: b(constant) ( 0x0ba ) 
+  7476: b(lit) ( 0x010 ) 0x5b
+  7481: named-token ( 0x0b6 ) ninety-one 0x91b
+  7495: b(constant) ( 0x0ba ) 
+  7496: b(lit) ( 0x010 ) 0x5c
+  7501: named-token ( 0x0b6 ) ninety-two 0x91c
+  7515: b(constant) ( 0x0ba ) 
+  7516: b(lit) ( 0x010 ) 0x5d
+  7521: named-token ( 0x0b6 ) ninety-three 0x91d
+  7537: b(constant) ( 0x0ba ) 
+  7538: b(lit) ( 0x010 ) 0x5e
+  7543: named-token ( 0x0b6 ) ninety-four 0x91e
+  7558: b(constant) ( 0x0ba ) 
+  7559: b(lit) ( 0x010 ) 0x5f
+  7564: named-token ( 0x0b6 ) ninety-five 0x91f
+  7579: b(constant) ( 0x0ba ) 
+  7580: b(lit) ( 0x010 ) 0x60
+  7585: named-token ( 0x0b6 ) ninety-six 0x920
+  7599: b(constant) ( 0x0ba ) 
+  7600: b(lit) ( 0x010 ) 0x61
+  7605: named-token ( 0x0b6 ) ninety-seven 0x921
+  7621: b(constant) ( 0x0ba ) 
+  7622: b(lit) ( 0x010 ) 0x62
+  7627: named-token ( 0x0b6 ) ninety-eight 0x922
+  7643: b(constant) ( 0x0ba ) 
+  7644: b(lit) ( 0x010 ) 0x63
+  7649: named-token ( 0x0b6 ) ninety-nine 0x923
+  7664: b(constant) ( 0x0ba ) 
+  7665: b(lit) ( 0x010 ) 0x64
+  7670: named-token ( 0x0b6 ) one_hundred 0x924
+  7685: b(constant) ( 0x0ba ) 
+  7686: b(lit) ( 0x010 ) 0x65
+  7691: named-token ( 0x0b6 ) one_hundred_and_one 0x925
+  7714: b(constant) ( 0x0ba ) 
+  7715: b(lit) ( 0x010 ) 0x66
+  7720: named-token ( 0x0b6 ) one_hundred_and_two 0x926
+  7743: b(constant) ( 0x0ba ) 
+  7744: b(lit) ( 0x010 ) 0x67
+  7749: named-token ( 0x0b6 ) one_hundred_and_three 0x927
+  7774: b(constant) ( 0x0ba ) 
+  7775: b(lit) ( 0x010 ) 0x68
+  7780: named-token ( 0x0b6 ) one_hundred_and_four 0x928
+  7804: b(constant) ( 0x0ba ) 
+  7805: b(lit) ( 0x010 ) 0x69
+  7810: named-token ( 0x0b6 ) one_hundred_and_five 0x929
+  7834: b(constant) ( 0x0ba ) 
+  7835: b(lit) ( 0x010 ) 0x6a
+  7840: named-token ( 0x0b6 ) one_hundred_and_six 0x92a
+  7863: b(constant) ( 0x0ba ) 
+  7864: b(lit) ( 0x010 ) 0x6b
+  7869: named-token ( 0x0b6 ) one_hundred_and_seven 0x92b
+  7894: b(constant) ( 0x0ba ) 
+  7895: b(lit) ( 0x010 ) 0x6c
+  7900: named-token ( 0x0b6 ) one_hundred_and_eight 0x92c
+  7925: b(constant) ( 0x0ba ) 
+  7926: b(lit) ( 0x010 ) 0x6d
+  7931: named-token ( 0x0b6 ) one_hundred_and_nine 0x92d
+  7955: b(constant) ( 0x0ba ) 
+  7956: b(lit) ( 0x010 ) 0x6e
+  7961: named-token ( 0x0b6 ) one_hundred_and_ten 0x92e
+  7984: b(constant) ( 0x0ba ) 
+  7985: b(lit) ( 0x010 ) 0x6f
+  7990: named-token ( 0x0b6 ) one_hundred_and_eleven 0x92f
+  8016: b(constant) ( 0x0ba ) 
+  8017: b(lit) ( 0x010 ) 0x70
+  8022: named-token ( 0x0b6 ) one_hundred_and_twelve 0x930
+  8048: b(constant) ( 0x0ba ) 
+  8049: b(lit) ( 0x010 ) 0x71
+  8054: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x931
+  8082: b(constant) ( 0x0ba ) 
+  8083: b(lit) ( 0x010 ) 0x72
+  8088: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x932
+  8116: b(constant) ( 0x0ba ) 
+  8117: b(lit) ( 0x010 ) 0x73
+  8122: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x933
+  8149: b(constant) ( 0x0ba ) 
+  8150: b(lit) ( 0x010 ) 0x74
+  8155: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x934
+  8182: b(constant) ( 0x0ba ) 
+  8183: b(lit) ( 0x010 ) 0x75
+  8188: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x935
+  8217: b(constant) ( 0x0ba ) 
+  8218: b(lit) ( 0x010 ) 0x76
+  8223: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x936
+  8251: b(constant) ( 0x0ba ) 
+  8252: b(lit) ( 0x010 ) 0x77
+  8257: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x937
+  8285: b(constant) ( 0x0ba ) 
+  8286: b(lit) ( 0x010 ) 0x78
+  8291: named-token ( 0x0b6 ) one_hundred_and_twenty 0x938
+  8317: b(constant) ( 0x0ba ) 
+  8318: b(lit) ( 0x010 ) 0x79
+  8323: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x939
+  8353: b(constant) ( 0x0ba ) 
+  8354: b(lit) ( 0x010 ) 0x7a
+  8359: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x93a
+  8389: b(constant) ( 0x0ba ) 
+  8390: b(lit) ( 0x010 ) 0x7b
+  8395: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x93b
+  8427: b(constant) ( 0x0ba ) 
+  8428: b(lit) ( 0x010 ) 0x7c
+  8433: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x93c
+  8464: b(constant) ( 0x0ba ) 
+  8465: b(lit) ( 0x010 ) 0x7d
+  8470: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x93d
+  8501: b(constant) ( 0x0ba ) 
+  8502: b(lit) ( 0x010 ) 0x7e
+  8507: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0x93e
+  8537: b(constant) ( 0x0ba ) 
+  8538: b(lit) ( 0x010 ) 0x7f
+  8543: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0x93f
+  8575: b(constant) ( 0x0ba ) 
+  8576: b(lit) ( 0x010 ) 0x80
+  8581: named-token ( 0x0b6 ) one_hundred_and_twenty-eight 0x940
+  8613: b(constant) ( 0x0ba ) 
+  8614: finish-device ( 0x127 ) 
+  8616: new-device ( 0x11f ) 
+  8618: 0 ( 0x0a5 ) 
+  8619: named-token ( 0x0b6 ) my_zero 0x87e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8630: b(constant) ( 0x0ba ) 
+  8631: 1 ( 0x0a6 ) 
+  8632: named-token ( 0x0b6 ) one 0x87f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8639: b(constant) ( 0x0ba ) 
+  8640: 2 ( 0x0a7 ) 
+  8641: named-token ( 0x0b6 ) two 0x880
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8648: b(constant) ( 0x0ba ) 
+  8649: 3 ( 0x0a8 ) 
+  8650: named-token ( 0x0b6 ) three 0x881
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8659: b(constant) ( 0x0ba ) 
+  8660: b(lit) ( 0x010 ) 0x4
+  8665: named-token ( 0x0b6 ) four 0x882
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8673: b(constant) ( 0x0ba ) 
+  8674: b(lit) ( 0x010 ) 0x5
+  8679: named-token ( 0x0b6 ) five 0x883
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8687: b(constant) ( 0x0ba ) 
+  8688: b(lit) ( 0x010 ) 0x6
+  8693: named-token ( 0x0b6 ) six 0x884
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8700: b(constant) ( 0x0ba ) 
+  8701: b(lit) ( 0x010 ) 0x7
+  8706: named-token ( 0x0b6 ) seven 0x885
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8715: b(constant) ( 0x0ba ) 
+  8716: b(lit) ( 0x010 ) 0x8
+  8721: named-token ( 0x0b6 ) eight 0x886
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8730: b(constant) ( 0x0ba ) 
+  8731: b(lit) ( 0x010 ) 0x9
+  8736: named-token ( 0x0b6 ) nine 0x887
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8744: b(constant) ( 0x0ba ) 
+  8745: b(lit) ( 0x010 ) 0xa
+  8750: named-token ( 0x0b6 ) ten 0x888
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8757: b(constant) ( 0x0ba ) 
+  8758: b(lit) ( 0x010 ) 0xb
+  8763: named-token ( 0x0b6 ) eleven 0x889
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8773: b(constant) ( 0x0ba ) 
+  8774: b(lit) ( 0x010 ) 0xc
+  8779: named-token ( 0x0b6 ) twelve 0x88a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8789: b(constant) ( 0x0ba ) 
+  8790: b(lit) ( 0x010 ) 0xd
+  8795: named-token ( 0x0b6 ) thirteen 0x88b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8807: b(constant) ( 0x0ba ) 
+  8808: b(lit) ( 0x010 ) 0xe
+  8813: named-token ( 0x0b6 ) fourteen 0x88c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8825: b(constant) ( 0x0ba ) 
+  8826: b(lit) ( 0x010 ) 0xf
+  8831: named-token ( 0x0b6 ) fifteen 0x88d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8842: b(constant) ( 0x0ba ) 
+  8843: b(lit) ( 0x010 ) 0x10
+  8848: named-token ( 0x0b6 ) sixteen 0x88e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8859: b(constant) ( 0x0ba ) 
+  8860: b(lit) ( 0x010 ) 0x11
+  8865: named-token ( 0x0b6 ) seventeen 0x88f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8878: b(constant) ( 0x0ba ) 
+  8879: b(lit) ( 0x010 ) 0x12
+  8884: named-token ( 0x0b6 ) eighteen 0x890
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8896: b(constant) ( 0x0ba ) 
+  8897: b(lit) ( 0x010 ) 0x13
+  8902: named-token ( 0x0b6 ) nineteen 0x891
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8914: b(constant) ( 0x0ba ) 
+  8915: b(lit) ( 0x010 ) 0x14
+  8920: named-token ( 0x0b6 ) twenty 0x892
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8930: b(constant) ( 0x0ba ) 
+  8931: b(lit) ( 0x010 ) 0x15
+  8936: named-token ( 0x0b6 ) twenty-one 0x893
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8950: b(constant) ( 0x0ba ) 
+  8951: b(lit) ( 0x010 ) 0x16
+  8956: named-token ( 0x0b6 ) twenty-two 0x894
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8970: b(constant) ( 0x0ba ) 
+  8971: b(lit) ( 0x010 ) 0x17
+  8976: named-token ( 0x0b6 ) twenty-three 0x895
+\  Warning:  New token # might overlap previously assigned token #(s).
+  8992: b(constant) ( 0x0ba ) 
+  8993: b(lit) ( 0x010 ) 0x18
+  8998: named-token ( 0x0b6 ) twenty-four 0x896
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9013: b(constant) ( 0x0ba ) 
+  9014: b(lit) ( 0x010 ) 0x19
+  9019: named-token ( 0x0b6 ) twenty-five 0x897
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9034: b(constant) ( 0x0ba ) 
+  9035: b(lit) ( 0x010 ) 0x1a
+  9040: named-token ( 0x0b6 ) twenty-six 0x898
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9054: b(constant) ( 0x0ba ) 
+  9055: b(lit) ( 0x010 ) 0x1b
+  9060: named-token ( 0x0b6 ) twenty-seven 0x899
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9076: b(constant) ( 0x0ba ) 
+  9077: b(lit) ( 0x010 ) 0x1c
+  9082: named-token ( 0x0b6 ) twenty-eight 0x89a
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9098: b(constant) ( 0x0ba ) 
+  9099: b(lit) ( 0x010 ) 0x1d
+  9104: named-token ( 0x0b6 ) twenty-nine 0x89b
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9119: b(constant) ( 0x0ba ) 
+  9120: b(lit) ( 0x010 ) 0x1e
+  9125: named-token ( 0x0b6 ) thirty 0x89c
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9135: b(constant) ( 0x0ba ) 
+  9136: b(lit) ( 0x010 ) 0x1f
+  9141: named-token ( 0x0b6 ) thirty-one 0x89d
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9155: b(constant) ( 0x0ba ) 
+  9156: b(lit) ( 0x010 ) 0x20
+  9161: named-token ( 0x0b6 ) thirty-two 0x89e
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9175: b(constant) ( 0x0ba ) 
+  9176: b(lit) ( 0x010 ) 0x21
+  9181: named-token ( 0x0b6 ) thirty-three 0x89f
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9197: b(constant) ( 0x0ba ) 
+  9198: b(lit) ( 0x010 ) 0x22
+  9203: named-token ( 0x0b6 ) thirty-four 0x8a0
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9218: b(constant) ( 0x0ba ) 
+  9219: b(lit) ( 0x010 ) 0x23
+  9224: named-token ( 0x0b6 ) thirty-five 0x8a1
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9239: b(constant) ( 0x0ba ) 
+  9240: b(lit) ( 0x010 ) 0x24
+  9245: named-token ( 0x0b6 ) thirty-six 0x8a2
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9259: b(constant) ( 0x0ba ) 
+  9260: b(lit) ( 0x010 ) 0x25
+  9265: named-token ( 0x0b6 ) thirty-seven 0x8a3
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9281: b(constant) ( 0x0ba ) 
+  9282: b(lit) ( 0x010 ) 0x26
+  9287: named-token ( 0x0b6 ) thirty-eight 0x8a4
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9303: b(constant) ( 0x0ba ) 
+  9304: b(lit) ( 0x010 ) 0x27
+  9309: named-token ( 0x0b6 ) thirty-nine 0x8a5
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9324: b(constant) ( 0x0ba ) 
+  9325: b(lit) ( 0x010 ) 0x28
+  9330: named-token ( 0x0b6 ) forty 0x8a6
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9339: b(constant) ( 0x0ba ) 
+  9340: b(lit) ( 0x010 ) 0x29
+  9345: named-token ( 0x0b6 ) forty-one 0x8a7
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9358: b(constant) ( 0x0ba ) 
+  9359: b(lit) ( 0x010 ) 0x2a
+  9364: named-token ( 0x0b6 ) forty-two 0x8a8
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9377: b(constant) ( 0x0ba ) 
+  9378: b(lit) ( 0x010 ) 0x2b
+  9383: named-token ( 0x0b6 ) forty-three 0x8a9
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9398: b(constant) ( 0x0ba ) 
+  9399: b(lit) ( 0x010 ) 0x2c
+  9404: named-token ( 0x0b6 ) forty-four 0x8aa
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9418: b(constant) ( 0x0ba ) 
+  9419: b(lit) ( 0x010 ) 0x2d
+  9424: named-token ( 0x0b6 ) forty-five 0x8ab
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9438: b(constant) ( 0x0ba ) 
+  9439: b(lit) ( 0x010 ) 0x2e
+  9444: named-token ( 0x0b6 ) forty-six 0x8ac
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9457: b(constant) ( 0x0ba ) 
+  9458: b(lit) ( 0x010 ) 0x2f
+  9463: named-token ( 0x0b6 ) forty-seven 0x8ad
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9478: b(constant) ( 0x0ba ) 
+  9479: b(lit) ( 0x010 ) 0x30
+  9484: named-token ( 0x0b6 ) forty-eight 0x8ae
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9499: b(constant) ( 0x0ba ) 
+  9500: b(lit) ( 0x010 ) 0x31
+  9505: named-token ( 0x0b6 ) forty-nine 0x8af
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9519: b(constant) ( 0x0ba ) 
+  9520: b(lit) ( 0x010 ) 0x32
+  9525: named-token ( 0x0b6 ) fifty 0x8b0
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9534: b(constant) ( 0x0ba ) 
+  9535: b(lit) ( 0x010 ) 0x33
+  9540: named-token ( 0x0b6 ) fifty-one 0x8b1
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9553: b(constant) ( 0x0ba ) 
+  9554: b(lit) ( 0x010 ) 0x34
+  9559: named-token ( 0x0b6 ) fifty-two 0x8b2
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9572: b(constant) ( 0x0ba ) 
+  9573: b(lit) ( 0x010 ) 0x35
+  9578: named-token ( 0x0b6 ) fifty-three 0x8b3
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9593: b(constant) ( 0x0ba ) 
+  9594: b(lit) ( 0x010 ) 0x36
+  9599: named-token ( 0x0b6 ) fifty-four 0x8b4
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9613: b(constant) ( 0x0ba ) 
+  9614: b(lit) ( 0x010 ) 0x37
+  9619: named-token ( 0x0b6 ) fifty-five 0x8b5
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9633: b(constant) ( 0x0ba ) 
+  9634: b(lit) ( 0x010 ) 0x38
+  9639: named-token ( 0x0b6 ) fifty-six 0x8b6
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9652: b(constant) ( 0x0ba ) 
+  9653: b(lit) ( 0x010 ) 0x39
+  9658: named-token ( 0x0b6 ) fifty-seven 0x8b7
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9673: b(constant) ( 0x0ba ) 
+  9674: b(lit) ( 0x010 ) 0x3a
+  9679: named-token ( 0x0b6 ) fifty-eight 0x8b8
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9694: b(constant) ( 0x0ba ) 
+  9695: b(lit) ( 0x010 ) 0x3b
+  9700: named-token ( 0x0b6 ) fifty-nine 0x8b9
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9714: b(constant) ( 0x0ba ) 
+  9715: b(lit) ( 0x010 ) 0x3c
+  9720: named-token ( 0x0b6 ) sixty 0x8ba
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9729: b(constant) ( 0x0ba ) 
+  9730: b(lit) ( 0x010 ) 0x3d
+  9735: named-token ( 0x0b6 ) sixty-one 0x8bb
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9748: b(constant) ( 0x0ba ) 
+  9749: b(lit) ( 0x010 ) 0x3e
+  9754: named-token ( 0x0b6 ) sixty-two 0x8bc
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9767: b(constant) ( 0x0ba ) 
+  9768: b(lit) ( 0x010 ) 0x3f
+  9773: named-token ( 0x0b6 ) sixty-three 0x8bd
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9788: b(constant) ( 0x0ba ) 
+  9789: b(lit) ( 0x010 ) 0x40
+  9794: named-token ( 0x0b6 ) sixty-four 0x8be
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9808: b(constant) ( 0x0ba ) 
+  9809: b(lit) ( 0x010 ) 0x41
+  9814: named-token ( 0x0b6 ) sixty-five 0x8bf
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9828: b(constant) ( 0x0ba ) 
+  9829: b(lit) ( 0x010 ) 0x42
+  9834: named-token ( 0x0b6 ) sixty-six 0x8c0
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9847: b(constant) ( 0x0ba ) 
+  9848: b(lit) ( 0x010 ) 0x43
+  9853: named-token ( 0x0b6 ) sixty-seven 0x8c1
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9868: b(constant) ( 0x0ba ) 
+  9869: b(lit) ( 0x010 ) 0x44
+  9874: named-token ( 0x0b6 ) sixty-eight 0x8c2
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9889: b(constant) ( 0x0ba ) 
+  9890: b(lit) ( 0x010 ) 0x45
+  9895: named-token ( 0x0b6 ) sixty-nine 0x8c3
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9909: b(constant) ( 0x0ba ) 
+  9910: b(lit) ( 0x010 ) 0x46
+  9915: named-token ( 0x0b6 ) seventy 0x8c4
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9926: b(constant) ( 0x0ba ) 
+  9927: b(lit) ( 0x010 ) 0x47
+  9932: named-token ( 0x0b6 ) seventy-one 0x8c5
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9947: b(constant) ( 0x0ba ) 
+  9948: b(lit) ( 0x010 ) 0x48
+  9953: named-token ( 0x0b6 ) seventy-two 0x8c6
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9968: b(constant) ( 0x0ba ) 
+  9969: b(lit) ( 0x010 ) 0x49
+  9974: named-token ( 0x0b6 ) seventy-three 0x8c7
+\  Warning:  New token # might overlap previously assigned token #(s).
+  9991: b(constant) ( 0x0ba ) 
+  9992: b(lit) ( 0x010 ) 0x4a
+  9997: named-token ( 0x0b6 ) seventy-four 0x8c8
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10013: b(constant) ( 0x0ba ) 
+ 10014: b(lit) ( 0x010 ) 0x4b
+ 10019: named-token ( 0x0b6 ) seventy-five 0x8c9
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10035: b(constant) ( 0x0ba ) 
+ 10036: b(lit) ( 0x010 ) 0x4c
+ 10041: named-token ( 0x0b6 ) seventy-six 0x8ca
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10056: b(constant) ( 0x0ba ) 
+ 10057: b(lit) ( 0x010 ) 0x4d
+ 10062: named-token ( 0x0b6 ) seventy-seven 0x8cb
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10079: b(constant) ( 0x0ba ) 
+ 10080: b(lit) ( 0x010 ) 0x4e
+ 10085: named-token ( 0x0b6 ) seventy-eight 0x8cc
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10102: b(constant) ( 0x0ba ) 
+ 10103: b(lit) ( 0x010 ) 0x4f
+ 10108: named-token ( 0x0b6 ) seventy-nine 0x8cd
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10124: b(constant) ( 0x0ba ) 
+ 10125: b(lit) ( 0x010 ) 0x50
+ 10130: named-token ( 0x0b6 ) eighty 0x8ce
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10140: b(constant) ( 0x0ba ) 
+ 10141: b(lit) ( 0x010 ) 0x51
+ 10146: named-token ( 0x0b6 ) eighty-one 0x8cf
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10160: b(constant) ( 0x0ba ) 
+ 10161: b(lit) ( 0x010 ) 0x52
+ 10166: named-token ( 0x0b6 ) eighty-two 0x8d0
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10180: b(constant) ( 0x0ba ) 
+ 10181: b(lit) ( 0x010 ) 0x53
+ 10186: named-token ( 0x0b6 ) eighty-three 0x8d1
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10202: b(constant) ( 0x0ba ) 
+ 10203: b(lit) ( 0x010 ) 0x54
+ 10208: named-token ( 0x0b6 ) eighty-four 0x8d2
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10223: b(constant) ( 0x0ba ) 
+ 10224: b(lit) ( 0x010 ) 0x55
+ 10229: named-token ( 0x0b6 ) eighty-five 0x8d3
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10244: b(constant) ( 0x0ba ) 
+ 10245: b(lit) ( 0x010 ) 0x56
+ 10250: named-token ( 0x0b6 ) eighty-six 0x8d4
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10264: b(constant) ( 0x0ba ) 
+ 10265: b(lit) ( 0x010 ) 0x57
+ 10270: named-token ( 0x0b6 ) eighty-seven 0x8d5
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10286: b(constant) ( 0x0ba ) 
+ 10287: b(lit) ( 0x010 ) 0x58
+ 10292: named-token ( 0x0b6 ) eighty-eight 0x8d6
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10308: b(constant) ( 0x0ba ) 
+ 10309: b(lit) ( 0x010 ) 0x59
+ 10314: named-token ( 0x0b6 ) eighty-nine 0x8d7
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10329: b(constant) ( 0x0ba ) 
+ 10330: b(lit) ( 0x010 ) 0x5a
+ 10335: named-token ( 0x0b6 ) ninety 0x8d8
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10345: b(constant) ( 0x0ba ) 
+ 10346: b(lit) ( 0x010 ) 0x5b
+ 10351: named-token ( 0x0b6 ) ninety-one 0x8d9
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10365: b(constant) ( 0x0ba ) 
+ 10366: b(lit) ( 0x010 ) 0x5c
+ 10371: named-token ( 0x0b6 ) ninety-two 0x8da
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10385: b(constant) ( 0x0ba ) 
+ 10386: b(lit) ( 0x010 ) 0x5d
+ 10391: named-token ( 0x0b6 ) ninety-three 0x8db
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10407: b(constant) ( 0x0ba ) 
+ 10408: b(lit) ( 0x010 ) 0x5e
+ 10413: named-token ( 0x0b6 ) ninety-four 0x8dc
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10428: b(constant) ( 0x0ba ) 
+ 10429: b(lit) ( 0x010 ) 0x5f
+ 10434: named-token ( 0x0b6 ) ninety-five 0x8dd
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10449: b(constant) ( 0x0ba ) 
+ 10450: b(lit) ( 0x010 ) 0x60
+ 10455: named-token ( 0x0b6 ) ninety-six 0x8de
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10469: b(constant) ( 0x0ba ) 
+ 10470: b(lit) ( 0x010 ) 0x61
+ 10475: named-token ( 0x0b6 ) ninety-seven 0x8df
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10491: b(constant) ( 0x0ba ) 
+ 10492: b(lit) ( 0x010 ) 0x62
+ 10497: named-token ( 0x0b6 ) ninety-eight 0x8e0
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10513: b(constant) ( 0x0ba ) 
+ 10514: b(lit) ( 0x010 ) 0x63
+ 10519: named-token ( 0x0b6 ) ninety-nine 0x8e1
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10534: b(constant) ( 0x0ba ) 
+ 10535: b(lit) ( 0x010 ) 0x64
+ 10540: named-token ( 0x0b6 ) one_hundred 0x8e2
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10555: b(constant) ( 0x0ba ) 
+ 10556: b(lit) ( 0x010 ) 0x65
+ 10561: named-token ( 0x0b6 ) one_hundred_and_one 0x8e3
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10584: b(constant) ( 0x0ba ) 
+ 10585: b(lit) ( 0x010 ) 0x66
+ 10590: named-token ( 0x0b6 ) one_hundred_and_two 0x8e4
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10613: b(constant) ( 0x0ba ) 
+ 10614: b(lit) ( 0x010 ) 0x67
+ 10619: named-token ( 0x0b6 ) one_hundred_and_three 0x8e5
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10644: b(constant) ( 0x0ba ) 
+ 10645: b(lit) ( 0x010 ) 0x68
+ 10650: named-token ( 0x0b6 ) one_hundred_and_four 0x8e6
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10674: b(constant) ( 0x0ba ) 
+ 10675: b(lit) ( 0x010 ) 0x69
+ 10680: named-token ( 0x0b6 ) one_hundred_and_five 0x8e7
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10704: b(constant) ( 0x0ba ) 
+ 10705: b(lit) ( 0x010 ) 0x6a
+ 10710: named-token ( 0x0b6 ) one_hundred_and_six 0x8e8
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10733: b(constant) ( 0x0ba ) 
+ 10734: b(lit) ( 0x010 ) 0x6b
+ 10739: named-token ( 0x0b6 ) one_hundred_and_seven 0x8e9
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10764: b(constant) ( 0x0ba ) 
+ 10765: b(lit) ( 0x010 ) 0x6c
+ 10770: named-token ( 0x0b6 ) one_hundred_and_eight 0x8ea
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10795: b(constant) ( 0x0ba ) 
+ 10796: b(lit) ( 0x010 ) 0x6d
+ 10801: named-token ( 0x0b6 ) one_hundred_and_nine 0x8eb
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10825: b(constant) ( 0x0ba ) 
+ 10826: b(lit) ( 0x010 ) 0x6e
+ 10831: named-token ( 0x0b6 ) one_hundred_and_ten 0x8ec
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10854: b(constant) ( 0x0ba ) 
+ 10855: b(lit) ( 0x010 ) 0x6f
+ 10860: named-token ( 0x0b6 ) one_hundred_and_eleven 0x8ed
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10886: b(constant) ( 0x0ba ) 
+ 10887: b(lit) ( 0x010 ) 0x70
+ 10892: named-token ( 0x0b6 ) one_hundred_and_twelve 0x8ee
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10918: b(constant) ( 0x0ba ) 
+ 10919: b(lit) ( 0x010 ) 0x71
+ 10924: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x8ef
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10952: b(constant) ( 0x0ba ) 
+ 10953: b(lit) ( 0x010 ) 0x72
+ 10958: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x8f0
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 10986: b(constant) ( 0x0ba ) 
+ 10987: b(lit) ( 0x010 ) 0x73
+ 10992: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x8f1
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11019: b(constant) ( 0x0ba ) 
+ 11020: b(lit) ( 0x010 ) 0x74
+ 11025: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x8f2
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11052: b(constant) ( 0x0ba ) 
+ 11053: b(lit) ( 0x010 ) 0x75
+ 11058: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x8f3
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11087: b(constant) ( 0x0ba ) 
+ 11088: b(lit) ( 0x010 ) 0x76
+ 11093: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x8f4
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11121: b(constant) ( 0x0ba ) 
+ 11122: b(lit) ( 0x010 ) 0x77
+ 11127: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x8f5
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11155: b(constant) ( 0x0ba ) 
+ 11156: b(lit) ( 0x010 ) 0x78
+ 11161: named-token ( 0x0b6 ) one_hundred_and_twenty 0x8f6
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11187: b(constant) ( 0x0ba ) 
+ 11188: b(lit) ( 0x010 ) 0x79
+ 11193: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x8f7
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11223: b(constant) ( 0x0ba ) 
+ 11224: b(lit) ( 0x010 ) 0x7a
+ 11229: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x8f8
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11259: b(constant) ( 0x0ba ) 
+ 11260: b(lit) ( 0x010 ) 0x7b
+ 11265: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x8f9
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11297: b(constant) ( 0x0ba ) 
+ 11298: b(lit) ( 0x010 ) 0x7c
+ 11303: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x8fa
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11334: b(constant) ( 0x0ba ) 
+ 11335: b(lit) ( 0x010 ) 0x7d
+ 11340: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x8fb
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11371: b(constant) ( 0x0ba ) 
+ 11372: b(lit) ( 0x010 ) 0x7e
+ 11377: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0x8fc
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11407: b(constant) ( 0x0ba ) 
+ 11408: b(lit) ( 0x010 ) 0x7f
+ 11413: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0x8fd
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11445: b(constant) ( 0x0ba ) 
+ 11446: b(lit) ( 0x010 ) 0x80
+ 11451: named-token ( 0x0b6 ) one_hundred_and_twenty-eight 0x8fe
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11483: b(constant) ( 0x0ba ) 
+ 11484: finish-device ( 0x127 ) 
+ 11486: new-device ( 0x11f ) 
+ 11488: 0 ( 0x0a5 ) 
+ 11489: named-token ( 0x0b6 ) my_zero 0x93e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11500: b(constant) ( 0x0ba ) 
+ 11501: 1 ( 0x0a6 ) 
+ 11502: named-token ( 0x0b6 ) one 0x93f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11509: b(constant) ( 0x0ba ) 
+ 11510: 2 ( 0x0a7 ) 
+ 11511: named-token ( 0x0b6 ) two 0x940
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 11518: b(constant) ( 0x0ba ) 
+ 11519: 3 ( 0x0a8 ) 
+ 11520: named-token ( 0x0b6 ) three 0x941
+ 11529: b(constant) ( 0x0ba ) 
+ 11530: b(lit) ( 0x010 ) 0x4
+ 11535: named-token ( 0x0b6 ) four 0x942
+ 11543: b(constant) ( 0x0ba ) 
+ 11544: b(lit) ( 0x010 ) 0x5
+ 11549: named-token ( 0x0b6 ) five 0x943
+ 11557: b(constant) ( 0x0ba ) 
+ 11558: b(lit) ( 0x010 ) 0x6
+ 11563: named-token ( 0x0b6 ) six 0x944
+ 11570: b(constant) ( 0x0ba ) 
+ 11571: b(lit) ( 0x010 ) 0x7
+ 11576: named-token ( 0x0b6 ) seven 0x945
+ 11585: b(constant) ( 0x0ba ) 
+ 11586: b(lit) ( 0x010 ) 0x8
+ 11591: named-token ( 0x0b6 ) eight 0x946
+ 11600: b(constant) ( 0x0ba ) 
+ 11601: b(lit) ( 0x010 ) 0x9
+ 11606: named-token ( 0x0b6 ) nine 0x947
+ 11614: b(constant) ( 0x0ba ) 
+ 11615: b(lit) ( 0x010 ) 0xa
+ 11620: named-token ( 0x0b6 ) ten 0x948
+ 11627: b(constant) ( 0x0ba ) 
+ 11628: b(lit) ( 0x010 ) 0xb
+ 11633: named-token ( 0x0b6 ) eleven 0x949
+ 11643: b(constant) ( 0x0ba ) 
+ 11644: b(lit) ( 0x010 ) 0xc
+ 11649: named-token ( 0x0b6 ) twelve 0x94a
+ 11659: b(constant) ( 0x0ba ) 
+ 11660: b(lit) ( 0x010 ) 0xd
+ 11665: named-token ( 0x0b6 ) thirteen 0x94b
+ 11677: b(constant) ( 0x0ba ) 
+ 11678: b(lit) ( 0x010 ) 0xe
+ 11683: named-token ( 0x0b6 ) fourteen 0x94c
+ 11695: b(constant) ( 0x0ba ) 
+ 11696: b(lit) ( 0x010 ) 0xf
+ 11701: named-token ( 0x0b6 ) fifteen 0x94d
+ 11712: b(constant) ( 0x0ba ) 
+ 11713: b(lit) ( 0x010 ) 0x10
+ 11718: named-token ( 0x0b6 ) sixteen 0x94e
+ 11729: b(constant) ( 0x0ba ) 
+ 11730: b(lit) ( 0x010 ) 0x11
+ 11735: named-token ( 0x0b6 ) seventeen 0x94f
+ 11748: b(constant) ( 0x0ba ) 
+ 11749: b(lit) ( 0x010 ) 0x12
+ 11754: named-token ( 0x0b6 ) eighteen 0x950
+ 11766: b(constant) ( 0x0ba ) 
+ 11767: b(lit) ( 0x010 ) 0x13
+ 11772: named-token ( 0x0b6 ) nineteen 0x951
+ 11784: b(constant) ( 0x0ba ) 
+ 11785: b(lit) ( 0x010 ) 0x14
+ 11790: named-token ( 0x0b6 ) twenty 0x952
+ 11800: b(constant) ( 0x0ba ) 
+ 11801: b(lit) ( 0x010 ) 0x15
+ 11806: named-token ( 0x0b6 ) twenty-one 0x953
+ 11820: b(constant) ( 0x0ba ) 
+ 11821: b(lit) ( 0x010 ) 0x16
+ 11826: named-token ( 0x0b6 ) twenty-two 0x954
+ 11840: b(constant) ( 0x0ba ) 
+ 11841: b(lit) ( 0x010 ) 0x17
+ 11846: named-token ( 0x0b6 ) twenty-three 0x955
+ 11862: b(constant) ( 0x0ba ) 
+ 11863: b(lit) ( 0x010 ) 0x18
+ 11868: named-token ( 0x0b6 ) twenty-four 0x956
+ 11883: b(constant) ( 0x0ba ) 
+ 11884: b(lit) ( 0x010 ) 0x19
+ 11889: named-token ( 0x0b6 ) twenty-five 0x957
+ 11904: b(constant) ( 0x0ba ) 
+ 11905: b(lit) ( 0x010 ) 0x1a
+ 11910: named-token ( 0x0b6 ) twenty-six 0x958
+ 11924: b(constant) ( 0x0ba ) 
+ 11925: b(lit) ( 0x010 ) 0x1b
+ 11930: named-token ( 0x0b6 ) twenty-seven 0x959
+ 11946: b(constant) ( 0x0ba ) 
+ 11947: b(lit) ( 0x010 ) 0x1c
+ 11952: named-token ( 0x0b6 ) twenty-eight 0x95a
+ 11968: b(constant) ( 0x0ba ) 
+ 11969: b(lit) ( 0x010 ) 0x1d
+ 11974: named-token ( 0x0b6 ) twenty-nine 0x95b
+ 11989: b(constant) ( 0x0ba ) 
+ 11990: b(lit) ( 0x010 ) 0x1e
+ 11995: named-token ( 0x0b6 ) thirty 0x95c
+ 12005: b(constant) ( 0x0ba ) 
+ 12006: b(lit) ( 0x010 ) 0x1f
+ 12011: named-token ( 0x0b6 ) thirty-one 0x95d
+ 12025: b(constant) ( 0x0ba ) 
+ 12026: b(lit) ( 0x010 ) 0x20
+ 12031: named-token ( 0x0b6 ) thirty-two 0x95e
+ 12045: b(constant) ( 0x0ba ) 
+ 12046: b(lit) ( 0x010 ) 0x21
+ 12051: named-token ( 0x0b6 ) thirty-three 0x95f
+ 12067: b(constant) ( 0x0ba ) 
+ 12068: b(lit) ( 0x010 ) 0x22
+ 12073: named-token ( 0x0b6 ) thirty-four 0x960
+ 12088: b(constant) ( 0x0ba ) 
+ 12089: b(lit) ( 0x010 ) 0x23
+ 12094: named-token ( 0x0b6 ) thirty-five 0x961
+ 12109: b(constant) ( 0x0ba ) 
+ 12110: b(lit) ( 0x010 ) 0x24
+ 12115: named-token ( 0x0b6 ) thirty-six 0x962
+ 12129: b(constant) ( 0x0ba ) 
+ 12130: b(lit) ( 0x010 ) 0x25
+ 12135: named-token ( 0x0b6 ) thirty-seven 0x963
+ 12151: b(constant) ( 0x0ba ) 
+ 12152: b(lit) ( 0x010 ) 0x26
+ 12157: named-token ( 0x0b6 ) thirty-eight 0x964
+ 12173: b(constant) ( 0x0ba ) 
+ 12174: b(lit) ( 0x010 ) 0x27
+ 12179: named-token ( 0x0b6 ) thirty-nine 0x965
+ 12194: b(constant) ( 0x0ba ) 
+ 12195: b(lit) ( 0x010 ) 0x28
+ 12200: named-token ( 0x0b6 ) forty 0x966
+ 12209: b(constant) ( 0x0ba ) 
+ 12210: b(lit) ( 0x010 ) 0x29
+ 12215: named-token ( 0x0b6 ) forty-one 0x967
+ 12228: b(constant) ( 0x0ba ) 
+ 12229: b(lit) ( 0x010 ) 0x2a
+ 12234: named-token ( 0x0b6 ) forty-two 0x968
+ 12247: b(constant) ( 0x0ba ) 
+ 12248: b(lit) ( 0x010 ) 0x2b
+ 12253: named-token ( 0x0b6 ) forty-three 0x969
+ 12268: b(constant) ( 0x0ba ) 
+ 12269: b(lit) ( 0x010 ) 0x2c
+ 12274: named-token ( 0x0b6 ) forty-four 0x96a
+ 12288: b(constant) ( 0x0ba ) 
+ 12289: b(lit) ( 0x010 ) 0x2d
+ 12294: named-token ( 0x0b6 ) forty-five 0x96b
+ 12308: b(constant) ( 0x0ba ) 
+ 12309: b(lit) ( 0x010 ) 0x2e
+ 12314: named-token ( 0x0b6 ) forty-six 0x96c
+ 12327: b(constant) ( 0x0ba ) 
+ 12328: b(lit) ( 0x010 ) 0x2f
+ 12333: named-token ( 0x0b6 ) forty-seven 0x96d
+ 12348: b(constant) ( 0x0ba ) 
+ 12349: b(lit) ( 0x010 ) 0x30
+ 12354: named-token ( 0x0b6 ) forty-eight 0x96e
+ 12369: b(constant) ( 0x0ba ) 
+ 12370: b(lit) ( 0x010 ) 0x31
+ 12375: named-token ( 0x0b6 ) forty-nine 0x96f
+ 12389: b(constant) ( 0x0ba ) 
+ 12390: b(lit) ( 0x010 ) 0x32
+ 12395: named-token ( 0x0b6 ) fifty 0x970
+ 12404: b(constant) ( 0x0ba ) 
+ 12405: b(lit) ( 0x010 ) 0x33
+ 12410: named-token ( 0x0b6 ) fifty-one 0x971
+ 12423: b(constant) ( 0x0ba ) 
+ 12424: b(lit) ( 0x010 ) 0x34
+ 12429: named-token ( 0x0b6 ) fifty-two 0x972
+ 12442: b(constant) ( 0x0ba ) 
+ 12443: b(lit) ( 0x010 ) 0x35
+ 12448: named-token ( 0x0b6 ) fifty-three 0x973
+ 12463: b(constant) ( 0x0ba ) 
+ 12464: b(lit) ( 0x010 ) 0x36
+ 12469: named-token ( 0x0b6 ) fifty-four 0x974
+ 12483: b(constant) ( 0x0ba ) 
+ 12484: b(lit) ( 0x010 ) 0x37
+ 12489: named-token ( 0x0b6 ) fifty-five 0x975
+ 12503: b(constant) ( 0x0ba ) 
+ 12504: b(lit) ( 0x010 ) 0x38
+ 12509: named-token ( 0x0b6 ) fifty-six 0x976
+ 12522: b(constant) ( 0x0ba ) 
+ 12523: b(lit) ( 0x010 ) 0x39
+ 12528: named-token ( 0x0b6 ) fifty-seven 0x977
+ 12543: b(constant) ( 0x0ba ) 
+ 12544: b(lit) ( 0x010 ) 0x3a
+ 12549: named-token ( 0x0b6 ) fifty-eight 0x978
+ 12564: b(constant) ( 0x0ba ) 
+ 12565: b(lit) ( 0x010 ) 0x3b
+ 12570: named-token ( 0x0b6 ) fifty-nine 0x979
+ 12584: b(constant) ( 0x0ba ) 
+ 12585: b(lit) ( 0x010 ) 0x3c
+ 12590: named-token ( 0x0b6 ) sixty 0x97a
+ 12599: b(constant) ( 0x0ba ) 
+ 12600: b(lit) ( 0x010 ) 0x3d
+ 12605: named-token ( 0x0b6 ) sixty-one 0x97b
+ 12618: b(constant) ( 0x0ba ) 
+ 12619: b(lit) ( 0x010 ) 0x3e
+ 12624: named-token ( 0x0b6 ) sixty-two 0x97c
+ 12637: b(constant) ( 0x0ba ) 
+ 12638: b(lit) ( 0x010 ) 0x3f
+ 12643: named-token ( 0x0b6 ) sixty-three 0x97d
+ 12658: b(constant) ( 0x0ba ) 
+ 12659: b(lit) ( 0x010 ) 0x40
+ 12664: named-token ( 0x0b6 ) sixty-four 0x97e
+ 12678: b(constant) ( 0x0ba ) 
+ 12679: b(lit) ( 0x010 ) 0x41
+ 12684: named-token ( 0x0b6 ) sixty-five 0x97f
+ 12698: b(constant) ( 0x0ba ) 
+ 12699: b(lit) ( 0x010 ) 0x42
+ 12704: named-token ( 0x0b6 ) sixty-six 0x980
+ 12717: b(constant) ( 0x0ba ) 
+ 12718: b(lit) ( 0x010 ) 0x43
+ 12723: named-token ( 0x0b6 ) sixty-seven 0x981
+ 12738: b(constant) ( 0x0ba ) 
+ 12739: b(lit) ( 0x010 ) 0x44
+ 12744: named-token ( 0x0b6 ) sixty-eight 0x982
+ 12759: b(constant) ( 0x0ba ) 
+ 12760: b(lit) ( 0x010 ) 0x45
+ 12765: named-token ( 0x0b6 ) sixty-nine 0x983
+ 12779: b(constant) ( 0x0ba ) 
+ 12780: b(lit) ( 0x010 ) 0x46
+ 12785: named-token ( 0x0b6 ) seventy 0x984
+ 12796: b(constant) ( 0x0ba ) 
+ 12797: b(lit) ( 0x010 ) 0x47
+ 12802: named-token ( 0x0b6 ) seventy-one 0x985
+ 12817: b(constant) ( 0x0ba ) 
+ 12818: b(lit) ( 0x010 ) 0x48
+ 12823: named-token ( 0x0b6 ) seventy-two 0x986
+ 12838: b(constant) ( 0x0ba ) 
+ 12839: b(lit) ( 0x010 ) 0x49
+ 12844: named-token ( 0x0b6 ) seventy-three 0x987
+ 12861: b(constant) ( 0x0ba ) 
+ 12862: b(lit) ( 0x010 ) 0x4a
+ 12867: named-token ( 0x0b6 ) seventy-four 0x988
+ 12883: b(constant) ( 0x0ba ) 
+ 12884: b(lit) ( 0x010 ) 0x4b
+ 12889: named-token ( 0x0b6 ) seventy-five 0x989
+ 12905: b(constant) ( 0x0ba ) 
+ 12906: b(lit) ( 0x010 ) 0x4c
+ 12911: named-token ( 0x0b6 ) seventy-six 0x98a
+ 12926: b(constant) ( 0x0ba ) 
+ 12927: b(lit) ( 0x010 ) 0x4d
+ 12932: named-token ( 0x0b6 ) seventy-seven 0x98b
+ 12949: b(constant) ( 0x0ba ) 
+ 12950: b(lit) ( 0x010 ) 0x4e
+ 12955: named-token ( 0x0b6 ) seventy-eight 0x98c
+ 12972: b(constant) ( 0x0ba ) 
+ 12973: b(lit) ( 0x010 ) 0x4f
+ 12978: named-token ( 0x0b6 ) seventy-nine 0x98d
+ 12994: b(constant) ( 0x0ba ) 
+ 12995: b(lit) ( 0x010 ) 0x50
+ 13000: named-token ( 0x0b6 ) eighty 0x98e
+ 13010: b(constant) ( 0x0ba ) 
+ 13011: b(lit) ( 0x010 ) 0x51
+ 13016: named-token ( 0x0b6 ) eighty-one 0x98f
+ 13030: b(constant) ( 0x0ba ) 
+ 13031: b(lit) ( 0x010 ) 0x52
+ 13036: named-token ( 0x0b6 ) eighty-two 0x990
+ 13050: b(constant) ( 0x0ba ) 
+ 13051: b(lit) ( 0x010 ) 0x53
+ 13056: named-token ( 0x0b6 ) eighty-three 0x991
+ 13072: b(constant) ( 0x0ba ) 
+ 13073: b(lit) ( 0x010 ) 0x54
+ 13078: named-token ( 0x0b6 ) eighty-four 0x992
+ 13093: b(constant) ( 0x0ba ) 
+ 13094: b(lit) ( 0x010 ) 0x55
+ 13099: named-token ( 0x0b6 ) eighty-five 0x993
+ 13114: b(constant) ( 0x0ba ) 
+ 13115: b(lit) ( 0x010 ) 0x56
+ 13120: named-token ( 0x0b6 ) eighty-six 0x994
+ 13134: b(constant) ( 0x0ba ) 
+ 13135: b(lit) ( 0x010 ) 0x57
+ 13140: named-token ( 0x0b6 ) eighty-seven 0x995
+ 13156: b(constant) ( 0x0ba ) 
+ 13157: b(lit) ( 0x010 ) 0x58
+ 13162: named-token ( 0x0b6 ) eighty-eight 0x996
+ 13178: b(constant) ( 0x0ba ) 
+ 13179: b(lit) ( 0x010 ) 0x59
+ 13184: named-token ( 0x0b6 ) eighty-nine 0x997
+ 13199: b(constant) ( 0x0ba ) 
+ 13200: b(lit) ( 0x010 ) 0x5a
+ 13205: named-token ( 0x0b6 ) ninety 0x998
+ 13215: b(constant) ( 0x0ba ) 
+ 13216: b(lit) ( 0x010 ) 0x5b
+ 13221: named-token ( 0x0b6 ) ninety-one 0x999
+ 13235: b(constant) ( 0x0ba ) 
+ 13236: b(lit) ( 0x010 ) 0x5c
+ 13241: named-token ( 0x0b6 ) ninety-two 0x99a
+ 13255: b(constant) ( 0x0ba ) 
+ 13256: b(lit) ( 0x010 ) 0x5d
+ 13261: named-token ( 0x0b6 ) ninety-three 0x99b
+ 13277: b(constant) ( 0x0ba ) 
+ 13278: b(lit) ( 0x010 ) 0x5e
+ 13283: named-token ( 0x0b6 ) ninety-four 0x99c
+ 13298: b(constant) ( 0x0ba ) 
+ 13299: b(lit) ( 0x010 ) 0x5f
+ 13304: named-token ( 0x0b6 ) ninety-five 0x99d
+ 13319: b(constant) ( 0x0ba ) 
+ 13320: b(lit) ( 0x010 ) 0x60
+ 13325: named-token ( 0x0b6 ) ninety-six 0x99e
+ 13339: b(constant) ( 0x0ba ) 
+ 13340: b(lit) ( 0x010 ) 0x61
+ 13345: named-token ( 0x0b6 ) ninety-seven 0x99f
+ 13361: b(constant) ( 0x0ba ) 
+ 13362: b(lit) ( 0x010 ) 0x62
+ 13367: named-token ( 0x0b6 ) ninety-eight 0x9a0
+ 13383: b(constant) ( 0x0ba ) 
+ 13384: b(lit) ( 0x010 ) 0x63
+ 13389: named-token ( 0x0b6 ) ninety-nine 0x9a1
+ 13404: b(constant) ( 0x0ba ) 
+ 13405: b(lit) ( 0x010 ) 0x64
+ 13410: named-token ( 0x0b6 ) one_hundred 0x9a2
+ 13425: b(constant) ( 0x0ba ) 
+ 13426: b(lit) ( 0x010 ) 0x65
+ 13431: named-token ( 0x0b6 ) one_hundred_and_one 0x9a3
+ 13454: b(constant) ( 0x0ba ) 
+ 13455: b(lit) ( 0x010 ) 0x66
+ 13460: named-token ( 0x0b6 ) one_hundred_and_two 0x9a4
+ 13483: b(constant) ( 0x0ba ) 
+ 13484: b(lit) ( 0x010 ) 0x67
+ 13489: named-token ( 0x0b6 ) one_hundred_and_three 0x9a5
+ 13514: b(constant) ( 0x0ba ) 
+ 13515: b(lit) ( 0x010 ) 0x68
+ 13520: named-token ( 0x0b6 ) one_hundred_and_four 0x9a6
+ 13544: b(constant) ( 0x0ba ) 
+ 13545: b(lit) ( 0x010 ) 0x69
+ 13550: named-token ( 0x0b6 ) one_hundred_and_five 0x9a7
+ 13574: b(constant) ( 0x0ba ) 
+ 13575: b(lit) ( 0x010 ) 0x6a
+ 13580: named-token ( 0x0b6 ) one_hundred_and_six 0x9a8
+ 13603: b(constant) ( 0x0ba ) 
+ 13604: b(lit) ( 0x010 ) 0x6b
+ 13609: named-token ( 0x0b6 ) one_hundred_and_seven 0x9a9
+ 13634: b(constant) ( 0x0ba ) 
+ 13635: b(lit) ( 0x010 ) 0x6c
+ 13640: named-token ( 0x0b6 ) one_hundred_and_eight 0x9aa
+ 13665: b(constant) ( 0x0ba ) 
+ 13666: b(lit) ( 0x010 ) 0x6d
+ 13671: named-token ( 0x0b6 ) one_hundred_and_nine 0x9ab
+ 13695: b(constant) ( 0x0ba ) 
+ 13696: b(lit) ( 0x010 ) 0x6e
+ 13701: named-token ( 0x0b6 ) one_hundred_and_ten 0x9ac
+ 13724: b(constant) ( 0x0ba ) 
+ 13725: b(lit) ( 0x010 ) 0x6f
+ 13730: named-token ( 0x0b6 ) one_hundred_and_eleven 0x9ad
+ 13756: b(constant) ( 0x0ba ) 
+ 13757: b(lit) ( 0x010 ) 0x70
+ 13762: named-token ( 0x0b6 ) one_hundred_and_twelve 0x9ae
+ 13788: b(constant) ( 0x0ba ) 
+ 13789: b(lit) ( 0x010 ) 0x71
+ 13794: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x9af
+ 13822: b(constant) ( 0x0ba ) 
+ 13823: b(lit) ( 0x010 ) 0x72
+ 13828: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x9b0
+ 13856: b(constant) ( 0x0ba ) 
+ 13857: b(lit) ( 0x010 ) 0x73
+ 13862: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x9b1
+ 13889: b(constant) ( 0x0ba ) 
+ 13890: b(lit) ( 0x010 ) 0x74
+ 13895: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x9b2
+ 13922: b(constant) ( 0x0ba ) 
+ 13923: b(lit) ( 0x010 ) 0x75
+ 13928: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x9b3
+ 13957: b(constant) ( 0x0ba ) 
+ 13958: b(lit) ( 0x010 ) 0x76
+ 13963: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x9b4
+ 13991: b(constant) ( 0x0ba ) 
+ 13992: b(lit) ( 0x010 ) 0x77
+ 13997: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x9b5
+ 14025: b(constant) ( 0x0ba ) 
+ 14026: b(lit) ( 0x010 ) 0x78
+ 14031: named-token ( 0x0b6 ) one_hundred_and_twenty 0x9b6
+ 14057: b(constant) ( 0x0ba ) 
+ 14058: b(lit) ( 0x010 ) 0x79
+ 14063: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x9b7
+ 14093: b(constant) ( 0x0ba ) 
+ 14094: b(lit) ( 0x010 ) 0x7a
+ 14099: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x9b8
+ 14129: b(constant) ( 0x0ba ) 
+ 14130: b(lit) ( 0x010 ) 0x7b
+ 14135: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x9b9
+ 14167: b(constant) ( 0x0ba ) 
+ 14168: b(lit) ( 0x010 ) 0x7c
+ 14173: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x9ba
+ 14204: b(constant) ( 0x0ba ) 
+ 14205: b(lit) ( 0x010 ) 0x7d
+ 14210: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x9bb
+ 14241: b(constant) ( 0x0ba ) 
+ 14242: b(lit) ( 0x010 ) 0x7e
+ 14247: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0x9bc
+ 14277: b(constant) ( 0x0ba ) 
+ 14278: b(lit) ( 0x010 ) 0x7f
+ 14283: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0x9bc
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14315: b(constant) ( 0x0ba ) 
+ 14316: finish-device ( 0x127 ) 
+ 14318: end0 ( 0x000 ) 
+\  Detokenization finished normally after 14319 bytes.
+\  Subsequent FCode Block detected.  Detokenizing.
+ 14319: start1 ( 0x0f1 )   ( 16-bit offsets)
+ 14320:   format:    0x08
+ 14321:   checksum:  0x5231 (Ok)
+ 14323:   len:       0x1601 ( 5633 bytes)
+ 14327: b(lit) ( 0x010 ) 0x80
+ 14332: named-token ( 0x0b6 ) one_hundred_and_twenty-eight 0x9bd
+ 14364: b(constant) ( 0x0ba ) 
+ 14365: new-device ( 0x11f ) 
+ 14367: 0 ( 0x0a5 ) 
+ 14368: named-token ( 0x0b6 ) my_zero 0x800
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14379: b(constant) ( 0x0ba ) 
+ 14380: 1 ( 0x0a6 ) 
+ 14381: named-token ( 0x0b6 ) one 0x800
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14388: b(constant) ( 0x0ba ) 
+ 14389: 2 ( 0x0a7 ) 
+ 14390: named-token ( 0x0b6 ) two 0x801
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14397: b(constant) ( 0x0ba ) 
+ 14398: 3 ( 0x0a8 ) 
+ 14399: named-token ( 0x0b6 ) three 0x802
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14408: b(constant) ( 0x0ba ) 
+ 14409: b(lit) ( 0x010 ) 0x4
+ 14414: named-token ( 0x0b6 ) four 0x803
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14422: b(constant) ( 0x0ba ) 
+ 14423: b(lit) ( 0x010 ) 0x5
+ 14428: named-token ( 0x0b6 ) five 0x804
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14436: b(constant) ( 0x0ba ) 
+ 14437: b(lit) ( 0x010 ) 0x6
+ 14442: named-token ( 0x0b6 ) six 0x805
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14449: b(constant) ( 0x0ba ) 
+ 14450: b(lit) ( 0x010 ) 0x7
+ 14455: named-token ( 0x0b6 ) seven 0x806
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14464: b(constant) ( 0x0ba ) 
+ 14465: b(lit) ( 0x010 ) 0x8
+ 14470: named-token ( 0x0b6 ) eight 0x807
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14479: b(constant) ( 0x0ba ) 
+ 14480: b(lit) ( 0x010 ) 0x9
+ 14485: named-token ( 0x0b6 ) nine 0x808
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14493: b(constant) ( 0x0ba ) 
+ 14494: b(lit) ( 0x010 ) 0xa
+ 14499: named-token ( 0x0b6 ) ten 0x809
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14506: b(constant) ( 0x0ba ) 
+ 14507: b(lit) ( 0x010 ) 0xb
+ 14512: named-token ( 0x0b6 ) eleven 0x80a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14522: b(constant) ( 0x0ba ) 
+ 14523: b(lit) ( 0x010 ) 0xc
+ 14528: named-token ( 0x0b6 ) twelve 0x80b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14538: b(constant) ( 0x0ba ) 
+ 14539: b(lit) ( 0x010 ) 0xd
+ 14544: named-token ( 0x0b6 ) thirteen 0x80c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14556: b(constant) ( 0x0ba ) 
+ 14557: b(lit) ( 0x010 ) 0xe
+ 14562: named-token ( 0x0b6 ) fourteen 0x80d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14574: b(constant) ( 0x0ba ) 
+ 14575: b(lit) ( 0x010 ) 0xf
+ 14580: named-token ( 0x0b6 ) fifteen 0x80e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14591: b(constant) ( 0x0ba ) 
+ 14592: b(lit) ( 0x010 ) 0x10
+ 14597: named-token ( 0x0b6 ) sixteen 0x80f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14608: b(constant) ( 0x0ba ) 
+ 14609: b(lit) ( 0x010 ) 0x11
+ 14614: named-token ( 0x0b6 ) seventeen 0x810
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14627: b(constant) ( 0x0ba ) 
+ 14628: b(lit) ( 0x010 ) 0x12
+ 14633: named-token ( 0x0b6 ) eighteen 0x811
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14645: b(constant) ( 0x0ba ) 
+ 14646: b(lit) ( 0x010 ) 0x13
+ 14651: named-token ( 0x0b6 ) nineteen 0x812
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14663: b(constant) ( 0x0ba ) 
+ 14664: b(lit) ( 0x010 ) 0x14
+ 14669: named-token ( 0x0b6 ) twenty 0x813
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14679: b(constant) ( 0x0ba ) 
+ 14680: b(lit) ( 0x010 ) 0x15
+ 14685: named-token ( 0x0b6 ) twenty-one 0x814
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14699: b(constant) ( 0x0ba ) 
+ 14700: b(lit) ( 0x010 ) 0x16
+ 14705: named-token ( 0x0b6 ) twenty-two 0x815
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14719: b(constant) ( 0x0ba ) 
+ 14720: b(lit) ( 0x010 ) 0x17
+ 14725: named-token ( 0x0b6 ) twenty-three 0x816
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14741: b(constant) ( 0x0ba ) 
+ 14742: b(lit) ( 0x010 ) 0x18
+ 14747: named-token ( 0x0b6 ) twenty-four 0x817
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14762: b(constant) ( 0x0ba ) 
+ 14763: b(lit) ( 0x010 ) 0x19
+ 14768: named-token ( 0x0b6 ) twenty-five 0x818
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14783: b(constant) ( 0x0ba ) 
+ 14784: b(lit) ( 0x010 ) 0x1a
+ 14789: named-token ( 0x0b6 ) twenty-six 0x819
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14803: b(constant) ( 0x0ba ) 
+ 14804: b(lit) ( 0x010 ) 0x1b
+ 14809: named-token ( 0x0b6 ) twenty-seven 0x81a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14825: b(constant) ( 0x0ba ) 
+ 14826: b(lit) ( 0x010 ) 0x1c
+ 14831: named-token ( 0x0b6 ) twenty-eight 0x81b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14847: b(constant) ( 0x0ba ) 
+ 14848: b(lit) ( 0x010 ) 0x1d
+ 14853: named-token ( 0x0b6 ) twenty-nine 0x81c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14868: b(constant) ( 0x0ba ) 
+ 14869: b(lit) ( 0x010 ) 0x1e
+ 14874: named-token ( 0x0b6 ) thirty 0x81d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14884: b(constant) ( 0x0ba ) 
+ 14885: b(lit) ( 0x010 ) 0x1f
+ 14890: named-token ( 0x0b6 ) thirty-one 0x81e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14904: b(constant) ( 0x0ba ) 
+ 14905: b(lit) ( 0x010 ) 0x20
+ 14910: named-token ( 0x0b6 ) thirty-two 0x81f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14924: b(constant) ( 0x0ba ) 
+ 14925: b(lit) ( 0x010 ) 0x21
+ 14930: named-token ( 0x0b6 ) thirty-three 0x820
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14946: b(constant) ( 0x0ba ) 
+ 14947: b(lit) ( 0x010 ) 0x22
+ 14952: named-token ( 0x0b6 ) thirty-four 0x821
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14967: b(constant) ( 0x0ba ) 
+ 14968: b(lit) ( 0x010 ) 0x23
+ 14973: named-token ( 0x0b6 ) thirty-five 0x822
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 14988: b(constant) ( 0x0ba ) 
+ 14989: b(lit) ( 0x010 ) 0x24
+ 14994: named-token ( 0x0b6 ) thirty-six 0x823
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15008: b(constant) ( 0x0ba ) 
+ 15009: b(lit) ( 0x010 ) 0x25
+ 15014: named-token ( 0x0b6 ) thirty-seven 0x824
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15030: b(constant) ( 0x0ba ) 
+ 15031: b(lit) ( 0x010 ) 0x26
+ 15036: named-token ( 0x0b6 ) thirty-eight 0x825
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15052: b(constant) ( 0x0ba ) 
+ 15053: b(lit) ( 0x010 ) 0x27
+ 15058: named-token ( 0x0b6 ) thirty-nine 0x826
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15073: b(constant) ( 0x0ba ) 
+ 15074: b(lit) ( 0x010 ) 0x28
+ 15079: named-token ( 0x0b6 ) forty 0x827
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15088: b(constant) ( 0x0ba ) 
+ 15089: b(lit) ( 0x010 ) 0x29
+ 15094: named-token ( 0x0b6 ) forty-one 0x828
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15107: b(constant) ( 0x0ba ) 
+ 15108: b(lit) ( 0x010 ) 0x2a
+ 15113: named-token ( 0x0b6 ) forty-two 0x829
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15126: b(constant) ( 0x0ba ) 
+ 15127: b(lit) ( 0x010 ) 0x2b
+ 15132: named-token ( 0x0b6 ) forty-three 0x82a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15147: b(constant) ( 0x0ba ) 
+ 15148: b(lit) ( 0x010 ) 0x2c
+ 15153: named-token ( 0x0b6 ) forty-four 0x82b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15167: b(constant) ( 0x0ba ) 
+ 15168: b(lit) ( 0x010 ) 0x2d
+ 15173: named-token ( 0x0b6 ) forty-five 0x82c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15187: b(constant) ( 0x0ba ) 
+ 15188: b(lit) ( 0x010 ) 0x2e
+ 15193: named-token ( 0x0b6 ) forty-six 0x82d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15206: b(constant) ( 0x0ba ) 
+ 15207: b(lit) ( 0x010 ) 0x2f
+ 15212: named-token ( 0x0b6 ) forty-seven 0x82e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15227: b(constant) ( 0x0ba ) 
+ 15228: b(lit) ( 0x010 ) 0x30
+ 15233: named-token ( 0x0b6 ) forty-eight 0x82f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15248: b(constant) ( 0x0ba ) 
+ 15249: b(lit) ( 0x010 ) 0x31
+ 15254: named-token ( 0x0b6 ) forty-nine 0x830
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15268: b(constant) ( 0x0ba ) 
+ 15269: b(lit) ( 0x010 ) 0x32
+ 15274: named-token ( 0x0b6 ) fifty 0x831
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15283: b(constant) ( 0x0ba ) 
+ 15284: b(lit) ( 0x010 ) 0x33
+ 15289: named-token ( 0x0b6 ) fifty-one 0x832
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15302: b(constant) ( 0x0ba ) 
+ 15303: b(lit) ( 0x010 ) 0x34
+ 15308: named-token ( 0x0b6 ) fifty-two 0x833
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15321: b(constant) ( 0x0ba ) 
+ 15322: b(lit) ( 0x010 ) 0x35
+ 15327: named-token ( 0x0b6 ) fifty-three 0x834
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15342: b(constant) ( 0x0ba ) 
+ 15343: b(lit) ( 0x010 ) 0x36
+ 15348: named-token ( 0x0b6 ) fifty-four 0x835
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15362: b(constant) ( 0x0ba ) 
+ 15363: b(lit) ( 0x010 ) 0x37
+ 15368: named-token ( 0x0b6 ) fifty-five 0x836
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15382: b(constant) ( 0x0ba ) 
+ 15383: b(lit) ( 0x010 ) 0x38
+ 15388: named-token ( 0x0b6 ) fifty-six 0x837
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15401: b(constant) ( 0x0ba ) 
+ 15402: b(lit) ( 0x010 ) 0x39
+ 15407: named-token ( 0x0b6 ) fifty-seven 0x838
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15422: b(constant) ( 0x0ba ) 
+ 15423: b(lit) ( 0x010 ) 0x3a
+ 15428: named-token ( 0x0b6 ) fifty-eight 0x839
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15443: b(constant) ( 0x0ba ) 
+ 15444: b(lit) ( 0x010 ) 0x3b
+ 15449: named-token ( 0x0b6 ) fifty-nine 0x83a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15463: b(constant) ( 0x0ba ) 
+ 15464: b(lit) ( 0x010 ) 0x3c
+ 15469: named-token ( 0x0b6 ) sixty 0x83b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15478: b(constant) ( 0x0ba ) 
+ 15479: b(lit) ( 0x010 ) 0x3d
+ 15484: named-token ( 0x0b6 ) sixty-one 0x83c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15497: b(constant) ( 0x0ba ) 
+ 15498: b(lit) ( 0x010 ) 0x3e
+ 15503: named-token ( 0x0b6 ) sixty-two 0x83d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15516: b(constant) ( 0x0ba ) 
+ 15517: b(lit) ( 0x010 ) 0x3f
+ 15522: named-token ( 0x0b6 ) sixty-three 0x83e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15537: b(constant) ( 0x0ba ) 
+ 15538: b(lit) ( 0x010 ) 0x40
+ 15543: named-token ( 0x0b6 ) sixty-four 0x83f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15557: b(constant) ( 0x0ba ) 
+ 15558: b(lit) ( 0x010 ) 0x41
+ 15563: named-token ( 0x0b6 ) sixty-five 0x840
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15577: b(constant) ( 0x0ba ) 
+ 15578: b(lit) ( 0x010 ) 0x42
+ 15583: named-token ( 0x0b6 ) sixty-six 0x841
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15596: b(constant) ( 0x0ba ) 
+ 15597: b(lit) ( 0x010 ) 0x43
+ 15602: named-token ( 0x0b6 ) sixty-seven 0x842
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15617: b(constant) ( 0x0ba ) 
+ 15618: b(lit) ( 0x010 ) 0x44
+ 15623: named-token ( 0x0b6 ) sixty-eight 0x843
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15638: b(constant) ( 0x0ba ) 
+ 15639: b(lit) ( 0x010 ) 0x45
+ 15644: named-token ( 0x0b6 ) sixty-nine 0x844
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15658: b(constant) ( 0x0ba ) 
+ 15659: b(lit) ( 0x010 ) 0x46
+ 15664: named-token ( 0x0b6 ) seventy 0x845
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15675: b(constant) ( 0x0ba ) 
+ 15676: b(lit) ( 0x010 ) 0x47
+ 15681: named-token ( 0x0b6 ) seventy-one 0x846
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15696: b(constant) ( 0x0ba ) 
+ 15697: b(lit) ( 0x010 ) 0x48
+ 15702: named-token ( 0x0b6 ) seventy-two 0x847
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15717: b(constant) ( 0x0ba ) 
+ 15718: b(lit) ( 0x010 ) 0x49
+ 15723: named-token ( 0x0b6 ) seventy-three 0x848
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15740: b(constant) ( 0x0ba ) 
+ 15741: b(lit) ( 0x010 ) 0x4a
+ 15746: named-token ( 0x0b6 ) seventy-four 0x849
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15762: b(constant) ( 0x0ba ) 
+ 15763: b(lit) ( 0x010 ) 0x4b
+ 15768: named-token ( 0x0b6 ) seventy-five 0x84a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15784: b(constant) ( 0x0ba ) 
+ 15785: b(lit) ( 0x010 ) 0x4c
+ 15790: named-token ( 0x0b6 ) seventy-six 0x84b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15805: b(constant) ( 0x0ba ) 
+ 15806: b(lit) ( 0x010 ) 0x4d
+ 15811: named-token ( 0x0b6 ) seventy-seven 0x84c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15828: b(constant) ( 0x0ba ) 
+ 15829: b(lit) ( 0x010 ) 0x4e
+ 15834: named-token ( 0x0b6 ) seventy-eight 0x84d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15851: b(constant) ( 0x0ba ) 
+ 15852: b(lit) ( 0x010 ) 0x4f
+ 15857: named-token ( 0x0b6 ) seventy-nine 0x84e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15873: b(constant) ( 0x0ba ) 
+ 15874: b(lit) ( 0x010 ) 0x50
+ 15879: named-token ( 0x0b6 ) eighty 0x84f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15889: b(constant) ( 0x0ba ) 
+ 15890: b(lit) ( 0x010 ) 0x51
+ 15895: named-token ( 0x0b6 ) eighty-one 0x850
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15909: b(constant) ( 0x0ba ) 
+ 15910: b(lit) ( 0x010 ) 0x52
+ 15915: named-token ( 0x0b6 ) eighty-two 0x851
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15929: b(constant) ( 0x0ba ) 
+ 15930: b(lit) ( 0x010 ) 0x53
+ 15935: named-token ( 0x0b6 ) eighty-three 0x852
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15951: b(constant) ( 0x0ba ) 
+ 15952: b(lit) ( 0x010 ) 0x54
+ 15957: named-token ( 0x0b6 ) eighty-four 0x853
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15972: b(constant) ( 0x0ba ) 
+ 15973: b(lit) ( 0x010 ) 0x55
+ 15978: named-token ( 0x0b6 ) eighty-five 0x854
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 15993: b(constant) ( 0x0ba ) 
+ 15994: b(lit) ( 0x010 ) 0x56
+ 15999: named-token ( 0x0b6 ) eighty-six 0x855
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16013: b(constant) ( 0x0ba ) 
+ 16014: b(lit) ( 0x010 ) 0x57
+ 16019: named-token ( 0x0b6 ) eighty-seven 0x856
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16035: b(constant) ( 0x0ba ) 
+ 16036: b(lit) ( 0x010 ) 0x58
+ 16041: named-token ( 0x0b6 ) eighty-eight 0x857
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16057: b(constant) ( 0x0ba ) 
+ 16058: b(lit) ( 0x010 ) 0x59
+ 16063: named-token ( 0x0b6 ) eighty-nine 0x858
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16078: b(constant) ( 0x0ba ) 
+ 16079: b(lit) ( 0x010 ) 0x5a
+ 16084: named-token ( 0x0b6 ) ninety 0x859
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16094: b(constant) ( 0x0ba ) 
+ 16095: b(lit) ( 0x010 ) 0x5b
+ 16100: named-token ( 0x0b6 ) ninety-one 0x85a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16114: b(constant) ( 0x0ba ) 
+ 16115: b(lit) ( 0x010 ) 0x5c
+ 16120: named-token ( 0x0b6 ) ninety-two 0x85b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16134: b(constant) ( 0x0ba ) 
+ 16135: b(lit) ( 0x010 ) 0x5d
+ 16140: named-token ( 0x0b6 ) ninety-three 0x85c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16156: b(constant) ( 0x0ba ) 
+ 16157: b(lit) ( 0x010 ) 0x5e
+ 16162: named-token ( 0x0b6 ) ninety-four 0x85d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16177: b(constant) ( 0x0ba ) 
+ 16178: b(lit) ( 0x010 ) 0x5f
+ 16183: named-token ( 0x0b6 ) ninety-five 0x85e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16198: b(constant) ( 0x0ba ) 
+ 16199: b(lit) ( 0x010 ) 0x60
+ 16204: named-token ( 0x0b6 ) ninety-six 0x85f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16218: b(constant) ( 0x0ba ) 
+ 16219: b(lit) ( 0x010 ) 0x61
+ 16224: named-token ( 0x0b6 ) ninety-seven 0x860
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16240: b(constant) ( 0x0ba ) 
+ 16241: b(lit) ( 0x010 ) 0x62
+ 16246: named-token ( 0x0b6 ) ninety-eight 0x861
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16262: b(constant) ( 0x0ba ) 
+ 16263: b(lit) ( 0x010 ) 0x63
+ 16268: named-token ( 0x0b6 ) ninety-nine 0x862
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16283: b(constant) ( 0x0ba ) 
+ 16284: b(lit) ( 0x010 ) 0x64
+ 16289: named-token ( 0x0b6 ) one_hundred 0x863
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16304: b(constant) ( 0x0ba ) 
+ 16305: b(lit) ( 0x010 ) 0x65
+ 16310: named-token ( 0x0b6 ) one_hundred_and_one 0x864
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16333: b(constant) ( 0x0ba ) 
+ 16334: b(lit) ( 0x010 ) 0x66
+ 16339: named-token ( 0x0b6 ) one_hundred_and_two 0x865
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16362: b(constant) ( 0x0ba ) 
+ 16363: b(lit) ( 0x010 ) 0x67
+ 16368: named-token ( 0x0b6 ) one_hundred_and_three 0x866
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16393: b(constant) ( 0x0ba ) 
+ 16394: b(lit) ( 0x010 ) 0x68
+ 16399: named-token ( 0x0b6 ) one_hundred_and_four 0x867
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16423: b(constant) ( 0x0ba ) 
+ 16424: b(lit) ( 0x010 ) 0x69
+ 16429: named-token ( 0x0b6 ) one_hundred_and_five 0x868
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16453: b(constant) ( 0x0ba ) 
+ 16454: b(lit) ( 0x010 ) 0x6a
+ 16459: named-token ( 0x0b6 ) one_hundred_and_six 0x869
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16482: b(constant) ( 0x0ba ) 
+ 16483: b(lit) ( 0x010 ) 0x6b
+ 16488: named-token ( 0x0b6 ) one_hundred_and_seven 0x86a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16513: b(constant) ( 0x0ba ) 
+ 16514: b(lit) ( 0x010 ) 0x6c
+ 16519: named-token ( 0x0b6 ) one_hundred_and_eight 0x86b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16544: b(constant) ( 0x0ba ) 
+ 16545: b(lit) ( 0x010 ) 0x6d
+ 16550: named-token ( 0x0b6 ) one_hundred_and_nine 0x86c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16574: b(constant) ( 0x0ba ) 
+ 16575: b(lit) ( 0x010 ) 0x6e
+ 16580: named-token ( 0x0b6 ) one_hundred_and_ten 0x86d
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16603: b(constant) ( 0x0ba ) 
+ 16604: b(lit) ( 0x010 ) 0x6f
+ 16609: named-token ( 0x0b6 ) one_hundred_and_eleven 0x86e
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16635: b(constant) ( 0x0ba ) 
+ 16636: b(lit) ( 0x010 ) 0x70
+ 16641: named-token ( 0x0b6 ) one_hundred_and_twelve 0x86f
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16667: b(constant) ( 0x0ba ) 
+ 16668: b(lit) ( 0x010 ) 0x71
+ 16673: named-token ( 0x0b6 ) one_hundred_and_thirteen 0x870
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16701: b(constant) ( 0x0ba ) 
+ 16702: b(lit) ( 0x010 ) 0x72
+ 16707: named-token ( 0x0b6 ) one_hundred_and_fourteen 0x871
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16735: b(constant) ( 0x0ba ) 
+ 16736: b(lit) ( 0x010 ) 0x73
+ 16741: named-token ( 0x0b6 ) one_hundred_and_fifteen 0x872
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16768: b(constant) ( 0x0ba ) 
+ 16769: b(lit) ( 0x010 ) 0x74
+ 16774: named-token ( 0x0b6 ) one_hundred_and_sixteen 0x873
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16801: b(constant) ( 0x0ba ) 
+ 16802: b(lit) ( 0x010 ) 0x75
+ 16807: named-token ( 0x0b6 ) one_hundred_and_seventeen 0x874
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16836: b(constant) ( 0x0ba ) 
+ 16837: b(lit) ( 0x010 ) 0x76
+ 16842: named-token ( 0x0b6 ) one_hundred_and_eighteen 0x875
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16870: b(constant) ( 0x0ba ) 
+ 16871: b(lit) ( 0x010 ) 0x77
+ 16876: named-token ( 0x0b6 ) one_hundred_and_nineteen 0x876
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16904: b(constant) ( 0x0ba ) 
+ 16905: b(lit) ( 0x010 ) 0x78
+ 16910: named-token ( 0x0b6 ) one_hundred_and_twenty 0x877
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16936: b(constant) ( 0x0ba ) 
+ 16937: b(lit) ( 0x010 ) 0x79
+ 16942: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0x878
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 16972: b(constant) ( 0x0ba ) 
+ 16973: b(lit) ( 0x010 ) 0x7a
+ 16978: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0x879
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 17008: b(constant) ( 0x0ba ) 
+ 17009: b(lit) ( 0x010 ) 0x7b
+ 17014: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0x87a
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 17046: b(constant) ( 0x0ba ) 
+ 17047: b(lit) ( 0x010 ) 0x7c
+ 17052: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0x87b
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 17083: b(constant) ( 0x0ba ) 
+ 17084: b(lit) ( 0x010 ) 0x7d
+ 17089: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0x87c
+\  Warning:  New token # might overlap previously assigned token #(s).
+ 17120: b(constant) ( 0x0ba ) 
+ 17121: finish-device ( 0x127 ) 
+ 17123: 0 ( 0x0a5 ) 
+ 17124: named-token ( 0x0b6 ) my_zero 0xf80
+\  Warning:  New token # out of sequence with previously assigned token #(s).
+ 17135: b(constant) ( 0x0ba ) 
+ 17136: 1 ( 0x0a6 ) 
+ 17137: named-token ( 0x0b6 ) one 0xf81
+ 17144: b(constant) ( 0x0ba ) 
+ 17145: 2 ( 0x0a7 ) 
+ 17146: named-token ( 0x0b6 ) two 0xf82
+ 17153: b(constant) ( 0x0ba ) 
+ 17154: 3 ( 0x0a8 ) 
+ 17155: named-token ( 0x0b6 ) three 0xf83
+ 17164: b(constant) ( 0x0ba ) 
+ 17165: b(lit) ( 0x010 ) 0x4
+ 17170: named-token ( 0x0b6 ) four 0xf84
+ 17178: b(constant) ( 0x0ba ) 
+ 17179: b(lit) ( 0x010 ) 0x5
+ 17184: named-token ( 0x0b6 ) five 0xf85
+ 17192: b(constant) ( 0x0ba ) 
+ 17193: b(lit) ( 0x010 ) 0x6
+ 17198: named-token ( 0x0b6 ) six 0xf86
+ 17205: b(constant) ( 0x0ba ) 
+ 17206: b(lit) ( 0x010 ) 0x7
+ 17211: named-token ( 0x0b6 ) seven 0xf87
+ 17220: b(constant) ( 0x0ba ) 
+ 17221: b(lit) ( 0x010 ) 0x8
+ 17226: named-token ( 0x0b6 ) eight 0xf88
+ 17235: b(constant) ( 0x0ba ) 
+ 17236: b(lit) ( 0x010 ) 0x9
+ 17241: named-token ( 0x0b6 ) nine 0xf89
+ 17249: b(constant) ( 0x0ba ) 
+ 17250: b(lit) ( 0x010 ) 0xa
+ 17255: named-token ( 0x0b6 ) ten 0xf8a
+ 17262: b(constant) ( 0x0ba ) 
+ 17263: b(lit) ( 0x010 ) 0xb
+ 17268: named-token ( 0x0b6 ) eleven 0xf8b
+ 17278: b(constant) ( 0x0ba ) 
+ 17279: b(lit) ( 0x010 ) 0xc
+ 17284: named-token ( 0x0b6 ) twelve 0xf8c
+ 17294: b(constant) ( 0x0ba ) 
+ 17295: b(lit) ( 0x010 ) 0xd
+ 17300: named-token ( 0x0b6 ) thirteen 0xf8d
+ 17312: b(constant) ( 0x0ba ) 
+ 17313: b(lit) ( 0x010 ) 0xe
+ 17318: named-token ( 0x0b6 ) fourteen 0xf8e
+ 17330: b(constant) ( 0x0ba ) 
+ 17331: b(lit) ( 0x010 ) 0xf
+ 17336: named-token ( 0x0b6 ) fifteen 0xf8f
+ 17347: b(constant) ( 0x0ba ) 
+ 17348: b(lit) ( 0x010 ) 0x10
+ 17353: named-token ( 0x0b6 ) sixteen 0xf90
+ 17364: b(constant) ( 0x0ba ) 
+ 17365: b(lit) ( 0x010 ) 0x11
+ 17370: named-token ( 0x0b6 ) seventeen 0xf91
+ 17383: b(constant) ( 0x0ba ) 
+ 17384: b(lit) ( 0x010 ) 0x12
+ 17389: named-token ( 0x0b6 ) eighteen 0xf92
+ 17401: b(constant) ( 0x0ba ) 
+ 17402: b(lit) ( 0x010 ) 0x13
+ 17407: named-token ( 0x0b6 ) nineteen 0xf93
+ 17419: b(constant) ( 0x0ba ) 
+ 17420: b(lit) ( 0x010 ) 0x14
+ 17425: named-token ( 0x0b6 ) twenty 0xf94
+ 17435: b(constant) ( 0x0ba ) 
+ 17436: b(lit) ( 0x010 ) 0x15
+ 17441: named-token ( 0x0b6 ) twenty-one 0xf95
+ 17455: b(constant) ( 0x0ba ) 
+ 17456: b(lit) ( 0x010 ) 0x16
+ 17461: named-token ( 0x0b6 ) twenty-two 0xf96
+ 17475: b(constant) ( 0x0ba ) 
+ 17476: b(lit) ( 0x010 ) 0x17
+ 17481: named-token ( 0x0b6 ) twenty-three 0xf97
+ 17497: b(constant) ( 0x0ba ) 
+ 17498: b(lit) ( 0x010 ) 0x18
+ 17503: named-token ( 0x0b6 ) twenty-four 0xf98
+ 17518: b(constant) ( 0x0ba ) 
+ 17519: b(lit) ( 0x010 ) 0x19
+ 17524: named-token ( 0x0b6 ) twenty-five 0xf99
+ 17539: b(constant) ( 0x0ba ) 
+ 17540: b(lit) ( 0x010 ) 0x1a
+ 17545: named-token ( 0x0b6 ) twenty-six 0xf9a
+ 17559: b(constant) ( 0x0ba ) 
+ 17560: b(lit) ( 0x010 ) 0x1b
+ 17565: named-token ( 0x0b6 ) twenty-seven 0xf9b
+ 17581: b(constant) ( 0x0ba ) 
+ 17582: b(lit) ( 0x010 ) 0x1c
+ 17587: named-token ( 0x0b6 ) twenty-eight 0xf9c
+ 17603: b(constant) ( 0x0ba ) 
+ 17604: b(lit) ( 0x010 ) 0x1d
+ 17609: named-token ( 0x0b6 ) twenty-nine 0xf9d
+ 17624: b(constant) ( 0x0ba ) 
+ 17625: b(lit) ( 0x010 ) 0x1e
+ 17630: named-token ( 0x0b6 ) thirty 0xf9e
+ 17640: b(constant) ( 0x0ba ) 
+ 17641: b(lit) ( 0x010 ) 0x1f
+ 17646: named-token ( 0x0b6 ) thirty-one 0xf9f
+ 17660: b(constant) ( 0x0ba ) 
+ 17661: b(lit) ( 0x010 ) 0x20
+ 17666: named-token ( 0x0b6 ) thirty-two 0xfa0
+ 17680: b(constant) ( 0x0ba ) 
+ 17681: b(lit) ( 0x010 ) 0x21
+ 17686: named-token ( 0x0b6 ) thirty-three 0xfa1
+ 17702: b(constant) ( 0x0ba ) 
+ 17703: b(lit) ( 0x010 ) 0x22
+ 17708: named-token ( 0x0b6 ) thirty-four 0xfa2
+ 17723: b(constant) ( 0x0ba ) 
+ 17724: b(lit) ( 0x010 ) 0x23
+ 17729: named-token ( 0x0b6 ) thirty-five 0xfa3
+ 17744: b(constant) ( 0x0ba ) 
+ 17745: b(lit) ( 0x010 ) 0x24
+ 17750: named-token ( 0x0b6 ) thirty-six 0xfa4
+ 17764: b(constant) ( 0x0ba ) 
+ 17765: b(lit) ( 0x010 ) 0x25
+ 17770: named-token ( 0x0b6 ) thirty-seven 0xfa5
+ 17786: b(constant) ( 0x0ba ) 
+ 17787: b(lit) ( 0x010 ) 0x26
+ 17792: named-token ( 0x0b6 ) thirty-eight 0xfa6
+ 17808: b(constant) ( 0x0ba ) 
+ 17809: b(lit) ( 0x010 ) 0x27
+ 17814: named-token ( 0x0b6 ) thirty-nine 0xfa7
+ 17829: b(constant) ( 0x0ba ) 
+ 17830: b(lit) ( 0x010 ) 0x28
+ 17835: named-token ( 0x0b6 ) forty 0xfa8
+ 17844: b(constant) ( 0x0ba ) 
+ 17845: b(lit) ( 0x010 ) 0x29
+ 17850: named-token ( 0x0b6 ) forty-one 0xfa9
+ 17863: b(constant) ( 0x0ba ) 
+ 17864: b(lit) ( 0x010 ) 0x2a
+ 17869: named-token ( 0x0b6 ) forty-two 0xfaa
+ 17882: b(constant) ( 0x0ba ) 
+ 17883: b(lit) ( 0x010 ) 0x2b
+ 17888: named-token ( 0x0b6 ) forty-three 0xfab
+ 17903: b(constant) ( 0x0ba ) 
+ 17904: b(lit) ( 0x010 ) 0x2c
+ 17909: named-token ( 0x0b6 ) forty-four 0xfac
+ 17923: b(constant) ( 0x0ba ) 
+ 17924: b(lit) ( 0x010 ) 0x2d
+ 17929: named-token ( 0x0b6 ) forty-five 0xfad
+ 17943: b(constant) ( 0x0ba ) 
+ 17944: b(lit) ( 0x010 ) 0x2e
+ 17949: named-token ( 0x0b6 ) forty-six 0xfae
+ 17962: b(constant) ( 0x0ba ) 
+ 17963: b(lit) ( 0x010 ) 0x2f
+ 17968: named-token ( 0x0b6 ) forty-seven 0xfaf
+ 17983: b(constant) ( 0x0ba ) 
+ 17984: b(lit) ( 0x010 ) 0x30
+ 17989: named-token ( 0x0b6 ) forty-eight 0xfb0
+ 18004: b(constant) ( 0x0ba ) 
+ 18005: b(lit) ( 0x010 ) 0x31
+ 18010: named-token ( 0x0b6 ) forty-nine 0xfb1
+ 18024: b(constant) ( 0x0ba ) 
+ 18025: b(lit) ( 0x010 ) 0x32
+ 18030: named-token ( 0x0b6 ) fifty 0xfb2
+ 18039: b(constant) ( 0x0ba ) 
+ 18040: b(lit) ( 0x010 ) 0x33
+ 18045: named-token ( 0x0b6 ) fifty-one 0xfb3
+ 18058: b(constant) ( 0x0ba ) 
+ 18059: b(lit) ( 0x010 ) 0x34
+ 18064: named-token ( 0x0b6 ) fifty-two 0xfb4
+ 18077: b(constant) ( 0x0ba ) 
+ 18078: b(lit) ( 0x010 ) 0x35
+ 18083: named-token ( 0x0b6 ) fifty-three 0xfb5
+ 18098: b(constant) ( 0x0ba ) 
+ 18099: b(lit) ( 0x010 ) 0x36
+ 18104: named-token ( 0x0b6 ) fifty-four 0xfb6
+ 18118: b(constant) ( 0x0ba ) 
+ 18119: b(lit) ( 0x010 ) 0x37
+ 18124: named-token ( 0x0b6 ) fifty-five 0xfb7
+ 18138: b(constant) ( 0x0ba ) 
+ 18139: b(lit) ( 0x010 ) 0x38
+ 18144: named-token ( 0x0b6 ) fifty-six 0xfb8
+ 18157: b(constant) ( 0x0ba ) 
+ 18158: b(lit) ( 0x010 ) 0x39
+ 18163: named-token ( 0x0b6 ) fifty-seven 0xfb9
+ 18178: b(constant) ( 0x0ba ) 
+ 18179: b(lit) ( 0x010 ) 0x3a
+ 18184: named-token ( 0x0b6 ) fifty-eight 0xfba
+ 18199: b(constant) ( 0x0ba ) 
+ 18200: b(lit) ( 0x010 ) 0x3b
+ 18205: named-token ( 0x0b6 ) fifty-nine 0xfbb
+ 18219: b(constant) ( 0x0ba ) 
+ 18220: b(lit) ( 0x010 ) 0x3c
+ 18225: named-token ( 0x0b6 ) sixty 0xfbc
+ 18234: b(constant) ( 0x0ba ) 
+ 18235: b(lit) ( 0x010 ) 0x3d
+ 18240: named-token ( 0x0b6 ) sixty-one 0xfbd
+ 18253: b(constant) ( 0x0ba ) 
+ 18254: b(lit) ( 0x010 ) 0x3e
+ 18259: named-token ( 0x0b6 ) sixty-two 0xfbe
+ 18272: b(constant) ( 0x0ba ) 
+ 18273: b(lit) ( 0x010 ) 0x3f
+ 18278: named-token ( 0x0b6 ) sixty-three 0xfbf
+ 18293: b(constant) ( 0x0ba ) 
+ 18294: b(lit) ( 0x010 ) 0x40
+ 18299: named-token ( 0x0b6 ) sixty-four 0xfc0
+ 18313: b(constant) ( 0x0ba ) 
+ 18314: b(lit) ( 0x010 ) 0x41
+ 18319: named-token ( 0x0b6 ) sixty-five 0xfc1
+ 18333: b(constant) ( 0x0ba ) 
+ 18334: b(lit) ( 0x010 ) 0x42
+ 18339: named-token ( 0x0b6 ) sixty-six 0xfc2
+ 18352: b(constant) ( 0x0ba ) 
+ 18353: b(lit) ( 0x010 ) 0x43
+ 18358: named-token ( 0x0b6 ) sixty-seven 0xfc3
+ 18373: b(constant) ( 0x0ba ) 
+ 18374: b(lit) ( 0x010 ) 0x44
+ 18379: named-token ( 0x0b6 ) sixty-eight 0xfc4
+ 18394: b(constant) ( 0x0ba ) 
+ 18395: b(lit) ( 0x010 ) 0x45
+ 18400: named-token ( 0x0b6 ) sixty-nine 0xfc5
+ 18414: b(constant) ( 0x0ba ) 
+ 18415: b(lit) ( 0x010 ) 0x46
+ 18420: named-token ( 0x0b6 ) seventy 0xfc6
+ 18431: b(constant) ( 0x0ba ) 
+ 18432: b(lit) ( 0x010 ) 0x47
+ 18437: named-token ( 0x0b6 ) seventy-one 0xfc7
+ 18452: b(constant) ( 0x0ba ) 
+ 18453: b(lit) ( 0x010 ) 0x48
+ 18458: named-token ( 0x0b6 ) seventy-two 0xfc8
+ 18473: b(constant) ( 0x0ba ) 
+ 18474: b(lit) ( 0x010 ) 0x49
+ 18479: named-token ( 0x0b6 ) seventy-three 0xfc9
+ 18496: b(constant) ( 0x0ba ) 
+ 18497: b(lit) ( 0x010 ) 0x4a
+ 18502: named-token ( 0x0b6 ) seventy-four 0xfca
+ 18518: b(constant) ( 0x0ba ) 
+ 18519: b(lit) ( 0x010 ) 0x4b
+ 18524: named-token ( 0x0b6 ) seventy-five 0xfcb
+ 18540: b(constant) ( 0x0ba ) 
+ 18541: b(lit) ( 0x010 ) 0x4c
+ 18546: named-token ( 0x0b6 ) seventy-six 0xfcc
+ 18561: b(constant) ( 0x0ba ) 
+ 18562: b(lit) ( 0x010 ) 0x4d
+ 18567: named-token ( 0x0b6 ) seventy-seven 0xfcd
+ 18584: b(constant) ( 0x0ba ) 
+ 18585: b(lit) ( 0x010 ) 0x4e
+ 18590: named-token ( 0x0b6 ) seventy-eight 0xfce
+ 18607: b(constant) ( 0x0ba ) 
+ 18608: b(lit) ( 0x010 ) 0x4f
+ 18613: named-token ( 0x0b6 ) seventy-nine 0xfcf
+ 18629: b(constant) ( 0x0ba ) 
+ 18630: b(lit) ( 0x010 ) 0x50
+ 18635: named-token ( 0x0b6 ) eighty 0xfd0
+ 18645: b(constant) ( 0x0ba ) 
+ 18646: b(lit) ( 0x010 ) 0x51
+ 18651: named-token ( 0x0b6 ) eighty-one 0xfd1
+ 18665: b(constant) ( 0x0ba ) 
+ 18666: b(lit) ( 0x010 ) 0x52
+ 18671: named-token ( 0x0b6 ) eighty-two 0xfd2
+ 18685: b(constant) ( 0x0ba ) 
+ 18686: b(lit) ( 0x010 ) 0x53
+ 18691: named-token ( 0x0b6 ) eighty-three 0xfd3
+ 18707: b(constant) ( 0x0ba ) 
+ 18708: b(lit) ( 0x010 ) 0x54
+ 18713: named-token ( 0x0b6 ) eighty-four 0xfd4
+ 18728: b(constant) ( 0x0ba ) 
+ 18729: b(lit) ( 0x010 ) 0x55
+ 18734: named-token ( 0x0b6 ) eighty-five 0xfd5
+ 18749: b(constant) ( 0x0ba ) 
+ 18750: b(lit) ( 0x010 ) 0x56
+ 18755: named-token ( 0x0b6 ) eighty-six 0xfd6
+ 18769: b(constant) ( 0x0ba ) 
+ 18770: b(lit) ( 0x010 ) 0x57
+ 18775: named-token ( 0x0b6 ) eighty-seven 0xfd7
+ 18791: b(constant) ( 0x0ba ) 
+ 18792: b(lit) ( 0x010 ) 0x58
+ 18797: named-token ( 0x0b6 ) eighty-eight 0xfd8
+ 18813: b(constant) ( 0x0ba ) 
+ 18814: b(lit) ( 0x010 ) 0x59
+ 18819: named-token ( 0x0b6 ) eighty-nine 0xfd9
+ 18834: b(constant) ( 0x0ba ) 
+ 18835: b(lit) ( 0x010 ) 0x5a
+ 18840: named-token ( 0x0b6 ) ninety 0xfda
+ 18850: b(constant) ( 0x0ba ) 
+ 18851: b(lit) ( 0x010 ) 0x5b
+ 18856: named-token ( 0x0b6 ) ninety-one 0xfdb
+ 18870: b(constant) ( 0x0ba ) 
+ 18871: b(lit) ( 0x010 ) 0x5c
+ 18876: named-token ( 0x0b6 ) ninety-two 0xfdc
+ 18890: b(constant) ( 0x0ba ) 
+ 18891: b(lit) ( 0x010 ) 0x5d
+ 18896: named-token ( 0x0b6 ) ninety-three 0xfdd
+ 18912: b(constant) ( 0x0ba ) 
+ 18913: b(lit) ( 0x010 ) 0x5e
+ 18918: named-token ( 0x0b6 ) ninety-four 0xfde
+ 18933: b(constant) ( 0x0ba ) 
+ 18934: b(lit) ( 0x010 ) 0x5f
+ 18939: named-token ( 0x0b6 ) ninety-five 0xfdf
+ 18954: b(constant) ( 0x0ba ) 
+ 18955: b(lit) ( 0x010 ) 0x60
+ 18960: named-token ( 0x0b6 ) ninety-six 0xfe0
+ 18974: b(constant) ( 0x0ba ) 
+ 18975: b(lit) ( 0x010 ) 0x61
+ 18980: named-token ( 0x0b6 ) ninety-seven 0xfe1
+ 18996: b(constant) ( 0x0ba ) 
+ 18997: b(lit) ( 0x010 ) 0x62
+ 19002: named-token ( 0x0b6 ) ninety-eight 0xfe2
+ 19018: b(constant) ( 0x0ba ) 
+ 19019: b(lit) ( 0x010 ) 0x63
+ 19024: named-token ( 0x0b6 ) ninety-nine 0xfe3
+ 19039: b(constant) ( 0x0ba ) 
+ 19040: b(lit) ( 0x010 ) 0x64
+ 19045: named-token ( 0x0b6 ) one_hundred 0xfe4
+ 19060: b(constant) ( 0x0ba ) 
+ 19061: b(lit) ( 0x010 ) 0x65
+ 19066: named-token ( 0x0b6 ) one_hundred_and_one 0xfe5
+ 19089: b(constant) ( 0x0ba ) 
+ 19090: b(lit) ( 0x010 ) 0x66
+ 19095: named-token ( 0x0b6 ) one_hundred_and_two 0xfe6
+ 19118: b(constant) ( 0x0ba ) 
+ 19119: b(lit) ( 0x010 ) 0x67
+ 19124: named-token ( 0x0b6 ) one_hundred_and_three 0xfe7
+ 19149: b(constant) ( 0x0ba ) 
+ 19150: b(lit) ( 0x010 ) 0x68
+ 19155: named-token ( 0x0b6 ) one_hundred_and_four 0xfe8
+ 19179: b(constant) ( 0x0ba ) 
+ 19180: b(lit) ( 0x010 ) 0x69
+ 19185: named-token ( 0x0b6 ) one_hundred_and_five 0xfe9
+ 19209: b(constant) ( 0x0ba ) 
+ 19210: b(lit) ( 0x010 ) 0x6a
+ 19215: named-token ( 0x0b6 ) one_hundred_and_six 0xfea
+ 19238: b(constant) ( 0x0ba ) 
+ 19239: b(lit) ( 0x010 ) 0x6b
+ 19244: named-token ( 0x0b6 ) one_hundred_and_seven 0xfeb
+ 19269: b(constant) ( 0x0ba ) 
+ 19270: b(lit) ( 0x010 ) 0x6c
+ 19275: named-token ( 0x0b6 ) one_hundred_and_eight 0xfec
+ 19300: b(constant) ( 0x0ba ) 
+ 19301: b(lit) ( 0x010 ) 0x6d
+ 19306: named-token ( 0x0b6 ) one_hundred_and_nine 0xfed
+ 19330: b(constant) ( 0x0ba ) 
+ 19331: b(lit) ( 0x010 ) 0x6e
+ 19336: named-token ( 0x0b6 ) one_hundred_and_ten 0xfee
+ 19359: b(constant) ( 0x0ba ) 
+ 19360: b(lit) ( 0x010 ) 0x6f
+ 19365: named-token ( 0x0b6 ) one_hundred_and_eleven 0xfef
+ 19391: b(constant) ( 0x0ba ) 
+ 19392: b(lit) ( 0x010 ) 0x70
+ 19397: named-token ( 0x0b6 ) one_hundred_and_twelve 0xff0
+ 19423: b(constant) ( 0x0ba ) 
+ 19424: b(lit) ( 0x010 ) 0x71
+ 19429: named-token ( 0x0b6 ) one_hundred_and_thirteen 0xff1
+ 19457: b(constant) ( 0x0ba ) 
+ 19458: b(lit) ( 0x010 ) 0x72
+ 19463: named-token ( 0x0b6 ) one_hundred_and_fourteen 0xff2
+ 19491: b(constant) ( 0x0ba ) 
+ 19492: b(lit) ( 0x010 ) 0x73
+ 19497: named-token ( 0x0b6 ) one_hundred_and_fifteen 0xff3
+ 19524: b(constant) ( 0x0ba ) 
+ 19525: b(lit) ( 0x010 ) 0x74
+ 19530: named-token ( 0x0b6 ) one_hundred_and_sixteen 0xff4
+ 19557: b(constant) ( 0x0ba ) 
+ 19558: b(lit) ( 0x010 ) 0x75
+ 19563: named-token ( 0x0b6 ) one_hundred_and_seventeen 0xff5
+ 19592: b(constant) ( 0x0ba ) 
+ 19593: b(lit) ( 0x010 ) 0x76
+ 19598: named-token ( 0x0b6 ) one_hundred_and_eighteen 0xff6
+ 19626: b(constant) ( 0x0ba ) 
+ 19627: b(lit) ( 0x010 ) 0x77
+ 19632: named-token ( 0x0b6 ) one_hundred_and_nineteen 0xff7
+ 19660: b(constant) ( 0x0ba ) 
+ 19661: b(lit) ( 0x010 ) 0x78
+ 19666: named-token ( 0x0b6 ) one_hundred_and_twenty 0xff8
+ 19692: b(constant) ( 0x0ba ) 
+ 19693: b(lit) ( 0x010 ) 0x79
+ 19698: named-token ( 0x0b6 ) one_hundred_and_twenty-one 0xff9
+ 19728: b(constant) ( 0x0ba ) 
+ 19729: b(lit) ( 0x010 ) 0x7a
+ 19734: named-token ( 0x0b6 ) one_hundred_and_twenty-two 0xffa
+ 19764: b(constant) ( 0x0ba ) 
+ 19765: b(lit) ( 0x010 ) 0x7b
+ 19770: named-token ( 0x0b6 ) one_hundred_and_twenty-three 0xffb
+ 19802: b(constant) ( 0x0ba ) 
+ 19803: b(lit) ( 0x010 ) 0x7c
+ 19808: named-token ( 0x0b6 ) one_hundred_and_twenty-four 0xffc
+ 19839: b(constant) ( 0x0ba ) 
+ 19840: b(lit) ( 0x010 ) 0x7d
+ 19845: named-token ( 0x0b6 ) one_hundred_and_twenty-five 0xffd
+ 19876: b(constant) ( 0x0ba ) 
+ 19877: b(lit) ( 0x010 ) 0x7e
+ 19882: named-token ( 0x0b6 ) one_hundred_and_twenty-six 0xffe
+ 19912: b(constant) ( 0x0ba ) 
+ 19913: b(lit) ( 0x010 ) 0x7f
+ 19918: named-token ( 0x0b6 ) one_hundred_and_twenty-seven 0xfff
+ 19950: b(constant) ( 0x0ba ) 
+ 19951: end0 ( 0x000 ) 
+\  Detokenization finished normally after 5633 bytes.
+End of file.
+

@@ -1,0 +1,19 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start4 ( 0x0f3 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x04b6 (Ok)
+     4:   len:       0x0015 ( 21 bytes)
+     8: named-token ( 0x0b6 ) foobar 0x800
+    18: b(:) ( 0x0b7 ) 
+    19: b(;) ( 0x0c2 ) 
+    20: end0 ( 0x000 ) 
+\  Detokenization finished normally after 21 bytes.
+End of file.
+

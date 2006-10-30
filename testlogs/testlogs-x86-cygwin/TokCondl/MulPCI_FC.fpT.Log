@@ -1,0 +1,43 @@
+toke -v -l -d first-path=true -o MulPCI_FC.fpT.fc MulPCI_FC.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+User-Defined Symbols:
+	first-path = true
+
+Tokenizing  MulPCI_FC.fth   Binary output to MulPCI_FC.fpT.fc   FLoad-list to MulPCI_FC.fpT.fl 
+Warning:  File MulPCI_FC.fth, Line 9.  Multi-line string, started on line 8
+Advisory:  File MulPCI_FC.fth, Line 13.  (Output Position = 52).  PCI header vendor id=0xb00b, device id=0xc0ed, class=090210
+Message:  File MulPCI_FC.fth, Line 16.  (Output Position = 52).  (PCI-Block Position = 0).  Loading first pass
+Advisory:  File MulPCI_FC.fth, Line 17.  (Output Position = 52).  (PCI-Block Position = 0).  PCI header not last image.
+Advisory:  File MulPCI_FC.fth, Line 19.  (Output Position = 52).  (PCI-Block Position = 0).  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 110).  (PCI-Block Position = 58).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 6.  (Output Position = 146).  (PCI-Block Position = 94).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 265).  (PCI-Block Position = 213).  FCODE-END encountered; processing...
+toke: checksum is 0x4365 (214 bytes).  Last assigned FCode = 0x801
+Adding 246 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Advisory:  File MulPCI_FC.fth, Line 24.  (Output Position = 512).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File MulPCI_FC.fth, Line 25.  (Output Position = 564).  PCI header vendor id=0xb00b, device id=0xfece, class=007112
+Message:  File MulPCI_FC.fth, Line 28.  (Output Position = 564).  (PCI-Block Position = 0).  Loading second pass
+Advisory:  File MulPCI_FC.fth, Line 29.  (Output Position = 564).  (PCI-Block Position = 0).  Last image for PCI header.
+Advisory:  File MulPCI_FC.fth, Line 31.  (Output Position = 564).  (PCI-Block Position = 0).  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 564).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 630).  (PCI-Block Position = 66).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 20.  (Output Position = 666).  (PCI-Block Position = 102).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 801).  (PCI-Block Position = 237).  FCODE-END encountered; processing...
+toke: checksum is 0x4bfd (238 bytes).  Last assigned FCode = 0x801
+Adding 222 bytes of zero padding to PCI image.
+
+Tokenization Completed.  1 Warning, 13 Advisories, 4 Messages.
+toke: wrote 1024 bytes to bytecode file 'MulPCI_FC.fpT.fc'

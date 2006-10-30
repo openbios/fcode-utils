@@ -1,0 +1,108 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xa1d5 (Ok)
+     4:   len:       0x04e1 ( 1249 bytes)
+     8: named-token ( 0x0b6 ) HotNasty 0x800
+    20: b(create) ( 0x0bb ) 
+    21: b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                " Begin Nest Test Test"
+    43: type ( 0x090 ) 
+    44: b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                " Exists, level 1"
+    61: type ( 0x090 ) 
+    62: b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                " Exists and exists, level 2"
+    90: type ( 0x090 ) 
+    91: b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                " Exists but doesn't exist.  What?  Level 2"
+   134: type ( 0x090 ) 
+   135: b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                " Resumes existence, level 1"
+   163: type ( 0x090 ) 
+   164: b(") ( 0x012 ) ( len=0x26 [38 bytes] )
+                " Exists but not exists.  What?  Level 2"
+   204: type ( 0x090 ) 
+   205: b(") ( 0x012 ) ( len=0x25 [37 bytes] )
+                " Exists and doesn't not exist, level 2"
+   244: type ( 0x090 ) 
+   245: b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                " Still exists, level 1"
+   268: type ( 0x090 ) 
+   269: b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                " Doesn't exist, level 1"
+   293: type ( 0x090 ) 
+   294: b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                " Doesn't exist but exists.  What?  Level 2"
+   337: type ( 0x090 ) 
+   338: b(") ( 0x012 ) ( len=0x28 [40 bytes] )
+                " Doesn't exist and doesn't exist, level 2"
+   380: type ( 0x090 ) 
+   381: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                " Resumes non-existence, level 1"
+   413: b(") ( 0x012 ) ( len=0x25 [37 bytes] )
+                " Doesn't exist and not exists, level 2"
+   452: type ( 0x090 ) 
+   453: b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                " Doesn't exist but doesn't not exist.  What?  Level 2"
+   507: type ( 0x090 ) 
+   508: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " Still doesn't exist, level 1"
+   538: type ( 0x090 ) 
+   539: b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                " Middle of Nest Test Test"
+   565: type ( 0x090 ) 
+   566: b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                " Not exists, pass 2, level 1"
+   595: type ( 0x090 ) 
+   596: b(") ( 0x012 ) ( len=0x2e [46 bytes] )
+                " Not exists but exists.  What?  Pass 2, Level 2"
+   644: type ( 0x090 ) 
+   645: b(") ( 0x012 ) ( len=0x2d [45 bytes] )
+                " Not exists and doesn't exist, pass 2, level 2"
+   692: type ( 0x090 ) 
+   693: b(") ( 0x012 ) ( len=0x26 [38 bytes] )
+                " Resumes non-existence, pass 2, level 1"
+   733: b(") ( 0x012 ) ( len=0x2a [42 bytes] )
+                " Not exists and not exists, pass 2, level 2"
+   777: type ( 0x090 ) 
+   778: b(") ( 0x012 ) ( len=0x39 [57 bytes] )
+                " Not exists but doesn't not exist.  What?  Pass 2, Level 2"
+   837: type ( 0x090 ) 
+   838: b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                " Still not exists, pass 2, level 1"
+   873: type ( 0x090 ) 
+   874: b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                " Doesn't not exist, pass 2, level 1"
+   910: type ( 0x090 ) 
+   911: b(") ( 0x012 ) ( len=0x2d [45 bytes] )
+                " Doesn't not exist and exists, pass 2, level 2"
+   958: type ( 0x090 ) 
+   959: b(") ( 0x012 ) ( len=0x3c [60 bytes] )
+                " Doesn't not exist but doesn't exist.  What?  Pass 2, Level 2"
+  1021: type ( 0x090 ) 
+  1022: b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                " Resumes not non-existing, pass 2, level 1"
+  1065: b(") ( 0x012 ) ( len=0x39 [57 bytes] )
+                " Doesn't not exist but not exists.  What?  Pass 2, Level 2"
+  1124: type ( 0x090 ) 
+  1125: b(") ( 0x012 ) ( len=0x38 [56 bytes] )
+                " Doesn't not exist and doesn't not exist, pass 2, level 1"
+  1183: type ( 0x090 ) 
+  1184: b(") ( 0x012 ) ( len=0x28 [40 bytes] )
+                " Still doesn't not exist, pass 2, level 1"
+  1226: type ( 0x090 ) 
+  1227: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " End Nest Test Test"
+  1247: type ( 0x090 ) 
+  1248: end0 ( 0x000 ) 
+\  Detokenization finished normally after 1249 bytes.
+End of file.
+

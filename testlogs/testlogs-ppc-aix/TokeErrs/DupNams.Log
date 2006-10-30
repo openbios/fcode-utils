@@ -1,0 +1,164 @@
+toke -v -f Local-Values -T alley-oop -T boop -T croop -T doop -T drop -T dup -T foop -T floop -T gloop -T _harpo -T koop -T loop -T noop -T poop -T shtoop -T zoop -T fontbytes -T blink-screen -T base -T bell DupNams.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tracing these symbols:   alley-oop   boop   croop   doop   drop   dup   foop   floop   gloop   _harpo   koop   loop   noop   poop   shtoop   zoop   fontbytes   blink-screen   base   bell
+Trace-Note:  drop (FCode token = 0x046) is a built-in word.
+Trace-Note:  dup (FCode token = 0x047) is a built-in word.
+Trace-Note:  noop (FCode token = 0x07b) is a built-in word.
+Trace-Note:  base (FCode token = 0x0a0) is a built-in VARIABLE.
+Trace-Note:  bell (FCode token = 0x0ab) is a built-in CONSTANT.
+Trace-Note:  blink-screen (FCode token = 0x15b) is a built-in DEFER.
+Trace-Note:  fontbytes (FCode token = 0x16f) is a built-in VALUE.
+Trace-Note:  loop is a built-in word.
+Trace-Note:  noop is a built-in word in Tokenizer-Escape mode.
+
+Tokenizing  DupNams.fth   Binary output to DupNams.fc 
+Trace-Note:  File DupNams.fth, Line 34.  Creating foop as an ALIAS to dup (FCode token = 0x047), which is defined with Global scope.
+Trace-Note:  File DupNams.fth, Line 34.  DUP is a Global definition, but its alias, foop, will only be defined in the top-level device-node.
+Trace-Note:  File DupNams.fth, Line 36.  Creating croop as a MACRO in the top-level device-node.
+Trace-Note:  File DupNams.fth, Line 38.  Creating dup as an ALIAS to croop, which is defined as a MACRO in the top-level device-node.
+Warning:  File DupNams.fth, Line 38.  Duplicate definition:   dup  already exists in the core vocabulary.
+Advisory:  File DupNams.fth, Line 46.  3DROP is a Global definition, but its alias, {pop-locals}, will only be defined in the top-level device-node.
+Advisory:  File DupNams.fth, Line 51.  Initiating Global Scope definitions.
+Trace-Note:  File DupNams.fth, Line 53.  Creating flop as an ALIAS to drop (FCode token = 0x046), which is defined in the top-level device-node.
+Message:  File DupNams.fth, Line 54.  Sync Up Diffs w/ prev. Release.
+
+
+Trace-Note:  File DupNams.fth, Line 55.  Creating floop as a MACRO with Global scope.
+Trace-Note:  File DupNams.fth, Line 56.  Creating drop as an ALIAS to floop, which is defined as a MACRO in the top-level device-node.
+Warning:  File DupNams.fth, Line 56.  Duplicate definition:   drop  already exists in the core vocabulary.
+Advisory:  File DupNams.fth, Line 58.  Terminating Global Scope definitions; resuming Device-node definitions.
+Advisory:  File DupNams.fth, Line 62.  FCODE-VERSION2 encountered; processing...
+Trace-Note:  File DupNams.fth, Line 64.  (Output Position = 8).  Creating noop (FCode token = 0x800) as a Headerless COLON in the top-level device-node, which began on line 62
+Warning:  File DupNams.fth, Line 64.  (Output Position = 8).  Duplicate definition:   noop  already exists in the core vocabulary.
+Trace-Note:  File DupNams.fth, Line 65.  (Output Position = 25).  Creating zoop as a MACRO in the top-level device-node, which began on line 62
+Trace-Note:  File DupNams.fth, Line 66.  (Output Position = 25).  Creating poop (FCode token = 0x801) as a Headerless COLON in the top-level device-node, which began on line 62
+Advisory:  File DupNams.fth, Line 68.  (Output Position = 35).  Encountered new-device.  Starting new device-node.
+Trace-Note:  File DupNams.fth, Line 69.  (Output Position = 37).  Creating zoop (FCode token = 0x802) as a Headerless COLON in the current device-node, which began on line 68
+Trace-Note:  File DupNams.fth, Line 69.  (Output Position = 71).  Attempt to invoke (undefined) croop.
+Error:  File DupNams.fth, Line 69.  (Output Position = 71).  Word  croop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 69.  (Output Position = 71).  croop is defined as a MACRO in the top-level device-node, which began on line 62
+Trace-Note:  File DupNams.fth, Line 70.  (Output Position = 72).  Creating croop (FCode token = 0x803) as a Headerless COLON in the current device-node, which began on line 68
+Trace-Note:  File DupNams.fth, Line 71.  (Output Position = 120).  Attempt to invoke (undefined) foop.
+Error:  File DupNams.fth, Line 71.  (Output Position = 120).  Word  foop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 71.  (Output Position = 120).  foop is defined in the top-level device-node, which began on line 62
+Trace-Note:  File DupNams.fth, Line 72.  (Output Position = 120).  Invoking drop defined as a MACRO.
+Trace-Note:  File DupNams.fth, Line 72.  (Output Position = 120).  Invoking flop (FCode token = 0x046).
+Message:  File DupNams.fth, Line 72.  (Output Position = 121).  Using FLOOP 
+Trace-Note:  File DupNams.fth, Line 73.  (Output Position = 121).  Invoking floop defined as a MACRO.
+Trace-Note:  File DupNams.fth, Line 73.  (Output Position = 121).  Invoking flop (FCode token = 0x046).
+Message:  File DupNams.fth, Line 73.  (Output Position = 122).  Using FLOOP 
+Trace-Note:  File DupNams.fth, Line 75.  (Output Position = 123).  Creating foop (FCode token = 0x804) as a Headerless COLON in the current device-node, which began on line 68
+Trace-Note:  File DupNams.fth, Line 76.  (Output Position = 164).  Creating floop (FCode token = 0x805) as a Headerless COLON in the current device-node, which began on line 68
+Warning:  File DupNams.fth, Line 76.  (Output Position = 164).  Duplicate definition:   floop  already exists as a MACRO in the core vocabulary.
+Trace-Note:  File DupNams.fth, Line 77.  (Output Position = 183).  Creating boop (FCode token = 0x806) as a Headerless COLON in the current device-node, which began on line 68
+Trace-Note:  File DupNams.fth, Line 77.  (Output Position = 187).  Creating _harpo as a Local Value name  in definition of  BOOP 
+Error:  File DupNams.fth, Line 77.  (Output Position = 189).  The word {push-locals} is only recognized in tokenizer-escape mode.
+Trace-Note:  File DupNams.fth, Line 78.  (Output Position = 189).  Creating _harpo as a CONSTANT in Tokenizer-Escape mode.
+Trace-Note:  File DupNams.fth, Line 79.  (Output Position = 189).  Attempt to invoke (undefined) poop.
+Error:  File DupNams.fth, Line 79.  (Output Position = 189).  Word  poop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 79.  (Output Position = 189).  poop is defined as a COLON in the top-level device-node, which began on line 62
+Error:  File DupNams.fth, Line 79.  (Output Position = 190).  Word  _{local}  is not in dictionary.
+Advisory:  File DupNams.fth, Line 79.  (Output Position = 190).  _{local} is defined as a MACRO in the top-level device-node, which began on line 62
+Error:  File DupNams.fth, Line 80.  (Output Position = 191).  The word _cheeko is not recognized in tokenizer-escape mode.
+Advisory:  File DupNams.fth, Line 80.  (Output Position = 191).  _cheeko is defined as a Local Value name.
+Error:  File DupNams.fth, Line 80.  (Output Position = 191).  stack underflow at or near  a__gent 
+Trace-Note:  File DupNams.fth, Line 81.  (Output Position = 191).  Invoking floop (FCode token = 0x805) defined as a COLON.
+Error:  File DupNams.fth, Line 82.  (Output Position = 194).  Word  {pop-locals}  is not in dictionary.
+Advisory:  File DupNams.fth, Line 82.  (Output Position = 194).  {pop-locals} is defined as a MACRO in the top-level device-node, which began on line 62
+Trace-Note:  File DupNams.fth, Line 84.  (Output Position = 195).  Creating droop as an ALIAS to drop, which is defined as a MACRO with Global scope.
+Trace-Note:  File DupNams.fth, Line 84.  (Output Position = 195).  DROP is a Global definition, but its alias, droop, will only be defined in the current device-node, which began on line 68
+Advisory:  File DupNams.fth, Line 85.  (Output Position = 195).  2DROP is a Global definition, but its alias, drupe, will only be defined in the current device-node, which began on line 68
+Trace-Note:  File DupNams.fth, Line 87.  (Output Position = 195).  Invoking boop (FCode token = 0x806) defined as a COLON.
+Warning:  File DupNams.fth, Line 87.  (Output Position = 197).  Duplicate definition:   o'ryan  already exists as a CONSTANT in Tokenizer-Escape mode.
+Trace-Note:  File DupNams.fth, Line 88.  (Output Position = 197).  Invoking foop (FCode token = 0x804) defined as a COLON.
+Warning:  File DupNams.fth, Line 88.  (Output Position = 204).  Duplicate definition:   3  already exists as a CONSTANT in the core vocabulary.
+Advisory:  File DupNams.fth, Line 90.  (Output Position = 208).  Encountered new-device.  Starting new device-node.  Suspending definitions of parent-device node that started on line 68
+Trace-Note:  File DupNams.fth, Line 92.  (Output Position = 214).  Attempt to invoke (undefined) _harpo.
+Error:  File DupNams.fth, Line 92.  (Output Position = 214).  The word _harpo is only recognized in tokenizer-escape mode.
+Error:  File DupNams.fth, Line 93.  (Output Position = 214).  Word  droop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 93.  (Output Position = 214).  droop is defined as a MACRO in the device-node that started on line 68
+Error:  File DupNams.fth, Line 94.  (Output Position = 214).  Word  drupe  is not in dictionary.
+Advisory:  File DupNams.fth, Line 94.  (Output Position = 214).  drupe is defined in the device-node that started on line 68
+Trace-Note:  File DupNams.fth, Line 95.  (Output Position = 214).  Attempt to invoke (undefined) boop.
+Error:  File DupNams.fth, Line 95.  (Output Position = 214).  Word  boop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 95.  (Output Position = 214).  boop is defined as a COLON in the device-node that started on line 68
+Trace-Note:  File DupNams.fth, Line 96.  (Output Position = 214).  Invoking floop defined as a MACRO.
+Trace-Note:  File DupNams.fth, Line 96.  (Output Position = 214).  Invoking flop (FCode token = 0x046).
+Message:  File DupNams.fth, Line 96.  (Output Position = 215).  Using FLOOP 
+Advisory:  File DupNams.fth, Line 98.  (Output Position = 216).  ENCODE-INT is a Global definition, but its alias, shoop, will only be defined in the current device-node, which began on line 90
+Warning:  File DupNams.fth, Line 101.  (Output Position = 216).  Duplicate definition:   octal  already exists in the core vocabulary.
+Trace-Note:  File DupNams.fth, Line 102.  (Output Position = 216).  Attempt to invoke (undefined) boop.
+Error:  File DupNams.fth, Line 102.  (Output Position = 216).  Word  boop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 102.  (Output Position = 216).  boop is defined as a COLON in the device-node that started on line 68
+Error:  File DupNams.fth, Line 103.  (Output Position = 216).  The word char-height is not recognized in tokenizer-escape mode.
+Advisory:  File DupNams.fth, Line 103.  (Output Position = 216).  char-height is defined as a VALUE in the core vocabulary.
+Error:  File DupNams.fth, Line 104.  (Output Position = 216).  The word eval is not recognized in tokenizer-escape mode.
+Advisory:  File DupNams.fth, Line 104.  (Output Position = 216).  eval is defined in the core vocabulary.
+Error:  File DupNams.fth, Line 105.  (Output Position = 216).  The word moop is not recognized in tokenizer-escape mode.
+Advisory:  File DupNams.fth, Line 105.  (Output Position = 216).  moop is defined as a COLON in the current device-node, which began on line 90
+Error:  File DupNams.fth, Line 106.  (Output Position = 216).  The word shoop is not recognized in tokenizer-escape mode.
+Advisory:  File DupNams.fth, Line 106.  (Output Position = 216).  shoop is defined in the current device-node, which began on line 90
+Advisory:  File DupNams.fth, Line 109.  (Output Position = 216).  Encountered finish-device.  Resetting definitions of device node that started on line 90
+Advisory:  File DupNams.fth, Line 109.  (Output Position = 216).  Resuming definitions of parent device-node that started on line 68
+Trace-Note:  File DupNams.fth, Line 112.  (Output Position = 222).  Invoking floop (FCode token = 0x805) defined as a COLON.
+Trace-Note:  File DupNams.fth, Line 113.  (Output Position = 224).  Attempt to invoke (undefined) gloop.
+Error:  File DupNams.fth, Line 113.  (Output Position = 224).  Word  gloop  is not in dictionary.
+Error:  File DupNams.fth, Line 114.  (Output Position = 224).  Word  shoop  is not in dictionary.
+Trace-Note:  File DupNams.fth, Line 116.  (Output Position = 225).  Creating coop as an ALIAS to floop (FCode token = 0x805), which is defined as a COLON in the current device-node, which began on line 68
+Error:  File DupNams.fth, Line 118.  (Output Position = 229).  Word  shoop  is not in dictionary.
+Trace-Note:  File DupNams.fth, Line 119.  (Output Position = 229).  Invoking coop (FCode token = 0x805) defined as a COLON.
+Trace-Note:  File DupNams.fth, Line 120.  (Output Position = 231).  Attempt to invoke (undefined) poop.
+Error:  File DupNams.fth, Line 120.  (Output Position = 231).  Word  poop  is not in dictionary.
+Advisory:  File DupNams.fth, Line 120.  (Output Position = 231).  poop is defined as a COLON in the top-level device-node, which began on line 62
+Advisory:  File DupNams.fth, Line 123.  (Output Position = 232).  Encountered finish-device.  Resetting definitions of device node that started on line 68
+Advisory:  File DupNams.fth, Line 123.  (Output Position = 232).  Resuming definitions since start of tokenization.
+Advisory:  File DupNams.fth, Line 124.  (Output Position = 234).  START4 encountered; processing...
+Warning:  File DupNams.fth, Line 124.  (Output Position = 234).  spread of 4 not supported.
+Warning:  File DupNams.fth, Line 124.  (Output Position = 234).  Only one "FCode Starter" permitted per tokenization.  Ignoring...
+Advisory:  File DupNams.fth, Line 125.  (Output Position = 234).  FCODE-END encountered; processing...
+toke: checksum is 0x4c0f (235 bytes).  Last assigned FCode = 0x80a
+Advisory:  File DupNams.fth, Line 128.  (Output Position = 235).  FCODE-END encountered; processing...
+Error:  File DupNams.fth, Line 128.  (Output Position = 236).  Missing FCode header.
+Advisory:  File DupNams.fth, Line 130.  (Output Position = 236).  START0 encountered; processing...
+Warning:  File DupNams.fth, Line 130.  (Output Position = 236).  spread of 0 not supported.
+Error:  File DupNams.fth, Line 130.  (Output Position = 236).  Cannot create FCode header after FCode output has begun.
+Warning:  File DupNams.fth, Line 132.  (Output Position = 264).  Appearance of END1 in FCode source code is not intended by IEEE 1275-1994
+Error:  File DupNams.fth, Line 132.  (Output Position = 265).  Missing FCode header.
+Advisory:  File DupNams.fth, Line 134.  (Output Position = 265).  START2 encountered; processing...
+Warning:  File DupNams.fth, Line 134.  (Output Position = 265).  spread of 2 not supported.
+Error:  File DupNams.fth, Line 134.  (Output Position = 265).  Cannot create FCode header after FCode output has begun.
+Advisory:  File DupNams.fth, Line 136.  (Output Position = 305).  END0 encountered; processing...
+Error:  File DupNams.fth, Line 136.  (Output Position = 306).  Missing FCode header.
+Advisory:  File DupNams.fth, Line 138.  (Output Position = 306).  Output is redirected to file:  poop.fc
+Tokenization Completed.  26 Errors, 12 Warnings, 34 Advisories, 4 Messages, 39 Trace-Notes.
+Suppressing binary output.

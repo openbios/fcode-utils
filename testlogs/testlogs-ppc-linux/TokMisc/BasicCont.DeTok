@@ -1,0 +1,141 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x8411 (Ok)
+     4:   len:       0x018b ( 395 bytes)
+     8: named-token ( 0x0b6 ) mishka 0x800
+    18: b(:) ( 0x0b7 ) 
+    19:     b(") ( 0x012 ) ( len=5 )
+                    " begin"
+    26:     type ( 0x090 ) 
+    27:     b(<mark) ( 0x0b1 ) 
+    28:         b(") ( 0x012 ) ( len=5 )
+                        " -1 if"
+    35:         type ( 0x090 ) 
+    36:         -1 ( 0x0a4 ) 
+    37:         b?branch ( 0x014 ) 0x000e ( =dec 14  dest = 52 )
+    40:             exit ( 0x033 ) 
+    41:             b(") ( 0x012 ) ( len=4 )
+                            " else"
+    47:             type ( 0x090 ) 
+    48:             bbranch ( 0x013 ) 0x000d ( =dec 13  dest = 62 )
+    51:             b(>resolve) ( 0x0b2 ) 
+    52:             0 ( 0x0a5 ) 
+    53:             drop ( 0x046 ) 
+    54:             b(") ( 0x012 ) ( len=4 )
+                            " then"
+    60:             type ( 0x090 ) 
+    61:         b(>resolve) ( 0x0b2 ) 
+    62:         b(") ( 0x012 ) ( len=5 )
+                        " again"
+    69:         type ( 0x090 ) 
+    70:         bbranch ( 0x013 ) 0xffd5 ( =dec -43  dest = 28 )
+    73:     b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                    " Donshka vith Mishka"
+    94:     type ( 0x090 ) 
+    95: b(;) ( 0x0c2 ) 
+    96: named-token ( 0x0b6 ) moose 0x801
+   105: b(:) ( 0x0b7 ) 
+   106:     b(") ( 0x012 ) ( len=5 )
+                    " begin"
+   113:     type ( 0x090 ) 
+   114:     b(<mark) ( 0x0b1 ) 
+   115:         b(") ( 0x012 ) ( len=7 )
+                        " 0 while"
+   124:         type ( 0x090 ) 
+   125:         0 ( 0x0a5 ) 
+   126:         b?branch ( 0x014 ) 0x000f ( =dec 15  dest = 142 )
+   129:             b(") ( 0x012 ) ( len=6 )
+                            " repeat"
+   137:             type ( 0x090 ) 
+   138:             bbranch ( 0x013 ) 0xffe8 ( =dec -24  dest = 115 )
+   141:     b(>resolve) ( 0x0b2 ) 
+   142:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " Done Vith Moose."
+   160:     type ( 0x090 ) 
+   161: b(;) ( 0x0c2 ) 
+   162: named-token ( 0x0b6 ) minski 0x802
+   172: b(:) ( 0x0b7 ) 
+   173:     b(") ( 0x012 ) ( len=6 )
+                    " 1 0 do"
+   181:     type ( 0x090 ) 
+   182:     1 ( 0x0a6 ) 
+   183:     0 ( 0x0a5 ) 
+   184:     b(do) ( 0x017 ) 0x0027 ( =dec 39  dest = 224 )
+   187:         b(") ( 0x012 ) ( len=6 )
+                        " i drop"
+   195:         type ( 0x090 ) 
+   196:         i ( 0x019 ) 
+   197:         drop ( 0x046 ) 
+   198:         b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                        " Please leave"
+   212:         type ( 0x090 ) 
+   213:         b(leave) ( 0x01b ) 
+   214:         b(") ( 0x012 ) ( len=4 )
+                        " loop"
+   220:         type ( 0x090 ) 
+   221:     b(loop) ( 0x015 ) 0xffdd ( =dec -35  dest = 187 )
+   224:     b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                    " Donesky vith Minski"
+   245:     type ( 0x090 ) 
+   246: b(;) ( 0x0c2 ) 
+   247: named-token ( 0x0b6 ) goofsky 0x803
+   258: b(:) ( 0x0b7 ) 
+   259:     b(") ( 0x012 ) ( len=6 )
+                    " 0 case"
+   267:     type ( 0x090 ) 
+   268:     0 ( 0x0a5 ) 
+   269:     b(case) ( 0x0c4 ) 
+   270:         b(") ( 0x012 ) ( len=4 )
+                        " 1 of"
+   276:         type ( 0x090 ) 
+   277:         1 ( 0x0a6 ) 
+   278:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 295 )
+   281:             b(") ( 0x012 ) ( len=7 )
+                            " 1 endof"
+   290:             type ( 0x090 ) 
+   291:             1 ( 0x0a6 ) 
+   292:         b(endof) ( 0x0c6 ) 0x004c ( =dec 76  dest = 369 )
+   295:         b(") ( 0x012 ) ( len=4 )
+                        " 2 of"
+   301:         type ( 0x090 ) 
+   302:         2 ( 0x0a7 ) 
+   303:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 320 )
+   306:             b(") ( 0x012 ) ( len=7 )
+                            " 2 endof"
+   315:             type ( 0x090 ) 
+   316:             2 ( 0x0a7 ) 
+   317:         b(endof) ( 0x0c6 ) 0x0033 ( =dec 51  dest = 369 )
+   320:         b(") ( 0x012 ) ( len=4 )
+                        " 3 of"
+   326:         type ( 0x090 ) 
+   327:         3 ( 0x0a8 ) 
+   328:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 345 )
+   331:             b(") ( 0x012 ) ( len=7 )
+                            " 3 endof"
+   340:             type ( 0x090 ) 
+   341:             3 ( 0x0a8 ) 
+   342:         b(endof) ( 0x0c6 ) 0x001a ( =dec 26  dest = 369 )
+   345:         b(") ( 0x012 ) ( len=9 )
+                        " default 0"
+   356:         type ( 0x090 ) 
+   357:         0 ( 0x0a5 ) 
+   358:         b(") ( 0x012 ) ( len=7 )
+                        " endcase"
+   367:         type ( 0x090 ) 
+   368:     b(endcase) ( 0x0c5 ) 
+   369:     b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                    " Donesky vith goofsky."
+   392:     type ( 0x090 ) 
+   393: b(;) ( 0x0c2 ) 
+   394: end0 ( 0x000 ) 
+\  Detokenization finished normally after 395 bytes.
+End of file.
+

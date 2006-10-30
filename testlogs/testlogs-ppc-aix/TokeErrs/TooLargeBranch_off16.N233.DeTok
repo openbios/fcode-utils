@@ -1,0 +1,3896 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x63d4 (Ok)
+     4:   len:       0x822b ( 33323 bytes)
+     8: named-token ( 0x0b6 ) too-large-case 0x800
+    26: b(:) ( 0x0b7 ) 
+    27:     b(") ( 0x012 ) ( len=0x29 [41 bytes] )
+                    " Let's give it a large back-reference too."
+    70:     type ( 0x090 ) 
+    71:     b(<mark) ( 0x0b1 ) 
+    72:         b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                        " We've just begun"
+    90:         type ( 0x090 ) 
+    91:         b(") ( 0x012 ) ( len=7 )
+                        " 1 0 do "
+   100:         type ( 0x090 ) 
+   101:         cr ( 0x092 ) 
+   102:         1 ( 0x0a6 ) 
+   103:         0 ( 0x0a5 ) 
+   104:         b(do) ( 0x017 ) 0x80a3 ( =dec -32605  dest = -32500 )
+\  Error:  Invalid offset.  Ignoring...
+   105:             wbflip ( 0x080 ) 
+   106:             digit ( 0x0a3 ) 
+   107:             dup ( 0x047 ) 
+   108:             b(") ( 0x012 ) ( len=3 )
+                            " if "
+   113:             type ( 0x090 ) 
+   114:             cr ( 0x092 ) 
+   115:             b?branch ( 0x014 ) 0x807c ( =dec -32644  dest = -32528 )
+\  Error:  Invalid offset.  Ignoring...
+   116:         wbflip ( 0x080 ) 
+   117:         lwsplit ( 0x07c ) 
+   118:         dup ( 0x047 ) 
+   119:         b(") ( 0x012 ) ( len=4 )
+                        " case"
+   125:         type ( 0x090 ) 
+   126:         b(case) ( 0x0c4 ) 
+   127:             0 ( 0x0a5 ) 
+   128:             b(of) ( 0x01c ) 0x001b ( =dec 27  dest = 156 )
+   131:                 b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                                "  Just a short case"
+   151:                 type ( 0x090 ) 
+   152:                 cr ( 0x092 ) 
+   153:             b(endof) ( 0x0c6 ) 0x804e ( =dec -32690  dest = -32536 )
+\  Error:  Invalid offset.  Ignoring...
+   154:             wbflip ( 0x080 ) 
+   155:             pick ( 0x04e ) 
+   156:             b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                            " default.  The Big One!"
+   180:             type ( 0x090 ) 
+   181:             cr ( 0x092 ) 
+   182:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 233 Bottles of Beer on the wall,"
+   220:             type ( 0x090 ) 
+   221:             cr ( 0x092 ) 
+   222:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     233 Bottles of Beer!,"
+   249:             type ( 0x090 ) 
+   250:             cr ( 0x092 ) 
+   251:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   286:             type ( 0x090 ) 
+   287:             cr ( 0x092 ) 
+   288:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 232 Bottles of Beer on the wall."
+   322:             type ( 0x090 ) 
+   323:             cr ( 0x092 ) 
+   324:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 232 Bottles of Beer on the wall,"
+   362:             type ( 0x090 ) 
+   363:             cr ( 0x092 ) 
+   364:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     232 Bottles of Beer!,"
+   391:             type ( 0x090 ) 
+   392:             cr ( 0x092 ) 
+   393:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   428:             type ( 0x090 ) 
+   429:             cr ( 0x092 ) 
+   430:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 231 Bottles of Beer on the wall."
+   464:             type ( 0x090 ) 
+   465:             cr ( 0x092 ) 
+   466:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 231 Bottles of Beer on the wall,"
+   504:             type ( 0x090 ) 
+   505:             cr ( 0x092 ) 
+   506:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     231 Bottles of Beer!,"
+   533:             type ( 0x090 ) 
+   534:             cr ( 0x092 ) 
+   535:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   570:             type ( 0x090 ) 
+   571:             cr ( 0x092 ) 
+   572:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 230 Bottles of Beer on the wall."
+   606:             type ( 0x090 ) 
+   607:             cr ( 0x092 ) 
+   608:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 230 Bottles of Beer on the wall,"
+   646:             type ( 0x090 ) 
+   647:             cr ( 0x092 ) 
+   648:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     230 Bottles of Beer!,"
+   675:             type ( 0x090 ) 
+   676:             cr ( 0x092 ) 
+   677:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   712:             type ( 0x090 ) 
+   713:             cr ( 0x092 ) 
+   714:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 229 Bottles of Beer on the wall."
+   748:             type ( 0x090 ) 
+   749:             cr ( 0x092 ) 
+   750:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 229 Bottles of Beer on the wall,"
+   788:             type ( 0x090 ) 
+   789:             cr ( 0x092 ) 
+   790:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     229 Bottles of Beer!,"
+   817:             type ( 0x090 ) 
+   818:             cr ( 0x092 ) 
+   819:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   854:             type ( 0x090 ) 
+   855:             cr ( 0x092 ) 
+   856:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 228 Bottles of Beer on the wall."
+   890:             type ( 0x090 ) 
+   891:             cr ( 0x092 ) 
+   892:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 228 Bottles of Beer on the wall,"
+   930:             type ( 0x090 ) 
+   931:             cr ( 0x092 ) 
+   932:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     228 Bottles of Beer!,"
+   959:             type ( 0x090 ) 
+   960:             cr ( 0x092 ) 
+   961:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+   996:             type ( 0x090 ) 
+   997:             cr ( 0x092 ) 
+   998:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 227 Bottles of Beer on the wall."
+  1032:             type ( 0x090 ) 
+  1033:             cr ( 0x092 ) 
+  1034:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 227 Bottles of Beer on the wall,"
+  1072:             type ( 0x090 ) 
+  1073:             cr ( 0x092 ) 
+  1074:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     227 Bottles of Beer!,"
+  1101:             type ( 0x090 ) 
+  1102:             cr ( 0x092 ) 
+  1103:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1138:             type ( 0x090 ) 
+  1139:             cr ( 0x092 ) 
+  1140:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 226 Bottles of Beer on the wall."
+  1174:             type ( 0x090 ) 
+  1175:             cr ( 0x092 ) 
+  1176:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 226 Bottles of Beer on the wall,"
+  1214:             type ( 0x090 ) 
+  1215:             cr ( 0x092 ) 
+  1216:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     226 Bottles of Beer!,"
+  1243:             type ( 0x090 ) 
+  1244:             cr ( 0x092 ) 
+  1245:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1280:             type ( 0x090 ) 
+  1281:             cr ( 0x092 ) 
+  1282:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 225 Bottles of Beer on the wall."
+  1316:             type ( 0x090 ) 
+  1317:             cr ( 0x092 ) 
+  1318:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 225 Bottles of Beer on the wall,"
+  1356:             type ( 0x090 ) 
+  1357:             cr ( 0x092 ) 
+  1358:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     225 Bottles of Beer!,"
+  1385:             type ( 0x090 ) 
+  1386:             cr ( 0x092 ) 
+  1387:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1422:             type ( 0x090 ) 
+  1423:             cr ( 0x092 ) 
+  1424:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 224 Bottles of Beer on the wall."
+  1458:             type ( 0x090 ) 
+  1459:             cr ( 0x092 ) 
+  1460:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 224 Bottles of Beer on the wall,"
+  1498:             type ( 0x090 ) 
+  1499:             cr ( 0x092 ) 
+  1500:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     224 Bottles of Beer!,"
+  1527:             type ( 0x090 ) 
+  1528:             cr ( 0x092 ) 
+  1529:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1564:             type ( 0x090 ) 
+  1565:             cr ( 0x092 ) 
+  1566:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 223 Bottles of Beer on the wall."
+  1600:             type ( 0x090 ) 
+  1601:             cr ( 0x092 ) 
+  1602:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 223 Bottles of Beer on the wall,"
+  1640:             type ( 0x090 ) 
+  1641:             cr ( 0x092 ) 
+  1642:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     223 Bottles of Beer!,"
+  1669:             type ( 0x090 ) 
+  1670:             cr ( 0x092 ) 
+  1671:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1706:             type ( 0x090 ) 
+  1707:             cr ( 0x092 ) 
+  1708:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 222 Bottles of Beer on the wall."
+  1742:             type ( 0x090 ) 
+  1743:             cr ( 0x092 ) 
+  1744:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 222 Bottles of Beer on the wall,"
+  1782:             type ( 0x090 ) 
+  1783:             cr ( 0x092 ) 
+  1784:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     222 Bottles of Beer!,"
+  1811:             type ( 0x090 ) 
+  1812:             cr ( 0x092 ) 
+  1813:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1848:             type ( 0x090 ) 
+  1849:             cr ( 0x092 ) 
+  1850:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 221 Bottles of Beer on the wall."
+  1884:             type ( 0x090 ) 
+  1885:             cr ( 0x092 ) 
+  1886:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 221 Bottles of Beer on the wall,"
+  1924:             type ( 0x090 ) 
+  1925:             cr ( 0x092 ) 
+  1926:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     221 Bottles of Beer!,"
+  1953:             type ( 0x090 ) 
+  1954:             cr ( 0x092 ) 
+  1955:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  1990:             type ( 0x090 ) 
+  1991:             cr ( 0x092 ) 
+  1992:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 220 Bottles of Beer on the wall."
+  2026:             type ( 0x090 ) 
+  2027:             cr ( 0x092 ) 
+  2028:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 220 Bottles of Beer on the wall,"
+  2066:             type ( 0x090 ) 
+  2067:             cr ( 0x092 ) 
+  2068:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     220 Bottles of Beer!,"
+  2095:             type ( 0x090 ) 
+  2096:             cr ( 0x092 ) 
+  2097:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2132:             type ( 0x090 ) 
+  2133:             cr ( 0x092 ) 
+  2134:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 219 Bottles of Beer on the wall."
+  2168:             type ( 0x090 ) 
+  2169:             cr ( 0x092 ) 
+  2170:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 219 Bottles of Beer on the wall,"
+  2208:             type ( 0x090 ) 
+  2209:             cr ( 0x092 ) 
+  2210:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     219 Bottles of Beer!,"
+  2237:             type ( 0x090 ) 
+  2238:             cr ( 0x092 ) 
+  2239:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2274:             type ( 0x090 ) 
+  2275:             cr ( 0x092 ) 
+  2276:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 218 Bottles of Beer on the wall."
+  2310:             type ( 0x090 ) 
+  2311:             cr ( 0x092 ) 
+  2312:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 218 Bottles of Beer on the wall,"
+  2350:             type ( 0x090 ) 
+  2351:             cr ( 0x092 ) 
+  2352:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     218 Bottles of Beer!,"
+  2379:             type ( 0x090 ) 
+  2380:             cr ( 0x092 ) 
+  2381:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2416:             type ( 0x090 ) 
+  2417:             cr ( 0x092 ) 
+  2418:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 217 Bottles of Beer on the wall."
+  2452:             type ( 0x090 ) 
+  2453:             cr ( 0x092 ) 
+  2454:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 217 Bottles of Beer on the wall,"
+  2492:             type ( 0x090 ) 
+  2493:             cr ( 0x092 ) 
+  2494:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     217 Bottles of Beer!,"
+  2521:             type ( 0x090 ) 
+  2522:             cr ( 0x092 ) 
+  2523:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2558:             type ( 0x090 ) 
+  2559:             cr ( 0x092 ) 
+  2560:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 216 Bottles of Beer on the wall."
+  2594:             type ( 0x090 ) 
+  2595:             cr ( 0x092 ) 
+  2596:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 216 Bottles of Beer on the wall,"
+  2634:             type ( 0x090 ) 
+  2635:             cr ( 0x092 ) 
+  2636:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     216 Bottles of Beer!,"
+  2663:             type ( 0x090 ) 
+  2664:             cr ( 0x092 ) 
+  2665:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2700:             type ( 0x090 ) 
+  2701:             cr ( 0x092 ) 
+  2702:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 215 Bottles of Beer on the wall."
+  2736:             type ( 0x090 ) 
+  2737:             cr ( 0x092 ) 
+  2738:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 215 Bottles of Beer on the wall,"
+  2776:             type ( 0x090 ) 
+  2777:             cr ( 0x092 ) 
+  2778:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     215 Bottles of Beer!,"
+  2805:             type ( 0x090 ) 
+  2806:             cr ( 0x092 ) 
+  2807:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2842:             type ( 0x090 ) 
+  2843:             cr ( 0x092 ) 
+  2844:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 214 Bottles of Beer on the wall."
+  2878:             type ( 0x090 ) 
+  2879:             cr ( 0x092 ) 
+  2880:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 214 Bottles of Beer on the wall,"
+  2918:             type ( 0x090 ) 
+  2919:             cr ( 0x092 ) 
+  2920:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     214 Bottles of Beer!,"
+  2947:             type ( 0x090 ) 
+  2948:             cr ( 0x092 ) 
+  2949:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  2984:             type ( 0x090 ) 
+  2985:             cr ( 0x092 ) 
+  2986:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 213 Bottles of Beer on the wall."
+  3020:             type ( 0x090 ) 
+  3021:             cr ( 0x092 ) 
+  3022:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 213 Bottles of Beer on the wall,"
+  3060:             type ( 0x090 ) 
+  3061:             cr ( 0x092 ) 
+  3062:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     213 Bottles of Beer!,"
+  3089:             type ( 0x090 ) 
+  3090:             cr ( 0x092 ) 
+  3091:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3126:             type ( 0x090 ) 
+  3127:             cr ( 0x092 ) 
+  3128:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 212 Bottles of Beer on the wall."
+  3162:             type ( 0x090 ) 
+  3163:             cr ( 0x092 ) 
+  3164:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 212 Bottles of Beer on the wall,"
+  3202:             type ( 0x090 ) 
+  3203:             cr ( 0x092 ) 
+  3204:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     212 Bottles of Beer!,"
+  3231:             type ( 0x090 ) 
+  3232:             cr ( 0x092 ) 
+  3233:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3268:             type ( 0x090 ) 
+  3269:             cr ( 0x092 ) 
+  3270:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 211 Bottles of Beer on the wall."
+  3304:             type ( 0x090 ) 
+  3305:             cr ( 0x092 ) 
+  3306:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 211 Bottles of Beer on the wall,"
+  3344:             type ( 0x090 ) 
+  3345:             cr ( 0x092 ) 
+  3346:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     211 Bottles of Beer!,"
+  3373:             type ( 0x090 ) 
+  3374:             cr ( 0x092 ) 
+  3375:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3410:             type ( 0x090 ) 
+  3411:             cr ( 0x092 ) 
+  3412:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 210 Bottles of Beer on the wall."
+  3446:             type ( 0x090 ) 
+  3447:             cr ( 0x092 ) 
+  3448:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 210 Bottles of Beer on the wall,"
+  3486:             type ( 0x090 ) 
+  3487:             cr ( 0x092 ) 
+  3488:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     210 Bottles of Beer!,"
+  3515:             type ( 0x090 ) 
+  3516:             cr ( 0x092 ) 
+  3517:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3552:             type ( 0x090 ) 
+  3553:             cr ( 0x092 ) 
+  3554:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 209 Bottles of Beer on the wall."
+  3588:             type ( 0x090 ) 
+  3589:             cr ( 0x092 ) 
+  3590:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 209 Bottles of Beer on the wall,"
+  3628:             type ( 0x090 ) 
+  3629:             cr ( 0x092 ) 
+  3630:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     209 Bottles of Beer!,"
+  3657:             type ( 0x090 ) 
+  3658:             cr ( 0x092 ) 
+  3659:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3694:             type ( 0x090 ) 
+  3695:             cr ( 0x092 ) 
+  3696:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 208 Bottles of Beer on the wall."
+  3730:             type ( 0x090 ) 
+  3731:             cr ( 0x092 ) 
+  3732:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 208 Bottles of Beer on the wall,"
+  3770:             type ( 0x090 ) 
+  3771:             cr ( 0x092 ) 
+  3772:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     208 Bottles of Beer!,"
+  3799:             type ( 0x090 ) 
+  3800:             cr ( 0x092 ) 
+  3801:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3836:             type ( 0x090 ) 
+  3837:             cr ( 0x092 ) 
+  3838:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 207 Bottles of Beer on the wall."
+  3872:             type ( 0x090 ) 
+  3873:             cr ( 0x092 ) 
+  3874:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 207 Bottles of Beer on the wall,"
+  3912:             type ( 0x090 ) 
+  3913:             cr ( 0x092 ) 
+  3914:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     207 Bottles of Beer!,"
+  3941:             type ( 0x090 ) 
+  3942:             cr ( 0x092 ) 
+  3943:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  3978:             type ( 0x090 ) 
+  3979:             cr ( 0x092 ) 
+  3980:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 206 Bottles of Beer on the wall."
+  4014:             type ( 0x090 ) 
+  4015:             cr ( 0x092 ) 
+  4016:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 206 Bottles of Beer on the wall,"
+  4054:             type ( 0x090 ) 
+  4055:             cr ( 0x092 ) 
+  4056:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     206 Bottles of Beer!,"
+  4083:             type ( 0x090 ) 
+  4084:             cr ( 0x092 ) 
+  4085:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4120:             type ( 0x090 ) 
+  4121:             cr ( 0x092 ) 
+  4122:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 205 Bottles of Beer on the wall."
+  4156:             type ( 0x090 ) 
+  4157:             cr ( 0x092 ) 
+  4158:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 205 Bottles of Beer on the wall,"
+  4196:             type ( 0x090 ) 
+  4197:             cr ( 0x092 ) 
+  4198:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     205 Bottles of Beer!,"
+  4225:             type ( 0x090 ) 
+  4226:             cr ( 0x092 ) 
+  4227:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4262:             type ( 0x090 ) 
+  4263:             cr ( 0x092 ) 
+  4264:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 204 Bottles of Beer on the wall."
+  4298:             type ( 0x090 ) 
+  4299:             cr ( 0x092 ) 
+  4300:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 204 Bottles of Beer on the wall,"
+  4338:             type ( 0x090 ) 
+  4339:             cr ( 0x092 ) 
+  4340:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     204 Bottles of Beer!,"
+  4367:             type ( 0x090 ) 
+  4368:             cr ( 0x092 ) 
+  4369:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4404:             type ( 0x090 ) 
+  4405:             cr ( 0x092 ) 
+  4406:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 203 Bottles of Beer on the wall."
+  4440:             type ( 0x090 ) 
+  4441:             cr ( 0x092 ) 
+  4442:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 203 Bottles of Beer on the wall,"
+  4480:             type ( 0x090 ) 
+  4481:             cr ( 0x092 ) 
+  4482:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     203 Bottles of Beer!,"
+  4509:             type ( 0x090 ) 
+  4510:             cr ( 0x092 ) 
+  4511:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4546:             type ( 0x090 ) 
+  4547:             cr ( 0x092 ) 
+  4548:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 202 Bottles of Beer on the wall."
+  4582:             type ( 0x090 ) 
+  4583:             cr ( 0x092 ) 
+  4584:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 202 Bottles of Beer on the wall,"
+  4622:             type ( 0x090 ) 
+  4623:             cr ( 0x092 ) 
+  4624:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     202 Bottles of Beer!,"
+  4651:             type ( 0x090 ) 
+  4652:             cr ( 0x092 ) 
+  4653:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4688:             type ( 0x090 ) 
+  4689:             cr ( 0x092 ) 
+  4690:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 201 Bottles of Beer on the wall."
+  4724:             type ( 0x090 ) 
+  4725:             cr ( 0x092 ) 
+  4726:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 201 Bottles of Beer on the wall,"
+  4764:             type ( 0x090 ) 
+  4765:             cr ( 0x092 ) 
+  4766:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     201 Bottles of Beer!,"
+  4793:             type ( 0x090 ) 
+  4794:             cr ( 0x092 ) 
+  4795:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4830:             type ( 0x090 ) 
+  4831:             cr ( 0x092 ) 
+  4832:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 200 Bottles of Beer on the wall."
+  4866:             type ( 0x090 ) 
+  4867:             cr ( 0x092 ) 
+  4868:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 200 Bottles of Beer on the wall,"
+  4906:             type ( 0x090 ) 
+  4907:             cr ( 0x092 ) 
+  4908:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     200 Bottles of Beer!,"
+  4935:             type ( 0x090 ) 
+  4936:             cr ( 0x092 ) 
+  4937:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  4972:             type ( 0x090 ) 
+  4973:             cr ( 0x092 ) 
+  4974:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 199 Bottles of Beer on the wall."
+  5008:             type ( 0x090 ) 
+  5009:             cr ( 0x092 ) 
+  5010:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 199 Bottles of Beer on the wall,"
+  5048:             type ( 0x090 ) 
+  5049:             cr ( 0x092 ) 
+  5050:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     199 Bottles of Beer!,"
+  5077:             type ( 0x090 ) 
+  5078:             cr ( 0x092 ) 
+  5079:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5114:             type ( 0x090 ) 
+  5115:             cr ( 0x092 ) 
+  5116:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 198 Bottles of Beer on the wall."
+  5150:             type ( 0x090 ) 
+  5151:             cr ( 0x092 ) 
+  5152:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 198 Bottles of Beer on the wall,"
+  5190:             type ( 0x090 ) 
+  5191:             cr ( 0x092 ) 
+  5192:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     198 Bottles of Beer!,"
+  5219:             type ( 0x090 ) 
+  5220:             cr ( 0x092 ) 
+  5221:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5256:             type ( 0x090 ) 
+  5257:             cr ( 0x092 ) 
+  5258:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 197 Bottles of Beer on the wall."
+  5292:             type ( 0x090 ) 
+  5293:             cr ( 0x092 ) 
+  5294:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 197 Bottles of Beer on the wall,"
+  5332:             type ( 0x090 ) 
+  5333:             cr ( 0x092 ) 
+  5334:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     197 Bottles of Beer!,"
+  5361:             type ( 0x090 ) 
+  5362:             cr ( 0x092 ) 
+  5363:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5398:             type ( 0x090 ) 
+  5399:             cr ( 0x092 ) 
+  5400:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 196 Bottles of Beer on the wall."
+  5434:             type ( 0x090 ) 
+  5435:             cr ( 0x092 ) 
+  5436:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 196 Bottles of Beer on the wall,"
+  5474:             type ( 0x090 ) 
+  5475:             cr ( 0x092 ) 
+  5476:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     196 Bottles of Beer!,"
+  5503:             type ( 0x090 ) 
+  5504:             cr ( 0x092 ) 
+  5505:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5540:             type ( 0x090 ) 
+  5541:             cr ( 0x092 ) 
+  5542:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 195 Bottles of Beer on the wall."
+  5576:             type ( 0x090 ) 
+  5577:             cr ( 0x092 ) 
+  5578:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 195 Bottles of Beer on the wall,"
+  5616:             type ( 0x090 ) 
+  5617:             cr ( 0x092 ) 
+  5618:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     195 Bottles of Beer!,"
+  5645:             type ( 0x090 ) 
+  5646:             cr ( 0x092 ) 
+  5647:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5682:             type ( 0x090 ) 
+  5683:             cr ( 0x092 ) 
+  5684:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 194 Bottles of Beer on the wall."
+  5718:             type ( 0x090 ) 
+  5719:             cr ( 0x092 ) 
+  5720:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 194 Bottles of Beer on the wall,"
+  5758:             type ( 0x090 ) 
+  5759:             cr ( 0x092 ) 
+  5760:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     194 Bottles of Beer!,"
+  5787:             type ( 0x090 ) 
+  5788:             cr ( 0x092 ) 
+  5789:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5824:             type ( 0x090 ) 
+  5825:             cr ( 0x092 ) 
+  5826:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 193 Bottles of Beer on the wall."
+  5860:             type ( 0x090 ) 
+  5861:             cr ( 0x092 ) 
+  5862:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 193 Bottles of Beer on the wall,"
+  5900:             type ( 0x090 ) 
+  5901:             cr ( 0x092 ) 
+  5902:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     193 Bottles of Beer!,"
+  5929:             type ( 0x090 ) 
+  5930:             cr ( 0x092 ) 
+  5931:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  5966:             type ( 0x090 ) 
+  5967:             cr ( 0x092 ) 
+  5968:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 192 Bottles of Beer on the wall."
+  6002:             type ( 0x090 ) 
+  6003:             cr ( 0x092 ) 
+  6004:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 192 Bottles of Beer on the wall,"
+  6042:             type ( 0x090 ) 
+  6043:             cr ( 0x092 ) 
+  6044:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     192 Bottles of Beer!,"
+  6071:             type ( 0x090 ) 
+  6072:             cr ( 0x092 ) 
+  6073:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6108:             type ( 0x090 ) 
+  6109:             cr ( 0x092 ) 
+  6110:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 191 Bottles of Beer on the wall."
+  6144:             type ( 0x090 ) 
+  6145:             cr ( 0x092 ) 
+  6146:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 191 Bottles of Beer on the wall,"
+  6184:             type ( 0x090 ) 
+  6185:             cr ( 0x092 ) 
+  6186:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     191 Bottles of Beer!,"
+  6213:             type ( 0x090 ) 
+  6214:             cr ( 0x092 ) 
+  6215:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6250:             type ( 0x090 ) 
+  6251:             cr ( 0x092 ) 
+  6252:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 190 Bottles of Beer on the wall."
+  6286:             type ( 0x090 ) 
+  6287:             cr ( 0x092 ) 
+  6288:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 190 Bottles of Beer on the wall,"
+  6326:             type ( 0x090 ) 
+  6327:             cr ( 0x092 ) 
+  6328:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     190 Bottles of Beer!,"
+  6355:             type ( 0x090 ) 
+  6356:             cr ( 0x092 ) 
+  6357:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6392:             type ( 0x090 ) 
+  6393:             cr ( 0x092 ) 
+  6394:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 189 Bottles of Beer on the wall."
+  6428:             type ( 0x090 ) 
+  6429:             cr ( 0x092 ) 
+  6430:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 189 Bottles of Beer on the wall,"
+  6468:             type ( 0x090 ) 
+  6469:             cr ( 0x092 ) 
+  6470:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     189 Bottles of Beer!,"
+  6497:             type ( 0x090 ) 
+  6498:             cr ( 0x092 ) 
+  6499:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6534:             type ( 0x090 ) 
+  6535:             cr ( 0x092 ) 
+  6536:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 188 Bottles of Beer on the wall."
+  6570:             type ( 0x090 ) 
+  6571:             cr ( 0x092 ) 
+  6572:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 188 Bottles of Beer on the wall,"
+  6610:             type ( 0x090 ) 
+  6611:             cr ( 0x092 ) 
+  6612:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     188 Bottles of Beer!,"
+  6639:             type ( 0x090 ) 
+  6640:             cr ( 0x092 ) 
+  6641:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6676:             type ( 0x090 ) 
+  6677:             cr ( 0x092 ) 
+  6678:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 187 Bottles of Beer on the wall."
+  6712:             type ( 0x090 ) 
+  6713:             cr ( 0x092 ) 
+  6714:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 187 Bottles of Beer on the wall,"
+  6752:             type ( 0x090 ) 
+  6753:             cr ( 0x092 ) 
+  6754:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     187 Bottles of Beer!,"
+  6781:             type ( 0x090 ) 
+  6782:             cr ( 0x092 ) 
+  6783:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6818:             type ( 0x090 ) 
+  6819:             cr ( 0x092 ) 
+  6820:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 186 Bottles of Beer on the wall."
+  6854:             type ( 0x090 ) 
+  6855:             cr ( 0x092 ) 
+  6856:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 186 Bottles of Beer on the wall,"
+  6894:             type ( 0x090 ) 
+  6895:             cr ( 0x092 ) 
+  6896:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     186 Bottles of Beer!,"
+  6923:             type ( 0x090 ) 
+  6924:             cr ( 0x092 ) 
+  6925:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  6960:             type ( 0x090 ) 
+  6961:             cr ( 0x092 ) 
+  6962:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 185 Bottles of Beer on the wall."
+  6996:             type ( 0x090 ) 
+  6997:             cr ( 0x092 ) 
+  6998:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 185 Bottles of Beer on the wall,"
+  7036:             type ( 0x090 ) 
+  7037:             cr ( 0x092 ) 
+  7038:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     185 Bottles of Beer!,"
+  7065:             type ( 0x090 ) 
+  7066:             cr ( 0x092 ) 
+  7067:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7102:             type ( 0x090 ) 
+  7103:             cr ( 0x092 ) 
+  7104:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 184 Bottles of Beer on the wall."
+  7138:             type ( 0x090 ) 
+  7139:             cr ( 0x092 ) 
+  7140:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 184 Bottles of Beer on the wall,"
+  7178:             type ( 0x090 ) 
+  7179:             cr ( 0x092 ) 
+  7180:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     184 Bottles of Beer!,"
+  7207:             type ( 0x090 ) 
+  7208:             cr ( 0x092 ) 
+  7209:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7244:             type ( 0x090 ) 
+  7245:             cr ( 0x092 ) 
+  7246:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 183 Bottles of Beer on the wall."
+  7280:             type ( 0x090 ) 
+  7281:             cr ( 0x092 ) 
+  7282:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 183 Bottles of Beer on the wall,"
+  7320:             type ( 0x090 ) 
+  7321:             cr ( 0x092 ) 
+  7322:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     183 Bottles of Beer!,"
+  7349:             type ( 0x090 ) 
+  7350:             cr ( 0x092 ) 
+  7351:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7386:             type ( 0x090 ) 
+  7387:             cr ( 0x092 ) 
+  7388:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 182 Bottles of Beer on the wall."
+  7422:             type ( 0x090 ) 
+  7423:             cr ( 0x092 ) 
+  7424:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 182 Bottles of Beer on the wall,"
+  7462:             type ( 0x090 ) 
+  7463:             cr ( 0x092 ) 
+  7464:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     182 Bottles of Beer!,"
+  7491:             type ( 0x090 ) 
+  7492:             cr ( 0x092 ) 
+  7493:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7528:             type ( 0x090 ) 
+  7529:             cr ( 0x092 ) 
+  7530:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 181 Bottles of Beer on the wall."
+  7564:             type ( 0x090 ) 
+  7565:             cr ( 0x092 ) 
+  7566:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 181 Bottles of Beer on the wall,"
+  7604:             type ( 0x090 ) 
+  7605:             cr ( 0x092 ) 
+  7606:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     181 Bottles of Beer!,"
+  7633:             type ( 0x090 ) 
+  7634:             cr ( 0x092 ) 
+  7635:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7670:             type ( 0x090 ) 
+  7671:             cr ( 0x092 ) 
+  7672:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 180 Bottles of Beer on the wall."
+  7706:             type ( 0x090 ) 
+  7707:             cr ( 0x092 ) 
+  7708:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 180 Bottles of Beer on the wall,"
+  7746:             type ( 0x090 ) 
+  7747:             cr ( 0x092 ) 
+  7748:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     180 Bottles of Beer!,"
+  7775:             type ( 0x090 ) 
+  7776:             cr ( 0x092 ) 
+  7777:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7812:             type ( 0x090 ) 
+  7813:             cr ( 0x092 ) 
+  7814:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 179 Bottles of Beer on the wall."
+  7848:             type ( 0x090 ) 
+  7849:             cr ( 0x092 ) 
+  7850:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 179 Bottles of Beer on the wall,"
+  7888:             type ( 0x090 ) 
+  7889:             cr ( 0x092 ) 
+  7890:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     179 Bottles of Beer!,"
+  7917:             type ( 0x090 ) 
+  7918:             cr ( 0x092 ) 
+  7919:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  7954:             type ( 0x090 ) 
+  7955:             cr ( 0x092 ) 
+  7956:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 178 Bottles of Beer on the wall."
+  7990:             type ( 0x090 ) 
+  7991:             cr ( 0x092 ) 
+  7992:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 178 Bottles of Beer on the wall,"
+  8030:             type ( 0x090 ) 
+  8031:             cr ( 0x092 ) 
+  8032:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     178 Bottles of Beer!,"
+  8059:             type ( 0x090 ) 
+  8060:             cr ( 0x092 ) 
+  8061:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8096:             type ( 0x090 ) 
+  8097:             cr ( 0x092 ) 
+  8098:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 177 Bottles of Beer on the wall."
+  8132:             type ( 0x090 ) 
+  8133:             cr ( 0x092 ) 
+  8134:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 177 Bottles of Beer on the wall,"
+  8172:             type ( 0x090 ) 
+  8173:             cr ( 0x092 ) 
+  8174:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     177 Bottles of Beer!,"
+  8201:             type ( 0x090 ) 
+  8202:             cr ( 0x092 ) 
+  8203:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8238:             type ( 0x090 ) 
+  8239:             cr ( 0x092 ) 
+  8240:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 176 Bottles of Beer on the wall."
+  8274:             type ( 0x090 ) 
+  8275:             cr ( 0x092 ) 
+  8276:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 176 Bottles of Beer on the wall,"
+  8314:             type ( 0x090 ) 
+  8315:             cr ( 0x092 ) 
+  8316:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     176 Bottles of Beer!,"
+  8343:             type ( 0x090 ) 
+  8344:             cr ( 0x092 ) 
+  8345:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8380:             type ( 0x090 ) 
+  8381:             cr ( 0x092 ) 
+  8382:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 175 Bottles of Beer on the wall."
+  8416:             type ( 0x090 ) 
+  8417:             cr ( 0x092 ) 
+  8418:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 175 Bottles of Beer on the wall,"
+  8456:             type ( 0x090 ) 
+  8457:             cr ( 0x092 ) 
+  8458:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     175 Bottles of Beer!,"
+  8485:             type ( 0x090 ) 
+  8486:             cr ( 0x092 ) 
+  8487:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8522:             type ( 0x090 ) 
+  8523:             cr ( 0x092 ) 
+  8524:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 174 Bottles of Beer on the wall."
+  8558:             type ( 0x090 ) 
+  8559:             cr ( 0x092 ) 
+  8560:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 174 Bottles of Beer on the wall,"
+  8598:             type ( 0x090 ) 
+  8599:             cr ( 0x092 ) 
+  8600:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     174 Bottles of Beer!,"
+  8627:             type ( 0x090 ) 
+  8628:             cr ( 0x092 ) 
+  8629:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8664:             type ( 0x090 ) 
+  8665:             cr ( 0x092 ) 
+  8666:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 173 Bottles of Beer on the wall."
+  8700:             type ( 0x090 ) 
+  8701:             cr ( 0x092 ) 
+  8702:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 173 Bottles of Beer on the wall,"
+  8740:             type ( 0x090 ) 
+  8741:             cr ( 0x092 ) 
+  8742:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     173 Bottles of Beer!,"
+  8769:             type ( 0x090 ) 
+  8770:             cr ( 0x092 ) 
+  8771:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8806:             type ( 0x090 ) 
+  8807:             cr ( 0x092 ) 
+  8808:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 172 Bottles of Beer on the wall."
+  8842:             type ( 0x090 ) 
+  8843:             cr ( 0x092 ) 
+  8844:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 172 Bottles of Beer on the wall,"
+  8882:             type ( 0x090 ) 
+  8883:             cr ( 0x092 ) 
+  8884:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     172 Bottles of Beer!,"
+  8911:             type ( 0x090 ) 
+  8912:             cr ( 0x092 ) 
+  8913:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  8948:             type ( 0x090 ) 
+  8949:             cr ( 0x092 ) 
+  8950:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 171 Bottles of Beer on the wall."
+  8984:             type ( 0x090 ) 
+  8985:             cr ( 0x092 ) 
+  8986:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 171 Bottles of Beer on the wall,"
+  9024:             type ( 0x090 ) 
+  9025:             cr ( 0x092 ) 
+  9026:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     171 Bottles of Beer!,"
+  9053:             type ( 0x090 ) 
+  9054:             cr ( 0x092 ) 
+  9055:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9090:             type ( 0x090 ) 
+  9091:             cr ( 0x092 ) 
+  9092:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 170 Bottles of Beer on the wall."
+  9126:             type ( 0x090 ) 
+  9127:             cr ( 0x092 ) 
+  9128:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 170 Bottles of Beer on the wall,"
+  9166:             type ( 0x090 ) 
+  9167:             cr ( 0x092 ) 
+  9168:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     170 Bottles of Beer!,"
+  9195:             type ( 0x090 ) 
+  9196:             cr ( 0x092 ) 
+  9197:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9232:             type ( 0x090 ) 
+  9233:             cr ( 0x092 ) 
+  9234:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 169 Bottles of Beer on the wall."
+  9268:             type ( 0x090 ) 
+  9269:             cr ( 0x092 ) 
+  9270:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 169 Bottles of Beer on the wall,"
+  9308:             type ( 0x090 ) 
+  9309:             cr ( 0x092 ) 
+  9310:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     169 Bottles of Beer!,"
+  9337:             type ( 0x090 ) 
+  9338:             cr ( 0x092 ) 
+  9339:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9374:             type ( 0x090 ) 
+  9375:             cr ( 0x092 ) 
+  9376:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 168 Bottles of Beer on the wall."
+  9410:             type ( 0x090 ) 
+  9411:             cr ( 0x092 ) 
+  9412:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 168 Bottles of Beer on the wall,"
+  9450:             type ( 0x090 ) 
+  9451:             cr ( 0x092 ) 
+  9452:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     168 Bottles of Beer!,"
+  9479:             type ( 0x090 ) 
+  9480:             cr ( 0x092 ) 
+  9481:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9516:             type ( 0x090 ) 
+  9517:             cr ( 0x092 ) 
+  9518:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 167 Bottles of Beer on the wall."
+  9552:             type ( 0x090 ) 
+  9553:             cr ( 0x092 ) 
+  9554:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 167 Bottles of Beer on the wall,"
+  9592:             type ( 0x090 ) 
+  9593:             cr ( 0x092 ) 
+  9594:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     167 Bottles of Beer!,"
+  9621:             type ( 0x090 ) 
+  9622:             cr ( 0x092 ) 
+  9623:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9658:             type ( 0x090 ) 
+  9659:             cr ( 0x092 ) 
+  9660:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 166 Bottles of Beer on the wall."
+  9694:             type ( 0x090 ) 
+  9695:             cr ( 0x092 ) 
+  9696:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 166 Bottles of Beer on the wall,"
+  9734:             type ( 0x090 ) 
+  9735:             cr ( 0x092 ) 
+  9736:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     166 Bottles of Beer!,"
+  9763:             type ( 0x090 ) 
+  9764:             cr ( 0x092 ) 
+  9765:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9800:             type ( 0x090 ) 
+  9801:             cr ( 0x092 ) 
+  9802:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 165 Bottles of Beer on the wall."
+  9836:             type ( 0x090 ) 
+  9837:             cr ( 0x092 ) 
+  9838:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 165 Bottles of Beer on the wall,"
+  9876:             type ( 0x090 ) 
+  9877:             cr ( 0x092 ) 
+  9878:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     165 Bottles of Beer!,"
+  9905:             type ( 0x090 ) 
+  9906:             cr ( 0x092 ) 
+  9907:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+  9942:             type ( 0x090 ) 
+  9943:             cr ( 0x092 ) 
+  9944:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 164 Bottles of Beer on the wall."
+  9978:             type ( 0x090 ) 
+  9979:             cr ( 0x092 ) 
+  9980:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 164 Bottles of Beer on the wall,"
+ 10018:             type ( 0x090 ) 
+ 10019:             cr ( 0x092 ) 
+ 10020:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     164 Bottles of Beer!,"
+ 10047:             type ( 0x090 ) 
+ 10048:             cr ( 0x092 ) 
+ 10049:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10084:             type ( 0x090 ) 
+ 10085:             cr ( 0x092 ) 
+ 10086:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 163 Bottles of Beer on the wall."
+ 10120:             type ( 0x090 ) 
+ 10121:             cr ( 0x092 ) 
+ 10122:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 163 Bottles of Beer on the wall,"
+ 10160:             type ( 0x090 ) 
+ 10161:             cr ( 0x092 ) 
+ 10162:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     163 Bottles of Beer!,"
+ 10189:             type ( 0x090 ) 
+ 10190:             cr ( 0x092 ) 
+ 10191:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10226:             type ( 0x090 ) 
+ 10227:             cr ( 0x092 ) 
+ 10228:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 162 Bottles of Beer on the wall."
+ 10262:             type ( 0x090 ) 
+ 10263:             cr ( 0x092 ) 
+ 10264:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 162 Bottles of Beer on the wall,"
+ 10302:             type ( 0x090 ) 
+ 10303:             cr ( 0x092 ) 
+ 10304:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     162 Bottles of Beer!,"
+ 10331:             type ( 0x090 ) 
+ 10332:             cr ( 0x092 ) 
+ 10333:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10368:             type ( 0x090 ) 
+ 10369:             cr ( 0x092 ) 
+ 10370:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 161 Bottles of Beer on the wall."
+ 10404:             type ( 0x090 ) 
+ 10405:             cr ( 0x092 ) 
+ 10406:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 161 Bottles of Beer on the wall,"
+ 10444:             type ( 0x090 ) 
+ 10445:             cr ( 0x092 ) 
+ 10446:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     161 Bottles of Beer!,"
+ 10473:             type ( 0x090 ) 
+ 10474:             cr ( 0x092 ) 
+ 10475:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10510:             type ( 0x090 ) 
+ 10511:             cr ( 0x092 ) 
+ 10512:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 160 Bottles of Beer on the wall."
+ 10546:             type ( 0x090 ) 
+ 10547:             cr ( 0x092 ) 
+ 10548:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 160 Bottles of Beer on the wall,"
+ 10586:             type ( 0x090 ) 
+ 10587:             cr ( 0x092 ) 
+ 10588:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     160 Bottles of Beer!,"
+ 10615:             type ( 0x090 ) 
+ 10616:             cr ( 0x092 ) 
+ 10617:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10652:             type ( 0x090 ) 
+ 10653:             cr ( 0x092 ) 
+ 10654:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 159 Bottles of Beer on the wall."
+ 10688:             type ( 0x090 ) 
+ 10689:             cr ( 0x092 ) 
+ 10690:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 159 Bottles of Beer on the wall,"
+ 10728:             type ( 0x090 ) 
+ 10729:             cr ( 0x092 ) 
+ 10730:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     159 Bottles of Beer!,"
+ 10757:             type ( 0x090 ) 
+ 10758:             cr ( 0x092 ) 
+ 10759:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10794:             type ( 0x090 ) 
+ 10795:             cr ( 0x092 ) 
+ 10796:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 158 Bottles of Beer on the wall."
+ 10830:             type ( 0x090 ) 
+ 10831:             cr ( 0x092 ) 
+ 10832:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 158 Bottles of Beer on the wall,"
+ 10870:             type ( 0x090 ) 
+ 10871:             cr ( 0x092 ) 
+ 10872:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     158 Bottles of Beer!,"
+ 10899:             type ( 0x090 ) 
+ 10900:             cr ( 0x092 ) 
+ 10901:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 10936:             type ( 0x090 ) 
+ 10937:             cr ( 0x092 ) 
+ 10938:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 157 Bottles of Beer on the wall."
+ 10972:             type ( 0x090 ) 
+ 10973:             cr ( 0x092 ) 
+ 10974:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 157 Bottles of Beer on the wall,"
+ 11012:             type ( 0x090 ) 
+ 11013:             cr ( 0x092 ) 
+ 11014:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     157 Bottles of Beer!,"
+ 11041:             type ( 0x090 ) 
+ 11042:             cr ( 0x092 ) 
+ 11043:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11078:             type ( 0x090 ) 
+ 11079:             cr ( 0x092 ) 
+ 11080:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 156 Bottles of Beer on the wall."
+ 11114:             type ( 0x090 ) 
+ 11115:             cr ( 0x092 ) 
+ 11116:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 156 Bottles of Beer on the wall,"
+ 11154:             type ( 0x090 ) 
+ 11155:             cr ( 0x092 ) 
+ 11156:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     156 Bottles of Beer!,"
+ 11183:             type ( 0x090 ) 
+ 11184:             cr ( 0x092 ) 
+ 11185:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11220:             type ( 0x090 ) 
+ 11221:             cr ( 0x092 ) 
+ 11222:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 155 Bottles of Beer on the wall."
+ 11256:             type ( 0x090 ) 
+ 11257:             cr ( 0x092 ) 
+ 11258:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 155 Bottles of Beer on the wall,"
+ 11296:             type ( 0x090 ) 
+ 11297:             cr ( 0x092 ) 
+ 11298:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     155 Bottles of Beer!,"
+ 11325:             type ( 0x090 ) 
+ 11326:             cr ( 0x092 ) 
+ 11327:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11362:             type ( 0x090 ) 
+ 11363:             cr ( 0x092 ) 
+ 11364:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 154 Bottles of Beer on the wall."
+ 11398:             type ( 0x090 ) 
+ 11399:             cr ( 0x092 ) 
+ 11400:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 154 Bottles of Beer on the wall,"
+ 11438:             type ( 0x090 ) 
+ 11439:             cr ( 0x092 ) 
+ 11440:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     154 Bottles of Beer!,"
+ 11467:             type ( 0x090 ) 
+ 11468:             cr ( 0x092 ) 
+ 11469:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11504:             type ( 0x090 ) 
+ 11505:             cr ( 0x092 ) 
+ 11506:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 153 Bottles of Beer on the wall."
+ 11540:             type ( 0x090 ) 
+ 11541:             cr ( 0x092 ) 
+ 11542:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 153 Bottles of Beer on the wall,"
+ 11580:             type ( 0x090 ) 
+ 11581:             cr ( 0x092 ) 
+ 11582:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     153 Bottles of Beer!,"
+ 11609:             type ( 0x090 ) 
+ 11610:             cr ( 0x092 ) 
+ 11611:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11646:             type ( 0x090 ) 
+ 11647:             cr ( 0x092 ) 
+ 11648:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 152 Bottles of Beer on the wall."
+ 11682:             type ( 0x090 ) 
+ 11683:             cr ( 0x092 ) 
+ 11684:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 152 Bottles of Beer on the wall,"
+ 11722:             type ( 0x090 ) 
+ 11723:             cr ( 0x092 ) 
+ 11724:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     152 Bottles of Beer!,"
+ 11751:             type ( 0x090 ) 
+ 11752:             cr ( 0x092 ) 
+ 11753:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11788:             type ( 0x090 ) 
+ 11789:             cr ( 0x092 ) 
+ 11790:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 151 Bottles of Beer on the wall."
+ 11824:             type ( 0x090 ) 
+ 11825:             cr ( 0x092 ) 
+ 11826:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 151 Bottles of Beer on the wall,"
+ 11864:             type ( 0x090 ) 
+ 11865:             cr ( 0x092 ) 
+ 11866:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     151 Bottles of Beer!,"
+ 11893:             type ( 0x090 ) 
+ 11894:             cr ( 0x092 ) 
+ 11895:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 11930:             type ( 0x090 ) 
+ 11931:             cr ( 0x092 ) 
+ 11932:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 150 Bottles of Beer on the wall."
+ 11966:             type ( 0x090 ) 
+ 11967:             cr ( 0x092 ) 
+ 11968:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 150 Bottles of Beer on the wall,"
+ 12006:             type ( 0x090 ) 
+ 12007:             cr ( 0x092 ) 
+ 12008:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     150 Bottles of Beer!,"
+ 12035:             type ( 0x090 ) 
+ 12036:             cr ( 0x092 ) 
+ 12037:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12072:             type ( 0x090 ) 
+ 12073:             cr ( 0x092 ) 
+ 12074:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 149 Bottles of Beer on the wall."
+ 12108:             type ( 0x090 ) 
+ 12109:             cr ( 0x092 ) 
+ 12110:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 149 Bottles of Beer on the wall,"
+ 12148:             type ( 0x090 ) 
+ 12149:             cr ( 0x092 ) 
+ 12150:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     149 Bottles of Beer!,"
+ 12177:             type ( 0x090 ) 
+ 12178:             cr ( 0x092 ) 
+ 12179:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12214:             type ( 0x090 ) 
+ 12215:             cr ( 0x092 ) 
+ 12216:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 148 Bottles of Beer on the wall."
+ 12250:             type ( 0x090 ) 
+ 12251:             cr ( 0x092 ) 
+ 12252:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 148 Bottles of Beer on the wall,"
+ 12290:             type ( 0x090 ) 
+ 12291:             cr ( 0x092 ) 
+ 12292:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     148 Bottles of Beer!,"
+ 12319:             type ( 0x090 ) 
+ 12320:             cr ( 0x092 ) 
+ 12321:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12356:             type ( 0x090 ) 
+ 12357:             cr ( 0x092 ) 
+ 12358:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 147 Bottles of Beer on the wall."
+ 12392:             type ( 0x090 ) 
+ 12393:             cr ( 0x092 ) 
+ 12394:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 147 Bottles of Beer on the wall,"
+ 12432:             type ( 0x090 ) 
+ 12433:             cr ( 0x092 ) 
+ 12434:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     147 Bottles of Beer!,"
+ 12461:             type ( 0x090 ) 
+ 12462:             cr ( 0x092 ) 
+ 12463:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12498:             type ( 0x090 ) 
+ 12499:             cr ( 0x092 ) 
+ 12500:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 146 Bottles of Beer on the wall."
+ 12534:             type ( 0x090 ) 
+ 12535:             cr ( 0x092 ) 
+ 12536:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 146 Bottles of Beer on the wall,"
+ 12574:             type ( 0x090 ) 
+ 12575:             cr ( 0x092 ) 
+ 12576:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     146 Bottles of Beer!,"
+ 12603:             type ( 0x090 ) 
+ 12604:             cr ( 0x092 ) 
+ 12605:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12640:             type ( 0x090 ) 
+ 12641:             cr ( 0x092 ) 
+ 12642:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 145 Bottles of Beer on the wall."
+ 12676:             type ( 0x090 ) 
+ 12677:             cr ( 0x092 ) 
+ 12678:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 145 Bottles of Beer on the wall,"
+ 12716:             type ( 0x090 ) 
+ 12717:             cr ( 0x092 ) 
+ 12718:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     145 Bottles of Beer!,"
+ 12745:             type ( 0x090 ) 
+ 12746:             cr ( 0x092 ) 
+ 12747:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12782:             type ( 0x090 ) 
+ 12783:             cr ( 0x092 ) 
+ 12784:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 144 Bottles of Beer on the wall."
+ 12818:             type ( 0x090 ) 
+ 12819:             cr ( 0x092 ) 
+ 12820:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 144 Bottles of Beer on the wall,"
+ 12858:             type ( 0x090 ) 
+ 12859:             cr ( 0x092 ) 
+ 12860:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     144 Bottles of Beer!,"
+ 12887:             type ( 0x090 ) 
+ 12888:             cr ( 0x092 ) 
+ 12889:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 12924:             type ( 0x090 ) 
+ 12925:             cr ( 0x092 ) 
+ 12926:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 143 Bottles of Beer on the wall."
+ 12960:             type ( 0x090 ) 
+ 12961:             cr ( 0x092 ) 
+ 12962:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 143 Bottles of Beer on the wall,"
+ 13000:             type ( 0x090 ) 
+ 13001:             cr ( 0x092 ) 
+ 13002:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     143 Bottles of Beer!,"
+ 13029:             type ( 0x090 ) 
+ 13030:             cr ( 0x092 ) 
+ 13031:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13066:             type ( 0x090 ) 
+ 13067:             cr ( 0x092 ) 
+ 13068:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 142 Bottles of Beer on the wall."
+ 13102:             type ( 0x090 ) 
+ 13103:             cr ( 0x092 ) 
+ 13104:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 142 Bottles of Beer on the wall,"
+ 13142:             type ( 0x090 ) 
+ 13143:             cr ( 0x092 ) 
+ 13144:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     142 Bottles of Beer!,"
+ 13171:             type ( 0x090 ) 
+ 13172:             cr ( 0x092 ) 
+ 13173:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13208:             type ( 0x090 ) 
+ 13209:             cr ( 0x092 ) 
+ 13210:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 141 Bottles of Beer on the wall."
+ 13244:             type ( 0x090 ) 
+ 13245:             cr ( 0x092 ) 
+ 13246:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 141 Bottles of Beer on the wall,"
+ 13284:             type ( 0x090 ) 
+ 13285:             cr ( 0x092 ) 
+ 13286:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     141 Bottles of Beer!,"
+ 13313:             type ( 0x090 ) 
+ 13314:             cr ( 0x092 ) 
+ 13315:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13350:             type ( 0x090 ) 
+ 13351:             cr ( 0x092 ) 
+ 13352:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 140 Bottles of Beer on the wall."
+ 13386:             type ( 0x090 ) 
+ 13387:             cr ( 0x092 ) 
+ 13388:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 140 Bottles of Beer on the wall,"
+ 13426:             type ( 0x090 ) 
+ 13427:             cr ( 0x092 ) 
+ 13428:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     140 Bottles of Beer!,"
+ 13455:             type ( 0x090 ) 
+ 13456:             cr ( 0x092 ) 
+ 13457:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13492:             type ( 0x090 ) 
+ 13493:             cr ( 0x092 ) 
+ 13494:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 139 Bottles of Beer on the wall."
+ 13528:             type ( 0x090 ) 
+ 13529:             cr ( 0x092 ) 
+ 13530:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 139 Bottles of Beer on the wall,"
+ 13568:             type ( 0x090 ) 
+ 13569:             cr ( 0x092 ) 
+ 13570:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     139 Bottles of Beer!,"
+ 13597:             type ( 0x090 ) 
+ 13598:             cr ( 0x092 ) 
+ 13599:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13634:             type ( 0x090 ) 
+ 13635:             cr ( 0x092 ) 
+ 13636:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 138 Bottles of Beer on the wall."
+ 13670:             type ( 0x090 ) 
+ 13671:             cr ( 0x092 ) 
+ 13672:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 138 Bottles of Beer on the wall,"
+ 13710:             type ( 0x090 ) 
+ 13711:             cr ( 0x092 ) 
+ 13712:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     138 Bottles of Beer!,"
+ 13739:             type ( 0x090 ) 
+ 13740:             cr ( 0x092 ) 
+ 13741:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13776:             type ( 0x090 ) 
+ 13777:             cr ( 0x092 ) 
+ 13778:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 137 Bottles of Beer on the wall."
+ 13812:             type ( 0x090 ) 
+ 13813:             cr ( 0x092 ) 
+ 13814:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 137 Bottles of Beer on the wall,"
+ 13852:             type ( 0x090 ) 
+ 13853:             cr ( 0x092 ) 
+ 13854:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     137 Bottles of Beer!,"
+ 13881:             type ( 0x090 ) 
+ 13882:             cr ( 0x092 ) 
+ 13883:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 13918:             type ( 0x090 ) 
+ 13919:             cr ( 0x092 ) 
+ 13920:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 136 Bottles of Beer on the wall."
+ 13954:             type ( 0x090 ) 
+ 13955:             cr ( 0x092 ) 
+ 13956:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 136 Bottles of Beer on the wall,"
+ 13994:             type ( 0x090 ) 
+ 13995:             cr ( 0x092 ) 
+ 13996:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     136 Bottles of Beer!,"
+ 14023:             type ( 0x090 ) 
+ 14024:             cr ( 0x092 ) 
+ 14025:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14060:             type ( 0x090 ) 
+ 14061:             cr ( 0x092 ) 
+ 14062:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 135 Bottles of Beer on the wall."
+ 14096:             type ( 0x090 ) 
+ 14097:             cr ( 0x092 ) 
+ 14098:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 135 Bottles of Beer on the wall,"
+ 14136:             type ( 0x090 ) 
+ 14137:             cr ( 0x092 ) 
+ 14138:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     135 Bottles of Beer!,"
+ 14165:             type ( 0x090 ) 
+ 14166:             cr ( 0x092 ) 
+ 14167:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14202:             type ( 0x090 ) 
+ 14203:             cr ( 0x092 ) 
+ 14204:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 134 Bottles of Beer on the wall."
+ 14238:             type ( 0x090 ) 
+ 14239:             cr ( 0x092 ) 
+ 14240:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 134 Bottles of Beer on the wall,"
+ 14278:             type ( 0x090 ) 
+ 14279:             cr ( 0x092 ) 
+ 14280:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     134 Bottles of Beer!,"
+ 14307:             type ( 0x090 ) 
+ 14308:             cr ( 0x092 ) 
+ 14309:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14344:             type ( 0x090 ) 
+ 14345:             cr ( 0x092 ) 
+ 14346:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 133 Bottles of Beer on the wall."
+ 14380:             type ( 0x090 ) 
+ 14381:             cr ( 0x092 ) 
+ 14382:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 133 Bottles of Beer on the wall,"
+ 14420:             type ( 0x090 ) 
+ 14421:             cr ( 0x092 ) 
+ 14422:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     133 Bottles of Beer!,"
+ 14449:             type ( 0x090 ) 
+ 14450:             cr ( 0x092 ) 
+ 14451:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14486:             type ( 0x090 ) 
+ 14487:             cr ( 0x092 ) 
+ 14488:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 132 Bottles of Beer on the wall."
+ 14522:             type ( 0x090 ) 
+ 14523:             cr ( 0x092 ) 
+ 14524:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 132 Bottles of Beer on the wall,"
+ 14562:             type ( 0x090 ) 
+ 14563:             cr ( 0x092 ) 
+ 14564:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     132 Bottles of Beer!,"
+ 14591:             type ( 0x090 ) 
+ 14592:             cr ( 0x092 ) 
+ 14593:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14628:             type ( 0x090 ) 
+ 14629:             cr ( 0x092 ) 
+ 14630:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 131 Bottles of Beer on the wall."
+ 14664:             type ( 0x090 ) 
+ 14665:             cr ( 0x092 ) 
+ 14666:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 131 Bottles of Beer on the wall,"
+ 14704:             type ( 0x090 ) 
+ 14705:             cr ( 0x092 ) 
+ 14706:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     131 Bottles of Beer!,"
+ 14733:             type ( 0x090 ) 
+ 14734:             cr ( 0x092 ) 
+ 14735:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14770:             type ( 0x090 ) 
+ 14771:             cr ( 0x092 ) 
+ 14772:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 130 Bottles of Beer on the wall."
+ 14806:             type ( 0x090 ) 
+ 14807:             cr ( 0x092 ) 
+ 14808:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 130 Bottles of Beer on the wall,"
+ 14846:             type ( 0x090 ) 
+ 14847:             cr ( 0x092 ) 
+ 14848:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     130 Bottles of Beer!,"
+ 14875:             type ( 0x090 ) 
+ 14876:             cr ( 0x092 ) 
+ 14877:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 14912:             type ( 0x090 ) 
+ 14913:             cr ( 0x092 ) 
+ 14914:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 129 Bottles of Beer on the wall."
+ 14948:             type ( 0x090 ) 
+ 14949:             cr ( 0x092 ) 
+ 14950:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 129 Bottles of Beer on the wall,"
+ 14988:             type ( 0x090 ) 
+ 14989:             cr ( 0x092 ) 
+ 14990:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     129 Bottles of Beer!,"
+ 15017:             type ( 0x090 ) 
+ 15018:             cr ( 0x092 ) 
+ 15019:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15054:             type ( 0x090 ) 
+ 15055:             cr ( 0x092 ) 
+ 15056:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 128 Bottles of Beer on the wall."
+ 15090:             type ( 0x090 ) 
+ 15091:             cr ( 0x092 ) 
+ 15092:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 128 Bottles of Beer on the wall,"
+ 15130:             type ( 0x090 ) 
+ 15131:             cr ( 0x092 ) 
+ 15132:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     128 Bottles of Beer!,"
+ 15159:             type ( 0x090 ) 
+ 15160:             cr ( 0x092 ) 
+ 15161:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15196:             type ( 0x090 ) 
+ 15197:             cr ( 0x092 ) 
+ 15198:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 127 Bottles of Beer on the wall."
+ 15232:             type ( 0x090 ) 
+ 15233:             cr ( 0x092 ) 
+ 15234:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 127 Bottles of Beer on the wall,"
+ 15272:             type ( 0x090 ) 
+ 15273:             cr ( 0x092 ) 
+ 15274:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     127 Bottles of Beer!,"
+ 15301:             type ( 0x090 ) 
+ 15302:             cr ( 0x092 ) 
+ 15303:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15338:             type ( 0x090 ) 
+ 15339:             cr ( 0x092 ) 
+ 15340:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 126 Bottles of Beer on the wall."
+ 15374:             type ( 0x090 ) 
+ 15375:             cr ( 0x092 ) 
+ 15376:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 126 Bottles of Beer on the wall,"
+ 15414:             type ( 0x090 ) 
+ 15415:             cr ( 0x092 ) 
+ 15416:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     126 Bottles of Beer!,"
+ 15443:             type ( 0x090 ) 
+ 15444:             cr ( 0x092 ) 
+ 15445:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15480:             type ( 0x090 ) 
+ 15481:             cr ( 0x092 ) 
+ 15482:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 125 Bottles of Beer on the wall."
+ 15516:             type ( 0x090 ) 
+ 15517:             cr ( 0x092 ) 
+ 15518:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 125 Bottles of Beer on the wall,"
+ 15556:             type ( 0x090 ) 
+ 15557:             cr ( 0x092 ) 
+ 15558:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     125 Bottles of Beer!,"
+ 15585:             type ( 0x090 ) 
+ 15586:             cr ( 0x092 ) 
+ 15587:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15622:             type ( 0x090 ) 
+ 15623:             cr ( 0x092 ) 
+ 15624:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 124 Bottles of Beer on the wall."
+ 15658:             type ( 0x090 ) 
+ 15659:             cr ( 0x092 ) 
+ 15660:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 124 Bottles of Beer on the wall,"
+ 15698:             type ( 0x090 ) 
+ 15699:             cr ( 0x092 ) 
+ 15700:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     124 Bottles of Beer!,"
+ 15727:             type ( 0x090 ) 
+ 15728:             cr ( 0x092 ) 
+ 15729:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15764:             type ( 0x090 ) 
+ 15765:             cr ( 0x092 ) 
+ 15766:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 123 Bottles of Beer on the wall."
+ 15800:             type ( 0x090 ) 
+ 15801:             cr ( 0x092 ) 
+ 15802:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 123 Bottles of Beer on the wall,"
+ 15840:             type ( 0x090 ) 
+ 15841:             cr ( 0x092 ) 
+ 15842:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     123 Bottles of Beer!,"
+ 15869:             type ( 0x090 ) 
+ 15870:             cr ( 0x092 ) 
+ 15871:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 15906:             type ( 0x090 ) 
+ 15907:             cr ( 0x092 ) 
+ 15908:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 122 Bottles of Beer on the wall."
+ 15942:             type ( 0x090 ) 
+ 15943:             cr ( 0x092 ) 
+ 15944:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 122 Bottles of Beer on the wall,"
+ 15982:             type ( 0x090 ) 
+ 15983:             cr ( 0x092 ) 
+ 15984:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     122 Bottles of Beer!,"
+ 16011:             type ( 0x090 ) 
+ 16012:             cr ( 0x092 ) 
+ 16013:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16048:             type ( 0x090 ) 
+ 16049:             cr ( 0x092 ) 
+ 16050:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 121 Bottles of Beer on the wall."
+ 16084:             type ( 0x090 ) 
+ 16085:             cr ( 0x092 ) 
+ 16086:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 121 Bottles of Beer on the wall,"
+ 16124:             type ( 0x090 ) 
+ 16125:             cr ( 0x092 ) 
+ 16126:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     121 Bottles of Beer!,"
+ 16153:             type ( 0x090 ) 
+ 16154:             cr ( 0x092 ) 
+ 16155:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16190:             type ( 0x090 ) 
+ 16191:             cr ( 0x092 ) 
+ 16192:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 120 Bottles of Beer on the wall."
+ 16226:             type ( 0x090 ) 
+ 16227:             cr ( 0x092 ) 
+ 16228:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 120 Bottles of Beer on the wall,"
+ 16266:             type ( 0x090 ) 
+ 16267:             cr ( 0x092 ) 
+ 16268:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     120 Bottles of Beer!,"
+ 16295:             type ( 0x090 ) 
+ 16296:             cr ( 0x092 ) 
+ 16297:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16332:             type ( 0x090 ) 
+ 16333:             cr ( 0x092 ) 
+ 16334:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 119 Bottles of Beer on the wall."
+ 16368:             type ( 0x090 ) 
+ 16369:             cr ( 0x092 ) 
+ 16370:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 119 Bottles of Beer on the wall,"
+ 16408:             type ( 0x090 ) 
+ 16409:             cr ( 0x092 ) 
+ 16410:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     119 Bottles of Beer!,"
+ 16437:             type ( 0x090 ) 
+ 16438:             cr ( 0x092 ) 
+ 16439:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16474:             type ( 0x090 ) 
+ 16475:             cr ( 0x092 ) 
+ 16476:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 118 Bottles of Beer on the wall."
+ 16510:             type ( 0x090 ) 
+ 16511:             cr ( 0x092 ) 
+ 16512:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 118 Bottles of Beer on the wall,"
+ 16550:             type ( 0x090 ) 
+ 16551:             cr ( 0x092 ) 
+ 16552:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     118 Bottles of Beer!,"
+ 16579:             type ( 0x090 ) 
+ 16580:             cr ( 0x092 ) 
+ 16581:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16616:             type ( 0x090 ) 
+ 16617:             cr ( 0x092 ) 
+ 16618:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 117 Bottles of Beer on the wall."
+ 16652:             type ( 0x090 ) 
+ 16653:             cr ( 0x092 ) 
+ 16654:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 117 Bottles of Beer on the wall,"
+ 16692:             type ( 0x090 ) 
+ 16693:             cr ( 0x092 ) 
+ 16694:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     117 Bottles of Beer!,"
+ 16721:             type ( 0x090 ) 
+ 16722:             cr ( 0x092 ) 
+ 16723:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16758:             type ( 0x090 ) 
+ 16759:             cr ( 0x092 ) 
+ 16760:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 116 Bottles of Beer on the wall."
+ 16794:             type ( 0x090 ) 
+ 16795:             cr ( 0x092 ) 
+ 16796:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 116 Bottles of Beer on the wall,"
+ 16834:             type ( 0x090 ) 
+ 16835:             cr ( 0x092 ) 
+ 16836:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     116 Bottles of Beer!,"
+ 16863:             type ( 0x090 ) 
+ 16864:             cr ( 0x092 ) 
+ 16865:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 16900:             type ( 0x090 ) 
+ 16901:             cr ( 0x092 ) 
+ 16902:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 115 Bottles of Beer on the wall."
+ 16936:             type ( 0x090 ) 
+ 16937:             cr ( 0x092 ) 
+ 16938:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 115 Bottles of Beer on the wall,"
+ 16976:             type ( 0x090 ) 
+ 16977:             cr ( 0x092 ) 
+ 16978:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     115 Bottles of Beer!,"
+ 17005:             type ( 0x090 ) 
+ 17006:             cr ( 0x092 ) 
+ 17007:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17042:             type ( 0x090 ) 
+ 17043:             cr ( 0x092 ) 
+ 17044:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 114 Bottles of Beer on the wall."
+ 17078:             type ( 0x090 ) 
+ 17079:             cr ( 0x092 ) 
+ 17080:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 114 Bottles of Beer on the wall,"
+ 17118:             type ( 0x090 ) 
+ 17119:             cr ( 0x092 ) 
+ 17120:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     114 Bottles of Beer!,"
+ 17147:             type ( 0x090 ) 
+ 17148:             cr ( 0x092 ) 
+ 17149:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17184:             type ( 0x090 ) 
+ 17185:             cr ( 0x092 ) 
+ 17186:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 113 Bottles of Beer on the wall."
+ 17220:             type ( 0x090 ) 
+ 17221:             cr ( 0x092 ) 
+ 17222:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 113 Bottles of Beer on the wall,"
+ 17260:             type ( 0x090 ) 
+ 17261:             cr ( 0x092 ) 
+ 17262:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     113 Bottles of Beer!,"
+ 17289:             type ( 0x090 ) 
+ 17290:             cr ( 0x092 ) 
+ 17291:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17326:             type ( 0x090 ) 
+ 17327:             cr ( 0x092 ) 
+ 17328:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 112 Bottles of Beer on the wall."
+ 17362:             type ( 0x090 ) 
+ 17363:             cr ( 0x092 ) 
+ 17364:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 112 Bottles of Beer on the wall,"
+ 17402:             type ( 0x090 ) 
+ 17403:             cr ( 0x092 ) 
+ 17404:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     112 Bottles of Beer!,"
+ 17431:             type ( 0x090 ) 
+ 17432:             cr ( 0x092 ) 
+ 17433:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17468:             type ( 0x090 ) 
+ 17469:             cr ( 0x092 ) 
+ 17470:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 111 Bottles of Beer on the wall."
+ 17504:             type ( 0x090 ) 
+ 17505:             cr ( 0x092 ) 
+ 17506:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 111 Bottles of Beer on the wall,"
+ 17544:             type ( 0x090 ) 
+ 17545:             cr ( 0x092 ) 
+ 17546:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     111 Bottles of Beer!,"
+ 17573:             type ( 0x090 ) 
+ 17574:             cr ( 0x092 ) 
+ 17575:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17610:             type ( 0x090 ) 
+ 17611:             cr ( 0x092 ) 
+ 17612:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 110 Bottles of Beer on the wall."
+ 17646:             type ( 0x090 ) 
+ 17647:             cr ( 0x092 ) 
+ 17648:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 110 Bottles of Beer on the wall,"
+ 17686:             type ( 0x090 ) 
+ 17687:             cr ( 0x092 ) 
+ 17688:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     110 Bottles of Beer!,"
+ 17715:             type ( 0x090 ) 
+ 17716:             cr ( 0x092 ) 
+ 17717:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17752:             type ( 0x090 ) 
+ 17753:             cr ( 0x092 ) 
+ 17754:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 109 Bottles of Beer on the wall."
+ 17788:             type ( 0x090 ) 
+ 17789:             cr ( 0x092 ) 
+ 17790:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 109 Bottles of Beer on the wall,"
+ 17828:             type ( 0x090 ) 
+ 17829:             cr ( 0x092 ) 
+ 17830:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     109 Bottles of Beer!,"
+ 17857:             type ( 0x090 ) 
+ 17858:             cr ( 0x092 ) 
+ 17859:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 17894:             type ( 0x090 ) 
+ 17895:             cr ( 0x092 ) 
+ 17896:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 108 Bottles of Beer on the wall."
+ 17930:             type ( 0x090 ) 
+ 17931:             cr ( 0x092 ) 
+ 17932:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 108 Bottles of Beer on the wall,"
+ 17970:             type ( 0x090 ) 
+ 17971:             cr ( 0x092 ) 
+ 17972:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     108 Bottles of Beer!,"
+ 17999:             type ( 0x090 ) 
+ 18000:             cr ( 0x092 ) 
+ 18001:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18036:             type ( 0x090 ) 
+ 18037:             cr ( 0x092 ) 
+ 18038:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 107 Bottles of Beer on the wall."
+ 18072:             type ( 0x090 ) 
+ 18073:             cr ( 0x092 ) 
+ 18074:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 107 Bottles of Beer on the wall,"
+ 18112:             type ( 0x090 ) 
+ 18113:             cr ( 0x092 ) 
+ 18114:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     107 Bottles of Beer!,"
+ 18141:             type ( 0x090 ) 
+ 18142:             cr ( 0x092 ) 
+ 18143:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18178:             type ( 0x090 ) 
+ 18179:             cr ( 0x092 ) 
+ 18180:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 106 Bottles of Beer on the wall."
+ 18214:             type ( 0x090 ) 
+ 18215:             cr ( 0x092 ) 
+ 18216:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 106 Bottles of Beer on the wall,"
+ 18254:             type ( 0x090 ) 
+ 18255:             cr ( 0x092 ) 
+ 18256:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     106 Bottles of Beer!,"
+ 18283:             type ( 0x090 ) 
+ 18284:             cr ( 0x092 ) 
+ 18285:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18320:             type ( 0x090 ) 
+ 18321:             cr ( 0x092 ) 
+ 18322:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 105 Bottles of Beer on the wall."
+ 18356:             type ( 0x090 ) 
+ 18357:             cr ( 0x092 ) 
+ 18358:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 105 Bottles of Beer on the wall,"
+ 18396:             type ( 0x090 ) 
+ 18397:             cr ( 0x092 ) 
+ 18398:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     105 Bottles of Beer!,"
+ 18425:             type ( 0x090 ) 
+ 18426:             cr ( 0x092 ) 
+ 18427:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18462:             type ( 0x090 ) 
+ 18463:             cr ( 0x092 ) 
+ 18464:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 104 Bottles of Beer on the wall."
+ 18498:             type ( 0x090 ) 
+ 18499:             cr ( 0x092 ) 
+ 18500:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 104 Bottles of Beer on the wall,"
+ 18538:             type ( 0x090 ) 
+ 18539:             cr ( 0x092 ) 
+ 18540:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     104 Bottles of Beer!,"
+ 18567:             type ( 0x090 ) 
+ 18568:             cr ( 0x092 ) 
+ 18569:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18604:             type ( 0x090 ) 
+ 18605:             cr ( 0x092 ) 
+ 18606:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 103 Bottles of Beer on the wall."
+ 18640:             type ( 0x090 ) 
+ 18641:             cr ( 0x092 ) 
+ 18642:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 103 Bottles of Beer on the wall,"
+ 18680:             type ( 0x090 ) 
+ 18681:             cr ( 0x092 ) 
+ 18682:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     103 Bottles of Beer!,"
+ 18709:             type ( 0x090 ) 
+ 18710:             cr ( 0x092 ) 
+ 18711:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18746:             type ( 0x090 ) 
+ 18747:             cr ( 0x092 ) 
+ 18748:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 102 Bottles of Beer on the wall."
+ 18782:             type ( 0x090 ) 
+ 18783:             cr ( 0x092 ) 
+ 18784:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 102 Bottles of Beer on the wall,"
+ 18822:             type ( 0x090 ) 
+ 18823:             cr ( 0x092 ) 
+ 18824:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     102 Bottles of Beer!,"
+ 18851:             type ( 0x090 ) 
+ 18852:             cr ( 0x092 ) 
+ 18853:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 18888:             type ( 0x090 ) 
+ 18889:             cr ( 0x092 ) 
+ 18890:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 101 Bottles of Beer on the wall."
+ 18924:             type ( 0x090 ) 
+ 18925:             cr ( 0x092 ) 
+ 18926:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 101 Bottles of Beer on the wall,"
+ 18964:             type ( 0x090 ) 
+ 18965:             cr ( 0x092 ) 
+ 18966:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     101 Bottles of Beer!,"
+ 18993:             type ( 0x090 ) 
+ 18994:             cr ( 0x092 ) 
+ 18995:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19030:             type ( 0x090 ) 
+ 19031:             cr ( 0x092 ) 
+ 19032:             b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                            " 100 Bottles of Beer on the wall."
+ 19066:             type ( 0x090 ) 
+ 19067:             cr ( 0x092 ) 
+ 19068:             b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                            " Oh, 100 Bottles of Beer on the wall,"
+ 19106:             type ( 0x090 ) 
+ 19107:             cr ( 0x092 ) 
+ 19108:             b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                            "     100 Bottles of Beer!,"
+ 19135:             type ( 0x090 ) 
+ 19136:             cr ( 0x092 ) 
+ 19137:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19172:             type ( 0x090 ) 
+ 19173:             cr ( 0x092 ) 
+ 19174:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 99 Bottles of Beer on the wall."
+ 19207:             type ( 0x090 ) 
+ 19208:             cr ( 0x092 ) 
+ 19209:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 99 Bottles of Beer on the wall,"
+ 19246:             type ( 0x090 ) 
+ 19247:             cr ( 0x092 ) 
+ 19248:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     99 Bottles of Beer!,"
+ 19274:             type ( 0x090 ) 
+ 19275:             cr ( 0x092 ) 
+ 19276:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19311:             type ( 0x090 ) 
+ 19312:             cr ( 0x092 ) 
+ 19313:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 98 Bottles of Beer on the wall."
+ 19346:             type ( 0x090 ) 
+ 19347:             cr ( 0x092 ) 
+ 19348:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 98 Bottles of Beer on the wall,"
+ 19385:             type ( 0x090 ) 
+ 19386:             cr ( 0x092 ) 
+ 19387:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     98 Bottles of Beer!,"
+ 19413:             type ( 0x090 ) 
+ 19414:             cr ( 0x092 ) 
+ 19415:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19450:             type ( 0x090 ) 
+ 19451:             cr ( 0x092 ) 
+ 19452:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 97 Bottles of Beer on the wall."
+ 19485:             type ( 0x090 ) 
+ 19486:             cr ( 0x092 ) 
+ 19487:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 97 Bottles of Beer on the wall,"
+ 19524:             type ( 0x090 ) 
+ 19525:             cr ( 0x092 ) 
+ 19526:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     97 Bottles of Beer!,"
+ 19552:             type ( 0x090 ) 
+ 19553:             cr ( 0x092 ) 
+ 19554:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19589:             type ( 0x090 ) 
+ 19590:             cr ( 0x092 ) 
+ 19591:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 96 Bottles of Beer on the wall."
+ 19624:             type ( 0x090 ) 
+ 19625:             cr ( 0x092 ) 
+ 19626:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 96 Bottles of Beer on the wall,"
+ 19663:             type ( 0x090 ) 
+ 19664:             cr ( 0x092 ) 
+ 19665:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     96 Bottles of Beer!,"
+ 19691:             type ( 0x090 ) 
+ 19692:             cr ( 0x092 ) 
+ 19693:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19728:             type ( 0x090 ) 
+ 19729:             cr ( 0x092 ) 
+ 19730:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 95 Bottles of Beer on the wall."
+ 19763:             type ( 0x090 ) 
+ 19764:             cr ( 0x092 ) 
+ 19765:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 95 Bottles of Beer on the wall,"
+ 19802:             type ( 0x090 ) 
+ 19803:             cr ( 0x092 ) 
+ 19804:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     95 Bottles of Beer!,"
+ 19830:             type ( 0x090 ) 
+ 19831:             cr ( 0x092 ) 
+ 19832:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 19867:             type ( 0x090 ) 
+ 19868:             cr ( 0x092 ) 
+ 19869:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 94 Bottles of Beer on the wall."
+ 19902:             type ( 0x090 ) 
+ 19903:             cr ( 0x092 ) 
+ 19904:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 94 Bottles of Beer on the wall,"
+ 19941:             type ( 0x090 ) 
+ 19942:             cr ( 0x092 ) 
+ 19943:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     94 Bottles of Beer!,"
+ 19969:             type ( 0x090 ) 
+ 19970:             cr ( 0x092 ) 
+ 19971:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20006:             type ( 0x090 ) 
+ 20007:             cr ( 0x092 ) 
+ 20008:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 93 Bottles of Beer on the wall."
+ 20041:             type ( 0x090 ) 
+ 20042:             cr ( 0x092 ) 
+ 20043:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 93 Bottles of Beer on the wall,"
+ 20080:             type ( 0x090 ) 
+ 20081:             cr ( 0x092 ) 
+ 20082:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     93 Bottles of Beer!,"
+ 20108:             type ( 0x090 ) 
+ 20109:             cr ( 0x092 ) 
+ 20110:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20145:             type ( 0x090 ) 
+ 20146:             cr ( 0x092 ) 
+ 20147:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 92 Bottles of Beer on the wall."
+ 20180:             type ( 0x090 ) 
+ 20181:             cr ( 0x092 ) 
+ 20182:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 92 Bottles of Beer on the wall,"
+ 20219:             type ( 0x090 ) 
+ 20220:             cr ( 0x092 ) 
+ 20221:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     92 Bottles of Beer!,"
+ 20247:             type ( 0x090 ) 
+ 20248:             cr ( 0x092 ) 
+ 20249:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20284:             type ( 0x090 ) 
+ 20285:             cr ( 0x092 ) 
+ 20286:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 91 Bottles of Beer on the wall."
+ 20319:             type ( 0x090 ) 
+ 20320:             cr ( 0x092 ) 
+ 20321:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 91 Bottles of Beer on the wall,"
+ 20358:             type ( 0x090 ) 
+ 20359:             cr ( 0x092 ) 
+ 20360:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     91 Bottles of Beer!,"
+ 20386:             type ( 0x090 ) 
+ 20387:             cr ( 0x092 ) 
+ 20388:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20423:             type ( 0x090 ) 
+ 20424:             cr ( 0x092 ) 
+ 20425:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 90 Bottles of Beer on the wall."
+ 20458:             type ( 0x090 ) 
+ 20459:             cr ( 0x092 ) 
+ 20460:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 90 Bottles of Beer on the wall,"
+ 20497:             type ( 0x090 ) 
+ 20498:             cr ( 0x092 ) 
+ 20499:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     90 Bottles of Beer!,"
+ 20525:             type ( 0x090 ) 
+ 20526:             cr ( 0x092 ) 
+ 20527:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20562:             type ( 0x090 ) 
+ 20563:             cr ( 0x092 ) 
+ 20564:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 89 Bottles of Beer on the wall."
+ 20597:             type ( 0x090 ) 
+ 20598:             cr ( 0x092 ) 
+ 20599:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 89 Bottles of Beer on the wall,"
+ 20636:             type ( 0x090 ) 
+ 20637:             cr ( 0x092 ) 
+ 20638:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     89 Bottles of Beer!,"
+ 20664:             type ( 0x090 ) 
+ 20665:             cr ( 0x092 ) 
+ 20666:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20701:             type ( 0x090 ) 
+ 20702:             cr ( 0x092 ) 
+ 20703:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 88 Bottles of Beer on the wall."
+ 20736:             type ( 0x090 ) 
+ 20737:             cr ( 0x092 ) 
+ 20738:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 88 Bottles of Beer on the wall,"
+ 20775:             type ( 0x090 ) 
+ 20776:             cr ( 0x092 ) 
+ 20777:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     88 Bottles of Beer!,"
+ 20803:             type ( 0x090 ) 
+ 20804:             cr ( 0x092 ) 
+ 20805:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20840:             type ( 0x090 ) 
+ 20841:             cr ( 0x092 ) 
+ 20842:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 87 Bottles of Beer on the wall."
+ 20875:             type ( 0x090 ) 
+ 20876:             cr ( 0x092 ) 
+ 20877:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 87 Bottles of Beer on the wall,"
+ 20914:             type ( 0x090 ) 
+ 20915:             cr ( 0x092 ) 
+ 20916:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     87 Bottles of Beer!,"
+ 20942:             type ( 0x090 ) 
+ 20943:             cr ( 0x092 ) 
+ 20944:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 20979:             type ( 0x090 ) 
+ 20980:             cr ( 0x092 ) 
+ 20981:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 86 Bottles of Beer on the wall."
+ 21014:             type ( 0x090 ) 
+ 21015:             cr ( 0x092 ) 
+ 21016:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 86 Bottles of Beer on the wall,"
+ 21053:             type ( 0x090 ) 
+ 21054:             cr ( 0x092 ) 
+ 21055:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     86 Bottles of Beer!,"
+ 21081:             type ( 0x090 ) 
+ 21082:             cr ( 0x092 ) 
+ 21083:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21118:             type ( 0x090 ) 
+ 21119:             cr ( 0x092 ) 
+ 21120:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 85 Bottles of Beer on the wall."
+ 21153:             type ( 0x090 ) 
+ 21154:             cr ( 0x092 ) 
+ 21155:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 85 Bottles of Beer on the wall,"
+ 21192:             type ( 0x090 ) 
+ 21193:             cr ( 0x092 ) 
+ 21194:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     85 Bottles of Beer!,"
+ 21220:             type ( 0x090 ) 
+ 21221:             cr ( 0x092 ) 
+ 21222:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21257:             type ( 0x090 ) 
+ 21258:             cr ( 0x092 ) 
+ 21259:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 84 Bottles of Beer on the wall."
+ 21292:             type ( 0x090 ) 
+ 21293:             cr ( 0x092 ) 
+ 21294:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 84 Bottles of Beer on the wall,"
+ 21331:             type ( 0x090 ) 
+ 21332:             cr ( 0x092 ) 
+ 21333:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     84 Bottles of Beer!,"
+ 21359:             type ( 0x090 ) 
+ 21360:             cr ( 0x092 ) 
+ 21361:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21396:             type ( 0x090 ) 
+ 21397:             cr ( 0x092 ) 
+ 21398:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 83 Bottles of Beer on the wall."
+ 21431:             type ( 0x090 ) 
+ 21432:             cr ( 0x092 ) 
+ 21433:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 83 Bottles of Beer on the wall,"
+ 21470:             type ( 0x090 ) 
+ 21471:             cr ( 0x092 ) 
+ 21472:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     83 Bottles of Beer!,"
+ 21498:             type ( 0x090 ) 
+ 21499:             cr ( 0x092 ) 
+ 21500:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21535:             type ( 0x090 ) 
+ 21536:             cr ( 0x092 ) 
+ 21537:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 82 Bottles of Beer on the wall."
+ 21570:             type ( 0x090 ) 
+ 21571:             cr ( 0x092 ) 
+ 21572:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 82 Bottles of Beer on the wall,"
+ 21609:             type ( 0x090 ) 
+ 21610:             cr ( 0x092 ) 
+ 21611:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     82 Bottles of Beer!,"
+ 21637:             type ( 0x090 ) 
+ 21638:             cr ( 0x092 ) 
+ 21639:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21674:             type ( 0x090 ) 
+ 21675:             cr ( 0x092 ) 
+ 21676:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 81 Bottles of Beer on the wall."
+ 21709:             type ( 0x090 ) 
+ 21710:             cr ( 0x092 ) 
+ 21711:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 81 Bottles of Beer on the wall,"
+ 21748:             type ( 0x090 ) 
+ 21749:             cr ( 0x092 ) 
+ 21750:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     81 Bottles of Beer!,"
+ 21776:             type ( 0x090 ) 
+ 21777:             cr ( 0x092 ) 
+ 21778:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21813:             type ( 0x090 ) 
+ 21814:             cr ( 0x092 ) 
+ 21815:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 80 Bottles of Beer on the wall."
+ 21848:             type ( 0x090 ) 
+ 21849:             cr ( 0x092 ) 
+ 21850:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 80 Bottles of Beer on the wall,"
+ 21887:             type ( 0x090 ) 
+ 21888:             cr ( 0x092 ) 
+ 21889:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     80 Bottles of Beer!,"
+ 21915:             type ( 0x090 ) 
+ 21916:             cr ( 0x092 ) 
+ 21917:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 21952:             type ( 0x090 ) 
+ 21953:             cr ( 0x092 ) 
+ 21954:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 79 Bottles of Beer on the wall."
+ 21987:             type ( 0x090 ) 
+ 21988:             cr ( 0x092 ) 
+ 21989:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 79 Bottles of Beer on the wall,"
+ 22026:             type ( 0x090 ) 
+ 22027:             cr ( 0x092 ) 
+ 22028:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     79 Bottles of Beer!,"
+ 22054:             type ( 0x090 ) 
+ 22055:             cr ( 0x092 ) 
+ 22056:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22091:             type ( 0x090 ) 
+ 22092:             cr ( 0x092 ) 
+ 22093:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 78 Bottles of Beer on the wall."
+ 22126:             type ( 0x090 ) 
+ 22127:             cr ( 0x092 ) 
+ 22128:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 78 Bottles of Beer on the wall,"
+ 22165:             type ( 0x090 ) 
+ 22166:             cr ( 0x092 ) 
+ 22167:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     78 Bottles of Beer!,"
+ 22193:             type ( 0x090 ) 
+ 22194:             cr ( 0x092 ) 
+ 22195:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22230:             type ( 0x090 ) 
+ 22231:             cr ( 0x092 ) 
+ 22232:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 77 Bottles of Beer on the wall."
+ 22265:             type ( 0x090 ) 
+ 22266:             cr ( 0x092 ) 
+ 22267:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 77 Bottles of Beer on the wall,"
+ 22304:             type ( 0x090 ) 
+ 22305:             cr ( 0x092 ) 
+ 22306:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     77 Bottles of Beer!,"
+ 22332:             type ( 0x090 ) 
+ 22333:             cr ( 0x092 ) 
+ 22334:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22369:             type ( 0x090 ) 
+ 22370:             cr ( 0x092 ) 
+ 22371:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 76 Bottles of Beer on the wall."
+ 22404:             type ( 0x090 ) 
+ 22405:             cr ( 0x092 ) 
+ 22406:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 76 Bottles of Beer on the wall,"
+ 22443:             type ( 0x090 ) 
+ 22444:             cr ( 0x092 ) 
+ 22445:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     76 Bottles of Beer!,"
+ 22471:             type ( 0x090 ) 
+ 22472:             cr ( 0x092 ) 
+ 22473:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22508:             type ( 0x090 ) 
+ 22509:             cr ( 0x092 ) 
+ 22510:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 75 Bottles of Beer on the wall."
+ 22543:             type ( 0x090 ) 
+ 22544:             cr ( 0x092 ) 
+ 22545:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 75 Bottles of Beer on the wall,"
+ 22582:             type ( 0x090 ) 
+ 22583:             cr ( 0x092 ) 
+ 22584:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     75 Bottles of Beer!,"
+ 22610:             type ( 0x090 ) 
+ 22611:             cr ( 0x092 ) 
+ 22612:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22647:             type ( 0x090 ) 
+ 22648:             cr ( 0x092 ) 
+ 22649:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 74 Bottles of Beer on the wall."
+ 22682:             type ( 0x090 ) 
+ 22683:             cr ( 0x092 ) 
+ 22684:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 74 Bottles of Beer on the wall,"
+ 22721:             type ( 0x090 ) 
+ 22722:             cr ( 0x092 ) 
+ 22723:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     74 Bottles of Beer!,"
+ 22749:             type ( 0x090 ) 
+ 22750:             cr ( 0x092 ) 
+ 22751:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22786:             type ( 0x090 ) 
+ 22787:             cr ( 0x092 ) 
+ 22788:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 73 Bottles of Beer on the wall."
+ 22821:             type ( 0x090 ) 
+ 22822:             cr ( 0x092 ) 
+ 22823:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 73 Bottles of Beer on the wall,"
+ 22860:             type ( 0x090 ) 
+ 22861:             cr ( 0x092 ) 
+ 22862:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     73 Bottles of Beer!,"
+ 22888:             type ( 0x090 ) 
+ 22889:             cr ( 0x092 ) 
+ 22890:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 22925:             type ( 0x090 ) 
+ 22926:             cr ( 0x092 ) 
+ 22927:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 72 Bottles of Beer on the wall."
+ 22960:             type ( 0x090 ) 
+ 22961:             cr ( 0x092 ) 
+ 22962:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 72 Bottles of Beer on the wall,"
+ 22999:             type ( 0x090 ) 
+ 23000:             cr ( 0x092 ) 
+ 23001:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     72 Bottles of Beer!,"
+ 23027:             type ( 0x090 ) 
+ 23028:             cr ( 0x092 ) 
+ 23029:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23064:             type ( 0x090 ) 
+ 23065:             cr ( 0x092 ) 
+ 23066:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 71 Bottles of Beer on the wall."
+ 23099:             type ( 0x090 ) 
+ 23100:             cr ( 0x092 ) 
+ 23101:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 71 Bottles of Beer on the wall,"
+ 23138:             type ( 0x090 ) 
+ 23139:             cr ( 0x092 ) 
+ 23140:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     71 Bottles of Beer!,"
+ 23166:             type ( 0x090 ) 
+ 23167:             cr ( 0x092 ) 
+ 23168:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23203:             type ( 0x090 ) 
+ 23204:             cr ( 0x092 ) 
+ 23205:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 70 Bottles of Beer on the wall."
+ 23238:             type ( 0x090 ) 
+ 23239:             cr ( 0x092 ) 
+ 23240:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 70 Bottles of Beer on the wall,"
+ 23277:             type ( 0x090 ) 
+ 23278:             cr ( 0x092 ) 
+ 23279:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     70 Bottles of Beer!,"
+ 23305:             type ( 0x090 ) 
+ 23306:             cr ( 0x092 ) 
+ 23307:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23342:             type ( 0x090 ) 
+ 23343:             cr ( 0x092 ) 
+ 23344:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 69 Bottles of Beer on the wall."
+ 23377:             type ( 0x090 ) 
+ 23378:             cr ( 0x092 ) 
+ 23379:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 69 Bottles of Beer on the wall,"
+ 23416:             type ( 0x090 ) 
+ 23417:             cr ( 0x092 ) 
+ 23418:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     69 Bottles of Beer!,"
+ 23444:             type ( 0x090 ) 
+ 23445:             cr ( 0x092 ) 
+ 23446:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23481:             type ( 0x090 ) 
+ 23482:             cr ( 0x092 ) 
+ 23483:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 68 Bottles of Beer on the wall."
+ 23516:             type ( 0x090 ) 
+ 23517:             cr ( 0x092 ) 
+ 23518:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 68 Bottles of Beer on the wall,"
+ 23555:             type ( 0x090 ) 
+ 23556:             cr ( 0x092 ) 
+ 23557:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     68 Bottles of Beer!,"
+ 23583:             type ( 0x090 ) 
+ 23584:             cr ( 0x092 ) 
+ 23585:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23620:             type ( 0x090 ) 
+ 23621:             cr ( 0x092 ) 
+ 23622:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 67 Bottles of Beer on the wall."
+ 23655:             type ( 0x090 ) 
+ 23656:             cr ( 0x092 ) 
+ 23657:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 67 Bottles of Beer on the wall,"
+ 23694:             type ( 0x090 ) 
+ 23695:             cr ( 0x092 ) 
+ 23696:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     67 Bottles of Beer!,"
+ 23722:             type ( 0x090 ) 
+ 23723:             cr ( 0x092 ) 
+ 23724:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23759:             type ( 0x090 ) 
+ 23760:             cr ( 0x092 ) 
+ 23761:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 66 Bottles of Beer on the wall."
+ 23794:             type ( 0x090 ) 
+ 23795:             cr ( 0x092 ) 
+ 23796:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 66 Bottles of Beer on the wall,"
+ 23833:             type ( 0x090 ) 
+ 23834:             cr ( 0x092 ) 
+ 23835:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     66 Bottles of Beer!,"
+ 23861:             type ( 0x090 ) 
+ 23862:             cr ( 0x092 ) 
+ 23863:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 23898:             type ( 0x090 ) 
+ 23899:             cr ( 0x092 ) 
+ 23900:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 65 Bottles of Beer on the wall."
+ 23933:             type ( 0x090 ) 
+ 23934:             cr ( 0x092 ) 
+ 23935:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 65 Bottles of Beer on the wall,"
+ 23972:             type ( 0x090 ) 
+ 23973:             cr ( 0x092 ) 
+ 23974:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     65 Bottles of Beer!,"
+ 24000:             type ( 0x090 ) 
+ 24001:             cr ( 0x092 ) 
+ 24002:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24037:             type ( 0x090 ) 
+ 24038:             cr ( 0x092 ) 
+ 24039:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 64 Bottles of Beer on the wall."
+ 24072:             type ( 0x090 ) 
+ 24073:             cr ( 0x092 ) 
+ 24074:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 64 Bottles of Beer on the wall,"
+ 24111:             type ( 0x090 ) 
+ 24112:             cr ( 0x092 ) 
+ 24113:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     64 Bottles of Beer!,"
+ 24139:             type ( 0x090 ) 
+ 24140:             cr ( 0x092 ) 
+ 24141:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24176:             type ( 0x090 ) 
+ 24177:             cr ( 0x092 ) 
+ 24178:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 63 Bottles of Beer on the wall."
+ 24211:             type ( 0x090 ) 
+ 24212:             cr ( 0x092 ) 
+ 24213:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 63 Bottles of Beer on the wall,"
+ 24250:             type ( 0x090 ) 
+ 24251:             cr ( 0x092 ) 
+ 24252:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     63 Bottles of Beer!,"
+ 24278:             type ( 0x090 ) 
+ 24279:             cr ( 0x092 ) 
+ 24280:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24315:             type ( 0x090 ) 
+ 24316:             cr ( 0x092 ) 
+ 24317:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 62 Bottles of Beer on the wall."
+ 24350:             type ( 0x090 ) 
+ 24351:             cr ( 0x092 ) 
+ 24352:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 62 Bottles of Beer on the wall,"
+ 24389:             type ( 0x090 ) 
+ 24390:             cr ( 0x092 ) 
+ 24391:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     62 Bottles of Beer!,"
+ 24417:             type ( 0x090 ) 
+ 24418:             cr ( 0x092 ) 
+ 24419:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24454:             type ( 0x090 ) 
+ 24455:             cr ( 0x092 ) 
+ 24456:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 61 Bottles of Beer on the wall."
+ 24489:             type ( 0x090 ) 
+ 24490:             cr ( 0x092 ) 
+ 24491:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 61 Bottles of Beer on the wall,"
+ 24528:             type ( 0x090 ) 
+ 24529:             cr ( 0x092 ) 
+ 24530:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     61 Bottles of Beer!,"
+ 24556:             type ( 0x090 ) 
+ 24557:             cr ( 0x092 ) 
+ 24558:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24593:             type ( 0x090 ) 
+ 24594:             cr ( 0x092 ) 
+ 24595:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 60 Bottles of Beer on the wall."
+ 24628:             type ( 0x090 ) 
+ 24629:             cr ( 0x092 ) 
+ 24630:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 60 Bottles of Beer on the wall,"
+ 24667:             type ( 0x090 ) 
+ 24668:             cr ( 0x092 ) 
+ 24669:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     60 Bottles of Beer!,"
+ 24695:             type ( 0x090 ) 
+ 24696:             cr ( 0x092 ) 
+ 24697:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24732:             type ( 0x090 ) 
+ 24733:             cr ( 0x092 ) 
+ 24734:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 59 Bottles of Beer on the wall."
+ 24767:             type ( 0x090 ) 
+ 24768:             cr ( 0x092 ) 
+ 24769:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 59 Bottles of Beer on the wall,"
+ 24806:             type ( 0x090 ) 
+ 24807:             cr ( 0x092 ) 
+ 24808:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     59 Bottles of Beer!,"
+ 24834:             type ( 0x090 ) 
+ 24835:             cr ( 0x092 ) 
+ 24836:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 24871:             type ( 0x090 ) 
+ 24872:             cr ( 0x092 ) 
+ 24873:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 58 Bottles of Beer on the wall."
+ 24906:             type ( 0x090 ) 
+ 24907:             cr ( 0x092 ) 
+ 24908:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 58 Bottles of Beer on the wall,"
+ 24945:             type ( 0x090 ) 
+ 24946:             cr ( 0x092 ) 
+ 24947:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     58 Bottles of Beer!,"
+ 24973:             type ( 0x090 ) 
+ 24974:             cr ( 0x092 ) 
+ 24975:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25010:             type ( 0x090 ) 
+ 25011:             cr ( 0x092 ) 
+ 25012:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 57 Bottles of Beer on the wall."
+ 25045:             type ( 0x090 ) 
+ 25046:             cr ( 0x092 ) 
+ 25047:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 57 Bottles of Beer on the wall,"
+ 25084:             type ( 0x090 ) 
+ 25085:             cr ( 0x092 ) 
+ 25086:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     57 Bottles of Beer!,"
+ 25112:             type ( 0x090 ) 
+ 25113:             cr ( 0x092 ) 
+ 25114:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25149:             type ( 0x090 ) 
+ 25150:             cr ( 0x092 ) 
+ 25151:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 56 Bottles of Beer on the wall."
+ 25184:             type ( 0x090 ) 
+ 25185:             cr ( 0x092 ) 
+ 25186:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 56 Bottles of Beer on the wall,"
+ 25223:             type ( 0x090 ) 
+ 25224:             cr ( 0x092 ) 
+ 25225:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     56 Bottles of Beer!,"
+ 25251:             type ( 0x090 ) 
+ 25252:             cr ( 0x092 ) 
+ 25253:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25288:             type ( 0x090 ) 
+ 25289:             cr ( 0x092 ) 
+ 25290:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 55 Bottles of Beer on the wall."
+ 25323:             type ( 0x090 ) 
+ 25324:             cr ( 0x092 ) 
+ 25325:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 55 Bottles of Beer on the wall,"
+ 25362:             type ( 0x090 ) 
+ 25363:             cr ( 0x092 ) 
+ 25364:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     55 Bottles of Beer!,"
+ 25390:             type ( 0x090 ) 
+ 25391:             cr ( 0x092 ) 
+ 25392:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25427:             type ( 0x090 ) 
+ 25428:             cr ( 0x092 ) 
+ 25429:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 54 Bottles of Beer on the wall."
+ 25462:             type ( 0x090 ) 
+ 25463:             cr ( 0x092 ) 
+ 25464:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 54 Bottles of Beer on the wall,"
+ 25501:             type ( 0x090 ) 
+ 25502:             cr ( 0x092 ) 
+ 25503:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     54 Bottles of Beer!,"
+ 25529:             type ( 0x090 ) 
+ 25530:             cr ( 0x092 ) 
+ 25531:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25566:             type ( 0x090 ) 
+ 25567:             cr ( 0x092 ) 
+ 25568:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 53 Bottles of Beer on the wall."
+ 25601:             type ( 0x090 ) 
+ 25602:             cr ( 0x092 ) 
+ 25603:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 53 Bottles of Beer on the wall,"
+ 25640:             type ( 0x090 ) 
+ 25641:             cr ( 0x092 ) 
+ 25642:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     53 Bottles of Beer!,"
+ 25668:             type ( 0x090 ) 
+ 25669:             cr ( 0x092 ) 
+ 25670:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25705:             type ( 0x090 ) 
+ 25706:             cr ( 0x092 ) 
+ 25707:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 52 Bottles of Beer on the wall."
+ 25740:             type ( 0x090 ) 
+ 25741:             cr ( 0x092 ) 
+ 25742:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 52 Bottles of Beer on the wall,"
+ 25779:             type ( 0x090 ) 
+ 25780:             cr ( 0x092 ) 
+ 25781:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     52 Bottles of Beer!,"
+ 25807:             type ( 0x090 ) 
+ 25808:             cr ( 0x092 ) 
+ 25809:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25844:             type ( 0x090 ) 
+ 25845:             cr ( 0x092 ) 
+ 25846:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 51 Bottles of Beer on the wall."
+ 25879:             type ( 0x090 ) 
+ 25880:             cr ( 0x092 ) 
+ 25881:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 51 Bottles of Beer on the wall,"
+ 25918:             type ( 0x090 ) 
+ 25919:             cr ( 0x092 ) 
+ 25920:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     51 Bottles of Beer!,"
+ 25946:             type ( 0x090 ) 
+ 25947:             cr ( 0x092 ) 
+ 25948:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 25983:             type ( 0x090 ) 
+ 25984:             cr ( 0x092 ) 
+ 25985:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 50 Bottles of Beer on the wall."
+ 26018:             type ( 0x090 ) 
+ 26019:             cr ( 0x092 ) 
+ 26020:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 50 Bottles of Beer on the wall,"
+ 26057:             type ( 0x090 ) 
+ 26058:             cr ( 0x092 ) 
+ 26059:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     50 Bottles of Beer!,"
+ 26085:             type ( 0x090 ) 
+ 26086:             cr ( 0x092 ) 
+ 26087:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26122:             type ( 0x090 ) 
+ 26123:             cr ( 0x092 ) 
+ 26124:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 49 Bottles of Beer on the wall."
+ 26157:             type ( 0x090 ) 
+ 26158:             cr ( 0x092 ) 
+ 26159:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 49 Bottles of Beer on the wall,"
+ 26196:             type ( 0x090 ) 
+ 26197:             cr ( 0x092 ) 
+ 26198:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     49 Bottles of Beer!,"
+ 26224:             type ( 0x090 ) 
+ 26225:             cr ( 0x092 ) 
+ 26226:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26261:             type ( 0x090 ) 
+ 26262:             cr ( 0x092 ) 
+ 26263:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 48 Bottles of Beer on the wall."
+ 26296:             type ( 0x090 ) 
+ 26297:             cr ( 0x092 ) 
+ 26298:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 48 Bottles of Beer on the wall,"
+ 26335:             type ( 0x090 ) 
+ 26336:             cr ( 0x092 ) 
+ 26337:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     48 Bottles of Beer!,"
+ 26363:             type ( 0x090 ) 
+ 26364:             cr ( 0x092 ) 
+ 26365:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26400:             type ( 0x090 ) 
+ 26401:             cr ( 0x092 ) 
+ 26402:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 47 Bottles of Beer on the wall."
+ 26435:             type ( 0x090 ) 
+ 26436:             cr ( 0x092 ) 
+ 26437:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 47 Bottles of Beer on the wall,"
+ 26474:             type ( 0x090 ) 
+ 26475:             cr ( 0x092 ) 
+ 26476:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     47 Bottles of Beer!,"
+ 26502:             type ( 0x090 ) 
+ 26503:             cr ( 0x092 ) 
+ 26504:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26539:             type ( 0x090 ) 
+ 26540:             cr ( 0x092 ) 
+ 26541:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 46 Bottles of Beer on the wall."
+ 26574:             type ( 0x090 ) 
+ 26575:             cr ( 0x092 ) 
+ 26576:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 46 Bottles of Beer on the wall,"
+ 26613:             type ( 0x090 ) 
+ 26614:             cr ( 0x092 ) 
+ 26615:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     46 Bottles of Beer!,"
+ 26641:             type ( 0x090 ) 
+ 26642:             cr ( 0x092 ) 
+ 26643:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26678:             type ( 0x090 ) 
+ 26679:             cr ( 0x092 ) 
+ 26680:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 45 Bottles of Beer on the wall."
+ 26713:             type ( 0x090 ) 
+ 26714:             cr ( 0x092 ) 
+ 26715:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 45 Bottles of Beer on the wall,"
+ 26752:             type ( 0x090 ) 
+ 26753:             cr ( 0x092 ) 
+ 26754:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     45 Bottles of Beer!,"
+ 26780:             type ( 0x090 ) 
+ 26781:             cr ( 0x092 ) 
+ 26782:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26817:             type ( 0x090 ) 
+ 26818:             cr ( 0x092 ) 
+ 26819:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 44 Bottles of Beer on the wall."
+ 26852:             type ( 0x090 ) 
+ 26853:             cr ( 0x092 ) 
+ 26854:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 44 Bottles of Beer on the wall,"
+ 26891:             type ( 0x090 ) 
+ 26892:             cr ( 0x092 ) 
+ 26893:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     44 Bottles of Beer!,"
+ 26919:             type ( 0x090 ) 
+ 26920:             cr ( 0x092 ) 
+ 26921:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 26956:             type ( 0x090 ) 
+ 26957:             cr ( 0x092 ) 
+ 26958:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 43 Bottles of Beer on the wall."
+ 26991:             type ( 0x090 ) 
+ 26992:             cr ( 0x092 ) 
+ 26993:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 43 Bottles of Beer on the wall,"
+ 27030:             type ( 0x090 ) 
+ 27031:             cr ( 0x092 ) 
+ 27032:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     43 Bottles of Beer!,"
+ 27058:             type ( 0x090 ) 
+ 27059:             cr ( 0x092 ) 
+ 27060:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27095:             type ( 0x090 ) 
+ 27096:             cr ( 0x092 ) 
+ 27097:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 42 Bottles of Beer on the wall."
+ 27130:             type ( 0x090 ) 
+ 27131:             cr ( 0x092 ) 
+ 27132:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 42 Bottles of Beer on the wall,"
+ 27169:             type ( 0x090 ) 
+ 27170:             cr ( 0x092 ) 
+ 27171:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     42 Bottles of Beer!,"
+ 27197:             type ( 0x090 ) 
+ 27198:             cr ( 0x092 ) 
+ 27199:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27234:             type ( 0x090 ) 
+ 27235:             cr ( 0x092 ) 
+ 27236:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 41 Bottles of Beer on the wall."
+ 27269:             type ( 0x090 ) 
+ 27270:             cr ( 0x092 ) 
+ 27271:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 41 Bottles of Beer on the wall,"
+ 27308:             type ( 0x090 ) 
+ 27309:             cr ( 0x092 ) 
+ 27310:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     41 Bottles of Beer!,"
+ 27336:             type ( 0x090 ) 
+ 27337:             cr ( 0x092 ) 
+ 27338:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27373:             type ( 0x090 ) 
+ 27374:             cr ( 0x092 ) 
+ 27375:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 40 Bottles of Beer on the wall."
+ 27408:             type ( 0x090 ) 
+ 27409:             cr ( 0x092 ) 
+ 27410:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 40 Bottles of Beer on the wall,"
+ 27447:             type ( 0x090 ) 
+ 27448:             cr ( 0x092 ) 
+ 27449:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     40 Bottles of Beer!,"
+ 27475:             type ( 0x090 ) 
+ 27476:             cr ( 0x092 ) 
+ 27477:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27512:             type ( 0x090 ) 
+ 27513:             cr ( 0x092 ) 
+ 27514:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 39 Bottles of Beer on the wall."
+ 27547:             type ( 0x090 ) 
+ 27548:             cr ( 0x092 ) 
+ 27549:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 39 Bottles of Beer on the wall,"
+ 27586:             type ( 0x090 ) 
+ 27587:             cr ( 0x092 ) 
+ 27588:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     39 Bottles of Beer!,"
+ 27614:             type ( 0x090 ) 
+ 27615:             cr ( 0x092 ) 
+ 27616:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27651:             type ( 0x090 ) 
+ 27652:             cr ( 0x092 ) 
+ 27653:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 38 Bottles of Beer on the wall."
+ 27686:             type ( 0x090 ) 
+ 27687:             cr ( 0x092 ) 
+ 27688:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 38 Bottles of Beer on the wall,"
+ 27725:             type ( 0x090 ) 
+ 27726:             cr ( 0x092 ) 
+ 27727:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     38 Bottles of Beer!,"
+ 27753:             type ( 0x090 ) 
+ 27754:             cr ( 0x092 ) 
+ 27755:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27790:             type ( 0x090 ) 
+ 27791:             cr ( 0x092 ) 
+ 27792:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 37 Bottles of Beer on the wall."
+ 27825:             type ( 0x090 ) 
+ 27826:             cr ( 0x092 ) 
+ 27827:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 37 Bottles of Beer on the wall,"
+ 27864:             type ( 0x090 ) 
+ 27865:             cr ( 0x092 ) 
+ 27866:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     37 Bottles of Beer!,"
+ 27892:             type ( 0x090 ) 
+ 27893:             cr ( 0x092 ) 
+ 27894:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 27929:             type ( 0x090 ) 
+ 27930:             cr ( 0x092 ) 
+ 27931:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 36 Bottles of Beer on the wall."
+ 27964:             type ( 0x090 ) 
+ 27965:             cr ( 0x092 ) 
+ 27966:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 36 Bottles of Beer on the wall,"
+ 28003:             type ( 0x090 ) 
+ 28004:             cr ( 0x092 ) 
+ 28005:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     36 Bottles of Beer!,"
+ 28031:             type ( 0x090 ) 
+ 28032:             cr ( 0x092 ) 
+ 28033:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28068:             type ( 0x090 ) 
+ 28069:             cr ( 0x092 ) 
+ 28070:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 35 Bottles of Beer on the wall."
+ 28103:             type ( 0x090 ) 
+ 28104:             cr ( 0x092 ) 
+ 28105:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 35 Bottles of Beer on the wall,"
+ 28142:             type ( 0x090 ) 
+ 28143:             cr ( 0x092 ) 
+ 28144:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     35 Bottles of Beer!,"
+ 28170:             type ( 0x090 ) 
+ 28171:             cr ( 0x092 ) 
+ 28172:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28207:             type ( 0x090 ) 
+ 28208:             cr ( 0x092 ) 
+ 28209:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 34 Bottles of Beer on the wall."
+ 28242:             type ( 0x090 ) 
+ 28243:             cr ( 0x092 ) 
+ 28244:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 34 Bottles of Beer on the wall,"
+ 28281:             type ( 0x090 ) 
+ 28282:             cr ( 0x092 ) 
+ 28283:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     34 Bottles of Beer!,"
+ 28309:             type ( 0x090 ) 
+ 28310:             cr ( 0x092 ) 
+ 28311:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28346:             type ( 0x090 ) 
+ 28347:             cr ( 0x092 ) 
+ 28348:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 33 Bottles of Beer on the wall."
+ 28381:             type ( 0x090 ) 
+ 28382:             cr ( 0x092 ) 
+ 28383:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 33 Bottles of Beer on the wall,"
+ 28420:             type ( 0x090 ) 
+ 28421:             cr ( 0x092 ) 
+ 28422:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     33 Bottles of Beer!,"
+ 28448:             type ( 0x090 ) 
+ 28449:             cr ( 0x092 ) 
+ 28450:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28485:             type ( 0x090 ) 
+ 28486:             cr ( 0x092 ) 
+ 28487:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 32 Bottles of Beer on the wall."
+ 28520:             type ( 0x090 ) 
+ 28521:             cr ( 0x092 ) 
+ 28522:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 32 Bottles of Beer on the wall,"
+ 28559:             type ( 0x090 ) 
+ 28560:             cr ( 0x092 ) 
+ 28561:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     32 Bottles of Beer!,"
+ 28587:             type ( 0x090 ) 
+ 28588:             cr ( 0x092 ) 
+ 28589:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28624:             type ( 0x090 ) 
+ 28625:             cr ( 0x092 ) 
+ 28626:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 31 Bottles of Beer on the wall."
+ 28659:             type ( 0x090 ) 
+ 28660:             cr ( 0x092 ) 
+ 28661:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 31 Bottles of Beer on the wall,"
+ 28698:             type ( 0x090 ) 
+ 28699:             cr ( 0x092 ) 
+ 28700:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     31 Bottles of Beer!,"
+ 28726:             type ( 0x090 ) 
+ 28727:             cr ( 0x092 ) 
+ 28728:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28763:             type ( 0x090 ) 
+ 28764:             cr ( 0x092 ) 
+ 28765:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 30 Bottles of Beer on the wall."
+ 28798:             type ( 0x090 ) 
+ 28799:             cr ( 0x092 ) 
+ 28800:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 30 Bottles of Beer on the wall,"
+ 28837:             type ( 0x090 ) 
+ 28838:             cr ( 0x092 ) 
+ 28839:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     30 Bottles of Beer!,"
+ 28865:             type ( 0x090 ) 
+ 28866:             cr ( 0x092 ) 
+ 28867:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 28902:             type ( 0x090 ) 
+ 28903:             cr ( 0x092 ) 
+ 28904:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 29 Bottles of Beer on the wall."
+ 28937:             type ( 0x090 ) 
+ 28938:             cr ( 0x092 ) 
+ 28939:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 29 Bottles of Beer on the wall,"
+ 28976:             type ( 0x090 ) 
+ 28977:             cr ( 0x092 ) 
+ 28978:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     29 Bottles of Beer!,"
+ 29004:             type ( 0x090 ) 
+ 29005:             cr ( 0x092 ) 
+ 29006:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29041:             type ( 0x090 ) 
+ 29042:             cr ( 0x092 ) 
+ 29043:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 28 Bottles of Beer on the wall."
+ 29076:             type ( 0x090 ) 
+ 29077:             cr ( 0x092 ) 
+ 29078:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 28 Bottles of Beer on the wall,"
+ 29115:             type ( 0x090 ) 
+ 29116:             cr ( 0x092 ) 
+ 29117:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     28 Bottles of Beer!,"
+ 29143:             type ( 0x090 ) 
+ 29144:             cr ( 0x092 ) 
+ 29145:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29180:             type ( 0x090 ) 
+ 29181:             cr ( 0x092 ) 
+ 29182:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 27 Bottles of Beer on the wall."
+ 29215:             type ( 0x090 ) 
+ 29216:             cr ( 0x092 ) 
+ 29217:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 27 Bottles of Beer on the wall,"
+ 29254:             type ( 0x090 ) 
+ 29255:             cr ( 0x092 ) 
+ 29256:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     27 Bottles of Beer!,"
+ 29282:             type ( 0x090 ) 
+ 29283:             cr ( 0x092 ) 
+ 29284:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29319:             type ( 0x090 ) 
+ 29320:             cr ( 0x092 ) 
+ 29321:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 26 Bottles of Beer on the wall."
+ 29354:             type ( 0x090 ) 
+ 29355:             cr ( 0x092 ) 
+ 29356:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 26 Bottles of Beer on the wall,"
+ 29393:             type ( 0x090 ) 
+ 29394:             cr ( 0x092 ) 
+ 29395:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     26 Bottles of Beer!,"
+ 29421:             type ( 0x090 ) 
+ 29422:             cr ( 0x092 ) 
+ 29423:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29458:             type ( 0x090 ) 
+ 29459:             cr ( 0x092 ) 
+ 29460:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 25 Bottles of Beer on the wall."
+ 29493:             type ( 0x090 ) 
+ 29494:             cr ( 0x092 ) 
+ 29495:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 25 Bottles of Beer on the wall,"
+ 29532:             type ( 0x090 ) 
+ 29533:             cr ( 0x092 ) 
+ 29534:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     25 Bottles of Beer!,"
+ 29560:             type ( 0x090 ) 
+ 29561:             cr ( 0x092 ) 
+ 29562:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29597:             type ( 0x090 ) 
+ 29598:             cr ( 0x092 ) 
+ 29599:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 24 Bottles of Beer on the wall."
+ 29632:             type ( 0x090 ) 
+ 29633:             cr ( 0x092 ) 
+ 29634:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 24 Bottles of Beer on the wall,"
+ 29671:             type ( 0x090 ) 
+ 29672:             cr ( 0x092 ) 
+ 29673:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     24 Bottles of Beer!,"
+ 29699:             type ( 0x090 ) 
+ 29700:             cr ( 0x092 ) 
+ 29701:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29736:             type ( 0x090 ) 
+ 29737:             cr ( 0x092 ) 
+ 29738:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 23 Bottles of Beer on the wall."
+ 29771:             type ( 0x090 ) 
+ 29772:             cr ( 0x092 ) 
+ 29773:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 23 Bottles of Beer on the wall,"
+ 29810:             type ( 0x090 ) 
+ 29811:             cr ( 0x092 ) 
+ 29812:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     23 Bottles of Beer!,"
+ 29838:             type ( 0x090 ) 
+ 29839:             cr ( 0x092 ) 
+ 29840:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 29875:             type ( 0x090 ) 
+ 29876:             cr ( 0x092 ) 
+ 29877:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 22 Bottles of Beer on the wall."
+ 29910:             type ( 0x090 ) 
+ 29911:             cr ( 0x092 ) 
+ 29912:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 22 Bottles of Beer on the wall,"
+ 29949:             type ( 0x090 ) 
+ 29950:             cr ( 0x092 ) 
+ 29951:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     22 Bottles of Beer!,"
+ 29977:             type ( 0x090 ) 
+ 29978:             cr ( 0x092 ) 
+ 29979:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30014:             type ( 0x090 ) 
+ 30015:             cr ( 0x092 ) 
+ 30016:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 21 Bottles of Beer on the wall."
+ 30049:             type ( 0x090 ) 
+ 30050:             cr ( 0x092 ) 
+ 30051:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 21 Bottles of Beer on the wall,"
+ 30088:             type ( 0x090 ) 
+ 30089:             cr ( 0x092 ) 
+ 30090:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     21 Bottles of Beer!,"
+ 30116:             type ( 0x090 ) 
+ 30117:             cr ( 0x092 ) 
+ 30118:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30153:             type ( 0x090 ) 
+ 30154:             cr ( 0x092 ) 
+ 30155:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 20 Bottles of Beer on the wall."
+ 30188:             type ( 0x090 ) 
+ 30189:             cr ( 0x092 ) 
+ 30190:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 20 Bottles of Beer on the wall,"
+ 30227:             type ( 0x090 ) 
+ 30228:             cr ( 0x092 ) 
+ 30229:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     20 Bottles of Beer!,"
+ 30255:             type ( 0x090 ) 
+ 30256:             cr ( 0x092 ) 
+ 30257:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30292:             type ( 0x090 ) 
+ 30293:             cr ( 0x092 ) 
+ 30294:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 19 Bottles of Beer on the wall."
+ 30327:             type ( 0x090 ) 
+ 30328:             cr ( 0x092 ) 
+ 30329:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 19 Bottles of Beer on the wall,"
+ 30366:             type ( 0x090 ) 
+ 30367:             cr ( 0x092 ) 
+ 30368:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     19 Bottles of Beer!,"
+ 30394:             type ( 0x090 ) 
+ 30395:             cr ( 0x092 ) 
+ 30396:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30431:             type ( 0x090 ) 
+ 30432:             cr ( 0x092 ) 
+ 30433:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 18 Bottles of Beer on the wall."
+ 30466:             type ( 0x090 ) 
+ 30467:             cr ( 0x092 ) 
+ 30468:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 18 Bottles of Beer on the wall,"
+ 30505:             type ( 0x090 ) 
+ 30506:             cr ( 0x092 ) 
+ 30507:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     18 Bottles of Beer!,"
+ 30533:             type ( 0x090 ) 
+ 30534:             cr ( 0x092 ) 
+ 30535:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30570:             type ( 0x090 ) 
+ 30571:             cr ( 0x092 ) 
+ 30572:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 17 Bottles of Beer on the wall."
+ 30605:             type ( 0x090 ) 
+ 30606:             cr ( 0x092 ) 
+ 30607:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 17 Bottles of Beer on the wall,"
+ 30644:             type ( 0x090 ) 
+ 30645:             cr ( 0x092 ) 
+ 30646:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     17 Bottles of Beer!,"
+ 30672:             type ( 0x090 ) 
+ 30673:             cr ( 0x092 ) 
+ 30674:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30709:             type ( 0x090 ) 
+ 30710:             cr ( 0x092 ) 
+ 30711:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 16 Bottles of Beer on the wall."
+ 30744:             type ( 0x090 ) 
+ 30745:             cr ( 0x092 ) 
+ 30746:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 16 Bottles of Beer on the wall,"
+ 30783:             type ( 0x090 ) 
+ 30784:             cr ( 0x092 ) 
+ 30785:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     16 Bottles of Beer!,"
+ 30811:             type ( 0x090 ) 
+ 30812:             cr ( 0x092 ) 
+ 30813:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30848:             type ( 0x090 ) 
+ 30849:             cr ( 0x092 ) 
+ 30850:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 15 Bottles of Beer on the wall."
+ 30883:             type ( 0x090 ) 
+ 30884:             cr ( 0x092 ) 
+ 30885:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 15 Bottles of Beer on the wall,"
+ 30922:             type ( 0x090 ) 
+ 30923:             cr ( 0x092 ) 
+ 30924:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     15 Bottles of Beer!,"
+ 30950:             type ( 0x090 ) 
+ 30951:             cr ( 0x092 ) 
+ 30952:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 30987:             type ( 0x090 ) 
+ 30988:             cr ( 0x092 ) 
+ 30989:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 14 Bottles of Beer on the wall."
+ 31022:             type ( 0x090 ) 
+ 31023:             cr ( 0x092 ) 
+ 31024:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 14 Bottles of Beer on the wall,"
+ 31061:             type ( 0x090 ) 
+ 31062:             cr ( 0x092 ) 
+ 31063:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     14 Bottles of Beer!,"
+ 31089:             type ( 0x090 ) 
+ 31090:             cr ( 0x092 ) 
+ 31091:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31126:             type ( 0x090 ) 
+ 31127:             cr ( 0x092 ) 
+ 31128:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 13 Bottles of Beer on the wall."
+ 31161:             type ( 0x090 ) 
+ 31162:             cr ( 0x092 ) 
+ 31163:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 13 Bottles of Beer on the wall,"
+ 31200:             type ( 0x090 ) 
+ 31201:             cr ( 0x092 ) 
+ 31202:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     13 Bottles of Beer!,"
+ 31228:             type ( 0x090 ) 
+ 31229:             cr ( 0x092 ) 
+ 31230:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31265:             type ( 0x090 ) 
+ 31266:             cr ( 0x092 ) 
+ 31267:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 12 Bottles of Beer on the wall."
+ 31300:             type ( 0x090 ) 
+ 31301:             cr ( 0x092 ) 
+ 31302:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 12 Bottles of Beer on the wall,"
+ 31339:             type ( 0x090 ) 
+ 31340:             cr ( 0x092 ) 
+ 31341:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     12 Bottles of Beer!,"
+ 31367:             type ( 0x090 ) 
+ 31368:             cr ( 0x092 ) 
+ 31369:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31404:             type ( 0x090 ) 
+ 31405:             cr ( 0x092 ) 
+ 31406:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 11 Bottles of Beer on the wall."
+ 31439:             type ( 0x090 ) 
+ 31440:             cr ( 0x092 ) 
+ 31441:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 11 Bottles of Beer on the wall,"
+ 31478:             type ( 0x090 ) 
+ 31479:             cr ( 0x092 ) 
+ 31480:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     11 Bottles of Beer!,"
+ 31506:             type ( 0x090 ) 
+ 31507:             cr ( 0x092 ) 
+ 31508:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31543:             type ( 0x090 ) 
+ 31544:             cr ( 0x092 ) 
+ 31545:             b(") ( 0x012 ) ( len=0x1f [31 bytes] )
+                            " 10 Bottles of Beer on the wall."
+ 31578:             type ( 0x090 ) 
+ 31579:             cr ( 0x092 ) 
+ 31580:             b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                            " Oh, 10 Bottles of Beer on the wall,"
+ 31617:             type ( 0x090 ) 
+ 31618:             cr ( 0x092 ) 
+ 31619:             b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                            "     10 Bottles of Beer!,"
+ 31645:             type ( 0x090 ) 
+ 31646:             cr ( 0x092 ) 
+ 31647:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31682:             type ( 0x090 ) 
+ 31683:             cr ( 0x092 ) 
+ 31684:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 9 Bottles of Beer on the wall."
+ 31716:             type ( 0x090 ) 
+ 31717:             cr ( 0x092 ) 
+ 31718:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 9 Bottles of Beer on the wall,"
+ 31754:             type ( 0x090 ) 
+ 31755:             cr ( 0x092 ) 
+ 31756:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     9 Bottles of Beer!,"
+ 31781:             type ( 0x090 ) 
+ 31782:             cr ( 0x092 ) 
+ 31783:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31818:             type ( 0x090 ) 
+ 31819:             cr ( 0x092 ) 
+ 31820:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 8 Bottles of Beer on the wall."
+ 31852:             type ( 0x090 ) 
+ 31853:             cr ( 0x092 ) 
+ 31854:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 8 Bottles of Beer on the wall,"
+ 31890:             type ( 0x090 ) 
+ 31891:             cr ( 0x092 ) 
+ 31892:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     8 Bottles of Beer!,"
+ 31917:             type ( 0x090 ) 
+ 31918:             cr ( 0x092 ) 
+ 31919:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 31954:             type ( 0x090 ) 
+ 31955:             cr ( 0x092 ) 
+ 31956:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 7 Bottles of Beer on the wall."
+ 31988:             type ( 0x090 ) 
+ 31989:             cr ( 0x092 ) 
+ 31990:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 7 Bottles of Beer on the wall,"
+ 32026:             type ( 0x090 ) 
+ 32027:             cr ( 0x092 ) 
+ 32028:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     7 Bottles of Beer!,"
+ 32053:             type ( 0x090 ) 
+ 32054:             cr ( 0x092 ) 
+ 32055:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32090:             type ( 0x090 ) 
+ 32091:             cr ( 0x092 ) 
+ 32092:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 6 Bottles of Beer on the wall."
+ 32124:             type ( 0x090 ) 
+ 32125:             cr ( 0x092 ) 
+ 32126:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 6 Bottles of Beer on the wall,"
+ 32162:             type ( 0x090 ) 
+ 32163:             cr ( 0x092 ) 
+ 32164:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     6 Bottles of Beer!,"
+ 32189:             type ( 0x090 ) 
+ 32190:             cr ( 0x092 ) 
+ 32191:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32226:             type ( 0x090 ) 
+ 32227:             cr ( 0x092 ) 
+ 32228:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 5 Bottles of Beer on the wall."
+ 32260:             type ( 0x090 ) 
+ 32261:             cr ( 0x092 ) 
+ 32262:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 5 Bottles of Beer on the wall,"
+ 32298:             type ( 0x090 ) 
+ 32299:             cr ( 0x092 ) 
+ 32300:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     5 Bottles of Beer!,"
+ 32325:             type ( 0x090 ) 
+ 32326:             cr ( 0x092 ) 
+ 32327:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32362:             type ( 0x090 ) 
+ 32363:             cr ( 0x092 ) 
+ 32364:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 4 Bottles of Beer on the wall."
+ 32396:             type ( 0x090 ) 
+ 32397:             cr ( 0x092 ) 
+ 32398:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 4 Bottles of Beer on the wall,"
+ 32434:             type ( 0x090 ) 
+ 32435:             cr ( 0x092 ) 
+ 32436:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     4 Bottles of Beer!,"
+ 32461:             type ( 0x090 ) 
+ 32462:             cr ( 0x092 ) 
+ 32463:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32498:             type ( 0x090 ) 
+ 32499:             cr ( 0x092 ) 
+ 32500:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 3 Bottles of Beer on the wall."
+ 32532:             type ( 0x090 ) 
+ 32533:             cr ( 0x092 ) 
+ 32534:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 3 Bottles of Beer on the wall,"
+ 32570:             type ( 0x090 ) 
+ 32571:             cr ( 0x092 ) 
+ 32572:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     3 Bottles of Beer!,"
+ 32597:             type ( 0x090 ) 
+ 32598:             cr ( 0x092 ) 
+ 32599:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32634:             type ( 0x090 ) 
+ 32635:             cr ( 0x092 ) 
+ 32636:             b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                            " 2 Bottles of Beer on the wall."
+ 32668:             type ( 0x090 ) 
+ 32669:             cr ( 0x092 ) 
+ 32670:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Oh, 2 Bottles of Beer on the wall,"
+ 32706:             type ( 0x090 ) 
+ 32707:             cr ( 0x092 ) 
+ 32708:             b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                            "     2 Bottles of Beer!,"
+ 32733:             type ( 0x090 ) 
+ 32734:             cr ( 0x092 ) 
+ 32735:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Take one down and pass it around,"
+ 32770:             type ( 0x090 ) 
+ 32771:             cr ( 0x092 ) 
+ 32772:             b(") ( 0x012 ) ( len=0x1d [29 bytes] )
+                            " 1 Bottle of Beer on the wall."
+ 32803:             type ( 0x090 ) 
+ 32804:             cr ( 0x092 ) 
+ 32805:             b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                            " Oh, 1 Bottle of Beer on the wall,"
+ 32840:             type ( 0x090 ) 
+ 32841:             cr ( 0x092 ) 
+ 32842:             b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                            "     1 Bottle of Beer!,"
+ 32866:             type ( 0x090 ) 
+ 32867:             cr ( 0x092 ) 
+ 32868:             b(") ( 0x012 ) ( len=0x22 [34 bytes] )
+                            " Take it down and pass it around..."
+ 32904:             type ( 0x090 ) 
+ 32905:             cr ( 0x092 ) 
+ 32906:             b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                            " How dry I am!  How dry I am!"
+ 32936:             type ( 0x090 ) 
+ 32937:             cr ( 0x092 ) 
+ 32938:             b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                            " No body knows how dry I am."
+ 32967:             type ( 0x090 ) 
+ 32968:             cr ( 0x092 ) 
+ 32969:             b(") ( 0x012 ) ( len=0x1a [26 bytes] )
+                            " How ... Dry I ... Aaaammm."
+ 32997:             type ( 0x090 ) 
+ 32998:             cr ( 0x092 ) 
+ 32999:         b(endcase) ( 0x0c5 ) 
+ 33000:         b(") ( 0x012 ) ( len=4 )
+                        " then"
+ 33006:         type ( 0x090 ) 
+ 33007:     b(>resolve) ( 0x0b2 ) 
+ 33008:     b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                    " Loop back and forward"
+ 33031:     type ( 0x090 ) 
+ 33032:     cr ( 0x092 ) 
+ 33033: b(loop) ( 0x015 ) 0x7f61 ( =dec 32609  dest = 65643 )
+\  Error:  Invalid offset.  Ignoring...
+ 33034: bljoin ( 0x07f ) 
+ 33035: na+ ( 0x061 ) 
+ 33036: b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                "  And here we are!"
+ 33055: type ( 0x090 ) 
+ 33056: exit ( 0x033 ) 
+ 33057: b(") ( 0x012 ) ( len=0x1e [30 bytes] )
+                "  Well, we needed some way out!"
+ 33089: type ( 0x090 ) 
+ 33090: bbranch ( 0x013 ) 0x7f05 ( =dec 32517  dest = 65608 )
+\  Error:  Invalid offset.  Ignoring...
+ 33091:     bljoin ( 0x07f ) 
+ 33092:     ferror ( 0x512 ) 
+ 33094: b(loop) ( 0x015 ) 0x2042 ( =dec 8258  dest = 41353 )
+\  Error:  Invalid offset.  Ignoring...
+ 33095: * ( 0x020 ) 
+ 33096: >= ( 0x042 ) 
+ 33097: na+ ( 0x061 ) 
+ 33098: wa1+ ( 0x063 ) 
+ 33099: off ( 0x06b ) 
+ 33100: * ( 0x020 ) 
+ 33101: w! ( 0x074 ) 
+ 33102: w@ ( 0x06f ) 
+ 33103: * ( 0x020 ) 
+ 33104: w! ( 0x074 ) 
+ 33105: /l* ( 0x068 ) 
+ 33106: cell+ ( 0x065 ) 
+ 33107: * ( 0x020 ) 
+ 33108: chars ( 0x066 ) 
+ 33109: c! ( 0x075 ) 
+ 33110: wa1+ ( 0x063 ) 
+ 33111: /l* ( 0x068 ) 
+ 33112: l! ( 0x073 ) 
+ 33113: cells ( 0x069 ) 
+ 33114: na+ ( 0x061 ) 
+ 33115: min ( 0x02e ) 
+ 33116: type ( 0x090 ) 
+ 33117: b(;) ( 0x0c2 ) 
+ 33118: named-token ( 0x0b6 ) control-example 0x801
+ 33137: b(:) ( 0x0b7 ) 
+ 33138:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    "  Small non-loop"
+ 33155:     type ( 0x090 ) 
+ 33156:     b(<mark) ( 0x0b1 ) 
+ 33157:         b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                        "  Here's the beguine"
+ 33178:         type ( 0x090 ) 
+ 33179:         dup ( 0x047 ) 
+ 33180:         b(") ( 0x012 ) ( len=3 )
+                        " if "
+ 33185:         type ( 0x090 ) 
+ 33186:         b?branch ( 0x014 ) 0x004a ( =dec 74  dest = 33261 )
+ 33189:             dup ( 0x047 ) 
+ 33190:             b(") ( 0x012 ) ( len=4 )
+                            " case"
+ 33196:             type ( 0x090 ) 
+ 33197:             b(case) ( 0x0c4 ) 
+ 33198:                 0 ( 0x0a5 ) 
+ 33199:                 b(of) ( 0x01c ) 0x001b ( =dec 27  dest = 33227 )
+ 33202:                     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                                    "  Just a short case"
+ 33222:                     type ( 0x090 ) 
+ 33223:                     cr ( 0x092 ) 
+ 33224:                 b(endof) ( 0x0c6 ) 0x001c ( =dec 28  dest = 33253 )
+ 33227:                 b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                                " default.  Normal one!"
+ 33250:                 type ( 0x090 ) 
+ 33251:                 cr ( 0x092 ) 
+ 33252:             b(endcase) ( 0x0c5 ) 
+ 33253:             b(") ( 0x012 ) ( len=4 )
+                            " then"
+ 33259:             type ( 0x090 ) 
+ 33260:         b(>resolve) ( 0x0b2 ) 
+ 33261:         b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                        " and the way out"
+ 33278:         type ( 0x090 ) 
+ 33279:         exit ( 0x033 ) 
+ 33280:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " and the jump back"
+ 33299:         type ( 0x090 ) 
+ 33300:         bbranch ( 0x013 ) 0xff70 ( =dec -144  dest = 33157 )
+ 33303:     b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                    "  Never do this"
+ 33319:     type ( 0x090 ) 
+ 33320:     cr ( 0x092 ) 
+ 33321: b(;) ( 0x0c2 ) 
+ 33322: end0 ( 0x000 ) 
+\  Detokenization finished normally after 33323 bytes.
+End of file.
+

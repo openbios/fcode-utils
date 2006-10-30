@@ -1,0 +1,62 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x126c (Ok)
+     4:   len:       0x0064 ( 100 bytes)
+     8: convert ( 0x0a1 ) 
+     9: set-token-table ( 0x0b3 ) 
+    10: set-table ( 0x0b4 ) 
+    11: b(code) ( 0x0bf ) 
+    12: 4-byte-id ( 0x0fe ) 
+    13: dma-alloc ( 0x101 ) 
+    15: memmap ( 0x104 ) 
+    17: >physical ( 0x106 ) 
+    19: b(') ( 0x011 ) my-params ( 0x10f ) 
+    22: b(') ( 0x011 ) 2dup ( 0x053 ) 
+    24: b?branch ( 0x014 ) 0x0000 (  dest = 25 )
+\  Error:  Unresolved offset.
+    27:     intr ( 0x117 ) 
+    29:     driver ( 0x118 ) 
+    31:     -1 ( 0x0a4 ) 
+    32:     group-code ( 0x123 ) 
+    34:     -1 ( 0x0a4 ) 
+    35:     b(to) ( 0x0c3 ) frame-buffer-busy? ( 0x156 ) 
+    38:     fb1-draw-character ( 0x170 ) 
+    40:     fb1-reset-screen ( 0x171 ) 
+    42:     fb1-toggle-cursor ( 0x172 ) 
+    44:     fb1-erase-screen ( 0x173 ) 
+    46:     fb1-blink-screen ( 0x174 ) 
+    48:     fb1-invert-screen ( 0x175 ) 
+    50:     fb1-insert-characters ( 0x176 ) 
+    52:     fb1-delete-characters ( 0x177 ) 
+    54:     fb1-insert-lines ( 0x178 ) 
+    56:     fb1-delete-lines ( 0x179 ) 
+    58:     fb1-draw-logo ( 0x17a ) 
+    60:     fb1-install ( 0x17b ) 
+    62:     fb1-slide-up ( 0x17c ) 
+    64:     return-buffer ( 0x1a0 ) 
+    66:     b(lit) ( 0x010 ) 0x1a0
+    71:     xmit-packet ( 0x1a1 ) 
+    73:     poll-packet ( 0x1a2 ) 
+    75:     processor-type ( 0x210 ) 
+    77:     firmware-version ( 0x211 ) 
+    79:     fcode-version ( 0x212 ) 
+    81:     adr-mask ( 0x229 ) 
+    83:     probe ( 0x238 ) 
+    85:     probe-virtual ( 0x239 ) 
+    87:     xwsplit ( 0x254 ) 
+    89:     b(lit) ( 0x010 ) 0x89
+    94:     b(') ( 0x011 ) unloop ( 0x089 ) 
+    96:     b(') ( 0x011 ) j ( 0x01a ) 
+    98:     j ( 0x01a ) 
+    99:     end0 ( 0x000 ) 
+\  Detokenization finished normally after 100 bytes.
+End of file.
+

@@ -1,0 +1,67 @@
+toke -v -i ContErr3.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  ContErr3.fth   Binary output to ContErr3.fc 
+Advisory:  File ContErr3.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Error:  File ContErr3.fth, Line 22.  (Output Position = 143).  The THEN is mismatched with the CASE on line 14 in definition of  CRAPSKY  , which started on line 13
+Error:  File ContErr3.fth, Line 23.  (Output Position = 170).  The THEN is mismatched with the ENDOF on line 20 in definition of  CRAPSKY  , which started on line 13
+Error:  File ContErr3.fth, Line 24.  (Output Position = 197).  The THEN is mismatched with the ENDOF on line 18 in definition of  CRAPSKY  , which started on line 13
+Error:  File ContErr3.fth, Line 25.  (Output Position = 224).  The THEN is mismatched with the ENDOF on line 16 in definition of  CRAPSKY  , which started on line 13
+Error:  File ContErr3.fth, Line 32.  (Output Position = 296).  The ENDCASE is mismatched with the IF on line 30 in definition of  DUMPSKY  , which started on line 29
+Error:  File ContErr3.fth, Line 36.  (Output Position = 345).  Control-Stack underflow at ELSE in definition of  SNEAKSKY  , which started on line 35
+Error:  File ContErr3.fth, Line 41.  (Output Position = 408).  Control-Stack underflow at WHILE
+Error:  File ContErr3.fth, Line 45.  (Output Position = 447).  Control-Stack underflow at OF in definition of  GROPSKY  , which started on line 43
+Error:  File ContErr3.fth, Line 47.  (Output Position = 473).  Control-Stack underflow at THEN in definition of  GROPSKY  , which started on line 43
+Error:  File ContErr3.fth, Line 57.  (Output Position = 591).  The ENDOF is mismatched with the IF on line 55 in definition of  TRASHSKY  , which started on line 51
+Error:  File ContErr3.fth, Line 61.  (Output Position = 645).  End of colon-definition before completion of ENDOF on line 57 in definition of  TRASHSKY  , which started on line 51
+Error:  File ContErr3.fth, Line 70.  (Output Position = 792).  The ENDOF is mismatched with the IF on line 68 in definition of  SCHLOCKSKY  , which started on line 63
+Error:  File ContErr3.fth, Line 72.  (Output Position = 810).  End of colon-definition before completion of CASE on line 66 in definition of  SCHLOCKSKY  , which started on line 63
+Error:  File ContErr3.fth, Line 72.  (Output Position = 810).  End of colon-definition before completion of ENDOF on line 70 in definition of  SCHLOCKSKY  , which started on line 63
+Error:  File ContErr3.fth, Line 78.  (Output Position = 915).  COLON definition before completion of DO on line 76
+Error:  File ContErr3.fth, Line 81.  (Output Position = 949).  LEAVE outside of  DO ... LOOP  structure in definition of  STINSKY  , which started on line 78
+Error:  File ContErr3.fth, Line 87.  (Output Position = 1011).  The LOOP is mismatched with the BEGIN on line 85
+Error:  File ContErr3.fth, Line 87.  (Output Position = 1011).  The LOOP is mismatched with the WHILE on line 86
+Message:  File ContErr3.fth, Line 99.  (Output Position = 1184).   There's an IF ; where's the WHILE?
+Error:  File ContErr3.fth, Line 100.  (Output Position = 1184).  The REPEAT is mismatched with the IF on line 97
+Message:  File ContErr3.fth, Line 101.  (Output Position = 1203).  Won't be easy to catch.
+Message:  File ContErr3.fth, Line 104.  (Output Position = 1261).  BEGIN without WHILE then REPEAT...
+Message:  File ContErr3.fth, Line 105.  (Output Position = 1283).  Where's the while?
+Error:  File ContErr3.fth, Line 106.  (Output Position = 1283).  The REPEAT is mismatched with the DO on line 76
+Error:  File ContErr3.fth, Line 109.  (Output Position = 1313).  Control-Stack underflow at REPEAT
+Error:  File ContErr3.fth, Line 111.  (Output Position = 1339).  Control-Stack underflow at LOOP
+Error:  File ContErr3.fth, Line 115.  (Output Position = 1377).  The REPEAT is mismatched with the DO on line 113
+Message:  File ContErr3.fth, Line 117.  (Output Position = 1377).  Definitions within a loop
+Error:  File ContErr3.fth, Line 124.  (Output Position = 1451).  VALUE definition before completion of IF on line 123
+Error:  File ContErr3.fth, Line 124.  (Output Position = 1451).  VALUE definition before completion of DO on line 122
+Error:  File ContErr3.fth, Line 125.  (Output Position = 1460).  COLON definition before completion of IF on line 123
+Error:  File ContErr3.fth, Line 125.  (Output Position = 1460).  COLON definition before completion of DO on line 122
+Error:  File ContErr3.fth, Line 126.  (Output Position = 1481).  Word  targ  is not in dictionary.
+Message:  File ContErr3.fth, Line 127.  (Output Position = 1482).  Error here...
+Error:  File ContErr3.fth, Line 127.  (Output Position = 1483).  J outside of  DO ... DO ... LOOP ... LOOP  structure in definition of  FUNNY_STUFF  , which started on line 125
+Message:  File ContErr3.fth, Line 128.  (Output Position = 1483).  But not here
+Warning:  File ContErr3.fth, Line 136.  (Output Position = 1503).  Multi-line string, started on line 135
+Message:  File ContErr3.fth, Line 135.  (Output Position = 1503).   Same line as a loop
+Error:  File ContErr3.fth, Line 137.  (Output Position = 1543).  Cannot apply  TO  to  TARG .
+Error:  File ContErr3.fth, Line 137.  (Output Position = 1543).  Word  targ  is not in dictionary.
+Error:  File ContErr3.fth, Line 137.  (Output Position = 1543).  COLON definition before completion of IF
+Error:  File ContErr3.fth, Line 137.  (Output Position = 1543).  COLON definition before completion of DO
+Error:  File ContErr3.fth, Line 138.  (Output Position = 1565).  Word  targ  is not in dictionary.
+Message:  File ContErr3.fth, Line 138.  (Output Position = 1566).  Error here, too...
+Error:  File ContErr3.fth, Line 138.  (Output Position = 1567).  J outside of  DO ... DO ... LOOP ... LOOP  structure in definition of  RUNNY_STUFF  , which started on line 137
+Message:  File ContErr3.fth, Line 139.  (Output Position = 1567).  But not here either
+Message:  File ContErr3.fth, Line 140.  (Output Position = 1581).  Missing an until
+Error:  File ContErr3.fth, Line 141.  (Output Position = 1581).  End of colon-definition before completion of BEGIN on line 137 in definition of  RUNNY_STUFF  , which started on line 137
+Advisory:  File ContErr3.fth, Line 144.  (Output Position = 1586).  FCODE-END encountered; processing...
+toke: checksum is 0x070b (1587 bytes).  Last assigned FCode = 0x80a
+Tokenization Completed.  36 Errors, 1 Warning, 2 Advisories, 11 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1587 bytes to bytecode file 'ContErr3.fc'

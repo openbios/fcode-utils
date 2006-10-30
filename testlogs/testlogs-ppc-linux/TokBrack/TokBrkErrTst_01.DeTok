@@ -1,0 +1,35 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x29b1 (Ok)
+     4:   len:       0x00a0 ( 160 bytes)
+     8: b(lit) ( 0x010 ) 0x30
+    13: b(lit) ( 0x010 ) 0x100a0810
+    18: lcc ( 0x082 ) 
+    19: b(lit) ( 0x010 ) 0x32
+    24: named-token ( 0x0b6 ) gummidge 0x802
+    36: b(constant) ( 0x0ba ) 
+    37: b(lit) ( 0x010 ) 0x30
+    42: b(lit) ( 0x010 ) 0x100
+    47: named-token ( 0x0b6 ) pele_yoetz_ne'ema'an_anochi_hu_ha'omer_v'oseh_v'ain_c'moni_bchol_ha_aretz 0x803
+   124: b(constant) ( 0x0ba ) 
+   125: pele_yoetz_ne'ema'an_anochi_hu_ha'omer_v'oseh_v'ain_c'moni_bchol_ha_aretz ( 0x803 ) 
+   127: 2 ( 0x0a7 ) 
+   128: * ( 0x020 ) 
+   129: named-token ( 0x0b6 ) clone 0x804
+   138: b(constant) ( 0x0ba ) 
+   139: b(lit) ( 0x010 ) 0x30141020
+   144: b(lit) ( 0x010 ) 0x0
+   149: b(lit) ( 0x010 ) 0x0
+   154: b(lit) ( 0x010 ) 0x805
+   159: end0 ( 0x000 ) 
+\  Detokenization finished normally after 160 bytes.
+End of file.
+

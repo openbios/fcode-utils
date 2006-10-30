@@ -1,0 +1,25 @@
+
+Image 1:
+PCI Expansion ROM Header:
+  Signature: 0x55aa (Ok)
+  CPU unique data: 0x34 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+                   0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+  Pointer to PCI Data Structure: 0x001c
+
+PCI Data Structure:
+  Signature: 0x50434952 'PCIR' (Ok)
+  Vendor ID: 0xcede
+  Device ID: 0x193a
+  Vital Product Data:  0x0000
+  PCI Data Structure Length: 0x0018 (24 bytes)
+  PCI Data Structure Revision: 0x00
+  Class Code: 0x095014 (unknown)
+  Image Length: 0x0001 blocks (512 bytes)
+  Revision Level of Code/Data: 0xfa57
+  Code Type: 0x01 (Open Firmware)
+  Last-Image Flag: 0x80 (last image in rom)
+  Reserved: 0x0000
+
+Platform specific data for Open Firmware compliant rom:
+  Pointer to FCode program: 0x0034
+

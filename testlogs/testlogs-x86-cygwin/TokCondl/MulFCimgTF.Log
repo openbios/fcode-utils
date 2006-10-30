@@ -1,0 +1,34 @@
+toke -v -l MulFCimgTF.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  MulFCimgTF.fth   Binary output to MulFCimgTF.fc   FLoad-list to MulFCimgTF.fl 
+Advisory:  File MulFCimgTF.fth, Line 9.  PCI header revision=0xfa57
+Advisory:  File MulFCimgTF.fth, Line 16.  (Output Position = 52).  PCI header vendor id=0xcede, device id=0x193a, class=095014
+Advisory:  File MulFCimgTF.fth, Line 19.  (Output Position = 52).  (PCI-Block Position = 0).  FLOADing TokConstCondTstT.fth
+Advisory:  File TokConstCondTstT.fth, Line 8.  (Output Position = 52).  (PCI-Block Position = 0).  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 110).  (PCI-Block Position = 58).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 6.  (Output Position = 146).  (PCI-Block Position = 94).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 265).  (PCI-Block Position = 213).  FCODE-END encountered; processing...
+toke: checksum is 0x4365 (214 bytes).  Last assigned FCode = 0x801
+Advisory:  File MulFCimgTF.fth, Line 22.  (Output Position = 266).  (PCI-Block Position = 214).  FLOADing TokConstCondTstF.fth
+Advisory:  File TokConstCondTstF.fth, Line 8.  (Output Position = 266).  (PCI-Block Position = 214).  FLOADing TokConstCondTst01.fth
+Warning:  File TokConstCondTst01.fth, Line 8.  (Output Position = 266).  (PCI-Block Position = 214).  Duplicate definition:   boobalah?  already exists as a CONSTANT in Tokenizer-Escape mode.
+Advisory:  File TokConstCondTst01.fth, Line 10.  (Output Position = 266).  (PCI-Block Position = 214).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 332).  (PCI-Block Position = 280).  FLOADing BooBalah.fth
+Message:  File BooBalah.fth, Line 20.  (Output Position = 368).  (PCI-Block Position = 316).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 503).  (PCI-Block Position = 451).  FCODE-END encountered; processing...
+toke: checksum is 0x4c03 (238 bytes).  Last assigned FCode = 0x803
+Adding 8 bytes of zero padding to PCI image.
+
+Tokenization Completed.  1 Warning, 12 Advisories, 2 Messages.
+toke: wrote 512 bytes to bytecode file 'MulFCimgTF.fc'

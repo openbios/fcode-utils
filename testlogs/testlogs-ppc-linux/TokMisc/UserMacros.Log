@@ -1,0 +1,28 @@
+toke -v UserMacros.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  UserMacros.fth   Binary output to UserMacros.fc 
+Advisory:  File UserMacros.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Message:  File UserMacros.fth, Line 15.  (Output Position = 67).  Look out, look out look out! ##Crash!# 
+Message:  File UserMacros.fth, Line 16.  (Output Position = 67).  I'll never forget you #Leader of the Pack!#
+Advisory:  File UserMacros.fth, Line 21.  (Output Position = 67).  FCode-token Assignment Counter is unchanged from 0x800.
+Message:  File UserMacros.fth, Line 29.  (Output Position = 92).   Now for some fun
+Advisory:  File UserMacros.fth, Line 46.  (Output Position = 245).  FCode-token Assignment Counter of 0x808 has been saved on stack.
+Advisory:  File UserMacros.fth, Line 47.  (Output Position = 245).  FCode-token Assignment Counter was 0x808; has been reset to 0x800.
+Advisory:  File UserMacros.fth, Line 48.  (Output Position = 245).  FCode-token Assignment Counter was 0x800; has been advanced to 0x808.
+Advisory:  File UserMacros.fth, Line 51.  (Output Position = 245).  FCODE-END encountered; processing...
+toke: checksum is 0x43f3 (246 bytes).  FCodes assigned:
+    From 0x800 to 0x807 in the range that started on line 10
+    None assigned in the range that started on line 47
+    None assigned in the range that started on line 48
+Tokenization Completed.  6 Advisories, 3 Messages.
+toke: wrote 246 bytes to bytecode file 'UserMacros.fc'

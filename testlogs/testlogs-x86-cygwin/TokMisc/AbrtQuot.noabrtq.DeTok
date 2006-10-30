@@ -1,0 +1,60 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x2f66 (Ok)
+     4:   len:       0x0097 ( 151 bytes)
+     8: b(lit) ( 0x010 ) 0xdefeca8e
+    13: named-token ( 0x0b6 ) poopoo 0x800
+    23: b(constant) ( 0x0ba ) 
+    24: b(lit) ( 0x010 ) 0xbeeffece
+    29: named-token ( 0x0b6 ) moopoo 0x801
+    39: b(constant) ( 0x0ba ) 
+    40: named-token ( 0x0b6 ) gotta_try_it 0x802
+    56: b(:) ( 0x0b7 ) 
+    57:     moopoo ( 0x801 ) 
+    59:     poopoo ( 0x800 ) 
+    61:     = ( 0x03c ) 
+    62:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    " poopoo is "
+    74:     type ( 0x090 ) 
+    75:     b(lit) ( 0x010 ) 0x800
+    80:     base ( 0x0a0 ) 
+    81:     @ ( 0x06d ) 
+    82:     swap ( 0x049 ) 
+    83:     b(lit) ( 0x010 ) 0x10
+    88:     base ( 0x0a0 ) 
+    89:     ! ( 0x072 ) 
+    90:     . ( 0x09d ) 
+    91:     base ( 0x0a0 ) 
+    92:     ! ( 0x072 ) 
+    93:     cr ( 0x092 ) 
+    94:     b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                    " couterde is "
+   108:     type ( 0x090 ) 
+   109:     b(lit) ( 0x010 ) 0x801
+   114:     base ( 0x0a0 ) 
+   115:     @ ( 0x06d ) 
+   116:     swap ( 0x049 ) 
+   117:     b(lit) ( 0x010 ) 0x10
+   122:     base ( 0x0a0 ) 
+   123:     ! ( 0x072 ) 
+   124:     . ( 0x09d ) 
+   125:     base ( 0x0a0 ) 
+   126:     ! ( 0x072 ) 
+   127:     cr ( 0x092 ) 
+   128:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " And its XT is: "
+   145:     type ( 0x090 ) 
+   146:     b(') ( 0x011 ) moopoo ( 0x801 ) 
+   149: b(;) ( 0x0c2 ) 
+   150: end0 ( 0x000 ) 
+\  Detokenization finished normally after 151 bytes.
+End of file.
+

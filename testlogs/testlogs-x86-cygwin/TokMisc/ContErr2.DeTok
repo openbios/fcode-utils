@@ -1,0 +1,175 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x0069 (Ok)
+     4:   len:       0x0308 ( 776 bytes)
+     8: named-token ( 0x0b6 ) crapsky 0x800
+    19: b(:) ( 0x0b7 ) 
+    20:     b(") ( 0x012 ) ( len=6 )
+                    " 0 case"
+    28:     type ( 0x090 ) 
+    29:     0 ( 0x0a5 ) 
+    30:     b(case) ( 0x0c4 ) 
+    31:         b(") ( 0x012 ) ( len=4 )
+                        " 1 of"
+    37:         type ( 0x090 ) 
+    38:         1 ( 0x0a6 ) 
+    39:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 56 )
+    42:             b(") ( 0x012 ) ( len=7 )
+                            " 1 endof"
+    51:             type ( 0x090 ) 
+    52:             1 ( 0x0a6 ) 
+    53:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 54 )
+\  Error:  Unresolved offset.
+    56:         b(") ( 0x012 ) ( len=4 )
+                        " 2 of"
+    62:         type ( 0x090 ) 
+    63:         2 ( 0x0a7 ) 
+    64:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 81 )
+    67:             b(") ( 0x012 ) ( len=7 )
+                            " 2 endof"
+    76:             type ( 0x090 ) 
+    77:             2 ( 0x0a7 ) 
+    78:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 79 )
+\  Error:  Unresolved offset.
+    81:         b(") ( 0x012 ) ( len=4 )
+                        " 3 of"
+    87:         type ( 0x090 ) 
+    88:         3 ( 0x0a8 ) 
+    89:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 106 )
+    92:             b(") ( 0x012 ) ( len=7 )
+                            " 3 endof"
+   101:             type ( 0x090 ) 
+   102:             3 ( 0x0a8 ) 
+   103:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 104 )
+\  Error:  Unresolved offset.
+   106:         b(") ( 0x012 ) ( len=9 )
+                        " default 0"
+   117:         type ( 0x090 ) 
+   118:         0 ( 0x0a5 ) 
+   119:         b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                        " resolve case w/ then"
+   141:         type ( 0x090 ) 
+   142:     b(>resolve) ( 0x0b2 ) 
+   143:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    " resolve 3 endof w/ then"
+   168:     type ( 0x090 ) 
+   169: b(>resolve) ( 0x0b2 ) 
+   170: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " resolve 2 endof w/ then"
+   195: type ( 0x090 ) 
+   196: b(>resolve) ( 0x0b2 ) 
+   197: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " resolve 1 endof w/ then"
+   222: type ( 0x090 ) 
+   223: b(>resolve) ( 0x0b2 ) 
+   224: b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                " Donesky vith crapsky."
+   247: type ( 0x090 ) 
+   248: b(;) ( 0x0c2 ) 
+   249: named-token ( 0x0b6 ) dumpsky 0x801
+   260: b(:) ( 0x0b7 ) 
+   261:     b(") ( 0x012 ) ( len=4 )
+                    " 0 if"
+   267:     type ( 0x090 ) 
+   268:     0 ( 0x0a5 ) 
+   269:     b?branch ( 0x014 ) 0x0000 (  dest = 270 )
+\  Error:  Unresolved offset.
+   272:         b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                        " free-floating endcase"
+   295:         type ( 0x090 ) 
+   296:         b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                        " And no then"
+   309:         type ( 0x090 ) 
+   310:     b(;) ( 0x0c2 ) 
+   311:     named-token ( 0x0b6 ) sneaksky 0x802
+   323:     b(:) ( 0x0b7 ) 
+   324:         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                        " Free-floating else"
+   344:         type ( 0x090 ) 
+   345:         b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                        " And notsnik aftervards."
+   370:         type ( 0x090 ) 
+   371:     b(;) ( 0x0c2 ) 
+   372:     named-token ( 0x0b6 ) gropsky 0x803
+   383:     b(:) ( 0x0b7 ) 
+   384:         b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                        " A typo.  0 of  not 0 if"
+   409:         type ( 0x090 ) 
+   410:         0 ( 0x0a5 ) 
+   411:         b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                        " Misbalanced by a then?"
+   435:         type ( 0x090 ) 
+   436:     b(>resolve) ( 0x0b2 ) 
+   437:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " Goobar... Guwno?"
+   455:     type ( 0x090 ) 
+   456: b(;) ( 0x0c2 ) 
+   457: named-token ( 0x0b6 ) trashsky 0x804
+   469: b(:) ( 0x0b7 ) 
+   470:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Another typo..."
+   487:     type ( 0x090 ) 
+   488:     b(") ( 0x012 ) ( len=7 )
+                    " 0 case "
+   497:     type ( 0x090 ) 
+   498:     0 ( 0x0a5 ) 
+   499:     b(case) ( 0x0c4 ) 
+   500:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " 10 if   not 10 of"
+   519:         type ( 0x090 ) 
+   520:         b(lit) ( 0x010 ) 0xa
+   525:         b?branch ( 0x014 ) 0x0000 (  dest = 526 )
+\  Error:  Unresolved offset.
+   528:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Misbalanced by endof."
+   551:             type ( 0x090 ) 
+   552:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 553 )
+\  Error:  Unresolved offset.
+   555:         b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                        " Not my default."
+   572:         type ( 0x090 ) 
+   573:     b(endcase) ( 0x0c5 ) 
+   574:     b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                    " That was an endcase just in case"
+   608:     type ( 0x090 ) 
+   609: b(;) ( 0x0c2 ) 
+   610: named-token ( 0x0b6 ) schlocksky 0x805
+   624: b(:) ( 0x0b7 ) 
+   625:     b(") ( 0x012 ) ( len=0x2b [43 bytes] )
+                    " Like trashsky but without final balancer..."
+   670:     type ( 0x090 ) 
+   671:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Another typo..."
+   688:     type ( 0x090 ) 
+   689:     b(") ( 0x012 ) ( len=7 )
+                    " 0 case "
+   698:     type ( 0x090 ) 
+   699:     0 ( 0x0a5 ) 
+   700:     b(case) ( 0x0c4 ) 
+   701:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " 10 if   not 10 of"
+   720:         type ( 0x090 ) 
+   721:         b(lit) ( 0x010 ) 0xa
+   726:         b?branch ( 0x014 ) 0x0000 (  dest = 727 )
+\  Error:  Unresolved offset.
+   729:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Misbalanced by endof."
+   752:             type ( 0x090 ) 
+   753:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 754 )
+\  Error:  Unresolved offset.
+   756:         b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                        " No endcase here"
+   773:         type ( 0x090 ) 
+   774:     b(;) ( 0x0c2 ) 
+   775:     end0 ( 0x000 ) 
+\  Detokenization finished normally after 776 bytes.
+End of file.
+

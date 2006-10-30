@@ -1,0 +1,70 @@
+toke -v -i -l -I. -I../TokoLoco DevNodAli_01.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Include-List:
+	. ../TokoLoco
+
+Tokenizing  DevNodAli_01.fth   Binary output to DevNodAli_01.fc   FLoad-list to DevNodAli_01.fl 
+Advisory:  File was found in ./DevNodAli_01.fth
+Advisory:  File DevNodAli_01.fth, Line 8.  Enabling:  Support IBM-style Local Values ("LV"s)
+Message:  File DevNodAli_01.fth, Line 9.  Special-Feature Flag settings:
+	  Local-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Advisory:  File DevNodAli_01.fth, Line 11.  FCODE-VERSION2 encountered; processing...
+Advisory:  File DevNodAli_01.fth, Line 13.  (Output Position = 8).  FLOADing LocalValuesSupport.fth
+Advisory:  File DevNodAli_01.fth, Line 13.  (Output Position = 8).  File was found in ../TokoLoco/LocalValuesSupport.fth
+Advisory:  File DevNodAli_01.fth, Line 34.  (Output Position = 215).  Initiating Global Scope definitions.
+Warning:  File DevNodAli_01.fth, Line 39.  (Output Position = 215).  Duplicate definition:   >>  already exists in the core vocabulary.
+Warning:  File DevNodAli_01.fth, Line 40.  (Output Position = 215).  Duplicate definition:   <<  already exists in the core vocabulary.
+Advisory:  File DevNodAli_01.fth, Line 41.  (Output Position = 215).  Terminating Global Scope definitions; resuming Device-node definitions.
+Message:  File DevNodAli_01.fth, Line 80.  (Output Position = 501).   Define a method that creates subsidiaries...
+Warning:  File DevNodAli_01.fth, Line 95.  (Output Position = 556).  Multi-line string, started on line 92 in definition of  MORE-OFFS  , which started on line 91
+Message:  File DevNodAli_01.fth, Line 112.  (Output Position = 634).   Subsidiary (child) device-node
+Advisory:  File DevNodAli_01.fth, Line 113.  (Output Position = 634).  Encountered new-device.  Starting new device-node.
+Message:  File DevNodAli_01.fth, Line 117.  (Output Position = 716).   About to access method from parent node
+Error:  File DevNodAli_01.fth, Line 121.  (Output Position = 734).  Word  achin  is not in dictionary.
+Advisory:  File DevNodAli_01.fth, Line 121.  (Output Position = 734).  achin is defined as a CREATE in the top-level device-node, which began on line 11
+Error:  File DevNodAli_01.fth, Line 127.  (Output Position = 766).  Word  croup  is not in dictionary.
+Advisory:  File DevNodAli_01.fth, Line 127.  (Output Position = 766).  croup is defined as a COLON in the top-level device-node, which began on line 11
+Error:  File DevNodAli_01.fth, Line 129.  (Output Position = 767).  Word  snoop  is not in dictionary.
+Advisory:  File DevNodAli_01.fth, Line 129.  (Output Position = 767).  snoop is defined as a COLON in the top-level device-node, which began on line 11
+Message:  File DevNodAli_01.fth, Line 134.  (Output Position = 772).   end child node
+Advisory:  File DevNodAli_01.fth, Line 135.  (Output Position = 772).  Encountered finish-device.  Resetting definitions of device node that started on line 113
+Advisory:  File DevNodAli_01.fth, Line 135.  (Output Position = 772).  Resuming definitions since start of tokenization.
+Message:  File DevNodAli_01.fth, Line 137.  (Output Position = 774).   Access methods from the root node again
+Message:  File DevNodAli_01.fth, Line 146.  (Output Position = 804).   An extra finish-device
+Error:  File DevNodAli_01.fth, Line 147.  (Output Position = 804).  Encountered finish-device without corresponding NEW-DEVICE.  Resetting definitions since start of tokenization.
+Message:  File DevNodAli_01.fth, Line 148.  (Output Position = 806).   Are we still here?
+Error:  File DevNodAli_01.fth, Line 151.  (Output Position = 816).  Word  bad-refs  is not in dictionary.
+Error:  File DevNodAli_01.fth, Line 153.  (Output Position = 817).  Word  refs-good-again  is not in dictionary.
+Advisory:  File DevNodAli_01.fth, Line 158.  (Output Position = 818).  FCODE-END encountered; processing...
+toke: checksum is 0xf2ea (819 bytes).  Last assigned FCode = 0x81f
+Tokenization Completed.  6 Errors, 3 Warnings, 14 Advisories, 8 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 819 bytes to bytecode file 'DevNodAli_01.fc'

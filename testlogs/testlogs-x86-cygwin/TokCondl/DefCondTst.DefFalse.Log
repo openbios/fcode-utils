@@ -1,0 +1,66 @@
+toke -v -d 'MOOGoo=faLSE' -l -f Trace-Conditionals -o DefCondTst.DefFalse.fc DefCondTst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+User-Defined Symbols:
+	MOOGoo = faLSE
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	  Sun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	  Trace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  DefCondTst.fth   Binary output to DefCondTst.DefFalse.fc   FLoad-list to DefCondTst.DefFalse.fl 
+Advisory:  File DefCondTst.fth, Line 6.  Tokenization-Condition is False; Ignoring.
+Warning:  File DefCondTst.fth, Line 11.  Multi-line string, started on line 10
+Advisory:  File DefCondTst.fth, Line 17.  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 6
+Advisory:  File DefCondTst.fth, Line 22.  FLOADing TokConstCondTst01.fth
+Advisory:  File TokConstCondTst01.fth, Line 10.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 27).  Tokenization-Condition is False; Ignoring.
+Advisory:  File TokConstCondTst01.fth, Line 14.  (Output Position = 27).  Now Processing.  Encountered [ELSE] belonging to Conditional
+Advisory:  File TokConstCondTst01.fth, Line 15.  (Output Position = 35).  Concluding Conditional that started on line 14
+Advisory:  File TokConstCondTst01.fth, Line 19.  (Output Position = 58).  FLOADing BooBalah.fth
+Advisory:  File BooBalah.fth, Line 5.  (Output Position = 94).  Tokenization-Condition is False; Ignoring.
+Advisory:  File BooBalah.fth, Line 8.  (Output Position = 94).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 10.  (Output Position = 94).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 12.  (Output Position = 94).  Concluding Conditional that started on line 8
+Advisory:  File BooBalah.fth, Line 14.  (Output Position = 94).  Tokenization-Condition is False, but Already Ignoring.
+Advisory:  File BooBalah.fth, Line 16.  (Output Position = 94).  While already ignoring, encountered [ELSE] belonging to Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 18.  (Output Position = 94).  Concluding Conditional that started on line 14
+Advisory:  File BooBalah.fth, Line 19.  (Output Position = 94).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 5
+Message:  File BooBalah.fth, Line 20.  (Output Position = 94).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File BooBalah.fth, Line 22.  (Output Position = 117).  Tokenization-Condition is False; Ignoring.
+Advisory:  File BooBalah.fth, Line 24.  (Output Position = 117).  Now Processing.  Encountered [ELSE] belonging to Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 26.  (Output Position = 155).  Concluding Conditional that started on line 22
+Advisory:  File BooBalah.fth, Line 28.  (Output Position = 179).  Tokenization-Condition is True; Processing.
+Advisory:  File BooBalah.fth, Line 30.  (Output Position = 214).  Now Ignoring.  Encountered [ELSE] belonging to Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 32.  (Output Position = 214).  Concluding Conditional that started on line 28
+Advisory:  File BooBalah.fth, Line 33.  (Output Position = 214).  Concluding Conditional that started on line 5
+Advisory:  File TokConstCondTst01.fth, Line 23.  (Output Position = 229).  FCODE-END encountered; processing...
+toke: checksum is 0x48e4 (230 bytes).  Last assigned FCode = 0x801
+Advisory:  File DefCondTst.fth, Line 23.  (Output Position = 230).  Concluding Conditional that started on line 6
+Tokenization Completed.  1 Warning, 25 Advisories, 1 Message.
+toke: wrote 230 bytes to bytecode file 'DefCondTst.DefFalse.fc'

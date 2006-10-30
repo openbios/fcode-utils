@@ -1,0 +1,55 @@
+toke -v -l TooLargeBufferMulPciFcb.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TooLargeBufferMulPciFcb.fth   Binary output to TooLargeBufferMulPciFcb.fc   FLoad-list to TooLargeBufferMulPciFcb.fl 
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 9.  PCI header revision=0xc020
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 16.  (Output Position = 52).  PCI header vendor id=0xdec1, device id=0xc0ed, class=080201
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 18.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 24.  (Output Position = 78).  (PCI-Block Position = 26).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 78).  (PCI-Block Position = 26).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBeerBuffer_body.fth, Line 2584.  (Output Position = 131072).  (PCI-Block Position = 131020).  Output Buffer overflow.  Relocating and increasing to 262144 bytes.
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 29.  (Output Position = 131201).  (PCI-Block Position = 131149).  FCODE-END encountered; processing...
+toke: checksum is 0xcd2e (131150 bytes).  Last assigned FCode = 0x800
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 31.  (Output Position = 131202).  (PCI-Block Position = 131150).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 35.  (Output Position = 131234).  (PCI-Block Position = 131182).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 131234).  (PCI-Block Position = 131182).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBeerBuffer_body.fth, Line 2581.  (Output Position = 262144).  (PCI-Block Position = 262092).  Output Buffer overflow.  Relocating and increasing to 524288 bytes.
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 39.  (Output Position = 262357).  (PCI-Block Position = 262305).  FCODE-END encountered; processing...
+toke: checksum is 0xcf73 (131156 bytes).  Last assigned FCode = 0x801
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 41.  (Output Position = 262358).  (PCI-Block Position = 262306).  PCI header not last image.
+Adding 298 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 49.  (Output Position = 262656).  PCI header revision=0xb020
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 56.  (Output Position = 262708).  PCI header vendor id=0xfece, device id=0xd00d, class=090210
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 58.  (Output Position = 262708).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 62.  (Output Position = 262742).  (PCI-Block Position = 34).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 262742).  (PCI-Block Position = 34).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 68.  (Output Position = 393892).  (PCI-Block Position = 131184).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 393892).  (PCI-Block Position = 131184).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBeerBuffer_body.fth, Line 2567.  (Output Position = 524288).  (PCI-Block Position = 261580).  Output Buffer overflow.  Relocating and increasing to 1048576 bytes.
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 74.  (Output Position = 525047).  (PCI-Block Position = 262339).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 525047).  (PCI-Block Position = 262339).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 80.  (Output Position = 656201).  (PCI-Block Position = 393493).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 656201).  (PCI-Block Position = 393493).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 87.  (Output Position = 787345).  (PCI-Block Position = 524637).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 787345).  (PCI-Block Position = 524637).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 89.  (Output Position = 918467).  (PCI-Block Position = 655759).  FLOADing TooLargeBeerBuffer_body.fth
+Message:  File TooLargeBeerBuffer_body.fth, Line 1.  (Output Position = 918467).  (PCI-Block Position = 655759).  Starting out with six hundred and forty-six Bottles of Beer on the wall
+Advisory:  File TooLargeBeerBuffer_body.fth, Line 2559.  (Output Position = 1048576).  (PCI-Block Position = 785868).  Output Buffer overflow.  Relocating and increasing to 2097152 bytes.
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 101.  (Output Position = 1049632).  (PCI-Block Position = 786924).  FCODE-END encountered; processing...
+toke: checksum is 0xe4cf (786925 bytes).  Last assigned FCode = 0x805
+Advisory:  File TooLargeBufferMulPciFcb.fth, Line 103.  (Output Position = 1049633).  (PCI-Block Position = 786925).  Last image for PCI header.
+Adding 479 bytes of zero padding to PCI image.
+
+Tokenization Completed.  24 Advisories, 8 Messages.
+toke: wrote 1050112 bytes to bytecode file 'TooLargeBufferMulPciFcb.fc'

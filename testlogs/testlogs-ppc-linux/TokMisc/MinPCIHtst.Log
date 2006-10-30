@@ -1,0 +1,22 @@
+toke -v MinPCIHtst.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  MinPCIHtst.fth   Binary output to MinPCIHtst.fc 
+Advisory:  File MinPCIHtst.fth, Line 9.  PCI header revision=0xc020
+Advisory:  File MinPCIHtst.fth, Line 13.  (Output Position = 52).  PCI header vendor id=0xdec1, device id=0xc0ed, class=a8d2e1
+Advisory:  File MinPCIHtst.fth, Line 17.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File MinPCIHtst.fth, Line 23.  (Output Position = 87).  (PCI-Block Position = 35).  FCODE-END encountered; processing...
+toke: checksum is 0x0926 (36 bytes).  Last assigned FCode = 0x800
+Adding 424 bytes of zero padding to PCI image.
+
+Tokenization Completed.  4 Advisories.
+toke: wrote 512 bytes to bytecode file 'MinPCIHtst.fc'

@@ -1,0 +1,51 @@
+toke -v -d 'MOOgoo=true' -l -o DefCondTst2.MeT.fc DefCondTst2.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+User-Defined Symbols:
+	MOOgoo = true
+
+Tokenizing  DefCondTst2.fth   Binary output to DefCondTst2.MeT.fc   FLoad-list to DefCondTst2.MeT.fl 
+Warning:  File DefCondTst2.fth, Line 12.  Multi-line string, started on line 11
+Advisory:  File DefCondTst2.fth, Line 24.  PCI header revision=0xfeeb
+Advisory:  File DefCondTst2.fth, Line 26.  PCI header not last image.
+Advisory:  File DefCondTst2.fth, Line 31.  (Output Position = 52).  PCI header vendor id=0x1fad, device id=0xc0ed, class=090210
+Advisory:  File DefCondTst2.fth, Line 35.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File DefCondTst2.fth, Line 40.  (Output Position = 60).  (PCI-Block Position = 8).  FLOADing TokConstCondTst02.fth
+Message:  File TokConstCondTst02.fth, Line 20.  (Output Position = 158).  (PCI-Block Position = 106).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File DefCondTst2.fth, Line 42.  (Output Position = 278).  (PCI-Block Position = 226).  FCODE-END encountered; processing...
+toke: checksum is 0x4855 (227 bytes).  Last assigned FCode = 0x802
+Advisory:  File DefCondTst2.fth, Line 45.  (Output Position = 279).  (PCI-Block Position = 227).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File DefCondTst2.fth, Line 48.  (Output Position = 279).  (PCI-Block Position = 227).  FCODE-VERSION2 encountered; processing...
+Advisory:  File DefCondTst2.fth, Line 53.  (Output Position = 287).  (PCI-Block Position = 235).  FLOADing TokConstCondTst02.fth
+Message:  File TokConstCondTst02.fth, Line 34.  (Output Position = 393).  (PCI-Block Position = 341).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File DefCondTst2.fth, Line 63.  (Output Position = 563).  (PCI-Block Position = 511).  FCODE-END encountered; processing...
+toke: checksum is 0x5b7c (285 bytes).  Last assigned FCode = 0x805
+Adding 460 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Advisory:  File DefCondTst2.fth, Line 70.  (Output Position = 1024).  PCI header revision=0x2a55
+Advisory:  File DefCondTst2.fth, Line 72.  (Output Position = 1024).  Last image for PCI header.
+Advisory:  File DefCondTst2.fth, Line 77.  (Output Position = 1076).  PCI header vendor id=0x5afe, device id=0x1991, class=010203
+Advisory:  File DefCondTst2.fth, Line 81.  (Output Position = 1076).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Advisory:  File DefCondTst2.fth, Line 83.  (Output Position = 1084).  (PCI-Block Position = 8).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File DefCondTst2.fth, Line 85.  (Output Position = 1084).  (PCI-Block Position = 8).  FLOADing TokConstCondTst02.fth
+Message:  File TokConstCondTst02.fth, Line 20.  (Output Position = 1190).  (PCI-Block Position = 114).   The TRUE path has wisely been chosen, Boobalah!
+Advisory:  File DefCondTst2.fth, Line 98.  (Output Position = 1318).  (PCI-Block Position = 242).  Resetting symbols defined in tokenizer-escape mode.
+Advisory:  File DefCondTst2.fth, Line 101.  (Output Position = 1318).  (PCI-Block Position = 242).  Resetting symbols defined in "normal" mode.
+Advisory:  File DefCondTst2.fth, Line 102.  (Output Position = 1318).  (PCI-Block Position = 242).  FLOADing TokConstCondTst02.fth
+Message:  File TokConstCondTst02.fth, Line 34.  (Output Position = 1424).  (PCI-Block Position = 348).   Oy, Boobalah.  You have foolishly chosen the FALSE path.
+Advisory:  File DefCondTst2.fth, Line 104.  (Output Position = 1560).  (PCI-Block Position = 484).  FCODE-END encountered; processing...
+toke: checksum is 0x9e28 (485 bytes).  Last assigned FCode = 0x805
+Adding 487 bytes of zero padding to PCI image.
+
+Tokenization Completed.  1 Warning, 20 Advisories, 4 Messages.
+toke: wrote 2048 bytes to bytecode file 'DefCondTst2.MeT.fc'

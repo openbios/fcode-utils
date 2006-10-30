@@ -1,0 +1,36 @@
+toke -v -i -l TokBrkTst_02.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  TokBrkTst_02.fth   Binary output to TokBrkTst_02.fc   FLoad-list to TokBrkTst_02.fl 
+Advisory:  File TokBrkTst_02.fth, Line 10.  FLOADing revlev.fth
+Advisory:  File TokBrkTst_02.fth, Line 21.  PCI header not last image.
+Advisory:  File TokBrkTst_02.fth, Line 22.  Last image for PCI header.
+Advisory:  File TokBrkTst_02.fth, Line 23.  PCI header not last image.
+Advisory:  File TokBrkTst_02.fth, Line 24.  PCI header revision=0xf2ed
+Advisory:  File TokBrkTst_02.fth, Line 25.  (Output Position = 52).  PCI header vendor id=0x17d5, device id=0x5417, class=020000
+Advisory:  File TokBrkTst_02.fth, Line 27.  (Output Position = 52).  (PCI-Block Position = 0).  FCODE-VERSION2 encountered; processing...
+Warning:  File TokBrkTst_02.fth, Line 71.  (Output Position = 134).  (PCI-Block Position = 82).  The word  '  should not be used inside of a colon definition.  Use  [']  instead.
+Warning:  File TokBrkTst_02.fth, Line 73.  (Output Position = 144).  (PCI-Block Position = 92).  The word  CHAR  should not be used inside of a colon definition.  Use  [CHAR]  instead.
+Message:  File TokBrkTst_02.fth, Line 74.  (Output Position = 154).  (PCI-Block Position = 102).   About to tokenize run-time date and time stamps.  Twice!
+Message:  File TokBrkTst_02.fth, Line 79.  (Output Position = 242).  (PCI-Block Position = 190).  10/23/2006
+Message:  File TokBrkTst_02.fth, Line 79.  (Output Position = 242).  (PCI-Block Position = 190).  14:07:18 CDT
+Message:  File TokBrkTst_02.fth, Line 80.  (Output Position = 322).  (PCI-Block Position = 270).  Currently in definition of  MERDE  , which started on line 69
+Warning:  File TokBrkTst_02.fth, Line 84.  (Output Position = 333).  (PCI-Block Position = 281).  The word  [CHAR]  should not be used outside of a colon definition.  Use  CHAR  instead.
+Message:  File TokBrkTst_02.fth, Line 87.  (Output Position = 428).  (PCI-Block Position = 376).  Currently in definition of  TERDE  , which started on line 86
+Advisory:  File TokBrkTst_02.fth, Line 91.  (Output Position = 429).  (PCI-Block Position = 377).  END0 encountered; processing...
+Warning:  File TokBrkTst_02.fth, Line 91.  (Output Position = 430).  (PCI-Block Position = 378).  Stack imbalance before end of tokenization.
+toke: checksum is 0x6d39 (378 bytes).  Last assigned FCode = 0x803
+Adding 82 bytes of zero padding to PCI image.
+Note:  PCI header is not last image.
+
+Tokenization Completed.  4 Warnings, 8 Advisories, 5 Messages.
+toke: wrote 512 bytes to bytecode file 'TokBrkTst_02.fc'

@@ -1,0 +1,19 @@
+toke -v -l TokExstCondTstY.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  TokExstCondTstY.fth   Binary output to TokExstCondTstY.fc   FLoad-list to TokExstCondTstY.fl 
+Advisory:  File TokExstCondTstY.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TokExstCondTstY.fth, Line 12.  (Output Position = 21).  FLOADing TokExstCondTst01.fth
+Advisory:  File TokExstCondTstY.fth, Line 14.  (Output Position = 462).  FCODE-END encountered; processing...
+toke: checksum is 0x9a90 (463 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  3 Advisories.
+toke: wrote 463 bytes to bytecode file 'TokExstCondTstY.fc'

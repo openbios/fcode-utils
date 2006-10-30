@@ -1,0 +1,167 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x8662 (Ok)
+     4:   len:       0x019b ( 411 bytes)
+     8: instance ( 0x0c0 ) 
+     9: named-token ( 0x0b6 ) goombah 0x800
+    20: b(:) ( 0x0b7 ) 
+    21:     dup ( 0x047 ) 
+    22:     swap ( 0x049 ) 
+    23:     drop ( 0x046 ) 
+    24: b(;) ( 0x0c2 ) 
+    25: named-token ( 0x0b6 ) foosbat 0x801
+    36: b(:) ( 0x0b7 ) 
+    37:     over ( 0x048 ) 
+    38:     swap ( 0x049 ) 
+    39:     nip ( 0x04d ) 
+    40: b(;) ( 0x0c2 ) 
+    41: named-token ( 0x0b6 ) casball 0x802
+    52: b(:) ( 0x0b7 ) 
+    53:     dup ( 0x047 ) 
+    54:     dup ( 0x047 ) 
+    55:     rot ( 0x04a ) 
+    56:     rot ( 0x04a ) 
+    57:     drop ( 0x046 ) 
+    58:     drop ( 0x046 ) 
+    59: b(;) ( 0x0c2 ) 
+    60: named-token ( 0x0b6 ) chump 0x803
+    69: b(variable) ( 0x0b9 ) 
+    70: instance ( 0x0c0 ) 
+    71: instance ( 0x0c0 ) 
+    72: new-device ( 0x11f ) 
+    74: named-token ( 0x0b6 ) what-the-heck 0x804
+    91: b(:) ( 0x0b7 ) 
+    92:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    "  What now?"
+   104:     type ( 0x090 ) 
+   105: b(;) ( 0x0c2 ) 
+   106: named-token ( 0x0b6 ) how-now? 0x805
+   118: b(:) ( 0x0b7 ) 
+   119:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    "  Now what?"
+   131:     type ( 0x090 ) 
+   132: b(;) ( 0x0c2 ) 
+   133: 0 ( 0x0a5 ) 
+   134: named-token ( 0x0b6 ) sclump 0x806
+   144: b(value) ( 0x0b8 ) 
+   145: instance ( 0x0c0 ) 
+   146: finish-device ( 0x127 ) 
+   148: b(lit) ( 0x010 ) 0xed
+   153: named-token ( 0x0b6 ) mugwump 0x807
+   164: b(buffer:) ( 0x0bd ) 
+   165: b(lit) ( 0x010 ) 0x370
+   170: named-token ( 0x0b6 ) nimnump 0x808
+   181: b(buffer:) ( 0x0bd ) 
+   182: b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                " madmirable_"
+   195: count ( 0x084 ) 
+   196: dup ( 0x047 ) 
+   197: nimnump ( 0x808 ) 
+   199: c! ( 0x075 ) 
+   200: dup ( 0x047 ) 
+   201: named-token ( 0x0b6 ) nimbasesiz 0x809
+   215: b(constant) ( 0x0ba ) 
+   216: 0 ( 0x0a5 ) 
+   217: b(do) ( 0x017 ) 0x0010 ( =dec 16  dest = 234 )
+   220:     dup ( 0x047 ) 
+   221:     i ( 0x019 ) 
+   222:     + ( 0x01e ) 
+   223:     c@ ( 0x071 ) 
+   224:     nimnump ( 0x808 ) 
+   226:     1 ( 0x0a6 ) 
+   227:     + ( 0x01e ) 
+   228:     i ( 0x019 ) 
+   229:     + ( 0x01e ) 
+   230:     c! ( 0x075 ) 
+   231: b(loop) ( 0x015 ) 0xfff4 ( =dec -12  dest = 220 )
+   234: drop ( 0x046 ) 
+   235: named-token ( 0x0b6 ) numnim 0x80a
+   245: b(:) ( 0x0b7 ) 
+   246:     nimnump ( 0x808 ) 
+   248:     nimbasesiz ( 0x809 ) 
+   250:     + ( 0x01e ) 
+   251:     my-address ( 0x102 ) 
+   253:     base ( 0x0a0 ) 
+   254:     @ ( 0x06d ) 
+   255:     b(lit) ( 0x010 ) 0x10
+   260:     base ( 0x0a0 ) 
+   261:     ! ( 0x072 ) 
+   262:     swap ( 0x049 ) 
+   263:     <# ( 0x096 ) 
+   264:     u#s ( 0x09a ) 
+   265:     u#> ( 0x097 ) 
+   266:     rot ( 0x04a ) 
+   267:     base ( 0x0a0 ) 
+   268:     ! ( 0x072 ) 
+   269:     dup ( 0x047 ) 
+   270:     >r ( 0x030 ) 
+   271:     0 ( 0x0a5 ) 
+   272:     b(do) ( 0x017 ) 0x000d ( =dec 13  dest = 286 )
+   275:         2dup ( 0x053 ) 
+   276:         i ( 0x019 ) 
+   277:         + ( 0x01e ) 
+   278:         c@ ( 0x071 ) 
+   279:         swap ( 0x049 ) 
+   280:         i ( 0x019 ) 
+   281:         + ( 0x01e ) 
+   282:         c! ( 0x075 ) 
+   283:     b(loop) ( 0x015 ) 0xfff7 ( =dec -9  dest = 275 )
+   286:     2drop ( 0x052 ) 
+   287:     r> ( 0x031 ) 
+   288:     nimbasesiz ( 0x809 ) 
+   290:     + ( 0x01e ) 
+   291:     nimnump ( 0x808 ) 
+   293:     c! ( 0x075 ) 
+   294: b(;) ( 0x0c2 ) 
+   295: named-token ( 0x0b6 ) gummink 0x80b
+   306: b(:) ( 0x0b7 ) 
+   307:     dup ( 0x047 ) 
+   308:     instance ( 0x0c0 ) 
+   309:     numnim ( 0x80a ) 
+   311: b(;) ( 0x0c2 ) 
+   312: named-token ( 0x0b6 ) prumpick 0x80c
+   324: b(:) ( 0x0b7 ) 
+   325:     dup ( 0x047 ) 
+   326:     instance ( 0x0c0 ) 
+   327:     gummink ( 0x80b ) 
+   329: b(;) ( 0x0c2 ) 
+   330: new-device ( 0x11f ) 
+   332: instance ( 0x0c0 ) 
+   333: numnim ( 0x80a ) 
+   335: nimnump ( 0x808 ) 
+   337: count ( 0x084 ) 
+   338: encode-string ( 0x114 ) 
+   340: b(") ( 0x012 ) ( len=6 )
+                " nimnum"
+   348: property ( 0x110 ) 
+   350: -1 ( 0x0a4 ) 
+   351: instance ( 0x0c0 ) 
+   352: named-token ( 0x0b6 ) hardware-store 0x80d
+   370: b(value) ( 0x0b8 ) 
+   371: named-token ( 0x0b6 ) knacknick 0x80e
+   384: b(:) ( 0x0b7 ) 
+   385:     numnim ( 0x80a ) 
+   387:     nimnump ( 0x808 ) 
+   389:     count ( 0x084 ) 
+   390:     encode-string ( 0x114 ) 
+   392:     b(") ( 0x012 ) ( len=6 )
+                    " nimnum"
+   400:     property ( 0x110 ) 
+   402:     instance ( 0x0c0 ) 
+   403: b(;) ( 0x0c2 ) 
+   404: instance ( 0x0c0 ) 
+   405: knacknick ( 0x80e ) 
+   407: finish-device ( 0x127 ) 
+   409: instance ( 0x0c0 ) 
+   410: end0 ( 0x000 ) 
+\  Detokenization finished normally after 411 bytes.
+End of file.
+

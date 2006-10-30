@@ -1,0 +1,76 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: version1 ( 0x0fd )   ( 8-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x18cb (Ok)
+     4:   len:       0x0044 ( 68 bytes)
+     8: ferror ( 0x341 ) 
+    10: -1 ( 0x0a4 ) 
+    11: dup ( 0x047 ) 
+    12: 0> ( 0x038 ) 
+    13: b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 26 )
+    15:     ferror ( 0x369 ) 
+    17:     end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 18 of 68 bytes.
+\  Unexpected token, 0xff, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x0032 ( 50 bytes)
+    18: end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 1 of 50 bytes.
+\  Unexpected token, 0xff, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x0031 ( 49 bytes)
+    19: end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 1 of 49 bytes.
+\  Unexpected token, 0xff, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x0030 ( 48 bytes)
+    20: end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 1 of 48 bytes.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x002f ( 47 bytes)
+    21: end0 ( 0x000 ) 
+\  Detokenization finished prematurely after 1 of 47 bytes.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x002e ( 46 bytes)
+    22: end0 ( 0x000 ) 
+\  Detokenization finished prematurely after 1 of 46 bytes.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x002d ( 45 bytes)
+    23: end0 ( 0x000 ) 
+\  Detokenization finished prematurely after 1 of 45 bytes.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x002c ( 44 bytes)
+    24: end0 ( 0x000 ) 
+\  Detokenization finished prematurely after 1 of 44 bytes.
+\  Unexpected token, 0xb2, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x002b ( 43 bytes)
+    25: b(>resolve) ( 0x0b2 ) 
+    26: dup ( 0x047 ) 
+    27: 0= ( 0x034 ) 
+    28: b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 41 )
+    30:     ferror ( 0x369 ) 
+    32:     end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 8 of 43 bytes.
+\  Unexpected token, 0xff, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x0023 ( 35 bytes)
+    33: end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 1 of 35 bytes.
+\  Unexpected token, 0xff, after end of FCode block.
+
+\  Invalid FCode Start Byte.  Ignoring FCode header.  Remaining len = 0x0022 ( 34 bytes)
+    34: end1 ( 0x0ff ) 
+\  Detokenization finished prematurely after 1 of 34 bytes.
+\  Subsequent FCode Block detected.  Detokenizing.
+    35: start0 ( 0x0f0 )   ( 16-bit offsets)
+    36:   format:    0x00
+    37: Premature unexpected end of file.
+

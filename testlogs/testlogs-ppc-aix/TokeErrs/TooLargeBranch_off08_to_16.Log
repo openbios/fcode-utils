@@ -1,0 +1,40 @@
+toke -v -i -l TooLargeBranch_off08_to_16.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  TooLargeBranch_off08_to_16.fth   Binary output to TooLargeBranch_off08_to_16.fc   FLoad-list to TooLargeBranch_off08_to_16.fl 
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 6.  FCODE-VERSION1 encountered; processing...
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 6.  (Output Position = 8).  Using version1 header (8-bit offsets).
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 22.  (Output Position = 178).  FLOADing TooLargeBranch_off08_body.fth
+Message:  File TooLargeBranch_off08_body.fth, Line 1.  (Output Position = 178).  Starting out with one Bottle of Beer on the wall
+Error:  File TooLargeBranch_off08_to_16.fth, Line 24.  (Output Position = 151).  Branch offset is too large between ENDCASE and the ENDOF on line 19 in definition of  TOO-LARGE-CASE  , which started on line 10
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 24.  (Output Position = 151).  Offset might fit if 16-bit offsets (e.g., fcode-version2) were used.
+Warning:  File TooLargeBranch_off08_to_16.fth, Line 24.  (Output Position = 151).  Actual offset is 0xe2 (=dec 226), but it will be coded as 0xffffffe2 (=dec -30).
+Error:  File TooLargeBranch_off08_to_16.fth, Line 26.  (Output Position = 115).  Branch offset is too large between THEN and the IF on line 16 in definition of  TOO-LARGE-CASE  , which started on line 10
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 26.  (Output Position = 115).  Offset might fit if 16-bit offsets (e.g., fcode-version2) were used.
+Warning:  File TooLargeBranch_off08_to_16.fth, Line 26.  (Output Position = 115).  Actual offset is 0x10f (=dec 271), but it will be coded as 0xf (=dec 15).
+Error:  File TooLargeBranch_off08_to_16.fth, Line 27.  (Output Position = 412).  Branch offset is too large between LOOP and the DO on line 14 in definition of  TOO-LARGE-CASE  , which started on line 10
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 27.  (Output Position = 412).  Offset might fit if 16-bit offsets (e.g., fcode-version2) were used.
+Warning:  File TooLargeBranch_off08_to_16.fth, Line 27.  (Output Position = 412).  Actual offset is 0xfffffece (=dec -306), but it will be coded as 0xffffffce (=dec -50).
+Warning:  File TooLargeBranch_off08_to_16.fth, Line 27.  (Output Position = 105).  Actual offset is 0x134 (=dec 308), but it will be coded as 0x34 (=dec 52).
+Error:  File TooLargeBranch_off08_to_16.fth, Line 33.  (Output Position = 470).  Branch offset is too large between AGAIN and the BEGIN on line 13 in definition of  TOO-LARGE-CASE  , which started on line 10
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 33.  (Output Position = 470).  Offset might fit if 16-bit offsets (e.g., fcode-version2) were used.
+Warning:  File TooLargeBranch_off08_to_16.fth, Line 33.  (Output Position = 470).  Actual offset is 0xfffffe72 (=dec -398), but it will be coded as 0x72 (=dec 114).
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 57.  (Output Position = 646).  FCODE-END encountered; processing...
+toke: checksum is 0xd74d (647 bytes).  Last assigned FCode = 0x801
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 60.  (Output Position = 647).  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 72.  (Output Position = 789).  FLOADing TooLargeBranch_off08_body.fth
+Message:  File TooLargeBranch_off08_body.fth, Line 1.  (Output Position = 789).  Starting out with one Bottle of Beer on the wall
+Advisory:  File TooLargeBranch_off08_to_16.fth, Line 84.  (Output Position = 1069).  FCODE-END encountered; processing...
+toke: checksum is 0x8a47 (423 bytes).  Last assigned FCode = 0x802
+Tokenization Completed.  4 Errors, 5 Warnings, 11 Advisories, 2 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 1070 bytes to bytecode file 'TooLargeBranch_off08_to_16.fc'

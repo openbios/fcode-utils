@@ -1,0 +1,37 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+\  Reading additional FCodes from file:  VendSpecFCodes
+\  Added Special Function FCode number 0x369, name double(lit)
+\  Added 2 FCode numbers
+     0: version1 ( 0x0fd )   ( 8-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x18cb (Ok)
+     4:   len:       0x0044 ( 68 bytes)
+     8: Three-for-One,aBargain! ( 0x341 ) 
+    10: -1 ( 0x0a4 ) 
+    11: dup ( 0x047 ) 
+    12: 0> ( 0x038 ) 
+    13: b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 26 )
+    15:     double(lit) ( 0x369 ) 0xffff.ffff.0000.0000
+    25: b(>resolve) ( 0x0b2 ) 
+    26: dup ( 0x047 ) 
+    27: 0= ( 0x034 ) 
+    28: b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 41 )
+    30:     double(lit) ( 0x369 ) 0xffff.fff0.0000.0000
+    40: b(>resolve) ( 0x0b2 ) 
+    41: 0< ( 0x036 ) 
+    42: b?branch ( 0x014 ) 0x0c ( =dec 12  dest = 55 )
+    44:     double(lit) ( 0x369 ) 0xdefe.ca8e.beef.fece
+    54: b(>resolve) ( 0x0b2 ) 
+    55: named-token ( 0x0b6 ) moochie 0x800
+    66: b(constant) ( 0x0ba ) 
+    67: end0 ( 0x000 ) 
+\  Detokenization finished normally after 68 bytes.
+End of file.
+

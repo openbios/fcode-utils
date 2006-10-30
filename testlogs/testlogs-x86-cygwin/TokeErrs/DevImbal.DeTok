@@ -1,0 +1,127 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x7085 (Ok)
+     4:   len:       0x016e ( 366 bytes)
+     8: named-token ( 0x0b6 ) achin 0x800
+    17: b(create) ( 0x0bb ) 
+    18: b(lit) ( 0x010 ) 0x12
+    23: c, ( 0x0d0 ) 
+    24: b(lit) ( 0x010 ) 0x13
+    29: c, ( 0x0d0 ) 
+    30: b(lit) ( 0x010 ) 0x14
+    35: c, ( 0x0d0 ) 
+    36: named-token ( 0x0b6 ) breakin 0x801
+    47: b(:) ( 0x0b7 ) 
+    48:     achin ( 0x800 ) 
+    50:     3 ( 0x0a8 ) 
+    51:     bounds ( 0x0ac ) 
+    52:     b(do) ( 0x017 ) 0x0008 (  dest = 61 )
+    55:         i ( 0x019 ) 
+    56:         c@ ( 0x071 ) 
+    57:         . ( 0x09d ) 
+    58:     b(loop) ( 0x015 ) 0xfffc ( =dec -4  dest = 55 )
+    61: b(;) ( 0x0c2 ) 
+    62: named-token ( 0x0b6 ) creakin 0x802
+    73: b(:) ( 0x0b7 ) 
+    74:     0 ( 0x0a5 ) 
+    75:     b?branch ( 0x014 ) 0x0005 (  dest = 81 )
+    78:         breakin ( 0x801 ) 
+    80:     b(>resolve) ( 0x0b2 ) 
+    81: b(;) ( 0x0c2 ) 
+    82: named-token ( 0x0b6 ) deacon 0x803
+    92: b(:) ( 0x0b7 ) 
+    93:     achin ( 0x800 ) 
+    95:     creakin ( 0x802 ) 
+    97:     drop ( 0x046 ) 
+    98:     breakin ( 0x801 ) 
+   100: b(;) ( 0x0c2 ) 
+   101: 3 ( 0x0a8 ) 
+   102: 0 ( 0x0a5 ) 
+   103: b(do) ( 0x017 ) 0x0000 (  dest = 104 )
+\  Error:  Unresolved offset.
+   106:     i ( 0x019 ) 
+   107:     b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                    " loop number"
+   120:     type ( 0x090 ) 
+   121:     . ( 0x09d ) 
+   122:     new-device ( 0x11f ) 
+   124:     named-token ( 0x0b6 ) eek! 0x804
+   132:     b(create) ( 0x0bb ) 
+   133:     b(lit) ( 0x010 ) 0x18
+   138:     c, ( 0x0d0 ) 
+   139:     b(lit) ( 0x010 ) 0x17
+   144:     c, ( 0x0d0 ) 
+   145:     b(lit) ( 0x010 ) 0x80
+   150:     c, ( 0x0d0 ) 
+   151:     b(lit) ( 0x010 ) 0x79
+   156:     c, ( 0x0d0 ) 
+   157:     named-token ( 0x0b6 ) freek 0x805
+   166:     b(:) ( 0x0b7 ) 
+   167:         b(lit) ( 0x010 ) 0x4
+   172:         bounds ( 0x0ac ) 
+   173:         b(?do) ( 0x018 ) 0x0009 (  dest = 183 )
+   176:             i ( 0x019 ) 
+   177:             c@ ( 0x071 ) 
+   178:             . ( 0x09d ) 
+   179:             1 ( 0x0a6 ) 
+   180:         b(+loop) ( 0x016 ) 0xfffb ( =dec -5  dest = 176 )
+   183:     b(;) ( 0x0c2 ) 
+   184:     named-token ( 0x0b6 ) greek 0x806
+   193:     b(:) ( 0x0b7 ) 
+   194:         -1 ( 0x0a4 ) 
+   195:         b?branch ( 0x014 ) 0x001d ( =dec 29  dest = 225 )
+   198:             b(") ( 0x012 ) ( len=7 )
+                            " By name"
+   207:             type ( 0x090 ) 
+   208:             b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                            " other name"
+   220:             type ( 0x090 ) 
+   221:             bbranch ( 0x013 ) 0x0016 ( =dec 22  dest = 244 )
+   224:             b(>resolve) ( 0x0b2 ) 
+   225:             b(") ( 0x012 ) ( len=0xd [13 bytes] )
+                            " Re-Curse you!"
+   240:             type ( 0x090 ) 
+   241:             greek ( 0x806 ) 
+   243:         b(>resolve) ( 0x0b2 ) 
+   244:     b(;) ( 0x0c2 ) 
+   245:     named-token ( 0x0b6 ) hierareek 0x807
+   258:     b(:) ( 0x0b7 ) 
+   259:     b(;) ( 0x0c2 ) 
+   260:     named-token ( 0x0b6 ) ikey 0x808
+   268:     b(:) ( 0x0b7 ) 
+   269:     b(;) ( 0x0c2 ) 
+   270:     0 ( 0x0a5 ) 
+   271:     b?branch ( 0x014 ) 0x0000 (  dest = 272 )
+\  Error:  Unresolved offset.
+   274:         b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                        " This should not be happening"
+   304:         type ( 0x090 ) 
+   305:         finish-device ( 0x127 ) 
+   307:         named-token ( 0x0b6 ) jeeky 0x809
+   316:         b(:) ( 0x0b7 ) 
+   317:             achin ( 0x800 ) 
+   319:             3 ( 0x0a8 ) 
+   320:             type ( 0x090 ) 
+   321:         b(;) ( 0x0c2 ) 
+   322:         b(<mark) ( 0x0b1 ) 
+   323:             b(") ( 0x012 ) ( len=0xd [13 bytes] )
+                            " What the hey?"
+   338:             type ( 0x090 ) 
+   339:             0 ( 0x0a5 ) 
+   340:             b?branch ( 0x014 ) 0x0000 (  dest = 341 )
+\  Error:  Unresolved offset.
+   343:                 b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                                "  Forgot it again..."
+   364:                 type ( 0x090 ) 
+   365:                 end0 ( 0x000 ) 
+\  Detokenization finished normally after 366 bytes.
+End of file.
+

@@ -1,0 +1,51 @@
+#!  /bin/csh -f
+#
+#  Examine the results of the AllMacros detokenization.
+#   All but the last items are in pairs...
+
+set ExamFil = AllMacros.DeTok
+if ( ! -f $ExamFil ) then
+    echo Missing Examination-target file -- $ExamFil
+    exit 237
+endif
+
+#  Get the line number that starts the simple pairs,
+#    identified by a text message.
+set firstlin = `grep -n 'Start of simple pairs' $ExamFil | awk -F: '{print $1+1}'`
+set lastlin = `grep -n 'End of simple pairs' $ExamFil | awk -F: '{print $1}'`
+
+
+#  Get the line numbers of the final phrase-item pair,
+#    identified by a text message.
+set lastphrase = `grep -n 'Last phrase-item' $ExamFil | awk -F: '{print $1+1}'`
+
+#  We'll need a pair o temp-files
+#  First, repository for one of each pair of lines
+set reposfil = /tmp/$0:t.1.$$
+#  Second, accumulation of differences
+set accumfil = /tmp/$0:t.2.$$
+
+#  Set up to compare two by two.
+#  Start with the final phrase-item pair
+set flin = $lastphrase[1]
+set slin = $lastphrase[2]
+set linnum = $firstlin
+while ( $linnum < $lastlin )
+    sed -n ${flin}p $ExamFil | sed -e 'sX^ *[0-9]*: XX' > ${reposfil}
+    sed -n ${slin}p $ExamFil | sed -e 'sX^ *[0-9]*: XX' | diff - ${reposfil} | tee -a ${accumfil}
+
+    set flin = $linnum
+    @ linnum++
+    set slin = $linnum
+    @ linnum++
+end
+
+if ( ! -z ${accumfil} ) then
+    cp -p ${accumfil} ./$0.Results.$$
+    echo Errors seen in $ExamFil.  See ./$0.Results.$$  for diffs
+endif
+
+rm -f ${reposfil} ${accumfil}
+
+
+

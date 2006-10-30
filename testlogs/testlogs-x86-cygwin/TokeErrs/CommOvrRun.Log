@@ -1,0 +1,43 @@
+toke -v -i -l CommOvrRun.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  CommOvrRun.fth   Binary output to CommOvrRun.fc   FLoad-list to CommOvrRun.fl 
+Advisory:  File CommOvrRun.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Advisory:  File CommOvrRun.fth, Line 10.  (Output Position = 8).  FLOADing CommOvrRun_01.fth
+Message:  File CommOvrRun_01.fth, Line 5.  (Output Position = 8).   Collecting bum string
+Warning:  File CommOvrRun_01.fth, Line 9.  (Output Position = 8).  Unterminated string hex-sequence remark
+Warning:  File CommOvrRun_01.fth, Line 7.  (Output Position = 8).  Unterminated string
+Warning:  File CommOvrRun_01.fth, Line 13.  (Output Position = 8).  Multi-line string, started on line 7
+Advisory:  File CommOvrRun.fth, Line 12.  (Output Position = 49).  FLOADing CommOvrRun_02.fth
+Message:  File CommOvrRun_02.fth, Line 4.  (Output Position = 49).   Stack Diagram w/o conclusion
+Warning:  File CommOvrRun_02.fth, Line 5.  (Output Position = 59).  Unterminated comment in definition of  FUDDY 
+Message:  File CommOvrRun.fth, Line 16.  (Output Position = 60).  About to load file w/ no e-o-l
+Advisory:  File CommOvrRun.fth, Line 17.  (Output Position = 60).  FLOADing CommOvrRun_03.fth
+Warning:  File CommOvrRun_03.fth, Line 4.  (Output Position = 60).  Unterminated remark.
+Message:  File CommOvrRun.fth, Line 18.  (Output Position = 60).  Back to the main file.
+Advisory:  File CommOvrRun.fth, Line 20.  (Output Position = 60).  FLOADing CommOvrRun_04.fth
+Message:  File CommOvrRun_04.fth, Line 3.  (Output Position = 60).   String w/o conclusion
+Warning:  File CommOvrRun_04.fth, Line 7.  (Output Position = 110).  Unterminated string in definition of  DUDDY  , which started on line 4
+Warning:  File CommOvrRun_04.fth, Line 9.  (Output Position = 110).  Multi-line string, started on line 7 in definition of  DUDDY  , which started on line 4
+Advisory:  File CommOvrRun.fth, Line 23.  (Output Position = 135).  FLOADing CommOvrRun_05.fth
+Message:  File CommOvrRun_05.fth, Line 4.  (Output Position = 135).  Unconcluded dot-quote
+Message:  File CommOvrRun_05.fth, Line 5.  (Output Position = 135).  Is everybody having a good time?  I don't know if I am...
+
+3700 constant sig_freq        \  Signal Freak-went-sea
+
+Warning:  File CommOvrRun_05.fth, Line 5.  (Output Position = 135).  Unterminated user-generated message in definition of  DUDDY  , which started on line 4 of file CommOvrRun_04.fth
+Advisory:  File CommOvrRun.fth, Line 26.  (Output Position = 135).  FCODE-END encountered; processing...
+Error:  File CommOvrRun_04.fth, Line 4.  (Output Position = 136).  Unterminated Colon Definition of DUDDY
+toke: checksum is 0x27bd (136 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  1 Error, 8 Warnings, 7 Advisories, 7 Messages.
+Error-detection over-ridden; producing binary output.
+toke: wrote 136 bytes to bytecode file 'CommOvrRun.fc'

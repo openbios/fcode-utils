@@ -1,0 +1,26 @@
+toke -v -i TooLargeSQuote.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TooLargeSQuote.fth   Binary output to TooLargeSQuote.fc 
+Advisory:  File TooLargeSQuote.fth, Line 9.  Initiating Global Scope definitions.
+Advisory:  File TooLargeSQuote.fth, Line 12.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeSQuote.fth, Line 18.  (Output Position = 19).  FLOADing LargeTextNoQte.fth
+Error:  File LargeTextNoQte.fth, Line 56.  (Output Position = 19).  get_until buffer overflow.  Max is 1023.
+Error:  File LargeTextNoQte.fth, Line 12.  (Output Position = 19).  Unterminated Ess-Quote in definition of  FOOBAR  , which started on line 17 of file TooLargeSQuote.fth
+Error:  File LargeTextNoQte.fth, Line 56.  (Output Position = 20).  String too long:  1023 characters.  Truncating.
+Advisory:  File TooLargeSQuote.fth, Line 22.  (Output Position = 277).  FCODE-END encountered; processing...
+Warning:  File TooLargeSQuote.fth, Line 22.  (Output Position = 278).  No DEVICE-DEFINITIONS directive encountered before end.  Compensating...
+Advisory:  File TooLargeSQuote.fth, Line 22.  (Output Position = 278).  Terminating Global Scope definitions; resuming Device-node definitions.
+toke: checksum is 0x54ad (278 bytes).  Last assigned FCode = 0x800
+Tokenization Completed.  3 Errors, 1 Warning, 5 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 278 bytes to bytecode file 'TooLargeSQuote.fc'

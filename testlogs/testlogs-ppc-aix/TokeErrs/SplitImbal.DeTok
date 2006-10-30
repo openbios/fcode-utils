@@ -1,0 +1,98 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x56c4 (Ok)
+     4:   len:       0x0100 ( 256 bytes)
+     8: named-token ( 0x0b6 ) firstdefn 0x800
+    21: b(:) ( 0x0b7 ) 
+    22:     1 ( 0x0a6 ) 
+    23:     b(?do) ( 0x018 ) 0x003f ( =dec 63  dest = 87 )
+    26:         i ( 0x019 ) 
+    27:         . ( 0x09d ) 
+    28:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " What have I done?"
+    47:         type ( 0x090 ) 
+    48:         cr ( 0x092 ) 
+    49:         i ( 0x019 ) 
+    50:         0 ( 0x0a5 ) 
+    51:         b(do) ( 0x017 ) 0x001d ( =dec 29  dest = 81 )
+    54:             j ( 0x01a ) 
+    55:             . ( 0x09d ) 
+    56:             i ( 0x019 ) 
+    57:             . ( 0x09d ) 
+    58:             b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                            " What has j done?"
+    76:             type ( 0x090 ) 
+    77:             cr ( 0x092 ) 
+    78:         b(loop) ( 0x015 ) 0xffe7 ( =dec -25  dest = 54 )
+    81:         cr ( 0x092 ) 
+    82:         cr ( 0x092 ) 
+    83:         cr ( 0x092 ) 
+    84:     b(loop) ( 0x015 ) 0xffc5 ( =dec -59  dest = 26 )
+    87:     b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                    " Done... cr"
+    99:     type ( 0x090 ) 
+   100: b(;) ( 0x0c2 ) 
+   101: named-token ( 0x0b6 ) seconddefn 0x801
+   115: b(:) ( 0x0b7 ) 
+   116:     1 ( 0x0a6 ) 
+   117:     b(?do) ( 0x018 ) 0x0000 (  dest = 118 )
+\  Error:  Unresolved offset.
+   120:         i ( 0x019 ) 
+   121:         . ( 0x09d ) 
+   122:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " What have I done?"
+   141:         type ( 0x090 ) 
+   142:         cr ( 0x092 ) 
+   143:         i ( 0x019 ) 
+   144:         0 ( 0x0a5 ) 
+   145:         b(do) ( 0x017 ) 0x001d ( =dec 29  dest = 175 )
+   148:             j ( 0x01a ) 
+   149:             . ( 0x09d ) 
+   150:             i ( 0x019 ) 
+   151:             . ( 0x09d ) 
+   152:             b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                            " What has j done?"
+   170:             type ( 0x090 ) 
+   171:             cr ( 0x092 ) 
+   172:         b(loop) ( 0x015 ) 0xffe7 ( =dec -25  dest = 148 )
+   175:         cr ( 0x092 ) 
+   176:         1 ( 0x0a6 ) 
+   177:         b(?do) ( 0x018 ) 0x003f ( =dec 63  dest = 241 )
+   180:             i ( 0x019 ) 
+   181:             . ( 0x09d ) 
+   182:             b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                            " What have I done?"
+   201:             type ( 0x090 ) 
+   202:             cr ( 0x092 ) 
+   203:             i ( 0x019 ) 
+   204:             0 ( 0x0a5 ) 
+   205:             b(do) ( 0x017 ) 0x001d ( =dec 29  dest = 235 )
+   208:                 j ( 0x01a ) 
+   209:                 . ( 0x09d ) 
+   210:                 i ( 0x019 ) 
+   211:                 . ( 0x09d ) 
+   212:                 b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                                " What has j done?"
+   230:                 type ( 0x090 ) 
+   231:                 cr ( 0x092 ) 
+   232:             b(loop) ( 0x015 ) 0xffe7 ( =dec -25  dest = 208 )
+   235:             cr ( 0x092 ) 
+   236:             cr ( 0x092 ) 
+   237:             cr ( 0x092 ) 
+   238:         b(loop) ( 0x015 ) 0xffc5 ( =dec -59  dest = 180 )
+   241:         b(") ( 0x012 ) ( len=0xa [10 bytes] )
+                        " Done... cr"
+   253:         type ( 0x090 ) 
+   254:     b(;) ( 0x0c2 ) 
+   255:     end0 ( 0x000 ) 
+\  Detokenization finished normally after 256 bytes.
+End of file.
+

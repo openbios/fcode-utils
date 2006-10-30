@@ -1,0 +1,352 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x070b (Ok)
+     4:   len:       0x0633 ( 1587 bytes)
+     8: named-token ( 0x0b6 ) crapsky 0x800
+    19: b(:) ( 0x0b7 ) 
+    20:     b(") ( 0x012 ) ( len=6 )
+                    " 0 case"
+    28:     type ( 0x090 ) 
+    29:     0 ( 0x0a5 ) 
+    30:     b(case) ( 0x0c4 ) 
+    31:         b(") ( 0x012 ) ( len=4 )
+                        " 1 of"
+    37:         type ( 0x090 ) 
+    38:         1 ( 0x0a6 ) 
+    39:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 56 )
+    42:             b(") ( 0x012 ) ( len=7 )
+                            " 1 endof"
+    51:             type ( 0x090 ) 
+    52:             1 ( 0x0a6 ) 
+    53:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 54 )
+\  Error:  Unresolved offset.
+    56:         b(") ( 0x012 ) ( len=4 )
+                        " 2 of"
+    62:         type ( 0x090 ) 
+    63:         2 ( 0x0a7 ) 
+    64:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 81 )
+    67:             b(") ( 0x012 ) ( len=7 )
+                            " 2 endof"
+    76:             type ( 0x090 ) 
+    77:             2 ( 0x0a7 ) 
+    78:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 79 )
+\  Error:  Unresolved offset.
+    81:         b(") ( 0x012 ) ( len=4 )
+                        " 3 of"
+    87:         type ( 0x090 ) 
+    88:         3 ( 0x0a8 ) 
+    89:         b(of) ( 0x01c ) 0x0010 ( =dec 16  dest = 106 )
+    92:             b(") ( 0x012 ) ( len=7 )
+                            " 3 endof"
+   101:             type ( 0x090 ) 
+   102:             3 ( 0x0a8 ) 
+   103:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 104 )
+\  Error:  Unresolved offset.
+   106:         b(") ( 0x012 ) ( len=9 )
+                        " default 0"
+   117:         type ( 0x090 ) 
+   118:         0 ( 0x0a5 ) 
+   119:         b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                        " resolve case w/ then"
+   141:         type ( 0x090 ) 
+   142:     b(>resolve) ( 0x0b2 ) 
+   143:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    " resolve 3 endof w/ then"
+   168:     type ( 0x090 ) 
+   169: b(>resolve) ( 0x0b2 ) 
+   170: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " resolve 2 endof w/ then"
+   195: type ( 0x090 ) 
+   196: b(>resolve) ( 0x0b2 ) 
+   197: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " resolve 1 endof w/ then"
+   222: type ( 0x090 ) 
+   223: b(>resolve) ( 0x0b2 ) 
+   224: b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                " Donesky vith crapsky."
+   247: type ( 0x090 ) 
+   248: b(;) ( 0x0c2 ) 
+   249: named-token ( 0x0b6 ) dumpsky 0x801
+   260: b(:) ( 0x0b7 ) 
+   261:     b(") ( 0x012 ) ( len=4 )
+                    " 0 if"
+   267:     type ( 0x090 ) 
+   268:     0 ( 0x0a5 ) 
+   269:     b?branch ( 0x014 ) 0x0000 (  dest = 270 )
+\  Error:  Unresolved offset.
+   272:         b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                        " free-floating endcase"
+   295:         type ( 0x090 ) 
+   296:         b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                        " And no then"
+   309:         type ( 0x090 ) 
+   310:     b(;) ( 0x0c2 ) 
+   311:     named-token ( 0x0b6 ) sneaksky 0x802
+   323:     b(:) ( 0x0b7 ) 
+   324:         b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                        " Free-floating else"
+   344:         type ( 0x090 ) 
+   345:         b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                        " And notsnik aftervards."
+   370:         type ( 0x090 ) 
+   371:     b(;) ( 0x0c2 ) 
+   372:     b(") ( 0x012 ) ( len=0x21 [33 bytes] )
+                    " While by itself, outside of def'n"
+   407:     type ( 0x090 ) 
+   408:     named-token ( 0x0b6 ) gropsky 0x803
+   419:     b(:) ( 0x0b7 ) 
+   420:         b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                        " A typo.  0 of  not 0 if"
+   445:         type ( 0x090 ) 
+   446:         0 ( 0x0a5 ) 
+   447:         b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                        " Misbalanced by a then?"
+   471:         type ( 0x090 ) 
+   472:     b(>resolve) ( 0x0b2 ) 
+   473:     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                    " Goobar... Guwno?"
+   491:     type ( 0x090 ) 
+   492: b(;) ( 0x0c2 ) 
+   493: named-token ( 0x0b6 ) trashsky 0x804
+   505: b(:) ( 0x0b7 ) 
+   506:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Another typo..."
+   523:     type ( 0x090 ) 
+   524:     b(") ( 0x012 ) ( len=7 )
+                    " 0 case "
+   533:     type ( 0x090 ) 
+   534:     0 ( 0x0a5 ) 
+   535:     b(case) ( 0x0c4 ) 
+   536:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " 10 if   not 10 of"
+   555:         type ( 0x090 ) 
+   556:         b(lit) ( 0x010 ) 0xa
+   561:         b?branch ( 0x014 ) 0x0000 (  dest = 562 )
+\  Error:  Unresolved offset.
+   564:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Misbalanced by endof."
+   587:             type ( 0x090 ) 
+   588:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 589 )
+\  Error:  Unresolved offset.
+   591:         b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                        " Not my default."
+   608:         type ( 0x090 ) 
+   609:     b(endcase) ( 0x0c5 ) 
+   610:     b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                    " That was an endcase just in case"
+   644:     type ( 0x090 ) 
+   645: b(;) ( 0x0c2 ) 
+   646: named-token ( 0x0b6 ) schlocksky 0x805
+   660: b(:) ( 0x0b7 ) 
+   661:     b(") ( 0x012 ) ( len=0x2b [43 bytes] )
+                    " Like trashsky but without final balancer..."
+   706:     type ( 0x090 ) 
+   707:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Another typo..."
+   724:     type ( 0x090 ) 
+   725:     b(") ( 0x012 ) ( len=7 )
+                    " 0 case "
+   734:     type ( 0x090 ) 
+   735:     0 ( 0x0a5 ) 
+   736:     b(case) ( 0x0c4 ) 
+   737:         b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                        " 10 if   not 10 of"
+   756:         type ( 0x090 ) 
+   757:         b(lit) ( 0x010 ) 0xa
+   762:         b?branch ( 0x014 ) 0x0000 (  dest = 763 )
+\  Error:  Unresolved offset.
+   765:             b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                            " Misbalanced by endof."
+   788:             type ( 0x090 ) 
+   789:         b(endof) ( 0x0c6 ) 0x0000 (  dest = 790 )
+\  Error:  Unresolved offset.
+   792:         b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                        " No endcase here"
+   809:         type ( 0x090 ) 
+   810:     b(;) ( 0x0c2 ) 
+   811:     b(") ( 0x012 ) ( len=0x34 [52 bytes] )
+                    " We need to be able to detect  Leave  out of context."
+   865:     type ( 0x090 ) 
+   866:     b(") ( 0x012 ) ( len=0x20 [32 bytes] )
+                    " Let's see if this can fool it..."
+   900:     type ( 0x090 ) 
+   901:     b(") ( 0x012 ) ( len=6 )
+                    " 1 0 DO"
+   909:     type ( 0x090 ) 
+   910:     1 ( 0x0a6 ) 
+   911:     0 ( 0x0a5 ) 
+   912:     b(do) ( 0x017 ) 0x0000 (  dest = 913 )
+\  Error:  Unresolved offset.
+   915:         named-token ( 0x0b6 ) stinsky 0x806
+   926:         b(:) ( 0x0b7 ) 
+   927:             b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                            "  if leave then "
+   944:             type ( 0x090 ) 
+   945:             b?branch ( 0x014 ) 0x0004 (  dest = 950 )
+   948:                 b(leave) ( 0x01b ) 
+   949:             b(>resolve) ( 0x0b2 ) 
+   950:         b(;) ( 0x0c2 ) 
+   951:         b(") ( 0x012 ) ( len=7 )
+                        " 1 begin"
+   960:         type ( 0x090 ) 
+   961:         1 ( 0x0a6 ) 
+   962:         b(<mark) ( 0x0b1 ) 
+   963:             b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                            " 1 - ?dup while"
+   979:             type ( 0x090 ) 
+   980:             1 ( 0x0a6 ) 
+   981:             - ( 0x01f ) 
+   982:             ?dup ( 0x050 ) 
+   983:             b?branch ( 0x014 ) 0x0000 (  dest = 984 )
+\  Error:  Unresolved offset.
+   986:                 b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                                " What the hey?  Loop ?"
+  1009:                 type ( 0x090 ) 
+  1010:             b(loop) ( 0x015 ) 0x0000 (  dest = 1011 )
+\  Error:  Unresolved offset.
+  1013:             b(") ( 0x012 ) ( len=7 )
+                            " 1 begin"
+  1022:             type ( 0x090 ) 
+  1023:             1 ( 0x0a6 ) 
+  1024:             b(<mark) ( 0x0b1 ) 
+  1025:                 b(") ( 0x012 ) ( len=0xe [14 bytes] )
+                                " 1 - ?dup while"
+  1041:                 type ( 0x090 ) 
+  1042:                 1 ( 0x0a6 ) 
+  1043:                 - ( 0x01f ) 
+  1044:                 ?dup ( 0x050 ) 
+  1045:                 b?branch ( 0x014 ) 0x0025 ( =dec 37  dest = 1083 )
+  1048:                     b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                                    " again then ought to match..."
+  1078:                     type ( 0x090 ) 
+  1079:                     bbranch ( 0x013 ) 0xffc9 ( =dec -55  dest = 1025 )
+  1082:             b(>resolve) ( 0x0b2 ) 
+  1083:             b(") ( 0x012 ) ( len=0x30 [48 bytes] )
+                            "  How about IF BEGIN without WHILE then REPEAT..."
+  1133:             type ( 0x090 ) 
+  1134:             b(") ( 0x012 ) ( len=4 )
+                            " 0 if"
+  1140:             type ( 0x090 ) 
+  1141:             0 ( 0x0a5 ) 
+  1142:             b?branch ( 0x014 ) 0x0000 (  dest = 1143 )
+\  Error:  Unresolved offset.
+  1145:                 b(<mark) ( 0x0b1 ) 
+  1146:                     b(") ( 0x012 ) ( len=0x23 [35 bytes] )
+                                    "  There's an IF ; where's the WHILE?"
+  1183:                     type ( 0x090 ) 
+  1184:                     b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                                    " That compiles..."
+  1202:                     type ( 0x090 ) 
+  1203:                     b(") ( 0x012 ) ( len=0x2e [46 bytes] )
+                                    "  How about  BEGIN without WHILE then REPEAT..."
+  1251:                     type ( 0x090 ) 
+  1252:                     b(") ( 0x012 ) ( len=5 )
+                                    " begin"
+  1259:                     type ( 0x090 ) 
+  1260:                     b(<mark) ( 0x0b1 ) 
+  1261:                         b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                                        "  Where's the while?"
+  1282:                         type ( 0x090 ) 
+  1283:                         b(") ( 0x012 ) ( len=0x1b [27 bytes] )
+                                        " repeat without precedent..."
+  1312:                         type ( 0x090 ) 
+  1313:                         b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                                        " loop without precedent"
+  1337:                         type ( 0x090 ) 
+  1338:                     b(loop) ( 0x015 ) 0x0000 (  dest = 1339 )
+\  Error:  Unresolved offset.
+  1341:                     b(") ( 0x012 ) ( len=6 )
+                                    " 1 0 DO"
+  1349:                     type ( 0x090 ) 
+  1350:                     1 ( 0x0a6 ) 
+  1351:                     0 ( 0x0a5 ) 
+  1352:                     b(do) ( 0x017 ) 0x0000 (  dest = 1353 )
+\  Error:  Unresolved offset.
+  1355:                         b(") ( 0x012 ) ( len=7 )
+                                        " What???"
+  1364:                         type ( 0x090 ) 
+  1365:                         b(") ( 0x012 ) ( len=9 )
+                                        " repeat..."
+  1376:                         type ( 0x090 ) 
+  1377:                         b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                                        " ...within a loop"
+  1395:                         type ( 0x090 ) 
+  1396:                         named-token ( 0x0b6 ) test_something 0x807
+  1414:                         b(:) ( 0x0b7 ) 
+  1415:                             b(") ( 0x012 ) ( len=4 )
+                                            " Stub"
+  1421:                             type ( 0x090 ) 
+  1422:                             2 ( 0x0a7 ) 
+  1423:                             = ( 0x03c ) 
+  1424:                             dup ( 0x047 ) 
+  1425:                             b?branch ( 0x014 ) 0x0009 (  dest = 1435 )
+  1428:                                 b(lit) ( 0x010 ) 0x1923
+  1433:                                 swap ( 0x049 ) 
+  1434:                             b(>resolve) ( 0x0b2 ) 
+  1435:                         b(;) ( 0x0c2 ) 
+  1436:                         b(lit) ( 0x010 ) 0x4
+  1441:                         0 ( 0x0a5 ) 
+  1442:                         b(do) ( 0x017 ) 0x003c ( =dec 60  dest = 1503 )
+  1445:                             i ( 0x019 ) 
+  1446:                             test_something ( 0x807 ) 
+  1448:                             b?branch ( 0x014 ) 0x0033 ( =dec 51  dest = 1500 )
+  1451:                                 named-token ( 0x0b6 ) targ 0x808
+  1459:                                 b(value) ( 0x0b8 ) 
+  1460:                                 named-token ( 0x0b6 ) funny_stuff 0x809
+  1475:                                 b(:) ( 0x0b7 ) 
+  1476:                                     1 ( 0x0a6 ) 
+  1477:                                     0 ( 0x0a5 ) 
+  1478:                                     b(do) ( 0x017 ) 0x0011 ( =dec 17  dest = 1496 )
+  1481:                                         u. ( 0x09b ) 
+  1482:                                         j ( 0x01a ) 
+  1483:                                         1 ( 0x0a6 ) 
+  1484:                                         0 ( 0x0a5 ) 
+  1485:                                         b(do) ( 0x017 ) 0x0007 (  dest = 1493 )
+  1488:                                             j ( 0x01a ) 
+  1489:                                             . ( 0x09d ) 
+  1490:                                         b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 1488 )
+  1493:                                     b(loop) ( 0x015 ) 0xfff3 ( =dec -13  dest = 1481 )
+  1496:                                     test_something ( 0x807 ) 
+  1498:                                 b(;) ( 0x0c2 ) 
+  1499:                             b(>resolve) ( 0x0b2 ) 
+  1500:                         b(loop) ( 0x015 ) 0xffc8 ( =dec -56  dest = 1445 )
+  1503:                         b(") ( 0x012 ) ( len=0x16 [22 bytes] )
+                                        " ...Same line as a loop"
+  1527:                         type ( 0x090 ) 
+  1528:                         b(lit) ( 0x010 ) 0x4
+  1533:                         0 ( 0x0a5 ) 
+  1534:                         b(do) ( 0x017 ) 0x0033 ( =dec 51  dest = 1586 )
+  1537:                             i ( 0x019 ) 
+  1538:                             test_something ( 0x807 ) 
+  1540:                             b?branch ( 0x014 ) 0x002a ( =dec 42  dest = 1583 )
+  1543:                                 named-token ( 0x0b6 ) runny_stuff 0x80a
+  1558:                                 b(:) ( 0x0b7 ) 
+  1559:                                     b(<mark) ( 0x0b1 ) 
+  1560:                                         1 ( 0x0a6 ) 
+  1561:                                         0 ( 0x0a5 ) 
+  1562:                                         b(do) ( 0x017 ) 0x0011 ( =dec 17  dest = 1580 )
+  1565:                                             u. ( 0x09b ) 
+  1566:                                             j ( 0x01a ) 
+  1567:                                             1 ( 0x0a6 ) 
+  1568:                                             0 ( 0x0a5 ) 
+  1569:                                             b(do) ( 0x017 ) 0x0007 (  dest = 1577 )
+  1572:                                                 j ( 0x01a ) 
+  1573:                                                 . ( 0x09d ) 
+  1574:                                             b(loop) ( 0x015 ) 0xfffd ( =dec -3  dest = 1572 )
+  1577:                                         b(loop) ( 0x015 ) 0xfff3 ( =dec -13  dest = 1565 )
+  1580:                                         -1 ( 0x0a4 ) 
+  1581:                                     b(;) ( 0x0c2 ) 
+  1582:                                 b(>resolve) ( 0x0b2 ) 
+  1583:                             b(loop) ( 0x015 ) 0xffd1 ( =dec -47  dest = 1537 )
+  1586:                             end0 ( 0x000 ) 
+\  Detokenization finished normally after 1587 bytes.
+End of file.
+

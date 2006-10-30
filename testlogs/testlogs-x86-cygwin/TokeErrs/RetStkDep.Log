@@ -1,0 +1,35 @@
+toke -v -i RetStkDep.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  RetStkDep.fth   Binary output to RetStkDep.fc 
+Advisory:  File RetStkDep.fth, Line 23.  Enabling:  Convert Token-Names to lower-Case
+Advisory:  File RetStkDep.fth, Line 25.  FCODE-VERSION2 encountered; processing...
+Warning:  File RetStkDep.fth, Line 30.  (Output Position = 36).  Possible Return-Stack access attempt by R> without value having been placed there
+Warning:  File RetStkDep.fth, Line 30.  (Output Position = 38).  Possible Return-Stack access attempt by R@ without value having been placed there
+Warning:  File RetStkDep.fth, Line 31.  (Output Position = 47).  Possible Return-Stack access attempt by R@ without value having been placed there
+Warning:  File RetStkDep.fth, Line 32.  (Output Position = 56).  Possible Return-Stack access attempt by R> without value having been placed there
+Warning:  File RetStkDep.fth, Line 51.  (Output Position = 200).  Possible Return-Stack access attempt by R> without value having been placed there in definition of  TRICKY_ONE  , which started on line 48
+Warning:  File RetStkDep.fth, Line 53.  (Output Position = 216).  Possible Return-Stack deficit before termination, in definition of  TRICKY_ONE  , which started on line 48
+Warning:  File RetStkDep.fth, Line 56.  (Output Position = 245).  Possible Return-Stack access attempt by R@ without value having been placed there in definition of  ANOTHER_ONE  , which started on line 54
+Warning:  File RetStkDep.fth, Line 56.  (Output Position = 247).  Possible Return-Stack access attempt by R> without value having been placed there in definition of  ANOTHER_ONE  , which started on line 54
+Warning:  File RetStkDep.fth, Line 57.  (Output Position = 250).  Possible Return-Stack deficit before termination, in definition of  ANOTHER_ONE  , which started on line 54
+Warning:  File RetStkDep.fth, Line 90.  (Output Position = 514).  Possible Return-Stack excess before termination, in definition of  SCATTERED-ERRORS  , which started on line 81
+Warning:  File RetStkDep.fth, Line 95.  (Output Position = 580).  Possible Return-Stack access attempt by R@ without value having been placed there in definition of  FRAYED-KNOT  , which started on line 94
+Warning:  File RetStkDep.fth, Line 96.  (Output Position = 585).  Possible Return-Stack access attempt by R> without value having been placed there in definition of  FRAYED-KNOT  , which started on line 94
+Warning:  File RetStkDep.fth, Line 96.  (Output Position = 592).  Possible Return-Stack deficit before EXIT in definition of  FRAYED-KNOT  , which started on line 94
+Warning:  File RetStkDep.fth, Line 98.  (Output Position = 615).  Possible Return-Stack deficit before termination, in definition of  FRAYED-KNOT  , which started on line 94
+Warning:  File RetStkDep.fth, Line 101.  (Output Position = 647).  Possible Return-Stack excess before EXIT in definition of  KRELLBOYN  , which started on line 99
+Warning:  File RetStkDep.fth, Line 103.  (Output Position = 670).  Possible Return-Stack excess before termination, in definition of  KRELLBOYN  , which started on line 99
+Advisory:  File RetStkDep.fth, Line 105.  (Output Position = 671).  FCODE-END encountered; processing...
+toke: checksum is 0xd2f7 (672 bytes).  Last assigned FCode = 0x80b
+Tokenization Completed.  16 Warnings, 3 Advisories.
+toke: wrote 672 bytes to bytecode file 'RetStkDep.fc'

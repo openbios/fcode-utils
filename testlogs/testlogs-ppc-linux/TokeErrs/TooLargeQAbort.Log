@@ -1,0 +1,31 @@
+toke -v TooLargeQAbort.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  TooLargeQAbort.fth   Binary output to TooLargeQAbort.fc 
+Advisory:  File TooLargeQAbort.fth, Line 11.  Initiating Global Scope definitions.
+Advisory:  File TooLargeQAbort.fth, Line 14.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeQAbort.fth, Line 20.  (Output Position = 22).  FLOADing LargeTextNoQte.fth
+Advisory:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  ABORT" in fcode not defined by IEEE 1275-1994
+Warning:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  Unrecognized character, 0x20, after \ in string.  Using it literally.
+Warning:  File LargeTextNoQte.fth, Line 12.  (Output Position = 22).  Unterminated string in definition of  BARFALOT  , which started on line 18 of file TooLargeQAbort.fth
+Warning:  File LargeTextNoQte.fth, Line 56.  (Output Position = 22).  Multi-line string, started on line 12 in definition of  BARFALOT  , which started on line 18 of file TooLargeQAbort.fth
+Error:  File LargeTextNoQte.fth, Line 56.  (Output Position = 22).  get_string buffer overflow.  Max is 1023
+.Warning:  File LargeTextNoQte.fth, Line 56.  (Output Position = 22).  String length being truncated to 255.
+Message:  File TooLargeQAbort.fth, Line 27.  (Output Position = 306).  The abort" starts here.
+Advisory:  File TooLargeQAbort.fth, Line 27.  (Output Position = 306).  ABORT" in fcode not defined by IEEE 1275-1994
+Warning:  File TooLargeQAbort.fth, Line 30.  (Output Position = 306).  Multi-line string, started on line 27 in definition of  OHFOOEY!  , which started on line 25
+Advisory:  File TooLargeQAbort.fth, Line 34.  (Output Position = 402).  FCODE-END encountered; processing...
+Warning:  File TooLargeQAbort.fth, Line 34.  (Output Position = 403).  No DEVICE-DEFINITIONS directive encountered before end.  Compensating...
+Advisory:  File TooLargeQAbort.fth, Line 34.  (Output Position = 403).  Terminating Global Scope definitions; resuming Device-node definitions.
+toke: checksum is 0x830c (403 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  1 Error, 6 Warnings, 7 Advisories, 1 Message.
+Suppressing binary output.

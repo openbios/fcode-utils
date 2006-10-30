@@ -1,0 +1,59 @@
+toke -v -i ObsoFCodes.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+Tokenizing  ObsoFCodes.fth   Binary output to ObsoFCodes.fc 
+Advisory:  File ObsoFCodes.fth, Line 6.  FCODE-VERSION2 encountered; processing...
+Warning:  File ObsoFCodes.fth, Line 14.  (Output Position = 8).  CONVERT is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 15.  (Output Position = 9).  SET-TOKEN-TABLE is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 16.  (Output Position = 10).  SET-TABLE is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 17.  (Output Position = 11).  B(CODE) is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 18.  (Output Position = 12).  4-BYTE-ID is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 19.  (Output Position = 13).  DMA-ALLOC is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 20.  (Output Position = 15).  MEMMAP is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 21.  (Output Position = 17).  >PHYSICAL is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 22.  (Output Position = 20).  MY-PARAMS is an Obsolete FCode.
+Error:  File ObsoFCodes.fth, Line 22.  (Output Position = 24).  Cannot apply  [']  to  IF .
+Warning:  File ObsoFCodes.fth, Line 23.  (Output Position = 27).  INTR is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 24.  (Output Position = 29).  DRIVER is an Obsolete FCode.
+Error:  File ObsoFCodes.fth, Line 25.  (Output Position = 32).  Cannot apply  TO  to  GROUP-CODE .
+Warning:  File ObsoFCodes.fth, Line 25.  (Output Position = 32).  GROUP-CODE is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 26.  (Output Position = 36).  FRAME-BUFFER-BUSY? is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 27.  (Output Position = 38).  FB1-DRAW-CHARACTER is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 28.  (Output Position = 40).  FB1-RESET-SCREEN is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 29.  (Output Position = 42).  FB1-TOGGLE-CURSOR is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 30.  (Output Position = 44).  FB1-ERASE-SCREEN is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 31.  (Output Position = 46).  FB1-BLINK-SCREEN is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 32.  (Output Position = 48).  FB1-INVERT-SCREEN is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 33.  (Output Position = 50).  FB1-INSERT-CHARACTERS is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 34.  (Output Position = 52).  FB1-DELETE-CHARACTERS is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 35.  (Output Position = 54).  FB1-INSERT-LINES is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 36.  (Output Position = 56).  FB1-DELETE-LINES is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 37.  (Output Position = 58).  FB1-DRAW-LOGO is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 38.  (Output Position = 60).  FB1-INSTALL is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 39.  (Output Position = 62).  FB1-SLIDE-UP is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 40.  (Output Position = 64).  RETURN-BUFFER is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 41.  (Output Position = 66).  RETURN-BUFFER is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 42.  (Output Position = 71).  XMIT-PACKET is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 43.  (Output Position = 73).  POLL-PACKET is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 44.  (Output Position = 75).  PROCESSOR-TYPE is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 45.  (Output Position = 77).  FIRMWARE-VERSION is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 46.  (Output Position = 79).  FCODE-VERSION is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 47.  (Output Position = 81).  ADR-MASK is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 48.  (Output Position = 83).  PROBE is an Obsolete FCode.
+Warning:  File ObsoFCodes.fth, Line 49.  (Output Position = 85).  PROBE-VIRTUAL is an Obsolete FCode.
+Error:  File ObsoFCodes.fth, Line 56.  (Output Position = 99).  J outside of  DO ... DO ... LOOP ... LOOP  structure
+Advisory:  File ObsoFCodes.fth, Line 58.  (Output Position = 99).  FCODE-END encountered; processing...
+Error:  File ObsoFCodes.fth, Line 58.  (Output Position = 100).  End of tokenization before completion of IF on line 22
+toke: checksum is 0x126c (100 bytes).  No FCodes assigned.
+Tokenization Completed.  4 Errors, 36 Warnings, 2 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 100 bytes to bytecode file 'ObsoFCodes.fc'

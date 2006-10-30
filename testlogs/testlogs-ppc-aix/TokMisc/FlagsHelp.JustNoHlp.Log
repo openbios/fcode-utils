@@ -1,0 +1,15 @@
+toke -v -f noHelp -o FlagsHelp.JustNoHlp.fc FlagsHelp.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under AIX Level 5.3.0.0
+		Mon, 23 Oct 2006 at 13:17:54 CDT
+
+Tokenizing  FlagsHelp.fth   Binary output to FlagsHelp.JustNoHlp.fc 
+Message:  File FlagsHelp.fth, Line 3.  Nothing to be done.
+Nothing Tokenized.  1 Message.

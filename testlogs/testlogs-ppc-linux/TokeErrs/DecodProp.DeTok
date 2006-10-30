@@ -1,0 +1,76 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0x45c3 (Ok)
+     4:   len:       0x00f0 ( 240 bytes)
+     8: b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                " grubby-nit-picker"
+    27: device-name ( 0x201 ) 
+    29: b(") ( 0x012 ) ( len=0x2c [44 bytes] )
+                " bloated lackey of the capitalist toy-mongers"
+    75: encode-bytes ( 0x115 ) 
+    77: b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                " santa-claus"
+    90: property ( 0x110 ) 
+    92: b(") ( 0x012 ) ( len=4 )
+                " name"
+    98: get-my-property ( 0x21a ) 
+   100: b?branch ( 0x014 ) 0x0018 ( =dec 24  dest = 125 )
+   103:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    " Sorry, Charlie!"
+   120:     type ( 0x090 ) 
+   121:     bbranch ( 0x013 ) 0x0026 ( =dec 38  dest = 160 )
+   124:     b(>resolve) ( 0x0b2 ) 
+   125:     b(lit) ( 0x010 ) 0x6
+   130:     >r ( 0x030 ) 
+   131:     over ( 0x048 ) 
+   132:     r@ ( 0x032 ) 
+   133:     + ( 0x01e ) 
+   134:     swap ( 0x049 ) 
+   135:     r@ ( 0x032 ) 
+   136:     - ( 0x01f ) 
+   137:     rot ( 0x04a ) 
+   138:     r> ( 0x031 ) 
+   139:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    "  Starts with:  "
+   156:     type ( 0x090 ) 
+   157:     type ( 0x090 ) 
+   158:     2drop ( 0x052 ) 
+   159: b(>resolve) ( 0x0b2 ) 
+   160: cr ( 0x092 ) 
+   161: b(") ( 0x012 ) ( len=0xb [11 bytes] )
+                " santa-claus"
+   174: get-my-property ( 0x21a ) 
+   176: b?branch ( 0x014 ) 0x001b ( =dec 27  dest = 204 )
+   179:     b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                    " Eat flaming death!"
+   199:     type ( 0x090 ) 
+   200:     bbranch ( 0x013 ) 0x0025 ( =dec 37  dest = 238 )
+   203:     b(>resolve) ( 0x0b2 ) 
+   204:     b(lit) ( 0x010 ) 0x7
+   209:     tuck ( 0x04c ) 
+   210:     - ( 0x01f ) 
+   211:     -rot ( 0x04b ) 
+   212:     2dup ( 0x053 ) 
+   213:     + ( 0x01e ) 
+   214:     swap ( 0x049 ) 
+   215:     2swap ( 0x055 ) 
+   216:     rot ( 0x04a ) 
+   217:     b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                    "  Starts with:  "
+   234:     type ( 0x090 ) 
+   235:     type ( 0x090 ) 
+   236:     2drop ( 0x052 ) 
+   237: b(>resolve) ( 0x0b2 ) 
+   238: cr ( 0x092 ) 
+   239: end0 ( 0x000 ) 
+\  Detokenization finished normally after 240 bytes.
+End of file.
+

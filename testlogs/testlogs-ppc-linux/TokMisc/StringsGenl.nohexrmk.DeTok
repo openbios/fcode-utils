@@ -1,0 +1,99 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xad8b (Ok)
+     4:   len:       0x022b ( 555 bytes)
+     8: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " Empty string next."
+    28: type ( 0x090 ) 
+    29: b(") ( 0x012 ) ( len=0 )
+                " "
+    31: type ( 0x090 ) 
+    32: b(") ( 0x012 ) ( len=0x15 [21 bytes] )
+                " BSlashes#1: "( 09 a9 )abdc"( 0a 1f ce )"
+    55: type ( 0x090 ) 
+    56: b(") ( 0x012 ) ( len=0x13 [19 bytes] )
+                " BSlashes#2: "( 09 )a7c01a"
+    77: type ( 0x090 ) 
+    78: b(") ( 0x012 ) ( len=0x27 [39 bytes] )
+                " Dec 1193176 = 0x1234D8 Dec 176 = 0xB0 "( d8 )"
+   119: type ( 0x090 ) 
+   120: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " BSlashes#3: "( 0a a7 )c01a"
+   140: type ( 0x090 ) 
+   141: b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                " BSlashes#4: "( 09 a7 c0 1a )"
+   159: type ( 0x090 ) 
+   160: b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                " BSlashes#5: "( 09 a7 c0 1a fe ed fa ce )"
+   182: type ( 0x090 ) 
+   183: b(") ( 0x012 ) ( len=0x3d [61 bytes] )
+                " 3 BSlashes, then QOpen. "( 09 )Q"( 0a 09 0a bc de fe ca 8e be ef fe ce b0 ) Zoh. "( 01 )#"( 04 )V"( 07 08 09 00 01 02 03 00 0a 0b 0c )0"
+   246: type ( 0x090 ) 
+   247: b(") ( 0x012 ) ( len=0x11 [17 bytes] )
+                " Dot-Paren-NoSpace"
+   266: type ( 0x090 ) 
+   267: cr ( 0x092 ) 
+   268: cr ( 0x092 ) 
+   269: b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                " Dot-Paren Space"
+   286: type ( 0x090 ) 
+   287: cr ( 0x092 ) 
+   288: cr ( 0x092 ) 
+   289: b(") ( 0x012 ) ( len=0xf [15 bytes] )
+                " QEscapes: p"( 08 0a )zz"
+   306: type ( 0x090 ) 
+   307: b(") ( 0x012 ) ( len=0x24 [36 bytes] )
+                " QEscapes: ""Q"( 0a )n"( 0d )r"( 09 )t"( 0c )f"( 0a )l"( 08 )b"( 07 )!"( 1b )UpBrackzz"
+   345: type ( 0x090 ) 
+   346: 0 ( 0x0a5 ) 
+   347: b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   350: b(") ( 0x012 ) ( len=0xc [12 bytes] )
+                " Quote"" Quote"
+   364: type ( 0x090 ) 
+   365: cr ( 0x092 ) 
+   366: b(") ( 0x012 ) ( len=9 )
+                " Ess-Quote"
+   377: type ( 0x090 ) 
+   378: cr ( 0x092 ) 
+   379: b(") ( 0x012 ) ( len=0x1c [28 bytes] )
+                " Cross"( 0a )the"( 0a )line."( 0a )Three times."
+   409: type ( 0x090 ) 
+   410: 0 ( 0x0a5 ) 
+   411: b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   414: b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                " Can I get a  backslash?"
+   439: type ( 0x090 ) 
+   440: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " Like this \ maybe?"
+   460: type ( 0x090 ) 
+   461: b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                " What about "( 1c cd e6 0e 0e 0f 0e 0d be 0a 0c 0e c7 )?"
+   488: type ( 0x090 ) 
+   489: b(") ( 0x012 ) ( len=6 )
+                "  Is   "
+   497: type ( 0x090 ) 
+   498: 0 ( 0x0a5 ) 
+   499: b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   502: b(") ( 0x012 ) ( len=0x14 [20 bytes] )
+                " Or a way to get a   "
+   524: type ( 0x090 ) 
+   525: 0 ( 0x0a5 ) 
+   526: b(to) ( 0x0c3 ) my-self ( 0x203 ) 
+   529: named-token ( 0x0b6 ) glemph!" 0x800
+   541: b(:) ( 0x0b7 ) 
+   542:     b(") ( 0x012 ) ( len=8 )
+                    " glemph!"""
+   552:     evaluate ( 0x0cd ) 
+   553: b(;) ( 0x0c2 ) 
+   554: end0 ( 0x000 ) 
+\  Detokenization finished normally after 555 bytes.
+End of file.
+

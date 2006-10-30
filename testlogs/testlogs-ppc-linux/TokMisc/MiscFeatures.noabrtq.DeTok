@@ -1,0 +1,502 @@
+\  Welcome to detok - OpenBIOS detokenizer v1.0.2
+\  (C) Copyright 2001-2006 Stefan Reinauer.
+\  (C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+\  Written by Stefan Reinauer, <stepan@openbios.org>
+\  This program is free software; you may redistribute it under the terms of
+\  the GNU General Public License v2. This program has absolutely no warranty.
+\  
+     0: start1 ( 0x0f1 )   ( 16-bit offsets)
+     1:   format:    0x08
+     2:   checksum:  0xb9d7 (Ok)
+     4:   len:       0x0593 ( 1427 bytes)
+     8: b(lit) ( 0x010 ) 0x47
+    13: emit ( 0x08f ) 
+    14: b(lit) ( 0x010 ) 0x7
+    19: emit ( 0x08f ) 
+    20: b(lit) ( 0x010 ) 0x1b
+    25: emit ( 0x08f ) 
+    26: b(") ( 0x012 ) ( len=5 )
+                " billy"
+    33: device-name ( 0x201 ) 
+    35: named-token ( 0x0b6 ) debug-bell? 0x800
+    50: b(variable) ( 0x0b9 ) 
+    51: debug-bell? ( 0x800 ) 
+    53: off ( 0x06b ) 
+    54: named-token ( 0x0b6 ) bell 0x801
+    62: b(:) ( 0x0b7 ) 
+    63:     debug-bell? ( 0x800 ) 
+    65:     @ ( 0x06d ) 
+    66:     b?branch ( 0x014 ) 0x0026 ( =dec 38  dest = 105 )
+    69:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+    80:         type ( 0x090 ) 
+    81:         b(") ( 0x012 ) ( len=4 )
+                        " bell"
+    87:         type ( 0x090 ) 
+    88:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+    94:         type ( 0x090 ) 
+    95:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   102:         type ( 0x090 ) 
+   103:         cr ( 0x092 ) 
+   104:     b(>resolve) ( 0x0b2 ) 
+   105:     b(lit) ( 0x010 ) 0x47
+   110:     dup ( 0x047 ) 
+   111:     b(lit) ( 0x010 ) 0x7
+   116:     drop ( 0x046 ) 
+   117:     2drop ( 0x052 ) 
+   118:     debug-bell? ( 0x800 ) 
+   120:     @ ( 0x06d ) 
+   121:     b?branch ( 0x014 ) 0x0025 ( =dec 37  dest = 159 )
+   124:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+   134:         type ( 0x090 ) 
+   135:         b(") ( 0x012 ) ( len=4 )
+                        " bell"
+   141:         type ( 0x090 ) 
+   142:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   148:         type ( 0x090 ) 
+   149:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   156:         type ( 0x090 ) 
+   157:         cr ( 0x092 ) 
+   158:     b(>resolve) ( 0x0b2 ) 
+   159: b(;) ( 0x0c2 ) 
+   160: named-token ( 0x0b6 ) factl 0x802
+   169: b(:) ( 0x0b7 ) 
+   170:     b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                    " Entering First vers. of "
+   196:     type ( 0x090 ) 
+   197:     b(") ( 0x012 ) ( len=5 )
+                    " factl"
+   204:     type ( 0x090 ) 
+   205:     cr ( 0x092 ) 
+   206:     ?dup ( 0x050 ) 
+   207:     0= ( 0x034 ) 
+   208:     b?branch ( 0x014 ) 0x0007 (  dest = 216 )
+   211:         1 ( 0x0a6 ) 
+   212:         bbranch ( 0x013 ) 0x000a ( =dec 10  dest = 223 )
+   215:         b(>resolve) ( 0x0b2 ) 
+   216:         dup ( 0x047 ) 
+   217:         1 ( 0x0a6 ) 
+   218:         - ( 0x01f ) 
+   219:         factl ( 0x802 ) 
+   221:         * ( 0x020 ) 
+   222:     b(>resolve) ( 0x0b2 ) 
+   223:     b(") ( 0x012 ) ( len=0x17 [23 bytes] )
+                    " Leaving First vers. of "
+   248:     type ( 0x090 ) 
+   249:     b(") ( 0x012 ) ( len=5 )
+                    " factl"
+   256:     type ( 0x090 ) 
+   257:     cr ( 0x092 ) 
+   258: b(;) ( 0x0c2 ) 
+   259: named-token ( 0x0b6 ) factl 0x803
+   268: b(:) ( 0x0b7 ) 
+   269:     b(") ( 0x012 ) ( len=0x19 [25 bytes] )
+                    " Entering Second vers. of "
+   296:     type ( 0x090 ) 
+   297:     b(") ( 0x012 ) ( len=5 )
+                    " factl"
+   304:     type ( 0x090 ) 
+   305:     cr ( 0x092 ) 
+   306:     ?dup ( 0x050 ) 
+   307:     0= ( 0x034 ) 
+   308:     b?branch ( 0x014 ) 0x0009 (  dest = 318 )
+   311:         1 ( 0x0a6 ) 
+   312:         factl ( 0x802 ) 
+   314:         bbranch ( 0x013 ) 0x000a ( =dec 10  dest = 325 )
+   317:         b(>resolve) ( 0x0b2 ) 
+   318:         dup ( 0x047 ) 
+   319:         1 ( 0x0a6 ) 
+   320:         - ( 0x01f ) 
+   321:         factl ( 0x803 ) 
+   323:         * ( 0x020 ) 
+   324:     b(>resolve) ( 0x0b2 ) 
+   325:     b(") ( 0x012 ) ( len=0x18 [24 bytes] )
+                    " Leaving Second vers. of "
+   351:     type ( 0x090 ) 
+   352:     b(") ( 0x012 ) ( len=5 )
+                    " factl"
+   359:     type ( 0x090 ) 
+   360:     cr ( 0x092 ) 
+   361: b(;) ( 0x0c2 ) 
+   362: named-token ( 0x0b6 ) naught 0x804
+   372: b(variable) ( 0x0b9 ) 
+   373: named-token ( 0x0b6 ) do-nothing 0x805
+   387: b(defer) ( 0x0bc ) 
+   388: b(lit) ( 0x010 ) 0x14
+   393: named-token ( 0x0b6 ) twenty 0x806
+   403: b(value) ( 0x0b8 ) 
+   404: b(lit) ( 0x010 ) 0x1e
+   409: named-token ( 0x0b6 ) thirty 0x807
+   419: b(value) ( 0x0b8 ) 
+   420: b(lit) ( 0x010 ) 0x28
+   425: named-token ( 0x0b6 ) forty 0x808
+   434: b(buffer:) ( 0x0bd ) 
+   435: b(lit) ( 0x010 ) 0x32
+   440: named-token ( 0x0b6 ) fifty 0x809
+   449: b(constant) ( 0x0ba ) 
+   450: named-token ( 0x0b6 ) three 0x80a
+   459: b(create) ( 0x0bb ) 
+   460: 0 ( 0x0a5 ) 
+   461: , ( 0x0d3 ) 
+   462: b(lit) ( 0x010 ) 0x0
+   467: , ( 0x0d3 ) 
+   468: b(lit) ( 0x010 ) 0x0
+   473: , ( 0x0d3 ) 
+   474: 0 ( 0x0a5 ) 
+   475: b(lit) ( 0x010 ) 0x4
+   480: named-token ( 0x0b6 ) >four 0x80b
+   489: b(field) ( 0x0be ) 
+   490: named-token ( 0x0b6 ) /four 0x80c
+   499: b(constant) ( 0x0ba ) 
+   500: named-token ( 0x0b6 ) peril 0x80d
+   509: b(:) ( 0x0b7 ) 
+   510:     debug-bell? ( 0x800 ) 
+   512:     @ ( 0x06d ) 
+   513:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 553 )
+   516:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+   527:         type ( 0x090 ) 
+   528:         b(") ( 0x012 ) ( len=5 )
+                        " peril"
+   535:         type ( 0x090 ) 
+   536:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   542:         type ( 0x090 ) 
+   543:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   550:         type ( 0x090 ) 
+   551:         cr ( 0x092 ) 
+   552:     b(>resolve) ( 0x0b2 ) 
+   553:     b(') ( 0x011 ) noop ( 0x07b ) 
+   555:     b(to) ( 0x0c3 ) do-nothing ( 0x805 ) 
+   558:     b(lit) ( 0x010 ) 0x64
+   563:     b(to) ( 0x0c3 ) thirty ( 0x807 ) 
+   566:     b(lit) ( 0x010 ) 0x5
+   571:     b(to) ( 0x0c3 ) naught ( 0x804 ) 
+   574:     thirty ( 0x807 ) 
+   576:     dup ( 0x047 ) 
+   577:     - ( 0x01f ) 
+   578:     debug-bell? ( 0x800 ) 
+   580:     @ ( 0x06d ) 
+   581:     b?branch ( 0x014 ) 0x0026 ( =dec 38  dest = 620 )
+   584:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+   594:         type ( 0x090 ) 
+   595:         b(") ( 0x012 ) ( len=5 )
+                        " peril"
+   602:         type ( 0x090 ) 
+   603:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   609:         type ( 0x090 ) 
+   610:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   617:         type ( 0x090 ) 
+   618:         cr ( 0x092 ) 
+   619:     b(>resolve) ( 0x0b2 ) 
+   620: b(;) ( 0x0c2 ) 
+   621: named-token ( 0x0b6 ) thirty 0x80e
+   631: b(:) ( 0x0b7 ) 
+   632:     debug-bell? ( 0x800 ) 
+   634:     @ ( 0x06d ) 
+   635:     b?branch ( 0x014 ) 0x0028 ( =dec 40  dest = 676 )
+   638:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+   649:         type ( 0x090 ) 
+   650:         b(") ( 0x012 ) ( len=6 )
+                        " thirty"
+   658:         type ( 0x090 ) 
+   659:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   665:         type ( 0x090 ) 
+   666:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   673:         type ( 0x090 ) 
+   674:         cr ( 0x092 ) 
+   675:     b(>resolve) ( 0x0b2 ) 
+   676:     dup ( 0x047 ) 
+   677:     b(to) ( 0x0c3 ) thirty ( 0x807 ) 
+   680:     b(") ( 0x012 ) ( len=5 )
+                    " Dirty"
+   687:     type ( 0x090 ) 
+   688:     base ( 0x0a0 ) 
+   689:     @ ( 0x06d ) 
+   690:     swap ( 0x049 ) 
+   691:     b(lit) ( 0x010 ) 0xa
+   696:     base ( 0x0a0 ) 
+   697:     ! ( 0x072 ) 
+   698:     . ( 0x09d ) 
+   699:     base ( 0x0a0 ) 
+   700:     ! ( 0x072 ) 
+   701:     debug-bell? ( 0x800 ) 
+   703:     @ ( 0x06d ) 
+   704:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 744 )
+   707:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+   717:         type ( 0x090 ) 
+   718:         b(") ( 0x012 ) ( len=6 )
+                        " thirty"
+   726:         type ( 0x090 ) 
+   727:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   733:         type ( 0x090 ) 
+   734:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+   741:         type ( 0x090 ) 
+   742:         cr ( 0x092 ) 
+   743:     b(>resolve) ( 0x0b2 ) 
+   744: b(;) ( 0x0c2 ) 
+   745: b(lit) ( 0x010 ) 0xdeadc0de
+   750: new-device ( 0x11f ) 
+   752: instance ( 0x0c0 ) 
+   753: named-token ( 0x0b6 ) cheryl 0x80f
+   763: b(variable) ( 0x0b9 ) 
+   764: b(") ( 0x012 ) ( len=6 )
+                " cheryl"
+   772: device-name ( 0x201 ) 
+   774: instance ( 0x0c0 ) 
+   775: new-device ( 0x11f ) 
+   777: b(") ( 0x012 ) ( len=5 )
+                " meryl"
+   784: device-name ( 0x201 ) 
+   786: named-token ( 0x0b6 ) beryl 0x810
+   795: b(variable) ( 0x0b9 ) 
+   796: named-token ( 0x0b6 ) debug-meryl? 0x811
+   812: b(variable) ( 0x0b9 ) 
+   813: debug-meryl? ( 0x811 ) 
+   815: off ( 0x06b ) 
+   816: named-token ( 0x0b6 ) meryl 0x812
+   825: b(:) ( 0x0b7 ) 
+   826:     debug-meryl? ( 0x811 ) 
+   828:     @ ( 0x06d ) 
+   829:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 869 )
+   832:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+   843:         type ( 0x090 ) 
+   844:         b(") ( 0x012 ) ( len=5 )
+                        " meryl"
+   851:         type ( 0x090 ) 
+   852:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   858:         type ( 0x090 ) 
+   859:         b(") ( 0x012 ) ( len=5 )
+                        " meryl"
+   866:         type ( 0x090 ) 
+   867:         cr ( 0x092 ) 
+   868:     b(>resolve) ( 0x0b2 ) 
+   869:     debug-meryl? ( 0x811 ) 
+   871:     @ ( 0x06d ) 
+   872:     b?branch ( 0x014 ) 0x0026 ( =dec 38  dest = 911 )
+   875:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+   885:         type ( 0x090 ) 
+   886:         b(") ( 0x012 ) ( len=5 )
+                        " meryl"
+   893:         type ( 0x090 ) 
+   894:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   900:         type ( 0x090 ) 
+   901:         b(") ( 0x012 ) ( len=5 )
+                        " meryl"
+   908:         type ( 0x090 ) 
+   909:         cr ( 0x092 ) 
+   910:     b(>resolve) ( 0x0b2 ) 
+   911: b(;) ( 0x0c2 ) 
+   912: finish-device ( 0x127 ) 
+   914: named-token ( 0x0b6 ) debug-cheryl? 0x813
+   931: b(variable) ( 0x0b9 ) 
+   932: debug-cheryl? ( 0x813 ) 
+   934: off ( 0x06b ) 
+   935: named-token ( 0x0b6 ) queryl 0x814
+   945: b(:) ( 0x0b7 ) 
+   946:     debug-cheryl? ( 0x813 ) 
+   948:     @ ( 0x06d ) 
+   949:     b?branch ( 0x014 ) 0x0029 ( =dec 41  dest = 991 )
+   952:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+   963:         type ( 0x090 ) 
+   964:         b(") ( 0x012 ) ( len=6 )
+                        " queryl"
+   972:         type ( 0x090 ) 
+   973:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+   979:         type ( 0x090 ) 
+   980:         b(") ( 0x012 ) ( len=6 )
+                        " cheryl"
+   988:         type ( 0x090 ) 
+   989:         cr ( 0x092 ) 
+   990:     b(>resolve) ( 0x0b2 ) 
+   991:     over ( 0x048 ) 
+   992:     rot ( 0x04a ) 
+   993:     dup ( 0x047 ) 
+   994:     nip ( 0x04d ) 
+   995:     drop ( 0x046 ) 
+   996:     swap ( 0x049 ) 
+   997:     debug-cheryl? ( 0x813 ) 
+   999:     @ ( 0x06d ) 
+  1000:     b?branch ( 0x014 ) 0x0028 ( =dec 40  dest = 1041 )
+  1003:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+  1013:         type ( 0x090 ) 
+  1014:         b(") ( 0x012 ) ( len=6 )
+                        " queryl"
+  1022:         type ( 0x090 ) 
+  1023:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+  1029:         type ( 0x090 ) 
+  1030:         b(") ( 0x012 ) ( len=6 )
+                        " cheryl"
+  1038:         type ( 0x090 ) 
+  1039:         cr ( 0x092 ) 
+  1040:     b(>resolve) ( 0x0b2 ) 
+  1041: b(;) ( 0x0c2 ) 
+  1042: finish-device ( 0x127 ) 
+  1044: b(") ( 0x012 ) ( len=8 )
+                " Cleared "
+  1054: type ( 0x090 ) 
+  1055: b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                " MiscFeatures.fth"
+  1073: type ( 0x090 ) 
+  1074: b(") ( 0x012 ) ( len=5 )
+                " line "
+  1081: type ( 0x090 ) 
+  1082: b(lit) ( 0x010 ) 0x7f
+  1087: base ( 0x0a0 ) 
+  1088: @ ( 0x06d ) 
+  1089: swap ( 0x049 ) 
+  1090: b(lit) ( 0x010 ) 0xa
+  1095: base ( 0x0a0 ) 
+  1096: ! ( 0x072 ) 
+  1097: . ( 0x09d ) 
+  1098: base ( 0x0a0 ) 
+  1099: ! ( 0x072 ) 
+  1100: cr ( 0x092 ) 
+  1101: named-token ( 0x0b6 ) droop 0x815
+  1110: b(:) ( 0x0b7 ) 
+  1111:     debug-bell? ( 0x800 ) 
+  1113:     @ ( 0x06d ) 
+  1114:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 1154 )
+  1117:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+  1128:         type ( 0x090 ) 
+  1129:         b(") ( 0x012 ) ( len=5 )
+                        " droop"
+  1136:         type ( 0x090 ) 
+  1137:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+  1143:         type ( 0x090 ) 
+  1144:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+  1151:         type ( 0x090 ) 
+  1152:         cr ( 0x092 ) 
+  1153:     b(>resolve) ( 0x0b2 ) 
+  1154:     twenty ( 0x806 ) 
+  1156:     0 ( 0x0a5 ) 
+  1157:     b(?do) ( 0x018 ) 0x0006 (  dest = 1164 )
+  1160:         i ( 0x019 ) 
+  1161:     b(loop) ( 0x015 ) 0xfffe ( =dec -2  dest = 1160 )
+  1164:     debug-bell? ( 0x800 ) 
+  1166:     @ ( 0x06d ) 
+  1167:     b?branch ( 0x014 ) 0x0026 ( =dec 38  dest = 1206 )
+  1170:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+  1180:         type ( 0x090 ) 
+  1181:         b(") ( 0x012 ) ( len=5 )
+                        " DROOP"
+  1188:         type ( 0x090 ) 
+  1189:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+  1195:         type ( 0x090 ) 
+  1196:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+  1203:         type ( 0x090 ) 
+  1204:         cr ( 0x092 ) 
+  1205:     b(>resolve) ( 0x0b2 ) 
+  1206: b(;) ( 0x0c2 ) 
+  1207: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " Finished defining "
+  1227: type ( 0x090 ) 
+  1228: b(") ( 0x012 ) ( len=5 )
+                " DROOP"
+  1235: type ( 0x090 ) 
+  1236: cr ( 0x092 ) 
+  1237: b(") ( 0x012 ) ( len=8 )
+                " Cleared "
+  1247: type ( 0x090 ) 
+  1248: b(") ( 0x012 ) ( len=0x10 [16 bytes] )
+                " MiscFeatures.fth"
+  1266: type ( 0x090 ) 
+  1267: b(") ( 0x012 ) ( len=5 )
+                " line "
+  1274: type ( 0x090 ) 
+  1275: b(lit) ( 0x010 ) 0x8a
+  1280: base ( 0x0a0 ) 
+  1281: @ ( 0x06d ) 
+  1282: swap ( 0x049 ) 
+  1283: b(lit) ( 0x010 ) 0xa
+  1288: base ( 0x0a0 ) 
+  1289: ! ( 0x072 ) 
+  1290: . ( 0x09d ) 
+  1291: base ( 0x0a0 ) 
+  1292: ! ( 0x072 ) 
+  1293: cr ( 0x092 ) 
+  1294: new-token ( 0x0b5 ) 0x816
+  1297: b(:) ( 0x0b7 ) 
+  1298:     debug-bell? ( 0x800 ) 
+  1300:     @ ( 0x06d ) 
+  1301:     b?branch ( 0x014 ) 0x0027 ( =dec 39  dest = 1341 )
+  1304:         b(") ( 0x012 ) ( len=9 )
+                        " Entering "
+  1315:         type ( 0x090 ) 
+  1316:         b(") ( 0x012 ) ( len=5 )
+                        " ploop"
+  1323:         type ( 0x090 ) 
+  1324:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+  1330:         type ( 0x090 ) 
+  1331:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+  1338:         type ( 0x090 ) 
+  1339:         cr ( 0x092 ) 
+  1340:     b(>resolve) ( 0x0b2 ) 
+  1341:     fifty ( 0x809 ) 
+  1343:     0 ( 0x0a5 ) 
+  1344:     b(do) ( 0x017 ) 0x0008 (  dest = 1353 )
+  1347:         i ( 0x019 ) 
+  1348:         drop ( 0x046 ) 
+  1349:         2 ( 0x0a7 ) 
+  1350:     b(+loop) ( 0x016 ) 0xfffc ( =dec -4  dest = 1347 )
+  1353:     debug-bell? ( 0x800 ) 
+  1355:     @ ( 0x06d ) 
+  1356:     b?branch ( 0x014 ) 0x0026 ( =dec 38  dest = 1395 )
+  1359:         b(") ( 0x012 ) ( len=8 )
+                        " Leaving "
+  1369:         type ( 0x090 ) 
+  1370:         b(") ( 0x012 ) ( len=5 )
+                        " ploop"
+  1377:         type ( 0x090 ) 
+  1378:         b(") ( 0x012 ) ( len=4 )
+                        "  in "
+  1384:         type ( 0x090 ) 
+  1385:         b(") ( 0x012 ) ( len=5 )
+                        " billy"
+  1392:         type ( 0x090 ) 
+  1393:         cr ( 0x092 ) 
+  1394:     b(>resolve) ( 0x0b2 ) 
+  1395: b(;) ( 0x0c2 ) 
+  1396: b(") ( 0x012 ) ( len=0x12 [18 bytes] )
+                " Finished defining "
+  1416: type ( 0x090 ) 
+  1417: b(") ( 0x012 ) ( len=5 )
+                " ploop"
+  1424: type ( 0x090 ) 
+  1425: cr ( 0x092 ) 
+  1426: end0 ( 0x000 ) 
+\  Detokenization finished normally after 1427 bytes.
+End of file.
+

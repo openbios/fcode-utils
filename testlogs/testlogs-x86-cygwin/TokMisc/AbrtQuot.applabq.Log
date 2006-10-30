@@ -1,0 +1,44 @@
+toke -v -i -f noSUN-abort-QUOte -o AbrtQuot.applabq.fc AbrtQuot.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Special-Feature Flag settings:
+	NoLocal-Values
+	  LV-Legacy-Separator
+	  LV-Legacy-Message
+	  ABORT-Quote
+	NoSun-ABORT-Quote
+	  ABORT-Quote-Throw
+	  String-remark-escape
+	  Hex-remark-escape
+	  C-Style-string-escape
+	NoAlways-Headers
+	NoAlways-External
+	  Warn-if-Duplicate
+	  Obsolete-FCode-Warning
+	NoTrace-Conditionals
+	NoUpper-Case-Token-Names
+	NoLower-Case-Token-Names
+	NoBig-End-PCI-Rev-Level
+	  Ret-Stk-Interp
+
+Tokenizing  AbrtQuot.fth   Binary output to AbrtQuot.applabq.fc 
+Advisory:  File AbrtQuot.fth, Line 5.  FCODE-VERSION2 encountered; processing...
+Error:  File AbrtQuot.fth, Line 14.  (Output Position = 57).  Word  gumfritsch  is not in dictionary.
+Error:  File AbrtQuot.fth, Line 15.  (Output Position = 57).  Unimplemented control word '{'
+Error:  File AbrtQuot.fth, Line 16.  (Output Position = 57).  Word  }  is not in dictionary.
+Advisory:  File AbrtQuot.fth, Line 17.  (Output Position = 62).  ABORT" in fcode not defined by IEEE 1275-1994
+Error:  File AbrtQuot.fth, Line 21.  (Output Position = 179).  Word  strumburkle  is not in dictionary.
+Advisory:  File AbrtQuot.fth, Line 24.  (Output Position = 180).  FCODE-END encountered; processing...
+toke: checksum is 0x3b2d (181 bytes).  Last assigned FCode = 0x802
+Tokenization Completed.  4 Errors, 3 Advisories.
+Error-detection over-ridden; producing binary output.
+toke: wrote 181 bytes to bytecode file 'AbrtQuot.applabq.fc'

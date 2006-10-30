@@ -1,0 +1,33 @@
+toke -v -i -l -d "fld_cmd=fload TooLargeBranch_N233_body.fth" -o TooLargeBranch_off16.N233.fc TooLargeBranch_off16.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on PPC under GNU_Linux
+		Mon, 23 Oct 2006 at 13:20:18 CDT
+
+User-Defined Symbols:
+	fld_cmd = fload TooLargeBranch_N233_body.fth
+
+Tokenizing  TooLargeBranch_off16.fth   Binary output to TooLargeBranch_off16.N233.fc   FLoad-list to TooLargeBranch_off16.N233.fl 
+Advisory:  File TooLargeBranch_off16.fth, Line 12.  FCODE-VERSION2 encountered; processing...
+Advisory:  File TooLargeBranch_off16.fth, Line 31.  (Output Position = 182).  FLOADing TooLargeBranch_N233_body.fth
+Message:  File TooLargeBranch_N233_body.fth, Line 1.  (Output Position = 182).  Starting out with 233 Bottles of Beer on the wall
+Error:  File TooLargeBranch_off16.fth, Line 34.  (Output Position = 154).  Branch offset is too large between ENDCASE and the ENDOF on line 25 in definition of  TOO-LARGE-CASE  , which started on line 16
+Warning:  File TooLargeBranch_off16.fth, Line 34.  (Output Position = 154).  Actual offset is 0x804e (=dec 32846), but it will be coded as 0xffff804e (=dec -32690).
+Error:  File TooLargeBranch_off16.fth, Line 36.  (Output Position = 116).  Branch offset is too large between THEN and the IF on line 22 in definition of  TOO-LARGE-CASE  , which started on line 16
+Warning:  File TooLargeBranch_off16.fth, Line 36.  (Output Position = 116).  Actual offset is 0x807c (=dec 32892), but it will be coded as 0xffff807c (=dec -32644).
+Error:  File TooLargeBranch_off16.fth, Line 37.  (Output Position = 33034).  Branch offset is too large between LOOP and the DO on line 20 in definition of  TOO-LARGE-CASE  , which started on line 16
+Warning:  File TooLargeBranch_off16.fth, Line 37.  (Output Position = 33034).  Actual offset is 0xffff7f61 (=dec -32927), but it will be coded as 0x7f61 (=dec 32609).
+Warning:  File TooLargeBranch_off16.fth, Line 37.  (Output Position = 105).  Actual offset is 0x80a3 (=dec 32931), but it will be coded as 0xffff80a3 (=dec -32605).
+Error:  File TooLargeBranch_off16.fth, Line 43.  (Output Position = 33091).  Branch offset is too large between AGAIN and the BEGIN on line 19 in definition of  TOO-LARGE-CASE  , which started on line 16
+Warning:  File TooLargeBranch_off16.fth, Line 43.  (Output Position = 33091).  Actual offset is 0xffff7f05 (=dec -33019), but it will be coded as 0x7f05 (=dec 32517).
+Advisory:  File TooLargeBranch_off16.fth, Line 67.  (Output Position = 33322).  FCODE-END encountered; processing...
+toke: checksum is 0x63d4 (33323 bytes).  Last assigned FCode = 0x801
+Tokenization Completed.  4 Errors, 5 Warnings, 3 Advisories, 1 Message.
+Error-detection over-ridden; producing binary output.
+toke: wrote 33323 bytes to bytecode file 'TooLargeBranch_off16.N233.fc'

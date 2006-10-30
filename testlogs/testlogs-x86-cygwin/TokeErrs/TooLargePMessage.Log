@@ -1,0 +1,47 @@
+toke -v TooLargePMessage.fth
+
+Welcome to toke - OpenBIOS tokenizer v1.0.2
+(C) Copyright 2001-2006 Stefan Reinauer.
+(C) Copyright 2006 coresystems GmbH <info@coresystems.de>
+(C) Copyright 2005 IBM Corporation.  All Rights Reserved.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License v2. This program has absolutely no warranty.
+
+	Tokenizer Compiled on X86 under Cygwin
+		Fri, 20 Oct 2006 at 17:57:43 PDT
+
+Tokenizing  TooLargePMessage.fth   Binary output to TooLargePMessage.fc 
+Advisory:  File TooLargePMessage.fth, Line 11.  Initiating Global Scope definitions.
+Advisory:  File TooLargePMessage.fth, Line 16.  FLOADing LargeTextNoQte.fth
+Error:  File LargeTextNoQte.fth, Line 56.  get_until buffer overflow.  Max is 1023.
+Message:  File LargeTextNoQte.fth, Line 12.          \  Okay, kids, here we go!
+
+    Oh, ten Bottles of Beer on the wall, cr
+	ten Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    nine Bottles of Beer on the wall. cr
+    Oh, nine Bottles of Beer on the wall, cr
+	nine Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    eight Bottles of Beer on the wall. cr
+    Oh, eight Bottles of Beer on the wall, cr
+	eight Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    seven Bottles of Beer on the wall. cr
+    Oh, seven Bottles of Beer on the wall, cr
+	seven Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    six Bottles of Beer on the wall. cr
+    Oh, six Bottles of Beer on the wall, cr
+	six Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    five Bottles of Beer on the wall. cr
+    Oh, five Bottles of Beer on the wall, cr
+	five Bottles of Beer!, cr
+    Take one down and pass it around, cr
+    four Bottles of Beer on the wall. cr
+    Oh, four Bottles of Beer on the wall, cr
+	four Bottles of 
+Warning:  File LargeTextNoQte.fth, Line 12.  Unterminated user-generated message
+Nothing Tokenized.  1 Error, 1 Warning, 2 Advisories, 1 Message.
+Suppressing binary output.
