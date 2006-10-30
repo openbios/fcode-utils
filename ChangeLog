@@ -1,0 +1,37 @@
+
+1.0.2
+-----
+
+David Paktor:
+The most prominent change is that the Tokenizer's Message
+format has been expanded to show the current Output Position
+and, if applicable, the position relative to the end of the
+most recent PCI Header (to keep in sync with Offset numbers
+displayed by the DeTokenizer.)
+
+The Symbol-Tracing feature has been changed and expanded:
+Its Messages are no longer Advisories, but a class of their
+own called Trace-Notes.  When a Traced Symbol is created, the
+Trace-Note Message gives the new Symbol's assigned FCode Token
+(when applicable) in addition to the Data-Type and Scope of
+the definition.
+
+A Trace-Note Message is now also issued when a Traced Symbol
+is invoked.  Symbol-Tracing is not fooled by aliases, and a
+failed attempt to create or invoke a Traced Symbol will also
+cause a Trace-Note Message to be displayed.
+
+These expansions are based on some questions asked by one of
+my colleagues while maintaining a very large and convoluted
+body of Legacy code -- questions like:  "Where is such-and-so
+definition coming from?"  "Which version of it is being used
+here?" "How can I find where exactly that is in the Binary?"
+
+Another change is based on the recent exchange of letters with
+Rolf Schroedter concerning the use of the  emit-fcode  command.
+In the previous version, arguments to the  emit-fcode  command
+were limited to the range of user-defined FCodes, i.e., 0x800
+to 0xFFF.  The new version permits numbers in the entire range
+of valid FCodes, 0x010 to 0xFFF, which includes the sub-ranges
+that are reserved for Vendor-Specific FCodes.
+
