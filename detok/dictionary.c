@@ -37,13 +37,6 @@
 #include "detok.h"
 
 bool check_tok_seq = TRUE;
-
-typedef struct token {
-	char *name;
-	u16 fcode;
-	struct token *next;
-} token_t;
-#define TOKEN_ENTRY(num, name)   { name, (u16)num, (token_t *)NULL }
 static token_t *dictionary;	/*  Initialize dynamically to accommodate AIX  */
 
 static char *fcerror = "ferror";
@@ -52,7 +45,7 @@ char *lookup_token(u16 number)
 {
 	token_t *curr;
 
-	for (curr = dictionary; curr != NULL; curr = curr->next)
+	for (curr = dictionary; curr != NULL; curr = curr->prev)
 		if (curr->fcode == number)
 			break;
 
@@ -60,6 +53,33 @@ char *lookup_token(u16 number)
 		return curr->name;
 
 	return fcerror;
+}
+
+/* **************************************************************************
+ *
+ *      Function name:  link_token
+ *      Synopsis:       Simply link a ready-made token-table entry to
+ *                          the dictionary, without side-effects.
+ *
+ *      Inputs:
+ *         Parameters:
+ *             curr_token                  The token-table entry to link
+ *         Local Static Variables:
+ *             dictionary                  Pointer to the "tail" of the
+ *                                             FCode-Tokens vocabulary.
+ *
+ *      Outputs:
+ *         Returned Value:                 NONE
+ *         Local Static Variables:
+ *             dictionary                  Updated to point to the new entry.
+ *
+ **************************************************************************** */
+
+void link_token( token_t *curr_token)
+{
+	curr_token->prev  = dictionary;
+
+	dictionary = curr_token;
 }
 
 /* **************************************************************************
@@ -72,8 +92,6 @@ char *lookup_token(u16 number)
  *             number                      Numeric value of the FCode token
  *             name                        Name of the function to display
  *         Global/Static Variables:
- *             dictionary                  Pointer to the "tail" of the
- *                                             FCode-Tokens vocabulary.
  *             check_tok_seq               TRUE = "Check Token Sequence"
  *                                             A retro-fit to accommodate
  *                                             adding Vendor FCodes
@@ -81,7 +99,6 @@ char *lookup_token(u16 number)
  *      Outputs:
  *         Returned Value:                 NONE
  *         Global/Static Variables:
- *             dictionary                  Updated to point to the new entry.
  *             last_defined_token          Updated to the given FCode token
  *         Memory Allocated
  *             For the new entry.
@@ -116,11 +133,10 @@ void add_token(u16 number, char *name)
 		exit(-ENOMEM);
 	}
 
-	curr->next = dictionary;
-	curr->fcode = number;
 	curr->name = name;
+	curr->fcode=number;
 
-	dictionary = curr;
+	link_token( curr);
 
 	if (check_tok_seq) {
 		/*  Error-check, but not for first time.  */
@@ -543,7 +559,7 @@ void init_dictionary(void)
 	dictionary_reset_position = dictionary;
 
 	for (indx = 1; indx < dictionary_indx_max; indx++) {
-		detok_table[indx].next = &detok_table[indx - 1];
+		detok_table[indx].prev = &detok_table[indx - 1];
 	}
 }
 
@@ -553,7 +569,7 @@ void reset_dictionary(void)
 
 	next_t = dictionary;
 	while (next_t != dictionary_reset_position) {
-		next_t = dictionary->next;
+		next_t = dictionary->prev;
 		free(dictionary->name);
 		free(dictionary);
 		dictionary = next_t;
