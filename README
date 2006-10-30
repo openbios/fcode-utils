@@ -1,0 +1,16 @@
+This is the OpenBIOS FCODE suite.
+
+It consists of:
+
+- toke
+- detok
+- romheaders
+- localvalues
+
+NOTE: all parts of the OpenBIOS FCODE suite are GPL v2, except the localvalues
+implementation which is released under the Common Public License (CPL) version 
+1.0 (see: http://www.opensource.org/licenses/cpl1.0.php)
+
+
+For information please contact info@coresystems.de
+

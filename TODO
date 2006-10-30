@@ -1,0 +1,298 @@
+fcode-utils/detok/decode.c
+   Line 46:
+ *
+ *      Still to be done:
+ *          Handling of indent-level is not correct.  Branches should
+ *              balance with their resolvers; constructs like do..loop
+ *              case/of/endof/endcase are a few major examples.
+ *          This will be tricky; the rules need to be carefully thought
+ *              out, and the implementation might be more complex than
+ *              at first meets the eye...
+ *
+
+   Line 280:
+ *
+ *      Still to be done:
+ *          More sophisticated error-checking for invalid offsets.  Look
+ *              at the type of branch, and what should be expected in the
+ *              vicinity of the destination.  (This might be best served
+ *              by a separate routine).
+ *         This might also help with handling the indent-level correctly...
+ *              Also, if indentation were to be handled in this routine,
+ *              there would be no need to return the value of the offset.
+ *
+
+
+fcode-utils/detok/pcihdr.c
+   Line 67:
+ *
+ *      Still to be done:
+ *          Print (as remarks) full descriptions of headers' fields
+ *          Error check for wrong "Format"
+ *          Skip past non-FCode blocks, thru multiple data-blocks
+ *          Recognize PCI header in unexpected place or out-of-place
+ *
+
+   Line 130:
+ *
+ *      Still to be done:
+ *          Error-check; look for inconsistencies:
+ *              Return a Negative Number if data-stream appears to be a PCI
+ *              header, but has erroneous or inconsistent sub-field contents.
+ *              Value and meaning of the Negative Number yet to be defined.
+ *
+
+   Line 188:
+ *
+ *      Still to be done:
+ *          Error-check; look for wrong "Code Type" or other inconsistencies:
+ *              Return a Negative Number if data-stream appears to be a
+ *              valid PCI Data Structure, but has erroneous or inconsistent
+ *              sub-field contents.
+ *              Value and meaning of the Negative Number yet to be defined.
+ *          Skip past non-FCode data-blocks, even multiple blocks
+ *
+
+   Line 364:
+ *
+ *      Still to be done:
+ *          Handle error cases.  At present, neither  is_pci_header()
+ *              nor  is_pci_data_struct()  returns a negative number,
+ *              but when they are modified to do so, we must handle it.
+ *
+
+   Line 442:
+ *
+ *      Still to be done:
+ *          Come up with something more elegant for non-zero filler.
+ *
+
+
+fcode-utils/detok/printformats.c
+   Line 74:
+ *
+ *      Still to be done:
+ *          Define a routine, call it  PrintComment , to print the given
+ *              string surrounded by open-paren-space ... space-close-paren
+ *          Define a single central routine, call it  safe_malloc ,
+ *              to do the test for null and print "No Memory" and exit.
+ *          Define a single central routine, call it  PrintError , to:
+ *              Print the given error message
+ *              Show the input file and line number
+ *              Collect error-flags for failure-exit at end of operation.
+ *
+
+
+fcode-utils/toke/devnode.c
+   Line 67:
+ *
+ *      Still to be done:
+ *          Add a pair of fields to the data-structure for the Input File and
+ *              Line Number where "finish-device" occurred.  When a device-node
+ *              is "finish"ed, do not delete it, but instead fill in those
+ *              fields and the move the node to a separate linked-list.
+ *          When looking whether a word exists in an ancestor-node, also
+ *              check whether it was in a device-node that was finished and
+ *              print both where it was started and where it was finished.
+ *
+
+
+fcode-utils/toke/emit.c
+   Line 34:
+ *
+ *      Still to be done:
+ *          Re-arrange routine and variable locations to clarify the
+ *              functions of this file and its companion, stream.c 
+ *          This file should be concerned primarily with management
+ *              of the Outputs; stream.c should be primarily concerned
+ *              with management of the Inputs.
+ *          Hard to justify, pragmatically, but will make for easier
+ *              maintainability down the proverbial road...
+ *
+
+
+fcode-utils/toke/flowcontrol.c
+   Line 75:
+ *
+ *      Still to be done:
+ *          Correct analysis of Return-Stack usage around Flow-Control
+ *              constructs, including within Do-Loops or before Loop
+ *              Elements like I and J or UNLOOP or LEAVE.
+ *          Similarly, Return-Stack usage around IF ... ELSE ... THEN
+ *              statements needs analysis.  For instance, the following:
+ * 
+ *          blablabla >R  yadayada IF  R> gubble ELSE flubble R>  THEN
+ * 
+ *              is, in fact, correct, while something like:
+ * 
+ *          blablabla >R  yadayada IF  R> gubble THEN
+ * 
+ *              is an error.
+ * 
+ *          Implementing an analysis that would be sufficiently accurate
+ *              to justify reporting an ERROR with certainty (rather than
+ *              a mere WARNING speculatively) would probably require full
+ *              coordination with management of Flow-Control constructs,
+ *              and so is noted here.
+ *
+
+
+fcode-utils/toke/macros.c
+   Line 166:
+ *
+ *      Still to be done:
+ *          If an error is encountered during Macro evaluation, display
+ *              supplemental information giving the name of the Macro 
+ *              being run, and the file and line number in which it was
+ *              defined.
+ *          This will require changes to the way user Macros are added
+ *              and retained, and to the way error messages are displayed.
+ *
+
+
+fcode-utils/toke/nextfcode.c
+   Line 90:
+ *
+ *      Still to be done:
+ *          Detect and report when the Current Range stops overlapping
+ *              one particular Range and starts overlapping another.
+ *
+
+
+fcode-utils/toke/scanner.c
+   Line 1046:
+ *
+ *      Still to be done:
+ *          Better protection against PC pointer-over-run past END.
+ *              Currently, this works, but it's held together by threads:
+ *              Because  init_stream  forces a null-byte at the end of
+ *              the input buffer, parse_number() exits immediately upon
+ *              encountering it.  This situation could be covered more
+ *              robustly...
+ *
+
+   Line 2192:
+ *
+ *      Still to be done:
+ *          Full detection of whether the Return-Stack has been cleared
+ *              when required, including analysis of Return-Stack usage
+ *              within Flow-Control constructs, and before Loop elements...
+ *
+
+   Line 2259:
+ *
+ *      Still to be done:
+ *          Correct analysis of Return-Stack usage around Flow-Control
+ *              constructs.  Consider, for instance, the following:
+ * 
+ *          blablabla >R  yadayada IF  R> gubble ELSE flubble R>  THEN
+ * 
+ *              It is, in fact, correct, but the present scheme would
+ *              tag it as a possible error.  Conversely, something like:
+ * 
+ *          blablabla >R  yadayada IF  R> gubble THEN
+ * 
+ *              would not get tagged, even though it is actually an error.
+ * 
+ *          The current simple scheme also does not cover Return-Stack
+ *              usage within Do-Loops or before Loop elements like I and
+ *              J or UNLOOP or LEAVE.  Implementing something like that
+ *              would probably need to be integrated in with Flow-Control
+ *              constructs, and will be noted in  flowcontrol.c
+ *
+
+   Line 2323:
+ *
+ *      Still to be done:
+ *          Correct analysis of Return-Stack usage...
+ *
+
+   Line 3299:
+ *
+ *      Still to be done:
+ *          If the definer-name is not found, we might still look up
+ *              the target name in the various vocabularies and use
+ *              a phrase for those.  E.g., if it is a valid token,
+ *              we could say it's defined as a "primitive".  (I'm
+ *              not sure what we'd say about an FWord...)
+ *
+
+   Line 4617:
+ *
+ *      Still to be done:
+ *          Correct analysis of Return-Stack usage within Do-Loops
+ *              or before Loop Elements like I and J or UNLOOP or LEAVE.
+ *
+
+
+fcode-utils/toke/stream.c
+   Line 60:
+ *
+ *      Still to be done:
+ *          Re-arrange routine and variable locations to clarify the
+ *              functions of this file and its companion, emit.c 
+ *          This file should be concerned primarily with management
+ *              of the Inputs; emit.c should be primarily concerned
+ *              with management of the Outputs.
+ *          Hard to justify, pragmatically, but will make for easier
+ *              maintainability down the proverbial road...
+ *
+
+   Line 1070:
+ *
+ *      Still to be done:
+ *          Set a flag when carr-ret has been replaced by space;
+ *              when a string crosses a line, if this flag is set,
+ *              issue a warning that an extra space has been inserted.
+ *
+
+
+fcode-utils/toke/toke.c
+   Line 363:
+ *
+ *      Still to be done:
+ *          Devise a syntax to allow the command-line to specify multiple
+ *              input files together with an output file name for each.
+ *          Currently, the syntax allows only one output file name to be
+ *              specified; when multiple input file names are specified,
+ *              the specification of an output file name is disallowed,
+ *              and only the default output file names are permitted.
+ *              While this works around the immediate problem, a more
+ *              elegant solution could be devised...
+ *
+
+
+fcode-utils/toke/usersymbols.c
+   Line 78:
+ *
+ *      Still to be done:
+ *          Convert the handling of user-defined symbols to the T.I.C.
+ *              data-structure and its support routines.  This should
+ *              eliminate any further need of String-Substitution-type
+ *              vocabularies.  User-defined symbols will, however, still
+ *              need to be a separate vocabulary from the Global, because
+ *              they are required to stay in effect for the duration of
+ *              the entire batch of tokenizations...
+ *          (Afterthought:  This is only true for user-defined symbols that
+ *              were created on the command-line; if we ever allow symbols
+ *              to be defined in the Source file, they should be as volatile
+ *              as anything else that comes from a source file...
+ *           Appending source-file-derived user-defined symbols to the Global
+ *              Vocabulary could be a quasi-simple way to accomplish this.)
+ *
+
+   Line 246:
+ *
+ *      Still to be done:
+ *          Hook-in this routine to the processing of:  [']  F[']  H#  FLOAD
+ *              etc., and wherever else it might be needed or useful.
+ *
+
+   Line 316:
+ *
+ *      Still to be done:
+ *          Space the duplicate-name notation evenly; line it up past
+ *               the longest name-with-value.
+ *
+
+
