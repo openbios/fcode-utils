@@ -21,6 +21,8 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
+VERSION:=$(shell grep ^\#.*TOKE_VERSION < toke/toke.c |cut -f2 -d\" )
+
 all:
 	make -C toke
 	make -C detok
@@ -51,6 +53,10 @@ tests: all
 	cp romheaders/romheaders testsuite
 	make -C testsuite all CygTestLogs=`pwd`/testlogs
 
+# lcov required for html reports
+coverage:
+	@testsuite/GenCoverage . fcode-suite-$(VERSION) "FCode suite $(VERSION)"
+	@testsuite/GenCoverage toke toke-$(VERSION) "Toke $(VERSION)"
 
 .PHONY: all clean distclean toke detok romheaders tests
 

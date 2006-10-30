@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SRCDIR=$1
+DSTDIR=$2
+BASENAME=$DSTDIR
+TITLE="$3"
+
+printf "Generating info file..."
+geninfo -t $BASENAME -o $BASENAME.info $SRCDIR 2>/dev/null
+printf "ok\n"
+
+printf "Filtering info file..."
+sed -i "/stat\.h/ {
+N
+N
+N
+N
+d
+}" $BASENAME.info
+printf "ok\n"
+
+genhtml --output-directory $DSTDIR --show-details --highlight --legend --frames --title "$TITLE" $BASENAME.info
+
+
