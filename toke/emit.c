@@ -30,6 +30,19 @@
  *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
  **************************************************************************** */
 
+/* **************************************************************************
+ *
+ *      Still to be done:
+ *          Re-arrange routine and variable locations to clarify the
+ *              functions of this file and its companion, stream.c 
+ *          This file should be concerned primarily with management
+ *              of the Outputs; stream.c should be primarily concerned
+ *              with management of the Inputs.
+ *          Hard to justify, pragmatically, but will make for easier
+ *              maintainability down the proverbial road...
+ *
+ **************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,6 +68,20 @@
  *
  **************************************************************************** */
 
+
+/* **************************************************************************
+ *
+ *      Global Variables Exported:
+ *          opc                       Output Buffer Position Counter
+ *          pci_hdr_end_ob_off        Offsets into Output Buffer of end
+ *                                        of last PCI Header Block structure
+ *            (To help match up the offset printed in Tokenization_error()
+ *              with the offsets shown by the DeTokenizer)
+ *
+ **************************************************************************** */
+
+unsigned int opc                = 0;
+unsigned int pci_hdr_end_ob_off = 0;   /*  0 means "Not initialized"  */
 
 /* **************************************************************************
  *
@@ -113,8 +140,8 @@ extern void increase_output_buffer( void);
 /* **************************************************************************
  *
  *      Function name:  init_emit
- *      Synopsis:       Initialize Local Static Variables before starting
- *                          Output.
+ *      Synopsis:       Initialize Output-related Local Static and Global
+ *                          Variables before starting Output.
  *                      Exposure as Limited as possible.
  *
  **************************************************************************** */
@@ -126,6 +153,8 @@ void init_emit( void)
     fcode_body_ob_off   = -1;
     pci_hdr_ob_off      = -1;
     pci_data_blk_ob_off = -1;
+    opc                 =  0;
+    pci_hdr_end_ob_off  =  0;
     fcode_written       = FALSE;
     haveend             = FALSE;   /*  Get this one too...  */
 }
@@ -462,13 +491,19 @@ static void emit_pci_data_block(void)
  *      Inputs:
  *         Parameters:                   NONE
  *         Global Variables:        
+ *             opc                       Output Buffer Position Counter      
  *             fcode_start_ob_off        Initted if FCode output has begun
  *             noerrors                  The "Ignore Errors" flag
  *
  *      Outputs:
  *         Returned Value:               NONE
  *         Global Variables:    
- *         FCode Output buffer:
+ *            pci_hdr_end_ob_off         Set to the Output Buffer Position
+ *                                           Counter after the PCI Header
+ *         FCode Output buffer      
+ *            :The beginning of the PCI Header will be entered, waiting for
+ *                 the fields that could not be determined until the end
+ *                 to be filled in.
  *
  *      Error Detection:
  *          An attempt to write a PCI Header after FCode output -- either an
@@ -496,6 +531,8 @@ void emit_pcihdr(void)
 	emit_pci_rom_hdr();
 
 	emit_pci_data_block();
+
+	pci_hdr_end_ob_off = opc;
 }
 
 /* **************************************************************************
@@ -561,7 +598,17 @@ void finish_pcihdr(void)
 	
 	pci_hdr_ob_off      = -1;
 	pci_data_blk_ob_off = -1;
+	pci_hdr_end_ob_off  =  0;
 }
+
+
+/* **************************************************************************
+ *
+ *      Function name:  finish_headers
+ *      Synopsis:       Fill-in the fields of the FCode- and PCI- Headers
+ *                      that could not be determined until the end.
+ *
+ *************************************************************************** */
 
 void finish_headers(void)
 {

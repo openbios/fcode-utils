@@ -45,8 +45,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "ticvocab.h"
+
 #include "tokzesc.h"
+#include "ticvocab.h"
 #include "stack.h"
 #include "emit.h"
 #include "stream.h"
@@ -54,6 +55,7 @@
 #include "errhandler.h"
 #include "strsubvocab.h"
 #include "nextfcode.h"
+#include "tracesyms.h"
 
 #undef TOKZTEST     /*  Define for testing only; else undef   */
 #ifdef TOKZTEST         /*  For testing only   */
@@ -215,7 +217,8 @@ static void tokz_esc_emit_byte ( tic_param_t pfield )
  *      Inputs:
  *         Parameters:
  *             the_num           Pointer to where to put the number
- *             the_action        Phrase to be used in ERROR message
+ *             setting_fc        TRUE if number is to be set as next fcode,
+ *                                   FALSE if the number is to be emitted
  *         Data-Stack Items:
  *             Top:              Value to be retrieved
  *
@@ -224,21 +227,44 @@ static void tokz_esc_emit_byte ( tic_param_t pfield )
  *         Supplied Pointers:
  *             *the_num          Value retrieved from the data-stack
  *
+ *      Process Explanation:
+ *          From the value of   setting_fc  we will deduce both the legal
+ *              minimum and the phrase to be used in the ERROR message.
+ *              If the number is to be emitted, it can be any legal FCode
+ *              token number down to  0x10 but if it is to be set, the
+ *              legal minimum is 0x0800.
+ *          In either case, 0x0fff is the legal maximum.
+ *
  *      Error Detection:
  *          If the number on the stack is larger than 16 bits, truncate
  *              it, with a WARNING message.
- *          If the (possibly truncated) number from the stack is larger
- *              than the legal maximum for an FCode (0x0fff), or
- *              less than the legal minimum (0x0800), issue an ERROR,
+ *          If the (possibly truncated) number taken from the stack is
+ *              larger than the legal maximum for an FCode, or if it is
+ *              less than the legal minimum, issue an ERROR message,
  *              leave the_num unchanged and return FALSE.
+ *
+ *      Extraneous Remarks:
+ *          If this function is ever used in more than the two ways allowed
+ *              by the  setting_fc  parameter, then the Right Thing would
+ *              be to define a local ENUM type for the possible uses, and
+ *              use a SWITCH statement to set the internal variables.  (But
+ *              I really don't see any way that could become necessary...)
  *
  **************************************************************************** */
 
-static bool get_fcode_from_stack( u16 *the_num, char *the_action)
+static bool get_fcode_from_stack( u16 *the_num, bool setting_fc)
 {
     bool retval = FALSE;
+    char *the_action = "emit FCode value of";
+    u16 legal_minimum = 0x10;
     long num_on_stk = dpop();
     u16 test_fcode = (u16)num_on_stk;
+
+    if ( setting_fc )
+    {
+        the_action = "set next fcode to";
+	legal_minimum = 0x800;
+    }
     if ( test_fcode != num_on_stk )
     {
         tokenization_error( WARNING,
@@ -246,7 +272,7 @@ static bool get_fcode_from_stack( u16 *the_num, char *the_action)
 		"Truncating to 0x%03x.\n",
 		     strupr(statbuf), num_on_stk, test_fcode);
     }
-    if ( ( test_fcode >= 0x800 ) && ( test_fcode <= 0xfff ) )
+    if ( ( test_fcode >= legal_minimum ) && ( test_fcode <= 0xfff ) )
     {
 	retval = TRUE;
 	*the_num = test_fcode;
@@ -279,7 +305,7 @@ static void tokz_esc_next_fcode( tic_param_t pfield )
 {
     u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, "set next fcode to") )
+    if ( get_fcode_from_stack( &test_fcode, TRUE) )
     {
 	if ( test_fcode == nextfcode )
 	{
@@ -318,7 +344,7 @@ static void tokz_emit_fcode( tic_param_t pfield )
 {
     u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, "Emit FCode value of") )
+    if ( get_fcode_from_stack( &test_fcode, FALSE) )
     {
 	tokenization_error( INFO,
 	    "Emitting FCode value of 0x%x\n", test_fcode);
@@ -462,8 +488,8 @@ static void do_constant ( tic_param_t pfield )
  *      Error Detection:
  *          Failure to allocate memory is a Fatal Error.
  *          Warning on excessively long name
- *          Warning on duplicate name
  *          Name to be defined not in same file, ERROR
+ *              Warning on duplicate name handled by support routine
  *
  *      Process Explanation:
  *          Get the next word, STRDUP it (which implicitly allocates memory). 
@@ -493,11 +519,6 @@ static void create_constant( tic_param_t pfield )
      *      the lines from here to the end of the
      *      routine should be re-factored...
      */
-    trace_creation( CONST, statbuf);
-
-    warn_if_duplicate( statbuf );
-    check_name_length( wlen );
-
     c_name_space = strdup( statbuf );
 
     add_tic_entry(
@@ -505,8 +526,10 @@ static void create_constant( tic_param_t pfield )
 	     do_constant,
 		  (TIC_P_DEFLT_TYPE)valu,
 		       CONST ,
-			   0 , NULL,
+			  0 , FALSE , NULL,
 		               &tokz_esc_vocab );
+
+    check_name_length( wlen );
 
 }
 
@@ -538,7 +561,7 @@ static const char close_paren = ')' ;
  **************************************************************************** */
 
 #define TKZESC_CONST(nam, pval)   \
-                        VALPARAM_TIC(nam, do_constant, pval, CONST )
+                        VALPARAM_TIC(nam, do_constant, pval, CONST, FALSE )
 #define TKZ_ESC_FUNC(nam, afunc, pval, ifunc)   \
                         DUALFUNC_TIC(nam, afunc, pval, ifunc, UNSPECIFIED)
 
@@ -586,6 +609,11 @@ static const tic_hdr_t *built_in_tokz_esc =
  *      Synopsis:       Initialize the "Tokenizer Escape" Vocabulary
  *                          link-pointers dynamically.
  *
+ *      Process Explanation:
+ *          While this is going on, set  in_tokz_esc  to TRUE; clear it
+ *              when done.  This will be used by the  trace_builtin
+ *              routine...
+ *
  **************************************************************************** */
 
 void init_tokz_esc_vocab ( void )
@@ -593,10 +621,12 @@ void init_tokz_esc_vocab ( void )
     static const int tokz_esc_vocab_max_indx =
 	 sizeof(tokz_esc_vocab_tbl)/sizeof(tic_hdr_t) ;
 
+    in_tokz_esc = TRUE;
     tokz_esc_vocab = NULL ;   /*  Belt-and-suspenders...  */
     init_tic_vocab(tokz_esc_vocab_tbl,
                        tokz_esc_vocab_max_indx,
 		           &tokz_esc_vocab );
+    in_tokz_esc = FALSE;
 }
 
 /* **************************************************************************

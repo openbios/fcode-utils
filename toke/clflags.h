@@ -124,6 +124,7 @@ extern bool big_end_pci_image_rev;
 
 extern bool force_tokens_case;
 extern bool force_lower_case_tokens;
+extern bool allow_ret_stk_interp;
 
 extern bool clflag_help;
 

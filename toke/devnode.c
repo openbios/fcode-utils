@@ -580,7 +580,7 @@ bool exists_in_ancestor( char *m_name)
 	}
 	if ( grandpa != NULL )
 	{
-	    char as_what_buf[32] = "";
+	    char as_what_buf[AS_WHAT_BUF_SIZE] = "";
 	    if ( as_a_what( found->fword_defr, as_what_buf) )
 	    {
 		strcat( as_what_buf, " ");

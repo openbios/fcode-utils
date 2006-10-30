@@ -50,6 +50,7 @@
 #include "errhandler.h"
 #include "tokzesc.h"
 #include "conditl.h"
+#include "tracesyms.h"
 
 /* **************************************************************************
  *
@@ -87,9 +88,47 @@
  *          Begin development of implementation of a way to define both (all?)
  *              types of definitions in a single  tic_hdr_t  type vocabulary.
  *
+ *          Wed, 04 Oct 2006 by David L. Paktor
+ *          Issue a message when a name on the trace list is invoked (as well
+ *              as when it is created), but keep a limit on the speed penalty.
+ *              (I.e., don't scan the trace-list for every symbol invoked.)
+ *              We will scan the trace-list for every pre-defined symbol during
+ *              initialization of the built-in vocabularies' lists, but that
+ *              occurs only once...
+ *
  **************************************************************************** */
 
 
+/* **************************************************************************
+ *
+ *          Global Variables Exported
+ *
+ *     scope_is_global      Indication that "global" scope is in effect
+ *
+ *     define_token        Normally TRUE, but if the definition in progress
+ *               occurs inside a control-structure, (which is an Error), we
+ *               make this FALSE.  We will allow the definition to proceed
+ *               (in order to avoid "cascade" errors and so that other errors
+ *               can be recognized normally) but we will use this to suppress
+ *               adding the new definition's token to the vocab.  We also use
+ *               this to suppress the actions of "hide_..." and "reveal..."
+ *               because if the token wasn't added to the vocabulary, there's
+ *               nothing to find that needed to be "hidden"...
+ *
+ **************************************************************************** */
+
+bool scope_is_global = FALSE;
+bool define_token = TRUE;      /*    TRUE = Normal definition process;
+                                *        FALSE when definition is an Error.
+                                *        We enter definition state anyway,
+                                *            but must still suppress:
+                                *        (1) adding an entry for the token
+                                *            to the vocab,
+                                *        (2) "hiding" it at first, and
+                                *        (3) "revealing" it later.
+                                *  
+                                *    Makes for more "normal" error- detection...
+                                */
 
 /* **************************************************************************
  *
@@ -169,6 +208,8 @@
  **************************************************************************** */
 
 /* **************************************************************************
+ *
+ *          Internal Static Variables
  *
  *      We'll be initializing the lists later, but will be referencing
  *          the pointers sooner, so we need to declare the pointers here.
@@ -278,20 +319,20 @@ static void emit_fc_token( tic_param_t pfield)
 #define FC_TOKEN_FUNC  emit_fc_token
 
 #define BUILTIN_FCODE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , UNSPECIFIED )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , UNSPECIFIED, TRUE )
 
 /*  Built-in FCodes with known definers:  */
 #define BI_FCODE_VALUE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VALUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VALUE, TRUE )
 
 #define BI_FCODE_VRBLE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VARIABLE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VARIABLE, TRUE )
 
 #define BI_FCODE_DEFER( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , DEFER )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , DEFER, TRUE )
 
 #define BI_FCODE_CONST( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , CONST )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , CONST, TRUE )
 
 /* **************************************************************************
  *
@@ -322,10 +363,10 @@ static void obsolete_fc_token( tic_param_t pfield)
 #define OBSO_FC_FUNC  obsolete_fc_token
 
 #define OBSOLETE_FCODE( tok, nam)   \
-     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , UNSPECIFIED )
+     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , UNSPECIFIED, TRUE )
 
 #define OBSOLETE_VALUE( tok, nam)   \
-     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , VALUE )
+     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , VALUE, TRUE )
 
 
 /* **************************************************************************
@@ -457,9 +498,6 @@ void skip_string( tic_param_t pfield);
  **************************************************************************** */
 
 static tic_hdr_t **save_device_definitions;
-/* Export the indication that "global" scope is in effect  */
-bool scope_is_global = FALSE;
-
 
 void enter_global_scope( void )
 {
@@ -626,20 +664,24 @@ static tic_hdr_t *save_current = NULL;
  *             name                      The name of the new entry
  *             fc_token                  The new entry's assigned FCode-number
  *             fw_definer                The new entry's definer
- *             define_token              If FALSE, suppress adding the entry,
- *                                           but preserve the side-effect of
- *                                           setting  save_current 
  *         Global Variables:
  *             current_definitions       Pointer to pointer to "tail" of the
  *                                           Vocabulary currently in effect;
  *                                           either Device-node or Global.
+ *             define_token              TRUE = Normal definition process;
+ *                                           FALSE if def'n is an Error.
+ *                                           Suppress adding entry to vocab;
+ *                                           Display "failure" Trace-note
+ *                                           and Duplicate-Name Warning.
  *
  *      Outputs:
  *         Returned Value:               NONE
  *         Global Variables:
  *             *current_definitions    Updated with the new entry
  *         Local Static Variables:
- *             save_current            Pointer to previous entry
+ *             save_current            Saved state of  current_definitions
+ *                                         before the new entry is added,
+ *                                         to permit "hide" and "reveal".
  *         Memory Allocated
  *             For the new entry's copy of the name.
  *         When Freed?
@@ -653,34 +695,38 @@ static tic_hdr_t *save_current = NULL;
  *          All user-defined words have the same action, i.e., emitting
  *              the assigned FCode-number.  The new entry's "parameter
  *              field" size is, of course, zero; the "ignore-function"
- *              is NULL.
+ *              is NULL, and the entry has a single-token FCode number.
  *
  *      Extraneous Remarks:
- *          The  define_token  parameter is a late addition, necessitated
- *              by the decision to continue processing after an erroneous
+ *          The  define_token  input is a late addition, necessitated by
+ *              the decision to continue processing after an erroneous
  *              attempt to create a definition inside a control-structure,
  *              in order to catch other errors. 
  *            
- *
  **************************************************************************** */
 
 void add_to_current( char *name,
                            TIC_P_DEFLT_TYPE fc_token,
-			       fwtoken definer,
-			           bool define_token)
+			       fwtoken definer)
 {
-    save_current = *current_definitions;
     if ( define_token )
 {
 	char *nu_name = strdup( name);
+
+	save_current = *current_definitions;
 	add_tic_entry( nu_name, FC_TOKEN_FUNC, fc_token,
-			   definer, 0 , NULL, current_definitions );
+			   definer, 0 , TRUE , NULL, current_definitions );
+    }else{
+	trace_create_failure( name, NULL, fc_token);
+	warn_if_duplicate( name);
     }
 }
 
 
 void hide_last_colon ( void )
 {
+    if ( define_token )
+    {
     tic_hdr_t *temp_vocab;
 
     /*  The  add_to_current()  function will have been called before this
@@ -692,15 +738,19 @@ void hide_last_colon ( void )
     temp_vocab = save_current ;
     save_current = *current_definitions;
     *current_definitions = temp_vocab;
+    }
 
 }
 
 void reveal_last_colon ( void )
 {
+    if ( define_token )
+    {
     /*  We call this function either when the colon-definition is
      *      completed, or when "recursive"-ness is intentional.
      */
     *current_definitions = save_current ;
+}
 }
 
 
@@ -724,6 +774,15 @@ void reveal_last_colon ( void )
  *             current_definitions        Device-node vocabulary currently
  *                                            in effect.
  *             scope_is_global            TRUE if "global" scope is in effect
+ *             split_alias_message        Message-type for announcement that
+ *                                            the "new" name was created in
+ *                                            a different vocabulary than where
+ *                                            the "old" name was found, if so
+ *                                            be.  (See "Rule 3", below).  An
+ *                                            Advisory, normally, but if either
+ *                                            of the names is being Traced, the
+ *                                            create_split_alias() routine will
+ *                                            change it to a Trace-Note.
  *         Local Static Variables:
  *             global_voc_dict_ptr        "Tail" of Global Vocabulary
  *
@@ -766,35 +825,52 @@ void reveal_last_colon ( void )
  *
  *          And one other thing:
  *              We will always make the alias's  pfld_size  zero.  See the
- *              prolog for  create_tic_alias()  in  ticvocab.c  for details...
+ *              prolog for  create_split_alias()  in  ticvocab.c  for details...
  *
  *      Extraneous Remarks:
- *          I will stretch the rules of well-structured code here, too.
+ *          I tried stretching the rules of well-structured code, but
+ *              I'm finding that there is a _good_reason_ for them...
  *
  **************************************************************************** */
 
 bool create_current_alias( char *new_name, char *old_name )
 {
     bool retval = FALSE;
+    bool split_alias = FALSE;
 
+    /*  Rules 1 & 2 are implemented in the same code.  */
     if ( create_tic_alias( new_name, old_name, current_definitions) )
     {
-	 return ( TRUE );
-    }
-    
+	 retval = TRUE;
+    }else{
     if ( INVERSE(scope_is_global) )
     {
-	tic_hdr_t *found = lookup_core_word( old_name );
-	if ( found != NULL )
-	{
-	    add_tic_entry( new_name, found->funct,
-			       found->pfield.deflt_elem,
-				   found->fword_defr,
-				       0, found->ign_func,
+	    /*  Rule 3.
+	     *  Because the vocab into which the new definition will go is
+	     *      not the same as the one in which the old name was found,
+	     *      we cannot call  create_tic_alias  but must replicate it.
+	     */
+	    /*  Hmmmmmm.....
+	     *  We could get around that by refactoring:  add a parameter,
+	     *      make the vocab to search separate from the one in which to
+	     *      create.  Also, by making it a separate routine, we won't
+	     *      have to disturb the other callers of  create_tic_alias()
+	     *  Yes!  Excellent!  Make it so!
+	     */
+	    split_alias = TRUE;
+	    split_alias_message = INFO;
+	    retval = create_split_alias(
+			 new_name, old_name,
+			     &global_voc_dict_ptr,
 					   current_definitions );
-	    retval = TRUE;
+	}
+    }
+    
+    if ( retval )
 	    {
-		tokenization_error( INFO,
+	if ( split_alias )
+	{
+	    tokenization_error( split_alias_message,
 		   "%s is a Global definition, but its alias, %s, "
 		       "will only be defined %s",
 			   strupr( old_name), new_name,
@@ -802,7 +878,6 @@ bool create_current_alias( char *new_name, char *old_name )
 		show_node_start();
 	    }
 	}
-    }
 
     return ( retval );
 }
@@ -1347,18 +1422,29 @@ tic_hdr_t *lookup_token( char *tname)
  *
  *      Process Explanation:
  *          We cannot rely on the "definer" field to indicate whether
- *              it is a single-token entry; instead, we will look at
- *              the associated function.
- *          Keep this routine here to avoid needing to export the names
- *              of the permitted functions or their synonymous macros.
- *              If we ever need to change it, we can do so at a single
- *              point of maintenance.
- *          Because the entry might have been found in the initial list
- *              of entries to the "FCode-Tokens" list, we need to check
- *              whether the associated function is either the general
- *              single-token emitting function,  FC_TOKEN_FUNC , or the
- *              function  OBSO_FC_FUNC , which presents a message before
- *              emitting, but is still a valid single-token function.
+ *              it is a single-token entry, and there too many possible
+ *              associated functions to be practical; instead we will
+ *              look at the  is_token  flag of the data structure.
+ *
+ *      Revision History:
+ *          Updated Mon, 25 Sep 2006 by David L. Paktor
+ *              Previously operated by examining the function associated
+ *                  with the entry, accepting the general single-token
+ *                  emitting function,  FC_TOKEN_FUNC , and later adding
+ *                  the function  OBSO_FC_FUNC , which presents a message
+ *                  before emitting.  Now the functions that present a
+ *                  message before emitting might be about to proliferate,
+ *                  rendering this implementation strategy impractical (i.e.,
+ *                  ugly to code and too attention-demanding to maintain)
+ *                  Instead, I will introduce a flag into the TIC-entry 
+ *                  data-structure and rely on it.
+ *          Updated Wed, 11 Oct 2006 by David L. Paktor
+ *              Discarded plan to have functions that present a "Trace-Note"
+ *                  message prior to performing their other duties (just too
+ *                  unwieldly all around) in favor of adding a "tracing" flag
+ *                  to the TIC_HDR data-structure.  Could have gone back to
+ *                  doing this the other way, but this is so much neater a
+ *                  solution that I'm keeping it.
  *
  **************************************************************************** */
 
@@ -1367,11 +1453,7 @@ bool entry_is_token( tic_hdr_t *test_entry )
     bool retval = FALSE;
     if ( test_entry != NULL )
     {
-	if ( ( test_entry->funct == FC_TOKEN_FUNC )  ||
-	     ( test_entry->funct ==  OBSO_FC_FUNC )  )
-	{
-	    retval = TRUE;
-	}
+	retval = test_entry->is_token;
     }
     return ( retval );
 }
@@ -1836,9 +1918,10 @@ void init_dictionary( void )
  *      Inputs:
  *         Parameters:                NONE
  *         Global Variables:
+ *             current_device_node        Vocab struct of current dev-node
+ *         Local Static Variables:
  *             global_voc_reset_ptr       Position to which to reset
  *                                            the "Global" Vocabulary
- *             current_device_node        Vocab struct of current dev-node
  *
  *      Outputs:
  *         Returned Value:            NONE

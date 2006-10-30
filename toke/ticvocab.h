@@ -52,18 +52,24 @@
  *               The function may re-cast it as needed.
  *          (5)  The "Definer" of the entry; a member of the subset of FWord-
  *               -tokens that may be Definers.
- *          (6)  A Pointer to a routine to be run when the word is encountered
+ *          (6)  A flag indicating whether the item is one for which a
+ *                      single-token FCode number is assigned. 
+ *          (7)  A Pointer to a routine to be run when the word is encountered
  *               in a Conditional Compilation section that is being ignored.
  *               Certain functions still need to be recognized in that state,
  *               and will require special behaviors; those that can be simply
  *               ignored will have a NULL pointer in this field.  The function
  *               in this field, also, takes the "parameter field" item as its
  *               argument and has no return-value.
- *          (7)  The size of the data pointed to by the "parameter field" item,
+ *          (8)  The size of the data pointed to by the "parameter field" item,
  *               if it is a pointer to allocated data; used to allocate space
  *               for a copy of the p.f. when making an alias, and to indicate
  *               whether the space needs to be freed.  Automatic procedures
  *               are too often fooled, so we don't leave things to chance...
+ *          (9)  A flag, set TRUE if the word is on the Trace List, to indicate
+ *               that an Invocation Message should be displayed when the word
+ *               is invoked.
+ *
  *      To accommodate C's insistence on strong-typing, we might need
  *          to define different "parameter field" structure-types; see
  *          description of "Parameter Field as a union", below.
@@ -176,8 +182,10 @@ typedef struct tic_hdr
 	void            (*funct)();      /*  Function for active processing  */
 	tic_param_t       pfield;
 	fwtoken           fword_defr;    /*  FWord Token of entry's Definer  */
+	bool              is_token;      /*  Is entry a single-token FCode?  */
 	void            (*ign_func)();   /*  Function in "Ignored" segment   */
 	int               pfld_size;
+	bool              tracing;       /*  TRUE if Invoc'n Msg required    */
     }  tic_hdr_t ;
 
 /* **************************************************************************
@@ -203,8 +211,10 @@ typedef struct tic_fwt_hdr
 	void              (*funct)();    /*  Function for active processing  */
 	tic_fwt_param_t     pfield;
 	fwtoken             fword_defr;  /*  FWord Token of entry's Definer  */
+	bool                is_token;    /*  Is entry a single-token FCode?  */
 	void              (*ign_func)(); /*  Function in "Ignored" segment   */
 	int                 pfld_size;
+	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
     }  tic_fwt_hdr_t ;
 
 
@@ -237,8 +247,10 @@ typedef struct tic_mac_hdr
 	void              (*funct)();
 	tic_mac_param_t     pfield;
 	fwtoken             fword_defr;
+	bool                is_token;    /*  Is entry a single-token FCode?  */
 	void              (*ign_func)();
 	int                 pfld_size;
+	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
     }  tic_mac_hdr_t ;
 
 /* **************************************************************************
@@ -265,8 +277,10 @@ typedef struct tic_bool_hdr
 	void               (*funct)();
 	tic_bool_param_t     pfield;
 	fwtoken              fword_defr;
+	bool                is_token;    /*  Is entry a single-token FCode?  */
 	void               (*ign_func)();
 	int                  pfld_size;
+	bool                 tracing;    /*  TRUE if Invoc'n Msg required    */
     }  tic_bool_hdr_t ;
 
 
@@ -292,10 +306,12 @@ typedef struct tic_bool_hdr
  *   Arguments:
  *       nam      (string)         Name of the entry as seen in the source
  *       func     (routine-name)   Name of internal function to call
+ *       The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 #define NO_PARAM_TIC(nam, func )  \
-  { nam , (tic_hdr_t *)NULL , func , { 0 }, UNSPECIFIED , NULL , 0 }
+  { nam , (tic_hdr_t *)NULL , func ,   \
+        { 0 }, UNSPECIFIED , FALSE , NULL , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -307,11 +323,12 @@ typedef struct tic_bool_hdr
  *   Arguments:
  *       nam      (string)         Name of the entry as seen in the source
  *       func     (routine-name)   Name of internal function to call for both
- *
+ *       The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 #define NO_PARAM_IGN(nam, func )  \
-  { nam , (tic_hdr_t *)NULL , func , { 0 }, UNSPECIFIED , func , 0 }
+  { nam , (tic_hdr_t *)NULL , func ,   \
+        { 0 }, UNSPECIFIED , FALSE , func , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -331,14 +348,15 @@ typedef struct tic_bool_hdr
  *       func     (routine-name)   Name of internal function to call
  *       pval     (integer)        The "param field" item
  *       definr   (fword_token)    "Definer" of the entry
+ *       is_tok   (bool)           Is the "param" item a single-token FCode?
  *
  *      The "param field" item will be recast to the required default type.
  *
  **************************************************************************** */
 
-#define VALPARAM_TIC(nam, func, pval, definr )  \
+#define VALPARAM_TIC(nam, func, pval, definr, is_tok )  \
     { nam , (tic_hdr_t *)NULL , func ,  \
-        { (TIC_P_DEFLT_TYPE)(pval) }, definr , NULL , 0 }
+        { (TIC_P_DEFLT_TYPE)(pval) }, definr , is_tok , NULL , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -357,16 +375,17 @@ typedef struct tic_bool_hdr
  *       definr   (fword_token)    "Definer" of the entry
  *
  *      The "param field" item will be recast to the required default type.
+ *      The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 #define DUALFUNC_TIC(nam, afunc, pval, ifunc, definr )  \
     { nam , (tic_hdr_t *)NULL , afunc ,  \
-        { (TIC_P_DEFLT_TYPE)(pval) }, definr , ifunc , 0 }
+        { (TIC_P_DEFLT_TYPE)(pval) }, definr , FALSE , ifunc , 0 , FALSE }
 
 /*  Similar but a  tic_fwt_hdr_t  type structure  */
 #define DUFNC_FWT_PARM(nam, afunc, pval, ifunc, definr )  \
     { nam , (tic_fwt_hdr_t *)NULL , afunc ,  \
-        { (TIC_FWT_P_DEFLT_TYPE)(pval) }, definr , ifunc , 0 }
+        { (TIC_FWT_P_DEFLT_TYPE)(pval) }, definr , FALSE , ifunc , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -381,11 +400,13 @@ typedef struct tic_bool_hdr
  *       definr      (fword_token)    "Definer" of the entry
  *
  *      The "param field" item should not need be recast.
+ *      The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 
 #define FWORD_TKN_TIC(nam, func, fw_tokval, definr )    \
-    { nam , (tic_fwt_hdr_t *)NULL , func , { fw_tokval }, definr , NULL , 0 }
+    { nam , (tic_fwt_hdr_t *)NULL , func , { fw_tokval },  \
+      definr , FALSE , NULL , 0 , FALSE }
 
 /* **************************************************************************
  *          Macro Name:   DUALFUNC_FWT_TIC
@@ -401,10 +422,12 @@ typedef struct tic_bool_hdr
  *       definr      (fword_token)    "Definer" of the entry
  *
  *      The "param field" item should not need be recast.
+ *      The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 #define DUALFUNC_FWT_TIC(nam, afunc, fw_tokval, ifunc, definr )    \
-    { nam , (tic_fwt_hdr_t *)NULL , afunc , { fw_tokval }, definr , ifunc , 0 }
+    { nam , (tic_fwt_hdr_t *)NULL , afunc , { fw_tokval }, \
+      definr , FALSE , ifunc , 0 , FALSE }
 
 /* **************************************************************************
  *          Macro Name:   BUILTIN_MAC_TIC
@@ -420,11 +443,13 @@ typedef struct tic_bool_hdr
  *      The "definer" will be MACRO_DEF
  *      Builtin Macros do not need to be expanded while Ignoring, so
  *          the ign_func will be NULL
+ *      The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 
 #define BUILTIN_MAC_TIC(nam, func, alias )    \
-    { nam , (tic_mac_hdr_t *)NULL , func , { alias }, MACRO_DEF , NULL , 0 }
+    { nam , (tic_mac_hdr_t *)NULL , func , { alias }, \
+      MACRO_DEF , FALSE , NULL , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -441,12 +466,13 @@ typedef struct tic_bool_hdr
  *      For all of the Condtionals, the "Ignoring" function is the same
  *          as the "Active" function.
  *      The "definer" will be COMMON_FWORD
+ *      The item is not one for which single-token FCode number is assigned.
  *
  **************************************************************************** */
 
 #define BUILTIN_BOOL_TIC(nam, func, bool_vbl )    \
     { nam , (tic_bool_hdr_t *)NULL , func , { &bool_vbl },   \
-        COMMON_FWORD , func , 0 }
+        COMMON_FWORD , FALSE , func , 0 , FALSE }
 
 
 /* **************************************************************************
@@ -465,14 +491,15 @@ void add_tic_entry( char *tname,
                              TIC_P_DEFLT_TYPE tparam,
                                  fwtoken fw_defr,
 				     int pfldsiz,
+                                         bool is_single,
                                          void (*ign_fnc)(),
                                              tic_hdr_t **tic_vocab );
 tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab );
 bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab );
 bool handle_tic_vocab( char *tname, tic_hdr_t *tic_vocab );
-bool create_tic_alias( char *new_name,
-                                  char *old_name,
-				      tic_hdr_t **tic_vocab );
+bool create_split_alias( char *new_name, char *old_name,
+                              tic_hdr_t **src_vocab, tic_hdr_t **dest_vocab );
+bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab );
 void reset_tic_vocab( tic_hdr_t **tic_vocab, tic_hdr_t *reset_position );
 
 #endif   /*  _TOKE_TICVOCAB_H    */

@@ -556,8 +556,6 @@ void set_next_fcode( u16  new_fcode)
  *      Inputs:
  *         Parameters:
  *             test_fcode                 FCode to be tested
- *         Global Variables:
- *             
  *         Local Static Variables:
  *             ranges_exist               If not TRUE, no need to test
  *             first_fc_range             Start of Ranges to test
@@ -610,7 +608,7 @@ static fcode_range_t *find_overlap( u16 test_fcode)
  *         Parameters:
  *             
  *         Global Variables:
- *             nextfcode
+ *             nextfcode            The FCode-number to be assigned
  *         Local Static Variables:
  *             ranges_exist         TRUE if FCode Ranges have been created
  *             first_fc_range       First entry in linked list of Ranges.
@@ -618,7 +616,6 @@ static fcode_range_t *find_overlap( u16 test_fcode)
  *
  *      Outputs:
  *         Returned Value:                  NONE
- *         Global Variables:
  *         Local Static Variables:
  *             changes_listed               Reset to FALSE
  *                    One of these two will be set to  nextfcode 

@@ -479,7 +479,7 @@ static bool control_stack_size_test( int min_depth )
 	retval = FALSE;
 	tokenization_error ( TKERROR,
 		"Control-Stack underflow at %s", strupr(statbuf) );
-	in_last_colon();
+	in_last_colon( TRUE);
 
 	not_cs_underflow = FALSE;   /*  See expl'n early on in this file  */
     }

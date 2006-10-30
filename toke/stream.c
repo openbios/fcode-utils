@@ -55,6 +55,21 @@
  *
  **************************************************************************** */
 
+
+/* **************************************************************************
+ *
+ *      Still to be done:
+ *          Re-arrange routine and variable locations to clarify the
+ *              functions of this file and its companion, emit.c 
+ *          This file should be concerned primarily with management
+ *              of the Inputs; emit.c should be primarily concerned
+ *              with management of the Outputs.
+ *          Hard to justify, pragmatically, but will make for easier
+ *              maintainability down the proverbial road...
+ *
+ **************************************************************************** */
+
+
 /* **************************************************************************
  *
  *          Global Variables Exported
@@ -64,7 +79,6 @@
  *              iname                 Current Input File name
  *              lineno                Current Line Number in Input File
  *              ostart                Start of Output Buffer
- *              opc                   FCode Output Buffer Position Counter
  *              oname                 Output File name
  *
  **************************************************************************** */
@@ -86,7 +100,7 @@ static unsigned int ilen;   /*  Length of Input Buffer   */
 /* output pointers */
 u8 *ostart;
 char *oname = NULL;
-unsigned int opc;           /*  Output Position Counter  */
+
 
 /* We want to limit exposure of this v'ble, so don't put it in  .h  file  */
 unsigned int olen;          /*  Length of Output Buffer  */
@@ -1373,7 +1387,6 @@ void init_output( const char *in_name, const char *out_name )
 	olen = OUTPUT_SIZE;
 	ostart=safe_malloc(olen, "initting output buffer");
 
-	opc = 0;
 	init_emit();  /* Init'l'zns needed by our companion file, emit.c  */
 
 	printf("Binary output to %s ", oname);
@@ -1494,7 +1507,10 @@ void increase_output_buffer( void )
 	unsigned int rea_len;
 	olen = olen * 2;
 	rea_len = olen;
-	if ( rea_len == 0 )   rea_len = (unsigned int)-1;
+	if ( rea_len == 0 )
+	{
+	    rea_len = (unsigned int)-1;
+	}
 	tokenization_error( INFO,
 	    "Output Buffer overflow.  "
 		"Relocating and increasing to %d bytes.\n", rea_len);

@@ -44,6 +44,7 @@
 #define  TKERROR     0x04000000
 #define  WARNING     0x00200000
 #define  INFO        0x00010000
+#define  TRACER      0x00008000
 #define  MESSAGE     0x00000800
 #define  P_MESSAGE   0x00000040
 #define  FORCE_MSG   0x00000001
@@ -55,7 +56,7 @@ void print_started_at( char * saved_ifile, unsigned int saved_lineno);
 void just_started_at( char * saved_ifile, unsigned int saved_lineno);
 void where_started( char * saved_ifile, unsigned int saved_lineno);
 void just_where_started( char * saved_ifile, unsigned int saved_lineno);
-void in_last_colon( void );
+void in_last_colon( bool say_in );
 _PTR safe_malloc( size_t size, char *phrase);
 bool error_summary( void );   /*  Return TRUE if OK to produce output. */
 
@@ -88,16 +89,6 @@ bool error_summary( void );   /*  Return TRUE if OK to produce output. */
 #define FFLUSH_STDOUT  /*  Don't need to do anything here  */
 #endif     /*  Switchable error-message destination  */
 
-/*  Some systems don't seem to have  strupr   */
-#ifdef SYS_IS_GNU_Linux
-#define NEEDS_STRUPR
-#endif  /*   SYS_IS_GNU_Linux   */
-#ifdef SYS_IS_AIX
-#define NEEDS_STRUPR
-#endif  /*   SYS_IS_AIX   */
-/*  ???  Should this instead be tuned to Proc'r is PPC ???  Why? */
-
-#ifdef NEEDS_STRUPR
 
 /* **************************************************************************
  *
@@ -113,7 +104,5 @@ extern char *strupper( char *strung);
 extern char *strlower( char *strung);
 #define strlwr strlower
 
-
-#endif  /*   NEEDS_STRUPR   */
 
 #endif  /*   _TOKE_ERRHANDLER_H   */

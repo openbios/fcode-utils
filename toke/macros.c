@@ -57,13 +57,13 @@
 #include <string.h>
 #include <errno.h>
 
+#include "macros.h"
 #include "errhandler.h"
 #include "ticvocab.h"
 #include "stream.h"
 #include "scanner.h"
 #include "dictionary.h"
 #include "devnode.h"
-#include "macros.h"
 
 /* **************************************************************************
  *
@@ -297,7 +297,15 @@ static tic_mac_hdr_t macros_tbl[] = {
 	BUILTIN_MACRO( "blank", 	"bl fill") ,
 	BUILTIN_MACRO( "carret",	"h# d") ,
 	BUILTIN_MACRO( ".d",		"base @ swap h# a base ! . base !") ,
-	BUILTIN_MACRO( "decode-bytes",  ">r over r@ + swap r@ - rot r>") ,
+
+	/*  Note:  The Standard gives:  ">r over r@ + swap r@ - rot r>"
+	 *      as its example of the macro for  decode-bytes
+	 *      But here's one that does the same thing without
+	 *      using return-stack operations.  And it's one step
+	 *      shorter, into the bargain!
+	 */
+	BUILTIN_MACRO( "decode-bytes",  "tuck - -rot 2dup + swap 2swap rot") ,
+
 	BUILTIN_MACRO( "3drop", 	"drop 2drop") ,
 	BUILTIN_MACRO( "3dup",		"2 pick 2 pick 2 pick") ,
 	BUILTIN_MACRO( "erase", 	"0 fill") ,
@@ -473,9 +481,6 @@ void add_user_macro( void)
 	    tic_hdr_t **target_vocab = current_definitions;
 	    if ( in_tokz_esc ) target_vocab = &tokz_esc_vocab ;
 
-            warn_if_duplicate( macroname);
-	    trace_creation( MACRO_DEF, macroname);
-
 	    /*  Tack on a new-line, so that a remark will appear
 	     *      to be properly terminated.   This might trigger
 	     *      an undeserved multi-line warning if the Macro
@@ -489,7 +494,7 @@ void add_user_macro( void)
 
 	    add_tic_entry( macroname, EVAL_MAC_FUNC,
 	                       (TIC_P_DEFLT_TYPE)macrobody,
-			           MACRO_DEF, mac_body_len,
+			           MACRO_DEF, mac_body_len, FALSE,
 				       EVAL_MAC_FUNC, target_vocab );
 	    failure = FALSE;
 	}

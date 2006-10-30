@@ -102,8 +102,13 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include "ticvocab.h"
 #include "errhandler.h"
+#include "tracesyms.h"
+#include "scanner.h"
+#include "devnode.h"
+#include "vocabfuncts.h"
 
 tic_hdr_t *tic_found;
 
@@ -133,8 +138,10 @@ tic_hdr_t *tic_found;
  *              precede this one in the voacbulary) gets entered into
  *              the link-pointer field of the first element of the array.
  *          For this reason, it is important that all TIC_HDR vocabulary
- *              pointers that will be pased to this routine have their
+ *              pointers that will be passed to this routine have their
  *              initial values explicitly declared NULL. 
+ *          If the user has asked to Trace any built-in name, the support
+ *              routine will set its  tracing  field and dispay a message.
  *
  **************************************************************************** */
 
@@ -147,14 +154,16 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
     {
         tic_vocab_tbl[indx].next = *tic_vocab_ptr;
 	*tic_vocab_ptr = &tic_vocab_tbl[indx];
+	trace_builtin( &tic_vocab_tbl[indx]);
     }
 }
 
 
 /* **************************************************************************
  *
- *      Function name:  add_tic_entry
- *      Synopsis:       Add an entry to the given TIC_HDR -type vocabulary
+ *      Function name:  make_tic_entry
+ *      Synopsis:       Construct a new entry to a TIC_HDR -type vocab-list
+ *                          but do not add it to a vocabulary
  *
  *      Inputs:
  *         Parameters:
@@ -163,13 +172,15 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
  *             tparam        The "parameter field" value (may be a pointer)
  *             fw_defr       FWord Token of the entry's Definer
  *             pfldsiz       Size of "param field" (if a pointer to alloc'd mem)
+ *             is_single     TRUE if entry is a single-token FCode
  *             ign_fnc       Pointer to "ignoring" routine for new entry
- *             tic_vocab     Pointer to ptr to "tail" of T.I.C.-type vocab-list 
+ *             trace_this    TRUE if new entry is to be "Traced"
+ *             tic_vocab     Address of the variable that holds the latest
+ *                               pointer to the "tail" of the T.I.C.-type
+ *                               vocab-list to which we are adding.
  *
  *      Outputs:
- *         Returned Value:          NONE
- *         Supplied Pointers:
- *             *tic_vocab           Will point to new entry
+ *         Returned Value:   Pointer to the new entry
  *         Memory Allocated:
  *             For the new entry.
  *         When Freed?
@@ -183,18 +194,27 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
  *              newly-allocated memory-space.  If the parameter field is
  *              actually a pointer, it, too, is presumed to already have
  *              been allocated.
- *          Memory will be allocated for the entry itself; its pointers
- *              will be entered and the given pointer-to-the-tail-of-the-
- *              -vocabulary will be updated to point to the new entry.
+ *          Memory will be allocated for the entry itself and the given
+ *              data will be placed into its fields.
+ *
+ *      Extraneous Remarks:
+ *          This is a retro-fit; it's a factor of the add_tic_entry()
+ *              routine, whose functionality has been expanded to include
+ *              issuing the Trace-Note and Duplication Warning messages.
+ *              Having it separate allows it to be called (internally) by
+ *              create_split_alias(), which has special requirements for
+ *              its call to trace_creation() 
  *
  **************************************************************************** */
 
-void add_tic_entry( char *tname,
+static tic_hdr_t *make_tic_entry( char *tname,
                         void (*tfunct)(),
                              TIC_P_DEFLT_TYPE tparam,
                                  fwtoken fw_defr,
 				     int pfldsiz,
+                                         bool is_single,
                                          void (*ign_fnc)(),
+                                               bool trace_this,
                                              tic_hdr_t **tic_vocab )
 {
     tic_hdr_t *new_entry;
@@ -205,9 +225,89 @@ void add_tic_entry( char *tname,
     new_entry->funct             =  tfunct;
     new_entry->pfield.deflt_elem =  tparam;
     new_entry->fword_defr        =  fw_defr;
+    new_entry->is_token          =  is_single;
     new_entry->ign_func          =  ign_fnc;
     new_entry->pfld_size         =  pfldsiz;
+    new_entry->tracing           =  trace_this;
 
+    return( new_entry);
+}
+
+
+/* **************************************************************************
+ *
+ *      Function name:  add_tic_entry
+ *      Synopsis:       Add an entry to the given TIC_HDR -type vocabulary;
+ *                          issue the Creation Tracing and Duplicate-Name
+ *                          messages as applicable.
+ *
+ *      Inputs:
+ *         Parameters:
+ *             tname             Pointer to space containing entry's new name
+ *             tfunct            Pointer to the routine the new entry will call
+ *             tparam            The "parameter field" value (may be a pointer)
+ *             fw_defr           FWord Token of the entry's Definer
+ *             pfldsiz           Size of "param field" (if a ptr to alloc'd mem)
+ *             is_single         TRUE if entry is a single-token FCode
+ *             ign_fnc           Pointer to "ignoring" routine for new entry
+ *          NOTE:  No  trace_this  param here; it's only in make_tic_entry()
+ *             tic_vocab         Address of the variable that holds the latest
+ *                                   pointer to the "tail" of the T.I.C.-type
+ *                                   vocab-list to which we are adding.
+ *         Global Variables:
+ *             scope_is_global   TRUE if "global" scope is in effect
+ *                                  (passed to "Trace-Creation" message)
+ *
+ *      Outputs:
+ *         Returned Value:       NONE
+ *         Supplied Pointers:
+ *             *tic_vocab        Will point to new entry
+ *         Printout:
+ *             "Trace-Creation" message
+ *
+ *      Error Detection:
+ *          Warning on duplicate name (subject to command-line control)
+ *
+ *      Process Explanation:
+ *          The entry itself will be created by the  make_tic_entry()  routine.
+ *          This routine will test whether the new name is to be Traced,
+ *              and will pass that datum to the  make_tic_entry()  routine.
+ *          If the new name is to be Traced, issue a Creation Tracing message.
+ *              (We want it to appear first).  Use the new entry.
+ *          Because this routine will not be called for creating aliases, the
+ *              second param to  trace_creation()  is NULL.
+ *          Do the duplicate-name check _before_ linking the new entry in to
+ *              the given vocabulary.  We don't want the duplicate-name test
+ *              to find the name in the new entry, only in pre-existing ones...
+ *          Now we're ready to update the given pointer-to-the-tail-of-the-
+ *              -vocabulary to point to the new entry.
+ *
+ **************************************************************************** */
+
+void add_tic_entry( char *tname,
+                        void (*tfunct)(),
+                             TIC_P_DEFLT_TYPE tparam,
+                                 fwtoken fw_defr,
+				     int pfldsiz,
+                                         bool is_single,
+					   void (*ign_fnc)(),
+					       tic_hdr_t **tic_vocab )
+{
+    bool trace_this = is_on_trace_list( tname);
+    tic_hdr_t *new_entry = make_tic_entry( tname,
+			       tfunct,
+			           tparam,
+				       fw_defr, pfldsiz,
+				           is_single,
+					       ign_fnc,
+						   trace_this,
+						       tic_vocab );
+
+    if ( trace_this )
+    {
+	trace_creation( new_entry, NULL, scope_is_global);
+    }
+    warn_if_duplicate( tname);
     *tic_vocab = new_entry;
 
 }
@@ -221,6 +321,7 @@ void add_tic_entry( char *tname,
  *         Parameters:
  *             tname                The "target" name for which to look
  *             tic_vocab            Pointer to the T. I. C. -type vocabulary
+ *                                      in which to search
  *
  *      Outputs:
  *         Returned Value:          Pointer to the relevant entry, or
@@ -229,8 +330,8 @@ void add_tic_entry( char *tname,
  *      Extraneous Remarks:
  *          We don't set the global  tic_found  here because this routine
  *              is not always called when the found function is going to
- *              be executed; sometimes it is called for error-detection,
- *              for instance...
+ *              be executed; sometimes it is called for error-detection;
+ *              for instance, duplicate-name checking...
  *
  **************************************************************************** */
  
@@ -282,6 +383,99 @@ bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
 
 /* **************************************************************************
  *
+ *      Function name:  create_split_alias
+ *      Synopsis:       Create an Alias in one TIC_HDR -type vocabulary
+ *                          for a word in (optionally) another vocabulary.
+ *                          Return a "success" flag.
+ *                          This is the work-horse for  create_tic_alias()
+ *
+ *      Associated FORTH word:                 ALIAS
+ *
+ *      Inputs:
+ *         Parameters:
+ *             old_name             Name of existing entry
+ *             new_name             New name for which to create an entry
+ *             *src_vocab           Pointer to the "tail" of the "Source"
+ *                                      TIC_HDR -type vocab-list 
+ *             *dest_vocab          Pointer to the "tail" of the "Destination"
+ *                                      TIC_HDR -type vocab-list 
+ *
+ *      Outputs:
+ *         Returned Value:          TRUE if  old_name  found in "Source" vocab
+ *         Supplied Pointers:
+ *             *dest_vocab          Will be updated to point to the new entry
+ *         Memory Allocated:
+ *             For the new entry, by the support routine.
+ *         When Freed?
+ *             When reset_tic_vocab() is applied to "Destination" vocab-list.
+ *         Printout:
+ *             "Trace-Creation" message
+ *
+ *      Error Detection:
+ *          Warning on duplicate name (subject to command-line control)
+ *
+ *      Process Explanation:
+ *          Both the "old" and "new" names are presumed to already point to
+ *              stable, freshly allocated memory-spaces.
+ *          Even if the "old" entry's  pfld_size  is not zero, meaning its
+ *              param-field is a pointer to allocated memory, we still do
+ *              not need to copy it into a freshly allocated memory-space,
+ *              as long as we make the new alias-entry's  pfld_size  zero:
+ *              the reference to the old space will work, and the old
+ *              entry's param-field memory space will not be freed with
+ *              the alias-entry but only with the "old" entry.
+ *          We will do both the "Creation-Tracing" announcement and the
+ *              Duplicate Name Warning here.  "Tracing" happens either if
+ *              the entry for the old name has its  tracing  flag set, or
+ *              if the new name is on the trace-list.  The "source" vocab
+ *              and the "dest" vocab can only be different when the "old"
+ *              name has defined Global scope.  We will pass that along
+ *              to the  trace_creation()  routine.
+ *          We're doing the "Tracing" and Duplicate-Name functions because
+ *              we're applying the "Tracing" message to the "old" name's
+ *              entry.  Because of this, we must call  make_tic_entry()  to
+ *              bypass  add_tic_entry(), which now does its own "Tracing"
+ *              and Duplicate-Name functions on the new entry.
+ *
+ **************************************************************************** */
+
+bool create_split_alias( char *new_name, char *old_name,
+                              tic_hdr_t **src_vocab, tic_hdr_t **dest_vocab )
+{
+    tic_hdr_t *found ;
+    bool retval = FALSE;
+
+    found = lookup_tic_entry( old_name, *src_vocab );
+    if ( found != NULL )
+    {
+	bool trace_it = found->tracing;
+	if ( ! trace_it )
+	{
+	    trace_it = is_on_trace_list( new_name);
+	}
+	if ( trace_it )
+	{
+	    bool old_is_global = BOOLVAL( src_vocab != dest_vocab );
+	    trace_creation( found, new_name, old_is_global);
+	}
+	warn_if_duplicate( new_name);
+
+	*dest_vocab = make_tic_entry( new_name,
+			   found->funct,
+			   found->pfield.deflt_elem,
+				   found->fword_defr, 0,
+			               found->is_token,
+					   found->ign_func,
+					       trace_it,
+						   dest_vocab );
+	retval = TRUE;
+    }
+
+    return ( retval );
+}
+
+/* **************************************************************************
+ *
  *      Function name:  create_tic_alias
  *      Synopsis:       Create an Alias in a TIC_HDR -type vocabulary
  *                          Return a "success" flag.
@@ -305,34 +499,14 @@ bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
  *             When reset_tic_vocab() is applied to the same vocab-list.
  *
  *      Process Explanation:
- *          Both the "old" and "new" names are presumed to already point to
- *              stable, freshly allocated memory-spaces.
- *          Even if the "old" entry's  pfld_size  is not zero, meaning its
- *              param-field is a pointer to allocated memory, we still do
- *              not need to copy it into a freshly allocated memory-space,
- *              as long as we make the new alias-entry's  pfld_size  zero:
- *              the reference to the old space will work, and the old
- *              entry's param-field memory space will not be freed with
- *              the alias-entry but only with the "old" entry.
- *
+ *          The given vocabulary is both the "Source" and the "Destination".
+ *              Pass them both to  create_split_alias.
+
  **************************************************************************** */
 
 bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab )
 {
-    tic_hdr_t *found ;
-    bool retval = FALSE;
-
-    found = lookup_tic_entry( old_name, *tic_vocab );
-    if ( found != NULL )
-    {
-	add_tic_entry( new_name, found->funct,
-			   found->pfield.deflt_elem,
-			       found->fword_defr,
-			           0, found->ign_func, tic_vocab );
-	retval = TRUE;
-    }
-
-    return ( retval );
+    return ( create_split_alias( new_name, old_name, tic_vocab, tic_vocab ) );
 }
 
 

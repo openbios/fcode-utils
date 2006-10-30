@@ -46,7 +46,8 @@
 #include "stack.h"
 #include "emit.h"
 
-#define TOKE_VERSION "1.0.1"
+#define TOKE_VERSION "1.0.2"
+#define TOKE_COPYRIGHT_DATE "2001-2006"
 
 #include "vocabfuncts.h"
 #include "scanner.h"
@@ -102,8 +103,8 @@ static void print_copyright(void)
 	printf( "Welcome to toke - OpenBIOS tokenizer v" TOKE_VERSION "\n"
 		CORE_COPYR "\n" IBM_COPYR "\n"
 		"This program is free software; you may redistribute it "
-		"under the terms of\nthe GNU General Public License v2. This "
-		"program has absolutely no warranty.\n\n");
+		"under the terms of\nthe GNU General Public License v2. "
+		"This program has absolutely no warranty.\n\n");
 #ifdef DEVEL
         /*  Temporary hack during development... */
 	printf( "\tTokenizer Compiled " DATE_STAMP "\n" );
@@ -352,6 +353,7 @@ static void get_args( int argc, char **argv )
 	    list_cl_flag_settings();
 	    display_include_list();
 	}
+	show_trace_list();
 	save_cl_flags();
 }
 
@@ -377,6 +379,8 @@ int main(int argc, char **argv)
 
 	print_copyright();
 	get_args( argc, argv );
+
+	init_error_handler();
 
 	init_stack();
 	init_dictionary();

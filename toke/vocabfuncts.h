@@ -47,6 +47,8 @@
  **************************************************************************** */
 
 extern bool scope_is_global;
+extern bool define_token;
+
 
 /* ************************************************************************** *
  *
@@ -66,8 +68,7 @@ bool exists_in_current( char *tname);
 tic_hdr_t *lookup_in_dev_node( char *tname);
 void add_to_current( char *name,
                            TIC_P_DEFLT_TYPE fc_token,
-			       fwtoken definer,
-			           bool define_token);
+			       fwtoken definer);
 void hide_last_colon ( void );
 void reveal_last_colon ( void );
 bool create_current_alias( char *new_name, char *old_name );

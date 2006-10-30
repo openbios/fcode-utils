@@ -61,6 +61,13 @@ extern bool incolon;	     /*  TRUE if inside a colon definition    */
 extern bool haveend;	     /*  TRUE if the "end" code was read.     */
 extern int do_loop_depth;    /*  How deep we are inside DO ... LOOP variants */
 
+/*  State of headered-ness for name-creation  */
+typedef enum headeredness_t {
+       FLAG_HEADERLESS ,
+       FLAG_EXTERNAL ,
+       FLAG_HEADERS }  headeredness ;
+extern headeredness hdr_flag;
+
 /*  For special-case error detection or reporting */
 extern int lastcolon;	/*  Loc'n in output stream of latest colon-def'n.  */
 			/*  Used for error-checking of IBM-style Locals    */
@@ -69,6 +76,10 @@ extern char *last_colon_filename;      /*  File where last colon-def'n made  */
 extern unsigned int last_colon_lineno; /*  Line number of last colon-def'n   */
 extern bool report_multiline;          /*  False to suspend multiline warning */
 extern unsigned int last_colon_abs_token_no;
+
+           /*  Shared phrases   */
+extern char *in_tkz_esc_mode;
+extern char *wh_defined; 
 
 /* ************************************************************************** *
  *
@@ -101,23 +112,27 @@ bool as_a_what( fwtoken definer, char *as_what);
 tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 );
 bool word_exists( char *stat_name, char **where_pt1, char **where_pt2 );
 void warn_if_duplicate ( char *stat_name);
-void trace_creation( fwtoken definer, char *nu_name);
 void tokenize_one_word( signed long wlen );
 void check_name_length( signed long wlen );
+bool definer_name(fwtoken definer, char **reslt_ptr);
 
 void	tokenize( void );
 
 /* **************************************************************************
  *
- *          Macro Name:   FUNC_CPY_BUF_SIZE
- *                        Size of a temporary buffer to retain a copy of
- *                        a function name taken from statbuf, when statbuf
- *                        will be used to return a value, but the function
- *                        name might still be needed for an error message.
+ *          Macros:
+ *    FUNC_CPY_BUF_SIZE   Recommended size of a temporary buffer to retain
+ *                        a copy of a function name taken from statbuf,
+ *                        when  statbuf  will be used to return a value,
+ *                        but the function name might still be needed for
+ *                        an error message.
+ *    AS_WHAT_BUF_SIZE    Recommended size of the buffer passed to the
+ *                        as_a_what() routine.
  *
  **************************************************************************** */
 
 #define FUNC_CPY_BUF_SIZE  40
 
+#define AS_WHAT_BUF_SIZE   32
 
 #endif   /*  _TOKE_SCANNER_H    */

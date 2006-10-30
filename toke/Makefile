@@ -29,7 +29,7 @@ STRIP	= strip
 INCLUDES = -I../shared
 
 # Normal flags
-CFLAGS  = -O2 -Wall -Wno-pointer-sign -fno-strict-aliasing -DSYS_IS_GNU_Linux
+CFLAGS  = -O2 -Wall -Wno-pointer-sign -fno-strict-aliasing 
 LDFLAGS =
 
 # Coverage:

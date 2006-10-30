@@ -104,6 +104,7 @@ bool verbose_dup_warning = TRUE ;
 bool obso_fcode_warning = TRUE ;
 bool trace_conditionals = FALSE ;
 bool big_end_pci_image_rev = FALSE ;
+bool allow_ret_stk_interp = TRUE ;
 
 /*  And one to trigger a "help" message  */
 bool clflag_help = FALSE;
@@ -241,6 +242,11 @@ static const cl_flag_t cl_flags_list[] = {
 	"\t",
 	    "Save the Vendor's Rev Level field of the PCI Header"
 		" in Big-Endian format" } ,
+
+  { "Ret-Stk-Interp",
+        &allow_ret_stk_interp,
+	"\t\t",
+	    "Allow Return-Stack Operations during Interpretation" } ,
 
 
   /*  Keep the "help" pseudo-flag last in the list  */

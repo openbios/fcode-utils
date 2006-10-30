@@ -78,15 +78,18 @@ static const char* local_op = "@";   /*  Initially Fetch  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "parselocals.h"
 #include "ticvocab.h"
 #include "dictionary.h"
 #include "scanner.h"
-#include "parselocals.h"
 #include "errhandler.h"
 #include "clflags.h"
 #include "stream.h"
+#include "emit.h"
 #include "devnode.h"
 #include "flowcontrol.h"
+#include "tracesyms.h"
 
 /* **************************************************************************
  *
@@ -335,8 +338,8 @@ static void add_local( TIC_P_DEFLT_TYPE lnum, char *lname)
 
     lnamecopy = strdup( lname);
     add_tic_entry( lnamecopy, invoke_local, lnum,
-		       LOCAL_VAL, 0, NULL, &local_names );
-    trace_creation( LOCAL_VAL, lname);
+		       LOCAL_VAL, 0, FALSE,  NULL,
+			       &local_names );
 }
 
 
@@ -423,7 +426,7 @@ static bool gather_locals( bool initted, int *counter )
 		    tokenization_error ( TKERROR,
 		        "Excess separator -- %s -- found "
 			    "in Local-Values declaration", statbuf);
-		    in_last_colon();
+		    in_last_colon( TRUE);
 		    continue;
 		}
 	    }
@@ -570,7 +573,7 @@ static bool error_check_locals ( void )
 	if ( last_local_colon == lastcolon )
 	{
 	    tokenization_error ( TKERROR, "Excess Locals Declaration");
-	    in_last_colon();
+	    in_last_colon( TRUE);
 	    retval = TRUE;
 	}else{
             last_local_colon = lastcolon;

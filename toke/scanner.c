@@ -82,6 +82,9 @@ bool incolon      = FALSE;   /*  TRUE if inside a colon definition    */
 bool haveend      = FALSE;   /*  TRUE if the "end" code was read.     */
 int do_loop_depth = 0;       /*  How deep we are inside DO ... LOOP variants  */
 
+/*  State of headered-ness for name-creation  */
+headeredness hdr_flag = FLAG_HEADERLESS ;  /*  Init'l default state  */
+
 /*  Used for error-checking of IBM-style Locals  */
 int lastcolon;   /*  Location in output stream of latest colon-definition. */
 
@@ -91,6 +94,10 @@ char *last_colon_filename = NULL;  /*  File where last colon-def'n made     */
 unsigned int last_colon_lineno;    /*  Line number of last colon-def'n      */
 bool report_multiline = TRUE;      /*  False to suspend multiline warning   */
 unsigned int last_colon_abs_token_no;
+
+           /*  Shared phrases                                               */
+char *in_tkz_esc_mode = "in Tokenizer-Escape mode.\n";
+char *wh_defined      = ", which is defined as a ";
 
 /* **************************************************************************
  *  Local variables
@@ -102,13 +109,6 @@ static bool do_not_overload = TRUE ;  /*  False to suspend dup-name-test     */
 static bool got_until_eof = FALSE ;   /*  TRUE to signal "unterminated"      */
 
 static unsigned int last_colon_do_depth = 0;
-
-/*  State of headered-ness for name-creation  */
-typedef enum headeredness_t {
-       FLAG_HEADERLESS ,
-       FLAG_EXTERNAL ,
-       FLAG_HEADERS }  headeredness ;
-static headeredness hdr_flag = FLAG_HEADERLESS ;  /*  Init'l default state  */
 
 /*  Local variables having to do with:                                      */
 /*       ...  the state of the tokenization                                 */
@@ -132,9 +132,6 @@ static bool dev_change_instance_warning = TRUE;
 
            /*  Has a gap developed between "instance" and its application?  */
 static bool instance_definer_gap = FALSE;
-
-           /*  Shared phrases                                               */
-static char *in_tkz_esc_mode = "in Tokenizer-Escape mode.\n";
 
 
 /* **************************************************************************
@@ -821,7 +818,7 @@ void warn_unterm( int severity, char *something, unsigned int saved_lineno)
 	unterm_is_colon = FALSE;
     }else{
 	tokenization_error( severity, "Unterminated %s", something);
-	in_last_colon();
+	in_last_colon( TRUE);
     }
     lineno = tmp;
 }
@@ -1349,7 +1346,8 @@ static signed long get_string( bool pack_str)
 	 *      -delimiting whitespace character.  Regard any sub-
 	 *      sequent whitespace characters as part of the string
 	 */
-	if (*pc++=='\n') lineno++;
+	if ( *pc == '\n' ) lineno++;
+	pc++;
 
 	got_until_eof = TRUE ;
 
@@ -1564,7 +1562,8 @@ static void handle_user_message( char delim, bool print_it )
 	{
 	    if ( *pc != '\n') pc++;
 	}else{
-		if (*pc++=='\n') lineno++;
+	    if ( *pc == '\n' ) lineno++;
+	    pc++;
 	    multiline_start = lineno;
 	    check_multiline = TRUE;
 	}
@@ -1914,7 +1913,7 @@ void exit_scanner(void)
  *
  *      Outputs:
  *         Returned Value:               None
- *         Local Static Variables:
+ *         Global Variables:
  *             hdr_flag                  Adjusted to new setting
  *
  *      Process Explanation:
@@ -2161,7 +2160,7 @@ static void must_be_deep_in_do( int how_deep )
 
 	tokenization_error( TKERROR,
 	    "%s outside of  %s  structure", strupr(statbuf), deep_do);
-	in_last_colon();
+	in_last_colon( TRUE);
     }
 
 }
@@ -2288,7 +2287,7 @@ static void ret_stk_balance_rpt( char *before_what, bool clear_it)
 
 	tokenization_error( WARNING,
 	    "Possible Return-Stack %s before %s", what_flow, what_phr);
-	in_last_colon();
+	in_last_colon( TRUE);
 
 	if ( clear_it )
 	{
@@ -2335,7 +2334,7 @@ static void ret_stk_access_rpt( void)
 	    "Possible Return-Stack access attempt by %s "
 		"without value having been placed there",
 		strupr(statbuf) );
-	in_last_colon();
+	in_last_colon( TRUE);
     }
 }
 
@@ -2462,7 +2461,7 @@ void check_name_length( signed long wlen )
  *
  **************************************************************************** */
 
-static bool definer_name(fwtoken definer, char **reslt_ptr)
+bool definer_name(fwtoken definer, char **reslt_ptr)
 {
     bool retval = TRUE;
     switch (definer)
@@ -2532,6 +2531,11 @@ static bool definer_name(fwtoken definer, char **reslt_ptr)
  *          The added text will not have spaces before or after; if any
  *              are needed, they, too, are the responsibility of the
  *              calling routine.  The return value gives a helpful clue.
+ *
+ *      Extraneous Remarks:
+ *          We define a Macro -- kept in scanner.h --that will give the
+ *             recommended length for the buffer passed to this routine.
+ *             It will be called  AS_WHAT_BUF_SIZE 
  *
  **************************************************************************** */
 
@@ -2639,7 +2643,7 @@ bool as_a_what( fwtoken definer, char *as_what)
  *
  **************************************************************************** */
 
-static char lookup_where_pt1_buf[32];
+static char lookup_where_pt1_buf[AS_WHAT_BUF_SIZE];
 
 tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
 {
@@ -2883,7 +2887,10 @@ static void not_in_dict( char *stat_name)
  *
  *      Outputs:
  *         Returned Value:              NONE
- *         Printout:          Error message.  Possible Advisory about
+ *         Printout:
+ *             Error message.
+ *             Possible Advisory about where the word might be found.
+ *             Trace-Note, if the word was on the Trace-List
  *
  *      Error Detection:
  *          Error was detected by the calling routine...
@@ -2910,6 +2917,8 @@ static void tokenized_word_error( char *stat_name)
     
     bool sav_in_tokz_esc = in_tokz_esc;
     in_tokz_esc = INVERSE(sav_in_tokz_esc);
+
+    traced_name_error( stat_name);
 
     found_somewhere = word_exists( stat_name, &where_pt1, &where_pt2);
     if ( found_somewhere )
@@ -3073,88 +3082,6 @@ static void validate_instance(fwtoken definer)
 
 /* **************************************************************************
  *
- *      Function name:  trace_creation
- *      Synopsis:       If the word being created is on the Trace List,
- *                          display the appropriate message
- *
- *      Inputs:
- *         Parameters:
- *             definer                 Internal token for the defining-word
- *             nu_name                 The word being created
- *         Global Variables:
- *             verbose                 No point in doing all this if we're
- *                                         not showing the message anyway...
- *             in_tokz_esc             TRUE if we are in Tokenizer-Escape mode
- *             scope_is_global         TRUE if "global" scope is in effect
- *             current_device_node     Current dev-node data-struct
- *
- *      Outputs:
- *         Returned Value:             NONE
- *         Printout:
- *             Advisory Message, if the word is on the Trace List.
- *
- *      Process Explanation:
- *          The order of scope-checking is important:
- *              A Local has no scope beyond the definition in which it occurs.
- *              Tokenizer-Escape mode supercedes "Normal" mode, and renders
- *                  moot the differences between Global and Device scope.
- *              Global scope is mutually exclusive with Device scope.
- *              Device scope needs to identify where the Current device-node
- *                  began.
- *
- **************************************************************************** */
-
-void trace_creation( fwtoken definer, char *nu_name)
-{
-    if ( verbose )
-    {
-	if ( is_on_trace_list( nu_name) )
-	{
-            char  as_what[96] = "";
-	    bool show_last_colon = BOOLVAL( definer == LOCAL_VAL);
-
-	    as_a_what( definer, as_what);  /*  No need to check return value. */
-
-	    /*  Scope-checking starts here, unless  show_last_colon  is TRUE.
-	     *  Come out of this with  as_what[]  filled up and
-	     *      terminated with a new-line, if appropriate,
-	     */
-	    while ( ! show_last_colon )
-	    {
-		strcat( as_what, " ");
-
-		if ( in_tokz_esc )
-		{
-		    strcat( as_what, in_tkz_esc_mode);
-		    break;
-		}
-
-		if ( scope_is_global )
-		{
-		    strcat( as_what, "with Global scope.\n");
-		}else{
-		    /*  In Device scope.  Show the Current node.   */
-		    strcat( as_what, in_what_node( current_device_node));
-		}
-		break;
-
-	    }   /*  Destination of BREAKs ...   */
-
-	    tokenization_error(INFO, "Creating %s %s", nu_name, as_what);
-
-	    if ( show_last_colon )
-	    {
-		in_last_colon();
-	    }else{
-		show_node_start();
-	    }
-
-	}
-    }
-}
-
-/* **************************************************************************
- *
  *      Function name:  create_word
  *      Synopsis:       
  *
@@ -3180,6 +3107,15 @@ void trace_creation( fwtoken definer, char *nu_name)
  *             nextfcode           Incremented  (by bump_fcode() )
  *             statbuf             Advanced to next symbol; must be re-read
  *             pc                  Advanced, then restored to previous value
+ *             define_token        Normally TRUE.  Made FALSE if the definition
+ *                                     occurs inside a control-structure, (which
+ *                                     is an Error); we allow the definition to
+ *                                     proceed (so as to avoid "cascade" errors
+ *                                     and catch other errors normally) but we
+ *                                     suppress adding its token to the vocab,
+ *                                     "hiding" it and "revealing" it (because
+ *                                     there's nothing to hide).
+ *             NOTE:  Make this a Global.  Use it in the routines it controls...
  *         Memory Allocated
  *             Copy of the name being defined, by support routine.
  *             Copy of input-source file name, for error-reporting
@@ -3249,7 +3185,8 @@ static bool create_word(fwtoken definer)
     {
 	char defn_type_buffr[32] = "";
 	unsigned int old_lineno = lineno;    /*  For error message  */
-	bool define_token = TRUE;
+
+	define_token = TRUE;
 
 	{   /*  Set up definition-type text for error-message */
 
@@ -3280,19 +3217,16 @@ static bool create_word(fwtoken definer)
 	}else{
 	    bool emit_token_name = TRUE;
 
-	    /*  Handle Tracing of new definitions  */
-	    trace_creation( definer, statbuf);
-
 	    /*  Other Error or Warnings as applicable  */
 	    validate_instance( definer);
-	    warn_if_duplicate( statbuf);
-	    check_name_length( wlen);
 
 	    /*  Bump FCode; error-check as applicable  */
 	    assigning_fcode();
 
 	    /*  Define the new token, unless disallowed  */
-	    add_to_current( statbuf, nextfcode, definer, define_token);
+	    add_to_current( statbuf, nextfcode, definer);
+
+	    check_name_length( wlen);
 
 	    /*  Emit appropriate FCodes:  Type of def'n,   */
 	    switch ( hdr_flag )
@@ -3375,7 +3309,7 @@ static bool create_word(fwtoken definer)
 static void cannot_apply( char *func_nam, char *targ_nam, fwtoken defr)
 {
     char *defr_name = "" ;
-    const char *defr_phrase = ", which is defined as a " ;
+    char *defr_phrase = wh_defined ;
 
     if ( ! definer_name(defr, &defr_name) )
     {
@@ -3797,24 +3731,29 @@ void fcode_ender(void)
  *      Outputs:
  *         Returned Value:            TRUE if successful (i.e., no error)
  *         Supplied Pointers:
- *             *tok_entry             The token entry, if no error
+ *             *tok_entry             The token entry, if no error.
+ *                                        Unchanged if error.
  *         Global Variables:
  *             statbuf                The next word in the input stream
  *             pc                     Restored to previous value if error
+ *         Other Effects:
+ *             Display Invocation Message if entry found and is being Traced
  *
  *      Error Detection:
  *          The next word in the input stream is expected to be on the
  *              same line as the directive.  The  get_word_in_line()
  *              routine will check for that.
- *          If the next word in the input stream is not a symbol
- *              for which a single-token FCode number is assigned,
- *              report an ERROR and restore PC to its previous value.
+ *          If the next word in the input stream is a known symbol, but
+ *              not one for which a single-token FCode number is assigned,
+ *              report an ERROR and restore PC to its previous value.  The
+ *              supplied pointer  tok_entry  will remain unaltered.
  *
  **************************************************************************** */
 
 static bool get_token(tic_hdr_t **tok_entry)
 {
     bool retval = FALSE;
+    tic_hdr_t *found;
     u8 *save_pc;
 
     /*  Copy of command being processed, for error message  */
@@ -3837,8 +3776,8 @@ static bool get_token(tic_hdr_t **tok_entry)
 	 *      need to search again, specifically within the list
 	 *      of FCode Tokens.
 	 */
-	*tok_entry = lookup_with_definer( statbuf, &defr);
-	if ( *tok_entry != NULL )
+	found = lookup_with_definer( statbuf, &defr);
+	if ( found != NULL )
 	{
 	    /*  Built-in FWords can be uniquely identified by their
 	     *      definer,  BI_FWRD_DEFN .  The definer for "shared"
@@ -3848,15 +3787,19 @@ static bool get_token(tic_hdr_t **tok_entry)
 	     */
 	    if ( defr == BI_FWRD_DEFN )
 	    {
-	        *tok_entry = lookup_token( statbuf);
-		retval = BOOLVAL( *tok_entry != NULL );
+	        found = lookup_token( statbuf);
+		retval = BOOLVAL( found != NULL );
 	    }else{
-		retval = entry_is_token( *tok_entry);
+		retval = entry_is_token( found);
 	    }
 	}
 
-	if ( INVERSE( retval) )
+	handle_invocation( found);
+
+	if ( retval)
 	{
+	    *tok_entry = found;
+	}else{
 	    cannot_apply( cmnd_cpy, strupr(statbuf), defr );
 	    pc = save_pc;
 	}
@@ -4180,9 +4123,7 @@ static bool abort_quote( fwtoken tok)
  *             Two words will be read.
  *
  *      Outputs:
- *         Returned Value:            TRUE if succeeded.
- *         Global Variables:    
- *             statbuf                New name will be copied back into here.
+ *         Returned Value:            NONE
  *         Memory Allocated
  *             The two words will be copied into freshly-allocated memory 
  *                 that will be passed to the create_..._alias()  routine.
@@ -4195,16 +4136,15 @@ static bool abort_quote( fwtoken tok)
  *          If the ALIAS command was given during colon-definition, that
  *              can be handled by this tokenizer, but it is not supported
  *              by IEEE 1275-1994.  Issue a WARNING.
- *          If the new name is a copy of an existing word-name, issue a warning.
  *          If the word to which an alias is to be created does not exist
  *              in the appropriate mode -- relative to "Tokenizer-Escape" --
  *              that is an ERROR.
  *          If "instance" is in effect, the ALIAS command is an ERROR.
+ *          Duplicate-name Warning is handled by support-routine.
  *
  *      Process Explanation:
  *          Get two words -- the new name and the "old" word -- from the
  *              same line of input as the ALIAS command.
- *          Copy the new name back into statbuf for use in trace_creation.
  *          Determine whether or not we are in "Tokenizer-Escape" mode.
  *              Subsequent searches will take place in that same mode.
  *          If the "new" name already exists, issue a warning.
@@ -4234,10 +4174,15 @@ static bool abort_quote( fwtoken tok)
  *      Revision History:
  *          Updated Tue, 10 Jan 2006 by David L. Paktor
  *              Convert to  tic_hdr_t  type vocabularies.
+ *          Updated Fri, 22 Sep 2006 by David L. Paktor
+ *              Move the  warn_if_duplicate()  call to the calling routine.
+ *          Updated Wed, 11 Oct 2006 by David L. Paktor
+ *              Move the Tracing and Duplicate-Warning message functions
+ *                  into support routine.
  *
  **************************************************************************** */
 
-static bool create_alias( void )
+static void create_alias( void )
 {
     char *new_alias ;
 
@@ -4257,30 +4202,6 @@ static bool create_alias( void )
 {
 	    char *old_name = strdup((char *)statbuf) ;
 
-	    /*  Copy the "new" alias name back into statbuf.
-	     *      This is a HACK ^H^H^H^H awkward way to retrofit
-	     *      support for the  trace_creation()  function.
-	     */
-	    strcpy( statbuf, new_alias);
-
-	    /*  We don't call  trace_creation()  here because we don't
-	     *      know if the creation succeeded.  However, we want
-	     *      to issue a "Duplicate" warning based on the attempt,
-	     *      even if it doesn't succeed.
-	     *  We would prefer to have the "Trace" message precede the 
-	     *      "Duplicate" warning, but we don't think it's worth
-	     *      the effort.  When it becomes worthwhile, the way to
-	     *      do it would be to factor out the block that handles
-	     *      normal-tokenization versus "Tokenizer-Escape" mode;
-	     *      condition the "Trace" message on its success-return, 
-	     *      show the "Duplicate" warning in any case, then show
-	     *      the error-message and do the cleanup conditioned on
-	     *      a failure-return.
-	     *  That will also obviate the need for a return value from
-	     *      this routine and for the copy-back into statbuf.
-	     */
-	    warn_if_duplicate(new_alias);
-
 	    /*
 	     *  Here is where we begin trying the  create_..._alias() 
 	     *      routines for the vocabularies.
@@ -4293,7 +4214,7 @@ static bool create_alias( void )
 	    if ( in_tokz_esc )
 	    {
 		if ( create_tokz_esc_alias( new_alias, old_name) )
-		    return(TRUE);
+		    return;
 	
 		/*
 		 *  Handle the classes of operatives that are common between
@@ -4306,7 +4227,7 @@ static bool create_alias( void )
 		    if ( found != NULL )
 		    {
 			if ( create_core_alias( new_alias, old_name) )
-			    return(TRUE);
+			    return;
 		    }
 	}
 	    }else{
@@ -4314,7 +4235,7 @@ static bool create_alias( void )
 	
 		/*  Can create aliases for "Locals", why not?  */
 		if ( create_local_alias( new_alias, old_name) )
-		    return(TRUE);
+		    return;
 
 		/*
 		 *  All other classes of operatives -- non-fcode forth
@@ -4325,19 +4246,19 @@ static bool create_alias( void )
 		 */
 
 		if ( create_current_alias( new_alias, old_name) )
-		    return(TRUE);
+		    return;
 	
 	    }    /*  End of separate handling for normal-tokenization mode
         	  *      versus  "Tokenizer-Escape" mode
 		  */
 
 	    /*  It's not a word, a macro or any of that other stuff.  */
+	    trace_create_failure( new_alias, old_name, 0);
 	    tokenized_word_error(old_name);
 	    free(old_name);
 	}
 	free (new_alias);
     }
-    return(FALSE);
 }
 
 	
@@ -4443,6 +4364,9 @@ void handle_internal( tic_param_t pfield)
 	unsigned int sav_lineno = lineno;    /*  For error message  */
 
 	bool handy_toggle = TRUE ;   /*  Various uses...   */
+	bool handy_toggle_too = TRUE ;   /*  Various other uses...   */
+	char *handy_string = "";
+	int handy_int = 0;
 	
 #ifdef DEBUG_SCANNER
 	printf("%s:%d: debug: tokenizing control word '%s'\n",
@@ -4594,10 +4518,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case ALIAS:
-		if ( create_alias() )
-		{
-		    trace_creation( ALIAS, statbuf);
-		}
+		create_alias();
 		break;
 
 	case CONTROL:
@@ -4916,19 +4837,21 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case FUNC_NAME:
-		if ( test_in_colon( statbuf, TRUE, TKERROR, NULL) )
-		{
 		    if ( in_tokz_esc )
 		    {
+		    if ( incolon )
+		    {
 			tokenization_error( P_MESSAGE, "Currently" );
-			in_last_colon();
+		    }else{
+			tokenization_error( P_MESSAGE, "After" );
+		    }
+		    in_last_colon( incolon);
 		    }else{
 		emit_token("b(\")");
 			emit_string( last_colon_defname,
 		            strlen( last_colon_defname) );
 			/*  if ( hdr_flag == FLAG_HEADERLESS ) { WARNING } */
 		    }
-		}
 		break;
 
 	case IFILE_NAME:
@@ -5066,19 +4989,56 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case RET_STK_FETCH:
-		ret_stk_access_rpt();
-		emit_token( "r@");
-		break;
-
+		/*  handy_toggle controls reloading other "handy_"s
+		 *  handy_toggle_too controls calling ret_stk_access_rpt()
+		 *  handy_int, if non-zero, passed to bump_ret_stk_depth()
+		 */
+		/*  First in series doesn't need to check handy_toggle  */
+		handy_string = "r@";
+		    /*  Will call ret_stk_access_rpt()       */
+		    /*  handy_toggle_too  is already TRUE    */
+		    /*  Will not call bump_ret_stk_depth()   */
+		    /*  handy_int  is already zero    */
+		handy_toggle = FALSE;
 	case RET_STK_FROM:
-		ret_stk_access_rpt();
-		bump_ret_stk_depth( -1);
-		emit_token( "r>");
-		break;
-
+		if ( handy_toggle )
+		{
+		    handy_string = "r>";
+		    /*  Will call ret_stk_access_rpt()  */
+		    /*  handy_toggle_too  is already TRUE    */
+		    /*  Will call bump_ret_stk_depth( -1)    */
+		    handy_int = -1;
+		    handy_toggle = FALSE;
+		}
 	case RET_STK_TO:
-		bump_ret_stk_depth( 1);
-		emit_token( ">r");
+		if ( handy_toggle )
+		{
+		    handy_string = ">r";
+		    /*  Will not call ret_stk_access_rpt()   */
+		    handy_toggle_too  = FALSE;
+		    /*  Will call bump_ret_stk_depth( 1)     */
+		    handy_int =  1;
+		    /*  Last in series doesn't need to reset handy_toggle  */
+		}
+
+		/*  handy_toggle  is now free for other use  */
+		handy_toggle = allow_ret_stk_interp;
+		if ( ! handy_toggle )
+		{
+		    handy_toggle = test_in_colon(statbuf, TRUE, TKERROR, NULL );
+		}
+		if ( handy_toggle || noerrors )
+		{
+		    if ( handy_toggle_too )
+		    {
+			ret_stk_access_rpt();
+		    }
+		    if ( handy_int != 0 )
+		    {
+			bump_ret_stk_depth( handy_int);
+		    }
+		    emit_token( handy_string);
+		}
 		break;
 
 	case PCIHDR:
@@ -5490,6 +5450,10 @@ void tokenize_one_word( signed long wlen )
     if ( found != NULL )
     {
 	tic_found = found;
+	if ( found->tracing)
+	{
+	    invoking_traced_name( found);
+	}
 	found->funct( found->pfield);
 	return ;
     }

@@ -52,7 +52,6 @@ extern unsigned int abs_token_no;   /* Absolute Token Number in Source Input  */
 /* output pointers */
 extern char *oname;         /* output file name  */
 
-extern unsigned int opc;    /* output buffer position counter  */
 
 /* **************************************************************************
  *

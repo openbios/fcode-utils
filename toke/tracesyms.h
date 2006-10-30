@@ -35,6 +35,16 @@
  **************************************************************************** */
 
 #include "types.h"
+#include "ticvocab.h"
+#include "devnode.h"
+
+/* ************************************************************************** *
+ *
+ *      Global Variables Exported
+ *
+ **************************************************************************** */
+
+extern int split_alias_message;
 
 /* ************************************************************************** *
  *
@@ -44,5 +54,25 @@
 
 void add_to_trace_list( char *trace_symb);
 bool is_on_trace_list( char *symb_name);
+void tracing_fcode( char *fc_phrase_buff, u16 fc_token_num);
+void trace_creation( tic_hdr_t *trace_entry,
+                         char *nu_name,
+			     bool is_global);
+void trace_create_failure( char *new_name, char *old_name, u16 fc_tokn);
+void traced_name_error( char *trace_name);
+void invoking_traced_name( tic_hdr_t *trace_entry);
+void handle_invocation( tic_hdr_t *trace_entry);
+void show_trace_list( void);
+void trace_builtin( tic_hdr_t *trace_entry);
+
+/* ************************************************************************** *
+ *
+ *      Macro:
+ *          TRACING_FCODE_LENGTH
+ *                Adequate length for the buffer passed to  tracing_fcode()
+ *
+ **************************************************************************** */
+
+#define  TRACING_FCODE_LENGTH   32
 
 #endif   /*  _TOKE_TRACESYMS_H    */
