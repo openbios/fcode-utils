@@ -35,23 +35,30 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+/*   We needn't be concerned with the endian-ness of the host,
+ *       only with the endian-ness of the data.
+ */
+
+#include "types.h"
 #include "pcihdr.h"
+
 
 char *rom=NULL;
 size_t romlen=0;
 
-/*  Prototypes for functions exported from  shared/classcodes.c   */
+
+/*  Prototypes for functions exported from  devsupp/pci/classcodes.c   */
 
 char *pci_device_class_name(u32 code);
 char *pci_code_type_name(unsigned char code);
 
 /*  Functions local to this file:
-	    int dump_rom_header(rom_header_t *data);
-	    int dump_pci_data(pci_data_t *data);
+	    bool dump_rom_header(rom_header_t *data);
+	    bool dump_pci_data(pci_data_t *data);
 	    void dump_platform_extensions(u8 type, rom_header_t *data);
  */
 
-static int dump_rom_header(rom_header_t *data)
+static bool dump_rom_header(rom_header_t *data)
 {   /*  Return TRUE for "no problem"  */
 	const u16 pci_header_signature = 0x55aa;
 	u16 sig=BIG_ENDIAN_WORD_FETCH(data->signature);
@@ -71,10 +78,10 @@ static int dump_rom_header(rom_header_t *data)
 	printf ("\n  Pointer to PCI Data Structure: 0x%04x\n\n",
 				LITTLE_ENDIAN_WORD_FETCH(data->data_ptr));
 
-	return (sig == pci_header_signature);
+	return (BOOLVAL(sig == pci_header_signature) );
 }
 
-static int dump_pci_data(pci_data_t *data)
+static bool dump_pci_data(pci_data_t *data)
 {   /*  Return TRUE for "no problem"  */
 	const u32 pci_data_hdr = PCI_DATA_HDR ;
 
@@ -106,7 +113,7 @@ static int dump_pci_data(pci_data_t *data)
 			data->last_image_flag&0x80?"":"not ");
 	printf("  Reserved: 0x%04x\n\n", little_word(data->reserved_2));
 
-	return (sig==PCI_DATA_HDR);
+	return (BOOLVAL(sig==PCI_DATA_HDR) );
 }
 
 static void dump_platform_extensions(u8 type, rom_header_t *data)
