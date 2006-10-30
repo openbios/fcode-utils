@@ -10,7 +10,7 @@
 #          Lines that have no label, no switches, and no script
 #              do not need any commas.
 
-#  Updated Thu, 27 Jul 2006 at 15:20 PDT by David L. Paktor
+#  Updated Fri, 13 Oct 2006 at 16:19 PDT by David L. Paktor
 
 TokExstCondTstY , , -l
 TokExstCondTstN , , -l

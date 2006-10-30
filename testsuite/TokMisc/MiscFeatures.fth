@@ -1,5 +1,5 @@
 \  Obvious pun intended...
-\   Updated Fri, 10 Feb 2006 at 15:53 PST by David L. Paktor
+\   Updated Tue, 17 Oct 2006 at 12:57 PDT by David L. Paktor
 
 alias // \
 fcode-version2
@@ -116,22 +116,32 @@ new-device
      ;
 finish-device
 
+\  Some interpretation-time after the fact markers...
+alias colon :
+overload [macro] : ." Cleared " [input-file-name] type ." line " [line-number] .d cr colon 
+
+alias semicolon ;
+overload [macro] ;  semicolon ." Finished defining " [function-name] type cr
+
 \  And we're back to billy.
 : droop ( -- )
     .dbg-enter            \  This will display  Entering droop in billy
     twenty
     tokenizer[
 	alias .x .h		\  Should this generate a warning?
+	[function-name]
     ]tokenizer
     0 ?do i .x loop
     .dbg-leave
-;
+;       f[  [function-name]   ]f
 headerless
 : ploop ( -- )
     .dbg-enter
     fifty  0 do i drop 2 +loop
     .dbg-leave
 ;
+overload alias  : colon 
+overload alias ; semicolon
 
 fcode-end
 

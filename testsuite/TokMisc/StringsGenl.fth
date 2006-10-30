@@ -1,6 +1,6 @@
 \  Test of various formats of strings
 
-\  Updated Mon, 06 Mar 2006 at 17:39 PST by David L. Paktor
+\  Updated Tue, 10 Oct 2006 at 11:46 PDT by David L. Paktor
 
 fcode-version2
 
@@ -9,13 +9,14 @@ headers hex
 ."
 Empty string next."
 ." "
-." BSlashes: \t\1fea9\abdc\n\1f\\fece"
+." BSlashes#1: \t\1fea9\abdc\n\1f\\fece"
 decimal
-." BSlashes: \t\a7\c01a"
+." BSlashes#2: \t\a7\c01a"
+." Dec 1193176 = 0x1234D8 Dec 176 = 0xB0 \1193176\"
 hex
-." BSlashes: \n\a7\c01a"
-." BSlashes: \t\a7\\c0\\1a"
-." BSlashes: \t\a7\\c0\\1a"( feedface)"
+." BSlashes#3: \n\a7\c01a"
+." BSlashes#4: \t\a7\\c0\\1a"
+." BSlashes#5: \t\a7\\c0\\1a"( feedface)"
 ." 3 BSlashes, then QOpen. \t\Q\n"(090abcdefeca8e beeffece b020)Zoh. "(1 23 4 567 8 9 0 1 2 3 0 a b c 30)"
 .( Dot-Paren-NoSpace)cr cr
 .( Dot-Paren Space) cr cr

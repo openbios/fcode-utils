@@ -1,11 +1,17 @@
 \  Obvious pun intended...
-\  Updated Fri, 14 Jul 2006 at 12:50 PDT by David L. Paktor
+\  Updated Mon, 09 Oct 2006 at 09:57 PDT by David L. Paktor
 
 [flag] Local-Values
 f[  ."  This is a test"  ]f
 fcode-version1
 
-fload LocalValuesSupport.fth
+global-definitions
+   headers
+   h# 130 constant  _local-storage-size_
+   headerless
+device-definitions
+
+fload TotalLocalValuesSupport.fth
 noop  noop  noop
 headers
 
@@ -59,8 +65,14 @@ recurse
        _a _b + i * dup -> d
 	  _c * to _e
                  j . loop
+       ['] _a
+      f['] _e
+      f[   f['] _b
+           f['] dup emit-fcode
+	      h# 0f emit-fcode ]f
+      _a _b +  _c *  [']
+          factl catch if ." Run in circles, scream and shout!" then
 ;
-
 
 
 : DMA-ALLOC      ( n -- vaddr )                 " dma-alloc"   $call-parent ;

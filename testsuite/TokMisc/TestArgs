@@ -7,8 +7,9 @@
 #                 A script-command with arguments (but no commas).
 #          Lines that have no label, no switches, and no script
 #              do not need any commas.
+#                 A leading +V in the script-command field will suppress -v
 
-#  Updated Thu, 07 Sep 2006 at 11:49 PDT by David L. Paktor
+#  Updated Mon, 16 Oct 2006 at 17:22 PDT by David L. Paktor
 
 MiscFeatures ,  ,  -i
 MiscFeatures , applabq ,  -i -f NOSUN-ABORT-Quote
@@ -23,15 +24,15 @@ StringsGenl , nohexrmk , -f noHex-remark-escape
 StringsGenl , noqbsrmk , -f NOSTRING-REMARK-ESCAPE
 BasicCont
 ExtCont
-OldTkzr/ContErr0 ,  ,  -i
+ContErr0 ,  ,  -i
 ContErr1 ,  ,  -i
 ContErr2 ,  ,  -i
 ContErr3 ,  ,  -i
 MulDev ,  ,  -i
 MulDev_01 ,  ,  -i
 MulDev_02 ,  ,  -i -T jeeky -T kinky
+MulDev_02 , NoV ,  -T jeeky -T kinky , +V
 MinPCIHtst
-OldTkzr/SimplStrEscs
 StrEscs
 StrEscs_01
 FlagSet ,  ,  -i
@@ -72,3 +73,7 @@ BatchTst , FHelp , -I. -I../TokeCommon -l  -f help , if ( "`cmp UserMacros.fc Us
 BatchTst ,  Help , -I. -I../TokeCommon -l  -h , rm *_cpy*
 
 CaseTkns
+
+#  Vendor-Specific FCodes, just a little...
+VSFCtest 
+VSFCtest , VSfc , , DtkVSFcTst.scr VSFCtest.VSfc VendSpecFCodes

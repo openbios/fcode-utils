@@ -132,8 +132,8 @@ repeat
     then
 loop
 
-#message" Same line as a loop"  ." ...Same line as a loop"
-
+#message"
+ Same line as a loop"  ." ...Same line as a loop"
 4 0 do i test_something if to targ : runny_stuff  begin
     1 0 do targ u.   #message" Error here, too..."  j
     #message" But not here either"  1 0 do j . loop

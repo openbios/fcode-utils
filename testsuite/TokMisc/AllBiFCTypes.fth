@@ -1,14 +1,13 @@
 \  Test all the known Built-In FCode tokens
 \     that have specific definition Types
 
-\  Updated Wed, 16 Aug 2006 at 14:30 PDT by David L. Paktor
+\  Updated Tue, 10 Oct 2006 at 11:00 PDT by David L. Paktor
 
 \  Applying "TO" to them ought to generate errors
 \  except for the ones that legitimately take "TO",
 \  namely the DEFER and VALUE definitions
 
 fcode-version2
-
 
 [message]  Constants.  Should generate errors
 d# 10 to -1  (  CONST  )
@@ -60,5 +59,13 @@ h# 12 to  base  (  VRBLE  )
 h# 12 to  mask  (  VRBLE  )
 h# 12 to  span  (  VRBLE  )
 h# 12 to  state  (  VRBLE  )
+
+multi-line  #message" Using ['] on words that are both FWords and FCodes "\
+                      should generate no errors"
+['] new-device     drop
+['] finish-device  drop
+['] offset16       drop
+['] instance       drop
+['] end0           drop
 
 fcode-end

@@ -76,7 +76,7 @@
 	f[  ."  Let's try some spurious [else] action, whaddya say?"  ]f
 	: [else]  ."  Don't do it" ;  [message]  Fake [else] got through
 	create [else]   [message]  Fake [else] got through
-	h# defeca8e constant [else]   [message]  Fake [else] got through
+	h# DeFeCA8e constant [else]   [message]  Fake [else] got through
 	h# -41100132 value [else]   [message]  Fake [else] got through
 	d# 64  buffer: [else]   [message]  Fake [else] got through
 	 struct

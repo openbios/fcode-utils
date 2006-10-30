@@ -22,7 +22,12 @@ create achin  12 c, 13 c, 14 c,
 new-device
 create eek!  18 c, 17 c, 80 c, 79 c,
 : freek  eek! 4 bounds ?do i c@ . 1 +loop ;
-: greek  -1 if  freek then ;
+: greek
+        recursive -1 if ." By name" greek
+                        ." other name" freek
+        else  ." Re-Curse you!"  recurse
+	then
+;
 [message]  About to access method from parent node
 : hierareek
        eek!

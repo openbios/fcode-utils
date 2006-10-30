@@ -6,7 +6,9 @@
 \
 \       Module Author:  David L. Paktor    dlpaktor@us.ibm.com
 
-\  Load Locals Support under Global-Definitions.  Bypass Instance warning
+\  Load Support file for development of FCode that uses Local Values
+\      under Global-Definitions.  Bypass Instance warning.
+\  Replace this with GlobalLocalValues.fth  in your final product.
 
 \  Make sure this option is turned on.
 [flag] Local-Values
@@ -20,6 +22,7 @@ alias generic-instance  instance
 overload alias instance bypass-instance
 
 fload LocalValuesSupport.fth
+fload LocalValuesDevelSupport.fth
 
 \  Replace normal meaning of  Instance, still in Global scope.
 overload alias instance generic-instance

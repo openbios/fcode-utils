@@ -1,0 +1,4 @@
+#  Sample of Vendor-Specific FCodes for test
+
+        0x341   Three-for-One,aBargain!
+	0x369   double(lit)    Special-Function pre-defined name

@@ -13,21 +13,26 @@
 #  Most files in this category need the  -i  switch
 #  Some may have additional variants.
 
-#  Updated Thu, 07 Sep 2006 at 11:49 PDT by David L. Paktor
+#  Updated Wed, 18 Oct 2006 at 11:44 PDT by David L. Paktor
 
 MiscFeatErrs , , -i -I. -I..
-LocalTest , NoLvSupp , -i -f Local-Values -I. -I..
-LocalTest , , -i -f Local-Values -I. -I.. -f Always-Headers -d dont_omit_support
-LocalTest1 , ,   -f Local-Values -f noLV-Legacy-Message -I. -I..
+MiscFeatErrs , GLoc , -i -I. -I.. -d Global-Locals
+MiscFeatErrs , LocR , -i -I. -I.. -d Locals-Release
+MiscFeatErrs , GlLr , -i -I. -I.. -d Global-Locals -d Locals-Release
+MiscFeatErrs , Lss  , -i -I. -I.. -d _local-storage-size_=3022
+MiscFeatErrs , NoLss  , -i -I. -I.. -d _local-storage-size_
+LocalTest , NoLvSupp , -i -f Local-Values -I. -I../TokoLoco
+LocalTest , , -i -f Local-Values -I. -I../TokoLoco -f Always-Headers -d dont_omit_support
+LocalTest1 , ,   -f Local-Values -f noLV-Legacy-Message -I. -I../TokoLoco
 ControlMismatch , , -i
-SuppLocErrTest4 , , -i -f Local-Values -l -I. -I..
-testLocDevSupG , , -i -f Local-Values -I. -I..
-testLocDevSupG , SymSiz , -i -f Local-Values -d "_local-storage-size_= d# 120" -I. -I..
+SuppLocErrTest4 , , -i -f Local-Values -l -I. -I../TokoLoco
+testLocDevSupG , , -i -f Local-Values -I. -I../TokoLoco
+testLocDevSupG , SymSiz , -i -f Local-Values -d "_local-storage-size_= d# 120" -I. -I../TokoLoco
 PCIhdrErrs , , -i
 FCShdrErrs , , -i
 PCI_FCShdrErrs , , -i
 CommOvrRun , , -i -l
-LocOvrRun , , -i -f Local-Values -l -I. -I..
+LocOvrRun , , -i -f Local-Values -l -I. -I../TokoLoco
 SplitImbal , , -i -l
 TokCondUnconcF , , -i -l
 TokCondUnconcT , , -i -l
@@ -46,13 +51,13 @@ TooTooLargeBuffer , , -i -l
 UserMacroErrors , , -i
 CStrEscOvflw , , -i -l
 DevImbal , , -i
-DevNodAli , , -i -l -I. -I..
-DevNodAli_01 , , -i -l -I. -I..
-GlobScopErrTst , NoI , -f Local-Values -I. -I..
-GlobScopErrTst , , -i -f Local-Values -I. -I..
-GlobScopErrTst_01 , , -i -f Local-Values -I. -I..
-GlobScopErrTst_02 , , -i -f Local-Values -I. -I..
-GlobScopErrTst_03 , , -i -f Local-Values -I. -I..
+DevNodAli , , -i -l -I. -I../TokoLoco
+DevNodAli_01 , , -i -l -I. -I../TokoLoco
+GlobScopErrTst , NoI , -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_01 , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_02 , , -i -f Local-Values -I. -I../TokoLoco
+GlobScopErrTst_03 , , -i -f Local-Values -I. -I../TokoLoco
 #  The script-fields below prepare for the  ExpPath InclLst and DePList  tests
 Frinstnce , , -i , touch ExpPath.NoV.{P,f{c,l{,.missing}}}
 Frinstnce , NoI , , chmod a-rw ../TokeCommon/{MyBeerAndYouCannotHaveIt.fth,NoRead.bin} ExpPath.NoV.{P,f{c,l{,.missing}}}
@@ -69,7 +74,7 @@ ExpPath , , -i -l , chmod a+r ../TokeCommon/{MyBeerAndYouCannotHaveIt.fth,NoRead
 
 #  Done with the  ExpPath and  InclLst  tests
 ToAtEnd , , -i
-ToAtEnd , WLocSup , -i -I . -I ..
+ToAtEnd , WLocSup , -i -I . -I ../TokoLoco
 ObsoFCodes , , -i
 ObsoFCodes , NoWarn , -f NoObsolete-FCode-Warning
 
@@ -84,7 +89,7 @@ TooLargeQNoAbort , , -f Local-Values
 AbrtWQuotStr , , -i
 
 #  The new "Trace" feature, and handling of duplicate and mis-scoped names...
-DupNams  , , -f Local-Values -T croop -T drop -T _harpo -T dup -T noop -T zoop -T foop
+DupNams  , , -f Local-Values -T alley-oop -T boop -T croop -T doop -T drop -T dup -T foop -T floop -T gloop -T _harpo -T koop -T loop -T noop -T poop -T shtoop -T zoop -T fontbytes -T blink-screen -T base -T bell
 
 TooManyFCodes , , -l -o TooManyFCodes.fl
 TooManyFCodes , Reg , -i
@@ -98,3 +103,6 @@ MulPCI_LapFC , NoRTwoVal , -i -d NoCrash -d NoReset -d RangeTwo
 
 RetStkDep , , -i
 CondlDefn , , -i
+
+DecodProp
+DecodProp , nrsi , -f noRet-Stk-Interp
