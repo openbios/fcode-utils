@@ -51,7 +51,8 @@ tests: all
 	cp toke/toke testsuite
 	cp detok/detok testsuite
 	cp romheaders/romheaders testsuite
-	make -C testsuite all CygTestLogs=`pwd`/testlogs
+	make -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-ppc-linux
+	#make -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-x86-cygwin
 
 # lcov required for html reports
 coverage:
