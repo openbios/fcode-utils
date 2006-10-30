@@ -1,1 +1,1 @@
-../../LocalValues/GlobalLocalValues.fth
+../localvalues/GlobalLocalValues.fth

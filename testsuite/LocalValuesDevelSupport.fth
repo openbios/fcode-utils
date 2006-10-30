@@ -1,1 +1,1 @@
-../../LocalValues/LocalValuesDevelSupport.fth
+../localvalues/LocalValuesDevelSupport.fth
