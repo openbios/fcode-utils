@@ -35,10 +35,28 @@
 
 #include "types.h"
 
+/*  Structure of an entry in a token-table
+ *  Consists of:
+ *      (1)  Name of the token
+ *      (2)  FCode of the token
+ *      (3)  Link-pointer to previous entry.
+ */
+
+typedef struct token {
+	char *name;
+	u16 fcode;
+	struct token *prev;
+} token_t;
+
+/*  Macro for creating an entry in a token-table data-array  */
+#define TOKEN_ENTRY(num, name)   { name, (u16)num, (token_t *)NULL }
+
+
 /*  Prototypes for functions exported from
  *   detok.c  decode.c  printformats.c  pcihdr.c  and  dictionary.c
  */
 
+void link_token(token_t *curr_token);
 void add_token(u16 number, char *name);
 void init_dictionary(void);
 void reset_dictionary(void);
