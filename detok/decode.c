@@ -38,6 +38,7 @@
 
 #include "detok.h"
 #include "stream.h"
+#include "addfcodes.h"
 
 static int indent;		/*  Current level of indentation   */
 
@@ -125,8 +126,7 @@ static void pretty_print_string(void)
 static void decode_lines(void)
 {
 	if (show_linenumbers) {
-		printf("%6d: ",
-		       show_offsets ? token_streampos : linenum++);
+		printf("%6d: ",show_offsets ? token_streampos : linenum++);
 	}
 }
 
@@ -384,6 +384,18 @@ static void blit(void)
 	printf("0x%x\n", lit);
 }
 
+static void double_length_literal(void)
+{
+	u16 quadhh, quadhl, quadlh, quadll;
+
+	output_token();
+	quadhh = get_num16();
+	quadhl = get_num16();
+	quadlh = get_num16();
+	quadll = get_num16();
+	printf("0x%04x.%04x.%04x.%04x\n", quadhh, quadhl, quadlh, quadll);
+}
+
 static void offset16(void)
 {
 	decode_default();
@@ -536,9 +548,27 @@ static void decode_token(u16 token)
 		end_found = TRUE;
 		decode_default();
 		break;
+
+#if  0  /*  Fooey on C's petty limitations!  */
+        /*  I'd like to be able to do this:  */
+	/*  Special Functions  */
+	case *double_lit_code:
+		double_length_literal();
+		break;
+#endif  /*  Fooey on C's petty limitations!  */
+
 	default:
+	{
+	    /*  Have to do this clumsy thing instead  */
+	    if ( token == *double_lit_code )
+	    {
+		double_length_literal();
+		break;
+	    }
+
 		decode_default();
 	}
+}
 }
 
 
@@ -556,15 +586,18 @@ static void decode_token(u16 token)
  *      Outputs:
  *         Returned Value:      NONE
  *         Global/Static Variables:
- *             offs16           FALSE if Starter was version1, else TRUE
+ *             offs16           FALSE if Starter was version1, TRUE for all
+ *                                  other valid Starters, otherwise unchanged.
  *             fclen            On error, gets set to reach end of input stream
  *                                  Otherwise, gets set by  decode_start() 
  *         Printout:
+ *             On error, print a new-line to finish previous token's line.
  *
  *      Error Detection:
  *          First byte not a valid FCode Start:  Print message, restore
  *              input pointer to initial value, set fclen to [(end of
- *              input stream) - (input pointer)], return FALSE.
+ *              input stream) - (input pointer)], leave offs16 unchanged.
+ *              Return FALSE.
  *
  *      Process Explanation:
  *          This routine error-checks and dispatches to the routine that
@@ -578,18 +611,20 @@ static void decode_fcode_header(void)
 {
 	long err_pos;
 	u16 token;
+	bool new_offs16 = TRUE;
 
 	err_pos = get_streampos();
 	indent = 0;
 	token = next_token();
-	offs16 = TRUE;
+
 	switch (token) {
 	case 0x0fd:		/* version1 */
-		offs16 = FALSE;
+		new_offs16 = FALSE;
 	case 0x0f0:		/* start0 */
 	case 0x0f1:		/* start1 */
 	case 0x0f2:		/* start2 */
 	case 0x0f3:		/* start4 */
+		offs16 = new_offs16;
 		decode_start();
 		break;
 	default:

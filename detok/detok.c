@@ -45,7 +45,7 @@
 #include "stream.h"
 #include "addfcodes.h"
 
-#define DETOK_VERSION "1.0.0"
+#define DETOK_VERSION "1.0.2"
 
 #define CORE_COPYR   "(C) Copyright 2001-2006 Stefan Reinauer.\n" \
 		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
@@ -69,8 +69,8 @@ static void print_copyright(bool is_error)
 		CORE_COPYR "\n" IBM_COPYR "\n"
 		"Written by Stefan Reinauer, <stepan@openbios.org>\n"
 		"This program is free software; you may redistribute it "
-		"under the terms of\nthe GNU General Public License v2. This "
-		"program has absolutely no warranty.\n\n");
+		"under the terms of\nthe GNU General Public License v2. "
+		"This program has absolutely no warranty.\n\n");
 
 	pfunct = (is_error ? (vfunct) printf : printremark);
 
@@ -190,3 +190,4 @@ int main(int argc, char **argv)
 
 	return 0;
 }
+
