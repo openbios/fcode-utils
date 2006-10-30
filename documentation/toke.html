@@ -1,0 +1,3968 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- ESWDESDOCFILE %Z%%M%	%I%  %W% %G% %U% -->
+  <title>ESW PART-FW: New Features in the OpenBIOS Tokenizer toke (A
+User's Guide)</title>
+  <link rel="stylesheet" type="text/css"
+ href="workbook.css">
+</head>
+<body>
+<h1 style="text-align: center;" class="title"><a class="mozTocH1"
+ name="mozTocId449746"></a>New Features in OpenBIOS Tokenizer toke
+</h1>
+<h1 style="text-align: center;"><a class="mozTocH1"
+ name="mozTocId459488"></a>(A
+User's Guide)
+</h1>
+<div class="document-control">
+<ul>
+  <li>Updated Wed, 18 Oct 2006 at 12:39 PDT by David L. Paktor </li>
+</ul>
+</div>
+<p class="copyright">Copyright &copy; 2005 International Business
+Machines<sup>&reg;</sup>,
+All Rights Reserved.<br>
+Licensed under the <a
+ href="http://www.opensource.org/licenses/cpl1.0.php">Common Public
+License (CPL) version 1.0</a><br>
+</p>
+<!-- =========================================================================== --><!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId700910"></a><a name="TOC"></a>Table
+Of Contents</h2>
+<ol id="mozToc">
+<!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6--><a href="#mozTocId459488">New
+Features in OpenBIOS Tokenizer toke (A User's Guide)</a><br>
+  <li><a href="#mozTocId601312">Overview</a></li>
+  <li><a href="#mozTocId119716">Scope of this Document</a>
+    <ol>
+      <li><a href="#mozTocId206214">What this document
+does not cover: </a></li>
+    </ol>
+  </li>
+  <li><a href="#mozTocId343012">Error Detection
+and other messages:</a></li>
+  <li><a href="#mozTocId271949">Case Sensitivity</a><br>
+  </li>
+  <li><a href="#mozTocId280593">Categories of Features</a>
+    <ol>
+      <li><a href="#mozTocId460640">Directives</a></li>
+      <li><a href="#mozTocId930032">Command-Line options</a></li>
+      <li><a href="#mozTocId379181">Non-standard input,
+syntaxes and behavior</a></li>
+      <li><a href="#mozTocId303703">&#8220;Tokenizer-Escape&#8221; Mode</a></li>
+    </ol>
+  </li>
+  <li><a href="#mozTocId959733">Features, by Category:</a>
+    <ol>
+      <li><a href="#mozTocId499618">Command-Line options</a>
+        <ol>
+          <li><a href="#mozTocId510152">Switches</a></li>
+          <li><a href="#mozTocId514350">Include-List Directories</a></li>
+          <li><a href="#mozTocId515750">Trace the Creation and
+Invocation of FCode or
+"Tokenizer Escape"-mode Definitions</a><br>
+          </li>
+          <li><a href="#mozTocId580387">Command-Line Symbol Definitions</a></li>
+          <li><a href="#mozTocId632060">Special-Feature Flags</a></li>
+        </ol>
+      </li>
+      <li><a href="#mozTocId445349">&#8220;Tokenizer-Escape&#8221; Mode</a></li>
+      <ol>
+        <li><a href="#mozTocId445715">The&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">emit-byte</span>&nbsp;
+command</a></li>
+        <li><a href="#mozTocId446081">Other commands</a></li>
+        <ol>
+          <li><a href="#mozTocId446447">Standard Commands</a></li>
+          <ol>
+            <li><a href="#mozTocId446813">The&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">next-fcode</span>&nbsp;
+command</a></li>
+          </ol>
+          <li><a href="#mozTocId447179">Non-Standard operations</a></li>
+          <ol>
+            <li><a href="#mozTocId447545">constant</a></li>
+            <li><a href="#mozTocId447911">emit-fcode</a></li>
+          </ol>
+          <li><a href="#mozTocId448277">Additional FORTH-compatible
+operations</a><br>
+          </li>
+        </ol>
+      </ol>
+      <li><a href="#mozTocId649525">Directives</a>
+        <ol>
+          <li><a href="#mozTocId557512">Conditional Tokenization</a>
+            <ol>
+              <li><a href="#mozTocId686605">The Conditional-block
+Terminator</a></li>
+              <li><a href="#mozTocId763728">The
+"False" segment-switcher</a></li>
+              <li><a href="#mozTocId375310">Condition-Testers</a></li>
+              <ol>
+                <li><a href="#mozTocId104560">True/False flag
+on the top of the stack</a></li>
+                <li><a href="#mozTocId956359">Existence or
+non-existence of an
+FCode or "Tokenizer Escape"-mode definition</a></li>
+                <li><a href="#mozTocId880808">Definition or
+non-definition of a
+Command-Line Symbol</a></li>
+              </ol>
+              <li><a href="#mozTocId891224">Tracing the state of
+Conditional Tokenization</a><br>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId202222">Suspending the Duplicate-Name
+Test
+for one Definition ("Overloading")</a></li>
+          <li><a href="#mozTocId202620">Suspending the Multi-Line
+Warning for one occasion</a><br>
+          </li>
+          <li><a href="#mozTocId203416">Controlling the Scope of
+Definitions</a><br>
+          </li>
+          <li><a href="#mozTocId314185">Evaluating
+Command-line Symbols </a></li>
+          <li><a href="#mozTocId655967">Outputting
+Arbitrary Byte-Sequences to
+the FCode Binary</a></li>
+          <li><a href="#mozTocId114013">Encoding
+blocks of binary data taken from a file</a></li>
+          <li><a href="#mozTocId69109">Generating Special Text-Strings
+and Literals</a><br>
+          </li>
+          <ol>
+            <li><a href="#mozTocId70133">Current date or time</a></li>
+            <li><a href="#mozTocId71157">Name of the function
+currently being defined</a></li>
+            <li><a href="#mozTocId72181">Input-File Name and Line Number</a></li>
+          </ol>
+          <li><a href="#mozTocId844437">Pre-pending
+PCI Headers to FCode
+images </a></li>
+          <li><a href="#mozTocId931658">Modifying the PCI
+Header</a>
+            <ol>
+              <li><a href="#mozTocId504353">"Revision
+Level of the Vendor's ROM"</a></li>
+              <ol>
+                <li><a href="#mozTocId503878">Byte-Order</a></li>
+              </ol>
+              <li><a href="#mozTocId53081">"Last
+Image Indicator" bit</a></li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId410469">Changing the name of the
+Binary Output File</a></li>
+          <li><a href="#mozTocId982642">Issuing messages at
+Tokenization
+time.</a></li>
+          <li><a href="#mozTocId550942">Changing Special-Feature
+Flags
+from Source</a>
+            <ol>
+              <li><a href="#mozTocId551846">Displaying
+Special-Feature Flags from Source</a></li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId573280">Manipulating the
+FCode-Token-Number Assignment Counter</a></li>
+          <ol>
+            <li><a href="#mozTocId566072">Saving
+and Restoring</a></li>
+            <li><a href="#mozTocId568474">Resetting</a><br>
+            </li>
+          </ol>
+          <li><a href="#mozTocId575686">Resetting
+Symbols Defined in Either Mode</a></li>
+        </ol>
+      </li>
+      <li><a href="#mozTocId957252">Non-standard input,
+syntaxes, and behavior </a>
+        <ol>
+          <li><a href="#mozTocId850914">Ambiguous
+Conditions</a>
+            <ol>
+              <li><a href="#mozTocId162252">Tokens
+expected on the same
+line</a></li>
+              <li><a href="#mozTocId246601">The&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#</span>
+                <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">d#</span>&nbsp;and
+                <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">o#</span>&nbsp;
+directives </a></li>
+              <li><a href="#mozTocId978546">The
+commands&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">leave</span>&nbsp;
+                <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">?leave</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">unloop</span>&nbsp;
+outside of a loop-control framework</a></li>
+              <li><a href="#mozTocId73206">The
+commands&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">'</span>&nbsp;
+followed by a name that is not a valid target</a></li>
+              <li><a href="#mozTocId74410">The Forth word <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">to</span>
+followed by a name that is not a valid target </a><br>
+              </li>
+              <li><a href="#mozTocId75614">The word <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span><br>
+                </a></li>
+              <ol>
+                <li><a href="#mozTocId76818">Followed by an
+inapplicable defining-word</a></li>
+                <li><a href="#mozTocId78022">Left unresolved</a></li>
+                <li><a href="#mozTocId79226">Not Allowed in...</a></li>
+              </ol>
+              <li><a href="#mozTocId884280">The command <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+inside a colon-definition<br>
+                </a></li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId901662">Non-Standard
+Synonyms for Standard
+Functions</a></li>
+          <li><a href="#mozTocId732819">Non-Standard
+Functions or behaviors</a>
+            <ol>
+              <li><a href="#mozTocId522750">Alias</a></li>
+              <li><a href="#mozTocId824541">String-Escape
+characters and other
+String-Gathering Features </a></li>
+              <ol>
+                <li><a href="#mozTocId945290">Quoted
+String-Escape Characters</a></li>
+                <li><a href="#mozTocId758170">Embedded New-Lines</a></li>
+                <li><a href="#mozTocId42456">Hex-Sequence
+Processing </a></li>
+                <li><a href="#mozTocId150131">C-Style
+String-Escape Characters</a></li>
+              </ol>
+              <li><a href="#mozTocId40998">The ABORT"
+(Abort-Quote) command</a></li>
+              <li><a href="#mozTocId526780">Conveniently
+Convert Short
+Character-Sequence to Number</a></li>
+              <ol>
+                <li><a href="#mozTocId53626">Left-Justified</a><br>
+                </li>
+              </ol>
+              <li><a href="#mozTocId54171">F[']&nbsp;&nbsp;
+("Eff-Bracket-Tick-Bracket")</a></li>
+              <ol>
+                <li><a href="#mozTocId54716">F['] in "Normal
+Tokenization" Mode</a></li>
+                <li><a href="#mozTocId55261">F['] in "Tokenizer-Escape"
+Mode</a><br>
+                </li>
+              </ol>
+              <li><a href="#mozTocId887752">Shell-Environment Variables
+in File-Names</a><br>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId505746">Featured
+behaviors, supported by this
+Tokenizer, that are not mentioned in the Standard</a>
+            <ol>
+              <li><a href="#mozTocId530910">User-Defined Macros</a><br>
+              </li>
+              <li><a href="#mozTocId539069">Multiple
+device-nodes</a></li>
+              <ol>
+                <li><a href="#mozTocId540605">Global Definitions</a><br>
+                </li>
+              </ol>
+              <li><a href="#mozTocId354426">Multiple
+FCode-block Images</a></li>
+              <li><a href="#mozTocId232809">Multiple
+PCI-Image</a></li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li><a href="#mozTocId194505">Examples:</a>
+    <ol>
+      <li><a href="#mozTocId544211">Example #1:</a></li>
+      <li><a href="#mozTocId80432">Example #2: </a></li>
+      <li><a href="#mozTocId455242">Example #3:</a></li>
+      <li><a href="#mozTocId861304">Example #4:</a></li>
+      <li><a href="#mozTocId866180">Example #5:</a><br>
+      </li>
+    </ol>
+  </li>
+</ol>
+<h2><a class="mozTocH2" name="mozTocId601312"></a>Overview</h2>
+<!-- ...................................................................................... -->
+<p>The goal of this project is to produce an FCode Tokenizer that can
+both
+be used in-house and be presented to third-party vendors, VARs and the
+like, as a professional-quality tool for their use, without adversely
+affecting IBM's
+Intellectual-Property rights.</p>
+<p>We are using, as a starting basis, the Open-Source tokenizer&nbsp;
+that is available from the <a href="http://openbios.org/">OpenBIOS
+project</a> .&nbsp;&nbsp; </p>
+<p>We expect to be able to deliver this tool to our vendors by
+returning our modifications to the OpenBIOS project, from whence it can
+be obtained openly by anyone. </p>
+<h2><a class="mozTocH2" name="mozTocId119716"></a>Scope of this Document</h2>
+<!-- ...................................................................................... -->
+In order to achieve the first part of the goal -- making it suitable
+for in-house use -- a number of features were added that are not
+covered in the IEEE-1275 Standard for Boot Firmware (also referred to
+herein simply as "the Standard").&nbsp; 
+<p>This document describes those <a href="#Categories_of_Features">features</a>
+and how they are used.
+</p>
+<p>There will be a brief overview of <a
+ href="#Error_Detection_and_other_messages:">Error Detection</a> and
+other
+messages.</p>
+<p>There will be some <a href="#Examples:">examples</a> at the end.<br>
+</p>
+<h3><a class="mozTocH3" name="mozTocId206214"></a>What this document
+does not cover:<br>
+</h3>
+<ul>
+  <li>Standard behavior, particularly conversion between ANSI /
+IEEE-1275 Standard Forth and IEEE-1275 Standard FCode, and standard
+Tokenizer Macros.&nbsp; These are
+expected and will be regarded as "presumed" by this document.</li>
+  <li>Changes to older versions of the OpenBIOS Tokenizer.</li>
+  <li>A complete list of Tokenization Source Errors detected and
+reported.</li>
+  <li>A complete list of conditions that generate WARNING or ADVISORY
+messages.</li>
+  <li>A complete list of FATAL conditions.<br>
+  </li>
+  <li>Support for <a href="TokenizerLocalValues.htm">IBM-Style Local
+Values</a>. That is the subject of a
+separate writeup.</li>
+</ul>
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId343012"></a><a
+ name="Error_Detection_and_other_messages:"></a>Error Detection
+and other messages:</h2>
+The Tokenizer is capable of producing the following kinds of messages:<br>
+<ul>
+  <li>FATAL</li>
+  <li>ERROR</li>
+  <li>WARNING</li>
+  <li>ADVISORY</li>
+  <li>MESSAGE generated by the User.</li>
+  <li>TRACE-NOTE<br>
+  </li>
+</ul>
+<p>A <span style="font-style: italic; font-weight: bold;">FATAL</span>
+condition is sufficient cause to immediately stop activity.&nbsp; It is
+usually (but not always) a symptom of a system failure, rather than a
+result of User
+input.</p>
+<p><a name="An_ERROR"></a>An <span
+ style="font-style: italic; font-weight: bold;">ERROR</span>
+occurs as a result of User input.&nbsp; It is a condition sufficient to
+make the run a failure, but not to stop activity.&nbsp; Unless the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold; font-style: italic;">-i</span>
+<a href="#Ignore_Errors_option">("Ignore Errors")</a> <a
+ href="#Command-Line_options_">Command-Line
+option</a> has been specified, the production of a Binary
+Output file
+will be suppressed and theTokenizer will exit with a non-zero status,
+if an Error Message has been issued. <br>
+</p>
+<p><a name="A_WARNING"></a>A <span
+ style="font-weight: bold; font-style: italic;">WARNING</span>
+is issued for a condition that, while not necessarily an error, might
+be something to avoid.&nbsp; E.g.,&nbsp; a deprecated feature, or a
+feature that might be incompatible with other Standard tokenizers.</p>
+<p><a name="Advisories"></a>An <span
+ style="font-weight: bold; font-style: italic;">ADVISORY</span>
+message is issued for a condition that is a response to User input, and
+where processing continues unchanged, but it is nonetheless (in
+this author's opinion) worthwhile to give the User a "heads-up" to make
+sure that what you got is what you wanted. <span
+ style="font-weight: bold; font-style: italic;">ADVISORY</span>
+messages are only displayed when the <a
+ style="font-style: italic; font-weight: bold;" href="#verbose_option">verbose</a>
+<a href="#Command-Line_options_">Command-Line option</a> is selected. </p>
+<p>
+A User-generated <span style="font-weight: bold; font-style: italic;">MESSAGE</span>
+-- unsurprisingly -- is a message generated by the User via any of the
+<a href="#User_Messages">directives</a> supported for that purpose.<br>
+</p>
+<p><a name="Trace_Notes"></a>A <span
+ style="font-weight: bold; font-style: italic;">TRACE-NOTE</span> is
+issued if the <a href="#Trace_Symbols">Trace-Symbols</a>
+feature is activated, whenever a symbol on the Trace-List is either
+created or invoked.<br>
+</p>
+<p><a name="Message_Format"></a>Each message of the above types is
+accompanied by the name of the
+source file and the line number in which the condition that triggered
+it was detected, as well as the current position to which data is being
+generated into the Binary Output.&nbsp; If a PCI Header is in effect,
+the position relative to the end of that PCI Header will also be shown;
+this is to maintain consistency with the <a
+ href="DeTokenizer.htm#with_offsets">"offsets</a>" displayed be the <a
+ href="DeTokenizer.htm">DeTokenizer</a><br>
+</p>
+<p><a name="Errors_Ignored"></a>
+The Tokenizer typically runs through to completion of the source file,
+displaying an ERROR message for each error it encounters (I.e., it does
+not "bail" after the first error).&nbsp; If the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold; font-style: italic;">-i</span>
+<a href="#Ignore_Errors_option">("Ignore
+Errors")</a> <a href="#Command-Line_options_">Command-Line
+option</a> has been specified, the Tokenizer will attempt to
+produce binary output for each error, as far as is feasible, and will
+produce
+a Binary Output file. &nbsp;While this practice is not recommended, the
+author acknowledges that it
+might be useful in some limited circumstances.</p>
+At the end of its run, the Tokenizer will print a tally of the number
+of each type of message that was generated.<br>
+<h2><a name="mozTocId271949"></a><a name="Case_Sensitivity"></a>Case
+Sensitivity</h2>
+Although Command-Line option
+<a href="#Command_Line_Switches">switches</a>
+are case-sensitive, this Tokenizer is insensitive to the distinctions
+between upper- or
+lower- -case characters in all other matters: in Command-Line <a
+ href="#Symbol_Definitions">symbol-definitions</a> and <a
+ href="#Special_Feature_Flags">Special-Feature Flag</a> settings and in
+the Input Source.<br>
+<p>Character-case is preserved in string sequences and in the
+assignment
+of names of headered definitions, but is ignored for purposes of
+name-matching.&nbsp; Case sensitivity of filenames, of course, is
+dependent on the Host Operating System.<br>
+</p>
+<p>This Tokenizer supports a pair of Special-Feature Flags that will
+enable the User to <a href="#Token_Name_Cases">over-ride the
+preservation of character-case</a> in the
+assignment
+of names of headered definitions. </p>
+<h2><a class="mozTocH2" name="mozTocId280593"></a><a
+ name="Categories_of_Features"></a>Categories of <a
+ href="#Features_by_Category">Features</a></h2>
+<!-- ...................................................................................... -->
+The features described in this document fall into four categories:<br>
+<ol>
+  <li><a href="#Directives">Directives</a></li>
+  <li><a href="#Command-Line_options">Command-Line options</a></li>
+  <li><a href="#Non-standard_input_syntaxes">Non-standard</a>
+input, syntaxes, and behavior</li>
+  <li>Options available within &#8220;<a href="#Tokenizer-Escape_Mode">tokenizer-escape</a>&#8221;
+mode (I.e., within
+the scope of a &nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">tokenizer[&nbsp;
+... ]tokenizer</span>&nbsp; block).</li>
+</ol>
+<h3><a class="mozTocH3" name="mozTocId460640"></a><a name="Directives"></a>Directives</h3>
+<a href="#Directives_">Directives</a> are commands that occur within
+the body of the Tokenization
+Source File, but are not part of the FCode program itself.&nbsp; They
+are recognized by the Tokenizer and cause it to perform special actions
+that might serve such diverse functions as:<br>
+<ul>
+  <li>Printing a message to the Standard Output during the Tokenization
+process</li>
+  <li>Controlling whether selected passages of&nbsp; the Source are
+processed or ignored (also called Conditional Compilation or
+Conditional Tokenization)</li>
+  <li>Outputting arbitrary sequences of bytes to the FCode binary file</li>
+</ul>
+<h3><a class="mozTocH3" name="mozTocId930032"></a><a
+ name="Command-Line_options"></a>Command-Line options</h3>
+<a href="#Command-Line_options_">Command-Line options</a> are, as the
+name suggests, switches that can be
+set on the command-line when the Tokenizer is invoked.&nbsp; They
+affect behaviors such as:<br>
+<ul>
+  <li>The verbosity of output during the Tokenization
+process</li>
+  <li>Definition of symbols that feed into some of the Conditional
+Tokenization Directives<br>
+  </li>
+  <li>Allowing output to be produced even when errors have been
+detected.</li>
+  <li>Selectively
+enabling variants of Non-standard input, syntaxes, and behavior<br>
+  </li>
+</ul>
+<h3><a class="mozTocH3" name="mozTocId379181"></a><a
+ name="Non-standard_input_syntaxes"></a><a
+ href="#Non-standard_input_syntaxes_">Non-standard input</a>,
+syntaxes and behavior</h3>
+Certain sequences of source code that are not covered by the IEEE-1275
+Standard are, nonetheless, recognized by this Tokenizer and cause it to
+produce valid FCode.&nbsp; Examples of these include:<br>
+<ul>
+  <li>"C"-style escape characters in strings</li>
+  <li>Sun-style versus Apple-style implementation of the command&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">ABORT"</span>&nbsp;
+    <br>
+  </li>
+  <li>IBM-style Local-Values</li>
+</ul>
+In order to
+accommodate the conflicting goals of standard-compliance and
+convenience,&nbsp; non-Standard variants will be selectively enabled by
+a set of Command-Line options known as "<a href="#Special_Feature_Flags">Special-Feature
+Flags</a>"
+<h3><a class="mozTocH3" name="mozTocId303703"></a><a
+ name="Tokenizer-Escape_Mode"></a>&#8220;Tokenizer-Escape&#8221; Mode</h3>
+Section C.3.1 of
+the IEEE-1275 Standard describes &#8220;<a href="#Tokenizer-Escape_Mode_">tokenizer-escape</a>&#8221;
+mode and its basic
+command, <a href="#emit_byte"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">emit-byte</span></a>&nbsp;
+The OpenBIOS Tokenizer toke, while it does not have a full FORTH
+capability, does support a few additional Forth-style commands that can
+be used to:<br>
+<ul>
+  <li>Define and retrieve named constants</li>
+  <li>Create aliases</li>
+  <li>Set the value of the next FCode-token<br>
+  </li>
+</ul>
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId959733"></a><a
+ name="Features_by_Category"></a>Features, by Category:</h2>
+The following sections will supply a complete list of the new features,
+organized by category.<br>
+<!-- ...................................................................................... -->
+<h3><a class="mozTocH3" name="mozTocId499618"></a><a
+ name="Command-Line_options_"></a>Command-Line options:</h3>
+Command-Line option Switches are <a href="#Case_Sensitivity">case-sensitive</a>;
+their arguments, where applicable, are not.<br>
+<br>
+<h4><a class="mozTocH4" name="mozTocId510152"></a><a
+ name="Command_Line_Switches"></a>Switches</h4>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-h</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-?</span></li>
+</ul>
+<div style="margin-left: 40px;">Print a brief help message and then
+exit.
+</div>
+<ul>
+  <li><a name="verbose_option"></a><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">-v</span></li>
+</ul>
+<p style="margin-left: 40px;">Verbose&nbsp; --&nbsp; print additional
+messages (including <a href="#Advisories">Advisories</a>) during
+tokenization.<br>
+</p>
+<ul>
+  <li
+ style="font-weight: bold; font-family: courier new,courier,monospace;"><a
+ name="Ignore_Errors_option"></a>-i</li>
+</ul>
+<p style="margin-left: 40px;">Ignore Errors.&nbsp; Generate a Binary
+Output&nbsp; <a href="#Errors_Ignored">even if
+errors were reported</a>.
+</p>
+<ul>
+  <li><a name="Binary_Output_Name_option"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-o
+&lt;OutputFileName&gt;</span></li>
+</ul>
+<p style="margin-left: 40px;">Direct the Binary Output (FCode result of
+Tokenization) to the named
+file instead of to the <a href="#Binary_Output_File_Name_Default">default-named
+file</a>.&nbsp; This option is not valid when multiple input files are
+named.
+</p>
+<ul>
+  <li><a name="FLoad_List_option"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-l</span></li>
+</ul>
+<p style="margin-left: 40px;">FLoad List -- Collect the names of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>ed
+files into an
+FLoad-List File.&nbsp; The names collected are in the same form as they
+were presented in the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+statements.
+</p>
+<p style="margin-left: 40px;">The name of the FLoad-List File is
+derived
+from
+the name of
+the Binary Output File, by replacing its extension with&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fl</span>
+, or, if the Binary Output File name had no extension, merely appending
+the
+extension&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fl<br>
+</span></p>
+<p style="margin-left: 40px;">The Binary Output File name used for this
+purpose is either the one specified <a
+ href="#Binary_Output_Name_option">on the Command
+Line</a>,&nbsp; or the one created by <a
+ href="#Binary_Output_File_Name_Default">default</a>. <br>
+</p>
+<ul>
+  <li><a name="Depncy_List_option"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-P</span>&nbsp;&nbsp;&nbsp;&nbsp;
+(Note:&nbsp; Switch is upper-case)<br>
+  </li>
+</ul>
+<p style="margin-left: 40px;">Dependency List -- Collect the
+fully-resolved pathnames
+of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>ed
+and <a href="#ENCODE_FILE">ENCODE</a>d files into a Dependency-List
+File.&nbsp; The names collected are in the form that is presented to
+the Host Operating System:&nbsp; <a
+ href="#Shell_Env_Vbles_in_File_Names">Shell Environment Variables</a>
+and
+related expressions will be fully expanded, and the directory within
+the <a href="#Include_List">Include-List</a> in which the file was
+found will
+be attached.<br>
+</p>
+<p style="margin-left: 40px;">The name of the Dependency-List File will
+be the same as that of the FLoad-List File, except that its extension
+will be <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.P</span>
+instead of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fl</span>
+</p>
+<ul>
+  <li>If an FLoad List&nbsp; or a Dependency List is being collected,
+the
+names of any files that cannot be read, for any reason,&nbsp;will be
+collected into
+a Missing-Files-List file.</li>
+</ul>
+<p style="margin-left: 40px;">The name of the Missing-Files-List file
+will be the same as that of the FLoad-List File except that its
+extension will be <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fl.missing</span>
+instead of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fl</span></p>
+<p style="margin-left: 40px;">The Missing-Files-List file will not be
+created if all of the files are read successfully.<br>
+</p>
+<p style="margin-left: 40px;">If the name
+of the Binary Output File is <a
+ href="#Binary_Output_File_Name_Directive">changed
+by a directive</a>
+embedded within the Tokenization Source File, that will not alter the
+names of the FLoad-List, Dependency List or Missing-Files-List files.</p>
+<h4><a class="mozTocH4" name="mozTocId514350"></a><a name="Include_List"></a>Include-List
+Directories</h4>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-I
+directory</span>&nbsp;&nbsp;&nbsp;&nbsp; (Note:&nbsp; Switch is
+upper-case)</li>
+</ul>
+<p style="margin-left: 40px;">This Tokenizer supports the notion of an
+Include-List.&nbsp; The User creates the Include-List by specifying a
+number of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-I
+directory</span> pairs on the Command-Line.&nbsp; All file-reads,
+whether for an <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+command or an <a href="#ENCODE_FILE"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">encode-file</span></a>
+directive, will involve a search for the named file through the
+directories of the Include-List, in the order they were supplied on the
+Command-Line.
+</p>
+<p style="margin-left: 40px;">If no Include-List is created, file-reads
+are relative to the Current Working
+Directory.&nbsp; If an Include-List <span style="font-style: italic;">is</span>
+created, file-reads are
+restricted to the directories within it.&nbsp; For the Current Working
+Directory to be included in the file-search, it must be specified
+explicitly.&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-I<big>.</big></span>&nbsp;
+will accomplish that quite
+effectively.<br>
+</p>
+<h4><a name="mozTocId515750"></a><a name="Trace_Symbols"></a>Trace the
+Creation and Invocation of FCode or
+"Tokenizer Escape"-mode Definitions</h4>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-T
+&lt;</span><span style="font-family: courier new,courier,monospace;">symbol</span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">&gt;</span>
+&nbsp;&nbsp; &nbsp;&nbsp; (Note:&nbsp; Switch is upper-case)</li>
+</ul>
+<p style="margin-left: 40px;">This Tokenizer supports the notion of a
+"Trace-List".&nbsp; The User creates the Trace-List by specifying a
+number of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-T
+&lt;symbol&gt;</span> pairs on the Command-Line.<br>
+</p>
+<p style="margin-left: 40px;">When a name is defined, whether as an
+FCode, an alias, a Macro or anything else, either in normal
+tokenization mode or "Tokenizer Escape"-mode, if it matches a symbol
+that has been added to the Trace List, a <a href="#Trace_Notes">Trace
+Note</a> Message will be issued indicating that a definition of that
+name has been created.&nbsp;&nbsp; Subsequent <a href="#Trace_Notes">Trace
+Note</a> Messages
+will be issued when the definition of that name is invoked.</p>
+<p style="margin-left: 40px;">This "<span
+ style="font-weight: bold; color: rgb(0, 80, 178);">Trace-Symbols</span>"
+feature can be helpful during maintenance of Legacy
+code, for instance, when multiple symbols carry the same name.<br>
+</p>
+<h4><a class="mozTocH4" name="mozTocId580387"></a><a
+ name="Symbol_Definitions"></a>Command-Line Symbol
+Definitions</h4>
+<ul>
+  <li style="font-family: courier new,courier,monospace;"><a
+ name="Define_Command-Line_symbol"></a><span style="font-weight: bold;">-d
+Symbol</span>[<span style="font-weight: bold;">=Value</span>]</li>
+</ul>
+<p style="margin-left: 40px;">Define a Command-Line Symbol.&nbsp;
+Optionally, assign a value to it.&nbsp; If you wish the "value" to
+contain spaces or quotes, you can accomplish that using the shell
+escape conventions.&nbsp; This sequence may be repeated.&nbsp; Once a
+Symbol is defined on the command-line, it stays in effect for the
+duration of the entire batch of tokenizations (i.e., if there are
+multiple input files named on the command line).&nbsp; Command-Line
+Symbols can be <a href="#Definition_or_non-definition_of_a">tested</a>
+for purposes of Conditional Tokenization, or their assigned values can
+be
+<a href="#Evaluating_Command-line_Symbols">Evaluated</a>.<br>
+</p>
+<h4><a class="mozTocH4" name="mozTocId632060"></a><a
+ name="Special_Feature_Flags"></a>Special-Feature Flags<br>
+</h4>
+<ul>
+  <li style="font-family: courier new,courier,monospace;"><span
+ style="font-weight: bold;">-f</span> [<span style="font-weight: bold;">no</span>]&lt;<span
+ style="font-weight: bold;">FlagName</span>&gt; </li>
+</ul>
+<p style="margin-left: 40px;">The Tokenizer
+recognizes a specific set of Special-Feature Flag-names; each is
+associated with a
+specific non-Standard variant
+behavior.&nbsp; Pass the Flag-name as an argument to the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-f</span>
+switch to enable the behavior; to disable it, precede the Flag-name
+with the
+optional string <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">No</span>
+<br>
+</p>
+<p style="margin-left: 40px;">The settings of the Special-Feature Flags
+can also be <a href="#Changing_C-L_Flags_from_Source">changed</a> or <a
+ href="#Displaying_C-L_Flags_from_Source">displayed</a> from
+within the Source Input File<br>
+</p>
+<p style="margin-left: 40px;">The Special-Feature Flags are all
+initially set to be enabled, except where noted.<br>
+</p>
+<p style="margin-left: 40px;">The Flag-names and their associated
+Special-Features are as follows:</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_Loc_Val"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Local-Values</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Support IBM-style <a
+ href="TokenizerLocalValues.htm">Local Values</a> ("LV"s).&nbsp;
+Initially disabled.
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_LV_Leg_Sep"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">LV-Legacy-Separator</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Allow Semicolon for Local Values
+<a
+ href="TokenizerLocalValues.htm#Separation_Character_between_Initialized">Separator</a>
+("<a href="TokenizerLocalValues.htm#Disallow_Legacy">Legacy</a>").
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_LV_Leg_Mssg"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">LV-Legacy-Message</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Display a <a
+ href="TokenizerLocalValues.htm#Legacy_Separator">Warning
+Message</a> when
+Semicolon
+is used as the Local Values Separator.
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_AB_Q"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT-Quote</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Allow <a href="#SFeat_AB_Q">ABORT"</a>
+macro.
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_Sun_AB_Q"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Sun-ABORT-Quote</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">ABORT" with <a href="#SFeat_Sun_AB_Q">implicit
+IF ... THEN</a>
+</p>
+<ul style="font-family: courier new,courier,monospace;">
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="SF_Flag_AB_Q_Throw"></a>Abort-Quote-Throw</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Use <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-2
+THROW</span> , rather than <a href="#Abort_Quote_Abort"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT</span></a>,
+in an <a href="#SFeat_AB_Q">Abort"</a> phrase</p>
+<ul style="font-family: courier new,courier,monospace;">
+  <ul>
+    <li><a name="SF_Flag_Str_Rem_Esc"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">String-remark-escape</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Allow <a href="#SFeat_Str_Rem_Esc">"\
+(Quote-Backslash)</a> to interrupt
+string parsing.
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_Hex_Rem_Esc"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Hex-remark-escape</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Allow <a href="#SFeat_Hex_Rem_Esc">\
+(Backslash)</a> to interrupt
+<a href="#Hex_Seq_Procg">hex-sequence parsing</a> within a string.
+</p>
+<ul>
+  <ul>
+    <li><a name="SF_Flag_C_Str_Esc"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">C-Style-string-escape</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Allow the <a
+ href="#C-Style_String-Escape_Characters"><big><b>C</b></big>-style
+String-Escape</a>
+pairs&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\n</span>
+<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\t</span>
+and <a href="#SFeat_BS_xx"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\xx\</span></a>
+to be treated as special characters
+in string parsing.
+</p>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Always-Headers</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">Over-ride occurrences of the
+Standard directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">headerless</span>
+in the Source with -- effectively -- <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">headers</span>
+to make all definitions have a header.&nbsp; Occurrences of the
+directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">external</span>
+will continue to behave in the Standard manner.&nbsp; Initially
+disabled.
+</p>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Always-External</span></li>
+  </ul>
+</ul>
+<p style="margin-left: 120px;">All definitions will be made as
+though under the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">external</span>
+directive; occurrences of either Standard directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">headerless</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">headers</span>
+in the Source will be over-ridden.&nbsp; This Special-Feature Flag will
+also over-ride the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Always-Headers</span>
+Special-Feature Flag in the event that both have been specified.&nbsp;
+Initially disabled.
+</p>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Warn_if_Duplicate_Flag"></a>Warn-if-Duplicate</span></li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">Display a <a href="#A_WARNING">WARNING</a>
+message whenever
+a
+definition is made
+whose name duplicates that of an existing definition.&nbsp; Disabling
+this flag will suspend the duplicate-names test globally, until it
+is re-enabled.&nbsp; A Directive is supported that will <a
+ href="#The_OVERLOAD_Directive">suspend the
+test for the duration of only a single definition</a>, without
+affecting global behavior.
+</div>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Obso_FCode_Warning"></a>Obsolete-FCode-Warning</span></li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">Display a <a href="#A_WARNING">WARNING</a>
+message whenever an FCode function is invoked that the Standard
+identifies as "obsolete".
+</div>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Trace_Condls"></a>Trace-Conditionals</span></li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">Issue <a href="#Advisories">Advisory
+Messages</a> about the <a href="#Tracing_Conditional_State">state of</a>
+<a href="#Conditional_Tokenization">Conditional Tokenization</a>.&nbsp;
+(Remember that <a href="#Advisories">Advisory
+Messages</a> are displayed only if the "verbose" option <a
+ href="#verbose_option"><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">-v</span></a>
+is set.)&nbsp;
+Initially disabled.
+</div>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Token_Name_Case_Upper"></a><a name="Token_Name_Cases"></a>Upper-Case-Token-Names
+      </span> </li>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Token_Name_Case_Lower"></a>Lower-Case-Token-Names </span> </li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">When outputting the names of headered
+functions ("Token-Names") to the Binary Output File, over-ride the
+character-case in which the names appeared in the Source, and convert
+them to Upper- or Lower- -Case, respectively.&nbsp; (These flags do not
+affect text string sequences, whose character-case is always
+preserved.)&nbsp;
+Initially disabled.<br>
+</div>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Big_End_PCI_Rev_Level"></a>Big-End-PCI-Rev-Level</span></li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">Save the "<a href="#PCI_Rev_Level">Revision
+Level of the
+Vendor's ROM</a>" field of the PCI Header in <a
+ href="#PCI_Rev_Level_Byte_Order">Big-Endian byte-order</a>, rather
+than&nbsp; "Little-Endian" as per the general PCI Standard
+convention. (This flag does not affect any other field of the PCI
+Header).&nbsp;
+Initially disabled.<br>
+</div>
+<ul>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="Ret_Stk_Interp"></a>Ret-Stk-Interp<br>
+      </span></li>
+  </ul>
+</ul>
+<div style="margin-left: 120px;">Allow Return-Stack Operations during
+Interpretation.&nbsp; While the Standard specifies that usage of the
+operators&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">&gt;r</span>&nbsp;
+<span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">r@</span>&nbsp;
+and&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">r&gt;</span>
+while interpreting is allowed, actual practice in the industry is
+inconsistent.&nbsp; Developers who wish to take a more cautious
+approach to this question can disable this flag so that any attempt to
+use the operators&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">&gt;r</span>&nbsp;
+<span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">r@</span>&nbsp;
+and&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">r&gt;</span>
+in the "interpreting" state will generate an <a href="#An_ERROR">ERROR</a>
+Message.<br>
+</div>
+<p style="margin-left: 40px;">
+Also, the pseudo-Flag-name&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">help</span>&nbsp;
+will cause a list of the Flag-names and their associated
+Special-Features to be printed.</p>
+<p style="margin-left: 40px;">
+The use of some of these flags is illustrated in <a href="#Example_2">Example
+#2</a>
+</p>
+<h3><a class="mozTocH3" name="mozTocId445349"></a><a
+ name="Tokenizer-Escape_Mode_"></a>&#8220;Tokenizer-Escape&#8221; Mode</h3>
+<p>The directive&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">tokenizer[</span>&nbsp;&nbsp;
+behaves as specified in Section C.3.1 of the IEEE-1275 Standard: it
+saves the current tokenizer numeric conversion radix, sets the radix to
+sixteen (hexadecimal) and enters &#8220;tokenizer-escape&#8221; mode.&nbsp;
+Likewise, the directive&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">]tokenizer</span>&nbsp;
+restores the radix and resumes the Tokenizer&#8217;s normal behavior.</p>
+<p>
+For convenience and compatibility with IBM's source-base, the
+directives&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">f[&nbsp;</span>
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">f]</span>&nbsp;&nbsp;
+are synonyms for&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">tokenizer[</span>&nbsp;
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">]tokenizer</span>
+respectively.&nbsp; In addition, the variant&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">]f</span>&nbsp;&nbsp;
+is a synonym for <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">f]</span>&nbsp;
+.
+</p>
+<p>The numeric conversion radix can be changed during&nbsp;
+&#8220;Tokenizer-Escape&#8221; mode by the use of the standard directives&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">hex
+decimal&nbsp;</span> and&nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">
+octal</span>&nbsp; .&nbsp; These will always change the numeric
+conversion radix in &#8220;tokenizer-escape&#8221; mode; even if&nbsp;
+&#8220;tokenizer-escape&#8221; mode was entered in the middle of a
+colon-definition, they will not issue an FCode sequence.&nbsp; And, as
+per the Standard, the numeric conversion radix will be restored when
+the Tokenizer returns to "Normal" mode.<br>
+</p>
+<a name="Tkz_Esc_Scope"></a>Function-names that were defined during
+normal tokenization mode will
+not be recognized in &#8220;Tokenizer-escape&#8221; mode and vice-versa.&nbsp; The
+one exception is that <a href="#F_B-T-B_TkzEsc"><span
+ style="font-family: courier new; font-weight: bold;">F[']</span></a> ,
+even when invoked in &#8220;Tokenizer-escape&#8221; mode, will apply to
+function-names that were defined during normal tokenization mode.<br>
+<h4 style="margin-left: 40px;"><a name="mozTocId445715"></a>The&nbsp; <span
+ style="font-family: courier new,courier,monospace;"><a name="emit_byte"></a>emit-byte</span>&nbsp;
+command
+</h4>
+<p style="margin-left: 40px;"><a name="Run-time_data_stack"></a>This
+Tokenizer supports the&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">emit-byte</span>&nbsp;
+command as specified in the Section cited above.&nbsp; In order to be
+able to do that, the &#8220;tokenizer-escape&#8221; mode needs to be able to
+support a tokenization-time data stack, and, indeed, it does.<br>
+</p>
+<h4 style="margin-left: 40px;"><a name="mozTocId446081"></a>Other
+commands</h4>
+<p style="margin-left: 40px;">In
+&#8220;tokenizer-escape&#8221; mode, a string representing a number (optionally
+preceded by one of the directives <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+d#</span> or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">
+o#</span>&nbsp; ) causes that number to be pushed to the stack, where
+it is available for use by any of several other commands as follows:<br>
+</p>
+<h5 style="font-weight: bold; margin-left: 80px;"><big><a
+ name="mozTocId446447"></a>Standard Commands</big></h5>
+<ul style="margin-left: 120px;">
+  <li><a name="mozTocId446813"></a>The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="next_fcode"></a>next-fcode</span> command </li>
+</ul>
+<div style="margin-left: 160px;">Set the value of the
+FCode-token-number
+assignment counter to the
+number
+that was on the stack.&nbsp; Subsequent fcode-functions defined in the
+source will be assigned FCode token numbers starting with this
+number.&nbsp;
+If the number supplied on the stack is outside the legal range
+specified by the IEEE-1275 Standard, the attempt will be disallowed and
+reported as an <a href="#An_ERROR">Error</a>.<br>
+<p>Note that this Tokenizer supports additional directives for <a
+ href="#Manipulate_FCode_Number">manipulating the FCode-token-number
+assignment counter</a>.<br>
+</p>
+</div>
+<h5 style="margin-left: 80px;"><big><a name="mozTocId447179"></a>Non-Standard
+operations
+</big></h5>
+<ul style="margin-left: 120px;">
+  <li><span style="font-family: courier new,courier,monospace;"><span
+ style="font-weight: bold;"><a name="Tkz_Esc_Const"></a><a
+ name="mozTocId447545"></a>constant</span>
+&lt;Name&gt;</span><br>
+  </li>
+</ul>
+<p style="margin-left: 160px;">Define <span
+ style="font-family: courier new,courier,monospace;">&lt;Name&gt;</span>
+as a named constant with the value that was on the stack.&nbsp; <span
+ style="font-family: courier new,courier,monospace;">&lt;Name&gt;</span>
+will be known within &#8220;tokenizer-escape&#8221; mode but will not be recognized
+during normal tokenization.&nbsp; When <span
+ style="font-family: courier new,courier,monospace;">&lt;Name&gt;</span>
+is invoked, its value will be pushed onto the stack.&nbsp; Two named
+constants are pre-defined: <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">true</span>
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">
+false</span><br>
+</p>
+<ul
+ style="font-family: courier new,courier,monospace; margin-left: 120px;">
+  <li><a name="emit_fcode"></a><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"><a
+ name="mozTocId447911"></a>emit-fcode</span></li>
+</ul>
+<p style="margin-left: 160px;">Emit the value that was on the stack as
+an FCode token, either one or two bytes long, depending on the
+value.&nbsp; Report an <a href="#An_ERROR">Error</a> if the number
+supplied on the stack is
+outside the legal range
+specified by the IEEE-1275 Standard.&nbsp; Since this is sort of a
+"cheat",&nbsp; issue an <a href="#Advisories">Advisory</a> if the
+operation is successful.<br>
+</p>
+<h4 style="margin-left: 40px;"><a name="mozTocId448277"></a>Additional
+FORTH-compatible operations</h4>
+<p style="margin-left: 40px;">
+In addition to the above, &#8220;Tokenizer-escape&#8221; mode recognizes a limited
+number of FORTH-compatible named constants and operations, as follows:<br>
+</p>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">TRUE</span>&nbsp;&nbsp;&nbsp;&nbsp;
+Push&nbsp; -1 onto the stack </li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FALSE</span>&nbsp;&nbsp;&nbsp;&nbsp;
+Push&nbsp; 0 onto the stack</li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0=</span>&nbsp;&nbsp;&nbsp;&nbsp;
+Invert the Boolean-flag on top of the stack:&nbsp; replace 0 with <span
+ style="font-family: courier new,courier,monospace;">TRUE</span>
+or
+any non-zero number with <span
+ style="font-family: courier new,courier,monospace;">FALSE</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">SWAP</span>&nbsp;&nbsp;&nbsp;&nbsp;
+Exchange top two stack items</li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">2SWAP</span>&nbsp;&nbsp;&nbsp;&nbsp;
+Exchange top two pairs of stack items</li>
+  <li><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">noop</span>&nbsp;
+Take no action. </li>
+</ul>
+<p style="margin-left: 40px;">These are different from the
+corresponding words in "Normal" mode,
+which would
+compile an FCode token. In &#8220;Tokenizer-escape&#8221; mode, they initiate an
+immediate
+action within the Tokenization process.
+</p>
+<h3><a class="mozTocH3" name="mozTocId649525"></a><a name="Directives_"></a>Directives</h3>
+<p>This Tokenizer supports a number of directives that are not
+specified
+by the Standard, but which serve functions as follows:<br>
+</p>
+<ul>
+  <li><a href="#Conditional_Tokenization">Conditional Tokenization</a></li>
+  <li><a href="#The_OVERLOAD_Directive">Suspending</a> the
+Duplicate-Name
+Test for one Definition ("Overloading")</li>
+  <li>Suspending the <a href="#Allow_Multi_Line">Multi-Line Warning</a>
+for one occasion<br>
+  </li>
+  <li><a href="#mozTocId203416">Controlling the
+Scope of
+Definitions</a></li>
+  <li><a href="#Evaluating_Command-line_Symbols">Evaluation</a> of
+symbols defined on the command-line</li>
+  <li>Outputting <a href="#FLITERAL">arbitrary sequences</a> of bytes
+to the FCode binary file</li>
+  <li><a href="#ENCODE_FILE">Encoding</a> blocks of binary data taken
+from a file</li>
+  <li>Generating <a href="#Gen_Specl_Txt_Strs">Special Text-Strings</a>
+and Literals: <br>
+  </li>
+  <ul>
+    <li>The <a href="#fcode_date">current
+date or time</a>.</li>
+    <li>The <a href="#function_name">name
+of the function</a> currently
+being defined</li>
+    <li>The <a href="#Inp_Fil_Nm_Strg">Input-File Name</a> and Line
+Number <br>
+    </li>
+  </ul>
+  <li>Pre-pending <a href="#Pre_pending_PCI_Headers_to_FCode_images_">PCI
+headers</a> to FCode
+images</li>
+  <li><a href="#Modifying_PCI_Header">Modifying</a> the PCI Header<br>
+  </li>
+  <li>Changing the name of the <a href="#Binary_Output_File_Name">Binary
+Output File</a></li>
+  <li>Issuing a <a href="#User_Messages">message</a> at tokenization
+time</li>
+  <li><a href="#Changing_C-L_Flags_from_Source">Over-riding</a> the
+setting of a <a href="#Special_Feature_Flags">Special-Feature Flag</a></li>
+  <li><a href="#Displaying_C-L_Flags_from_Source">Displaying</a> the
+settings of all the <a href="#Special_Feature_Flags">Special-Feature
+Flags</a> </li>
+  <li><a href="#Manipulate_FCode_Number">Saving, Restoring and
+Resetting the
+FCode-Token-Number Assignment Counter</a> </li>
+  <li><a href="#Resetting_Symbols_Defined_in_Either_Mode">Resetting the
+symbols</a> defined either in Normal Tokenization Mode or in "Tokenizer
+Escape" mode.<br>
+  </li>
+</ul>
+<h4><a class="mozTocH4" name="mozTocId557512"></a><a
+ name="Conditional_Tokenization"></a>Conditional Tokenization</h4>
+The
+OpenBIOS Tokenizer toke supports a fully-nestable Conditional
+Tokenization capability comparable to the one in the "<big><b>C</b></big>"
+pre-processor.&nbsp; A
+Conditional Tokenization block consists of either one or two segments
+-- a "True" segment and an optional "False" segment -- delimited by <a
+ name="Conditional_Operators"></a>Conditional Operators of three types:<br>
+<ul>
+  <li>the <a href="#Condition_Testers">Condition-Tester</a></li>
+  <li>the optional <a href="#The_False_segment-switcher">"False"
+segment switcher</a></li>
+  <li>the <a href="#The_Conditional-block_Terminator">Conditional-block
+terminator</a></li>
+</ul>
+<p>The "True" segment&nbsp; immediately follows the Condition-Tester,
+and
+is ended either by the "False" segment switcher or by the
+Conditional-block terminator.&nbsp; If the "False" segment
+switcher&nbsp; is present, it introduces the "False" segment, which
+is ended by the
+Conditional-block terminator.&nbsp; The three delimiters (in reverse
+order) are:
+</p>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId686605"></a><a
+ name="The_Conditional-block_Terminator"></a><big>The Conditional-block
+Terminator</big></h5>
+<div style="margin-left: 40px;">Exit the current level of Conditional
+Tokenization.
+<p>If the
+Conditional-block in question was nested within another
+one, resume conditional processing at the
+level of the enclosing segment.&nbsp; When the outermost
+Conditional-block is exited, resume normal processing.<br>
+</p>
+<p>While it is a requirement that&nbsp; the
+Conditional-block terminator be contained within the same Input File as
+the Condition-Tester and its optional "False" segment switcher, the
+body of a Conditional Segment may contain separate <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+directives, which will be processed or ignored in accordance with the
+prevailing Condition.&nbsp; An <a href="#Example_4_Condl_FLoad">illustration</a>
+can be seen in <a href="#Example_4">Example #4</a>. </p>
+There are several synonyms for the Conditional-block terminator:<br>
+</div>
+<ul style="margin-left: 40px;">
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[then]</span></li>
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#then</span></li>
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#then]</span></li>
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[endif]</span></li>
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#endif</span></li>
+  <big> </big><li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#endif]</span></li>
+</ul>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId763728"></a><a
+ name="The_False_segment-switcher"></a><big>The
+"False" segment-switcher</big></h5>
+<p style="margin-left: 40px;">Reverses the sense of the condition and
+introduces the "False"
+segment.</p>
+<p style="margin-left: 40px;">If the Condition-Test resulted in "TRUE",
+then the first segment -- the
+"True" segment -- was processed and the "False" segment will be
+ignored.&nbsp; Conversely, if the Condition-Test resulted in "FALSE",
+then the first segment -- the "True" segment -- was ignored and the
+"False" segment will be processed.</p>
+<p style="margin-left: 40px;">There are three synonyms for this
+function:<br>
+</p>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[else]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#else</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#else]</span></li>
+</ul>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId375310"></a><a
+ name="Condition_Testers"></a><big>Condition-Testers</big></h5>
+<div style="margin-left: 40px;">Tokenization can be controlled
+according to the following conditions:
+</div>
+<ul style="margin-left: 40px;">
+  <li>A <a href="#TrueFalse_flag_on_the_top_of_the_stack">True/False
+flag</a> on the top of the stack</li>
+  <li><a href="#Existence_or_non-existence_of_an_FCode">Existence</a>
+or non-existence of an FCode or "Tokenizer Escape"-mode
+definition</li>
+  <li><a href="#Definition_or_non-definition_of_a">Definition</a> or
+non-definition of a Command-Line symbol.</li>
+</ul>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId104560"></a><a
+ name="TrueFalse_flag_on_the_top_of_the_stack"></a><big>True/False flag
+on the top of the
+stack</big></h5>
+<div style="margin-left: 80px;">
+<p>A number that was placed on the stack
+in &#8220;Tokenizer-Escape&#8221; mode will be consumed and tested.&nbsp; If the
+number was
+non-zero, the Condition-Test will result in "TRUE", and the first
+segment -- the "True" segment -- will be processed and the "False"
+segment, if present, will be ignored.&nbsp; Conversely, if the number
+was zero, the Condition-Test will result in "FALSE", and the first
+segment -- the "True" segment -- will be ignored and the "False"
+segment, if present, will be processed.</p>
+<p>There is only one word for this
+function:<br>
+</p>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[if]</span></li>
+</ul>
+The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[if]</span>
+Operator can be invoked from either "Tokenizer Escape" mode or normal
+tokenization mode, but the number to be tested must have been put on
+top of the Stack during "Tokenizer Escape" mode.
+</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId956359"></a><a
+ name="Existence_or_non-existence_of_an_FCode"></a><big>Existence or
+non-existence of an
+FCode or "Tokenizer Escape"-mode definition</big></h5>
+<p style="margin-left: 80px;">A name-string must follow the directive
+<a href="#Expected_on_same_line">on the same line</a>.&nbsp; A
+search for that name is conducted through the word-list of the mode --
+i.e.,
+"Tokenizer Escape" mode versus "Normal" mode -- and the <a
+ href="#Scope_Directives">Scope</a> -- i.e., "<a
+ href="#Global_Definitions">Global</a>" versus "<a
+ href="#device-node_vocabularies">Current Device-Node</a>" -- in which
+the
+Tokenizer is currently operating.</p>
+<p style="margin-left: 80px;">If the directive is for the existence of
+the definition, and the name
+is found, or if the directive is for the non-existence of the
+definition, and the name is not found, the Condition-Test will result
+in "TRUE".&nbsp; Otherwise, the Condition-Test results in "FALSE".</p>
+<div style="margin-left: 80px;">The synonyms for the test for <span
+ style="font-style: italic; font-weight: bold;">existence</span> of a
+definition are:<br>
+</div>
+<ul style="margin-left: 80px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifexist]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#ifexist</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#ifexist]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifexists]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#ifexists</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#ifexists]</span></li>
+</ul>
+<p style="margin-left: 120px;">(Note the variants with
+and without a final '<span style="font-weight: bold;">s</span>')<br>
+</p>
+<div style="margin-left: 80px;">The synonyms for the test for <span
+ style="font-weight: bold; font-style: italic;">non-existence</span> of
+a definition are:<br>
+</div>
+<ul style="margin-left: 80px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifnexist]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#ifnexist</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#ifnexist]</span></li>
+</ul>
+<div style="margin-left: 120px;">(Note that variants with a final '<span
+ style="font-weight: bold;">s</span>'
+didn't make sense here.)<br>
+</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId880808"></a><a
+ name="Definition_or_non-definition_of_a"></a><big>Definition or
+non-definition of a
+Command-Line Symbol</big></h5>
+<div style="margin-left: 80px;">As noted <a
+ href="#Define_Command-Line_symbol">above</a>, the Tokenizer
+recognizes the syntax<br>
+</div>
+<div style="margin-left: 120px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-d
+Symbol</span>[<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">=Value</span>]
+<br>
+</div>
+<div style="margin-left: 80px;">as the means by which to define a
+Command-Line Symbol and optionally assign a value to it.<br>
+</div>
+<div style="margin-left: 80px;">
+<p>A pair of Condition-Tester directives
+are supported that will test, respectively, for definition or
+non-definition of a named Symbol.&nbsp; Their operation is similar to
+that of the Tests for existence of non-existence of a Definition, in
+that a name-string must follow the directive
+<a href="#Expected_on_same_line">on the same line</a>, but they are
+different in the matter of where the
+search for the name string is conducted:&nbsp; these directives search
+the list of Command-Line Symbols.&nbsp; The relation between the type
+of directive and the result of the search is also similar to that of
+the Tests for existence of non-existence of a Definition.</p>
+</div>
+<div style="margin-left: 80px;">The synonyms for the test for <span
+ style="font-weight: bold; font-style: italic;">definition</span> of a
+Command-Line Symbol are:<br>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifdef]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#ifdef</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#ifdef]</span></li>
+</ul>
+</div>
+<div style="margin-left: 80px;">The synonyms for the test
+for <span style="font-weight: bold; font-style: italic;">non-definition</span>
+of a Command-Line Symbol are:<br>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifndef]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#ifndef</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#ifndef]</span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;"></span>
+  </li>
+</ul>
+</div>
+<div style="margin-left: 80px;">The test is simply to verify the
+existence of a Symbol; it is not sensitive to
+whether or not the optional value was assigned.&nbsp;<br>
+</div>
+<h5 style="margin-left: 40px;"><a name="mozTocId891224"></a><a
+ name="Tracing_Conditional_State"></a><big>Tracing the state of
+Conditional
+Tokenization</big></h5>
+<div style="margin-left: 40px;">The nesting and un-nesting of
+<a href="#Conditional_Tokenization">Conditional Tokenization</a> can
+become complicated; an <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>ed
+file may contain a segment-switcher or Conditional-block terminator
+that interacts with the prevailing Condition-Tester that originated in
+another Source file, which might lead to unexpected results.&nbsp; To
+help trace the status of Conditional Tokenization, the User can invoke
+the <a href="#Trace_Condls"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Trace-Conditionals</span></a>&nbsp;
+Special-Feature Flag together with the"verbose" option ( <a
+ href="#verbose_option"><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">-v</span></a>
+).&nbsp; This will cause an <a href="#Advisories">Advisory
+Message</a> to be displayed whenever a <a href="#Conditional_Operators">Conditional
+Operator</a> is
+encountered, even if it is in a segment that is already being ignored.
+The message will indicate the location of the associated <a
+ href="#Condition_Testers">Condition-Tester</a> (or the state of the
+condition, if the Conditional Operator <span
+ style="font-style: italic;">is</span> a Condition-Tester) and whether
+the segment is being Processed or being Ignored. </div>
+<br>
+<h4><a class="mozTocH4" name="mozTocId202222"></a><a
+ name="The_OVERLOAD_Directive"></a><big>Suspending
+the Duplicate-Name Test for one Definition ("Overloading")</big></h4>
+<p>When a definition is created whose name duplicates that of an
+existing definition, default behavior is to issue a <a
+ href="#A_WARNING">WARNING</a>
+notification.
+</p>
+<p>Intentionally creating such a
+duplicately-named definition is called "overloading" the name.&nbsp;
+This may be required, for instance, to supplant future invocations of
+the named function with a version that incorporates the earlier
+instance of the function of
+the same name and supplies additional behavior.
+</p>
+<p>When this is intentional, no warning should be issued.&nbsp; This
+Tokenizer
+supports a directive called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">overload</span>
+which the User may invoke to bypass the duplicate-name test for the
+duration of only one definition that follows
+it (as contrasted with <a href="#Warn_if_Duplicate_Flag">suspending
+the test globally</a>).&nbsp; An illustration of its use may be seen in
+<a href="#Example_4">Example 4</a>.<br>
+</p>
+<h4><a class="mozTocH4" name="mozTocId202620"></a><a
+ name="Allow_Multi_Line"></a><big>Suspending the Multi-Line Warning
+for one occasion</big></h4>
+<p>The Standard allows Comments and Strings that extend across multiple
+lines, terminated by their specific delimiter.&nbsp; In addition, this
+Tokenizer allows User-generated Messages and Local-Values Declarations
+that, likewise, extend across multiple lines.&nbsp; Because of the
+potential for a cascade of errors that can be caused by a missing
+delimiter, this Tokenizer issues a <a href="#A_WARNING">WARNING</a>
+notification whenever such an entity is encountered.&nbsp; <a
+ href="#Example_5_func_nam">Example #5</a> shows an occasion where this
+might be helpful.<br>
+</p>
+<p>When this is intentional, no warning should be issued.&nbsp; This
+Tokenizer
+supports a directive called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">multi-line</span>
+which the User may invoke to suppress the notification for the next
+multi-line item that follows
+it. </p>
+<h4><a class="mozTocH4" name="mozTocId203416"></a><a
+ name="Scope_Directives"></a><big>Controlling
+the Scope of Definitions</big></h4>
+<p>The User may wish to create a collection of utility functions
+that will be available to all the device-nodes in a <a
+ href="#Multiple_device_nodes">multiple-node
+driver</a>.&nbsp; Directly accessing such functions across device-nodes
+can
+be risky if any component uses <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+data.&nbsp; However, if the use of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+data is precluded, such access can be performed safely.</p>
+<p>This Tokenizer
+supports a pair of directives for setting the Scope of
+Definitions.&nbsp; The one called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">global-definitions</span>
+will cause all subsequent definitions -- Aliases and Macros as well as
+FCode -- to be entered into the same vocabulary -- referred to as the
+"core" -- from which all the Standard functions are drawn.&nbsp; The
+other, called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">device-definitions</span>
+, will cause the Scope of Definitions to revert to the <a
+ href="#current_device-node"><span
+ style="font-family: courier new,courier,monospace; font-style: italic;">current
+device-node</span></a>.&nbsp; The use of these directives is
+illustrated in
+<a href="#Example_4">Example #4</a>.<br>
+</p>
+<p>While Global Scope is in effect, the use of the word <a
+ href="#Instance_Not_Allowed"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span></a>
+will not be allowed, nor will definitions made in any device-node be
+recognized.&nbsp; Conversely, an attempt to enter Global Scope while <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+is in effect will be reported as an <a href="#An_ERROR">Error</a>
+condition.</p>
+<h4><a class="mozTocH4" name="mozTocId314185"></a><a
+ name="Evaluating_Command-line_Symbols"></a><big>Evaluating
+Command-line Symbols</big></h4>
+A Directive is supported that can be used to extract the <a
+ href="#Define_Command-Line_symbol">optional
+value</a> that was assigned to a Command-Line Symbol.
+<p>The Symbol name must appear <a href="#Expected_on_same_line">on the
+same line</a> as the directive.</p>
+<p>If the Symbol name is not found or no value has been assigned to it,
+a <a href="#A_WARNING">WARNING</a> will
+be issued.</p>
+Otherwise, the associated value will be interpreted as though it were
+source-code.
+<p>The synonyms for the directive to evaluate a Command-Line Symbol's
+assigned value are:<br>
+</p>
+<ul>
+  <li><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">[defined]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#defined</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#defined]</span></li>
+</ul>
+<h4><a class="mozTocH4" name="mozTocId655967"></a><big><a
+ name="FLITERAL"></a>Outputting
+Arbitrary Byte-Sequences to
+the FCode Binary</big></h4>
+In addition to the Standard <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">emit-byte</span>
+command, this Tokenizer supports a directive called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FLITERAL</span>
+, which will emit the number popped from the top of the Data Stack as a
+literal to the FCode Binary, as though the number were invoked during
+normal operation.
+<p>The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FLITERAL</span>
+directive can be invoked from either "Tokenizer Escape" mode or normal
+tokenization mode, but the number to be emitted must have been put on
+top of the Stack during "Tokenizer Escape" mode.</p>
+<h4><a class="mozTocH4" name="mozTocId114013"></a><big><a
+ name="ENCODE_FILE"></a>Encoding blocks of binary data taken from a
+file
+</big></h4>
+The directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ENCODE-FILE</span>&nbsp;
+takes a file-name as an argument <a href="#Expected_on_same_line">on
+the same line</a>.&nbsp; It translates
+the contents of the file into a series of strings interspersed
+with&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">encode-bytes</span>&nbsp;
+and&nbsp;&nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">encode+</span>&nbsp;
+commands, resulting in a block of byte-encoded binary data.<br>
+<h4><a name="mozTocId69109"></a><big><a name="Gen_Specl_Txt_Strs"></a>Generating
+Special Text-Strings and Literals</big></h4>
+This Tokenizer supports a set of directives that will present a string
+or a literal
+for processing as though it were part of the Tokenization Source
+File.&nbsp; Except as otherwise noted, these directives may be invoked
+in either "Normal" or
+"Tokenizer-Escape" mode:&nbsp; in "Normal" mode, the string produced
+will be
+compiled-in as an in-line text
+string; in "Tokenizer-Escape" mode, it will be displayed as a
+User-generated <a href="#User_Messages"><span
+ style="font-weight: bold; font-style: italic;">MESSAGE</span></a>.<br>
+<br>
+<h5 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId70133"></a><big><a
+ name="fcode_date"></a>Current date or time</big></h5>
+<div style="margin-left: 40px;">The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[fcode-date]</span>
+directive produces a string&nbsp; that consists of the current date,
+formatted as&nbsp; <span
+ style="font-family: courier new,courier,monospace;">mm/dd/ccyy</span>
+.
+</div>
+<p style="margin-left: 40px;">The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[fcode-time]</span>
+directive produces a string&nbsp; that consists of the current time,
+formatted as&nbsp; <span
+ style="font-family: courier new,courier,monospace;">hh:mm:ss ZZZ</span>&nbsp;
+(where <span style="font-family: courier new,courier,monospace;">ZZZ</span>
+represents the local Time-Zone).<br>
+</p>
+<p style="margin-left: 40px;">An <a href="#timestamp_prop">illustration</a>
+is included in <a href="#Example_4">Example 4</a>.<br>
+</p>
+<h5 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId71157"></a><big><a
+ name="function_name"></a>Name of the Function currently
+being defined</big></h5>
+<div style="margin-left: 40px;">
+<p>The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[function-name]</span>
+directive, when invoked in "Normal" mode, produces an in-line string
+that consists of the name of the function (colon-definition) most
+recently -- or currently
+being --
+defined.&nbsp; It will persist until a new colon-definition is
+started.&nbsp;
+This can be useful for embedding interpetation-time or run-time
+debugging-statements into or after
+functions' definitions.&nbsp; In "Tokenizer-Escape" mode, it will
+display the
+function name in more detail as a
+User-generated <a href="#User_Messages"><span
+ style="font-weight: bold; font-style: italic;">MESSAGE</span></a>.&nbsp;
+<a href="#Example_5">Example 5</a> illustrates its
+use in "Normal" mode, and has a small <a href="#Example_5_func_nam">illustration</a>
+of its use in "Tokenizer-Escape" mode.
+</p>
+</div>
+<h5 style="margin-left: 40px;"><a name="mozTocId72181"></a><big><a
+ name="Inp_Fil_Nm_Strg"></a>Input-File Name and Line Number</big></h5>
+<div style="margin-left: 40px;">The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[input-file-name]</span>directive
+produces an in-line string that
+consists of the name of the current Input File.<br>
+<p>The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[line-number]</span>directive
+produces an in-line numeric literal giving the Line-Number within the
+current Input File.<br>
+</p>
+<p>These directives
+can only be invoked in "Normal" mode; they&nbsp;are not supported -- or
+needed -- in
+"Tokenizer-Escape" mode,&nbsp; because any User-generated <a
+ href="#User_Messages"><span
+ style="font-weight: bold; font-style: italic;">MESSAGE</span></a> will
+print that information. An <a href="#Example_5_func_nam">illustration</a>
+is included in <a href="#Example_5">Example 5</a>.<br>
+</p>
+</div>
+<h4><a class="mozTocH4" name="mozTocId844437"></a><big><a
+ name="Pre_pending_PCI_Headers_to_FCode_images_"></a>Pre-pending
+PCI Headers to FCode
+images</big>
+</h4>
+The directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-header</span>
+, which can be invoked from either "Tokenizer Escape" mode or normal
+tokenization mode, will cause a&nbsp; PCI Header to be generated to the
+Binary Output file, in front of the FCode Binary image.&nbsp; It takes
+three parameters from the Data Stack:&nbsp; Vendor ID as the third item
+on the Stack, Device ID as the second, and Class Code as the top item
+on the Data Stack.&nbsp; These must be put on the Stack during
+"Tokenizer Escape" mode.
+<p>An attempt to issue the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-header</span>
+directive after FCode output has begun will be reported as an <a
+ href="#An_ERROR">Error</a> condition.</p>
+<p>
+The PCI Header cannot be completed until after the FCode Binary image
+has been completely tokenized.&nbsp; The directive to complete the PCI
+Header should be issued at the end of the process.&nbsp; Synonyms for
+this directive are:
+</p>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-header-end</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-end</span></li>
+</ul>
+<h4 style="font-weight: bold;"><a class="mozTocH4" name="mozTocId931658"></a><a
+ name="Modifying_PCI_Header"></a><big>Modifying the PCI
+Header</big></h4>
+Directives are supported that will alter specific fields of the PCI
+Header.&nbsp; They can be issued at any time before the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-end</span>&nbsp;
+directive to specify the contents of certain fields of the PCI Data
+Structure as follows:<br>
+<ul>
+  <li>"Revision Level of the Vendor's ROM"&nbsp; (2 bytes at
+offset 0x12)</li>
+  <li>"Last Image Indicator" bit (High-order bit of 1 byte at offset
+0x15)</li>
+</ul>
+The syntax for these functions is:<br>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId504353"></a><big><a
+ name="PCI_Rev_Level"></a>"Revision
+Level of the Vendor's ROM"</big></h5>
+<div style="margin-left: 40px;">To set the "Revision Level of the
+Vendor's ROM" field of the PCI Header to the number popped from the top
+of the Data Stack, use any of these synonyms:<br>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">set-rev-level</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-revision</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">pci-code-revision</span></li>
+</ul>
+These directives can be invoked from either "Tokenizer Escape" mode or
+normal tokenization mode, but the number to be used must have been put
+on top of the Stack during "Tokenizer Escape" mode.
+<p>The default setting for this field is 1.<br>
+</p>
+<h6 style="font-weight: bold; margin-left: 40px;"><a
+ name="mozTocId503878"></a><big><a name="PCI_Rev_Level_Byte_Order"></a>Byte-Order</big></h6>
+<p style="margin-left: 40px;">Ordinarily, the "Revision Level of the
+Vendor's ROM" field of the PCI Header follows the general PCI Standard
+convention of "Little-Endian" byte-order.&nbsp; However, some
+organizations' legacy code saves this field in Big-Endian order.&nbsp;
+To
+accommodate the need for compatibility, this
+Tokenizer supports a <a href="#Special_Feature_Flags">Special-Feature
+Flag</a> called <a href="#Big_End_PCI_Rev_Level"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Big-End-PCI-Rev-Level</span></a>.&nbsp;
+Its default is <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">no</span>,
+i.e., to follow the PCI Standard.&nbsp; </p>
+<br>
+</div>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId53081"></a><big><a
+ name="Last_Image_Indicator_bit"></a>"Last
+Image Indicator" bit</big></h5>
+<div style="margin-left: 40px;">The "Last Image Indicator" bit can be
+specified in either of three ways:<br>
+<ul>
+  <li>Force it to be set to TRUE.&nbsp; Synonyms for this are:</li>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">last-image</span></li>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">last-img</span></li>
+  </ul>
+</ul>
+<ul>
+  <li>Force it to be reset to FALSE.&nbsp; Synonyms for this are:</li>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">not-last-image</span></li>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">not-last-img</span></li>
+  </ul>
+</ul>
+<ul>
+  <li>Set or reset it according to the number popped from the top
+of the Data Stack.&nbsp; Synonyms for this are:</li>
+  <ul>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">set-last-image</span></li>
+    <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">set-last-img</span></li>
+  </ul>
+</ul>
+</div>
+<div style="margin-left: 80px;">If the number was zero, the "Last Image
+Indicator" bit will be reset to FALSE; if it was non-zero, the bit will
+be set to TRUE.</div>
+<p style="margin-left: 80px;">These directives can be invoked from
+either "Tokenizer Escape"
+mode or
+normal tokenization mode, but the number to be examined must have been
+put
+on top of the Stack during "Tokenizer Escape" mode.
+</p>
+<p style="margin-left: 40px;">The default setting for this field is
+TRUE.</p>
+<h4><a class="mozTocH4" name="mozTocId410469"></a><big><a
+ name="Binary_Output_File_Name"></a>Changing the name of the
+Binary Output File</big></h4>
+<p><a name="Binary_Output_File_Name_Default"></a>By default, the name
+of the Binary Output File is derived from the
+name
+of the Source Input File, by replacing its extension with&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fc</span>
+, or, if&nbsp; the Input File name had no extension, merely appending
+the
+extension&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.fc</span></p>
+<p>
+The name of the Binary Output File may be specified on the Command
+Line,&nbsp; as noted <a href="#Binary_Output_Name_option">above</a>.</p>
+<p><a name="Binary_Output_File_Name_Directive"></a>
+The name of the Binary Output File may also be specified by a directive
+embedded within the Tokenization Source File.&nbsp; Synonyms for the
+directive are&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">save-image</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">save-img</span>
+; the name follows after the directive <a href="#Expected_on_same_line">on
+the same line</a>.<br>
+</p>
+<p>The directive can be invoked from either "Tokenizer Escape" mode or
+normal tokenization mode. It does not cause an imediate action (i.e.,
+saving the Binary Image), but merely alters the name of the file to
+which the image will be saved when tokenization is completed.<br>
+</p>
+<p>Note that this directive does not change the name of the <a
+ href="#FLoad_List_option">FLoad-List File</a>, if one has been
+specified.
+</p>
+<h4><a class="mozTocH4" name="mozTocId982642"></a><big><a
+ name="User_Messages"></a>Issuing messages at Tokenization
+time.</big></h4>
+Directives are supported that will gather text and output it as a
+User-generated <span style="font-weight: bold; font-style: italic;">MESSAGE</span>
+during
+Tokenization.
+<p>These directives can be invoked from either "Tokenizer
+Escape" mode or normal tokenization mode:</p>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#MESSAGE"</span>&nbsp;
+will parse text in <a href="#String_Gathering_Features">string-collection
+mode</a>, i.e., with
+sensitivity to the special escaped-characters, until a concluding
+Quote-followed-by-whitespace,</li>
+</ul>
+<div style="margin-left: 40px;">and the synonyms:
+</div>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[MESSAGE]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#MESSAGE</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#MESSAGE]</span></li>
+</ul>
+<div style="margin-left: 40px;">will gather the text remaining on the
+line.
+</div>
+<p>In addition,&nbsp; the commands&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">."</span>&nbsp;
+(Dot-Quote) and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">.(</span>&nbsp;
+(Dot-Paren), which have Standard meanings in normal tokenization
+mode, will, when invoked in
+"Tokenizer Escape" mode,
+collect text in their Standard manner and output it as a User-generated
+<span style="font-weight: bold; font-style: italic;">MESSAGE</span>:</p>
+<ul>
+  <li>Dot-Quote will parse text in <a href="#String_Gathering_Features">string-collection
+mode</a>,</li>
+  <li>Dot-Paren will collect text until a
+balancing Close-Paren --&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">)</span>&nbsp;
+-- character.</li>
+</ul>
+<p>Also, as noted earlier, the <a href="#fcode_date"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[fcode-date]</span></a>
+and <a href="#fcode_date"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[fcode-time]</span></a>
+directives, when invoked in
+"Tokenizer Escape" mode, will display the current date and time,
+respectively,&nbsp;as a User-generated
+<span style="font-weight: bold; font-style: italic;">MESSAGE</span>: </p>
+<h4><a class="mozTocH4" name="mozTocId550942"></a><big><a
+ name="Changing_C-L_Flags_from_Source"></a>Changing Special-Feature
+Flags
+from Source</big></h4>
+A directive is supported that can be used from within the Tokenization
+Source File to over-ride the setting of any one of the <a
+ href="#Special_Feature_Flags">Special-Feature
+Flags</a> that might have been made from the Command Line.&nbsp; The
+name of the Flag --&nbsp;with, of course, an optional leading <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">No</span>
+-- must follow after the directive <a href="#Expected_on_same_line">on
+the same line</a>.&nbsp; It can be
+invoked from either "Tokenizer Escape" mode or normal tokenization
+mode.&nbsp; Its synonyms are:
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[FLAG]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#FLAG</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#FLAG]</span></li>
+</ul>
+<p>The User is hereby admonished to exercise caution when using this
+directive.&nbsp; Not all combinations are meaningful, and automated
+error-checking is not feasible.&nbsp; An <a href="#Advisories">Advisory
+Message</a> will
+be issued to remind the User of the change.<br>
+</p>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId551846"></a><big><a
+ name="Displaying_C-L_Flags_from_Source"></a>Displaying
+Special-Feature Flags from Source</big></h5>
+<div style="margin-left: 40px;">A directive is supported that can be
+used from within the Tokenization
+Source File to display a <a href="#User_Messages"><span
+ style="font-weight: bold; font-style: italic;">MESSAGE</span></a> with
+a list of the settings of all of the Special-Feature Flags.&nbsp; Its
+synonyms are:
+</div>
+<div style="margin-left: 40px;">
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[FLAGS]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#FLAGS</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[#FLAGS]</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">SHOW-FLAGS</span></li>
+</ul>
+</div>
+<h4><a class="mozTocH4" name="mozTocId573280"></a><big><a
+ name="Manipulate_FCode_Number"></a>Manipulating the
+FCode-Token-Number Assignment Counter</big></h4>
+In addition to the Standard&nbsp; <a href="#next_fcode"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">next-fcode</span></a>&nbsp;
+command, this Tokenizer supports additional directives that can be used
+to
+alter the normal sequence of FCode-token-number assignment.<br>
+<p>In order to protect against unintended collisions in FCode-token
+numbers, which can cause severe
+errors at run-time, this Tokenizer will report an <a href="#An_ERROR">Error</a>
+the first time
+an FCode-number assignment overlaps FCodes that were assigned in a
+different range.<br>
+</p>
+<p>Because the programmer may choose to "recycle" FCode-token-numbers
+intentionally, a directive is supported that clears the records of
+FCode-number assignments and resets the FCode-token-number assignment
+counter to its inital value. </p>
+<h5 style="margin-left: 40px;"><big><a name="mozTocId566072"></a>Saving
+and Restoring</big></h5>
+<div style="margin-left: 40px;">
+The directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Push</span>
+can be used to save the value of the FCode-token-number assignment
+counter on the <a href="#Run-time_data_stack">tokenization-time
+data
+stack</a> .&nbsp; Later, the saved value can be restored by invoking
+the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Pop</span>
+directive.&nbsp; Note that <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Pop</span>&nbsp;
+is functionally equivalent to <a href="#next_fcode"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">next-fcode</span></a>
+except that&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Push</span>
+&nbsp;and &nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Pop</span>&nbsp;
+can be invoked from either "Tokenizer Escape" mode or "Normal" mode.</div>
+<h5 style="margin-left: 40px;"><big><a name="mozTocId568474"></a>Resetting</big></h5>
+<div style="margin-left: 40px;">
+The directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Reset</span>
+will re-initalize the value of the FCode-token-number assignment
+counter and clear the records of previous FCode-number
+assignments.&nbsp; Note that it is not equivalent to:<br>
+<p style="margin-left: 40px;"><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">F[</span>
+&nbsp;&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">h#
+800 next-fcode</span>
+&nbsp; <span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">F]</span></p>
+which merely re-initalizes the value of the FCode-token-number
+assignment counter, but does not prevent the first assignment of this
+FCode-number from being regarded as overlapping an earlier
+assignment&nbsp; and therefore being reported as an <a href="#An_ERROR">Error</a>.<br>
+<p>The FCode-token-number assignment
+counter and the records of previous FCode-number assignments will also
+be automatically re-initalized when a <a href="#Multiple_PCI_Image">new
+PCI-Image</a> block is started.<br>
+</p>
+</div>
+<h4><a class="mozTocH4" name="mozTocId575686"></a><big>Resetting
+Symbols Defined in Either Mode</big></h4>
+Symbol names defined in "Normal" mode persist until a <a
+ href="#Multiple_device_nodes">device-node is finished</a>, or until
+the end of an FCode-block or of a PCI Image.<br>
+<p>Symbol names defined in "Tokenizer Escape" mode persist throughout
+the entire run of the Tokenizer. </p>
+The directive <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Reset-Symbols</span>
+enables the User to delete symbol-definitions at any other time, should
+that be required. <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Reset-Symbols</span>&nbsp;
+is sensitive to the the mode in which the Tokenizer is operating:&nbsp;
+invoked during "Tokenizer Escape" mode, it will cause only the
+definitions made under "Tokenizer Escape" mode to be deleted; during
+"Normal" mode, only those made under "Normal" mode.&nbsp; <a
+ href="#Example_1">Example
+#1</a> contains an invocation in "Tokenizer Escape" mode.<br>
+<br>
+<h3><a class="mozTocH3" name="mozTocId957252"></a><a
+ name="Non-standard_input_syntaxes_"></a>Non-standard input,
+syntaxes, and behavior<br>
+</h3>
+<p>In this section, we will discuss:<br>
+</p>
+<ul>
+  <li>This Tokenizer's handling of conditions the Standard calls
+"ambiguous"</li>
+  <li>Non-Standard synonyms for Standard functions</li>
+  <li>Non-Standard functions or behaviors that are supported by this
+Tokenizer.</li>
+  <li>Featured behaviors, supported by this Tokenizer, that are not
+mentioned in the Standard. </li>
+</ul>
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId850914"></a>Ambiguous
+Conditions</h4>
+<div style="margin-left: 80px;">The Standard only identifies a few
+questionable combinations as "ambiguous conditions" or "behavior ...
+unspecified" and leaves their
+handling open to interpretation of the implementor.&nbsp; Here's how
+this Tokenizer handles them:<br>
+</div>
+<div style="margin-left: 40px;">
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId162252"></a><big><a
+ name="Expected_on_same_line"></a>Tokens
+expected on the same
+line</big></h5>
+<p style="margin-left: 40px;">Certain commands and directives expect a
+token to appear on the same line, and will report an <a
+ href="#An_ERROR">Error</a> condition if no
+token appears on the same line:</p>
+<ul>
+  <ul>
+    <li>The&nbsp; <a href="#The_h_d_and_o_directives_"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#</span>&nbsp;
+      <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">d#</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">o#</span></a>&nbsp;
+directives, and the <a href="#Char_Seq_To_Num">a#</a> and <a
+ href="#Char_to_Num_Left_Justified">al#</a>
+directives.<br>
+    </li>
+    <li>The&nbsp; &nbsp; <a
+ href="#Existence_or_non-existence_of_an_FCode"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifexist]</span>&nbsp;
+      <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifnexist]</span></a>&nbsp;&nbsp;
+      <a href="#Definition_or_non-definition_of_a"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifdef]</span>&nbsp;&nbsp;
+      <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[ifndef]</span></a>&nbsp;
+and&nbsp; <a href="#Evaluating_Command-line_Symbols"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[defined]</span></a>&nbsp;&nbsp;
+directives and all their synonyms</li>
+    <li>The commands &nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">'</span>
+      <br>
+    </li>
+    <li>The&nbsp; <a href="#F_Eff-Bracket-Tick-Bracket"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">F[']</span></a>&nbsp;
+directive</li>
+    <li>The <a href="#Alias"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ALIAS</span></a>
+directive&nbsp; (expects two tokens on the same line)</li>
+    <li>The <a href="#Macros"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[macro]</span></a>
+directive&nbsp; (expects at least two tokens on the same line) </li>
+    <li>The directives&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">control
+ascii </span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">char</span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">
+      </span>and<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">
+[char]</span></li>
+    <li>The&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FLOAD</span>&nbsp;
+command</li>
+    <li>The&nbsp; <a href="#Binary_Output_File_Name"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">SAVE-IMAGE</span></a>
+directive</li>
+    <li>The&nbsp; <a href="#Changing_C-L_Flags_from_Source"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[FLAG]</span></a>
+directive and its synonyms <br>
+    </li>
+    <li>The&nbsp; <a href="#ENCODE_FILE"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ENCODE-FILE</span></a>
+directive </li>
+  </ul>
+</ul>
+</div>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId246601"></a><a
+ name="The_h_d_and_o_directives_"></a><big>The&nbsp;
+<span style="font-family: courier new,courier,monospace;">h#</span>
+<span style="font-family: courier new,courier,monospace;">d#</span> and
+<span style="font-family: courier new,courier,monospace;">o#</span>
+directives</big></h5>
+<div style="margin-left: 40px;">The directives <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+d#&nbsp;</span>and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">o#</span>&nbsp;&nbsp;
+convert the token immediately following to a
+number, in hex, decimal or
+octal, respectively.
+<p>If the token is present, but cannot be converted to a number using
+the
+appropriate radix, i.e., if the conversion fails, the
+Tokenizer will issue a <a href="#A_WARNING">WARNING</a>,
+ignore the directive and attempt to
+process the token
+as ordinary input.&nbsp; If the name is not
+known, the "ordinary processing" will catch the error.</p>
+</div>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId978546"></a><big>The
+commands&nbsp; <span
+ style="font-family: courier new,courier,monospace;">leave</span>&nbsp;
+<span style="font-family: courier new,courier,monospace;">?leave</span>&nbsp;
+or&nbsp; <span style="font-family: courier new,courier,monospace;">unloop</span>&nbsp;
+outside of a loop-control framework</big></h5>
+<div style="margin-left: 40px;">The Standard only speaks briefly about
+the execution consequences of this condition, and says nothing about
+whether a Tokenizer should permit such a sequence. This Tokenizer will
+report it as an <a href="#An_ERROR">Error</a>
+condition.
+</div>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId73206"></a><big>The
+commands&nbsp; <span
+ style="font-family: courier new,courier,monospace;">[']</span>&nbsp;
+or&nbsp; <span style="font-family: courier new,courier,monospace;">'</span>&nbsp;
+followed by a name that is not a valid target</big></h5>
+<div style="margin-left: 40px;">Valid targets for the commands &nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">'</span>&nbsp;
+are function-names that were defined during normal tokenization
+mode.&nbsp;
+This Tokenizer reports an <a href="#An_ERROR">Error</a>
+if the name following the&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">'</span>&nbsp;
+is not a valid target (e.g., is the name of a macro).&nbsp; It will
+then
+attempt to
+process the name in the ordinary manner.</div>
+<h5 style="margin-left: 40px;"><big><a class="mozTocH5"
+ name="mozTocId74410"></a>The Forth word <span
+ style="font-family: courier new,courier,monospace;">to</span>
+followed by a name that is not a valid target</big></h5>
+<div style="margin-left: 40px;">The Standard specifies the Forth word <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">to</span>
+as the means for setting the value of a word defined with either the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">value</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">defer</span>
+defining-words, but says nothing about how a Tokenizer should respond
+to attempts to apply it to other&nbsp; targets. &nbsp;&nbsp; This
+Tokenizer reports an <a href="#An_ERROR">Error</a>
+if the name following the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">to</span>
+is not a valid target (e.g., is the name of a macro or a
+colon-definition).
+<p>An exception is made for a word defined as a <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">variable</span>
+:&nbsp; Although such words are not a valid target for <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">to</span>,
+many platforms' firmware will execute the sequence correctly; this
+Tokenizer will issue a <a href="A_WARNING">WARNING</a>.</p>
+</div>
+<h5 style="margin-left: 40px;"><big><a class="mozTocH5"
+ name="mozTocId75614"></a><a name="Instance"></a>The
+word <span style="font-family: courier new,courier,monospace;">instance</span></big>
+</h5>
+<h6 style="font-weight: bold; margin-left: 80px;"><big><a
+ name="mozTocId76818"></a>Followed by an inapplicable
+defining-word</big></h6>
+<div style="margin-left: 80px;">The Standard implies (but does not
+state) that,
+once <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+has been executed, it remains in effect until an applicable
+defining-word ( <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">value</span>
+, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">variable</span>
+, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">defer</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">buffer:</span>
+)
+is encountered. For example, in the sequence:
+<p style="font-family: courier new,courier,monospace;"><span
+ style="font-weight: bold;">instance</span> <span
+ style="font-weight: bold;">:</span> <span>nonsense</span> <span
+ style="font-weight: bold;">dup</span> <span style="font-weight: bold;">swap</span>
+<span style="font-weight: bold;">drop</span> <span
+ style="font-weight: bold;">;</span><br>
+<span style="font-weight: bold;">variable</span> boombah</p>
+<p>the colon-definition of <span
+ style="font-family: courier new,courier,monospace;">nonsense</span> is
+unaffected by the occurrence of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+, which will, instead, be applied to the defining-word <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">variable</span>
+(which defines <span
+ style="font-family: courier new,courier,monospace;">boombah</span> )
+on a later line.
+</p>
+<p>Since&nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+would typically be followed immediately by the defining-word
+to which it is intended to apply, a sequence like the above can
+reasonably be presumed to be a likely error.&nbsp; This Tokenizer will
+issue
+a <a href="A_WARNING">WARNING</a> when an
+inapplicable
+defining-word is encountered while <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+is in effect, and another WARNING when the dangling <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+is finally applied to a valid definer.
+</p>
+</div>
+<h6 style="margin-left: 80px;"><big><a name="mozTocId78022"></a>Left
+unresolved</big></h6>
+<div style="margin-left: 80px;">Multiple occurrences of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+are not cumulative; if a second <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+is encountered before the first is applied, only one occurrence of an
+applicable defining-word will be modified.&nbsp; This Tokenizer will
+issue a <a href="#A_WARNING">WARNING</a> when
+a second occurrence of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+is encountered before the first has been applied. </div>
+<div style="margin-left: 80px;">
+<p>The Standard says nothing about what
+should occur
+if <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+has not been applied by the time a device-node is "<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish</span>"ed
+or a new device-node
+is started.&nbsp; In most Platforms' implementations of the FCode
+Interpreter, the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+state will remain in effect.&nbsp; This Tokenizer will issue a WARNING
+the first time a device-node
+is changed while an <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+remains unresolved.<br>
+</p>
+</div>
+<h6 style="margin-left: 80px;"><a name="mozTocId79226"></a><big><a
+ name="Instance_Not_Allowed"></a>Not
+Allowed in...</big></h6>
+<div style="margin-left: 80px;">
+Although the Standard says nothing about the subject, an inclusion
+of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+inside
+a Colon-definition would serve no purpose and is <a
+ href="#INSTANCE_at_run_time">potentially harmful</a>; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+should not be allowed in a Colon-definition. This Tokenizer will
+detect an attempt to compile <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+into
+a Colon-definition and report it as an <a href="#An_ERROR">Error</a>
+condition.
+<p>Also, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+can not be allowed when <a href="#Global_Definitions">Global Scope</a>
+is in effect, as <a href="#INSTANCE_at_run_time">explained elsewhere</a>.<br>
+</p>
+</div>
+<h5 style="margin-left: 40px;"><a class="mozTocH5" name="mozTocId884280"></a><big>The
+command <span style="font-family: courier new,courier,monospace;">fload</span>
+inside a colon-definition</big></h5>
+<div style="margin-left: 40px;">If the command <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+is encountered while a colon-definition
+is in progress, this Tokenizer will process it immediately, and read
+the contents of
+the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>ed
+file as a continuation of Source input. &nbsp; </div>
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId901662"></a>Non-Standard
+Synonyms for Standard
+Functions</h4>
+<div style="margin-left: 40px;">This Tokenizer accepts the following
+non-Standard words as synonyms for the Standard words, as listed:<br>
+<ul>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ENDIF</span>
+as a synonym for <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">THEN</span></li>
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">NAME</span>
+as a synonym for <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">DEVICE-NAME</span></li>
+</ul>
+</div>
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId732819"></a>Non-Standard
+Functions or behaviors</h4>
+<div style="margin-left: 40px;">This section will discuss features
+supported by this Tokenizer that extend capabilities regarded by the
+Standard as unsupportable, or that are left only vaguely specified as
+"implementation-dependent".&nbsp;
+It will also present a few minor items that are introduced as
+conveniences for the User.<br>
+</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId522750"></a><a
+ name="Alias"></a><big>Alias</big></h5>
+<p style="margin-left: 80px;">In normal tokenization mode the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">alias</span>
+directive behaves as specified in the Standard, i.e., it creates a new
+command with the exact behavior of an existing command. Any occurrence
+of the new command will cause the assigned FCode of the old command to
+be generated, with all the implications that follow from that.</p>
+<p style="margin-left: 80px;">The Standard, further, states that:&nbsp;
+"In FCode source, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">alias</span>
+cannot be called from within a colon definition."&nbsp; However, this
+Tokenizer can handle that, and issues a <a href="#A_WARNING">WARNING</a>
+message when it
+does so.</p>
+<p style="margin-left: 80px;">The Standard does not specify the
+behavior of&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">alias</span>&nbsp;
+in&nbsp; "Tokenizer Escape" mode.&nbsp; This
+Tokenizer will allow <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">alias</span>
+commands issued in "Tokenizer Escape" mode to take effect in that mode,
+and, furthermore, aliases to words that are recognized in either mode
+may be created in either mode and will be recognized in either mode.<br>
+</p>
+<p style="margin-left: 80px;">Generally speaking, an alias definition
+will take on the <a href="#Scope_Directives">Scope</a> that is current
+at the time it is made:&nbsp; If Device Scope is in effect, the new
+name -- even if it is an alias to a word that has <a
+ href="#Global_Definitions">Global scope</a> -- will only be accessible
+from the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">current
+device-node</span>. &nbsp; An <a href="#Advisories">ADVISORY</a>
+message will be issued for this condition.
+</p>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId824541"></a><a
+ name="String_Gathering_Features"></a>
+<big>String-Escape characters and other String-Gathering Features</big></h5>
+<div style="margin-left: 80px;">The Standard specifies, in effect, that
+a string is terminated by a double-quote (the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+character) when it is immediately followed by whitespace; that if the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+is followed by an open-parenthesis, hex-sequence parsing begins until a
+close-parenthesis is found; and that if the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+is followed by any other character, "the result is
+implementation-dependent".<br>
+<h6 style="margin-left: 40px;"><big><a class="mozTocH5"
+ name="mozTocId945290"></a>Quoted
+String-Escape Characters</big></h6>
+<p style="margin-left: 40px;">Common practice -- widely enough used as
+to merit consideration as an undocumented de-facto standard -- has been
+to recognize a set of letters and to translate them into special
+characters when they immediately follow the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+.<br>
+</p>
+<p style="margin-left: 40px;">This
+Tokenizer translates String-Escape Quoted-pairs as follows:
+</p>
+<p style="margin-left: 60px;">
+<table style="text-align: left; width: 100%;" border="0" cellpadding="1"
+ cellspacing="4">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"n</span>
+      </td>
+      <td style="vertical-align: top;">New-Line </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"l</span></td>
+      <td style="vertical-align: top;">New-Line</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"r</span></td>
+      <td style="vertical-align: top;">Carriage-Return</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"t</span></td>
+      <td style="vertical-align: top;">Horizontal Tab</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"f</span></td>
+      <td style="vertical-align: top;">Form-Feed</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"b</span></td>
+      <td style="vertical-align: top;">Backspace</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"!</span></td>
+      <td style="vertical-align: top;">Bell</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"<span
+ style="font-style: italic;">^</span></span><span
+ style="font-family: arial; font-style: italic;">L</span></td>
+      <td style="vertical-align: top;">Quote-Caret followed by a letter
+is
+translated as "Control"-<span
+ style="font-family: arial; font-style: italic;">the-letter</span>.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span><span
+ style="font-family: arial; font-style: italic;">Other</span></td>
+      <td style="vertical-align: top;">Any unrecognized character
+following the &nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+&nbsp;
+is taken verbatim.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">""</span></td>
+      <td style="vertical-align: top;">The way to embed a double-quote
+into a string is to
+escape it with itself.&nbsp; (This is a special instance of the
+preceding rule)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"(</span></td>
+      <td style="vertical-align: top;">As was mentioned above,
+Quote-Open-Parenthesis begins parsing a hex-sequence as per Section A.2
+of the
+Standard under the description of the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+operator.&nbsp; Details will be discussed <a href="#Hex_Seq_Procg">below</a>.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: left; width: 105px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"\<a
+ name="SFeat_Str_Rem_Esc"></a></span></td>
+      <td style="vertical-align: top;">Quote-Backslash permits
+insertion of remarks into the middle of a string definition; it will
+interrupt
+string parsing, causing the remainder of
+the line, together with any whitespace that might begin the new line,
+to be ignored.
+      <p>Because this feature is not in usual
+practice, the User can disable it by invoking the <a
+ href="#SF_Flag_Str_Rem_Esc"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">noString-remark-escape</span></a>&nbsp;<a
+ href="#Special_Feature_Flags"> Special-Feature
+Flag</a>.</p>
+      <p>If this feature is disabled, the Backslash following the &nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+&nbsp;
+will be taken verbatim; the Backslash, the text following it on the
+remainder of the line, the new-line and the whitespace on the next line
+-- all of which would otherwise have been ignored -- will be included
+in the
+string parsing and incorporated into the result. </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+</div>
+<div style="margin-left: 120px;">
+<h6><big><a class="mozTocH5" name="mozTocId758170"></a>Embedded
+New-Lines</big></h6>
+<p>The Standard makes no mention about what to do when a string reaches
+a new-line before its termination.&nbsp; This
+Tokenizer continues parsing and includes the new-line, together with
+any whitespace that might begin the new line, in the result.<br>
+</p>
+<h6><big><a class="mozTocH5" name="mozTocId42456"></a><a
+ name="Hex_Seq_Procg"></a>Hex-Sequence
+Processing</big></h6>
+The Standard mentions parsing hexadecimal characters in pairs in the
+substring between&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"(</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">)</span>&nbsp;
+but makes no mention of what to do when a single hexadecimal character
+appears between nonhexadecimal characters.&nbsp; The usual practice is
+to treat it as representing the low-order digit of a single byte, and
+this Tokenizer follows that convention.<br>
+<p><a name="SFeat_Hex_Rem_Esc"></a>This Tokenizer&nbsp; also supports
+an option -- not in usual practice,
+hence listed separately here -- that permits insertion of remarks in
+the middle of a hex-sequence in a string.&nbsp; The occurrence of a
+single <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\</span>
+(backslash) character will interrupt hex-sequence parsing, causing the
+remainder of the line,
+together with any whitespace that might begin the next line, to be
+ignored.&nbsp; The User can disable this feature by invoking the <a
+ href="#SF_Flag_Hex_Rem_Esc"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">noHex-remark-escape</span></a>&nbsp;<a
+ href="#Special_Feature_Flags"> Special-Feature
+Flag</a>.<br>
+</p>
+<p>If the Hex-Remark-Escape feature is disabled, the Backslash will be
+treated as an ordinary nonhexadecimal character, and Hex-Sequence
+parsing will proceed.&nbsp; Any hexadecimal characters on the
+remainder of the line&nbsp; -- which would otherwise have been ignored
+-- will be recognized and incorporated into the result.&nbsp; </p>
+<h6><big><a class="mozTocH5" name="mozTocId150131"></a><a
+ name="C-Style_String-Escape_Characters"></a><big>C</big>-Style
+String-Escape Characters</big></h6>
+In addition to the Quoted String-Escape sequences, this
+Tokenizer recognizes a small subset of the Backslash-based
+String-Escape
+pairs that are used in <big><b>C</b></big> and translates them
+similarly.
+<p>Specifically, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\n</span>&nbsp;
+and&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\t</span>
+are translated into New-Line and Horizontal Tab respectively.</p>
+<p><a name="SFeat_BS_xx"></a>If the Backslash is followed by other
+characters, the
+Tokenizer will attempt to read them as a digit-string, using the
+current base, and create a numeric byte. The numeric sequence ends with
+the first non-numeric character (which is treated as a delimiter and
+consumed, unless it's a double-quote, in which case it's allowed to
+terminate the string or apply whatever action is triggered by the
+character following it).&nbsp; If the value represented by the numeric
+sequence exceeds
+the size of a byte, its low-order byte will be used and a <a
+ href="#A_WARNING">WARNING</a> will
+be issued.
+</p>
+<p>If the first character after the backslash was non-numeric, the
+character will be used literally (and a WARNING will be issued).&nbsp;
+As in <big><b>C</b></big>, the backslash can be used to escape itself.
+</p>
+</div>
+<p style="margin-left: 120px;">The User can disable this feature by
+invoking the <a href="#SF_Flag_C_Str_Esc"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">noC-Style-string-escape</span></a>
+<a href="#Special_Feature_Flags">Special-Feature
+Flag</a>.
+</p>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId40998"></a><big><a
+ name="SFeat_AB_Q"></a>The <big><span
+ style="font-family: courier new,courier,monospace;">ABORT"</span></big>
+(Abort-Quote) command<br>
+</big></h5>
+<div style="margin-left: 80px;">The Standard is not very clear about
+the use of this FORTH command, and does not assign it an FCode.&nbsp;
+Nonetheless, it has historically been treated as a macro, and this
+Tokenizer will support that treatment.<br>
+<p><a name="SFeat_Sun_AB_Q"></a>To complicate matters, there are two
+distinct styles in which this
+macro is used in FCode drivers, "Apple" style and "Sun" style:<br>
+</p>
+<p>In Sun Style, the sequence, in the Source, would look like this:<br>
+</p>
+<p style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace;"><span
+ style="font-style: italic;">&lt;Condition&gt;</span> <span
+ style="font-weight: bold;">ABORT"</span> <span
+ style="font-style: italic;">Message text</span><span
+ style="font-weight: bold;">"</span></span></p>
+<p>Semantically, it would mean that if the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">&lt;Condition&gt;</span>
+is true, the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">Message
+text</span> would be printed and a <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-2
+THROW</span> would be performed; conversely, if the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">&lt;Condition&gt;</span>
+is false, the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">Message
+text</span>&nbsp; would be bypassed and execution would continue with
+the next token after.
+</p>
+<p>The sequence could be translated into FCode as a macro like this:</p>
+<div style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace;"><span
+ style="font-style: italic;">&lt;Condition&gt;</span> <span
+ style="font-weight: bold;">IF</span> <span style="font-weight: bold;">"</span>
+<span style="font-style: italic;">Message text</span><span
+ style="font-weight: bold;">" TYPE</span>&nbsp; <span
+ style="font-weight: bold;">-2 THROW</span>
+<span style="font-weight: bold;">THEN</span></span><br>
+</div>
+<p>In Apple Style, the Source supplies the surrounding <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">IF</span>
+... <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">THEN</span>
+.&nbsp; The action of the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+command is to leave
+the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">Message
+text</span> on the stack and perform the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-2
+THROW</span> unconditionally, with the expectation that the system <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">CATCH</span>
+will print the string
+it finds on the stack. <br>
+</p>
+<p>The Source sequence would look like this:<br>
+</p>
+<p style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace;"><span
+ style="font-style: italic;">&lt;Condition&gt;</span> <span
+ style="font-weight: bold;">IF</span> <span style="font-weight: bold;">ABORT"</span>
+<span style="font-style: italic;">Message text</span><span
+ style="font-weight: bold;">" </span><span style="font-weight: bold;">THEN</span></span><br>
+</p>
+<p>The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+...
+<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">"</span>
+portion of the
+sequence would be translated into FCode as a macro like this:</p>
+<div style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace;"><span
+ style="font-weight: bold;">"</span> <span style="font-style: italic;">Message
+text</span><span style="font-weight: bold;">"</span> <span
+ style="font-weight: bold;">-2 THROW
+</span></span><br>
+</div>
+<p>Because the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+command is not specified in the Standard, the User can disable it by
+invoking the <a href="#SF_Flag_AB_Q"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">noABORT-Quote</span></a>&nbsp;
+<a href="#Special_Feature_Flags">Special-Feature
+Flag</a>.
+</p>
+<p>The User who chooses to enable this feature, can, further, select to
+disable "Sun" style in favor of "Apple" style by invoking the <a
+ href="#SF_Flag_Sun_AB_Q"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">noSun-ABORT-Quote</span></a>
+<a href="#Special_Feature_Flags">Special-Feature
+Flag</a>.<br>
+</p>
+<p><a name="Abort_Quote_Abort"></a>And to complicate matters even
+further, some Legacy&nbsp; applications prefer to use the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT</span>&nbsp;
+command (note there's no quote) in place of the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-2
+THROW</span>&nbsp; sequence.&nbsp;&nbsp; Although the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT</span>
+command is not recommended, it <span style="font-style: italic;">is</span>
+a legitimate FCode function, and this Tokenizer supports a <a
+ href="#Special_Feature_Flags">Special-Feature
+Flag</a>, called <a href="#SF_Flag_AB_Q_Throw">Abort-Quote-Throw</a>,
+which controls whether an <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+(Abort-Quote) phrase will be tokenized with the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-2
+THROW</span>&nbsp; sequence or with the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT</span>
+function.&nbsp; The User who chooses to have&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+(Abort-Quote) phrases tokenized with the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT</span>
+function can do so by invoking <a href="#SF_Flag_AB_Q_Throw">noAbort-Quote-Throw</a>
+</p>
+</div>
+<h5 style="margin-left: 80px;"><a name="mozTocId526780"></a><big><a
+ name="Char_Seq_To_Num"></a>Conveniently Convert Short
+Character-Sequence to Number</big><br>
+</h5>
+<p style="margin-left: 80px;">Occasionally, a User needs to create a
+numeric constant whose value corresponds to a short sequence of
+characters.&nbsp; For instance, <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">PCIR</span>
+will get coded as <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+50434952</span>.&nbsp; This tokenizer supports a convenient directive
+called&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#</span>
+, syntactically similar to&nbsp; <a href="#The_h_d_and_o_directives_"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+d#&nbsp;</span>and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">o#</span></a>
+, which makes the conversion directly.&nbsp; The above example can be
+written:&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#
+PCIR</span> , sparing the programmer -- and the maintainer -- from
+needing to translate ASCII on the fly.<br>
+</p>
+<p style="margin-left: 80px;">The&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#</span>&nbsp;&nbsp;
+operator expects
+its target argument <a href="#Expected_on_same_line">on the same line</a>.<br>
+</p>
+<p style="margin-left: 80px;">If the target-sequence contains more than
+four characters,&nbsp; the last four will become the number; if the
+target-sequence contains fewer than four characters, &nbsp;they will
+fill the low-order part of the number.&nbsp; (I.e.,&nbsp; the operation
+of&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#</span>&nbsp;
+is right-justified.)&nbsp; Thus:<br>
+</p>
+<div style="margin-left: 160px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#
+CPU</span>&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; is equivalent to
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+00435055</span>
+</div>
+<div style="margin-left: 120px;">&nbsp;and
+</div>
+<div style="margin-left: 160px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#
+LotsOfStuff</span>&nbsp;&nbsp;&nbsp;&nbsp; is equivalent to&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#
+tuff</span>&nbsp;&nbsp; or &nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+74756666</span></div>
+<p style="margin-left: 80px;">Also, the conversion is case-sensitive:
+&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#
+cpu</span> &nbsp; is equivalent to&nbsp;&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+00637075</span></p>
+<h6 style="margin-left: 120px;"><a class="mozTocH5" name="mozTocId53626"></a><big><a
+ name="Char_to_Num_Left_Justified"></a>Left-Justified</big></h6>
+<div style="margin-left: 120px;">To accommodate situations that call
+for
+the characters to occupy the high-order part of the number, this
+Tokenizer supports an
+"Ascii-Left" conversion directive called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">al#</span>
+, which is equivalent to&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">a#</span>&nbsp;
+in all respects except when the
+target-sequence contains fewer than four characters:&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">al#
+CPU</span>&nbsp; is equivalent to&nbsp;&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">h#
+43505500</span></div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId54171"></a><a
+ name="F_Eff-Bracket-Tick-Bracket"></a><big>F[']&nbsp;&nbsp;
+("Eff-Bracket-Tick-Bracket")</big></h5>
+<p style="margin-left: 80px;">Syntactically similar to the Standard <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>
+("Bracket-Tick-Bracket").&nbsp; Valid targets for <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">F[']</span>
+are the same as for <a href="#mozTocId73206"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[']</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">'</span></a>
+.&nbsp; Attempts to apply <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">F[']</span>
+to an invalid target will be handled similarly.<br>
+</p>
+<p style="margin-left: 80px;">This directive acquires the given word's
+FCode-Token number,
+which is then used according to whether the directive is invoked during
+"Normal Tokenization" or "Tokenizer-Escape" mode:</p>
+<h6 style="margin-left: 120px;"><big><big><a name="mozTocId54716"></a><a
+ name="F_B-T-B_Normal"></a>F['] in "Normal Tokenization" Mode:</big></big></h6>
+<p style="margin-left: 120px;">The given word's FCode-Token number is
+tokenized as a literal, which can be used, for instance, as the
+argument to a&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">get-token</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">set-token</span>&nbsp;
+command.<br>
+</p>
+<div style="margin-left: 120px;">For example, the sequence:<big> </big><br>
+</div>
+<div style="margin-left: 200px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">F[']
+rl@ get-token</span><span
+ style="font-family: helvetica,arial,sans-serif;"></span>
+</div>
+<div style="margin-left: 160px;">is equivalent to:<big> </big><br>
+</div>
+<div style="margin-left: 200px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">&nbsp;h#
+234&nbsp; get-token</span><br>
+</div>
+<h6 style="margin-left: 120px;"><big><big><a name="mozTocId55261"></a><a
+ name="F_B-T-B_TkzEsc"></a>F['] in "Tokenizer-Escape" Mode:</big></big></h6>
+<p style="margin-left: 120px;">This function is the one <a
+ href="#Tkz_Esc_Scope">exception to the general rule</a> about the <a
+ href="#Scope_Directives">scope</a> of words recognized in
+"Tokenizer-Escape" mode; it will recognize function-names that
+were defined during normal tokenization mode and that were <a
+ href="#current_device-node">current at the time</a> "Tokenizer-Escape"
+mode was entered.<br>
+</p>
+<p style="margin-left: 120px;">The given word's FCode-Token number is
+pushed
+onto the data-stack, from whence it can be used, for instance, as the
+numeric argument to a <a href="#Tkz_Esc_Const"><span
+ style="font-family: courier new; font-weight: bold;">constant</span></a>
+definition.<br>
+</p>
+<h5 style="margin-left: 80px;"><a name="mozTocId887752"></a><big><a
+ name="Shell_Env_Vbles_in_File_Names"></a>Shell-Environment
+Variables in
+File-Names</big></h5>
+<p style="margin-left: 80px;">The filename that follows the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>
+command or the <a href="#ENCODE_FILE"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">encode-file</span></a>
+directive may be an
+absolute path, a path relative to the Current Working
+Directory, or a path relative to one of the
+directories in the <a href="#Include_List">Include-List</a>.&nbsp; It
+may also contain Shell Environment Variables and
+related expressions recognized by the Host Operating System environment
+in which the
+Tokenizer is running.&nbsp; These will all be expanded before loading
+the
+file.&nbsp; An illustration may be
+seen in <a href="#Example_4">Example #4</a>. </p>
+<p style="margin-left: 80px;">An <a href="#Advisories">ADVISORY</a>
+message showing the expanded value will be printed if the <a
+ style="font-style: italic; font-weight: bold;" href="#verbose_option">verbose</a>
+<a href="#Command-Line_options_">option</a> has
+been selected or in the event of a failure to read the file.<br>
+</p>
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId505746"></a>Featured
+behaviors, supported by this
+Tokenizer, that are not mentioned in the Standard</h4>
+<h5 style="margin-left: 80px;"><a name="mozTocId530910"></a><big><a
+ name="Macros"></a>User-Defined Macros</big></h5>
+<div style="margin-left: 80px;">The Standard mentions built-in
+tokenizer macros (such as <span
+ style="font-family: courier new,courier,monospace;">3drop</span> for
+example) but makes no provision for the User to define any additional
+macros.
+<p>This Tokenizer supports a directive that allows the User to define
+additional macros.&nbsp; Its syntax is:</p>
+<p style="margin-left: 40px;">
+<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[macro]</span>&nbsp;
+<span style="font-family: courier new,courier,monospace;">&lt;<span
+ style="font-style: italic;">macroname</span>&gt;&nbsp; <span
+ style="font-style: italic;">cmnd1 cmnd2 cmnd3 ... cmndN</span></span></p>
+<p>The entire body of the macro definition must be contained on a
+single line.&nbsp; The linefeed at the end of the line will be included
+as part of the macro definition.<br>
+</p>
+<p>In this Tokenizer,&nbsp; macros are implemented as simple
+string
+substitutions, interpreted at the time they are invoked.&nbsp; If a
+component of the macro should change its meaning -- i.e., be redefined
+-- then, on subsequent invocations of the macro, the new meaning will
+take effect.&nbsp; (Note that this is different from an <a
+ href="#Alias">alias</a>).&nbsp; It is also (eminently) possible to
+define a macro
+that uses a name that has not been defined at the time the macro is
+defined, to define that name later, and to invoke the macro after
+the name has been defined.&nbsp; This is legitimate and will work.<br>
+</p>
+<p>For the same reason, macros may be nested; i.e., one macro may be
+defined in such a way as to invoke another.&nbsp; However, if a macro
+-- or a series of nested macros -- were to invoke a macro that is
+already running, that will be detected and reported as an <a
+ href="#An_ERROR">Error</a> condition.&nbsp;
+For a simple example, a User who needed to identify all occurrences of
+the word <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">2drop</span>
+might attempt to write:</p>
+<div
+ style="margin-left: 40px; font-family: courier new,courier,monospace;">&nbsp;<span
+ style="font-weight: bold;">overload</span> <span
+ style="font-weight: bold;">[macro]</span>&nbsp; 2drop&nbsp; <span
+ style="font-weight: bold;">message"</span> 2DROP called here<span
+ style="font-weight: bold;">"</span> <span style="font-weight: bold;">2drop</span>
+</div>
+&nbsp;in the expectation that the second <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">2drop</span>&nbsp;
+would be interpreted as the generic one, which outputs the
+corresponding token.
+<p>However, because the macro definition is not "compiled" in the same
+way
+as a colon-definition, but is, instead, interpreted at run-time, the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">2drop</span>
+that would be executed would, in fact, be the macro itself, leading to
+an infinite loop of messages (if the condition were not
+detected...).&nbsp; In order to protect against this condition, the
+User should, instead, do something like this:</p>
+<div
+ style="margin-left: 40px; font-family: courier new,courier,monospace;">\&nbsp;&nbsp;&nbsp;
+Keep a "generic" 2DROP handy.<br>
+<span style="font-weight: bold;">alias</span>
+generic-2drop&nbsp; 2drop<br>
+<span style="font-weight: bold;">overload</span> <span
+ style="font-weight: bold;">[macro]</span> 2drop <span
+ style="font-weight: bold;">message"</span> 2DROP called here<span
+ style="font-weight: bold;">" </span>generic-2drop
+</div>
+<p>
+This has the added advantage that, when the passage in which the
+notification is needed comes to an end, the User can restore <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">2drop</span>
+to its Standard behavior with:<br>
+</p>
+<div
+ style="margin-left: 40px; font-family: courier new,courier,monospace;"><span
+ style="font-weight: bold;">overload</span> &nbsp;<span
+ style="font-weight: bold;">alias</span> &nbsp;2drop &nbsp;generic-2drop</div>
+<p>A User-Defined Macro takes on the <a href="#Scope_Directives">Scope</a>
+that is current at the time it is created.&nbsp; An illustration may be
+seen in <a href="#Example_4">Example #4</a>. </p>
+</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId539069"></a><big><a
+ name="Multiple_device_nodes"></a>Multiple
+device-nodes</big></h5>
+<div style="margin-left: 80px;">The typical use of a tokenizer is to
+write a driver for a single-node device.&nbsp; For such an application,
+the commands <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>
+are not required.&nbsp; However, many newer devices consist of
+complexes of subordinate and peer devices within a single assembly;
+some additional caution is required when developing drivers for such
+configurations.<br>
+<p><a name="INSTANCE_at_run_time"></a>In particular, an attempt within
+one device-node to access directly
+a method defined in another device-node must be flagged as an
+error.&nbsp; Consider
+what would happen at run-time if it were allowed:&nbsp; the called
+method
+would be expecting the instance-pointer to be pointing to the instance
+data of the device-node in which that method was defined, but it would,
+instead,
+be pointing to the instance data of the device-node that made the
+call.&nbsp;
+This is an invitation to havoc that would be -- to put it politely --
+somewhat difficult to trace.<br>
+</p>
+<p>The correct way to invoke a method across device-node boundaries is
+via <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">$call-parent</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">$call-method</span>
+or the like.<br>
+</p>
+<p><a name="device-node_vocabularies"></a>In order to detect such
+errors early on, this Tokenizer keeps track
+of separate but linked "vocabularies"
+associated with device-nodes. When the command <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>
+is encountered in interpretation mode, a new device-node vocabulary is
+opened and new
+definitions are entered into it.&nbsp; Definition-names created in the
+preceding device-node -- presumably the parent of the newly started
+device -- are suspended from accessiblity. <br>
+</p>
+<p>Correspondingly, when the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>
+command is encountered in interpretation mode, the "vocabulary" of the
+device
+being ended is emptied ("forgotten" in classic Forth parlance) and the
+"vocabulary" of the parent-device is resumed.<br>
+</p>
+<p><a name="current_device-node"></a>The device-node vocabulary to
+which definitions are being entered at
+any given time, and from which definitions are accessible, may be
+referred to as the <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">current
+device-node</span> for purposes of discussion.<br>
+</p>
+<p>Note that the Tokenizer does not switch vocabularies when the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>
+commands are encountered in compilation mode (i.e., when they are being
+compiled-in to a method); they are treated as ordinary tokens, since
+the shift to a new device-node will not occur until run-time.
+</p>
+<p>The commands <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>
+must remain in balance.&nbsp; If a <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>&nbsp;
+is encountered without a prior corresponding <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>,
+or if the end of FCode (or a <a
+ href="#Resetting_Symbols_Defined_in_Either_Mode"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Reset-Symbols</span></a>
+directive issued in "normal" mode) is reached and not all occurrences
+of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>
+are balanced by a call to <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">finish-device</span>,
+it will be reported as an <a href="#An_ERROR">Error</a> condition. </p>
+<p>Definitions made in "Tokenizer-Escape" mode, however, are
+independent of device-node vocabularies and remain accessible until
+they
+are explicitly reset by a <a
+ href="#Resetting_Symbols_Defined_in_Either_Mode"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Reset-Symbols</span></a>
+directive issued in "Tokenizer-Escape" mode.<br>
+</p>
+</div>
+<h6 style="margin-left: 120px;"><a name="mozTocId540605"></a><big><big><a
+ name="Global_Definitions"></a>Global
+Definitions</big></big></h6>
+<div style="margin-left: 120px;">Occasionally, the User might need to
+create definitions of methods that are
+intended to be directly accessible to all the device-nodes in a
+driver, even though they reside in one device
+node.&nbsp; Such
+definitions are, effectively, added to the "core" vocabulary, and are
+Global in scope.&nbsp; <a href="#Scope_Directives">Directives</a> to
+control the creation of Global Definitions are supported by this
+Tokenizer.</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId354426"></a><big><a
+ name="Multiple_FCode-block_Images"></a>Multiple
+FCode-block Images</big></h5>
+<div style="margin-left: 80px;">In addition to supporting complexes of
+subordinate and peer devices within a single assembly, this Tokenizer
+supports configurations in which subordinate devices' drivers are kept
+in separate but related FCode blocks.&nbsp; This is accomplished simply
+by invoking multiple bodies of code bracketed by&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fcode-version<span
+ style="font-style: italic;">&lt;</span></span><span
+ style="font-family: courier new,courier,monospace; font-style: italic;">n</span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold; font-style: italic;">&gt;</span>&nbsp;
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fcode-end</span>
+(or one of its synonyms).<br>
+<p>When the&nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fcode-end</span>
+(or equivalent) that ends one body of code is processed, and before
+the&nbsp;<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fcode-version<span
+ style="font-style: italic;">&lt;</span></span><span
+ style="font-family: courier new,courier,monospace; font-style: italic;">n</span><span
+ style="font-family: courier new,courier,monospace; font-weight: bold; font-style: italic;">&gt;</span>
+that begins the next, the definitions that had been created are
+forgotten, but assignment of FCode-token numbers will continue in
+sequence.&nbsp; Likewise, definitions made in "Tokenizer-Escape" mode
+will persist.<br>
+</p>
+<p>The User who desires to reset one or the other of these, or both,
+can do so by issuing the directives:<br>
+</p>
+<div style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Reset<br>
+</span>
+<div style="margin-left: 40px;">or<br>
+</div>
+</div>
+<div style="margin-left: 40px;"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Reset-Symbols</span><br>
+</div>
+</div>
+<div style="margin-left: 40px;">
+<div style="margin-left: 40px;"><br>
+respectively, in "Tokenizer-Escape" mode.&nbsp; This is illustrated in <a
+ href="#Example_3">Example #3</a>.<br>
+</div>
+</div>
+<h5 style="margin-left: 80px;"><a class="mozTocH5" name="mozTocId232809"></a><big><a
+ name="Multiple_PCI_Image"></a>Multiple
+PCI-Image</big></h5>
+<div style="margin-left: 80px;">The PCI Standard allows for a chain of
+PCI Images to be bundled together in a single binary (as indicated by
+the <a href="#Last_Image_Indicator_bit">"Last Image" bit</a>).&nbsp;
+This Tokenizer supports such configurations by correctly processing
+Source that contains multiple occurrences of blocks of code bracketed
+by <span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0); font-weight: bold;">pci-header</span>
+... <span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0); font-weight: bold;">pci-header-end</span>&nbsp;
+directives.&nbsp; An illustration can be seen in <a href="#Example_1">Example
+#1</a>, below.<br>
+</div>
+<h2><a class="mozTocH2" name="mozTocId194505"></a><a name="Examples:"></a>Examples:</h2>
+<h3><a class="mozTocH3" name="mozTocId544211"></a><a name="Example_1"></a>Example
+#1:</h3>
+In the first example, the "Inner Body" file has some sections that
+compile
+different code, depending on the value of a named-constant
+switch.&nbsp; The "Outer Shell " file controls the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">fload</span>ing
+of the
+"Inner Body":&nbsp; It reminds the User to specify the setting of the
+switch, then produces an image with two PCI-Images, based on opposite
+settings of the switch.&nbsp; Note that the use of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold; color: rgb(68, 34, 0);">Reset-Symbols</span>
+in "Tokenizer-Escape" mode before the redefinition of <span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0);">function-switch</span>,
+to avoid a "Duplicate definition" condition, may be omitted if the User
+is willing to tolerate the warning.
+<h5><a class="mozTocH5" name="mozTocId563670"></a>File:&nbsp;
+InnerBody.fth</h5>
+<span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0);"><span
+ style="font-weight: bold;">fcode-version2</span><br>
+<span style="font-style: italic;">... Common code &lt;obligatory
+sneeze&gt; ...</span><br>
+<span style="font-weight: bold;">F[</span>&nbsp;&nbsp;
+function-switch&nbsp;&nbsp; <span style="font-weight: bold;">F]</span>&nbsp;&nbsp;
+<span style="font-weight: bold;">[if]</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-style: italic;">True-conditional
+code</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-weight: bold;">[message]</span>&nbsp;&nbsp; The true
+path was wisely chosen<br>
+<span style="font-weight: bold;">[else]</span><br>
+&nbsp;&nbsp;&nbsp;
+<span style="font-style: italic;">False-conditional code</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-weight: bold;">[message]</span>&nbsp;&nbsp; You have
+foolishly chosen the false path.<br>
+<span style="font-weight: bold;">[then]</span><br>
+<span style="font-style: italic;">...&nbsp;
+More common code&nbsp; &lt;now cough&gt;.</span><br>
+<span style="font-weight: bold;">end0</span></span><br>
+<h5><a class="mozTocH5" name="mozTocId570875"></a>File:&nbsp;
+OuterShell.fth</h5>
+<span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0);"><span
+ style="font-weight: bold;">[ifndef]</span>&nbsp; first-path<br>
+&nbsp;
+<span style="font-weight: bold;">F[</span><br>
+&nbsp;<span style="font-weight: bold;">."</span>&nbsp; Add a
+command-line switch:
+-d ""first-path=&lt;true|false&gt;"" "n"\<br>
+&nbsp;<span style="font-weight: bold;"> &nbsp;&nbsp;</span> "tthen run
+this again.<span style="font-weight: bold;">"</span><br>
+&nbsp;&nbsp;&nbsp;
+<span style="font-weight: bold;">F]</span><br>
+<span style="font-weight: bold;">[else]</span><br>
+&nbsp; <span style="font-weight: bold;">F[</span><br>
+&nbsp;&nbsp; <span style="font-weight: bold;">[defined]</span>
+first-path&nbsp; <span style="font-weight: bold;">constant</span>
+function-switch<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">vendor-id</span>&nbsp;
+<span style="font-style: italic;">device1-id</span>&nbsp; <span
+ style="font-style: italic;">class-code1</span> &nbsp; <span
+ style="font-weight: bold;">pci-header</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-weight: bold;">F]</span><br>
+<span style="font-weight: bold;">not-last-image</span><br>
+<span style="font-weight: bold;">fload</span> InnerBody.fth<br>
+<span style="font-weight: bold;">pci-header-end</span><br>
+<br>
+</div>
+&nbsp; <span style="font-weight: bold;">F[</span>&nbsp; <span
+ style="font-weight: bold;">reset-symbols</span><br>
+&nbsp;&nbsp; <span style="font-weight: bold;">[defined]</span>
+first-path&nbsp; <span style="font-weight: bold;">0=</span>&nbsp; <span
+ style="font-weight: bold;">constant</span> function-switch<br>
+<div style="margin-left: 40px;"><span style="font-style: italic;">vendor-id</span>&nbsp;
+<span style="font-style: italic;">device2-id</span>&nbsp; <span
+ style="font-style: italic;">class-code2</span> &nbsp; <span
+ style="font-weight: bold;">pci-header</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-weight: bold;">F]</span><br>
+<span style="font-weight: bold;">last-image</span><br>
+<span style="font-weight: bold;">fload</span> InnerBody.fth<br>
+<span style="font-weight: bold;">pci-header-end</span><br>
+</div>
+<span style="font-weight: bold;">[then]</span></span><br>
+<h5><a class="mozTocH5" name="mozTocId953372"></a>Command-Line
+invocation:</h5>
+<span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0); font-weight: bold;">toke
+-v -d "first-path=true"
+OuterShell.fth</span><br>
+<br>
+<h3><a class="mozTocH3" name="mozTocId80432"></a><a name="Example_2"></a>Example
+#2:<br>
+</h3>
+<p>The second example illustrates the use of
+<a href="#Special_Feature_Flags">Special-Feature
+Flags</a> to select or de-select
+specific non-standard
+features.<br>
+</p>
+<p>The User is developing code that will run across all platforms, and
+therefore must
+must be neutral with regard to "Sun"- or "Apple"- -style usage of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+; this can be best achieved by disallowing the use of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">ABORT"</span>
+altogether.
+</p>
+<p>There is no concern, however, about compatibility of the Source with
+other Tokenizers, so the User need not forgo the conveniences of Local
+Values and String-remark-escapes.
+</p>
+<p>Furthermore, the Source contains many passages taken from IBM Legacy
+sources, and the User does not wish to see a WARNING message when the
+Legacy Locals Separator is used.
+</p>
+<p>The command-line for these conditions would include the following:</p>
+<span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0); font-weight: bold;">toke
+-f NOabort-quote -f local-values -f NOlv-legacy-warning</span>
+<p>Alternatively, these flags may be set from <a
+ href="#Changing_C-L_Flags_from_Source">within the Source code</a>
+thus:
+</p>
+<div
+ style="margin-left: 40px; color: rgb(68, 34, 0); font-family: courier new,courier,monospace; font-weight: bold;">[flag]
+NOabort-quote<br>
+[flag] local-values<br>
+[flag] NOlv-legacy-warning
+</div>
+<p>Note that the invocation of&nbsp; <span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0);">-f
+local-values</span> is necessary, as its default state is to be
+disabled.&nbsp;
+Also, because&nbsp; <span
+ style="font-family: courier new,courier,monospace; color: rgb(68, 34, 0);">-f
+NOabort-quote</span>&nbsp; is invoked, the setting of the&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">Sun-ABORT-Quote</span>&nbsp;
+flag is irrelevant.<br>
+</p>
+<h3><a class="mozTocH3" name="mozTocId455242"></a><a name="Example_3"></a>Example
+#3:</h3>
+<p>The third example illustrates two situations where two or three
+<a href="#Multiple_FCode-block_Images">FCode blocks</a>
+are incorporated into a single PCI Image.<br>
+</p>
+<p>In the first situation, the "Outer" block will <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">byte-load</span>
+the code of
+the "Inner" block before the "Outer" block has been completely
+interpreted.&nbsp; It is therefore important to avoid collisions in
+FCode-token numeric assignments.<br>
+</p>
+<div
+ style="color: rgb(68, 34, 0); font-family: courier new,courier,monospace; margin-left: 40px;">
+<span style="font-weight: bold;">F[</span><br>
+<div style="margin-left: 40px;">h# 5afe&nbsp; <span
+ style="font-weight: bold;">set-rev-level</span>
+<br>
+h# beef &nbsp; &nbsp; &nbsp;&nbsp;
+\ Vendor<br>
+h# c0de &nbsp; &nbsp; &nbsp;&nbsp;
+\ Device ID<br>
+h# 90210 &nbsp; &nbsp; &nbsp; \
+Class Code &nbsp; (A "classy" ZIP Code... ;-)<br>
+</div>
+<span style="font-weight: bold;">F]</span> &nbsp; &nbsp; <span
+ style="font-weight: bold;">pci-header</span><br>
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-weight: bold;">fload</span>
+outer-block.fth<span><br>
+</span><br>
+<span style="font-weight: bold;">fcode-end<br>
+<br>
+</span><span style="font-family: helvetica,arial,sans-serif;">\&nbsp;
+At this point, the last definition's assigned FCode number
+is approximately 0Xac0</span><br>
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-family: helvetica,arial,sans-serif;">\&nbsp; The next
+definitions' assigned FCode numbers continue from
+0Xac1</span><br>
+<br>
+<span style="font-weight: bold;">fload</span>
+inner-block.fth<span style="font-weight: bold;"><br>
+</span><br>
+<span style="font-weight: bold;">fcode-end</span><br>
+<br>
+<span style="font-weight: bold;">pci-header-end</span><br>
+<br>
+</div>
+<p>In the second situation, the "Outer" block will have been completely
+interpreted before it begins to <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">byte-load</span>
+the code of the two "Inner" blocks.&nbsp; It can safely discard the
+token-table of the interpreter, and allow its assigned FCode-token
+numbers to be re-cycled.&nbsp; Furthermore, the large number of
+definitions presents a real risk that the full range of usable
+FCode-token numbers will be exhausted.&nbsp; For these reasons, the
+User finds it necessary to reset the FCode-token numeric assignments to
+their initial state before tokenizing the two "Inner" blocks.&nbsp;<br>
+</p>
+<div
+ style="margin-left: 40px; color: rgb(68, 34, 0); font-family: courier new,courier,monospace;">
+<span style="font-weight: bold;">F[</span><br>
+<div style="margin-left: 40px;">
+h# face &nbsp;
+&nbsp;&nbsp; <span style="font-weight: bold;">set-rev-level</span><br>
+h# cafe &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; \
+Vendor<br>
+h# d00d &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \
+Device ID<br>
+h# 95014 &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;\ Another Class(y
+ZIP) Code</div>
+<span style="font-weight: bold;">F]</span> &nbsp; &nbsp; <span
+ style="font-weight: bold;">pci-header</span><br>
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-weight: bold;">fload</span> outer-block.fth<br>
+<br>
+<span style="font-weight: bold;">fcode-end</span><br>
+<br>
+<span style="font-family: helvetica,arial,sans-serif;">\&nbsp; At this
+point, the last definition's assigned FCode number
+is approximately 0Xae0</span><br>
+<br>
+<span style="font-weight: bold;">fcode-version2<br>
+<br>
+</span><span style="font-family: helvetica,arial,sans-serif;">\&nbsp;
+Reset the assigned FCode numbers for the first "inner" block<br>
+&nbsp;</span><br>
+<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Reset</span><span
+ style="font-weight: bold;"><br>
+</span>&nbsp;<br>
+<span style="font-weight: bold;">fload</span> inner-block_01.fth<br>
+<br>
+<span style="font-weight: bold;">fcode-end</span><br>
+<br>
+\&nbsp; Load the second "inner" block.<br>
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-family: helvetica,arial,sans-serif;">\&nbsp; Reset
+the assigned FCode numbers for the second "inner" block</span><br>
+<br>
+<span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">FCode-Reset</span><br>
+<br>
+<span style="font-weight: bold;">fload</span> inner-block_02.fth<br>
+<br>
+<span style="font-weight: bold;">fcode-end</span><br>
+<br>
+<span style="font-weight: bold;">pci-header-end</span>
+</div>
+<br>
+<h3><a class="mozTocH3" name="mozTocId861304"></a><a name="Example_4"></a>Example
+#4</h3>
+<p>This example serves to illustrate the use of the directives that
+control the
+<a href="#Scope_Directives">Scope of Definitions</a>, and also to show
+a means whereby the IBM-Style
+Local Values
+Support File can be incorporated at a <a href="#Global_Definitions">Global</a>
+level.&nbsp; Normally, <a href="#Multiple_device_nodes">that would be
+problematical</a> because
+the <a href="TokenizerLocalValues.htm#Instance_Data_in_L_V_Support">Local
+Values
+Support functions</a> are written to use <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+data, in order to conserve use of System memory.&nbsp; By temporarily
+over-riding the definition of <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+in the <a href="#over_ride_instance">manner shown</a>, the User has
+traded-off economy of System-memory
+for convenience of programming.
+</p>
+<p>This example also offers an illustration of the use of <a
+ href="#Shell_Env_Vbles_in_File_Names">Shell-Environment Variables in
+File-Names</a>:&nbsp; Let us suppose that the directory in which the
+main file for the controller of the assembly whose driver being
+compiled here resides in a directory-tree, several layers under the
+root.&nbsp; Immediately below the root is a sub-directory called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">shared</span>
+that contains shared functions and the Local Values support, and
+elsewhere under the tree are sharable bodies of driver code for
+device-modules that can be incorporated into various assemblies.&nbsp;
+Let us also suppose that the Makefile that governs this Tokenization
+process sets Environment Variables; the root of the tree is called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">DevRoot</span>,
+and the directory in which the sharable bodies reside are called <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">SCZ</span>
+and <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">SLZ</span>
+respectively.&nbsp; And let us further suppose that the <a
+ href="#Example_4_Condl_FLoad">inclusion of these two subsidiary devices</a>
+is
+optional, controlled by command-line symbol definitions. </p>
+<div
+ style="margin-left: 40px; color: rgb(68, 34, 0); font-family: courier new,courier,monospace;">
+\ Define a few macros and functions that will become available<br>
+\ to all subordinate device-nodes in this bundle.<br>
+<br>
+\ Some of our functions are written using Local Values.<br>
+\ We can make the Local Values Support accessible Globally<br>
+\&nbsp;&nbsp;&nbsp;&nbsp; without incurring any Warning messages, and
+without<br>
+\&nbsp;&nbsp;&nbsp;&nbsp; altering the LocalValuesSupport file, if we
+temporarily<br>
+\&nbsp;&nbsp;&nbsp;&nbsp; disable the definition of INSTANCE<br>
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-weight: bold;">headers</span><br>
+<br>
+<span style="font-weight: bold;">global-definitions</span><br>
+<br>
+<a name="over_ride_instance"></a>\&nbsp; Bypass warning about&nbsp;
+Instance<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; without altering
+LocalValuesSupport file<br>
+<br>
+\&nbsp; Leave ourselves a way to recover<br>
+<span style="font-weight: bold;">alias</span> generic-instance&nbsp;
+instance<br>
+<br>
+\&nbsp; Here's where we disable it.&nbsp; During development, give
+confirmation<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; that the macro has been activated by
+printing a message.&nbsp; Also,<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert a token in the place where
+the&nbsp; Instance&nbsp; would have<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gone so that our detokenizations line
+up
+when we inspect.&nbsp; We<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; do this by defining a comand-line
+symbol called&nbsp; proto-code<br>
+\&nbsp; For the final production run, we can make the macro completely<br>
+\ &nbsp; &nbsp;&nbsp; silent by leaving&nbsp; proto-code&nbsp;
+undefined.<br>
+<span style="font-weight: bold;">[ifdef]</span> proto-code<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">overload [macro]</span>
+instance&nbsp; <span style="font-weight: bold;">message"</span>
+Bypassing Instance<span style="font-weight: bold;">"</span>&nbsp; <span
+ style="font-weight: bold;">noop</span><br>
+<span style="font-weight: bold;">[else]</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \&nbsp; Make it completely silent<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">overload [macro]</span>
+instance <span style="font-weight: bold;">f[&nbsp; noop&nbsp; ]f</span><br>
+<span style="font-weight: bold;">[endif]</span><br>
+<br>
+<span style="font-weight: bold;">fload</span> ${DevRoot}/shared/<span
+ style="font-weight: bold;">LocalValuesSupport.fth</span><br>
+<br>
+\&nbsp; Restore normal meaning of&nbsp; Instance , also in Global scope.<br>
+<span style="font-weight: bold;">overload alias</span> instance
+generic-instance<br>
+<br>
+\&nbsp; Here's a global definition that uses Local Values<br>
+: $CAT&nbsp;&nbsp; ( _max _str1 _len1 _str2 _len2 -- _max _str1 _len1' )<br>
+&nbsp;&nbsp; <span style="font-weight: bold;">{</span> _max _str1
+_len1 _str2 _len2 <span style="font-weight: bold;">}</span><br>
+&nbsp;&nbsp; _len1 _max &lt;
+if&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\ there is room<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _str2 _str1 _len1 + _len2 _max _len1 -
+min move<br>
+&nbsp;&nbsp; then<br>
+&nbsp;&nbsp; _max _str1 _len1 _len2 + _max min &nbsp; \ always leave
+total length<br>
+;<br>
+<br>
+\&nbsp; Here is a global macro<br>
+<span style="font-weight: bold;">[macro]</span> 4DUP &nbsp; 2over 2over<br>
+<br>
+\&nbsp; And another<br>
+<span style="font-weight: bold;">[macro]</span> 4DROP&nbsp; 2drop
+2drop<br>
+<br>
+\&nbsp; And yet another<br>
+<span style="font-weight: bold;">[macro]</span> (.h)&nbsp; base @
+swap hex (.) rot base !<br>
+<br>
+\&nbsp; Other shared functions are in a file in the Shared Code
+directory:<br>
+<span style="font-weight: bold;">fload</span>
+${DevRoot}/shared/sharedfuncts.fth<br>
+<br>
+\&nbsp; Definitions in all subsequent device-nodes will be able to
+access<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the $CAT function and the macros&nbsp;
+4DUP&nbsp; and&nbsp;
+4DROP, as well as<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to make use of IBM-Style Local Values
+without re-<span style="font-style: italic; font-weight: bold;">fload</span>ing<br>
+\ &nbsp; &nbsp;&nbsp; the Support File<br>
+<br>
+\&nbsp; Now let's get back into the primary device-node.<br>
+<span style="font-weight: bold;">device-definitions</span><br>
+<br>
+\&nbsp; Use instance data to create a large temporary buffer<br>
+d# 40 dup instance buffer:&nbsp; temp-buf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( max )<br>
+<br>
+\&nbsp; Convolutions to create a name on the fly...<br>
+s" controller_" tuck &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( max len adr len )<br>
+temp-buf
+swap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; ( max len adr buf len )<br>
+move&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; ( max len )<br>
+temp-buf
+swap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; &nbsp; ( max buf len )<br>
+my-self
+(.h)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( max buf len adr2 len2 )<br>
+$cat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( max buf len )<br>
+device-name drop<br>
+<br>
+\&nbsp; Make a macro of that.&nbsp; Define it in parts.<br>
+\&nbsp; Requires the core of the name on the stack.<br>
+\&nbsp; Macro will create its own&nbsp; temp-buf&nbsp; in the current
+device.<br>
+<br>
+<span style="font-weight: bold;">global-definitions<br>
+<br>
+</span>\&nbsp; First part of the operation:&nbsp;&nbsp; ( adr len --
+max adr len )<br>
+\&nbsp; Note that "instance" is allowed here because it is not<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; invoked -- or even parsed --&nbsp;
+until the macro is invoked.<br>
+<span style="font-weight: bold;">[macro]</span>&nbsp;
+create-buffr&nbsp; d# 40 dup instance buffer: temp-buf&nbsp; -rot<br>
+<br>
+\&nbsp; Second part of the operation:&nbsp; ( max adr len -- max buf
+len )<br>
+<span style="font-weight: bold;">[macro]</span>&nbsp;
+name-to-buffr&nbsp;&nbsp; tuck temp-buf swap move temp-buf swap<br>
+<br>
+\&nbsp; Last part of the operation:&nbsp; ( max buf len -- )<br>
+\&nbsp; We're using&nbsp; my-self&nbsp; as part of the device-name<br>
+\ &nbsp; &nbsp;&nbsp; for no particularly good reason other than<br>
+\ &nbsp; &nbsp;&nbsp; that it makes for an interesting example...&nbsp;
+;-}<br>
+<span style="font-weight: bold;">[macro]</span>&nbsp;
+buffr-to-dev-name&nbsp; my-self (.h) $cat device-name drop<br>
+<br>
+\&nbsp; Combine the parts:<br>
+<span style="font-weight: bold;">[macro]</span>&nbsp; make-my-dev&nbsp;
+create-buffr&nbsp; name-to-buffr&nbsp; buffr-to-dev-name<br>
+<br>
+\&nbsp; Back to the primary device-node.<br>
+<span style="font-weight: bold;">device-definitions</span><br>
+<br>
+\&nbsp; Load its methods from the Current Directory<br>
+<span style="font-weight: bold;">fload</span> controller_methods.fth<br>
+<br>
+<a name="timestamp_prop"></a>\&nbsp; Create timestamp property based on
+actual tokenization date and time<br>
+\&nbsp; Combine into a single string (with a space between).<br>
+\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No trailing null-byte until end.<br>
+[fcode-date] encode-bytes &nbsp; "&nbsp; " encode-bytes encode+<br>
+[fcode-time] encode-string encode+ " release-time" property<br>
+<br>
+\&nbsp; Log timestamp to the Audit Trail<br>
+tokenizer[&nbsp;&nbsp; [fcode-date] [fcode-time]&nbsp; ]tokenizer<br>
+<br>
+<a name="Example_4_Condl_FLoad"></a>\&nbsp; First optional subsidiary
+device.&nbsp; Inclusion controlled by command-line symbol.<br>
+<span style="font-weight: bold;">[ifdef]</span> scuzzy<br>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">new-device</span><br>
+<br>
+" scuzzy_"&nbsp; make-my-dev<br>
+<br>
+\&nbsp; Load its methods<br>
+<span style="font-weight: bold;">fload</span> ${SCZ}/scuzzy_methods.fth<br>
+<br>
+<span style="font-weight: bold;">finish-device</span><br>
+</div>
+<span style="font-weight: bold;">[endif]</span><br>
+<br>
+\&nbsp; Second optional subsidiary device, controlled by command-line
+symbol.<br>
+<span style="font-weight: bold;">[ifdef]</span> sleazy<br>
+<div style="margin-left: 40px;"><span style="font-weight: bold;">new-device</span><br>
+<br>
+" sleazy_"&nbsp; make-my-dev<br>
+<br>
+\&nbsp; Load its methods<br>
+<span style="font-weight: bold;">fload</span> ${SLZ}sleazy_methods.fth<br>
+<br>
+<span style="font-weight: bold;">finish-device</span><br>
+</div>
+<span style="font-weight: bold;">[endif]</span><br>
+<br>
+\&nbsp; That's enough for now...<br>
+<span style="font-weight: bold;">fcode-end</span><br>
+</div>
+<h3><a class="mozTocH3" name="mozTocId866180"></a><a name="Example_5"></a>Example
+#5</h3>
+<p>This example serves to illustrate the use of the <a
+ href="#function_name"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">[function-name]</span></a>
+directive to create a series of "you are here" debugging messages.<br>
+</p>
+<p>We will create a pair of macros whose names we can cut'n'paste at
+the beginning and end of every function we want to give a "you are
+here" message, switchable by a local debug-flag.&nbsp; The macros will
+be globally defined, but will make reference to locally-defined names
+for the debug-flag and the device-node name string. </p>
+<div
+ style="margin-left: 40px; color: rgb(68, 34, 0); font-family: courier new,courier,monospace;">
+<br>
+<span style="font-weight: bold;">fcode-version2</span><br>
+<br>
+<span style="font-weight: bold;">global-definitions</span><br>
+\&nbsp; Each dev-node will create its own debug-flag and alias it
+to&nbsp; debug-me?<br>
+\&nbsp; Each dev-node creates a macro called my-dev-name giving its
+device-name<br>
+<span style="font-weight: bold;"></span><br>
+<span style="font-weight: bold;">[macro]</span> .fname&amp;dev&nbsp; <span
+ style="font-weight: bold;">[function-name]</span> <span
+ style="font-weight: bold;">type</span> <span
+ style="font-weight: bold;">."</span>&nbsp; in <span
+ style="font-weight: bold;">"</span> my-dev-name <span
+ style="font-weight: bold;">type</span> <br>
+&nbsp;&nbsp;&nbsp; <br>
+<span style="font-weight: bold;">[macro]</span> name-my-dev&nbsp;&nbsp;
+my-dev-name <span style="font-weight: bold;">device-name<br>
+</span><br>
+<span style="font-weight: bold;">[macro]</span> .dbg-enter&nbsp;
+debug-me? <span style="font-weight: bold;">@</span> <span
+ style="font-weight: bold;">if</span> <span style="font-weight: bold;">."</span>
+Entering<span style="font-weight: bold;"> "</span> .fname&amp;dev&nbsp;
+<span style="font-weight: bold;">cr</span> <span
+ style="font-weight: bold;">then</span><br>
+<span style="font-weight: bold;">[macro]</span> .dbg-leave&nbsp;
+debug-me? <span style="font-weight: bold;">@</span> <span
+ style="font-weight: bold;">if</span> <span style="font-weight: bold;">."</span>
+Leaving <span style="font-weight: bold;">"</span>&nbsp;
+.fname&amp;dev&nbsp; <span style="font-weight: bold;">cr</span> <span
+ style="font-weight: bold;">then</span><br>
+<span style="font-weight: bold;">device-definitions</span><br>
+<br>
+<span style="font-weight: bold;">headers</span><br>
+\&nbsp; Top-most device, named billy<br>
+<span style="font-weight: bold;">[macro]</span> my-dev-name&nbsp; "
+billy"<br>
+name-my-dev<br>
+<br>
+\&nbsp; debug-billy?&nbsp; is a flag the user can turn "on" to get
+debug-messages<br>
+\&nbsp; from the methods of the device we call "billy"<br>
+<span style="font-weight: bold;">variable</span> debug-billy?&nbsp;
+debug-billy? <span style="font-weight: bold;">off</span><br>
+\&nbsp; Set it up for the macro<br>
+<span style="font-weight: bold;">alias</span> debug-me? debug-billy?<br>
+<br>
+: bill<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Entering bill in billy<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">[char]</span> G <span
+ style="font-weight: bold;">dup</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">control</span> G <span
+ style="font-weight: bold;">3drop</span><br>
+&nbsp;&nbsp;&nbsp;
+.dbg-leave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Leaving bill in billy<br>
+<br>
+;<br>
+<br>
+: factl recursive&nbsp; ( n -- n! )<br>
+<span style="font-weight: bold;">type</span> &nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">."</span> Entering First vers. of <span
+ style="font-weight: bold;">"</span> .fname&amp;dev <span
+ style="font-weight: bold;">cr</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">?dup</span> <span
+ style="font-weight: bold;">0=</span> <span style="font-weight: bold;">if</span>
+<span style="font-weight: bold;">1</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">else</span>&nbsp; <span
+ style="font-weight: bold;">dup</span> <span style="font-weight: bold;">1-</span>&nbsp;
+factl <span style="font-weight: bold;">*</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">then</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">."</span> Leaving
+First vers. of <span style="font-weight: bold;">"</span>
+.fname&amp;dev <span style="font-weight: bold;">type</span> <span
+ style="font-weight: bold;">cr</span><br>
+;<br>
+<br>
+: factl ( n -- n! )<br>
+<span style="font-weight: bold;">type</span> &nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">."</span> Entering Second vers. of <span
+ style="font-weight: bold;">"</span> <span style="font-weight: bold;">[function-name]</span>
+<span style="font-weight: bold;">cr</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">?dup</span> <span
+ style="font-weight: bold;">0=</span> <span style="font-weight: bold;">if</span>
+<span style="font-weight: bold;">1</span> factl<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">else</span>&nbsp; <span
+ style="font-weight: bold;">dup</span> <span style="font-weight: bold;">1-</span>
+<span style="font-weight: bold;">recurse</span> <span
+ style="font-weight: bold;">*</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">then</span><br>
+<span style="font-weight: bold;">type</span> &nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">."</span> Leaving Second vers. of <span
+ style="font-weight: bold;">"</span> <span style="font-weight: bold;">[function-name]</span>
+<span style="font-weight: bold;">cr</span><br>
+;<br>
+<br>
+<span style="font-weight: bold;">variable</span> naught<br>
+<span style="font-weight: bold;">defer</span>&nbsp; do-nothing<br>
+20 <span style="font-weight: bold;">value</span> twenty<br>
+30 <span style="font-weight: bold;">value</span> thirty<br>
+40 <span style="font-weight: bold;">buffer:</span> forty<br>
+50 <span style="font-weight: bold;">constant</span> fifty<br>
+<span style="font-weight: bold;">create</span> three 0 <span
+ style="font-weight: bold;">,</span> 00 <span
+ style="font-weight: bold;">,</span> <span style="font-weight: bold;">h#</span>
+000 <span style="font-weight: bold;">,</span><br>
+<span style="font-weight: bold;">struct</span><br>
+4 <span style="font-weight: bold;">field</span> &gt;four<br>
+<span style="font-weight: bold;">constant</span> /four<br>
+<br>
+: peril<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Entering peril in billy<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">[']</span> <span
+ style="font-weight: bold;">noop</span> <span
+ style="font-weight: bold;">to</span> do-nothing<br>
+&nbsp;&nbsp;&nbsp; 100 <span style="font-weight: bold;">to</span>
+thirty<br>
+&nbsp;&nbsp;&nbsp; 5 <span style="font-weight: bold;">to</span>
+naught&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="font-style: italic;">\&nbsp; Generates a WARNING</span><br>
+&nbsp;&nbsp;&nbsp; thirty <span style="font-weight: bold;">dup</span> <span
+ style="font-weight: bold;">-</span> <span style="font-weight: bold;">abort"</span>
+Never Happen<span style="font-weight: bold;">"</span><br>
+&nbsp;&nbsp;&nbsp;
+.dbg-leave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; You get the idea...<br>
+;<br>
+<br>
+: thirty ( new-val -- )<br>
+&nbsp;&nbsp;&nbsp; .dbg-enter<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">dup</span> <span
+ style="font-weight: bold;">to</span> thirty<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">alias</span> .dec <span
+ style="font-weight: bold;">.d</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; Generates a WARNING and an ADVISORY<br>
+&nbsp;&nbsp;&nbsp; ." Dirty"&nbsp; .dec<br>
+&nbsp;&nbsp;&nbsp; .dbg-leave<br>
+;<br>
+<br>
+\&nbsp; First subsidiary device, "child" of billy<br>
+<span style="font-weight: bold;">new-device</span><br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">instance</span> <span
+ style="font-weight: bold;">variable</span> cheryl<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">[macro]</span>&nbsp;
+my-dev-name&nbsp; <span style="font-weight: bold;">"</span> cheryl<span
+ style="font-weight: bold;">"</span><br>
+&nbsp;&nbsp;&nbsp; name-my-dev<br>
+<br>
+&nbsp;&nbsp;&nbsp; \&nbsp; Third-level device, "grandchild" of billy<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">new-device</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">[macro]</span>&nbsp; my-dev-name&nbsp; <span
+ style="font-weight: bold;">"</span> meryl<span
+ style="font-weight: bold;">"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name-my-dev<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">variable</span> debug-meryl?&nbsp;
+debug-meryl? <span style="font-weight: bold;">off</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span
+ style="font-weight: bold;">alias</span> debug-me? debug-meryl?<br>
+<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; : merle<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Entering merle in meryl<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+cheryl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; ERROR.&nbsp; Is in a different dev-node.<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; .dbg-leave<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ;<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">variable</span>
+beryl<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">finish-device</span><br>
+<br>
+&nbsp;&nbsp;&nbsp; \&nbsp; Now we're back to "cheryl"<br>
+&nbsp;&nbsp;&nbsp; <br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold;">variable</span>
+debug-cheryl?&nbsp; debug-cheryl? <span style="font-weight: bold;">off</span><br>
+&nbsp;&nbsp;&nbsp; alias debug-me? debug-cheryl?<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp; : queryl<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Entering queryl in cheryl<br>
+&nbsp;&nbsp;&nbsp; <span style="font-weight: bold; font-style: italic;">over
+rot dup nip drop swap</span>&nbsp;&nbsp; \&nbsp; Not the most useful
+code...&nbsp; ;-}<br>
+&nbsp;&nbsp;&nbsp; .dbg-leave<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ;<br>
+<span style="font-weight: bold;">finish-device</span><br>
+\&nbsp; And we're back to billy.<br>
+: droop ( -- )<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This will display&nbsp; Entering droop in billy<br>
+&nbsp;&nbsp;&nbsp; twenty<br>
+&nbsp;&nbsp;&nbsp; 0 <span style="font-weight: bold;">?do</span> i .h <span
+ style="font-weight: bold;">loop</span><br>
+&nbsp;&nbsp;&nbsp;
+.dbg-leave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; You get the idea....<br>
+;<br>
+<br>
+<a name="Example_5_func_nam"></a><br>
+\&nbsp; The following will generate some unexpected errors:<br>
+: quack ( maybe not -- oops!&nbsp; I-forgot-the-close-paren<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This should display&nbsp; Entering quack in billy<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; But it doesn't display anything and I don't know why.<br>
+&nbsp;&nbsp;&nbsp; h# 30&nbsp; .d<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-leave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; and I'm still baffled...<br>
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \&nbsp; Oh, well, soldier on...<br>
+: cluck&nbsp; ( don't count -- before hatched )&nbsp; \&nbsp; Now, <span
+ style="font-style: italic;">there's</span> a close-paren....
+</div>
+<br>
+<div
+ style="color: black; font-family: helvetica,arial,sans-serif; font-weight: bold;"><span
+ style="font-style: italic;">Note:</span>&nbsp; At this point,
+the Tokenizer has issued a <a href="#Allow_Multi_Line">Multi-Line
+Warning</a> about a Comment that
+began six lines earlier, which gives the User a good indication as to
+just what
+went wrong... </div>
+<br>
+<div
+ style="margin-left: 40px; color: rgb(68, 34, 0); font-family: courier new,courier,monospace;">&nbsp;&nbsp;&nbsp;
+.dbg-enter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; This does display, but not what I expected.<br>
+&nbsp;&nbsp;&nbsp; ." Coming from" <a href="#Inp_Fil_Nm_Strg">[input-file-name]</a>
+type ."&nbsp; line
+" <a href="#Inp_Fil_Nm_Strg">[line-number]</a> .d cr<br>
+tokenizer[&nbsp; <a href="#function_name">[function-name]</a>&nbsp;&nbsp;
+]tokenizer&nbsp;&nbsp;&nbsp; \&nbsp;&nbsp; Let's not wait for run-time<br>
+&nbsp;&nbsp;&nbsp;
+.dbg-leave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; Now I get it...<br>
+;<br>
+<span style="font-weight: bold;">fcode-end</span><br>
+<br>
+</div>
+<br>
+<h2><a class="mozTocH2" name="mozTocId856440"></a>End Of Document</h2>
+<!-- =========================================================================== -->
+</body>
+</html>

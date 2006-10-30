@@ -1,0 +1,859 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- ESWDESDOCFILE %Z%%M%	%I%  %W% %G% %U% -->
+  <title>ESW PART-FW: Support for "Local Values" in the OpenBIOS
+Tokenizer</title>
+  <link rel="stylesheet" type="text/css"
+ href="workbook.css">
+</head>
+<body>
+<h1 class="title"><a class="mozTocH1" name="mozTocId810036"></a>Support
+for "Local Values" in the OpenBIOS Tokenizer</h1>
+<div class="document-control">
+<ul>
+  <li>Updated Wed, 26 Jul 2006 at 10:04 PDT by David L. Paktor<br>
+  </li>
+</ul>
+</div>
+<p class="copyright"> Copyright &copy; 2005 International Business
+Machines<sup>&reg;</sup>, All Rights Reserved.<br>
+Licensed under the <a
+ href="http://www.opensource.org/licenses/cpl1.0.php">Common Public
+License (CPL) version 1.0</a><br>
+</p>
+<!-- =========================================================================== --><!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId207724"></a>Table Of Contents</h2>
+<ol id="mozToc">
+<!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6--><li><a href="#mozTocId810036">Support
+for "Local Values" in the OpenBIOS Tokenizer</a>
+    <ol>
+      <li><a href="#mozTocId944022">Overview</a></li>
+      <li><a href="#mozTocId303607">Scope of this Document</a></li>
+      <li><a href="#mozTocId272611">Design Objectives</a></li>
+      <li><a href="#mozTocId383861">Functional
+Requirements</a></li>
+      <li><a href="#mozTocId969736">Interface
+Specification</a>
+        <ol>
+          <li><a href="#mozTocId699042">Syntax:</a>
+            <ol>
+              <li><a href="#mozTocId94063">Declaration:
+(Curly-braces: &nbsp; { &nbsp; and
+&nbsp; } &nbsp; )</a></li>
+              <li><a href="#mozTocId444210">Separation
+Character between Initialized and
+Uninitialized Local Values</a></li>
+              <li><a href="#mozTocId715222">Value Extraction:
+Invocation</a></li>
+              <li><a href="#mozTocId677769">Value Assignment: The
+&nbsp; -&gt; &nbsp;
+Operator.</a></li>
+              <li><a href="#mozTocId189696">Scope of Local Values:</a></li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId107943">Semantics:</a>
+            <ol>
+              <li><a href="#mozTocId459457">Order of
+Initialization:</a></li>
+              <li><a href="#mozTocId908599">Note two significant
+departures from the "Local Variables"
+discussed in the ANSI FORTH Standard document: </a></li>
+              <li><a href="#mozTocId213536">Value Extraction</a></li>
+              <li><a href="#mozTocId563286">Value Assignment</a></li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="#mozTocId505598">Implementation</a>
+        <ol>
+          <li><a href="#mozTocId134995">Compilation -- the
+Parser:</a>
+            <ol>
+              <li><a href="#mozTocId467215">Run-Time Support
+Function names:</a>
+                <ol>
+                  <li><a href="#mozTocId497158">Example:</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#mozTocId361894">Run-Time Support --
+the Local Values Support "Library":</a>
+            <ol>
+              <li><a href="#mozTocId191315">Operational Run-Time
+Support
+Functions:</a></li>
+              <li><a href="#mozTocId750894">Important note regarding
+floading of the Local Values Support Functions file</a></li>
+              <li><a href="#mozTocId684194">Adjusting the size of
+Local Values Storage:</a></li>
+              <li><a href="#mozTocId208497">Additional Support
+Function(s):</a>
+                <ol>
+                  <li><a href="#mozTocId781114">CATCH / THROW</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+<h2><a class="mozTocH2" name="mozTocId944022"></a>Overview</h2>
+<!-- =========================================================================== -->
+The goal of this project is to implement support for "Local Values"
+in the OpenBIOS Tokenizer.
+<p>"Local Values" are an IBM-specific extension of FORTH syntax,
+currently used both by the FCode Tokenizer and Platform Firmware.
+They might be considered a variant that meets the spirit, if not the
+letter, of the suggestions for a "Locals word set" discussed
+-- but not specified -- in the ANSI FORTH Standard, Section 13 and
+Appendix A.13</p>
+<p>
+(Please note that the ANSI document does not really specify this
+feature,
+because the Committee could not reach an agreement. Appendix A.13
+records the somewhat lively discussions that accompanied this topic.)</p>
+<p>We will refer to this feature with the nomenclature "<span
+ style="font-weight: bold;">Local Values</span>" in preference to
+"Local
+Variables" or "Locals" in order to (a) more accurately
+characterize the behavior of these objects, and (b) further emphasize
+the differences between the IBM-specific extension and those discussed
+in the ANSI document.
+</p>
+<h2><a class="mozTocH2" name="mozTocId303607"></a>Scope of this Document</h2>
+<!-- ...................................................................................... -->
+The sections labeled <a style="font-weight: bold;" href="#Syntax">Syntax</a>
+and <a style="font-weight: bold;" href="#Semantics">Semantics</a>
+describe the user's view of this feature.<br>
+<p>The section
+labeled <a style="font-weight: bold;" href="#Implementation">Implementation</a>
+is a description of the
+underlying parsing and support mechanisms that meet the <a
+ style="font-weight: bold;" href="#Design_Objectives">Design Objectives</a>.
+</p>
+<!-- ...................................................................................... --><!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId272611"></a><a
+ name="Design_Objectives"></a>Design Objectives</h2>
+<!-- =========================================================================== -->The
+"Local Values" extension is intended to relieve programmers maintaining
+FCode device drivers from the complexity involved in keeping track of
+the
+positions of the various items on the stack. The programmer can,
+instead,
+refer to these items by symbolic names, in a manner similar to "<big><b>C</b></big>"
+syntax.
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId383861"></a>Functional
+Requirements</h2>
+<!-- =========================================================================== -->
+Tokenizing source-code that makes use of the "Local Values" syntax
+shall still result in Industry Standard FCode that can be interpreted
+by the
+FCode interpreter of any Open Firmware-compliant Host Platform, without
+imposing any IBM-specific requirements.<br>
+<p>Also, the implementation shall support a means whereby to remain
+compatible with IBM's existing code-base.</p>
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId969736"></a>Interface
+Specification</h2>
+<!-- =========================================================================== -->
+<h3><a class="mozTocH3" name="mozTocId699042"></a><a name="Syntax"></a>Syntax:</h3>
+<h4><a class="mozTocH4" name="mozTocId94063"></a>Declaration:
+(Curly-braces: &nbsp; <b><big>{</big></b> &nbsp; and
+&nbsp; <big><b>}</b></big> &nbsp; )</h4>
+<p>
+Local Values may only be declared in connection with a colon-definition
+(A "word" in FORTH parlance.) </p>
+<p> Declaration of Local Values is triggered by an open-curly-brace
+(i.e.,: &nbsp; <b>{</b> &nbsp; ) , and ends with a close-curly-brace (
+&nbsp; <b>}</b> &nbsp;
+).</p>
+<p>A further distinction is made between Initialized Local Values and
+Uninitialized Local Values:&nbsp; Initialized Local Values are declared
+first, and
+are separated by a <a href="#Separation_Character_between_Initialized">special
+character</a> from Uninitialized Local Values.<br>
+</p>
+<p>Declaration of Local Values may only occur once within the body of
+the colon-definition.<br>
+</p>
+<p>Declaration of Local Values after code has been compiled into the
+body of the word is not recommended, but is permitted.&nbsp; A Local
+Values
+Declaration that occurs inside a Flow-Control Structure will be
+reported as an <a href="TokenizerNewFeatures.htm#An_ERROR">Error</a>.<br>
+</p>
+<p>A Local Values Declaration may include comments and may continue
+across
+multiple lines.&nbsp; See the <a href="#mozTocId497158">example</a> in
+the <a href="#Implementation">Implementation</a> section.</p>
+<h4><a class="mozTocH4" name="mozTocId444210"></a><a
+ name="Separation_Character_between_Initialized"></a>Separation
+Character between Initialized and
+Uninitialized Local Values</h4>
+<p>Two symbols are accepted as the separator between
+Initialized and Uninitialized Local Values, the <b>Semicolon</b>
+(&nbsp;<span style="font-family: courier new,courier,monospace;"
+ font-weight="" bold="">;</span> ) and the <span
+ style="font-weight: bold;">Vertical-Bar</span> (&nbsp;&nbsp; <span
+ style="font-weight: bold;">|</span>&nbsp;&nbsp; ).
+</p>
+<p>Since, in FORTH, Semicolon is heavily fraught with a very important
+meaning,
+it is preferable to use a different symbol -- one that isn't used
+for anything else -- as the separator between Initialized and
+Uninitialized Local Values. Better still would be a symbol that's given
+at least passing mention in the discussion about the (failed) attempt
+to establish an ANSI standard for Locals (see the ANSI Forth Spec.,
+section 13.6.2.1795).</p>
+<p>
+The <span style="font-weight: bold;">Vertical-Bar</span>
+symbol
+(&nbsp;&nbsp; <span style="font-weight: bold;">|</span>&nbsp;&nbsp; )
+fills that bill nicely.</p>
+<p><a name="Legacy_Separator"></a>Local Values Declarations
+will accept Semicolon as an alternative ("Legacy") separator between
+Initialized
+and Uninitialized Local Values, and issue a Warning message to the
+effect
+that the
+use of Semicolons in that context is deprecated in favor of the
+Vertical-Bar.</p>
+<p>The User may suppress this
+message by means of a <a
+ href="TokenizerNewFeatures.htm#Command-Line_options_">Command-line
+switch</a>, known as the
+<a href="TokenizerNewFeatures.htm#Special_Feature_Flags">Special-Feature
+Flag</a> named <a href="TokenizerNewFeatures.htm#SF_Flag_LV_Leg_Mssg"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">NoLV-Legacy-Message</span></a>
+, which is described in the <a href="TokenizerNewFeatures.htm">Tokenizer
+User's Guide</a>.</p>
+<p><a name="Disallow_Legacy"></a>Conversely, the User who wishes to
+disallow the use of Semicolon as
+an alternative separator may do so by means of the
+Special-Feature Flag named <a
+ href="TokenizerNewFeatures.htm#SF_Flag_LV_Leg_Sep"><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">NoLV-Legacy-Separator</span></a>
+.&nbsp; When the Legacy Local Values
+Separator is thus disallowed, occurrences will be treated as an
+Error.</p>
+<h4><a class="mozTocH4" name="mozTocId715222"></a>Value Extraction:
+Invocation</h4>
+A name declared as a Local Value may be invoked within the body of a
+word in connection with which it was declared, simply by name, in a
+manner similar to a name defined by the Standard FORTH defining-word, <i><b>VALUE</b></i>
+, to mean that its associated value is to be extracted and placed onto
+the Stack.
+<h4><a class="mozTocH4" name="mozTocId677769"></a>Value Assignment: The
+&nbsp; <b><big>-&gt;</big></b> &nbsp;
+Operator.</h4>
+The symbol &nbsp; <b>-&gt;</b> &nbsp; (dash angle-bracket, pronounced
+"dash-arrow"), may precede the name of a Local Value, and it may not
+precede anything else.
+<p>No comments are permitted between the &nbsp; <b>-&gt;</b> &nbsp;
+and the Local-Value name to which it applies.</p>
+<p>The &nbsp; <b>-&gt;</b> &nbsp; and
+the Local-Value name to which it applies must be on the same line. </p>
+<p>The &nbsp; <b>-&gt;</b> &nbsp; operator relates to the Local-Value
+name to which it is applied in a manner similar to the way the &nbsp;<i><b>TO</b></i>&nbsp;
+operator relates, when it is applied, to a name defined by &nbsp;<i><b>VALUE</b></i>&nbsp;
+; it causes the numeric value on
+top of the Parameter Stack to be popped and stored into -- associated
+with -- the named Local Value.</p>
+<h4><a class="mozTocH4" name="mozTocId189696"></a>Scope of Local Values:</h4>
+Upon completion of the definition of the word in connection with which
+a set of Local Values was declared, i.e., at the semicolon, the names
+of the Local Values cease to be recognized. If the same names are
+declared in connection with a subsequent definition, they are only
+applicable to that subsequent definition, as if they were newly
+created. No warning is issued, nor do rules concerning "overloading"
+apply.<!-- ...................................................................................... -->
+<h3><a class="mozTocH3" name="mozTocId107943"></a><a name="Semantics"></a>Semantics:</h3>
+<h4><a class="mozTocH4" name="mozTocId459457"></a>Order of
+Initialization:</h4>
+Uninitialized Local Values do not have a value until one is assigned
+within the definition, by the use of the &nbsp; <b>-&gt;</b>&nbsp;
+("dash-arrow") operator.
+<p>Initialized Local Values are initialized from the stack at the start
+of execution of the defined word, in the same order as the convention
+for a stack-diagram, i.e., the first-named Local Value is
+initialized from the stack-item whose depth corresponds to the total
+number of initialized Local Values, the last-named Local Value is
+initialized from the top-of-stack item, and so on in between. </p>
+<p>
+The following will serve to illustrate:
+</p>
+<code><font color="#000000">
+<p>: &lt;word-name&gt; ( P_x ... P_y &nbsp; P_0 P_1 ... P_n-2 P_n-1 --
+??? )<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; { IL_0 IL_1
+... IL_n-2 IL_n-1 | UL_0 UL_1 } </p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \ &nbsp; &nbsp;
+&nbsp; At the start of the word,
+IL_0 through IL_n-1 are initialized<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \ &nbsp; &nbsp; &nbsp;
+with P_0 thorough P_n-1, respectively, and the stack contains<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( &nbsp; P_x ... P_y &nbsp; )
+</p>
+</font></code>
+<h4><a class="mozTocH4" name="mozTocId908599"></a>Note two significant
+departures from the "Locals"
+discussed in the ANSI FORTH Standard document:
+</h4>
+<p>(1) The ANSI FORTH Committee discussions make no provision for
+Uninitialized Locals, <br>
+</p>
+<p>and
+</p>
+<p> (2) The order of initialization is reversed. In the ANSI document,
+Locals are initialized
+in the order they are declared, so that the first-declared will take
+the topmost value on the stack, and the last-declared will take the
+deepest value.
+</p>
+<p> The general consensus within IBM is that this scheme is confusing
+at best, and does not serve the intent of the <a
+ href="#Design_Objectives">Design Objectives</a>.
+</p>
+<h4><a class="mozTocH4" name="mozTocId213536"></a>Value Extraction</h4>
+When the name of a Local Value is invoked, its associated value is
+extracted
+and pushed onto the Parameter Stack.
+<h4><a class="mozTocH4" name="mozTocId563286"></a>Value Assignment</h4>
+If the &nbsp; <b>-&gt;</b> &nbsp; ("dash-arrow") symbol precedes the
+name of a Local Value, then the numeric value on
+top of the Parameter Stack is popped and stored into -- associated with
+-- the named Local-Value.<br>
+<p>Following the&nbsp;&nbsp; -&gt;&nbsp;&nbsp; ("dash-arrow") symbol
+with anything other than the name of a Local Value is an Error.</p>
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId505598"></a><a
+ name="Implementation"></a>Implementation</h2>
+<!-- =========================================================================== -->
+<!-- ...................................................................................... -->
+<h3><a class="mozTocH3" name="mozTocId134995"></a>Compilation -- the
+Parser:</h3>
+<!-- ...................................................................................... -->
+A separate area (a "vocabulary", in Forth parlance) must be reserved
+where temporary compile-time
+definitions of the new Local Value names can be created, and whence the
+new Local Value names can be removed after the definition of the word
+in connection with which they were declared is completed. Variables
+must also be set aside to keep count of the Initialized and
+Uninitialized Local Value names declared inside the curly-braces.
+<p> Each new Local Value name has an integer assigned to it. The Parser
+assigns successive integers, starting with 0, to the Local Value names,
+in the order that they are declared, and enters the name of each new
+Local Value, together with its assigned integer, into the separate
+reserved temporary area.
+</p>
+<p> After all the Local Value names have been declared, i.e., after the
+close-curly-brace has been read, the Parser compiles-in the number of
+Initialized Local Values, followed by the number of Uninitialized Local
+Values, where they will act as arguments to the <a href="#push-locals">appropriate
+function</a>,
+which the Parser compiles-in immediately after. The function will be
+the special one that allocates space for, and initializes, the Local
+Values at the time they are about to be used.
+</p>
+<p> While the definition under construction is being compiled, the area
+where the temporary compile-time definitions of the new Local Value
+names have been created must be available to the scanning process, so
+that the new names will be recognized when invoked. Also, it should be
+scanned first, ahead of any other word-lists, so that the Local Value
+names will supercede any similarly-named words, in case of a
+naming-overlap.
+</p>
+<p> When a Local Value's name is invoked, the Parser compiles-in its
+assigned integer as an argument to the <a href="#_local">appropriate
+function</a>, which is
+compiled-in immediately after. The function will be a common one that
+will push onto the stack the address at which the numbered Local Value
+can be accessed. The Parser will then compile-in either the "fetch"
+function ( &nbsp; <b>@</b> &nbsp; ) or the "store" function ( &nbsp; <b>!</b>
+&nbsp; ), depending on whether the Local Value name was invoked by
+itself or in conjunction with the &nbsp; <b>-&gt;</b> &nbsp; operator.
+This way the User/Programmer's view of Local Values' <i><b>VALUE</b></i>-style
+behavior is preserved. </p>
+<p>The FORTH functions <b>exit</b> and <b>;</b> (semicolon) have to
+be overloaded. (Section 13.3.3 of the ANSI document also mentions
+&nbsp; <b>;CODE</b> &nbsp; and &nbsp; <b>DOES&gt;</b> &nbsp; but
+these are not recognized by the Tokenizer, so we will not discuss them
+here.) The overloaded definitions must take special action at
+compile-time
+(note that &nbsp; <b>;</b> &nbsp; -- semicolon -- does that normally,
+anyway, but <b>exit</b> does not) to: compile-in the total number of
+Local Values as an argument to the <a href="#pop-locals">appropriate
+function</a>, which is
+compiled-in immediately afterwards, before completing their normal
+behavior. The function in this case will be the special one that
+releases the space that had been allocated for the Local Values, and
+restores the state of Local Values storage to the way the calling
+routine left it. Semicolon must also clear the area where the temporary
+compile-time definitions of the new local-names were created,
+rendering them inaccessible. </p>
+<h4><a class="mozTocH4" name="mozTocId467215"></a>Run-Time Support
+Function names:</h4>
+The names of the three functions that the Parser compiles-in must be
+well-known and documented, so that they can be implemented and exported
+correctly in the
+Run-Time Support "Library" file.
+<p>The three functions' names are: </p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>{push-locals} ( #ilocals
+#ulocals -- )</b></p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>{pop-locals}
+( total#locals
+-- ) </b></p>
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>_{local}
+( local-var# --
+addr )<br>
+</b></p>
+<h4><a class="mozTocH4" name="mozTocId497158"></a>Example:</h4>
+The following is an example of a word definition that declares and
+makes
+use of Local Values; it also shows inclusion of comments and
+continuation
+of the Declaration
+across multiple lines:<br>
+<br>
+<tt>
+
+<font color="#663333" face="Courier New, Courier, monospace"></font></tt>
+<table style="text-align: left; width: 821px; height: 356px;" border="0" cellpadding="0" cellspacing="0">
+
+
+  <tbody>
+
+
+    <tr>
+
+
+      <td style="text-align: left; vertical-align: top; width: 33%; white-space: nowrap;"><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(102, 0, 204);">:</span></font><font style="font-family: monospace;" color="#663333" size="-1">
+      <span style="color: rgb(0, 102, 0);">faber</span> <span style="color: rgb(136, 136, 136);">( m4 m3 n2 n1 n0 -- m4 m3 )<br>
+
+
+      <span style="color: rgb(204, 51, 204);">&nbsp; &nbsp;{</span><br>
+
+
+      </span></font><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(204, 51, 204);"></span></font><font style="font-family: monospace;" color="#663333" size="-1">&nbsp; &nbsp; &nbsp; <span style="color: rgb(119, 119, 119);">\ These are initialized values:</span><br>
+
+
+&nbsp; &nbsp; &nbsp; <span style="color: rgb(51, 102, 255);">_otter</span><br>
+
+
+&nbsp; &nbsp;</font><font style="font-family: monospace;" color="#663333" size="-1"> &nbsp; <span style="color: rgb(51, 102, 255);">_weasel</span><br>
+
+
+&nbsp; &nbsp;</font><font style="font-family: monospace;" color="#663333" size="-1"> &nbsp; <span style="color: rgb(51, 102, 255);">_skunk</span><br>
+
+
+      <br>
+
+
+&nbsp; &nbsp; &nbsp; <span style="color: rgb(204, 51, 204);">|</span><br>
+
+
+      <br>
+
+
+&nbsp; &nbsp; &nbsp; <span style="color: rgb(119, 119, 119);">\ </span></font><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(119, 119, 119);">These are uninitialized:</span><br>
+
+
+&nbsp; &nbsp; &nbsp; </font><font style="font-family: monospace;" size="-1"><span style="color: rgb(51, 153, 153);">_muskrat</span><br>
+
+
+      </font><font style="font-family: monospace;" color="#663333" size="-1">&nbsp; &nbsp; &nbsp; </font><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(51, 153, 153);">_mole</span><br>
+
+
+      <span style="color: rgb(204, 51, 204);">&nbsp; &nbsp;}</span></font><font style="font-family: monospace;" color="#663333" size="-1"><br>
+
+
+      <span style="color: rgb(0, 0, 0);">&nbsp; &nbsp;</span></font><font style="font-family: monospace;" size="-1"><span style="color: rgb(0, 0, 0);">_skunk 40 * &nbsp; &nbsp; &nbsp; &nbsp;-&gt; _muskrat<br>
+
+
+&nbsp; &nbsp;_muskrat alloc-mem -&gt; _mole<br>
+
+
+&nbsp; &nbsp;base @<br>
+
+
+&nbsp; &nbsp;hex &nbsp; &nbsp; &nbsp;_weasel (.)
+_mole place<br>
+
+
+&nbsp; &nbsp;decimal &nbsp; _otter (.) _mole $cat<br>
+
+
+&nbsp; &nbsp;base !<br>
+
+
+&nbsp; &nbsp;_mole count type<br>
+
+
+&nbsp; &nbsp;</span></font><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(0, 0, 0);">_mole _muskrat free-mem</span><br>
+
+
+      </font><font style="font-family: monospace;" color="#663333" size="-1"><span style="color: rgb(102, 0, 204);">;</span></font><tt><font color="#663333" face="Courier New, Courier, monospace"></font></tt></td>
+
+
+      <td style="text-align: left; vertical-align: top; white-space: nowrap; background-color: rgb(255, 255, 255);"><font style="font-family: monospace;" size="-1"><span style="color: rgb(119, 119, 119);">\ Does nothing useful.&nbsp;Just an example.<br>
+
+
+\ BEGIN the declaration of Local Values.<br>
+
+
+      <br>
+
+
+\&nbsp;_otter is initialized with
+the value of n2<br>
+
+
+\ _weasel&nbsp;is initialized with
+the value of n1<br>
+
+
+\&nbsp;_skunk is
+initialized
+with the value of n0<br>
+
+
+\ and will be used to
+determine&nbsp;an amount of memory
+to allocate.<br>
+
+
+\ Vertical bar ends the group of Initialized Local Values.<br>
+
+
+\ NOTE: m4 and m3 stay on the stack.<br>
+
+
+      <br>
+
+
+\&nbsp;_muskrat will take the
+final size of the allocation.</span><br style="color: rgb(119, 119, 119);">
+
+
+      </font><font style="color: rgb(119, 119, 119); font-family: monospace;" color="#663333" size="-1">\&nbsp;_mole will hold the address of the allocated memory<br>
+
+
+\ END the declaration of Local Values.</font><font style="font-family: monospace;" color="#663333"><br>
+
+
+      </font><tt><font color="#663333" face="Courier New, Courier, monospace"></font></tt></td>
+
+
+    </tr>
+
+
+  
+  
+  </tbody>
+</table>
+
+<!-- <font color="#663333" face="Courier New, Courier, monospace">:
+faber ( m4 m3 n2 n1 n0 -- m4 m3 ) &nbsp;
+\ &nbsp; Does nothing useful.&nbsp; Just an example.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; { &nbsp;&nbsp;
+_otter&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; \&nbsp;
+_otter &nbsp; &nbsp; &nbsp;
+is initialized with
+the value of n2<br>
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; _weasel &nbsp; &nbsp; &nbsp;
+&nbsp; \&nbsp; _weasel&nbsp; is initialized with
+the value of n1<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; _skunk &nbsp;
+&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; \&nbsp; _skunk&nbsp; &nbsp; is
+initialized
+with the value of n0<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; \&nbsp;
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; and will be used to
+determine<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; \&nbsp;
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+&nbsp; an amount of memory
+to allocate<br>
+&nbsp;
+&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; ( Vertical
+Bar ends the group of Initialized
+Local Values&nbsp; ) &nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; |&nbsp; &nbsp;&nbsp; ( m3 and m4 stay on the
+stack )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; These are uninitialized:<br>
+&nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+_muskrat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \&nbsp; _muskrat will take the
+final size of the allocation<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+_mole&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+\&nbsp; _mole will hold the address of the allocated memory<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; }<br>
+&nbsp; &nbsp; &nbsp; &nbsp; _skunk 40 * -&gt; _muskrat<br>
+&nbsp; &nbsp; &nbsp; &nbsp; _muskrat alloc-mem -&gt; _mole<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+base @<br>
+&nbsp; &nbsp; &nbsp; &nbsp; hex &nbsp; &nbsp; &nbsp; &nbsp; _weasel (.)
+_mole place<br>
+&nbsp; &nbsp; &nbsp; &nbsp; decimal &nbsp; _otter (.) _mole $cat<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; base !<br>
+&nbsp; &nbsp; &nbsp; &nbsp; _mole count type<br>
+&nbsp; &nbsp; &nbsp; &nbsp; _mole _muskrat free-mem<br>
+; </font>
+-->
+</tt>
+<p> The compilation of <font color="#663333"
+ face="Courier New, Courier, monospace">
+<b>faber</b></font>
+starts with &nbsp; <b>3 2
+{push-locals}</b> &nbsp; . The first invocation of <font
+ color="#663333" face="Courier New, Courier, monospace"><b>_skunk</b></font>
+(by itself) compiles as &nbsp; <b>2 _{local} @</b> &nbsp; and the
+sequence &nbsp; <b>
+<font color="#663333" face="Courier New, Courier, monospace">-&gt;
+_muskrat</font></b>
+&nbsp; compiles as &nbsp; <b>3 _{local) !</b> &nbsp; <br>
+Finally, &nbsp;<font color="#663333"
+ face="Courier New, Courier, monospace"><b>faber</b></font>
+ends with &nbsp; <b>5 {pop-locals}</b> &nbsp; before the <b>unnest</b>
+. After
+that, the local-names are no longer accessible. </p>
+<h3><a class="mozTocH3" name="mozTocId361894"></a>Run-Time Support --
+the Local Values Support "Library":</h3>
+<!-- ...................................................................................... -->
+An FCode program that makes use of the Local Values extension will
+need to incorporate an implementation of the three compiled-in
+functions named above, together with a collection of functions that
+support them. These support functions must be defined in a way such
+that they can be tokenized into Industry Standard FCode, conformant to
+the Open Firmware specification, without imposing any non-Standard
+requirements on the FCode interpreter of the Host Platform.
+<p>The obvious way to deliver this package of support functions would
+be to incorporate, into
+the FCode source being Tokenized, a Prologue or "Library" file that
+contains the definitions of the three above-named compiled-in
+functions, along with all their required support.<br>
+</p>
+<p>A file defining the Local Values Support Functions has been written
+and
+will be delivered as part of the implementation of this
+Project.&nbsp; The user/programmer will be responsible for <span
+ style="font-family: courier new;">fload</span>ing
+it into the FCode source program to be Tokenized.<br>
+</p>
+<p>The user/programmer has the option of specifying the
+placement of the Local Values Support Functions file within the body of
+the
+FCode source program, and even of making alterations to it, if needed.<br>
+</p>
+<p><b><a name="Error_handling"></a>Error handling:</b>
+If the Local Values Support Functions file is not <span
+ style="font-family: courier new;">fload</span>ed, then the
+Parser, when it completes the processing of a Local Values declaration,
+i.e, when it encounters the close-curly-brace, or, similarly, when it
+encounters an invocation of a Local Value's name, will proceed as
+normal to compile-in the call to the appropriate function. That
+function's name will not be recognized, and the Tokenizer will exhibit
+the normal error-behavior for an invocation of an unrecognized name.<br>
+</p>
+<h4><a class="mozTocH4" name="mozTocId191315"></a>Operational Run-Time
+Support
+Functions:</h4>
+To make Local Values operate, we will, of course, need to reserve an
+area of Backing Storage. The size of that area will be <a
+ href="#Adjusting_size_of_L_V_Storage">adjustable by
+the programmer</a>, and we have chosen a suitable default.<br>
+<p>We define a
+&nbsp; <b>locals-base</b> &nbsp; pointer that will point to the base
+-- within the reserved Local Values Storage Area -- of the set of Local
+Values currently in use; it will be initialized to point just past the
+end of the locals-storage area.
+</p>
+<p><a name="_local"></a> The address to which the &nbsp; <i>&lt;n&gt;</i>
+&nbsp; <b>_{local}</b>
+&nbsp; routine will point is calculated as the given number of cells
+above the &nbsp; <b>locals-base</b>&nbsp; pointer. </p>
+<p><a name="push-locals"></a> The &nbsp; <i>( #I-Ls #U-Ls -- )</i>&nbsp;
+<b>{push-locals}</b>
+&nbsp; routine works in two stages: for the Unitialized Local Values,
+it
+simply decrements the &nbsp; <b>locals-base</b> &nbsp; pointer by the
+number of cells given in the top argument. The Initialized Local Values
+are
+then handled one at a time: the &nbsp; <b>locals-base</b> &nbsp;
+pointer is decremented by a single cell, and the data-item on top of
+the parameter stack is popped and stored into the cell at which the
+&nbsp; <b>locals-base</b> &nbsp; pointer now points. The result is
+that the topmost stack-item is placed in the last-declared Initialized
+Local, and so on down the line until the lowest stack-item is placed in
+the first-declared Initialized Local Value. Neat, sweet, and petite. </p>
+<p><a name="pop-locals"></a> The &nbsp; <i>( #-Ls -- )</i> &nbsp; <b>{pop-locals}</b>
+&nbsp;
+routine simply increments the &nbsp; <b>locals-base</b> &nbsp;
+pointer by the given number of cells, which is the total number of
+Local Values used by the function in which it
+occurs. </p>
+<p> Because functions that use Local Values can call each other, (i.e.,
+the use of Local Values can be nested), the depth of the nesting might
+be
+unpredictable. Therefore, the &nbsp; <b>{push-locals}</b> &nbsp;
+routine must perform error-checking: Before decrementing the&nbsp; <b>locals-base</b>&nbsp;
+pointer, it must test whether doing so would put the pointer
+below the start of the area reserved for Local Values Storage. Such an
+error is inevitably fatal, and can only be handled by an &nbsp; <b>ABORT</b>
+&nbsp; occurring in conjunction with a warning message advising the
+programmer to increase the size of the Local Values Storage (and, by
+implication, re-Tokenize).
+</p>
+<p> It will be the developer's responsibility to catch all such errors
+during early testing. To prevent generating hidden errors of this sort,
+the programmer is advised to use Local Values judiciously, and
+particularly to avoid using them in functions that may be called
+re-entrantly or recursively to an uncontrolled depth. Fortunately, such
+routines are rare and easily identified.
+</p>
+<p>Additional help can be provided in the form of a second <span
+ style="font-family: courier new;">fload</span>able
+Local Values Support Function source file -- to be used during
+development only -- that would overload the
+&nbsp; <b>{push-locals}</b> &nbsp;
+and
+&nbsp; <b>{pop-locals}</b> &nbsp; routines with the additional action
+of keeping track of&nbsp; -- and, of course, displaying at will
+--&nbsp;
+the maximum depth used in the course of a test run. Such overloading of
+functions is very simple and straightforward in FORTH.<br>
+</p>
+<h4><a class="mozTocH4" name="mozTocId750894"></a><a
+ name="Instance_Data_in_L_V_Support"></a>Important note
+regarding <span style="font-family: courier new,courier,monospace;">fload</span>ing
+of the Local Values Support Functions file</h4>
+In order to simplify management of the allocation and de-allocation of
+the area of Backing Storage, and to assure independence among instances
+of a device-package, both the reserved Local Values Storage Area and
+the&nbsp; <b>locals-base</b> pointer are created as part
+of the device-node's <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
+data.<br>
+<br>
+The <a href="TokenizerNewFeatures.htm#INSTANCE_at_run_time">consequence</a>
+of this is that, in device-drivers that are configured
+with <a href="TokenizerNewFeatures.htm#Multiple_device_nodes">multiple
+device-nodes</a>, the Local Values Support Functions file
+must be re-<span style="font-family: courier new;">fload</span>ed for
+each device-node that uses Local Values.&nbsp; That is to say, every
+invocation of the <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">new-device</span>
+command creates a new device node; if that new device-node will be
+making use of&nbsp; Local Values, then the Local Values Support
+Functions file must be <span style="font-family: courier new;">fload</span>ed
+again.<br>
+<p>The Tokenizer is sophisticated enough to keep a <a
+ href="TokenizerNewFeatures.htm#device-node_vocabularies">separate
+vocabulary
+for each device-node</a>, and will flag an <a href="#Error_handling">Error</a>
+if Local Values are used in a device-node for which the Local Values
+Support Functions file has not been <span
+ style="font-family: courier new;">fload</span>ed. </p>
+<p>However, should the user so choose, a <a
+ href="TokenizerNewFeatures.htm#Example_4">means</a> is available
+whereby a single <span style="font-family: courier new;">fload</span>ing
+of the Local Values
+Support Functions can become <a
+ href="TokenizerNewFeatures.htm#Global_Definitions">accessible to all
+Device Nodes</a> in a driver, trading off economy of System-memory
+for convenience of programming. </p>
+<h4><a class="mozTocH4" name="mozTocId684194"></a><a
+ name="Adjusting_size_of_L_V_Storage"></a>Adjusting the size of
+Local Values Storage:</h4>
+The user is responsible for declaring the maximum depth of the run-time
+Local Values stack, in storage units (Cells).<br>
+<br>
+This may be accomplished either by:<br>
+<ul>
+  <li>defining a constant named&nbsp;&nbsp; <b>_local-storage-size_</b>&nbsp;
+before <span style="font-family: courier new;">fload</span>ing the
+Local Values Support Functions file</li>
+  <li>defining &nbsp; <b>_local-storage-size_</b>&nbsp; as a
+Command-Line User-Symbol when the Tokenizer is run.</li>
+</ul>
+<div style="margin-left: 40px;">The form of the Command-Line
+User-Symbol definition resembles:<br>
+<div style="text-align: center;">&nbsp;&nbsp; <span
+ style="font-family: courier new,courier,monospace;">-d
+'_local-storage-size_=d# <span style="font-style: italic;">42</span>'</span><br>
+<span style="font-family: courier new,courier,monospace;"></span></div>
+&nbsp;(Be sure to enclose it within quotes
+so that the Shell treats it as a single string, and, of course, replace
+the&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-style: italic;">42</span>&nbsp;
+with the actual number you need...)<br>
+</div>
+<br>
+If&nbsp;&nbsp; <b>_local-storage-size_</b>&nbsp; is defined
+both ways, the Command-Line User-Symbol will prevail.<br>
+<br>
+If the&nbsp;&nbsp; <b>_local-storage-size_</b>&nbsp; definition
+is omitted, the Local Values Support Functions file will supply a
+default.<br>
+<h4><a class="mozTocH4" name="mozTocId208497"></a>Additional Support
+Function(s):</h4>
+<h5><a class="mozTocH5" name="mozTocId781114"></a>CATCH / THROW</h5>
+Another way that a function might exit prematurely is via a call to <b><i>throw</i></b>
+&nbsp;.
+<p>An FCode program that utilizes Local Values, that calls <b><i>throw</i></b>
+,
+and that has a corresponding <b><i>catch</i></b> to guard it, will
+need to
+keep its Local Values properly synchronized.
+</p>
+<p>A <b><i>throw</i></b> done by an FCode program that does not have a
+corresponding <b><i>catch</i></b> to guard it will be caught outside
+the scope of that FCode program, and the question of synchronizing
+Local Values will be rendered irrelevant.
+</p>
+<p>An <a href="TokenizerNewFeatures.htm#The_OVERLOAD_Directive">overloaded</a>
+<b><i>catch</i></b> in the Local Values Support
+Functions file does the job.<br>
+</p>
+<p>Constructing it was quite simple: It needs to (a) save
+the &nbsp; <b>locals-base</b> &nbsp; pointer onto the return stack,
+(b) do a system (generic) CATCH, and (c) restore the &nbsp; <b>locals-base</b>
+&nbsp; pointer. Counterintuitive though this might be, it does not even
+need to examine the result of the system (generic) CATCH ; it can
+restore the &nbsp; <b>locals-base</b> &nbsp; pointer in either case.
+If the result was zero (i.e., no <b><i>throw</i></b> occurred), the
+Local Values Pointer will be the same as it was when saved and
+restoring it
+will be harmless...
+</p>
+<!-- ...................................................................................... -->
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId951082"></a>End Of Document</h2>
+<!-- =========================================================================== -->
+<br>
+<br>
+<br>
+</body>
+</html>

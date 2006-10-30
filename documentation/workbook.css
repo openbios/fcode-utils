@@ -1,0 +1,426 @@
+/************ This page modified on March 14, 2001 by Sharon Rempert ***************/
+.title
+{
+	text-align: right;
+}
+/*table*/
+table
+{
+	padding: 3px;
+	border: 1px;
+	margin-left: 20px;
+}	
+.small
+{	
+	font-size: 10pt;
+}
+
+/* body */
+body
+{
+	margin: 1em 2em 2em 1em;
+	font-family: sans-serif;
+	color: black;
+	background: white;
+}
+
+.draft 
+{
+	margin: 1em 2em 2em 2em;
+	color: black;
+	background: white url(/:/projects/esw/process/doc/draft.gif) no-repeat fixed top left;
+}
+
+p, a,ul,dt,li,dd,ol,b,i,blockquote,font
+{
+	font-family: sans-serif;
+}
+
+address
+{
+	font-size: 10pt;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.logo
+{
+	text-align: center;
+}
+
+/*text*/
+
+
+p.adoption
+{
+	color: #0050B2;
+	background: white;
+	font-size: large;
+}
+
+p.copyright {font-size: small;}
+
+p.warning 
+{
+	color: #901010;
+	background: white;
+	margin: 1em 4em 1em 4em;
+	border: solid red;
+}
+
+.note1
+{
+	width: 80%;
+	border: solid #800080;
+}
+.note 
+{
+	color: green;
+	background: white;
+}
+
+pre 
+{
+	white-space: pre;
+	font-family: monospace;
+	margin-left: 2em;
+	color: maroon;
+	background: white;
+}
+
+pre.example 
+{
+	white-space: pre;
+	color: #203838;
+	background: #B0E0E0;
+	margin: 1em 4em 1em 4em;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	font-family: monospace;
+	border: none;
+}
+
+pre.code 
+{
+	white-space: pre;
+	color: maroon;
+	background: #eed6b4;
+	margin: 1em 4em 1em 0em;
+	padding: 1em 1em 1em 1em;
+	font-family: monospace;
+	border: none;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: sans-serif;
+	text-align: left;
+	font-weight: bold;
+	color: #0050B2; 
+	background: white;
+}
+
+.special
+{
+	color: #FF0000;
+}
+.spec_head
+{
+	color: #FF0000;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.spec_pre
+{
+	font-style: oblique;
+}
+
+
+h1.title 
+{
+	text-align: left;
+}
+
+ul.toc 
+{
+	list-style: none;
+}
+
+dl { margin-top: 1em; }
+
+th, td 
+{
+	font-family: sans-serif;
+	vertical-align:top;
+}
+.command
+{
+	font-weight: 700;
+	color: #0050B2;
+	background-color: white;
+}
+
+.description
+{
+	margin: 40px 0px 0px 0px;
+	font-family: sans-serif;
+}
+
+/*media*/
+
+@media screen
+{
+	a:hover 
+	{
+		background: #FFFFAA;
+		color: blue;
+	} 
+}
+
+@media aural 
+{
+	h1, h2, h3 
+	{
+		stress: 20;
+		richness: 90;
+	}
+
+	.hide {speak: none;}
+
+	p.copyright
+	{
+		volume: x-soft;
+		speech-rate: x-fast;
+	}
+
+	dt {pause-before: 20%;}
+	pre {speak-punctuation: code;} 
+}
+
+/* inline markup */
+
+em {font-style: italic;}
+
+strong {font-weight: bold;}
+
+.emp
+{
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+
+.strongerEmp
+{ 
+	font-weight: 900; 
+	font-style: italic;
+}
+
+cite {font-style: italic;}
+
+dfn
+{
+	font-weight: 700;
+	font-style: italic;
+}
+
+var
+{
+	font-style: italic; 
+	font-family: monospace; 
+	color: #0000CD; 
+	background: white;
+}
+
+acronym
+{
+	font-variant: small-caps; 
+	font-style: normal;
+}
+
+abbr {font-style: normal;}
+
+code
+{
+	font-style: normal;
+	font-family: monospace;
+	color: #a72ea0;
+	background: white;
+}
+
+samp
+{
+	font-style: normal;
+	font-family: monospace;
+	color: #a723a0;
+	background: white; 
+}
+
+kbd
+{
+	font-style: italic; 
+	font-family: monospace; 
+	color: #0000CD; 
+	background: white;
+}
+
+/*hide*/
+
+.hide {display: none}
+
+/*span*/
+
+span.doc-string 
+{
+	/* purple */
+	color: purple;
+	background-color: white;
+}
+
+span.reference 
+{
+	/* red3 */
+	color: rgb(205,0,0);
+	background-color: white;
+}
+
+span.type 
+{
+	/* MediumPurple3 */
+	color: rgb(137,104,205);
+	background-color: white;
+}
+
+span.function-name 
+{
+	/* forestgreen */
+	color: rgb(34,139,34);
+	font-weight: bold;
+	background-color: white;
+}
+
+span.string 
+{
+	/* blue4 */
+	color: rgb(0,0,139);
+	background-color: white;
+}
+
+span.comment 
+{
+	/* red */
+	color: red;
+	font-style:italic;
+	background-color: white;
+}
+
+span.variable-name 
+{
+	/* blue3 */
+	color: rgb(0,0,205);
+	background-color: white;
+}
+
+span.preprocessor 
+{
+	/* blue3 */
+	color: rgb(0,0,205);
+	background-color: white;
+}
+
+span.keyword 
+{
+	/* goldenrod3 */
+	color: rgb(205,155,29);
+	background-color: white;
+}
+
+.lists
+{ 
+	font-size: 14pt;
+	font-family: sans-serif;
+	text-align: left;
+	font-weight: bold;
+	color: #0050B2; 
+	background: white;
+}
+	
+
+.text
+{	
+	font-family: sans-serif;
+}
+
+/*div*/
+
+.subtoc
+{
+	/*padding: 1em;*/
+	border: solid thin;
+	/*margin: 1em 0;*/
+	color: white;
+	background: #d0d0d0;
+}
+
+
+div.head {margin-bottom: 1em;}
+
+div.head h1
+{
+	margin-top: 2em;
+	clear: both;
+}
+
+div.head table
+{
+	margin-left: 2em;
+	margin-top: 2em;
+}
+
+div.head img 
+{
+	color: black;
+	background: white;
+	border: none;
+}
+
+.document-control_2
+{
+	border: solid #404040;
+	color: black;
+	background: #e0e0e0;
+}
+
+.document-control 
+{
+	margin-top: 1em;
+	margin-left: 10%;
+	margin-bottom: 1em;
+	border: solid #404040;
+	color: black;
+	background: #e0e0e0;
+}
+
+/* why doesn't dt work here? */
+div.document-control dl dt 
+{
+	font-weight: bold;
+}
+
+
+/*links*/
+
+a.normref
+{
+	color: red;
+	background: white;
+}
+
+a.informref 
+{
+	color: green;
+	background: white;
+}	
+.no_bullet
+{
+	list-style-type: none;
+}

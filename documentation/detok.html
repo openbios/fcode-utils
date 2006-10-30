@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- ESWDESDOCFILE %Z%%M%	%I%  %W% %G% %U% -->
+  <title>ESW PART-FW: OpenBIOS DeTokenizer detok (A User's Guide)</title>
+  <link rel="stylesheet" type="text/css"
+ href="workbook.css">
+</head>
+<body>
+<h1 style="text-align: center;" class="title"><a class="mozTocH1"
+ name="mozTocId94624"></a>OpenBIOS DeTokenizer detok</h1>
+<h1 style="text-align: center;"><a class="mozTocH1"
+ name="mozTocId186871"></a>(A
+User's Guide)</h1>
+<div class="document-control">
+<ul>
+  <li>Updated Wed, 18 Oct 2006 at 12:37 PDT by David L. Paktor</li>
+</ul>
+</div>
+<p class="copyright">Copyright &copy; 2005 International Business
+Machines<sup>&reg;</sup>,
+All Rights Reserved.<br>
+Licensed under the <a
+ href="http://www.opensource.org/licenses/cpl1.0.php">Common Public
+License (CPL) version 1.0</a><br>
+</p>
+<!-- =========================================================================== --><!-- =========================================================================== -->
+<h1><a class="mozTocH2" name="mozTocId48196"></a>Table of Contents</h1>
+<ol id="mozToc">
+<!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6--> <li><a
+ href="#mozTocId734288">Overview</a></li>
+  <li><a href="#mozTocId101390">Output Formats</a>
+    <ol>
+      <li><a href="#mozTocId555273">Sample source file:</a></li>
+      <li><a href="#mozTocId805568">DeTokenizer output with no
+options selected:</a></li>
+      <li><a href="#mozTocId621166">DeTokenizer output with the
+"verbose" option selected:</a></li>
+      <li><a href="#mozTocId409633">DeTokenizer output with the
+"offsets" option selected:</a></li>
+      <li><a href="#mozTocId460016">DeTokenizer output with both
+the "verbose" and "offsets" options selected:</a></li>
+    </ol>
+  </li>
+  <li><a href="#mozTocId930428">Command-Line Format</a>
+    <ol>
+      <li><a href="#mozTocId582301">Command-Line Options</a>
+        <ol>
+          <li><a href="#mozTocId403694">Switches</a></li>
+          <li><a href="#mozTocId532000">The "Additional FCodes"
+file</a></li>
+          <ol>
+            <li><a href="#mozTocId814200">Special Functions<br>
+              </a></li>
+          </ol>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li><a href="#mozTocId657867">End Of Document</a></li>
+</ol>
+<h2><a class="mozTocH2" name="mozTocId734288"></a>Overview</h2>
+The DeTokenizer is an adjunct tool to the Tokenizer, and performs the
+reverse function, in a fashion.&nbsp; That is, it converts binary FCode
+into a form that can be read for purposes of verification.&nbsp; This
+implementation is not, however, a complete DeTokenizer in the sense of
+one whose output can be turned back through the Tokenizer to generate
+the same binary.&nbsp; Such programs might exist, but this is not one
+of them.<br>
+<h2><a class="mozTocH2" name="mozTocId101390"></a>Output Formats</h2>
+The output of this DeTokenizer basically consists of one token
+(sometimes two) per line, with optional additional information,
+depending on which Command-Line Options have been specified.<br>
+<br>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId555273"></a>Sample
+source file:<br>
+</h3>
+<div style="margin-left: 40px;">The easiest way to describe the
+different optional output formats would
+be by creating an example of a source file that has been Tokenized and
+displaying the output of the DeTokenizer, applied to its resultant
+FCode binary, with the various options.<br>
+<br>
+Our example source file looks like this:<br>
+<br>
+</div>
+<pre style="font-family: courier new; margin-left: 40px;">\  Demo program for DeTokenizer output format display.<br><br><span
+ style="font-weight: bold;">tokenizer[</span> <br>            <span
+ style="font-weight: bold;">h#</span>     17d5       \    Vendor ID: 0x17d5<br>	    <span
+ style="font-weight: bold;">h#</span>     5417       \    Device ID: 0x5417<br>	    <span
+ style="font-weight: bold;">h#</span>   020000       \    Class Code: 0x020000  (Ethernet)<br>	    <span
+ style="font-weight: bold;">h#</span>     f2ed       \    Rev-Level<br>	 <span
+ style="font-weight: bold;">]tokenizer</span><br>	   <span
+ style="font-weight: bold;">SET-REV-LEVEL</span><br>	     <span
+ style="font-weight: bold;">pci-header</span><br><br><span
+ style="font-weight: bold;">fcode-version2</span><br><br><span
+ style="font-weight: bold;">headers</span><br><span
+ style="font-weight: bold;">hex</span><br><br><span
+ style="font-weight: bold;">:</span> hello/goodbye ( hello? -- )<br>    <span
+ style="font-weight: bold;">if</span><br>        <span
+ style="font-weight: bold;">."</span> Hello, you big beautiful world!"<br>    <span
+ style="font-weight: bold;">else</span><br>        <span
+ style="font-weight: bold;">."</span> Goodbye, cruel world.  Gggga-a-a-ackkkkk!"<br>    <span
+ style="font-weight: bold;">then</span><br><span
+ style="font-weight: bold;">;</span><br><br><span
+ style="font-weight: bold;">:</span> I-say-hello      <span
+ style="font-weight: bold;">true</span>  hello/goodbye  <span
+ style="font-weight: bold;">;</span><br><span style="font-weight: bold;">:</span> You-say-goodbye  <span
+ style="font-weight: bold;">false</span> hello/goodbye  <span
+ style="font-weight: bold;">;</span><br><br><br><span
+ style="font-weight: bold;">fcode-end</span></pre>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId805568">
+</a>DeTokenizer output with no options selected:</h3>
+<div style="margin-left: 40px;"><br>
+With no options selected, the DeTokenizer output looks like this:<br>
+<br>
+</div>
+<pre
+ style="font-family: courier new; margin-left: 40px; color: rgb(204, 0, 0);">\  PCI Header identified<br>\    Offset to Data Structure = 0x001c (28)<br>\  PCI Data Structure identified<br>\    Data Structure Length = 0x0018 (24)<br>\    Vendor ID: 0x17d5<br>\    Device ID: 0x5417<br>\    Class Code: 0x020000  (Ethernet controller)<br>\    Image Revision: 0xf2ed<br>\    Code Type: 0x01 (Open Firmware)<br>\    Image Length: 0x0001 blocks (512 bytes)<br>\    Last PCI Image.<br>start1   ( 16-bit offsets)<br>  format:    0x08<br>  checksum:  0x33d5 (Ok)<br>  len:       0x009e ( 158 bytes)<br>named-token hello/goodbye 0x800<br>b(:) <br>    b?branch 0x0028 ( =dec 40)<br>        b(") ( len=0x1f [31 bytes] )<br>                " Hello, you big beautiful world!"<br>        type <br>        bbranch 0x0030 ( =dec 48)<br>        b(&gt;resolve) <br>        b(") ( len=0x29 [41 bytes] )<br>                " Goodbye, cruel world.  Gggga-a-a-ackkkkk!"<br>        type <br>    b(&gt;resolve) <br>b(;) <br>named-token I-say-hello 0x801<br>b(:) <br>    -1 <br>    hello/goodbye <br>b(;) <br>named-token You-say-goodbye 0x802<br>b(:) <br>    0 <br>    hello/goodbye <br>b(;) <br>end0 <br>\  Detokenization finished normally after 158 bytes.<br>\  PCI Image padded with 302 bytes of zero</pre>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId621166"></a><a
+ name="with_verbose"></a>DeTokenizer output
+with the "verbose" option selected:</h3>
+<div style="margin-left: 40px;">The "verbose" option adds a display of
+the hex value of each token
+processed, (as well as a signature block), thus:<br>
+<br>
+</div>
+<pre
+ style="font-family: courier new; margin-left: 40px; color: rgb(204, 0, 0);">\  Welcome to the OpenBIOS detokenizer v0.6.1<br>\  detok Copyright(c) 2001-2005 by Stefan Reinauer.<br>\  Written by Stefan Reinauer, &lt;stepan@openbios.org&gt;<br>\  This program is free software; you may redistribute it under the terms of<br>\  the GNU General Public License.  This program has absolutely no warranty.<br>\  <br>\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.<br>\  PCI Header identified<br>\    Offset to Data Structure = 0x001c (28)<br>\  PCI Data Structure identified<br>\    Data Structure Length = 0x0018 (24)<br>\    Vendor ID: 0x17d5<br>\    Device ID: 0x5417<br>\    Class Code: 0x020000  (Ethernet controller)<br>\    Image Revision: 0xf2ed<br>\    Code Type: 0x01 (Open Firmware)<br>\    Image Length: 0x0001 blocks (512 bytes)<br>\    Last PCI Image.<br>start1 ( 0x0f1 )   ( 16-bit offsets)<br>  format:    0x08<br>  checksum:  0x33d5 (Ok)<br>  len:       0x009e ( 158 bytes)<br>named-token ( 0x0b6 ) hello/goodbye 0x800<br>b(:) ( 0x0b7 ) <br>    b?branch ( 0x014 ) 0x0028 ( =dec 40)<br>        b(") ( 0x012 ) ( len=0x1f [31 bytes] )<br>                " Hello, you big beautiful world!"<br>        type ( 0x090 ) <br>        bbranch ( 0x013 ) 0x0030 ( =dec 48)<br>        b(&gt;resolve) ( 0x0b2 ) <br>        b(") ( 0x012 ) ( len=0x29 [41 bytes] )<br>                " Goodbye, cruel world.  Gggga-a-a-ackkkkk!"<br>        type ( 0x090 ) <br>    b(&gt;resolve) ( 0x0b2 ) <br>b(;) ( 0x0c2 ) <br>named-token ( 0x0b6 ) I-say-hello 0x801<br>b(:) ( 0x0b7 ) <br>    -1 ( 0x0a4 ) <br>    hello/goodbye ( 0x800 ) <br>b(;) ( 0x0c2 ) <br>named-token ( 0x0b6 ) You-say-goodbye 0x802<br>b(:) ( 0x0b7 ) <br>    0 ( 0x0a5 ) <br>    hello/goodbye ( 0x800 ) <br>b(;) ( 0x0c2 ) <br>end0 ( 0x000 ) <br>\  Detokenization finished normally after 158 bytes.<br>\  PCI Image padded with 302 bytes of zero</pre>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId409633"></a><a
+ name="with_offsets"></a>DeTokenizer output
+with the "offsets" option selected:</h3>
+<div style="margin-left: 40px;">The "offsets" option shows the position
+of the tokens relative to the
+start of the first FCode block after a PCI header (if one is present)
+and the destination-offset of each
+branch. If more than one FCode header follows a single PCI header, the
+offset-counter will continue; if a new PCI header is encountered, the
+offset-counter will be reset and will begin counting again from zero
+after the end of the latest PCI header.
+<p>Without the "verbose" option, i.e., with just the
+"offsets" option by itself, the DeTokenizer output looks like this:</p>
+</div>
+<pre
+ style="font-family: courier new; margin-left: 40px; color: rgb(204, 0, 0);">\  PCI Header identified<br>\    Offset to Data Structure = 0x001c (28)<br>\  PCI Data Structure identified<br>\    Data Structure Length = 0x0018 (24)<br>\    Vendor ID: 0x17d5<br>\    Device ID: 0x5417<br>\    Class Code: 0x020000  (Ethernet controller)<br>\    Image Revision: 0xf2ed<br>\    Code Type: 0x01 (Open Firmware)<br>\    Image Length: 0x0001 blocks (512 bytes)<br>\    Last PCI Image.<br>     0: start1   ( 16-bit offsets)<br>     1:   format:    0x08<br>     2:   checksum:  0x33d5 (Ok)<br>     4:   len:       0x009e ( 158 bytes)<br>     8: named-token hello/goodbye 0x800<br>    25: b(:) <br>    26:     b?branch 0x0028 ( =dec 40  dest = 67 )<br>    29:         b(") ( len=0x1f [31 bytes] )<br>                        " Hello, you big beautiful world!"<br>    62:         type <br>    63:         bbranch 0x0030 ( =dec 48  dest = 112 )<br>    66:         b(&gt;resolve) <br>    67:         b(") ( len=0x29 [41 bytes] )<br>                        " Goodbye, cruel world.  Gggga-a-a-ackkkkk!"<br>   110:         type <br>   111:     b(&gt;resolve) <br>   112: b(;) <br>   113: named-token I-say-hello 0x801<br>   128: b(:) <br>   129:     -1 <br>   130:     hello/goodbye <br>   132: b(;) <br>   133: named-token You-say-goodbye 0x802<br>   152: b(:) <br>   153:     0 <br>   154:     hello/goodbye <br>   156: b(;) <br>   157: end0 <br>\  Detokenization finished normally after 158 bytes.<br>\  PCI Image padded with 302 bytes of zero</pre>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId460016"></a><a
+ name="with_verbose_and_offsets"></a>DeTokenizer output
+with both the "verbose" and "offsets" options selected:</h3>
+<div style="margin-left: 40px;">Combining the "verbose" and "offsets"
+options results in something that
+looks like this:<br>
+<br>
+</div>
+<pre
+ style="font-family: courier new; margin-left: 40px; color: rgb(204, 0, 0);">\  Welcome to the OpenBIOS detokenizer v0.6.1<br>\  detok Copyright(c) 2001-2005 by Stefan Reinauer.<br>\  Written by Stefan Reinauer, &lt;stepan@openbios.org&gt;<br>\  This program is free software; you may redistribute it under the terms of<br>\  the GNU General Public License.  This program has absolutely no warranty.<br>\  <br>\  (C) Copyright 2005 IBM Corporation.  All Rights Reserved.<br>\  PCI Header identified<br>\    Offset to Data Structure = 0x001c (28)<br>\  PCI Data Structure identified<br>\    Data Structure Length = 0x0018 (24)<br>\    Vendor ID: 0x17d5<br>\    Device ID: 0x5417<br>\    Class Code: 0x020000  (Ethernet controller)<br>\    Image Revision: 0xf2ed<br>\    Code Type: 0x01 (Open Firmware)<br>\    Image Length: 0x0001 blocks (512 bytes)<br>\    Last PCI Image.<br>     0: start1 ( 0x0f1 )   ( 16-bit offsets)<br>     1:   format:    0x08<br>     2:   checksum:  0x33d5 (Ok)<br>     4:   len:       0x009e ( 158 bytes)<br>     8: named-token ( 0x0b6 ) hello/goodbye 0x800<br>    25: b(:) ( 0x0b7 ) <br>    26:     b?branch ( 0x014 ) 0x0028 ( =dec 40  dest = 67 )<br>    29:         b(") ( 0x012 ) ( len=0x1f [31 bytes] )<br>                        " Hello, you big beautiful world!"<br>    62:         type ( 0x090 ) <br>    63:         bbranch ( 0x013 ) 0x0030 ( =dec 48  dest = 112 )<br>    66:         b(&gt;resolve) ( 0x0b2 ) <br>    67:         b(") ( 0x012 ) ( len=0x29 [41 bytes] )<br>                        " Goodbye, cruel world.  Gggga-a-a-ackkkkk!"<br>   110:         type ( 0x090 ) <br>   111:     b(&gt;resolve) ( 0x0b2 ) <br>   112: b(;) ( 0x0c2 ) <br>   113: named-token ( 0x0b6 ) I-say-hello 0x801<br>   128: b(:) ( 0x0b7 ) <br>   129:     -1 ( 0x0a4 ) <br>   130:     hello/goodbye ( 0x800 ) <br>   132: b(;) ( 0x0c2 ) <br>   133: named-token ( 0x0b6 ) You-say-goodbye 0x802<br>   152: b(:) ( 0x0b7 ) <br>   153:     0 ( 0x0a5 ) <br>   154:     hello/goodbye ( 0x800 ) <br>   156: b(;) ( 0x0c2 ) <br>   157: end0 ( 0x000 ) <br>\  Detokenization finished normally after 158 bytes.<br>\  PCI Image padded with 302 bytes of zero</pre>
+<div style="margin-left: 80px;">There's another option called "line
+numbers" but it only numbers the
+lines of output.&nbsp; It's easy enough to describe, and so needs no
+illustration.<br>
+</div>
+<br>
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId930428"></a>Command-Line Format</h2>
+<div style="margin-left: 40px;">The command-line format is simply:<br>
+<br>
+</div>
+<div
+ style="font-family: courier new,courier,monospace; margin-left: 80px;">detok
+[options] fc-file [fc-file ...]<br>
+</div>
+<br>
+<div style="margin-left: 40px;">The output of this DeTokenizer is
+directed to STDOUT, so there is no
+"Output file" option per se.&nbsp; Simply redirect the output to the
+file in which you wish to keep the results, using the standard Shell
+conventions.<br>
+</div>
+<h3 style="margin-left: 40px;"><a class="mozTocH3" name="mozTocId582301"></a>Command-Line
+Options</h3>
+<div style="margin-left: 40px;">Command-Line option Switches are
+case-sensitive;
+only one option has an applicable argument, and that one is a file
+name.&nbsp; Its case sensitivity is, of course, dependent on the Host
+Operating System.<br>
+</div>
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId403694"></a>Switches</h4>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-h</span>&nbsp;
+or&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-?</span></li>
+</ul>
+<div style="margin-left: 80px;">Print a brief help message and then
+exit.
+</div>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-weight: bold; font-family: courier new,courier,monospace;">-v</span></li>
+</ul>
+<div style="margin-left: 80px;">Verbose&nbsp; --&nbsp; display
+<a href="#with_verbose">additional information</a>:&nbsp; the hex value
+of each token processed, as
+well as a signature block.<br>
+</div>
+<ul
+ style="font-weight: bold; font-family: courier new; margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-o</span></li>
+</ul>
+<div style="margin-left: 80px;">Offsets&nbsp; --&nbsp; display the
+<a href="#with_offsets">positions of the tokens</a> relative to the
+start of the first FCode block after a PCI header (if one is present),
+and
+the destination-offset of each branch.<br>
+<p>Note that the <a href="#with_verbose_and_offsets">combination</a>
+of
+the Verbose and Offsets options yields the maximum amount of useful
+information.&nbsp; </p>
+</div>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-n</span></li>
+</ul>
+<div style="margin-left: 80px;">Line Numbers&nbsp; --&nbsp; display the
+sequential number of each line of output.<br>
+<p>Note that the <span
+ style="font-family: courier new; font-weight: bold;">-n</span> and <span
+ style="font-family: courier new; font-weight: bold;">-o</span> options
+are mutually exclusive; if both are specified, <span
+ style="font-family: courier new; font-weight: bold;">-o</span> will be
+favoured.</p>
+</div>
+<ul style="margin-left: 40px;">
+  <li><span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-a</span></li>
+</ul>
+<div style="margin-left: 80px;">Process All input.&nbsp; Do not stop
+when <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">end0</span>
+has been encountered.&nbsp; This option is usually not needed, but may
+be useful in cases where a file has been corrupted or when
+something very strange has been Tokenized...<br>
+</div>
+<ul style="margin-left: 40px;">
+  <li><span style="font-family: courier new; font-weight: bold;">-f
+&lt;FCode-List-File&gt;</span></li>
+</ul>
+<div style="margin-left: 80px;">Pre-load Additional FCodes before
+processing.&nbsp; These might be, for instance, a set of
+vendor-specific FCodes that were generated for a specific vendor's
+products by a Tokenizer customized for that specific vendor.&nbsp; A
+detailed discussion of <a href="#Additional_FCodes_file">the
+"Additional FCodes" file</a> will be presented in a separate dedicated
+section. </div>
+<!-- =========================================================================== --><!-- =========================================================================== -->
+<h4 style="margin-left: 40px;"><a class="mozTocH4" name="mozTocId532000"></a><a
+ name="Additional_FCodes_file"></a>The
+"Additional FCodes" file</h4>
+<div style="margin-left: 80px;">Some vendors' FCode drivers contain
+non-standard FCode tokens.&nbsp; In order to accommodate those
+situations, provision is made to specify the names of the FCodes in
+question.&nbsp; The <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">-f</span>
+command-line option permits the user to specify an "Additional FCodes
+List" file, which will be read before detokenization begins and which
+will contain the list of "Additional FCodes" to be recognized.<br>
+<p>The format of the file is as follows:<br>
+</p>
+<ol>
+  <li>One entry, consisting of an FCode and its name, on a line.&nbsp;
+The FCode Number is given first, in the form of a hex number, preceded
+by an optional <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0x</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0X</span>&nbsp;
+(Thus: <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0x602</span>
+or <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0X602</span>
+or simply&nbsp; <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">602</span>
+are all equivalent.)&nbsp; At least one blank space separates the FCode
+Number from the Name, which must be on the same line.&nbsp; Any number
+of blanks are permitted, and any text that follows the Name is
+permitted and will be ignored.</li>
+  <li>Blank lines are permitted and will be ignored.</li>
+  <li>Comment lines are permitted and will be ignored.&nbsp;
+A comment-line starts with either a pound-sign ( <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">#</span>
+) or a backslash ( <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">\</span>&nbsp;
+).</li>
+  <li>FCode Numbers are limited to the range <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0x10..0x7ff</span>&nbsp;
+Numbers smaller than <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0x10</span>
+are the leading-byte of a two-byte FCode, and numbers from <span
+ style="font-family: courier new,courier,monospace; font-weight: bold;">0x800</span>
+and up are assigned by the tokenizer.&nbsp; Lines with numbers outside
+the permitted range will be ignored, and a message will be printed.</li>
+  <li>FCode numbers that are already assigned will not be permitted to
+be overwritten. &nbsp; Lines with numbers that are already assigned
+will be ignored, and a message will be printed.&nbsp; </li>
+</ol>
+<p>If the file cannot be read, that will be regarded as an immediate
+failure and cause the program to exit. <br>
+</p>
+<h5><big><a name="mozTocId814200"></a><a name="Special_Functions"></a>Special
+Functions</big></h5>
+In addition to non-standard FCode tokens with simple behavior, some
+vendors' FCode drivers also contain non-standard FCode tokens with
+complex behavior.&nbsp; An example that was recently encountered is "<span
+ style="font-weight: bold;">double(lit)</span>" which precedes a
+double-length (i.e., 64-bit) literal.&nbsp; This DeTokenizer is
+structured to allow the creation of a list of pre-defined Special
+Function names, each of which has a special behavior associated with
+it.&nbsp; When one of those names occurs in the "Additional FCodes
+List" file, it will be recognized; the FCode Number given with it is
+assigned to it.&nbsp; When that FCode number is encountered, the
+assigned special behavior will be exercised.<br>
+<p>Adding to the list of&nbsp;Special Function names, and associating a
+new behavior with the added function, requires modifying the
+DeTokenizer code, but the infrastructure that is already in place
+should make this a manageable task for even a modestly skilled
+programmer.<br>
+</p>
+<p>At the present writing, only one such Special Function name is
+supported, and that one is, of course,&nbsp; <span
+ style="font-weight: bold;">double(lit)</span></p>
+<p>Its associated special behavior is to collect the next eight bytes
+from the FCode input stream and display them as a double-length literal.<br>
+</p>
+<p>If you modify the DeTokenizer to recognize additional Special
+Function names, please update this document to list them and describe
+their special behaviors.&nbsp; Thank you.&nbsp; </p>
+<br>
+</div>
+<!-- ...................................................................................... --><!-- =========================================================================== -->
+<h2><a class="mozTocH2" name="mozTocId657867"></a>End Of Document</h2>
+<!-- =========================================================================== -->
+</body>
+</html>
