@@ -185,7 +185,7 @@ the colon-definition.<br>
 body of the word is not recommended, but is permitted.&nbsp; A Local
 Values
 Declaration that occurs inside a Flow-Control Structure will be
-reported as an <a href="TokenizerNewFeatures.htm#An_ERROR">Error</a>.<br>
+reported as an <a href="toke.html#An_ERROR">Error</a>.<br>
 </p>
 <p>A Local Values Declaration may include comments and may continue
 across
@@ -225,18 +225,18 @@ use of Semicolons in that context is deprecated in favor of the
 Vertical-Bar.</p>
 <p>The User may suppress this
 message by means of a <a
- href="TokenizerNewFeatures.htm#Command-Line_options_">Command-line
+ href="toke.html#Command-Line_options_">Command-line
 switch</a>, known as the
-<a href="TokenizerNewFeatures.htm#Special_Feature_Flags">Special-Feature
-Flag</a> named <a href="TokenizerNewFeatures.htm#SF_Flag_LV_Leg_Mssg"><span
+<a href="toke.html#Special_Feature_Flags">Special-Feature
+Flag</a> named <a href="toke.html#SF_Flag_LV_Leg_Mssg"><span
  style="font-family: courier new,courier,monospace; font-weight: bold;">NoLV-Legacy-Message</span></a>
-, which is described in the <a href="TokenizerNewFeatures.htm">Tokenizer
+, which is described in the <a href="toke.html">Tokenizer
 User's Guide</a>.</p>
 <p><a name="Disallow_Legacy"></a>Conversely, the User who wishes to
 disallow the use of Semicolon as
 an alternative separator may do so by means of the
 Special-Feature Flag named <a
- href="TokenizerNewFeatures.htm#SF_Flag_LV_Leg_Sep"><span
+ href="toke.html#SF_Flag_LV_Leg_Sep"><span
  style="font-family: courier new,courier,monospace; font-weight: bold;">NoLV-Legacy-Separator</span></a>
 .&nbsp; When the Legacy Local Values
 Separator is thus disallowed, occurrences will be treated as an
@@ -757,9 +757,9 @@ of the device-node's <span
  style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
 data.<br>
 <br>
-The <a href="TokenizerNewFeatures.htm#INSTANCE_at_run_time">consequence</a>
+The <a href="toke.html#INSTANCE_at_run_time">consequence</a>
 of this is that, in device-drivers that are configured
-with <a href="TokenizerNewFeatures.htm#Multiple_device_nodes">multiple
+with <a href="toke.html#Multiple_device_nodes">multiple
 device-nodes</a>, the Local Values Support Functions file
 must be re-<span style="font-family: courier new;">fload</span>ed for
 each device-node that uses Local Values.&nbsp; That is to say, every
@@ -770,18 +770,18 @@ making use of&nbsp; Local Values, then the Local Values Support
 Functions file must be <span style="font-family: courier new;">fload</span>ed
 again.<br>
 <p>The Tokenizer is sophisticated enough to keep a <a
- href="TokenizerNewFeatures.htm#device-node_vocabularies">separate
+ href="toke.html#device-node_vocabularies">separate
 vocabulary
 for each device-node</a>, and will flag an <a href="#Error_handling">Error</a>
 if Local Values are used in a device-node for which the Local Values
 Support Functions file has not been <span
  style="font-family: courier new;">fload</span>ed. </p>
 <p>However, should the user so choose, a <a
- href="TokenizerNewFeatures.htm#Example_4">means</a> is available
+ href="toke.html#Example_4">means</a> is available
 whereby a single <span style="font-family: courier new;">fload</span>ing
 of the Local Values
 Support Functions can become <a
- href="TokenizerNewFeatures.htm#Global_Definitions">accessible to all
+ href="toke.html#Global_Definitions">accessible to all
 Device Nodes</a> in a driver, trading off economy of System-memory
 for convenience of programming. </p>
 <h4><a class="mozTocH4" name="mozTocId684194"></a><a
@@ -833,7 +833,7 @@ corresponding <b><i>catch</i></b> to guard it will be caught outside
 the scope of that FCode program, and the question of synchronizing
 Local Values will be rendered irrelevant.
 </p>
-<p>An <a href="TokenizerNewFeatures.htm#The_OVERLOAD_Directive">overloaded</a>
+<p>An <a href="toke.html#The_OVERLOAD_Directive">overloaded</a>
 <b><i>catch</i></b> in the Local Values Support
 Functions file does the job.<br>
 </p>

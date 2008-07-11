@@ -347,7 +347,7 @@ reported.</li>
 messages.</li>
   <li>A complete list of FATAL conditions.<br>
   </li>
-  <li>Support for <a href="TokenizerLocalValues.htm">IBM-Style Local
+  <li>Support for <a href="localvalues.html">IBM-Style Local
 Values</a>. That is the subject of a
 separate writeup.</li>
 </ul>
@@ -416,8 +416,8 @@ it was detected, as well as the current position to which data is being
 generated into the Binary Output.&nbsp; If a PCI Header is in effect,
 the position relative to the end of that PCI Header will also be shown;
 this is to maintain consistency with the <a
- href="DeTokenizer.htm#with_offsets">"offsets</a>" displayed be the <a
- href="DeTokenizer.htm">DeTokenizer</a><br>
+ href="detok.html#with_offsets">"offsets</a>" displayed by the <a
+ href="detok.html">DeTokenizer</a><br>
 </p>
 <p><a name="Errors_Ignored"></a>
 The Tokenizer typically runs through to completion of the source file,
@@ -786,7 +786,7 @@ Special-Features are as follows:</p>
   </ul>
 </ul>
 <p style="margin-left: 120px;">Support IBM-style <a
- href="TokenizerLocalValues.htm">Local Values</a> ("LV"s).&nbsp;
+ href="localvalues.html">Local Values</a> ("LV"s).&nbsp;
 Initially disabled.
 </p>
 <ul>
@@ -797,8 +797,8 @@ Initially disabled.
 </ul>
 <p style="margin-left: 120px;">Allow Semicolon for Local Values
 <a
- href="TokenizerLocalValues.htm#Separation_Character_between_Initialized">Separator</a>
-("<a href="TokenizerLocalValues.htm#Disallow_Legacy">Legacy</a>").
+ href="localvalues.html#Separation_Character_between_Initialized">Separator</a>
+("<a href="localvalues.html#Disallow_Legacy">Legacy</a>").
 </p>
 <ul>
   <ul>
@@ -807,7 +807,7 @@ Initially disabled.
   </ul>
 </ul>
 <p style="margin-left: 120px;">Display a <a
- href="TokenizerLocalValues.htm#Legacy_Separator">Warning
+ href="localvalues.html#Legacy_Separator">Warning
 Message</a> when
 Semicolon
 is used as the Local Values Separator.
@@ -3462,7 +3462,7 @@ Local Values
 Support File can be incorporated at a <a href="#Global_Definitions">Global</a>
 level.&nbsp; Normally, <a href="#Multiple_device_nodes">that would be
 problematical</a> because
-the <a href="TokenizerLocalValues.htm#Instance_Data_in_L_V_Support">Local
+the <a href="localvalues.html#Instance_Data_in_L_V_Support">Local
 Values
 Support functions</a> are written to use <span
  style="font-family: courier new,courier,monospace; font-weight: bold;">instance</span>
