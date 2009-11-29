@@ -5,7 +5,7 @@
 #  This program is part of a free implementation of the IEEE 1275-1994
 #  Standard for Boot (Initialization Configuration) Firmware.
 #
-#  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
+#  Copyright (C) 2006-2009 coresystems GmbH <info@coresystems.de>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -24,26 +24,26 @@
 VERSION:=$(shell grep ^\#.*TOKE_VERSION < toke/toke.c |cut -f2 -d\" )
 
 all:
-	make -C toke
-	make -C detok
-	make -C romheaders
+	$(MAKE) -C toke
+	$(MAKE) -C detok
+	$(MAKE) -C romheaders
 
 install:
-	make -C toke install
-	make -C detok install
-	make -C romheaders install
+	$(MAKE) -C toke install
+	$(MAKE) -C detok install
+	$(MAKE) -C romheaders install
 
 clean:	
-	make -C toke clean
-	make -C detok clean
-	make -C romheaders clean
-	make -C testsuite clean
+	$(MAKE) -C toke clean
+	$(MAKE) -C detok clean
+	$(MAKE) -C romheaders clean
+	$(MAKE) -C testsuite clean
 
 distclean: clean
-	make -C toke distclean
-	make -C detok distclean
-	make -C romheaders distclean
-	make -C testsuite distclean
+	$(MAKE) -C toke distclean
+	$(MAKE) -C detok distclean
+	$(MAKE) -C romheaders distclean
+	$(MAKE) -C testsuite distclean
 	find . -name "*.gcda" -exec rm -f \{\} \;
 	find . -name "*.gcno" -exec rm -f \{\} \;
 
@@ -51,8 +51,8 @@ tests: all
 	cp toke/toke testsuite
 	cp detok/detok testsuite
 	cp romheaders/romheaders testsuite
-	make -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-ppc-linux
-	#make -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-x86-cygwin
+	$(MAKE) -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-ppc-linux
+	#$(MAKE) -C testsuite all CygTestLogs=`pwd`/testlogs/testlogs-x86-cygwin
 
 # lcov required for html reports
 coverage:

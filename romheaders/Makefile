@@ -5,7 +5,8 @@
 #  This program is part of a free implementation of the IEEE 1275-1994 
 #  Standard for Boot (Initialization Configuration) Firmware.
 #
-#  Copyright (C) 2002  Stefan Reinauer, <stepan@openbios.net>
+#  Copyright (C) 2002 Stefan Reinauer, <stepan@openbios.org>
+#  Copyright (C) 2009 coresystems GmbH <info@coresystems.de>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,8 +22,9 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
-CC  = gcc
-CFLAGS= -O2 -Wall -W -ansi -I../shared
+CC	?= gcc
+STRIP	= strip
+CFLAGS	= -O2 -Wall -W -ansi -I../shared
 
 SOURCES = romheaders.c ../shared/classcodes.c
 
@@ -32,10 +34,9 @@ all: romheaders
 
 romheaders: $(SOURCES)
 	$(CC) $(CFLAGS) $(SOURCES) -o $@
-	strip romheaders
+	$(STRIP) romheaders
 	
 clean:
 	rm -f *~
-
-distclean: clean
 	rm -f romheaders
+

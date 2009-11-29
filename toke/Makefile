@@ -6,7 +6,7 @@
 #  Standard for Boot (Initialization Configuration) Firmware.
 #
 #  Copyright (C) 2001-2006  Stefan Reinauer <stepan@openbios.org>
-#  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
+#  Copyright (C) 2006-2009 coresystems GmbH <info@coresystems.de>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -24,12 +24,12 @@
 
 PROGRAM = toke
 
-CC      = gcc
+CC      ?= gcc
 STRIP	= strip
 INCLUDES = -I../shared
 
 # Normal flags
-CFLAGS  = -O2 -Wall -Wno-pointer-sign -fno-strict-aliasing 
+CFLAGS  = -O2 -Wall -Wextra 
 LDFLAGS =
 
 # Coverage:
@@ -48,14 +48,12 @@ all: .dependencies $(PROGRAM)
 
 $(PROGRAM): $(OBJS)
 	$(CC) -o $(PROGRAM) $(OBJS) $(LDFLAGS)
-	$(STRIP) -s $(PROGRAM)
+	$(STRIP) $(PROGRAM)
 
 clean:
 	rm -f $(OBJS) *~
-
-distclean: clean
 	rm -f $(PROGRAM) .dependencies
-	
+
 .dependencies: *.c 
 	@$(CC) $(CFLAGS) $(INCLUDES) -MM *.c > .dependencies
 
