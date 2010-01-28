@@ -39,7 +39,7 @@
  *
  **************************************************************************** */
 
-#if defined(__ppc__) && defined(__APPLE__)
+#if defined(__APPLE__)
 #include <sys/types.h>
 
 typedef int8_t s8;
