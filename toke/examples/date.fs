@@ -2,8 +2,8 @@
 
 fcode-version2
     ." This program was tokenized on " 
-    fcode-date type
+    [fcode-date] type
     ." at "
-    fcode-time type
+    [fcode-time] type
 fcode-end
 

@@ -111,9 +111,9 @@ true instance value first-install?      \ Used for rewind-on-first-open.
          0 false                                ( 0 false )
       else    \ Decode status buffer            ( xstatbuf )
          >r  #requested                         ( #requested ) ( r: xstatbuf )
-         r@ ili?  r@ eof? or  if                ( #requested ) ( r: xstatbuf 
-            r@ residue -                        ( #xfered )    ( r: xstatbuf 
-         then                                   ( #xfered )    ( r: xstatbuf 
+         r@ ili?  r@ eof? or  if                ( #requested ) ( r: xstatbuf )
+            r@ residue -                        ( #xfered )    ( r: xstatbuf )
+         then                                   ( #xfered )    ( r: xstatbuf )
          r> eof?                                ( #xfered flag )
       then
    else       \ no error, #request = #xfered    ( )

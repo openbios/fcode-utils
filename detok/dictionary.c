@@ -361,7 +361,7 @@ token_t detok_table[] = {
 	TOKEN_ENTRY(0x0da, "get-token"),
 	TOKEN_ENTRY(0x0db, "set-token"),
 	TOKEN_ENTRY(0x0dc, "state"),
-	TOKEN_ENTRY(0x0dd, "compile"),
+	TOKEN_ENTRY(0x0dd, "compile,"),
 	TOKEN_ENTRY(0x0de, "behavior"),
 	TOKEN_ENTRY(0x0f0, "start0"),
 	TOKEN_ENTRY(0x0f1, "start1"),

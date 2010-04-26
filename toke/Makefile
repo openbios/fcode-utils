@@ -60,7 +60,7 @@ clean:
 documentation:: *.c *.h toke.doxygen
 	@doxygen toke.doxygen
 
-.PHONY: all clean distclean 
+.PHONY: all clean
 
 -include .dependencies
 

@@ -40,9 +40,6 @@ clean:
 	$(MAKE) -C testsuite clean
 
 distclean: clean
-	$(MAKE) -C toke distclean
-	$(MAKE) -C detok distclean
-	$(MAKE) -C romheaders distclean
 	$(MAKE) -C testsuite distclean
 	find . -name "*.gcda" -exec rm -f \{\} \;
 	find . -name "*.gcno" -exec rm -f \{\} \;

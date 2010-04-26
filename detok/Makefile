@@ -52,11 +52,11 @@ $(PROGRAM): $(OBJS)
 clean:
 	rm -f $(OBJS) *~
 	rm -f $(PROGRAM) .dependencies
-	
+
 .dependencies: *.c 
 	@$(CC) $(CFLAGS) $(INCLUDES) -MM *.c > .dependencies
 
-.PHONY: all clean distclean 
+.PHONY: all clean
 
 -include .dependencies
 

@@ -1,5 +1,6 @@
 \ FCode driver for hypothetical SCSI host adapter
 
+fcode-version2
 hex
 " XYZI,scsi"          name          \ Name of device node
 " XYZI,12346-01"      model         \ Manufacturer's model number
