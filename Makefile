@@ -21,7 +21,7 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
-VERSION:=$(shell grep ^\#.*TOKE_VERSION < toke/toke.c |cut -f2 -d\" )
+VERSION:=$(shell grep "^\#.*TOKE_VERSION" < toke/toke.c |cut -f2 -d\" )
 
 all:
 	$(MAKE) -C toke
