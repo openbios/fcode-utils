@@ -5,7 +5,7 @@
  *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2001-2010 Stefan Reinauer <stepan@openbios.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -94,6 +94,7 @@ bool ibm_locals_legacy_separator = TRUE ;
 bool ibm_legacy_separator_message = TRUE ;
 bool enable_abort_quote = TRUE ;
 bool sun_style_abort_quote = TRUE ;
+bool sun_style_checksum = FALSE ;
 bool abort_quote_throw = TRUE ;
 bool string_remark_escape = TRUE ;
 bool hex_remark_escape = TRUE ;
@@ -180,6 +181,11 @@ static const cl_flag_t cl_flags_list[] = {
         &abort_quote_throw,
 	"\t",
 	    "Use -2 THROW in an Abort\" phrase, rather than ABORT"     } ,
+
+  { "Sun-Style-Checksum",
+        &sun_style_checksum,
+	"\t\t",
+	    "Use this for SPARC (Enterprise) platforms (especially): M3000, M4000, M9000"     } ,
 
   { "String-remark-escape",
         &string_remark_escape,
@@ -640,7 +646,7 @@ void cl_flags_help(void )
 
    for ( indx = 0 ; indx < number_of_cl_flags ; indx++ )
     {
-	printf("  %s    %s%s%s\n",
+	printf(" %s    %s%s%s\n",
 	    *(cl_flags_list[indx].flag_var) ? "  " : "no" ,
 	    cl_flags_list[indx].clflag_name,
 	    cl_flags_list[indx].clflag_tabs,

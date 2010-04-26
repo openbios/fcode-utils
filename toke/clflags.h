@@ -8,7 +8,7 @@
  *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2001-2010 Stefan Reinauer <stepan@openbios.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,6 +56,7 @@
  *          ibm_legacy_separator_message
  *          enable_abort_quote
  *          sun_style_abort_quote
+ *          sun_style_checksum
  *          string_remark_escape
  *          hex_remark_escape
  *          c_style_string_escape
@@ -111,6 +112,7 @@ extern bool ibm_locals_legacy_separator;
 extern bool ibm_legacy_separator_message;
 extern bool enable_abort_quote;
 extern bool sun_style_abort_quote;
+extern bool sun_style_checksum;
 extern bool abort_quote_throw;
 extern bool string_remark_escape;
 extern bool hex_remark_escape;

@@ -7,7 +7,7 @@
  *  This program is part of a free implementation of the IEEE 1275-1994 
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2001-2010 Stefan Reinauer <stepan@openbios.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -317,7 +317,7 @@ void finish_fcodehdr(void)
 	/*  Calculate and place checksum and length, if haven't already  */
 	if ( fcode_start_ob_off != -1 )
 	{
-	    u16 checksum;
+	    u32 checksum;
 	    int length;
 
 	    u8 *fcode_body = ostart+fcode_body_ob_off;
@@ -331,13 +331,23 @@ void finish_fcodehdr(void)
 	              fcode_body < ob_end ;
 		          checksum += *(fcode_body++) ) ;
 
-	    BIG_ENDIAN_WORD_STORE(fcode_hdr->checksum , checksum);
+	    if (sun_style_checksum) {
+		/* SUN OPB on the SPARC (Enterprise) platforms (especially):
+                 * M3000, M4000, M9000 expects a checksum algorithm that is
+                 * not compliant with IEEE 1275-1994 section 5.2.2.5.
+		 */
+		checksum = (checksum & 0xffff) + (checksum >> 16);
+		checksum = (checksum & 0xffff) + (checksum >> 16);
+	    }
+
+	    BIG_ENDIAN_WORD_STORE(fcode_hdr->checksum, 
+		    (u16)(checksum & 0xffff));
 	    BIG_ENDIAN_LONG_STORE(fcode_hdr->length , length);
 
 	if (verbose)
 	    {
 		printf( "toke: checksum is 0x%04x (%d bytes).  ",
-		    checksum, length);
+                        (u16)checksum, length);
 		list_fcode_ranges( TRUE);
 	    }
 	}
