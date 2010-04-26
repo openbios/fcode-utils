@@ -1,14 +1,11 @@
-#ifndef _DETOK_VSFCODES_H
-#define _DETOK_VSFCODES_H
-
 /*
  *                     OpenBIOS - free your system!
- *                         ( FCode tokenizer )
+ *                        ( FCode detokenizer )
  *
  *  This program is part of a free implementation of the IEEE 1275-1994
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2005 Stefan Reinauer, <stepan@openbios.org>
+ *  Copyright (C) 2001-2010 Stefan Reinauer <stepan@openbios.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,6 +31,9 @@
  *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
  *
  **************************************************************************** */
+
+#ifndef _DETOK_VSFCODES_H
+#define _DETOK_VSFCODES_H
 
 #include "types.h"
 

@@ -5,7 +5,7 @@
 #  This program is part of a free implementation of the IEEE 1275-1994 
 #  Standard for Boot (Initialization Configuration) Firmware.
 #
-#  Copyright (C) 2002 Stefan Reinauer, <stepan@openbios.org>
+#  Copyright (C) 2002-2010 Stefan Reinauer <stepan@openbios.org>
 #  Copyright (C) 2009 coresystems GmbH <info@coresystems.de>
 #
 #  This program is free software; you can redistribute it and/or modify
