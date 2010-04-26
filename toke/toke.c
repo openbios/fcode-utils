@@ -46,8 +46,7 @@
 #include "stack.h"
 #include "emit.h"
 
-#define TOKE_VERSION "1.0.2"
-#define TOKE_COPYRIGHT_DATE "2001-2006"
+#define TOKE_VERSION "1.0.3"
 
 #include "vocabfuncts.h"
 #include "scanner.h"
@@ -56,7 +55,7 @@
 #include "clflags.h"
 #include "tracesyms.h"
 
-#define CORE_COPYR   "(C) Copyright 2001-2006 Stefan Reinauer.\n" \
+#define CORE_COPYR   "(C) Copyright 2001-2010 Stefan Reinauer.\n" \
 		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
@@ -100,7 +99,7 @@ static char *outputname = NULL;
  **************************************************************************** */
 static void print_copyright(void)
 {
-	printf( "Welcome to toke - OpenBIOS tokenizer v" TOKE_VERSION "\n"
+	printf( "Welcome to toke - FCode tokenizer v" TOKE_VERSION "\n"
 		CORE_COPYR "\n" IBM_COPYR "\n"
 		"This program is free software; you may redistribute it "
 		"under the terms of\nthe GNU General Public License v2. "

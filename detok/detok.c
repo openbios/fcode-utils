@@ -45,9 +45,9 @@
 #include "stream.h"
 #include "addfcodes.h"
 
-#define DETOK_VERSION "1.0.2"
+#define DETOK_VERSION "1.0.3"
 
-#define CORE_COPYR   "(C) Copyright 2001-2006 Stefan Reinauer.\n" \
+#define CORE_COPYR   "(C) Copyright 2001-2010 Stefan Reinauer.\n" \
 		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
@@ -65,9 +65,9 @@ static void print_copyright(bool is_error)
 	char buffr[512];
 
 	sprintf(buffr,
-		"Welcome to detok - OpenBIOS detokenizer v" DETOK_VERSION "\n" 
+		"Welcome to detok - FCode detokenizer v" DETOK_VERSION "\n" 
 		CORE_COPYR "\n" IBM_COPYR "\n"
-		"Written by Stefan Reinauer, <stepan@openbios.org>\n"
+		"Written by Stefan Reinauer <stepan@openbios.org>\n"
 		"This program is free software; you may redistribute it "
 		"under the terms of\nthe GNU General Public License v2. "
 		"This program has absolutely no warranty.\n\n");
