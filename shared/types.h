@@ -40,6 +40,7 @@
  **************************************************************************** */
 
 #if defined(__APPLE__)
+
 #include <sys/types.h>
 
 typedef int8_t s8;
@@ -50,6 +51,22 @@ typedef u_int16_t u16;
 
 typedef int32_t s32;
 typedef u_int32_t u32;
+
+#elif defined(__sparc)
+
+#include <sys/types.h>
+
+typedef int8_t s8;
+typedef uint8_t u8;
+
+typedef int16_t s16;
+typedef uint16_t u16;
+
+typedef int32_t s32;
+typedef uint32_t u32;
+
+typedef int64_t s64;
+typedef uint64_t u64;
 
 #else
 
@@ -63,6 +80,7 @@ typedef __u16   u16;
 
 typedef __s32   s32;
 typedef __u32   u32;
+
 #endif
 
 #ifdef FALSE            /*  Hack for AIX.     */
