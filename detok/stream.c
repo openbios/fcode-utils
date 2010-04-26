@@ -236,7 +236,7 @@ static u8 *get_bytes(int nbytes)
 		throw_eof(TRUE);
 	}
 	pc += nbytes;
-	return (retval);
+	return retval;
 }
 
 
@@ -252,7 +252,7 @@ bool more_to_go(void)
 {
 	bool retval;
 	retval = INVERSE(pc == max);
-	return (retval);
+	return retval;
 }
 
 
@@ -282,7 +282,7 @@ u16 next_token(void)
 		tok |= *(get_bytes(1));
 	}
 	fcode = tok;
-	return (tok);
+	return tok;
 }
 
 u32 get_num32(void)
@@ -293,7 +293,7 @@ u32 get_num32(void)
 	num_str = get_bytes(4);
 	retval = BIG_ENDIAN_LONG_FETCH(num_str);
 
-	return (retval);
+	return retval;
 }
 
 u16 get_num16(void)
@@ -304,7 +304,7 @@ u16 get_num16(void)
 	num_str = get_bytes(2);
 	retval = BIG_ENDIAN_WORD_FETCH(num_str);
 
-	return (retval);
+	return retval;
 }
 
 u8 get_num8(void)
@@ -326,7 +326,7 @@ s16 get_offset(void)
 		retval |= (retval & 0x80) ? 0xff00 : 0;
 	}
 
-	return (retval);
+	return retval;
 }
 
 /* **************************************************************************
@@ -356,12 +356,12 @@ s16 get_offset(void)
 
 u8 *get_string(u8 * len)
 {
-	char *retval;
+	u8 *retval;
 
 	*len = get_num8();
 	retval = get_bytes((int) *len);
 
-	return (retval);
+	return retval;
 }
 
 
@@ -405,7 +405,7 @@ char *get_name(u8 * len)
 	char *retval;
 	u8 sav_byt;
 
-	str_start = get_string(len);
+	str_start = (char *)get_string(len);
 
 	sav_byt = *pc;
 	*pc = 0;
@@ -413,7 +413,7 @@ char *get_name(u8 * len)
 	retval = strdup(str_start);
 	*pc = sav_byt;
 
-	return (retval);
+	return retval;
 }
 
 /* **************************************************************************
@@ -462,7 +462,7 @@ u16 calc_checksum(void)
 	}
 
 	pc = save_pc;
-	return (retval);
+	return retval;
 }
 
 

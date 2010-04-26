@@ -461,7 +461,7 @@ void handle_pci_filler(u8 * filler_ptr)
 	} else {
 		sprintf(temp_buf, "PCI Image padding-field of %d bytes "
 			"had first non-zero byte at offset %ld",
-			filler_len, scan_ptr - filler_ptr);
+			filler_len, (unsigned long)(scan_ptr - filler_ptr));
 	}
 	printremark(temp_buf);
 }

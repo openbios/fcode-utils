@@ -357,7 +357,7 @@ static void named_token(void)
 {
 	u16 token;
 	u8 len;
-	u8 *string;
+	char *string;
 
 	output_token();
 	/* get forth string ( [len] [char0] ... [charn] ) */

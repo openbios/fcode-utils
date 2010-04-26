@@ -24,7 +24,7 @@
 
 CC	 ?= gcc
 STRIP    = strip
-CFLAGS   = -O2 -Wall -W -ansi
+CFLAGS   = -O2 -Wall -Wextra -ansi
 INCLUDES = -I../shared
 
 SOURCES = romheaders.c ../shared/classcodes.c

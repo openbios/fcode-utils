@@ -98,9 +98,9 @@
  **************************************************************************** */
 
 static char *current_vfc_line;
-static char *vfc_remainder;
+static u8 *vfc_remainder;
 static int vfc_line_no = 0;
-static char *vfc_buf_end;
+static u8 *vfc_buf_end;
 
 /*  Special Functions List  */
 /*  Initial fcode-field value of  -1  guarantees they won't be used  */
@@ -173,12 +173,12 @@ static bool get_next_vfc_line(void)
 {
 	bool retval = FALSE;	/*  TRUE = not at end yet  */
 	while (vfc_remainder < vfc_buf_end) {
-		current_vfc_line = vfc_remainder;
-		vfc_remainder = strchr(current_vfc_line, '\n');
+		current_vfc_line = (char *)vfc_remainder;
+		vfc_remainder = (u8 *)strchr((const char *)current_vfc_line, '\n');
 		*vfc_remainder = 0;
 		vfc_remainder++;
 		vfc_line_no++;
-		skip_whitespace(&current_vfc_line);
+		skip_whitespace((char **)&current_vfc_line);
 		if (*current_vfc_line == 0)
 			continue;	/*  Blank line */
 		if (*current_vfc_line == '#')
