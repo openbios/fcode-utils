@@ -29,7 +29,7 @@ STRIP	= strip
 INCLUDES = -I../shared
 
 # Normal Flags:
-CFLAGS  = -O2 -Wall -ansi #-Wextra
+CFLAGS  = -O2 -Wall #-Wextra
 LDFLAGS = 
 
 # Coverage:
