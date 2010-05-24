@@ -52,7 +52,7 @@ typedef u_int16_t u16;
 typedef int32_t s32;
 typedef u_int32_t u32;
 
-#elif defined(__sparc)
+#elif defined(__sun__)
 
 #include <sys/types.h>
 
