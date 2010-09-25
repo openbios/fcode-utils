@@ -39,22 +39,8 @@
  *
  **************************************************************************** */
 
-#if defined(__APPLE__)
+#include <stdint.h>
 
-#include <sys/types.h>
-
-typedef int8_t s8;
-typedef u_int8_t u8;
-
-typedef int16_t s16;
-typedef u_int16_t u16;
-
-typedef int32_t s32;
-typedef u_int32_t u32;
-
-#elif defined(__sun__)
-
-#include <sys/types.h>
 
 typedef int8_t s8;
 typedef uint8_t u8;
@@ -68,20 +54,6 @@ typedef uint32_t u32;
 typedef int64_t s64;
 typedef uint64_t u64;
 
-#else
-
-#include <asm/types.h>
-
-typedef __s8    s8;
-typedef __u8    u8;
-
-typedef __s16   s16;
-typedef __u16   u16;
-
-typedef __s32   s32;
-typedef __u32   u32;
-
-#endif
 
 #ifdef FALSE            /*  Hack for AIX.     */
 #undef FALSE
