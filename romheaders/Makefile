@@ -22,6 +22,9 @@
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA, 02110-1301 USA
 #
 
+PROGRAM = romheaders
+
+DESTDIR  = /usr/local
 CC	 ?= gcc
 STRIP    = strip
 CFLAGS   = -O2 -Wall -Wextra
@@ -39,4 +42,8 @@ romheaders: $(SOURCES)
 
 clean:
 	rm -f *~
-	rm -f romheaders
+	rm -f $(PROGRAM)
+
+install:
+	mkdir -p $(DESTDIR)/bin
+	cp $(PROGRAM) $(DESTDIR)/bin/$(PROGRAM)

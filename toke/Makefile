@@ -24,6 +24,7 @@
 
 PROGRAM = toke
 
+DESTDIR = /usr/local
 CC      ?= gcc
 STRIP	= strip
 INCLUDES = -I../shared
@@ -73,3 +74,6 @@ documentation:: *.c *.h toke.doxygen
 .c.o:
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@ 
 
+install:
+	mkdir -p $(DESTDIR)/bin
+	cp $(PROGRAM) $(DESTDIR)/bin/$(PROGRAM)
