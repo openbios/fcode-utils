@@ -1625,7 +1625,7 @@ static void handle_user_message( char delim, bool print_it )
 
 void user_message( tic_param_t pfield )
 {
-    char delim = (char)pfield.deflt_elem ;
+    char delim = (char)pfield.fw_token ;
     handle_user_message( delim, TRUE);
 }
 
@@ -5295,7 +5295,7 @@ void skip_string( tic_param_t pfield)
 
 void process_remark( tic_param_t pfield )
 {
-    char until_char = (char)pfield.deflt_elem ;
+    char until_char = (char)pfield.fw_token ;
     unsigned int start_lineno = lineno;
 
 #ifdef DEBUG_SCANNER
