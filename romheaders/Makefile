@@ -24,10 +24,10 @@
 
 PROGRAM = romheaders
 
-DESTDIR  = /usr/local
+DESTDIR  ?= /usr/local
 CC	 ?= gcc
-STRIP    = strip
-CFLAGS   = -O2 -Wall -Wextra
+STRIP    ?= strip
+CFLAGS   ?= -O2 -Wall -Wextra
 INCLUDES = -I../shared
 
 SOURCES = romheaders.c ../shared/classcodes.c

@@ -24,13 +24,13 @@
 
 PROGRAM = detok
 
-DESTDIR = /usr/local
+DESTDIR ?= /usr/local
 CC      ?= gcc
-STRIP	= strip
+STRIP	?= strip
 INCLUDES = -I../shared
 
 # Normal Flags:
-CFLAGS  = -O2 -Wall #-Wextra
+CFLAGS  ?= -O2 -Wall #-Wextra
 LDFLAGS = 
 
 # Coverage:
