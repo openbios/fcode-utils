@@ -63,18 +63,18 @@ static bool dump_rom_header(rom_header_t *data)
 	const u16 pci_header_signature = 0x55aa;
 	u16 sig=BIG_ENDIAN_WORD_FETCH(data->signature);
 	int i;
-	
+
 	printf ("PCI Expansion ROM Header:\n");
-	
-	printf ("  Signature: 0x%04x (%s)\n", 
+
+	printf ("  Signature: 0x%04x (%s)\n",
 			sig, sig == pci_header_signature ? "Ok":"Not Ok");
-	
+
 	printf ("  CPU unique data:");
 	for (i=0;i<16;i++) {
 		printf(" 0x%02x",data->reserved[i]);
 		if (i==7) printf("\n                  ");
 	}
-	
+
 	printf ("\n  Pointer to PCI Data Structure: 0x%04x\n\n",
 				LITTLE_ENDIAN_WORD_FETCH(data->data_ptr));
 
@@ -89,7 +89,7 @@ static bool dump_pci_data(pci_data_t *data)
 	u32 classcode= CLASS_CODE_FETCH(data->class_code);
 	u32 dlen     = (u32)LITTLE_ENDIAN_WORD_FETCH(data->dlen);
 	u32 ilen     = (u32)LITTLE_ENDIAN_WORD_FETCH(data->ilen);
-	
+
 	printf("PCI Data Structure:\n");
 	printf("  Signature: 0x%04x '%c%c%c%c' ", sig,
 			sig>>24,(sig>>16)&0xff, (sig>>8)&0xff, sig&0xff);
@@ -119,7 +119,7 @@ static bool dump_pci_data(pci_data_t *data)
 static void dump_platform_extensions(u8 type, rom_header_t *data)
 {
 	u32 entry;
-	
+
 	switch (type) {
 	case 0x00:
 		printf("Platform specific data for x86 compliant option rom:\n");
@@ -130,7 +130,7 @@ static void dump_platform_extensions(u8 type, rom_header_t *data)
 		 * to output correct offset for init code. Once again x86
 		 * is ugly.
 		 */
-		
+
 		switch (data->reserved[1]) {
 		case 0xeb: /* short jump */
 			entry = data->reserved[2] + 2;
@@ -155,7 +155,7 @@ static void dump_platform_extensions(u8 type, rom_header_t *data)
 		} else
 			printf( "  Unable to determine entry point for INIT"
 				" function. Please report.\n\n");
-		
+
 		break;
 	case 0x01:
 		printf("Platform specific data for Open Firmware compliant rom:\n");
@@ -185,7 +185,7 @@ int main(int argc, char **argv)
 				"  specs 2.2 in human readable form\n\n");
 		return -1;
 	}
-	
+
 	if (stat(name,&finfo)) {
 		printf("Error while reading file information.\n");
 		return -1;
@@ -212,7 +212,7 @@ int main(int argc, char **argv)
 	}
 
 	fclose(romfile);
-	
+
 	rom_header=(rom_header_t *)rom;
 
 	do {
@@ -221,17 +221,17 @@ int main(int argc, char **argv)
 			printf("Rom Header error occured. Bailing out.\n");
 			break;
 		}
-		
+
 		pci_data = (pci_data_t *)((char *)rom_header +
 			     LITTLE_ENDIAN_WORD_FETCH(rom_header->data_ptr));
-		
+
 		if (!dump_pci_data(pci_data)) {
 			printf("PCI Data error occured. Bailing out.\n");
 			break;
 		}
-		
+
 		dump_platform_extensions(pci_data->code_type, rom_header);
-		
+
 		rom_header = (rom_header_t *)((char *)rom_header +
 				LITTLE_ENDIAN_WORD_FETCH(pci_data->ilen)*512);
 		i++;
