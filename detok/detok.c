@@ -7,8 +7,8 @@
  *  This program is part of a free implementation of the IEEE 1275-1994 
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2010 Stefan Reinauer <stepan@openbios.org>
- *  Copyright (C) 2006 coresystems GmbH <info@coresystems.de>
+ *  Copyright (C) 2001-2010 Stefan Reinauer
+ *  Copyright (C) 2006 coresystems GmbH
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -47,8 +47,8 @@
 
 #define DETOK_VERSION "1.0.3"
 
-#define CORE_COPYR   "(C) Copyright 2001-2010 Stefan Reinauer.\n" \
-		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
+#define CORE_COPYR   "(C) Copyright 2001-2010 Stefan Reinauer\n" \
+		     "(C) Copyright 2006 coresystems GmbH"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
 bool verbose = FALSE;
@@ -67,7 +67,7 @@ static void print_copyright(bool is_error)
 	sprintf(buffr,
 		"Welcome to detok - FCode detokenizer v" DETOK_VERSION "\n" 
 		CORE_COPYR "\n" IBM_COPYR "\n"
-		"Written by Stefan Reinauer <stepan@openbios.org>\n"
+		"Written by Stefan Reinauer\n"
 		"This program is free software; you may redistribute it "
 		"under the terms of\nthe GNU General Public License v2. "
 		"This program has absolutely no warranty.\n\n");

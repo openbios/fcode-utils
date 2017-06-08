@@ -7,7 +7,7 @@
  *  This program is part of a free implementation of the IEEE 1275-1994 
  *  Standard for Boot (Initialization Configuration) Firmware.
  *
- *  Copyright (C) 2001-2010 by Stefan Reinauer <stepan@openbios.org>
+ *  Copyright (C) 2001-2010 by Stefan Reinauer
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@
 #include "tracesyms.h"
 
 #define CORE_COPYR   "(C) Copyright 2001-2010 Stefan Reinauer.\n" \
-		     "(C) Copyright 2006 coresystems GmbH <info@coresystems.de>"
+		     "(C) Copyright 2006 coresystems GmbH"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
 /*  Temporary hack during development...  See DATE_STAMP  line below... */

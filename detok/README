@@ -52,7 +52,7 @@ Table of Contents:
     $ detok -ov world.fc
     Welcome to the OpenBIOS detokenizer v0.6.1
     detok Copyright(c) 2001-2005 by Stefan Reinauer.
-    Written by Stefan Reinauer, <stepan@openbios.org>  
+    Written by Stefan Reinauer
     This program is free software; you may redistribute it under the terms of
     the GNU General Public License.  This program has absolutely no warranty.
 
@@ -75,6 +75,5 @@ Table of Contents:
 4. Contact
 
    Any ideas, bug reports, patches, contributions, discussion is
-   welcome.
-
-        Stefan Reinauer <stepan@openbios.org>
+   welcome. Please send email to the OpenBIOS mailing list at
+   openbios@openbios.org
