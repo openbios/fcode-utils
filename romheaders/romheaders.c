@@ -47,10 +47,15 @@ char *rom=NULL;
 size_t romlen=0;
 
 
-/*  Prototypes for functions exported from  devsupp/pci/classcodes.c   */
+/*  Prototypes for functions exported from:
+ *   - devsupp/pci/classcodes.c
+ *   - devsupp/pci/eficodes.c
+ */
 
 char *pci_device_class_name(u32 code);
 char *pci_code_type_name(unsigned char code);
+char *efi_subsystem_name(u16 code);
+char *efi_machine_type_name(u16 code);
 
 /*  Functions local to this file:
 	    bool dump_rom_header(rom_header_t *data);
@@ -119,6 +124,7 @@ static bool dump_pci_data(pci_data_t *data)
 static void dump_platform_extensions(u8 type, rom_header_t *data)
 {
 	u32 entry;
+	efirom_header_t *efidata;
 
 	switch (type) {
 	case 0x00:
@@ -161,6 +167,52 @@ static void dump_platform_extensions(u8 type, rom_header_t *data)
 		printf("Platform specific data for Open Firmware compliant rom:\n");
 		printf("  Pointer to FCode program: 0x%04x\n\n",
 				data->reserved[1]<<8|data->reserved[0]);
+		break;
+	case 0x03:
+/*
+typedef struct {
+    be_u16(signature);
+    le_u16(initialization_size);
+    le_u32(efi_signature);
+    le_u16(efi_subsystem);
+    le_u16(efi_machine_type);
+    le_u16(compression_type);
+    u8  reserved[0x8];
+    le_u16(efi_image_header_offset);
+    le_u16(data_ptr);
+    le_u16(padd);
+} efirom_header_t;
+*/
+		efidata = (efirom_header_t *) data;
+
+		if (LITTLE_ENDIAN_WORD_FETCH(efidata->efi_signature) != 0x0ef1) {
+			printf("EFI signature is missing.\n");
+			printf("  This is not a valid EFI option rom.\n");
+			break;
+		}
+
+		printf("Platform specific data for EFI compliant option rom:\n");
+
+		printf("  Initialization size: %d\n",
+			LITTLE_ENDIAN_WORD_FETCH(efidata->initialization_size)*512);
+		printf("  EFI signature: 0x%04x\n",
+			LITTLE_ENDIAN_LONG_FETCH(efidata->efi_signature));
+		printf("  EFI subsystem: %d (%s)\n",
+			LITTLE_ENDIAN_WORD_FETCH(efidata->efi_subsystem),
+			efi_subsystem_name(LITTLE_ENDIAN_WORD_FETCH(efidata->efi_subsystem))
+			);
+		printf("  EFI machine type: 0x%04x (%s)\n",
+			LITTLE_ENDIAN_WORD_FETCH(efidata->efi_machine_type),
+			efi_machine_type_name(LITTLE_ENDIAN_WORD_FETCH(efidata->efi_machine_type))
+			);
+		printf("  EFI image %s compressed\n",
+			(LITTLE_ENDIAN_WORD_FETCH(efidata->compression_type) ? "is" : "is not"));
+		printf("  EFI image header offset: 0x%x\n",
+			LITTLE_ENDIAN_WORD_FETCH(efidata->efi_image_header_offset));
+		break;
+	case 0xff:
+		printf("This looks to be an iPXE ROM (full length). If there is\n");
+		printf("  also a code type 0x00 ROM, that one is an iPXE MROM (stub).\n");
 		break;
 	default:
 		printf("Parsing of platform specific data not available for this image\n\n");
