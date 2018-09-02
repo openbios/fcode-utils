@@ -169,20 +169,6 @@ static void dump_platform_extensions(u8 type, rom_header_t *data)
 				data->reserved[1]<<8|data->reserved[0]);
 		break;
 	case 0x03:
-/*
-typedef struct {
-    be_u16(signature);
-    le_u16(initialization_size);
-    le_u32(efi_signature);
-    le_u16(efi_subsystem);
-    le_u16(efi_machine_type);
-    le_u16(compression_type);
-    u8  reserved[0x8];
-    le_u16(efi_image_header_offset);
-    le_u16(data_ptr);
-    le_u16(padd);
-} efirom_header_t;
-*/
 		efidata = (efirom_header_t *) data;
 
 		if (LITTLE_ENDIAN_WORD_FETCH(efidata->efi_signature) != 0x0ef1) {
