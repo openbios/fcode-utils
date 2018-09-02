@@ -48,8 +48,8 @@ size_t romlen=0;
 
 
 /*  Prototypes for functions exported from:
- *   - devsupp/pci/classcodes.c
- *   - devsupp/pci/eficodes.c
+ *   - shared/classcodes.c
+ *   - shared/eficodes.c
  */
 
 char *pci_device_class_name(u32 code);
