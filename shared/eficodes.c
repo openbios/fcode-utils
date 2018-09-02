@@ -24,9 +24,13 @@
 
 /* **************************************************************************
  *
- *      Functions to correlate PCI Device Class-Codes and PCI Code Types
+ *      Functions to correlate EFI subsystem type and machine name
  *      with their printable names.
  *
+ *      (C) Copyright 2018.  All Rights Reserved.
+ *      Module Author:  Radek Zajic        radek@zajic.v.pytli.cz
+ *
+ *      Based on the classcodes.c file
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
  *      Module Author:  David L. Paktor    dlpaktor@us.ibm.com
  *
@@ -38,11 +42,11 @@
 /* **************************************************************************
  *
  *      Functions Eported:
- *          pci_device_class_name
- *              Convert a numeric PCI Class Code to the Device Class Name
+ *          efi_subsystem_name
+ *              Convert a numeric EFI subsystem type to a printable Name
  *
- *          pci_code_type_name
- *              Convert a numeric PCI Code Type to a printable Name
+ *          efi_machine_type_name
+ *              Convert a numeric EFI machine type to a printable Name
  *
  **************************************************************************** */
 
