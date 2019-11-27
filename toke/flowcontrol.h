@@ -35,7 +35,6 @@
  *
  **************************************************************************** */
 
-
 /* ************************************************************************** *
  *
  *      Global Variables Exported
@@ -43,32 +42,32 @@
  **************************************************************************** */
 
 extern int control_stack_depth;
- 
+
 /* ************************************************************************** *
  *
  *      Function Prototypes / Functions Exported:
  *
  **************************************************************************** */
 
-void emit_if( void );
-void emit_then( void );
-void emit_else( void );
-void emit_begin( void );
-void emit_again( void );
-void emit_until( void );
-void emit_while( void );
-void emit_repeat( void );
-void mark_do( void );
-void resolve_loop( void );
-void emit_case( void );
-void emit_of( void );
-void emit_endof( void );
-void emit_endcase( void );
+void emit_if(void);
+void emit_then(void);
+void emit_else(void);
+void emit_begin(void);
+void emit_again(void);
+void emit_until(void);
+void emit_while(void);
+void emit_repeat(void);
+void mark_do(void);
+void resolve_loop(void);
+void emit_case(void);
+void emit_of(void);
+void emit_endof(void);
+void emit_endcase(void);
 
-void announce_control_structs( int severity, char *call_cond,
-				          unsigned int abs_token_limit);
-void clear_control_structs_to_limit( char *call_cond,
-				          unsigned int abs_token_limit);
-void clear_control_structs( char *call_cond);
+void announce_control_structs(int severity, char *call_cond,
+			      unsigned int abs_token_limit);
+void clear_control_structs_to_limit(char *call_cond,
+				    unsigned int abs_token_limit);
+void clear_control_structs(char *call_cond);
 
-#endif   /*  _TOKE_FLOWCONTROL_H    */
+#endif /*  _TOKE_FLOWCONTROL_H    */

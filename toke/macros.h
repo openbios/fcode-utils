@@ -35,7 +35,6 @@
  *
  **************************************************************************** */
 
-
 #include "types.h"
 #include "ticvocab.h"
 
@@ -45,14 +44,14 @@
  *
  **************************************************************************** */
 
-void init_macros( tic_hdr_t **tic_vocab_ptr );
-void add_user_macro( void);
-void skip_user_macro( tic_bool_param_t pfield );
-#if  0  /*  What's this doing here?  */
+void init_macros(tic_hdr_t ** tic_vocab_ptr);
+void add_user_macro(void);
+void skip_user_macro(tic_bool_param_t pfield);
+#if  0				/*  What's this doing here?  */
 char *lookup_macro(char *name);
 bool exists_as_macro(char *name);
-bool create_macro_alias( char *new_name, char *old_name );
-void reset_macros_vocab( void );
-#endif  /*  What's this doing here?  */
+bool create_macro_alias(char *new_name, char *old_name);
+void reset_macros_vocab(void);
+#endif /*  What's this doing here?  */
 
-#endif   /*  _TOKE_MACROS_H    */
+#endif /*  _TOKE_MACROS_H    */

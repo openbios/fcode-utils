@@ -50,7 +50,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Functions Exported:
@@ -76,8 +75,6 @@
  *
  **************************************************************************** */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -91,7 +88,6 @@
 #include "stream.h"
 #include "ticvocab.h"
 
-
 /* **************************************************************************
  *
  *      Tokenization starts with an implicit "new-device" in effect.
@@ -103,12 +99,12 @@
 char default_top_dev_ifile_name[] = "Start of tokenization";
 
 static device_node_t top_level_dev_node = {
-     	NULL ,                          /*  parent_node    */
-	default_top_dev_ifile_name ,	/*  ifile_name.
+	NULL,			/*  parent_node    */
+	default_top_dev_ifile_name,	/*  ifile_name.
 					 *     Something to show, Just In Case
 					 */
-	0 ,                             /*  line_no        */
-	NULL ,                          /*  tokens_vocab   */
+	0,			/*  line_no        */
+	NULL,			/*  tokens_vocab   */
 };
 
 /* **************************************************************************
@@ -122,7 +118,6 @@ static device_node_t top_level_dev_node = {
 
 device_node_t *current_device_node = &top_level_dev_node;
 tic_hdr_t **current_definitions = &(top_level_dev_node.tokens_vocab);
-
 
 /* **************************************************************************
  *
@@ -140,12 +135,11 @@ tic_hdr_t **current_definitions = &(top_level_dev_node.tokens_vocab);
  *
  **************************************************************************** */
 
-static char in_what_buffr[50];   /*  Ought to be more than enough.  */
+static char in_what_buffr[50];	/*  Ought to be more than enough.  */
 static bool show_where = FALSE;
 static bool show_which;
 static int in_what_line;
 static char *in_what_file;
-
 
 /* **************************************************************************
  *
@@ -173,21 +167,19 @@ static char *in_what_file;
  *
  **************************************************************************** */
 
-static void dev_vocab_control_struct_check( void)
+static void dev_vocab_control_struct_check(void)
 {
-    char *ccs_messg;
+	char *ccs_messg;
 
-    ccs_messg = safe_malloc(strlen(statbuf) + 32,
-        "Device-Node control-structure check");
-    
-    strcpy( ccs_messg, statbuf );
-    strupr( ccs_messg);
-    strcat( ccs_messg, " encountered");
-    announce_control_structs( WARNING, ccs_messg, 0 );
-    free( ccs_messg);
+	ccs_messg = safe_malloc(strlen(statbuf) + 32,
+				"Device-Node control-structure check");
+
+	strcpy(ccs_messg, statbuf);
+	strupr(ccs_messg);
+	strcat(ccs_messg, " encountered");
+	announce_control_structs(WARNING, ccs_messg, 0);
+	free(ccs_messg);
 }
-
-
 
 /* **************************************************************************
  *
@@ -229,40 +221,39 @@ static void dev_vocab_control_struct_check( void)
  *
  **************************************************************************** */
 
-void new_device_vocab( void )
+void new_device_vocab(void)
 {
-    device_node_t *new_node_data;
+	device_node_t *new_node_data;
 
-    dev_vocab_control_struct_check();
+	dev_vocab_control_struct_check();
 
-    /*  Advisory message will mention previous device-node
-     *      if there was one.  Either way starts out the same:
-     */
+	/*  Advisory message will mention previous device-node
+	 *      if there was one.  Either way starts out the same:
+	 */
 #define NEW_DEV_MSG_START  "Encountered %s.  Starting new device-node."
 
-    if ( current_device_node == &top_level_dev_node )
-    {
-	tokenization_error(INFO, NEW_DEV_MSG_START "\n", statbuf );
-    }else{
-	tokenization_error(INFO, NEW_DEV_MSG_START
-	    "  Suspending definitions of parent-device node", statbuf );
-	started_at( current_device_node->ifile_name,
-	     current_device_node->line_no );
-    }
+	if (current_device_node == &top_level_dev_node) {
+		tokenization_error(INFO, NEW_DEV_MSG_START "\n", statbuf);
+	} else {
+		tokenization_error(INFO, NEW_DEV_MSG_START
+				   "  Suspending definitions of parent-device node",
+				   statbuf);
+		started_at(current_device_node->ifile_name,
+			   current_device_node->line_no);
+	}
 
-    /*  Now to business...   */
-    new_node_data = safe_malloc( sizeof(device_node_t),
-        "creating new-device vocab data" );
-    new_node_data->parent_node = current_device_node;
-    new_node_data->ifile_name = strdup(iname);
-    new_node_data->line_no = lineno;
-    new_node_data->tokens_vocab = NULL;
+	/*  Now to business...   */
+	new_node_data = safe_malloc(sizeof(device_node_t),
+				    "creating new-device vocab data");
+	new_node_data->parent_node = current_device_node;
+	new_node_data->ifile_name = strdup(iname);
+	new_node_data->line_no = lineno;
+	new_node_data->tokens_vocab = NULL;
 
-    current_device_node = new_node_data;
-    
-    current_definitions = &(current_device_node->tokens_vocab);
+	current_device_node = new_node_data;
+
+	current_definitions = &(current_device_node->tokens_vocab);
 }
-
 
 /* **************************************************************************
  *
@@ -295,19 +286,18 @@ void new_device_vocab( void )
  *
  **************************************************************************** */
 
-void delete_device_vocab( void )
+void delete_device_vocab(void)
 {
-    reset_tic_vocab( current_definitions, NULL );
+	reset_tic_vocab(current_definitions, NULL);
 
-    if ( current_device_node != &top_level_dev_node )
-    {
-	device_node_t *temp_node = current_device_node;
-	current_device_node = current_device_node->parent_node;
-	free( temp_node->ifile_name );
-	free(temp_node);
-    }
+	if (current_device_node != &top_level_dev_node) {
+		device_node_t *temp_node = current_device_node;
+		current_device_node = current_device_node->parent_node;
+		free(temp_node->ifile_name);
+		free(temp_node);
+	}
 
-    current_definitions = &(current_device_node->tokens_vocab);
+	current_definitions = &(current_device_node->tokens_vocab);
 }
 
 /* **************************************************************************
@@ -346,52 +336,48 @@ void delete_device_vocab( void )
  *
  **************************************************************************** */
 
-void finish_device_vocab( void )
+void finish_device_vocab(void)
 {
-    bool at_top_level;
+	bool at_top_level;
 
-    dev_vocab_control_struct_check();
+	dev_vocab_control_struct_check();
 
-    /*   We never remove the top-level device-node vocabulary,
-     *       so we need to test whether we're about to.
-     */
+	/*   We never remove the top-level device-node vocabulary,
+	 *       so we need to test whether we're about to.
+	 */
 
-    at_top_level = BOOLVAL( current_device_node == &top_level_dev_node );
-    if ( at_top_level )
-    {
-        tokenization_error( TKERROR,
-	    "Encountered %s without corresponding NEW-DEVICE.  "
-	    "Resetting definitions since start of tokenization.\n",
-		statbuf );
-    }else{    
-	tokenization_error(INFO,
-	    "Encountered %s.  Resetting definitions of device node",
-		statbuf );
-	started_at( current_device_node->ifile_name,
-	     current_device_node->line_no );
-    }
-
-    /*  Now to business...   */
-    delete_device_vocab();
-
-    /*   Did we just get to the top-level device-node vocabulary
-     *       when we weren't before?
-     */
-    if ( INVERSE(at_top_level) )
-    {
-	if ( current_device_node == &top_level_dev_node )
-	{
-	    tokenization_error(INFO,
-		"Resuming definitions since start of tokenization.\n" );
-	}else{
-	    tokenization_error(INFO,
-		"Resuming definitions of parent device-node" );
-	    started_at( current_device_node->ifile_name,
-		 current_device_node->line_no );
+	at_top_level = BOOLVAL(current_device_node == &top_level_dev_node);
+	if (at_top_level) {
+		tokenization_error(TKERROR,
+				   "Encountered %s without corresponding NEW-DEVICE.  "
+				   "Resetting definitions since start of tokenization.\n",
+				   statbuf);
+	} else {
+		tokenization_error(INFO,
+				   "Encountered %s.  Resetting definitions of device node",
+				   statbuf);
+		started_at(current_device_node->ifile_name,
+			   current_device_node->line_no);
 	}
-    }
-}
 
+	/*  Now to business...   */
+	delete_device_vocab();
+
+	/*   Did we just get to the top-level device-node vocabulary
+	 *       when we weren't before?
+	 */
+	if (INVERSE(at_top_level)) {
+		if (current_device_node == &top_level_dev_node) {
+			tokenization_error(INFO,
+					   "Resuming definitions since start of tokenization.\n");
+		} else {
+			tokenization_error(INFO,
+					   "Resuming definitions of parent device-node");
+			started_at(current_device_node->ifile_name,
+				   current_device_node->line_no);
+		}
+	}
+}
 
 /* **************************************************************************
  *
@@ -454,29 +440,25 @@ void finish_device_vocab( void )
  *
  **************************************************************************** */
 
-char *in_what_node(device_node_t *the_node)
+char *in_what_node(device_node_t * the_node)
 {
-    bool top_node    = BOOLVAL( the_node == &top_level_dev_node);
-    bool curr_node   = BOOLVAL( the_node == current_device_node);
-    bool known_node  = BOOLVAL( top_node || curr_node );
-    bool no_line     = BOOLVAL( the_node->line_no == 0);
+	bool top_node = BOOLVAL(the_node == &top_level_dev_node);
+	bool curr_node = BOOLVAL(the_node == current_device_node);
+	bool known_node = BOOLVAL(top_node || curr_node);
+	bool no_line = BOOLVAL(the_node->line_no == 0);
 
-    show_where   = INVERSE( no_line  );
-    show_which   = known_node;
-    in_what_line = the_node->line_no;
-    in_what_file = the_node->ifile_name;
+	show_where = INVERSE(no_line);
+	show_which = known_node;
+	in_what_line = the_node->line_no;
+	in_what_file = the_node->ifile_name;
 
-    sprintf( in_what_buffr, "in the%s device-node%s",
-	INVERSE( known_node )  ? ""
-	        :  top_node    ?    " top-level"   :  " current" ,
-	
-	no_line                ?  ".\n"
-	        :  known_node  ?  ", which began"  :   ""         );
+	sprintf(in_what_buffr, "in the%s device-node%s",
+		INVERSE(known_node) ? ""
+		: top_node ? " top-level" : " current",
+		no_line ? ".\n" : known_node ? ", which began" : "");
 
-    
-    return( in_what_buffr);
+	return (in_what_buffr);
 }
-
 
 /* **************************************************************************
  *
@@ -510,21 +492,17 @@ char *in_what_node(device_node_t *the_node)
  *
  **************************************************************************** */
 
-void show_node_start( void)
+void show_node_start(void)
 {
-    if ( show_where)
-    {
-	if ( show_which )
-	{
-	    just_where_started( in_what_file, in_what_line);
-	}else{
-	    just_started_at( in_what_file, in_what_line);
+	if (show_where) {
+		if (show_which) {
+			just_where_started(in_what_file, in_what_line);
+		} else {
+			just_started_at(in_what_file, in_what_line);
+		}
+		show_where = FALSE;
 	}
-	show_where = FALSE;
-    }
 }
-
-
 
 /* **************************************************************************
  *
@@ -559,37 +537,33 @@ void show_node_start( void)
  *
  **************************************************************************** */
 
-bool exists_in_ancestor( char *m_name)
+bool exists_in_ancestor(char *m_name)
 {
-    tic_hdr_t *found;
-    bool retval = FALSE;
-    if ( current_device_node != NULL )
-    {
-	device_node_t *grandpa = current_device_node->parent_node;
+	tic_hdr_t *found;
+	bool retval = FALSE;
+	if (current_device_node != NULL) {
+		device_node_t *grandpa = current_device_node->parent_node;
 
-	if ( scope_is_global )    grandpa = current_device_node;
+		if (scope_is_global)
+			grandpa = current_device_node;
 
-	for ( ; grandpa != NULL; grandpa = grandpa->parent_node )
-	{
-	    found = lookup_tic_entry( m_name, grandpa->tokens_vocab);
-	    if ( found != NULL )
-	    {
-		retval = TRUE;
-		break;
-	    }
+		for (; grandpa != NULL; grandpa = grandpa->parent_node) {
+			found = lookup_tic_entry(m_name, grandpa->tokens_vocab);
+			if (found != NULL) {
+				retval = TRUE;
+				break;
+			}
+		}
+		if (grandpa != NULL) {
+			char as_what_buf[AS_WHAT_BUF_SIZE] = "";
+			if (as_a_what(found->fword_defr, as_what_buf)) {
+				strcat(as_what_buf, " ");
+			}
+			tokenization_error(INFO, "%s is defined %s%s", m_name,
+					   as_what_buf, in_what_node(grandpa));
+			show_node_start();
+		}
 	}
-	if ( grandpa != NULL )
-	{
-	    char as_what_buf[AS_WHAT_BUF_SIZE] = "";
-	    if ( as_a_what( found->fword_defr, as_what_buf) )
-	    {
-		strcat( as_what_buf, " ");
-	    }
-	    tokenization_error(INFO, "%s is defined %s%s", m_name,
-		as_what_buf, in_what_node( grandpa) );
-	    show_node_start();
-	}
-    }
 
-    return(retval );
+	return (retval);
 }

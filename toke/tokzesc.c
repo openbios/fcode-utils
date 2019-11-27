@@ -57,11 +57,11 @@
 #include "nextfcode.h"
 #include "tracesyms.h"
 
-#undef TOKZTEST     /*  Define for testing only; else undef   */
-#ifdef TOKZTEST         /*  For testing only   */
-   #include "vocabfuncts.h"
-   #include "date_stamp.h"
-#endif                  /*  For testing only   */
+#undef TOKZTEST			/*  Define for testing only; else undef   */
+#ifdef TOKZTEST			/*  For testing only   */
+#include "vocabfuncts.h"
+#include "date_stamp.h"
+#endif /*  For testing only   */
 
 /* **************************************************************************
  *
@@ -123,7 +123,7 @@
  *
  **************************************************************************** */
 
-tic_hdr_t *tokz_esc_vocab = NULL ;
+tic_hdr_t *tokz_esc_vocab = NULL;
 
 /* **************************************************************************
  *
@@ -153,13 +153,13 @@ tic_hdr_t *tokz_esc_vocab = NULL ;
  *
  **************************************************************************** */
 
-static int saved_base ;    /*  Place to save the numeric conversion radix  */
+static int saved_base;		/*  Place to save the numeric conversion radix  */
 
-void enter_tokz_esc( void )
+void enter_tokz_esc(void)
 {
-    saved_base = base ;
-    base = 16;
-    in_tokz_esc = TRUE;
+	saved_base = base;
+	base = 16;
+	in_tokz_esc = TRUE;
 }
 
 /* **************************************************************************
@@ -176,10 +176,10 @@ void enter_tokz_esc( void )
  *
  **************************************************************************** */
 
-static void end_tokz_esc( tic_param_t pfield )
+static void end_tokz_esc(tic_param_t pfield)
 {
-    in_tokz_esc = FALSE;
-    base = saved_base ;
+	in_tokz_esc = FALSE;
+	base = saved_base;
 }
 
 /* **************************************************************************
@@ -194,18 +194,17 @@ static void end_tokz_esc( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void tokz_esc_emit_byte ( tic_param_t pfield )
+static void tokz_esc_emit_byte(tic_param_t pfield)
 {
-    long num_on_stk = dpop();
-    u8 byt_to_emit = (u8)num_on_stk;
-    if ( byt_to_emit != num_on_stk )
-    {
-        tokenization_error( WARNING,
-	    "Value on stack for %s command is 0x%0x.  "
-		"Truncating to 0x%02x.\n",
-		     strupr(statbuf), num_on_stk, byt_to_emit);
-    }
-    user_emit_byte(byt_to_emit);
+	long num_on_stk = dpop();
+	u8 byt_to_emit = (u8) num_on_stk;
+	if (byt_to_emit != num_on_stk) {
+		tokenization_error(WARNING,
+				   "Value on stack for %s command is 0x%0x.  "
+				   "Truncating to 0x%02x.\n",
+				   strupr(statbuf), num_on_stk, byt_to_emit);
+	}
+	user_emit_byte(byt_to_emit);
 }
 
 /* **************************************************************************
@@ -252,37 +251,34 @@ static void tokz_esc_emit_byte ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static bool get_fcode_from_stack( u16 *the_num, bool setting_fc)
+static bool get_fcode_from_stack(u16 * the_num, bool setting_fc)
 {
-    bool retval = FALSE;
-    char *the_action = "emit FCode value of";
-    u16 legal_minimum = 0x10;
-    long num_on_stk = dpop();
-    u16 test_fcode = (u16)num_on_stk;
+	bool retval = FALSE;
+	char *the_action = "emit FCode value of";
+	u16 legal_minimum = 0x10;
+	long num_on_stk = dpop();
+	u16 test_fcode = (u16) num_on_stk;
 
-    if ( setting_fc )
-    {
-        the_action = "set next fcode to";
-	legal_minimum = 0x800;
-    }
-    if ( test_fcode != num_on_stk )
-    {
-        tokenization_error( WARNING,
-	    "Value on stack for %s command is 0x%0x.  "
-		"Truncating to 0x%03x.\n",
-		     strupr(statbuf), num_on_stk, test_fcode);
-    }
-    if ( ( test_fcode >= legal_minimum ) && ( test_fcode <= 0xfff ) )
-    {
-	retval = TRUE;
-	*the_num = test_fcode;
-    }else{	tokenization_error( TKERROR, "Attempt to %s "
-	    "0x%x, which violates limit specified by IEEE-1275.  "
-		"Disallowing.\n", the_action, test_fcode );
-    }
-    return( retval );
+	if (setting_fc) {
+		the_action = "set next fcode to";
+		legal_minimum = 0x800;
+	}
+	if (test_fcode != num_on_stk) {
+		tokenization_error(WARNING,
+				   "Value on stack for %s command is 0x%0x.  "
+				   "Truncating to 0x%03x.\n",
+				   strupr(statbuf), num_on_stk, test_fcode);
+	}
+	if ((test_fcode >= legal_minimum) && (test_fcode <= 0xfff)) {
+		retval = TRUE;
+		*the_num = test_fcode;
+	} else {
+		tokenization_error(TKERROR, "Attempt to %s "
+				   "0x%x, which violates limit specified by IEEE-1275.  "
+				   "Disallowing.\n", the_action, test_fcode);
+	}
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -301,26 +297,27 @@ static bool get_fcode_from_stack( u16 *the_num, bool setting_fc)
  *
  **************************************************************************** */
 
-static void tokz_esc_next_fcode( tic_param_t pfield )
+static void tokz_esc_next_fcode(tic_param_t pfield)
 {
-    u16 test_fcode;
+	u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, TRUE) )
-    {
-	if ( test_fcode == nextfcode )
-	{
-	    tokenization_error( INFO, "FCode-token Assignment Counter "
-		"is unchanged from 0x%x.\n",
-		    nextfcode);
-	}else{
-	    tokenization_error( INFO, "FCode-token Assignment Counter "
-		"was 0x%x; has been %s to 0x%x.\n",
-		    nextfcode,
-			test_fcode > nextfcode ? "advanced" : "reset",
-			    test_fcode );
-	    set_next_fcode( test_fcode);
+	if (get_fcode_from_stack(&test_fcode, TRUE)) {
+		if (test_fcode == nextfcode) {
+			tokenization_error(INFO,
+					   "FCode-token Assignment Counter "
+					   "is unchanged from 0x%x.\n",
+					   nextfcode);
+		} else {
+			tokenization_error(INFO,
+					   "FCode-token Assignment Counter "
+					   "was 0x%x; has been %s to 0x%x.\n",
+					   nextfcode,
+					   test_fcode >
+					   nextfcode ? "advanced" : "reset",
+					   test_fcode);
+			set_next_fcode(test_fcode);
+		}
 	}
-    }
 }
 
 /* **************************************************************************
@@ -340,18 +337,17 @@ static void tokz_esc_next_fcode( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void tokz_emit_fcode( tic_param_t pfield )
+static void tokz_emit_fcode(tic_param_t pfield)
 {
-    u16 test_fcode;
+	u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, FALSE) )
-    {
-	tokenization_error( INFO,
-	    "Emitting FCode value of 0x%x\n", test_fcode);
-	emit_fcode( test_fcode);
-    }
+	if (get_fcode_from_stack(&test_fcode, FALSE)) {
+		tokenization_error(INFO,
+				   "Emitting FCode value of 0x%x\n",
+				   test_fcode);
+		emit_fcode(test_fcode);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -363,9 +359,9 @@ static void tokz_emit_fcode( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void  zero_equals ( tic_param_t pfield )
+static void zero_equals(tic_param_t pfield)
 {
-    *dstack = (*dstack == 0) ? -1 : 0 ;
+	*dstack = (*dstack == 0) ? -1 : 0;
 }
 
 /* **************************************************************************
@@ -377,9 +373,9 @@ static void  zero_equals ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void  tokz_esc_swap ( tic_param_t pfield )
+static void tokz_esc_swap(tic_param_t pfield)
 {
-    swap();
+	swap();
 }
 
 /* **************************************************************************
@@ -391,9 +387,9 @@ static void  tokz_esc_swap ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void  tokz_esc_two_swap ( tic_param_t pfield )
+static void tokz_esc_two_swap(tic_param_t pfield)
 {
-    two_swap();
+	two_swap();
 }
 
 /* **************************************************************************
@@ -405,22 +401,22 @@ static void  tokz_esc_two_swap ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void  tokz_esc_noop ( tic_param_t pfield )
+static void tokz_esc_noop(tic_param_t pfield)
 {
-    return;
+	return;
 }
 
-#ifdef TOKZTEST         /*  For testing only   */
+#ifdef TOKZTEST			/*  For testing only   */
 
-   static void  tokz_esc_emit_string( tic_param_t pfield )
-   {
-      int lenny ;
-      lenny = strlen ( pfield.chr_ptr );
-      emit_token("b(\")");
-      emit_string(pfield.chr_ptr, lenny);
-   }
+static void tokz_esc_emit_string(tic_param_t pfield)
+{
+	int lenny;
+	lenny = strlen(pfield.chr_ptr);
+	emit_token("b(\")");
+	emit_string(pfield.chr_ptr, lenny);
+}
 
-#endif                  /*  For testing only   */
+#endif /*  For testing only   */
 
 /* **************************************************************************
  *
@@ -449,9 +445,9 @@ static void  tokz_esc_noop ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void do_constant ( tic_param_t pfield )
+static void do_constant(tic_param_t pfield)
 {
-    dpush( pfield.long_val );
+	dpush(pfield.long_val);
 }
 
 /* **************************************************************************
@@ -498,38 +494,34 @@ static void do_constant ( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void create_constant( tic_param_t pfield )
+static void create_constant(tic_param_t pfield)
 {
-    char *c_name_space ;          /*  Space for copy of the name    */
-    long valu ;                   /*  Value, popped off the stack   */
-    signed long wlen;
+	char *c_name_space;	/*  Space for copy of the name    */
+	long valu;		/*  Value, popped off the stack   */
+	signed long wlen;
 
-    /*  Get the name that is to be defined  */
-    wlen = get_word();
-    if ( wlen <= 0 )
-    {
-	warn_unterm( TKERROR, "Constant definition", lineno);
-	return;
-    }
+	/*  Get the name that is to be defined  */
+	wlen = get_word();
+	if (wlen <= 0) {
+		warn_unterm(TKERROR, "Constant definition", lineno);
+		return;
+	}
 
-    valu = dpop();
+	valu = dpop();
 
-    /*  If ever we implement more than just this one
-     *      defining-word in "Tokenizer Escape" mode,
-     *      the lines from here to the end of the
-     *      routine should be re-factored...
-     */
-    c_name_space = strdup( statbuf );
+	/*  If ever we implement more than just this one
+	 *      defining-word in "Tokenizer Escape" mode,
+	 *      the lines from here to the end of the
+	 *      routine should be re-factored...
+	 */
+	c_name_space = strdup(statbuf);
 
-    add_tic_entry(
-	 c_name_space,
-	     do_constant,
-		  (TIC_P_DEFLT_TYPE)valu,
-		       CONST ,
-			  0 , FALSE , NULL,
-		               &tokz_esc_vocab );
+	add_tic_entry(c_name_space,
+		      do_constant,
+		      (TIC_P_DEFLT_TYPE) valu,
+		      CONST, 0, FALSE, NULL, &tokz_esc_vocab);
 
-    check_name_length( wlen );
+	check_name_length(wlen);
 
 }
 
@@ -545,9 +537,9 @@ static const int minus_one = -1 ;
 static const char double_quote = '"' ;
 static const char close_paren = ')' ;
  *  Except for this next one, of course...   */
-#ifdef TOKZTEST        /*  For testing only   */
-   static const char date_me[] =  DATE_STAMP;
-#endif                 /*  For testing only   */
+#ifdef TOKZTEST			/*  For testing only   */
+static const char date_me[] = DATE_STAMP;
+#endif /*  For testing only   */
 
 /* **************************************************************************
  *
@@ -566,31 +558,31 @@ static const char close_paren = ')' ;
                         DUALFUNC_TIC(nam, afunc, pval, ifunc, UNSPECIFIED)
 
 static tic_hdr_t tokz_esc_vocab_tbl[] = {
-    NO_PARAM_IGN( "]tokenizer" , end_tokz_esc                           ) ,
+	NO_PARAM_IGN("]tokenizer", end_tokz_esc),
 
-    /*  An IBM-ish synonym.  */
-    NO_PARAM_IGN( "f]"         , end_tokz_esc                           ) ,
-    /*  An alternate synonym.  */
-    NO_PARAM_IGN( "]f"         , end_tokz_esc                           ) ,
+	/*  An IBM-ish synonym.  */
+	NO_PARAM_IGN("f]", end_tokz_esc),
+	/*  An alternate synonym.  */
+	NO_PARAM_IGN("]f", end_tokz_esc),
 
-    NO_PARAM_TIC( "emit-byte"  , tokz_esc_emit_byte                     ) ,
-    NO_PARAM_TIC( "next-fcode" , tokz_esc_next_fcode                    ) ,
-    NO_PARAM_TIC( "emit-fcode" , tokz_emit_fcode                        ) ,
-    NO_PARAM_TIC( "constant"   , create_constant                        ) ,
-    NO_PARAM_TIC( "0="         , zero_equals                            ) ,
-    NO_PARAM_TIC( "swap"       , tokz_esc_swap                          ) ,
-    NO_PARAM_TIC( "2swap"      , tokz_esc_two_swap                      ) ,
-    NO_PARAM_TIC( "noop"       , tokz_esc_noop                          ) ,
-    TKZESC_CONST( "false"      ,  0                                     ) ,
-    TKZESC_CONST( "true"       , -1                                     ) ,
-    TKZ_ESC_FUNC( ".("         , user_message, ')', skip_user_message   ) ,
-    TKZ_ESC_FUNC( ".\""        , user_message, '"', skip_user_message   ) ,
-#ifdef TOKZTEST        /*  For testing only   */
-    /*  Data is a pointer to a constant string in the compiler;    */
-    /*      no need to copy, hence data_size can remain zero.      */
-    /*  We could almost use the Macro macro, except for the type.  */
-    TKZ_ESC_FUNC( "emit-date"  , tokz_esc_emit_string, date_me , NULL   ) ,
-#endif                 /*  For testing only   */
+	NO_PARAM_TIC("emit-byte", tokz_esc_emit_byte),
+	NO_PARAM_TIC("next-fcode", tokz_esc_next_fcode),
+	NO_PARAM_TIC("emit-fcode", tokz_emit_fcode),
+	NO_PARAM_TIC("constant", create_constant),
+	NO_PARAM_TIC("0=", zero_equals),
+	NO_PARAM_TIC("swap", tokz_esc_swap),
+	NO_PARAM_TIC("2swap", tokz_esc_two_swap),
+	NO_PARAM_TIC("noop", tokz_esc_noop),
+	TKZESC_CONST("false", 0),
+	TKZESC_CONST("true", -1),
+	TKZ_ESC_FUNC(".(", user_message, ')', skip_user_message),
+	TKZ_ESC_FUNC(".\"", user_message, '"', skip_user_message),
+#ifdef TOKZTEST			/*  For testing only   */
+	/*  Data is a pointer to a constant string in the compiler;    */
+	/*      no need to copy, hence data_size can remain zero.      */
+	/*  We could almost use the Macro macro, except for the type.  */
+	TKZ_ESC_FUNC("emit-date", tokz_esc_emit_string, date_me, NULL),
+#endif /*  For testing only   */
 };
 
 /* **************************************************************************
@@ -601,7 +593,7 @@ static tic_hdr_t tokz_esc_vocab_tbl[] = {
  **************************************************************************** */
 
 static const tic_hdr_t *built_in_tokz_esc =
-    &tokz_esc_vocab_tbl[(sizeof(tokz_esc_vocab_tbl)/sizeof(tic_hdr_t))-1];
+    &tokz_esc_vocab_tbl[(sizeof(tokz_esc_vocab_tbl) / sizeof(tic_hdr_t)) - 1];
 
 /* **************************************************************************
  *
@@ -616,17 +608,16 @@ static const tic_hdr_t *built_in_tokz_esc =
  *
  **************************************************************************** */
 
-void init_tokz_esc_vocab ( void )
+void init_tokz_esc_vocab(void)
 {
-    static const int tokz_esc_vocab_max_indx =
-	 sizeof(tokz_esc_vocab_tbl)/sizeof(tic_hdr_t) ;
+	static const int tokz_esc_vocab_max_indx =
+	    sizeof(tokz_esc_vocab_tbl) / sizeof(tic_hdr_t);
 
-    in_tokz_esc = TRUE;
-    tokz_esc_vocab = NULL ;   /*  Belt-and-suspenders...  */
-    init_tic_vocab(tokz_esc_vocab_tbl,
-                       tokz_esc_vocab_max_indx,
-		           &tokz_esc_vocab );
-    in_tokz_esc = FALSE;
+	in_tokz_esc = TRUE;
+	tokz_esc_vocab = NULL;	/*  Belt-and-suspenders...  */
+	init_tic_vocab(tokz_esc_vocab_tbl,
+		       tokz_esc_vocab_max_indx, &tokz_esc_vocab);
+	in_tokz_esc = FALSE;
 }
 
 /* **************************************************************************
@@ -648,10 +639,9 @@ void init_tokz_esc_vocab ( void )
 
 tic_hdr_t *lookup_tokz_esc(char *name)
 {
-    tic_hdr_t *retval = lookup_tic_entry( name, tokz_esc_vocab );
-    return ( retval );
+	tic_hdr_t *retval = lookup_tic_entry(name, tokz_esc_vocab);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -680,10 +670,9 @@ tic_hdr_t *lookup_tokz_esc(char *name)
 
 bool create_tokz_esc_alias(char *new_name, char *old_name)
 {
-    bool retval = create_tic_alias( new_name, old_name, &tokz_esc_vocab );
-    return ( retval );
+	bool retval = create_tic_alias(new_name, old_name, &tokz_esc_vocab);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -709,9 +698,9 @@ bool create_tokz_esc_alias(char *new_name, char *old_name)
  *
  **************************************************************************** */
 
-void reset_tokz_esc( void )
+void reset_tokz_esc(void)
 {
-    reset_tic_vocab( &tokz_esc_vocab, (tic_hdr_t *)built_in_tokz_esc);
+	reset_tic_vocab(&tokz_esc_vocab, (tic_hdr_t *) built_in_tokz_esc);
 }
 
 /* **************************************************************************
@@ -735,8 +724,8 @@ void reset_tokz_esc( void )
  *
  **************************************************************************** */
 
-void pop_next_fcode( void)
+void pop_next_fcode(void)
 {
-   tic_param_t dummy_param;
-   tokz_esc_next_fcode( dummy_param);
+	tic_param_t dummy_param;
+	tokz_esc_next_fcode(dummy_param);
 }

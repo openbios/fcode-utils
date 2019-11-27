@@ -32,7 +32,7 @@
  *      (C) Copyright 2005 IBM Corporation.  All Rights Reserved.
  *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
  **************************************************************************** */
- 
+
 #include "types.h"
 
 /* **************************************************************************
@@ -51,11 +51,10 @@
  **************************************************************************** */
 
 typedef struct {
-    u8  format;
-    u8  checksum[2];  /* [0] = Hi byte, [1] = Lo */
-    u8  length[4];    /* [0] = Hi, [1] = Hi-mid, [2] = Lo-mid, [3] = Lo  */
+	u8 format;
+	u8 checksum[2];		/* [0] = Hi byte, [1] = Lo */
+	u8 length[4];		/* [0] = Hi, [1] = Hi-mid, [2] = Lo-mid, [3] = Lo  */
 } fcode_header_t;
-
 
 /* **************************************************************************
  *          Macro Name:   STRING_LEN_MAX
@@ -73,7 +72,6 @@ typedef struct {
  **************************************************************************** */
 
 #define STRING_LEN_MAX    255
-
 
 /* **************************************************************************
  *          Macro Name:   GET_BUF_MAX
@@ -93,7 +91,6 @@ typedef struct {
 
 #define GET_BUF_MAX    1024
 
-
 /* ************************************************************************** *
  *
  *      Global Variables Exported
@@ -109,17 +106,17 @@ extern unsigned int pci_hdr_end_ob_off;
  *
  **************************************************************************** */
 
-void  emit_fcode(u16 tok);
-void  user_emit_byte(u8 data);
+void emit_fcode(u16 tok);
+void user_emit_byte(u8 data);
 
-void  emit_offset(s16 offs);
-void  emit_string(u8 *string, signed int cnt);
-void  emit_fcodehdr(const char *starter_name);
-void  finish_fcodehdr(void);
-void  emit_pcihdr(void);
-void  finish_pcihdr(void);
+void emit_offset(s16 offs);
+void emit_string(u8 * string, signed int cnt);
+void emit_fcodehdr(const char *starter_name);
+void finish_fcodehdr(void);
+void emit_pcihdr(void);
+void finish_pcihdr(void);
 void finish_headers(void);
-void  emit_end0(void);
-void  emit_literal(u32 num);
+void emit_end0(void);
+void emit_literal(u32 num);
 
-#endif   /* _TOKE_EMIT_H */
+#endif /* _TOKE_EMIT_H */

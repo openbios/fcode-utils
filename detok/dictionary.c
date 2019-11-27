@@ -75,9 +75,9 @@ char *lookup_token(u16 number)
  *
  **************************************************************************** */
 
-void link_token( token_t *curr_token)
+void link_token(token_t * curr_token)
 {
-	curr_token->prev  = dictionary;
+	curr_token->prev = dictionary;
 
 	dictionary = curr_token;
 }
@@ -134,9 +134,9 @@ void add_token(u16 number, char *name)
 	}
 
 	curr->name = name;
-	curr->fcode=number;
+	curr->fcode = number;
 
-	link_token( curr);
+	link_token(curr);
 
 	if (check_tok_seq) {
 		/*  Error-check, but not for first time.  */
@@ -145,11 +145,13 @@ void add_token(u16 number, char *name)
 			last_defined_token = number;
 		} else {
 			if (number <= last_defined_token) {
-				printremark("Warning:  New token # might overlap "
-						"previously assigned token #(s).");
+				printremark
+				    ("Warning:  New token # might overlap "
+				     "previously assigned token #(s).");
 			} else {
-				printremark("Warning:  New token # out of sequence with "
-				     		"previously assigned token #(s).");
+				printremark
+				    ("Warning:  New token # out of sequence with "
+				     "previously assigned token #(s).");
 				/*  It's increasing; update it.  */
 				last_defined_token = number;
 			}
@@ -546,8 +548,7 @@ token_t detok_table[] = {
 	TOKEN_ENTRY(0x254, "xwsplit"),
 };
 
-static const int dictionary_indx_max =
-    (sizeof(detok_table) / sizeof(token_t));
+static const int dictionary_indx_max = (sizeof(detok_table) / sizeof(token_t));
 
 static token_t *dictionary_reset_position;
 

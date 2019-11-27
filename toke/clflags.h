@@ -92,14 +92,12 @@
 
 #include "types.h"
 
-typedef struct cl_flag
-    {
-	char             *clflag_name;
-	bool             *flag_var;
-	char             *clflag_tabs;
-	char             *clflag_expln;
-    }  cl_flag_t ;
-
+typedef struct cl_flag {
+	char *clflag_name;
+	bool *flag_var;
+	char *clflag_tabs;
+	char *clflag_expln;
+} cl_flag_t;
 
 /* **************************************************************************
  *
@@ -144,4 +142,4 @@ void list_cl_flag_settings(void);
 void save_cl_flags(void);
 void reset_cl_flags(void);
 
-#endif   /*  _TOKE_CLFLAGS_H    */
+#endif /*  _TOKE_CLFLAGS_H    */

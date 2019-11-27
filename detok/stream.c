@@ -77,7 +77,6 @@ u8 *indata;
 static u8 *fc_start;
 static bool pci_image_found = FALSE;
 
-
 int init_stream(char *name)
 {
 	FILE *infile;
@@ -124,7 +123,6 @@ void init_fcode_block(void)
 	linenum = 1;
 }
 
-
 void close_stream(void)
 {
 	free(indata);
@@ -133,14 +131,13 @@ void close_stream(void)
 
 int get_streampos(void)
 {
-	return (int) (pc - fc_start);
+	return (int)(pc - fc_start);
 }
 
 void set_streampos(int pos)
 {
 	pc = fc_start + pos;
 }
-
 
 /* **************************************************************************
  *
@@ -239,7 +236,6 @@ static u8 *get_bytes(int nbytes)
 	return retval;
 }
 
-
 /* **************************************************************************
  *
  *       Function name:  more_to_go
@@ -254,7 +250,6 @@ bool more_to_go(void)
 	retval = INVERSE(pc == max);
 	return retval;
 }
-
 
 /* **************************************************************************
  *
@@ -359,11 +354,10 @@ u8 *get_string(u8 * len)
 	u8 *retval;
 
 	*len = get_num8();
-	retval = get_bytes((int) *len);
+	retval = get_bytes((int)*len);
 
 	return retval;
 }
-
 
 /* **************************************************************************
  *
@@ -464,7 +458,6 @@ u16 calc_checksum(void)
 	pc = save_pc;
 	return retval;
 }
-
 
 /* **************************************************************************
  *

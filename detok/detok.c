@@ -60,12 +60,12 @@ bool show_offsets = FALSE;
  *       TRUE preceding error-exit   */
 static void print_copyright(bool is_error)
 {
-	typedef void (*vfunct) ();	/*  Pointer to function returning void  */
+	typedef void (*vfunct)();	/*  Pointer to function returning void  */
 	vfunct pfunct;
 	char buffr[512];
 
 	sprintf(buffr,
-		"Welcome to detok - FCode detokenizer v" DETOK_VERSION "\n" 
+		"Welcome to detok - FCode detokenizer v" DETOK_VERSION "\n"
 		CORE_COPYR "\n" IBM_COPYR "\n"
 		"Written by Stefan Reinauer\n"
 		"This program is free software; you may redistribute it "
@@ -100,13 +100,13 @@ int main(int argc, char **argv)
 #ifdef __GLIBC__
 		int option_index = 0;
 		static struct option long_options[] = {
-			{"verbose", 0, 0, 'v'},
-			{"help", 0, 0, 'h'},
-			{"all", 0, 0, 'a'},
-			{"linenumbers", 0, 0, 'n'},
-			{"offsets", 0, 0, 'o'},
-			{"fcodes", 1, 0, 'f'},
-			{0, 0, 0, 0}
+			{ "verbose", 0, 0, 'v' },
+			{ "help", 0, 0, 'h' },
+			{ "all", 0, 0, 'a' },
+			{ "linenumbers", 0, 0, 'n' },
+			{ "offsets", 0, 0, 'o' },
+			{ "fcodes", 1, 0, 'f' },
+			{ 0, 0, 0, 0 }
 		};
 
 		c = getopt_long(argc, argv, optstring,
@@ -190,4 +190,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-

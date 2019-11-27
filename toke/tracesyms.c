@@ -97,7 +97,6 @@
  *
  **************************************************************************** */
 
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -122,7 +121,6 @@ int split_alias_message = INFO;
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Internal (Static) Structures:
@@ -135,8 +133,8 @@ int split_alias_message = INFO;
  **************************************************************************** */
 
 typedef struct trace_entry {
-      char *tracee;
-      struct trace_entry *next;
+	char *tracee;
+	struct trace_entry *next;
 } trace_entry_t;
 
 static trace_entry_t *trace_list = NULL;
@@ -180,23 +178,21 @@ static bool tracing_symbols = FALSE;
  *
  **************************************************************************** */
 
-void add_to_trace_list( char *trace_symb)
+void add_to_trace_list(char *trace_symb)
 {
-    trace_entry_t *new_t_l_entry = safe_malloc( sizeof( trace_entry_t),
-        "adding to trace-list");
-    new_t_l_entry->tracee = strdup( trace_symb);
-    new_t_l_entry->next = NULL;
+	trace_entry_t *new_t_l_entry = safe_malloc(sizeof(trace_entry_t),
+						   "adding to trace-list");
+	new_t_l_entry->tracee = strdup(trace_symb);
+	new_t_l_entry->next = NULL;
 
-    if ( trace_list != NULL )
-    {
-	trace_list_last->next = new_t_l_entry;
-    }else{
-    trace_list = new_t_l_entry;
-	tracing_symbols = TRUE;
-    }
-    trace_list_last = new_t_l_entry;
+	if (trace_list != NULL) {
+		trace_list_last->next = new_t_l_entry;
+	} else {
+		trace_list = new_t_l_entry;
+		tracing_symbols = TRUE;
+	}
+	trace_list_last = new_t_l_entry;
 }
-
 
 /* **************************************************************************
  *
@@ -215,25 +211,21 @@ void add_to_trace_list( char *trace_symb)
  *
  **************************************************************************** */
 
-bool is_on_trace_list( char *symb_name)
+bool is_on_trace_list(char *symb_name)
 {
-    bool retval = FALSE;
-    if ( tracing_symbols )
-    {
-    trace_entry_t *test_entry = trace_list;
-    while ( test_entry != NULL )
-    {
-        if ( strcasecmp( symb_name, test_entry->tracee) == 0 )
-	{
-	    retval = TRUE;
-	    break;
+	bool retval = FALSE;
+	if (tracing_symbols) {
+		trace_entry_t *test_entry = trace_list;
+		while (test_entry != NULL) {
+			if (strcasecmp(symb_name, test_entry->tracee) == 0) {
+				retval = TRUE;
+				break;
+			}
+			test_entry = test_entry->next;
+		}
 	}
-	    test_entry = test_entry->next;
-	}
-    }
-    return ( retval );
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -267,13 +259,12 @@ bool is_on_trace_list( char *symb_name)
  *
  **************************************************************************** */
 
-void tracing_fcode( char *fc_phrase_buff, u16 fc_token_num)
+void tracing_fcode(char *fc_phrase_buff, u16 fc_token_num)
 {
-    if ( fc_token_num > 0 )
-    {
-	sprintf( fc_phrase_buff,
-		    " (FCode token = 0x%03x)", fc_token_num);
-    }
+	if (fc_token_num > 0) {
+		sprintf(fc_phrase_buff,
+			" (FCode token = 0x%03x)", fc_token_num);
+	}
 }
 
 /* **************************************************************************
@@ -333,109 +324,96 @@ void tracing_fcode( char *fc_phrase_buff, u16 fc_token_num)
  *
  **************************************************************************** */
 
-void trace_creation( tic_hdr_t *trace_entry,
-                         char *nu_name,
-			     bool is_global)
+void trace_creation(tic_hdr_t * trace_entry, char *nu_name, bool is_global)
 {
-    char  fc_token_display[TRACING_FCODE_LENGTH] = "";
-    char *head_ness = "";
-    char *defr_name = "" ;
-    char *defr_phrase = "" ;
-    char *with_scope = "" ;
-    bool def_is_local = BOOLVAL( trace_entry->fword_defr == LOCAL_VAL);
-    bool creating_alias = BOOLVAL( nu_name != NULL );
+	char fc_token_display[TRACING_FCODE_LENGTH] = "";
+	char *head_ness = "";
+	char *defr_name = "";
+	char *defr_phrase = "";
+	char *with_scope = "";
+	bool def_is_local = BOOLVAL(trace_entry->fword_defr == LOCAL_VAL);
+	bool creating_alias = BOOLVAL(nu_name != NULL);
 
-    if ( creating_alias )
-    {
-	head_ness = "n";
-	split_alias_message = TRACER;
-    }
-
-    if ( in_tokz_esc )
-    {
-	with_scope = in_tkz_esc_mode;
-    }else{
-	if ( ! def_is_local )
-	{
-	    if ( is_global )
-	    {
-		with_scope = "with Global scope.\n";
-	    }else{
-		with_scope = in_what_node( current_device_node);
-	    }
+	if (creating_alias) {
+		head_ness = "n";
+		split_alias_message = TRACER;
 	}
 
-	if ( trace_entry->is_token )
-	{
-	    tracing_fcode( fc_token_display,
-		               (u16)trace_entry->pfield.deflt_elem );
-	    /*   Headered-ness only applies to FCode definitions  */
-	    /*   But not to aliases to FCode definitions          */
-	    if ( ! creating_alias )
-	    {
-		switch ( hdr_flag )
-		{
-		    case FLAG_HEADERS:
-			head_ness = " Headered";
-			break;
-
-		    case FLAG_EXTERNAL:
-			head_ness = "n External";
-			break;
-
-		    default:  /*   FLAG_HEADERLESS   */
-			head_ness = " Headerless";
+	if (in_tokz_esc) {
+		with_scope = in_tkz_esc_mode;
+	} else {
+		if (!def_is_local) {
+			if (is_global) {
+				with_scope = "with Global scope.\n";
+			} else {
+				with_scope = in_what_node(current_device_node);
+			}
 		}
-	    }
+
+		if (trace_entry->is_token) {
+			tracing_fcode(fc_token_display,
+				      (u16) trace_entry->pfield.deflt_elem);
+			/*   Headered-ness only applies to FCode definitions  */
+			/*   But not to aliases to FCode definitions          */
+			if (!creating_alias) {
+				switch (hdr_flag) {
+				case FLAG_HEADERS:
+					head_ness = " Headered";
+					break;
+
+				case FLAG_EXTERNAL:
+					head_ness = "n External";
+					break;
+
+				default:	/*   FLAG_HEADERLESS   */
+					head_ness = " Headerless";
+				}
+			}
+		}
+
 	}
 
-    }
-
-
-    if ( definer_name(trace_entry->fword_defr, &defr_name) )
-    {
-	defr_phrase = wh_defined;
-    }else{
-	/*  Even if we don't have a Type for the "old" word
-	 *      we still have its scope.  If the "new" word's
-	 *      scope is different, the "split-alias message"
-	 *      will take care of it.
-	 */
-	if ( creating_alias )
-	{
-	    defr_phrase = ", which is defined" ;
+	if (definer_name(trace_entry->fword_defr, &defr_name)) {
+		defr_phrase = wh_defined;
+	} else {
+		/*  Even if we don't have a Type for the "old" word
+		 *      we still have its scope.  If the "new" word's
+		 *      scope is different, the "split-alias message"
+		 *      will take care of it.
+		 */
+		if (creating_alias) {
+			defr_phrase = ", which is defined";
+		}
 	}
-    }
 
-    if ( creating_alias )
-    {
-	/*
-	 *         Creating <new-name> as a{n External,Headered,Headerless} 
-	 *             ALIAS to <old-name> <(if is_single:FCode Token = xxx)>,
-	 *             [which is defined as a <Type> <with scope>]
-	 */
-	tokenization_error(TRACER,
-	    "Creating %s"            /*  nu_name                       */
-	    " as a%s ALIAS to %s"    /*  head_ness  trace_entry->name  */
-	    "%s"                     /*  fc_token_display              */
-	    "%s%s "                  /*  defr_phrase defr_name         */
-	    "%s",                    /*  with_scope  */
-	    nu_name, head_ness, trace_entry->name,
-	    fc_token_display, defr_phrase, defr_name, with_scope );
-    }else{
-	/*
-	 *         Creating <name> <(if is_single:FCode Token = xxx)>
-	 *             as a{n External,Headered,Headerless} <Type>
-	 *             [ <with scope> ]
-	 */
-	tokenization_error(TRACER,
-	    "Creating %s"       /*  trace_entry->name     */
-	    "%s"                /*  fc_token_display      */
-	    " as a%s %s "       /*  head_ness  defr_name  */
-	    "%s",               /*  with_scope         */
-	    trace_entry->name,
-	    fc_token_display, head_ness, defr_name, with_scope );
-    }
+	if (creating_alias) {
+		/*
+		 *         Creating <new-name> as a{n External,Headered,Headerless} 
+		 *             ALIAS to <old-name> <(if is_single:FCode Token = xxx)>,
+		 *             [which is defined as a <Type> <with scope>]
+		 */
+		tokenization_error(TRACER, "Creating %s"	/*  nu_name                       */
+				   " as a%s ALIAS to %s"	/*  head_ness  trace_entry->name  */
+				   "%s"	/*  fc_token_display              */
+				   "%s%s "	/*  defr_phrase defr_name         */
+				   "%s",	/*  with_scope  */
+				   nu_name, head_ness, trace_entry->name,
+				   fc_token_display, defr_phrase, defr_name,
+				   with_scope);
+	} else {
+		/*
+		 *         Creating <name> <(if is_single:FCode Token = xxx)>
+		 *             as a{n External,Headered,Headerless} <Type>
+		 *             [ <with scope> ]
+		 */
+		tokenization_error(TRACER, "Creating %s"	/*  trace_entry->name     */
+				   "%s"	/*  fc_token_display      */
+				   " as a%s %s "	/*  head_ness  defr_name  */
+				   "%s",	/*  with_scope         */
+				   trace_entry->name,
+				   fc_token_display, head_ness, defr_name,
+				   with_scope);
+	}
 	/*
 	 *     The <with scope> phrase is:
 	 *         If we are in Tokz-Esc mode, "in Tokenizer-Escape mode".
@@ -446,19 +424,15 @@ void trace_creation( tic_hdr_t *trace_entry,
 	 *         Otherwise, the identification of the current device-node.
 	 */
 
-
-    if ( ! in_tokz_esc )
-    {
-	if ( def_is_local )
-	{
-	    in_last_colon( TRUE);
-	}else{
-	    show_node_start();
+	if (!in_tokz_esc) {
+		if (def_is_local) {
+			in_last_colon(TRUE);
+		} else {
+			show_node_start();
+		}
 	}
-    }
 
 }
-
 
 /* **************************************************************************
  *
@@ -482,36 +456,31 @@ void trace_creation( tic_hdr_t *trace_entry,
  *
  **************************************************************************** */
 
-void trace_create_failure( char *new_name, char *old_name, u16 fc_tokn)
+void trace_create_failure(char *new_name, char *old_name, u16 fc_tokn)
 {
-    bool not_alias   = BOOLVAL( old_name == NULL );
-    bool do_it       = is_on_trace_list( new_name);
+	bool not_alias = BOOLVAL(old_name == NULL);
+	bool do_it = is_on_trace_list(new_name);
 
-    if ( ( ! do_it ) && ( ! not_alias ) )
-    {
-        do_it       = is_on_trace_list( old_name);
-    }
-
-    if ( do_it )
-    {
-	char  fc_token_display[TRACING_FCODE_LENGTH] = "";
-	char *as_alias   = not_alias ? "" : " as an ALIAS to ";
-	char *alias_name = not_alias ? "" : old_name;
-
-	if ( fc_tokn > 0 )
-	{
-	   tracing_fcode( fc_token_display, fc_tokn);
+	if ((!do_it) && (!not_alias)) {
+		do_it = is_on_trace_list(old_name);
 	}
-	tokenization_error(TRACER, 
-		"Failed to create %s"          /*  new_name          */
-		"%s"                           /*  fc_token_display  */
-		"%s"                           /*  as_alias          */
-		"%s\n",                        /*  alias_name        */
-		new_name, fc_token_display,
-		    as_alias, alias_name);
-    }
-}
 
+	if (do_it) {
+		char fc_token_display[TRACING_FCODE_LENGTH] = "";
+		char *as_alias = not_alias ? "" : " as an ALIAS to ";
+		char *alias_name = not_alias ? "" : old_name;
+
+		if (fc_tokn > 0) {
+			tracing_fcode(fc_token_display, fc_tokn);
+		}
+		tokenization_error(TRACER, "Failed to create %s"	/*  new_name          */
+				   "%s"	/*  fc_token_display  */
+				   "%s"	/*  as_alias          */
+				   "%s\n",	/*  alias_name        */
+				   new_name, fc_token_display,
+				   as_alias, alias_name);
+	}
+}
 
 /* **************************************************************************
  *
@@ -537,13 +506,13 @@ void trace_create_failure( char *new_name, char *old_name, u16 fc_tokn)
  *
  **************************************************************************** */
 
-void traced_name_error( char *trace_name)
+void traced_name_error(char *trace_name)
 {
-    if ( is_on_trace_list( trace_name ) )
-    {
-	tokenization_error(TRACER, "Attempt to invoke (undefined) %s.\n",
-	     trace_name);
-    }
+	if (is_on_trace_list(trace_name)) {
+		tokenization_error(TRACER,
+				   "Attempt to invoke (undefined) %s.\n",
+				   trace_name);
+	}
 }
 
 /* **************************************************************************
@@ -576,36 +545,32 @@ void traced_name_error( char *trace_name)
  *
  **************************************************************************** */
 
-void invoking_traced_name( tic_hdr_t *trace_entry)
+void invoking_traced_name(tic_hdr_t * trace_entry)
 {
 
-    char  fc_token_display[TRACING_FCODE_LENGTH] = "";
-    char *defr_name   = "" ;
-    char *defr_phrase = "" ;
-    char *defr_space  = "" ;
+	char fc_token_display[TRACING_FCODE_LENGTH] = "";
+	char *defr_name = "";
+	char *defr_phrase = "";
+	char *defr_space = "";
 
-    if ( trace_entry->is_token )
-    {
-	tracing_fcode( fc_token_display,
-		           (u16)trace_entry->pfield.deflt_elem );
-    }
+	if (trace_entry->is_token) {
+		tracing_fcode(fc_token_display,
+			      (u16) trace_entry->pfield.deflt_elem);
+	}
 
-    if ( definer_name(trace_entry->fword_defr, &defr_name) )
-    {
-	defr_phrase = " defined as a";
-	defr_space  = " " ;
+	if (definer_name(trace_entry->fword_defr, &defr_name)) {
+		defr_phrase = " defined as a";
+		defr_space = " ";
 
-    }
+	}
 
-    tokenization_error(TRACER,
-	"Invoking %s"                  /*  <name>                      */
-	"%s"                           /*  fc_token_display            */
-	"%s%s"                         /*  defr_phrase  defr_space     */
-	"%s.\n",                       /*  defr_name                   */
-	trace_entry->name,
-	fc_token_display,
-	defr_phrase, defr_space,
-	defr_name);
+	tokenization_error(TRACER, "Invoking %s"	/*  <name>                      */
+			   "%s"	/*  fc_token_display            */
+			   "%s%s"	/*  defr_phrase  defr_space     */
+			   "%s.\n",	/*  defr_name                   */
+			   trace_entry->name,
+			   fc_token_display,
+			   defr_phrase, defr_space, defr_name);
 
 }
 
@@ -633,17 +598,14 @@ void invoking_traced_name( tic_hdr_t *trace_entry)
  *
  **************************************************************************** */
 
-void handle_invocation( tic_hdr_t *trace_entry)
+void handle_invocation(tic_hdr_t * trace_entry)
 {
-    if ( trace_entry != NULL )
-    {
-	if ( trace_entry->tracing)
-	{
-	    invoking_traced_name( trace_entry);
+	if (trace_entry != NULL) {
+		if (trace_entry->tracing) {
+			invoking_traced_name(trace_entry);
+		}
 	}
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -666,21 +628,18 @@ void handle_invocation( tic_hdr_t *trace_entry)
  *
  **************************************************************************** */
 
-void show_trace_list( void)
+void show_trace_list(void)
 {
-    if ( tracing_symbols )
-    {
-	trace_entry_t *test_entry;
-	printf("\nTracing these symbols:");
-	for ( test_entry = trace_list;
-	      test_entry != NULL;
-	      test_entry = test_entry->next )
-	{
-            printf("   %s", test_entry->tracee);
-	    
-	}	
-	printf("\n");
-    }
+	if (tracing_symbols) {
+		trace_entry_t *test_entry;
+		printf("\nTracing these symbols:");
+		for (test_entry = trace_list;
+		     test_entry != NULL; test_entry = test_entry->next) {
+			printf("   %s", test_entry->tracee);
+
+		}
+		printf("\n");
+	}
 
 }
 
@@ -712,29 +671,26 @@ void show_trace_list( void)
  *                          is a built-in {word|<Type>} [in Tokz-Esc mode]
  *
  **************************************************************************** */
- 
-void trace_builtin( tic_hdr_t *trace_entry)
+
+void trace_builtin(tic_hdr_t * trace_entry)
 {
-    if (is_on_trace_list( trace_entry->name ) )
-    {
-	char  fc_token_display[TRACING_FCODE_LENGTH] = "";
-	char *defr_name = "word";
-	char *ws_space = in_tokz_esc ? " " : "";
-	char *with_scope = in_tokz_esc ? in_tkz_esc_mode  : ".\n";
-	if ( trace_entry->is_token )
-	{
-	    tracing_fcode( fc_token_display,
-		           (u16)trace_entry->pfield.deflt_elem );
+	if (is_on_trace_list(trace_entry->name)) {
+		char fc_token_display[TRACING_FCODE_LENGTH] = "";
+		char *defr_name = "word";
+		char *ws_space = in_tokz_esc ? " " : "";
+		char *with_scope = in_tokz_esc ? in_tkz_esc_mode : ".\n";
+		if (trace_entry->is_token) {
+			tracing_fcode(fc_token_display,
+				      (u16) trace_entry->pfield.deflt_elem);
+		}
+		definer_name(trace_entry->fword_defr, &defr_name);
+		trace_entry->tracing = TRUE;
+		tokenization_error(TRACER, "%s"	/*  <name>                 */
+				   "%s "	/*  fc_token_display       */
+				   "is a built-in %s"	/*  defr_name              */
+				   "%s%s",	/*  ws_space with_scope    */
+				   trace_entry->name,
+				   fc_token_display, defr_name, ws_space,
+				   with_scope);
 	}
-	definer_name(trace_entry->fword_defr, &defr_name);
-	trace_entry->tracing = TRUE;
-	tokenization_error(TRACER,
-	    "%s"                             /*  <name>                 */
-	    "%s "                            /*  fc_token_display       */
-	    "is a built-in %s"               /*  defr_name              */
-	    "%s%s",                          /*  ws_space with_scope    */
-	    trace_entry->name,
-	    fc_token_display, defr_name, ws_space, with_scope );
-    }
 }
- 

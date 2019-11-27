@@ -66,7 +66,6 @@
 #include "errhandler.h"
 #include "strsubvocab.h"
 
-
 /* **************************************************************************
  *
  *      Function name:  add_str_sub_entry
@@ -105,21 +104,20 @@
  *
  **************************************************************************** */
 
-void add_str_sub_entry( char *ename,
-                            char *subst_str,
-			        str_sub_vocab_t **str_sub_vocab )
+void add_str_sub_entry(char *ename,
+		       char *subst_str, str_sub_vocab_t ** str_sub_vocab)
 {
-    str_sub_vocab_t *new_entry;
+	str_sub_vocab_t *new_entry;
 
-    new_entry = safe_malloc(sizeof(str_sub_vocab_t), "adding str_sub_entry");
-    new_entry->name   =  ename;
-    new_entry->alias  =  subst_str;
-    new_entry->next   = *str_sub_vocab;
+	new_entry =
+	    safe_malloc(sizeof(str_sub_vocab_t), "adding str_sub_entry");
+	new_entry->name = ename;
+	new_entry->alias = subst_str;
+	new_entry->next = *str_sub_vocab;
 
-    *str_sub_vocab = new_entry;
+	*str_sub_vocab = new_entry;
 
 }
-
 
 /* **************************************************************************
  *
@@ -138,20 +136,18 @@ void add_str_sub_entry( char *ename,
  *
  **************************************************************************** */
 
-str_sub_vocab_t *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab )
+str_sub_vocab_t *lookup_str_sub(char *tname, str_sub_vocab_t * str_sub_vocab)
 {
-    str_sub_vocab_t *curr;
-    str_sub_vocab_t *retval = NULL;
+	str_sub_vocab_t *curr;
+	str_sub_vocab_t *retval = NULL;
 
-    for (curr = str_sub_vocab ; curr != NULL ; curr=curr->next)
-    {
-        if ( strcasecmp(tname, curr->name) == 0 )
-	{
-	    retval = curr;
-	    break;
+	for (curr = str_sub_vocab; curr != NULL; curr = curr->next) {
+		if (strcasecmp(tname, curr->name) == 0) {
+			retval = curr;
+			break;
+		}
 	}
-    }
-    return ( retval ) ;
+	return (retval);
 }
 
 /* **************************************************************************
@@ -170,17 +166,15 @@ str_sub_vocab_t *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab )
  *
  **************************************************************************** */
 
-bool exists_in_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab )
+bool exists_in_str_sub(char *tname, str_sub_vocab_t * str_sub_vocab)
 {
-    bool retval = FALSE;
-    str_sub_vocab_t *found = NULL;
+	bool retval = FALSE;
+	str_sub_vocab_t *found = NULL;
 
-    found = lookup_str_sub( tname, str_sub_vocab );
-    if ( found != NULL )
-    {
-        retval = TRUE;
-    }
-    return ( retval );
+	found = lookup_str_sub(tname, str_sub_vocab);
+	if (found != NULL) {
+		retval = TRUE;
+	}
+	return (retval);
 
 }
-

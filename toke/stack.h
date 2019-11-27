@@ -65,9 +65,9 @@ long dget(void);
 void clear_stack(void);
 void init_stack(void);
 
-bool min_stack_depth(int mindep);   /*  TRUE if no error  */
+bool min_stack_depth(int mindep);	/*  TRUE if no error  */
 long stackdepth(void);
 void swap(void);
 void two_swap(void);
 
-#endif   /*  _TOKE_STACK_H    */
+#endif /*  _TOKE_STACK_H    */

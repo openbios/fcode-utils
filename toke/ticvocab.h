@@ -157,36 +157,34 @@
  **************************************************************************** */
 
 #define TIC_P_DEFLT_TYPE  long
-typedef union tic_param
-    {
-	TIC_P_DEFLT_TYPE  deflt_elem ;  /*  The "default element" aspect.  */
-	long              long_val ;    /*  Explicitly specifying "long"   */
-	fwtoken           fw_token ;    /*  FWord Token                    */
-	bool             *bool_ptr ;    /*  Pointer to a boolean variable  */
-	char             *chr_ptr  ;    /*  Pointer to a character string  */
+typedef union tic_param {
+	TIC_P_DEFLT_TYPE deflt_elem;	/*  The "default element" aspect.  */
+	long long_val;		/*  Explicitly specifying "long"   */
+	fwtoken fw_token;	/*  FWord Token                    */
+	bool *bool_ptr;		/*  Pointer to a boolean variable  */
+	char *chr_ptr;		/*  Pointer to a character string  */
 
 	/*  The "character value" aspect behaves differently on big-
 	 *      versus little- -endian platforms (for initialization,
 	 *      anyway), so we cannot actually use it.
 	 *  Keep this commented-out, as a reminder.
 	 */
-     /* char             char_val ;    */
+	/* char             char_val ;    */
 	/*  We will recast "character value" as an integer.  */
 
-    } tic_param_t ;
+} tic_param_t;
 
-typedef struct tic_hdr
-    {
-        char             *name;
-	struct tic_hdr   *next;
-	void            (*funct)();      /*  Function for active processing  */
-	tic_param_t       pfield;
-	fwtoken           fword_defr;    /*  FWord Token of entry's Definer  */
-	bool              is_token;      /*  Is entry a single-token FCode?  */
-	void            (*ign_func)();   /*  Function in "Ignored" segment   */
-	int               pfld_size;
-	bool              tracing;       /*  TRUE if Invoc'n Msg required    */
-    }  tic_hdr_t ;
+typedef struct tic_hdr {
+	char *name;
+	struct tic_hdr *next;
+	void (*funct)();	/*  Function for active processing  */
+	tic_param_t pfield;
+	fwtoken fword_defr;	/*  FWord Token of entry's Definer  */
+	bool is_token;		/*  Is entry a single-token FCode?  */
+	void (*ign_func)();	/*  Function in "Ignored" segment   */
+	int pfld_size;
+	bool tracing;		/*  TRUE if Invoc'n Msg required    */
+} tic_hdr_t;
 
 /* **************************************************************************
  *
@@ -195,28 +193,25 @@ typedef struct tic_hdr
  **************************************************************************** */
 
 #define TIC_FWT_P_DEFLT_TYPE  fwtoken
-typedef union tic_fwt_param
-    {
-	TIC_FWT_P_DEFLT_TYPE  deflt_elem ;  /*  "Default element" aspect.  */
-	long              long_val ;    /*  Long integer                   */
-	fwtoken           fw_token ;    /*  Explicit FWord Token           */
-	bool             *bool_ptr ;    /*  Pointer to a boolean variable  */
-	char             *chr_ptr  ;    /*  Pointer to a character string  */
-    } tic_fwt_param_t ;
+typedef union tic_fwt_param {
+	TIC_FWT_P_DEFLT_TYPE deflt_elem;	/*  "Default element" aspect.  */
+	long long_val;		/*  Long integer                   */
+	fwtoken fw_token;	/*  Explicit FWord Token           */
+	bool *bool_ptr;		/*  Pointer to a boolean variable  */
+	char *chr_ptr;		/*  Pointer to a character string  */
+} tic_fwt_param_t;
 
-typedef struct tic_fwt_hdr
-    {
-        char               *name;
+typedef struct tic_fwt_hdr {
+	char *name;
 	struct tic_fwt_hdr *next;
-	void              (*funct)();    /*  Function for active processing  */
-	tic_fwt_param_t     pfield;
-	fwtoken             fword_defr;  /*  FWord Token of entry's Definer  */
-	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void              (*ign_func)(); /*  Function in "Ignored" segment   */
-	int                 pfld_size;
-	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
-    }  tic_fwt_hdr_t ;
-
+	void (*funct)();	/*  Function for active processing  */
+	tic_fwt_param_t pfield;
+	fwtoken fword_defr;	/*  FWord Token of entry's Definer  */
+	bool is_token;		/*  Is entry a single-token FCode?  */
+	void (*ign_func)();	/*  Function in "Ignored" segment   */
+	int pfld_size;
+	bool tracing;		/*  TRUE if Invoc'n Msg required    */
+} tic_fwt_hdr_t;
 
 /* **************************************************************************
  *
@@ -231,27 +226,25 @@ typedef struct tic_fwt_hdr
  **************************************************************************** */
 
 #define TIC_MAC_P_DEFLT_TYPE  char *
-typedef union tic_mac_param
-    {
-	TIC_MAC_P_DEFLT_TYPE  deflt_elem ;  /*  "Default element" aspect.  */
-	long              long_val ;    /*  Long integer                   */
-	fwtoken           fw_token ;    /*  FWord Token                    */
-	bool             *bool_ptr ;    /*  Pointer to a boolean variable  */
-	char            *chr_ptr ;      /*  Explicit Pointer to char str.  */
-    } tic_mac_param_t ;
+typedef union tic_mac_param {
+	TIC_MAC_P_DEFLT_TYPE deflt_elem;	/*  "Default element" aspect.  */
+	long long_val;		/*  Long integer                   */
+	fwtoken fw_token;	/*  FWord Token                    */
+	bool *bool_ptr;		/*  Pointer to a boolean variable  */
+	char *chr_ptr;		/*  Explicit Pointer to char str.  */
+} tic_mac_param_t;
 
-typedef struct tic_mac_hdr
-    {
-        char               *name;
+typedef struct tic_mac_hdr {
+	char *name;
 	struct tic_mac_hdr *next;
-	void              (*funct)();
-	tic_mac_param_t     pfield;
-	fwtoken             fword_defr;
-	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void              (*ign_func)();
-	int                 pfld_size;
-	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
-    }  tic_mac_hdr_t ;
+	void (*funct)();
+	tic_mac_param_t pfield;
+	fwtoken fword_defr;
+	bool is_token;		/*  Is entry a single-token FCode?  */
+	void (*ign_func)();
+	int pfld_size;
+	bool tracing;		/*  TRUE if Invoc'n Msg required    */
+} tic_mac_hdr_t;
 
 /* **************************************************************************
  *
@@ -261,29 +254,25 @@ typedef struct tic_mac_hdr
  **************************************************************************** */
 
 #define TIC_BOOL_P_DEFLT_TYPE  bool *
-typedef union tic_bool_param
-    {
-	TIC_BOOL_P_DEFLT_TYPE deflt_elem ;  /*  "Default element" aspect.  */
-	long              long_val ;    /*  Long integer                   */
-	fwtoken           fw_token ;    /*  FWord Token                    */
-	bool             *bool_ptr ;    /*  Explicit Ptr to boolean v'ble  */
-	char             *chr_ptr  ;    /*  Pointer to a character string  */
-    } tic_bool_param_t ;
+typedef union tic_bool_param {
+	TIC_BOOL_P_DEFLT_TYPE deflt_elem;	/*  "Default element" aspect.  */
+	long long_val;		/*  Long integer                   */
+	fwtoken fw_token;	/*  FWord Token                    */
+	bool *bool_ptr;		/*  Explicit Ptr to boolean v'ble  */
+	char *chr_ptr;		/*  Pointer to a character string  */
+} tic_bool_param_t;
 
-typedef struct tic_bool_hdr
-    {
-        char                *name;
+typedef struct tic_bool_hdr {
+	char *name;
 	struct tic_bool_hdr *next;
-	void               (*funct)();
-	tic_bool_param_t     pfield;
-	fwtoken              fword_defr;
-	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void               (*ign_func)();
-	int                  pfld_size;
-	bool                 tracing;    /*  TRUE if Invoc'n Msg required    */
-    }  tic_bool_hdr_t ;
-
-
+	void (*funct)();
+	tic_bool_param_t pfield;
+	fwtoken fword_defr;
+	bool is_token;		/*  Is entry a single-token FCode?  */
+	void (*ign_func)();
+	int pfld_size;
+	bool tracing;		/*  TRUE if Invoc'n Msg required    */
+} tic_bool_hdr_t;
 
 /* **************************************************************************
  *
@@ -313,7 +302,6 @@ typedef struct tic_bool_hdr
   { nam , (tic_hdr_t *)NULL , func ,   \
         { 0 }, UNSPECIFIED , FALSE , NULL , 0 , FALSE }
 
-
 /* **************************************************************************
  *          Macro Name:   NO_PARAM_IGN
  *                        Create an entry with an empty "param field"
@@ -329,7 +317,6 @@ typedef struct tic_bool_hdr
 #define NO_PARAM_IGN(nam, func )  \
   { nam , (tic_hdr_t *)NULL , func ,   \
         { 0 }, UNSPECIFIED , FALSE , func , 0 , FALSE }
-
 
 /* **************************************************************************
  *
@@ -358,7 +345,6 @@ typedef struct tic_bool_hdr
     { nam , (tic_hdr_t *)NULL , func ,  \
         { (TIC_P_DEFLT_TYPE)(pval) }, definr , is_tok , NULL , 0 , FALSE }
 
-
 /* **************************************************************************
  *          Macro Name:   DUALFUNC_TIC
  *                        Create an entry in the initial "Built-In" portion
@@ -386,7 +372,6 @@ typedef struct tic_bool_hdr
 #define DUFNC_FWT_PARM(nam, afunc, pval, ifunc, definr )  \
     { nam , (tic_fwt_hdr_t *)NULL , afunc ,  \
         { (TIC_FWT_P_DEFLT_TYPE)(pval) }, definr , FALSE , ifunc , 0 , FALSE }
-
 
 /* **************************************************************************
  *          Macro Name:   FWORD_TKN_TIC
@@ -451,7 +436,6 @@ typedef struct tic_bool_hdr
     { nam , (tic_mac_hdr_t *)NULL , func , { alias }, \
       MACRO_DEF , FALSE , NULL , 0 , FALSE }
 
-
 /* **************************************************************************
  *          Macro Name:   BUILTIN_BOOL_TIC
  *                        Create an entry in the initial "Built-In" portion
@@ -474,7 +458,6 @@ typedef struct tic_bool_hdr
     { nam , (tic_bool_hdr_t *)NULL , func , { &bool_vbl },   \
         COMMON_FWORD , FALSE , func , 0 , FALSE }
 
-
 /* **************************************************************************
  *
  *     Exported Variables and Function Prototypes the rest of the way...
@@ -483,23 +466,20 @@ typedef struct tic_bool_hdr
 
 extern tic_hdr_t *tic_found;
 
-void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
-                         int max_indx,
-			     tic_hdr_t **tic_vocab_ptr);
-void add_tic_entry( char *tname,
-                        void (*tfunct)(),
-                             TIC_P_DEFLT_TYPE tparam,
-                                 fwtoken fw_defr,
-				     int pfldsiz,
-                                         bool is_single,
-                                         void (*ign_fnc)(),
-                                             tic_hdr_t **tic_vocab );
-tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab );
-bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab );
-bool handle_tic_vocab( char *tname, tic_hdr_t *tic_vocab );
-bool create_split_alias( char *new_name, char *old_name,
-                              tic_hdr_t **src_vocab, tic_hdr_t **dest_vocab );
-bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab );
-void reset_tic_vocab( tic_hdr_t **tic_vocab, tic_hdr_t *reset_position );
+void init_tic_vocab(tic_hdr_t * tic_vocab_tbl,
+		    int max_indx, tic_hdr_t ** tic_vocab_ptr);
+void add_tic_entry(char *tname,
+		   void (*tfunct)(),
+		   TIC_P_DEFLT_TYPE tparam,
+		   fwtoken fw_defr,
+		   int pfldsiz,
+		   bool is_single, void(*ign_fnc)(), tic_hdr_t ** tic_vocab);
+tic_hdr_t *lookup_tic_entry(char *tname, tic_hdr_t * tic_vocab);
+bool exists_in_tic_vocab(char *tname, tic_hdr_t * tic_vocab);
+bool handle_tic_vocab(char *tname, tic_hdr_t * tic_vocab);
+bool create_split_alias(char *new_name, char *old_name,
+			tic_hdr_t ** src_vocab, tic_hdr_t ** dest_vocab);
+bool create_tic_alias(char *new_name, char *old_name, tic_hdr_t ** tic_vocab);
+void reset_tic_vocab(tic_hdr_t ** tic_vocab, tic_hdr_t * reset_position);
 
-#endif   /*  _TOKE_TICVOCAB_H    */
+#endif /*  _TOKE_TICVOCAB_H    */

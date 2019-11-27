@@ -132,7 +132,6 @@
 
 int control_stack_depth = 0;
 
-
 /* **************************************************************************
  *
  *              Internal Static Functions:
@@ -175,15 +174,14 @@ int control_stack_depth = 0;
  *       and constructed with a hint of mnemonic value in mind.
  *
  **************************************************************************** */
-                                 /*     Mnemonic:   */
-#define BEGIN_CSTAG  0xC57be916  /*  CST BEGIN      */
-#define IF_CSTAG     0xC57A901f  /*  CSTAG (0) IF   */
-#define WHILE_CSTAG  0xC573412e  /*  CST WHILE      */
-#define DO_CSTAG     0xC57A90d0  /*  CSTAG (0) DO   */
-#define CASE_CSTAG   0xC57Aca5e  /*  CSTA CASE      */
-#define OF_CSTAG     0xC57A90f0  /*  CSTAG OF (0)   */
-#define ENDOF_CSTAG  0xC57e6d0f  /*  CST ENDOF   */
-
+				 /*     Mnemonic:   */
+#define BEGIN_CSTAG  0xC57be916	/*  CST BEGIN      */
+#define IF_CSTAG     0xC57A901f	/*  CSTAG (0) IF   */
+#define WHILE_CSTAG  0xC573412e	/*  CST WHILE      */
+#define DO_CSTAG     0xC57A90d0	/*  CSTAG (0) DO   */
+#define CASE_CSTAG   0xC57Aca5e	/*  CSTA CASE      */
+#define OF_CSTAG     0xC57A90f0	/*  CSTAG OF (0)   */
+#define ENDOF_CSTAG  0xC57e6d0f	/*  CST ENDOF   */
 
 /* **************************************************************************
  *
@@ -284,14 +282,14 @@ int control_stack_depth = 0;
  **************************************************************************** */
 
 typedef struct cstag_group {
-    unsigned long cs_tag;
-    char *cs_inp_fil;
-    unsigned int cs_line_num;
-    unsigned int cs_abs_token_num;
-    char *cs_word;
-    bool cs_not_dup;
-    unsigned long cs_datum;
-    struct cstag_group *prev;
+	unsigned long cs_tag;
+	char *cs_inp_fil;
+	unsigned int cs_line_num;
+	unsigned int cs_abs_token_num;
+	char *cs_word;
+	bool cs_not_dup;
+	unsigned long cs_datum;
+	struct cstag_group *prev;
 } cstag_group_t;
 
 /* **************************************************************************
@@ -305,7 +303,7 @@ typedef struct cstag_group {
  *
  **************************************************************************** */
 
-static cstag_group_t *control_stack = NULL;   /*  "Top" of the "Stack"  */
+static cstag_group_t *control_stack = NULL;	/*  "Top" of the "Stack"  */
 
 /* **************************************************************************
  *
@@ -318,7 +316,7 @@ static cstag_group_t *control_stack = NULL;   /*  "Top" of the "Stack"  */
  *
  **************************************************************************** */
 
-static bool not_cs_underflow;  /*  No need to initialize.  */
+static bool not_cs_underflow;	/*  No need to initialize.  */
 
 /* **************************************************************************
  *
@@ -339,7 +337,6 @@ static bool not_cs_underflow;  /*  No need to initialize.  */
 
 static bool not_consuming_two = TRUE;
 static bool didnt_print_otl = TRUE;
-
 
 /* **************************************************************************
  *
@@ -376,24 +373,24 @@ static bool didnt_print_otl = TRUE;
  *
  **************************************************************************** */
 
-static void push_cstag( unsigned long cstag, unsigned long datum)
+static void push_cstag(unsigned long cstag, unsigned long datum)
 {
-    cstag_group_t *cs_temp;
+	cstag_group_t *cs_temp;
 
-    cs_temp = control_stack;
-    control_stack = safe_malloc( sizeof(cstag_group_t), "pushing CSTag");
+	cs_temp = control_stack;
+	control_stack = safe_malloc(sizeof(cstag_group_t), "pushing CSTag");
 
-    control_stack->cs_tag = cstag;
-    control_stack->cs_inp_fil = strdup(iname);
-    control_stack->cs_line_num = lineno;
-    control_stack->cs_abs_token_num = abs_token_no;
-    control_stack->cs_word = strdup(statbuf);
-    control_stack->cs_not_dup = TRUE;
-    control_stack->cs_datum = datum;
-    control_stack->prev = cs_temp;
+	control_stack->cs_tag = cstag;
+	control_stack->cs_inp_fil = strdup(iname);
+	control_stack->cs_line_num = lineno;
+	control_stack->cs_abs_token_num = abs_token_no;
+	control_stack->cs_word = strdup(statbuf);
+	control_stack->cs_not_dup = TRUE;
+	control_stack->cs_datum = datum;
+	control_stack->prev = cs_temp;
 
-    control_stack_depth++;
-    
+	control_stack_depth++;
+
 }
 
 /* **************************************************************************
@@ -426,21 +423,20 @@ static void push_cstag( unsigned long cstag, unsigned long datum)
  *
  **************************************************************************** */
 
-static void pop_cstag( void)
+static void pop_cstag(void)
 {
 
-    if ( control_stack != NULL )
-    {
-	cstag_group_t *cs_temp;
+	if (control_stack != NULL) {
+		cstag_group_t *cs_temp;
 
-	cs_temp = control_stack->prev;
-	free( control_stack->cs_word );
-	free( control_stack->cs_inp_fil );
-	free( control_stack );
-	control_stack = cs_temp;
+		cs_temp = control_stack->prev;
+		free(control_stack->cs_word);
+		free(control_stack->cs_inp_fil);
+		free(control_stack);
+		control_stack = cs_temp;
 
-	control_stack_depth--;
-    }
+		control_stack_depth--;
+	}
 }
 
 /* **************************************************************************
@@ -470,21 +466,21 @@ static void pop_cstag( void)
  *
  **************************************************************************** */
 
-static bool control_stack_size_test( int min_depth )
+static bool control_stack_size_test(int min_depth)
 {
-    bool retval = TRUE;
+	bool retval = TRUE;
 
-    if ( control_stack_depth < min_depth )
-    {
-	retval = FALSE;
-	tokenization_error ( TKERROR,
-		"Control-Stack underflow at %s", strupr(statbuf) );
-	in_last_colon( TRUE);
+	if (control_stack_depth < min_depth) {
+		retval = FALSE;
+		tokenization_error(TKERROR,
+				   "Control-Stack underflow at %s",
+				   strupr(statbuf));
+		in_last_colon(TRUE);
 
-	not_cs_underflow = FALSE;   /*  See expl'n early on in this file  */
-    }
+		not_cs_underflow = FALSE;	/*  See expl'n early on in this file  */
+	}
 
-    return( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -521,17 +517,17 @@ static bool control_stack_size_test( int min_depth )
  *
  **************************************************************************** */
 
-static void control_structure_mismatch( void )
+static void control_structure_mismatch(void)
 {
-    if ( control_stack->cs_not_dup || not_consuming_two )
-    {
-	tokenization_error ( TKERROR,
-	    "The %s is mismatched with the %s" ,
-		strupr(statbuf), strupr(control_stack->cs_word));
-	where_started( control_stack->cs_inp_fil, control_stack->cs_line_num );
-    }
+	if (control_stack->cs_not_dup || not_consuming_two) {
+		tokenization_error(TKERROR,
+				   "The %s is mismatched with the %s",
+				   strupr(statbuf),
+				   strupr(control_stack->cs_word));
+		where_started(control_stack->cs_inp_fil,
+			      control_stack->cs_line_num);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -579,29 +575,28 @@ static void control_structure_mismatch( void )
  *
  **************************************************************************** */
 
-static void offset_too_large( bool too_large_for_16 )
+static void offset_too_large(bool too_large_for_16)
 {
-    if ( control_stack->cs_not_dup || didnt_print_otl )
-    {
-	tokenization_error( TKERROR,
-	    "Branch offset is too large between %s and the %s" ,
-		strupr(statbuf), strupr(control_stack->cs_word));
-	where_started( control_stack->cs_inp_fil, control_stack->cs_line_num );
-	if ( INVERSE( offs16 ) )
-	{
-	    if ( too_large_for_16 )
-	    {
-		tokenization_error ( INFO,
-		    "Offset would be too large even if 16-bit offsets "
-			"were in effect.\n");
-	    }else{
-		tokenization_error ( INFO,
-		    "Offset might fit if 16-bit offsets "
-			"(e.g., fcode-version2) were used.\n" );
-	    }
+	if (control_stack->cs_not_dup || didnt_print_otl) {
+		tokenization_error(TKERROR,
+				   "Branch offset is too large between %s and the %s",
+				   strupr(statbuf),
+				   strupr(control_stack->cs_word));
+		where_started(control_stack->cs_inp_fil,
+			      control_stack->cs_line_num);
+		if (INVERSE(offs16)) {
+			if (too_large_for_16) {
+				tokenization_error(INFO,
+						   "Offset would be too large even if 16-bit offsets "
+						   "were in effect.\n");
+			} else {
+				tokenization_error(INFO,
+						   "Offset might fit if 16-bit offsets "
+						   "(e.g., fcode-version2) were used.\n");
+			}
+		}
 	}
-    }
-    didnt_print_otl = FALSE;
+	didnt_print_otl = FALSE;
 }
 
 /* **************************************************************************
@@ -638,29 +633,28 @@ static void offset_too_large( bool too_large_for_16 )
  *
  **************************************************************************** */
 
-static void emit_fc_offset( int fc_offset)
+static void emit_fc_offset(int fc_offset)
 {
-    int fc_offs_s16 = (s16)fc_offset;
-    int fc_offs_s8  =  (s8)fc_offset;
-    bool too_large_for_8  = BOOLVAL( fc_offset != fc_offs_s8 );
-    bool too_large_for_16 = BOOLVAL( fc_offset != fc_offs_s16);
+	int fc_offs_s16 = (s16) fc_offset;
+	int fc_offs_s8 = (s8) fc_offset;
+	bool too_large_for_8 = BOOLVAL(fc_offset != fc_offs_s8);
+	bool too_large_for_16 = BOOLVAL(fc_offset != fc_offs_s16);
 
-    if ( too_large_for_16 || ( INVERSE(offs16) && too_large_for_8 ) )
-    {
-	offset_too_large( too_large_for_16 );
-	if ( noerrors )
-	{
-	    int coded_as = offs16 ? (int)fc_offs_s16 : (int)fc_offs_s8 ;
-	    tokenization_error( WARNING,
-		"Actual offset is 0x%x (=dec %d), "
-		    "but it will be coded as 0x%x (=dec %d).\n",
-			fc_offset, fc_offset, coded_as, coded_as );
+	if (too_large_for_16 || (INVERSE(offs16) && too_large_for_8)) {
+		offset_too_large(too_large_for_16);
+		if (noerrors) {
+			int coded_as =
+			    offs16 ? (int)fc_offs_s16 : (int)fc_offs_s8;
+			tokenization_error(WARNING,
+					   "Actual offset is 0x%x (=dec %d), "
+					   "but it will be coded as 0x%x (=dec %d).\n",
+					   fc_offset, fc_offset, coded_as,
+					   coded_as);
+		}
 	}
-    }
 
-    emit_offset( fc_offs_s16 );
+	emit_offset(fc_offs_s16);
 }
-
 
 /* **************************************************************************
  *
@@ -723,29 +717,26 @@ static void emit_fc_offset( int fc_offset)
  *
  **************************************************************************** */
 
-static bool matchup_control_structure( unsigned long cstag )
+static bool matchup_control_structure(unsigned long cstag)
 {
-    bool retval = FALSE;
+	bool retval = FALSE;
 
-    if ( control_stack_size_test( 1) )
-    {
-	retval = TRUE;
+	if (control_stack_size_test(1)) {
+		retval = TRUE;
 
-	if ( control_stack->cs_tag != cstag )
-	{
-	    control_structure_mismatch();
+		if (control_stack->cs_tag != cstag) {
+			control_structure_mismatch();
 
-	    if (    ( INVERSE(noerrors) )
-		 || ( cstag == CASE_CSTAG )
-		 || ( control_stack->cs_tag == CASE_CSTAG )
-	            )
-	    {
-		retval = FALSE;
-	    }
+			if ((INVERSE(noerrors))
+			    || (cstag == CASE_CSTAG)
+			    || (control_stack->cs_tag == CASE_CSTAG)
+			    ) {
+				retval = FALSE;
+			}
+		}
+
 	}
-
-    }
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -793,18 +784,17 @@ static bool matchup_control_structure( unsigned long cstag )
  *
  **************************************************************************** */
 
-static void control_structure_swap( void )
+static void control_structure_swap(void)
 {
-    if ( control_stack_size_test( 2) )
-    {
-	cstag_group_t *cs_temp;
+	if (control_stack_size_test(2)) {
+		cstag_group_t *cs_temp;
 
-	cs_temp = control_stack->prev;
+		cs_temp = control_stack->prev;
 
-	control_stack->prev = cs_temp->prev;
-	cs_temp->prev = control_stack;
-	control_stack = cs_temp;
-    }
+		control_stack->prev = cs_temp->prev;
+		cs_temp->prev = control_stack;
+		control_stack = cs_temp;
+	}
 }
 
 /* **************************************************************************
@@ -851,39 +841,36 @@ static void control_structure_swap( void )
  *
  **************************************************************************** */
 
-static bool matchup_two_control_structures( unsigned long top_cstag,
-                                                unsigned long next_cstag)
+static bool matchup_two_control_structures(unsigned long top_cstag,
+					   unsigned long next_cstag)
 {
-    bool retval;
-    bool topmatch;
-    bool nextmatch = FALSE;
-    bool sav_noerrors = noerrors;
-    noerrors = FALSE;
-    not_consuming_two = FALSE;
+	bool retval;
+	bool topmatch;
+	bool nextmatch = FALSE;
+	bool sav_noerrors = noerrors;
+	noerrors = FALSE;
+	not_consuming_two = FALSE;
 
-    not_cs_underflow = TRUE;
-    topmatch = matchup_control_structure( top_cstag);
-    if ( not_cs_underflow )
-    {
-	control_structure_swap();
-	if ( not_cs_underflow )
-	{
-	   nextmatch = matchup_control_structure( next_cstag);
-	   control_structure_swap();
+	not_cs_underflow = TRUE;
+	topmatch = matchup_control_structure(top_cstag);
+	if (not_cs_underflow) {
+		control_structure_swap();
+		if (not_cs_underflow) {
+			nextmatch = matchup_control_structure(next_cstag);
+			control_structure_swap();
+		}
 	}
-    }
 
-    retval = BOOLVAL( topmatch && nextmatch);
+	retval = BOOLVAL(topmatch && nextmatch);
 
-    if ( INVERSE( retval) )
-    {
-        pop_cstag();
-        pop_cstag();
-    }
+	if (INVERSE(retval)) {
+		pop_cstag();
+		pop_cstag();
+	}
 
-    not_consuming_two = TRUE;
-    noerrors = sav_noerrors;
-    return ( retval );
+	not_consuming_two = TRUE;
+	noerrors = sav_noerrors;
+	return (retval);
 }
 
 /* **************************************************************************
@@ -917,9 +904,9 @@ static bool matchup_two_control_structures( unsigned long top_cstag,
  *      
  **************************************************************************** */
 
-static void mark_backward_target(unsigned long cstag )
+static void mark_backward_target(unsigned long cstag)
 {
-    push_cstag( cstag, (unsigned long)opc);
+	push_cstag(cstag, (unsigned long)opc);
 }
 
 /* **************************************************************************
@@ -961,10 +948,10 @@ static void mark_backward_target(unsigned long cstag )
  *
  **************************************************************************** */
 
-static void mark_forward_branch(unsigned long cstag )
+static void mark_forward_branch(unsigned long cstag)
 {
-    mark_backward_target(cstag );
-    emit_offset(0);
+	mark_backward_target(cstag);
+	emit_offset(0);
 }
 
 /* **************************************************************************
@@ -1015,19 +1002,18 @@ static void mark_forward_branch(unsigned long cstag )
  *
  **************************************************************************** */
 
-static void resolve_backward( unsigned long cstag)
+static void resolve_backward(unsigned long cstag)
 {
-    unsigned long targ_opc;
-    int fc_offset = 0;
+	unsigned long targ_opc;
+	int fc_offset = 0;
 
-    if ( matchup_control_structure( cstag) )
-    {
-	targ_opc = control_stack->cs_datum;
-	fc_offset = targ_opc - opc;
-    }
+	if (matchup_control_structure(cstag)) {
+		targ_opc = control_stack->cs_datum;
+		fc_offset = targ_opc - opc;
+	}
 
-    emit_fc_offset( fc_offset );
-    pop_cstag();
+	emit_fc_offset(fc_offset);
+	pop_cstag();
 }
 
 /* **************************************************************************
@@ -1086,36 +1072,33 @@ static void resolve_backward( unsigned long cstag)
  *
  **************************************************************************** */
 
-static void resolve_forward( unsigned long cstag)
+static void resolve_forward(unsigned long cstag)
 {
-    unsigned long resvd_opc;
-    bool sav_noerrors = noerrors;
-    bool cs_match_result;
-    noerrors = FALSE;
-    /*  Restore the "ignore-errors" flag before we act on our match result
-     *      because we want it to remain in effect for  emit_fc_offset()
-     */
-    cs_match_result = matchup_control_structure( cstag);
-    noerrors = sav_noerrors;
+	unsigned long resvd_opc;
+	bool sav_noerrors = noerrors;
+	bool cs_match_result;
+	noerrors = FALSE;
+	/*  Restore the "ignore-errors" flag before we act on our match result
+	 *      because we want it to remain in effect for  emit_fc_offset()
+	 */
+	cs_match_result = matchup_control_structure(cstag);
+	noerrors = sav_noerrors;
 
-    if ( cs_match_result )
-    {
-	int saved_opc;
-	int fc_offset;
+	if (cs_match_result) {
+		int saved_opc;
+		int fc_offset;
 
-	resvd_opc = control_stack->cs_datum;
-	fc_offset = opc - resvd_opc;
+		resvd_opc = control_stack->cs_datum;
+		fc_offset = opc - resvd_opc;
 
-	saved_opc = opc;
-	opc = resvd_opc;
+		saved_opc = opc;
+		opc = resvd_opc;
 
-
-	emit_fc_offset( fc_offset );
-	opc = saved_opc;
-    }
-    pop_cstag();
+		emit_fc_offset(fc_offset);
+		opc = saved_opc;
+	}
+	pop_cstag();
 }
-	
 
 /* **************************************************************************
  *
@@ -1129,7 +1112,6 @@ static void resolve_forward( unsigned long cstag)
  *          prologues.
  *
  **************************************************************************** */
-
 
 /* **************************************************************************
  *
@@ -1152,10 +1134,10 @@ static void resolve_forward( unsigned long cstag)
  *
  **************************************************************************** */
 
-void emit_if( void )
+void emit_if(void)
 {
-    emit_token("b?branch");
-    mark_forward_branch( IF_CSTAG );
+	emit_token("b?branch");
+	mark_forward_branch(IF_CSTAG);
 }
 
 /* **************************************************************************
@@ -1193,19 +1175,16 @@ void emit_if( void )
  *
  **************************************************************************** */
 
-void emit_then( void )
+void emit_then(void)
 {
-    emit_token("b(>resolve)");
-    if ( control_stack != NULL )
-    {
-	if ( control_stack->cs_tag == WHILE_CSTAG )
-	{
-	    control_stack->cs_tag = IF_CSTAG;
+	emit_token("b(>resolve)");
+	if (control_stack != NULL) {
+		if (control_stack->cs_tag == WHILE_CSTAG) {
+			control_stack->cs_tag = IF_CSTAG;
+		}
 	}
-    }
-    resolve_forward( IF_CSTAG );
+	resolve_forward(IF_CSTAG);
 }
-
 
 /* **************************************************************************
  *
@@ -1255,21 +1234,18 @@ void emit_then( void )
  *
  **************************************************************************** */
 
-void emit_else( void )
+void emit_else(void)
 {
-    if ( control_stack_depth > 0 )
-    {
-	emit_token("bbranch");
-	mark_forward_branch( IF_CSTAG );
-    }
-    not_cs_underflow = TRUE;
-    control_structure_swap();
-    if ( not_cs_underflow )
-    {
-        emit_then();
-    }
+	if (control_stack_depth > 0) {
+		emit_token("bbranch");
+		mark_forward_branch(IF_CSTAG);
+	}
+	not_cs_underflow = TRUE;
+	control_structure_swap();
+	if (not_cs_underflow) {
+		emit_then();
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -1291,12 +1267,11 @@ void emit_else( void )
  *
  **************************************************************************** */
 
-void emit_begin( void )
+void emit_begin(void)
 {
-    emit_token("b(<mark)");
-    mark_backward_target( BEGIN_CSTAG );
+	emit_token("b(<mark)");
+	mark_backward_target(BEGIN_CSTAG);
 }
-
 
 /* **************************************************************************
  *
@@ -1325,10 +1300,10 @@ void emit_begin( void )
  *              
  **************************************************************************** */
 
-void emit_again( void )
+void emit_again(void)
 {
-    emit_token("bbranch");
-    resolve_backward( BEGIN_CSTAG );
+	emit_token("bbranch");
+	resolve_backward(BEGIN_CSTAG);
 }
 
 /* **************************************************************************
@@ -1344,10 +1319,10 @@ void emit_again( void )
  *
  **************************************************************************** */
 
-void emit_until( void )
+void emit_until(void)
 {
-    emit_token("b?branch");
-    resolve_backward( BEGIN_CSTAG );
+	emit_token("b?branch");
+	resolve_backward(BEGIN_CSTAG);
 }
 
 /* **************************************************************************
@@ -1399,14 +1374,13 @@ void emit_until( void )
  *
  **************************************************************************** */
 
-void emit_while( void )
+void emit_while(void)
 {
-    if ( control_stack_depth > 0 )
-    {
-	emit_token("b?branch");
-	mark_forward_branch( WHILE_CSTAG );
-    }
-    control_structure_swap();
+	if (control_stack_depth > 0) {
+		emit_token("b?branch");
+		mark_forward_branch(WHILE_CSTAG);
+	}
+	control_structure_swap();
 }
 
 /* **************************************************************************
@@ -1449,20 +1423,18 @@ void emit_while( void )
  *
  **************************************************************************** */
 
-void emit_repeat( void )
+void emit_repeat(void)
 {
-    if ( matchup_two_control_structures( BEGIN_CSTAG, WHILE_CSTAG ) )
-    {
-	not_cs_underflow = TRUE;
-	not_consuming_two = FALSE;
-	emit_again();
-	if ( not_cs_underflow )
-	{
-            emit_token("b(>resolve)");
-	    resolve_forward( WHILE_CSTAG );
+	if (matchup_two_control_structures(BEGIN_CSTAG, WHILE_CSTAG)) {
+		not_cs_underflow = TRUE;
+		not_consuming_two = FALSE;
+		emit_again();
+		if (not_cs_underflow) {
+			emit_token("b(>resolve)");
+			resolve_forward(WHILE_CSTAG);
+		}
+		not_consuming_two = TRUE;
 	}
-	not_consuming_two = TRUE;
-    }
 }
 
 /* **************************************************************************
@@ -1515,14 +1487,13 @@ void emit_repeat( void )
  *
  **************************************************************************** */
 
-void mark_do( void )
+void mark_do(void)
 {
-    mark_forward_branch( DO_CSTAG);
-    control_stack->cs_not_dup = FALSE;
-    mark_backward_target( DO_CSTAG);
-    do_loop_depth++;
+	mark_forward_branch(DO_CSTAG);
+	control_stack->cs_not_dup = FALSE;
+	mark_backward_target(DO_CSTAG);
+	do_loop_depth++;
 }
-
 
 /* **************************************************************************
  *
@@ -1596,24 +1567,23 @@ void mark_do( void )
  *
  **************************************************************************** */
 
-void resolve_loop( void )
+void resolve_loop(void)
 {
-    if ( INVERSE( matchup_two_control_structures( DO_CSTAG, DO_CSTAG) ) )
-    {
-	emit_offset( 0 );
-    }else{
-	not_cs_underflow = TRUE;
-	didnt_print_otl = TRUE;
-	not_consuming_two = FALSE;
-	resolve_backward( DO_CSTAG);
-	if ( not_cs_underflow )
-	{
-	    resolve_forward( DO_CSTAG);
+	if (INVERSE(matchup_two_control_structures(DO_CSTAG, DO_CSTAG))) {
+		emit_offset(0);
+	} else {
+		not_cs_underflow = TRUE;
+		didnt_print_otl = TRUE;
+		not_consuming_two = FALSE;
+		resolve_backward(DO_CSTAG);
+		if (not_cs_underflow) {
+			resolve_forward(DO_CSTAG);
+		}
+		if (do_loop_depth > 0)
+			do_loop_depth--;
+		not_consuming_two = TRUE;
+		didnt_print_otl = TRUE;	/*  Might have gotten cleared   */
 	}
-	if ( do_loop_depth > 0 ) do_loop_depth--;
-	not_consuming_two = TRUE;
-	didnt_print_otl = TRUE;   /*  Might have gotten cleared   */
-    }
 }
 
 /* **************************************************************************
@@ -1637,12 +1607,11 @@ void resolve_loop( void )
  *
  **************************************************************************** */
 
-void emit_case( void )
+void emit_case(void)
 {
-    push_cstag( CASE_CSTAG, 0);
-    emit_token("b(case)");
+	push_cstag(CASE_CSTAG, 0);
+	emit_token("b(case)");
 }
-
 
 /* **************************************************************************
  *
@@ -1689,33 +1658,31 @@ void emit_case( void )
  *
  **************************************************************************** */
 
-void emit_of( void )
+void emit_of(void)
 {
 
-    if ( matchup_control_structure( CASE_CSTAG ) )
-    {
-	emit_token("b(of)");
+	if (matchup_control_structure(CASE_CSTAG)) {
+		emit_token("b(of)");
 
-	/*
-	 *  See comment-block about "Control-Stack" Diagram Notation
-	 *       early on in this file.
-	 *
-	 */
+		/*
+		 *  See comment-block about "Control-Stack" Diagram Notation
+		 *       early on in this file.
+		 *
+		 */
 
-	/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs...CASE_CSTAG -- )          */
+		/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs...CASE_CSTAG -- )          */
 
-	/*  Increment the OF-count .  */
-	(control_stack->cs_datum)++;
+		/*  Increment the OF-count .  */
+		(control_stack->cs_datum)++;
 
-	/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG -- )        */
+		/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG -- )        */
 
-	mark_forward_branch( OF_CSTAG );
-	/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG Of_FORw_OF )
-	 */
-    }
-    /*  Leave the CSTAG-Group on the "Control-Stack" .  */
+		mark_forward_branch(OF_CSTAG);
+		/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG Of_FORw_OF )
+		 */
+	}
+	/*  Leave the CSTAG-Group on the "Control-Stack" .  */
 }
-
 
 /* **************************************************************************
  *
@@ -1757,50 +1724,49 @@ void emit_of( void )
  *
  **************************************************************************** */
 
-void emit_endof( void )
+void emit_endof(void)
 {
-    if ( control_stack_size_test( 2) )
-    {
-	emit_token("b(endof)");
+	if (control_stack_size_test(2)) {
+		emit_token("b(endof)");
 
-	/*  See "Control-Stack" Diagram Notation comment-block  */
+		/*  See "Control-Stack" Diagram Notation comment-block  */
 
-	/*  Stack-diagrams might need to be split across lines.  */
+		/*  Stack-diagrams might need to be split across lines.  */
 
-	/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...  
-	 *                       ...                          Of_FORw_OF -- )
-	 */
-	mark_forward_branch(ENDOF_CSTAG);
-	/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...  
-	 *                       ...  Of_FORw_OF  {Endof_FORw_ENDOF}n_ofs+1 )
-	 */
+		/* (    {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...  
+		 *                       ...                          Of_FORw_OF -- )
+		 */
+		mark_forward_branch(ENDOF_CSTAG);
+		/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...  
+		 *                       ...  Of_FORw_OF  {Endof_FORw_ENDOF}n_ofs+1 )
+		 */
 
-	control_structure_swap();
-	/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...
-	 *                       ...  {Endof_FORw_ENDOF}n_ofs+1  Of_FORw_OF )
-	 */
+		control_structure_swap();
+		/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG  ...
+		 *                       ...  {Endof_FORw_ENDOF}n_ofs+1  Of_FORw_OF )
+		 */
 
-	resolve_forward( OF_CSTAG );
-	/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG        ...
-	 *                       ...  {Endof_FORw_ENDOF}n_ofs+1  )
-	 */
+		resolve_forward(OF_CSTAG);
+		/* ( -- {Endof_FORw_ENDOF}1..n_ofs  N_OFs+1...CASE_CSTAG        ...
+		 *                       ...  {Endof_FORw_ENDOF}n_ofs+1  )
+		 */
 
-	control_structure_swap();
-	/* ( -- {Endof_FORw_ENDOF}1..n_ofs         ...
-	 *                       ...  {Endof_FORw_ENDOF}n_ofs+1   ...
-	 *                                        ...  N_OFs+1...CASE_CSTAG )
-	 */
+		control_structure_swap();
+		/* ( -- {Endof_FORw_ENDOF}1..n_ofs         ...
+		 *                       ...  {Endof_FORw_ENDOF}n_ofs+1   ...
+		 *                                        ...  N_OFs+1...CASE_CSTAG )
+		 */
 
-	/*  The number of ENDOF-tagged Forward-Marker pairs has now
-	 *     caught up with the incremented OF-count; therefore,
-	 *     we can notate the above as:
-	 *
-	 *  ( {Endof_FORw_ENDOF}1..n_ofs  N_OFs CASE_CSTAG )
-	 *
-	 *     and we are ready for another  OF ... ENDOF  pair,
-	 *     or for the ENDCASE statement.
-	 */
-    }
+		/*  The number of ENDOF-tagged Forward-Marker pairs has now
+		 *     caught up with the incremented OF-count; therefore,
+		 *     we can notate the above as:
+		 *
+		 *  ( {Endof_FORw_ENDOF}1..n_ofs  N_OFs CASE_CSTAG )
+		 *
+		 *     and we are ready for another  OF ... ENDOF  pair,
+		 *     or for the ENDCASE statement.
+		 */
+	}
 
 }
 
@@ -1842,32 +1808,29 @@ void emit_endof( void )
  *
  **************************************************************************** */
 
-void emit_endcase( void )
+void emit_endcase(void)
 {
-    unsigned long n_endofs ;
-    if ( matchup_control_structure( CASE_CSTAG) )
-    {
-	int indx;
+	unsigned long n_endofs;
+	if (matchup_control_structure(CASE_CSTAG)) {
+		int indx;
 
-	emit_token("b(endcase)");
-	n_endofs = control_stack->cs_datum;
-	for ( indx = 0 ; indx < n_endofs ; indx++ )
-	{
-	    /*  Because  matchup_control_structure  doesn't pop the
-	     *      control-stack, we have the  N_OFs...CASE_CSTAG
-	     *      item on top of the  Endof_FORw_ENDOF  item we
-	     *      want to resolve.  We need to keep it there so
-	     *      the  POP  is valid for the other path as well
-	     *      as at the end of this one.
-	     *  So we  SWAP  to get at the  Endof_FORw_ENDOF  item.
-	     */
-	    control_structure_swap();
-	    resolve_forward( ENDOF_CSTAG);
+		emit_token("b(endcase)");
+		n_endofs = control_stack->cs_datum;
+		for (indx = 0; indx < n_endofs; indx++) {
+			/*  Because  matchup_control_structure  doesn't pop the
+			 *      control-stack, we have the  N_OFs...CASE_CSTAG
+			 *      item on top of the  Endof_FORw_ENDOF  item we
+			 *      want to resolve.  We need to keep it there so
+			 *      the  POP  is valid for the other path as well
+			 *      as at the end of this one.
+			 *  So we  SWAP  to get at the  Endof_FORw_ENDOF  item.
+			 */
+			control_structure_swap();
+			resolve_forward(ENDOF_CSTAG);
+		}
 	}
-    }
-    pop_cstag();
+	pop_cstag();
 }
-
 
 /* **************************************************************************
  *
@@ -1895,15 +1858,14 @@ void emit_endcase( void )
  *
  **************************************************************************** */
 
-static void control_struct_incomplete(
-			    int severity,
-				char *call_cond,
-				    cstag_group_t *c_s_entry)
+static void control_struct_incomplete(int severity,
+				      char *call_cond,
+				      cstag_group_t * c_s_entry)
 {
-    tokenization_error ( severity,
-	"%s before completion of %s" ,
-	    call_cond, strupr(c_s_entry->cs_word));
-    where_started( c_s_entry->cs_inp_fil, c_s_entry->cs_line_num );
+	tokenization_error(severity,
+			   "%s before completion of %s",
+			   call_cond, strupr(c_s_entry->cs_word));
+	where_started(c_s_entry->cs_inp_fil, c_s_entry->cs_line_num);
 }
 
 /* **************************************************************************
@@ -1931,22 +1893,19 @@ static void control_struct_incomplete(
  *
  **************************************************************************** */
 
-void announce_control_structs( int severity, char *call_cond,
-				          unsigned int abs_token_limit)
+void announce_control_structs(int severity, char *call_cond,
+			      unsigned int abs_token_limit)
 {
-    cstag_group_t *cs_temp = control_stack;
-    while ( cs_temp != NULL )
-    {
-	if ( cs_temp->cs_abs_token_num < abs_token_limit )
-	{
-	    break;
+	cstag_group_t *cs_temp = control_stack;
+	while (cs_temp != NULL) {
+		if (cs_temp->cs_abs_token_num < abs_token_limit) {
+			break;
+		}
+		if (cs_temp->cs_not_dup) {
+			control_struct_incomplete(severity, call_cond, cs_temp);
+		}
+		cs_temp = cs_temp->prev;
 	}
-	if ( cs_temp->cs_not_dup )
-	{
-	    control_struct_incomplete( severity, call_cond, cs_temp );
-	}
-	cs_temp = cs_temp->prev;
-    }
 }
 
 /* **************************************************************************
@@ -2009,22 +1968,21 @@ void announce_control_structs( int severity, char *call_cond,
  *
  **************************************************************************** */
 
-void clear_control_structs_to_limit( char *call_cond,
-				          unsigned int abs_token_limit)
+void clear_control_structs_to_limit(char *call_cond,
+				    unsigned int abs_token_limit)
 {
-    while ( control_stack_depth > 0 )
-    {
-	if ( control_stack->cs_abs_token_num < abs_token_limit )
-	{
-	    break;
+	while (control_stack_depth > 0) {
+		if (control_stack->cs_abs_token_num < abs_token_limit) {
+			break;
+		}
+		if (control_stack->cs_not_dup) {
+			control_struct_incomplete(TKERROR, call_cond,
+						  control_stack);
+			if (control_stack->cs_tag == DO_CSTAG)
+				do_loop_depth--;
+		}
+		pop_cstag();
 	}
-	if ( control_stack->cs_not_dup )
-	{
-	    control_struct_incomplete( TKERROR, call_cond, control_stack );
-	    if ( control_stack->cs_tag == DO_CSTAG) do_loop_depth--;
-	}
-	pop_cstag();
-    }
 }
 
 /* **************************************************************************
@@ -2074,7 +2032,7 @@ void clear_control_structs_to_limit( char *call_cond,
  *
  **************************************************************************** */
 
-void clear_control_structs( char *call_cond)
+void clear_control_structs(char *call_cond)
 {
-    clear_control_structs_to_limit( call_cond, 0);
+	clear_control_structs_to_limit(call_cond, 0);
 }

@@ -37,10 +37,10 @@
 #include "types.h"
 #include "ticvocab.h"
 
-void init_conditionals_vocab( tic_hdr_t **tic_vocab_ptr );
+void init_conditionals_vocab(tic_hdr_t ** tic_vocab_ptr);
 
-void skip_a_word( tic_bool_param_t pfield );
-void skip_a_word_in_line( tic_bool_param_t pfield );
-void skip_two_words_in_line( tic_bool_param_t pfield );
+void skip_a_word(tic_bool_param_t pfield);
+void skip_a_word_in_line(tic_bool_param_t pfield);
+void skip_two_words_in_line(tic_bool_param_t pfield);
 
-#endif   /* _TOKE_CONDITL_H    */
+#endif /* _TOKE_CONDITL_H    */

@@ -88,8 +88,6 @@
  *
  **************************************************************************** */
 
-
-
 /* **************************************************************************
  *
  *      Function name:  macro_recursion_error
@@ -120,12 +118,11 @@
  *
  **************************************************************************** */
 
-static void macro_recursion_error( tic_param_t pfield)
+static void macro_recursion_error(tic_param_t pfield)
 {
-    tokenization_error( TKERROR,
-	"Recursive invocation of macro named %s\n", statbuf);
+	tokenization_error(TKERROR,
+			   "Recursive invocation of macro named %s\n", statbuf);
 }
-
 
 /* **************************************************************************
  *
@@ -210,9 +207,8 @@ static void macro_recursion_error( tic_param_t pfield)
  *
  **************************************************************************** */
 
-typedef void (*vfunct)();  /*  Pointer to function returning void  */
-static vfunct sav_mac_funct ;
-
+typedef void (*vfunct)();	/*  Pointer to function returning void  */
+static vfunct sav_mac_funct;
 
 /* **************************************************************************
  *
@@ -222,10 +218,10 @@ static vfunct sav_mac_funct ;
  *
  **************************************************************************** */
 
-static void mac_string_recovery( tic_hdr_t *macro_entry)
+static void mac_string_recovery(tic_hdr_t * macro_entry)
 {
-    (*macro_entry).funct = sav_mac_funct;
-    (*macro_entry).ign_func = sav_mac_funct;
+	(*macro_entry).funct = sav_mac_funct;
+	(*macro_entry).ign_func = sav_mac_funct;
 }
 
 /* **************************************************************************
@@ -233,27 +229,27 @@ static void mac_string_recovery( tic_hdr_t *macro_entry)
  *     The normal Macro-invocation routine, at last...
  *
  **************************************************************************** */
-static void eval_mac_string( tic_param_t pfield)
+static void eval_mac_string(tic_param_t pfield)
 {
-    int mac_str_len = strlen(pfield.chr_ptr);
-    /*  We can't use  (*tic_found).pfld_size  for the string length
-     *      because, if this is an alias for a macro, it will be zero...
-     */
-    /*  We can change that by de-coupling the decision to free the
-     *      param-field from whether pfld_size is non-zero (by intro-
-     *      ducing yet another field into the  tic_param_t  struct),
-     *      but we're not doing that today...
-     */
+	int mac_str_len = strlen(pfield.chr_ptr);
+	/*  We can't use  (*tic_found).pfld_size  for the string length
+	 *      because, if this is an alias for a macro, it will be zero...
+	 */
+	/*  We can change that by de-coupling the decision to free the
+	 *      param-field from whether pfld_size is non-zero (by intro-
+	 *      ducing yet another field into the  tic_param_t  struct),
+	 *      but we're not doing that today...
+	 */
 
-    sav_mac_funct = *tic_found->funct;
-    (*tic_found).funct = macro_recursion_error;
-    (*tic_found).ign_func = macro_recursion_error;
-    push_source( mac_string_recovery, tic_found, FALSE);
-    report_multiline = FALSE;  /*  Must be done AFTER call to push_source()
-                                *      because  report_multiline  is part of
-                                *      the state that  push_source()  saves.
-				*/
-    init_inbuf( pfield.chr_ptr, mac_str_len);
+	sav_mac_funct = *tic_found->funct;
+	(*tic_found).funct = macro_recursion_error;
+	(*tic_found).ign_func = macro_recursion_error;
+	push_source(mac_string_recovery, tic_found, FALSE);
+	report_multiline = FALSE;	/*  Must be done AFTER call to push_source()
+					 *      because  report_multiline  is part of
+					 *      the state that  push_source()  saves.
+					 */
+	init_inbuf(pfield.chr_ptr, mac_str_len);
 }
 
 /* **************************************************************************
@@ -262,10 +258,11 @@ static void eval_mac_string( tic_param_t pfield)
  *     Intermediate routine to convert parameter type.
  *
  **************************************************************************** */
-static void eval_builtin_mac( tic_param_t pfield)
+static void eval_builtin_mac(tic_param_t pfield)
 {
-    eval_string( pfield.chr_ptr);
+	eval_string(pfield.chr_ptr);
 }
+
 /* **************************************************************************
  *
  *      Make a macro, because we might eliminate this layer later on.
@@ -283,20 +280,19 @@ static void eval_builtin_mac( tic_param_t pfield)
 #define BUILTIN_MACRO(nam, alias) BUILTIN_MAC_TIC(nam, BUILTIN_MAC_FUNC, alias )
 
 static tic_mac_hdr_t macros_tbl[] = {
-	BUILTIN_MACRO( "(.)",		"dup abs <# u#s swap sign u#>") ,
+	BUILTIN_MACRO("(.)", "dup abs <# u#s swap sign u#>"),
 
+	BUILTIN_MACRO("?", "@ ."),
+	BUILTIN_MACRO("1+", "1 +"),
+	BUILTIN_MACRO("1-", "1 -"),
+	BUILTIN_MACRO("2+", "2 +"),
+	BUILTIN_MACRO("2-", "2 -"),
 
-	BUILTIN_MACRO( "?",		"@ .") ,
-	BUILTIN_MACRO( "1+",		"1 +") ,
-	BUILTIN_MACRO( "1-",		"1 -") ,
-	BUILTIN_MACRO( "2+",		"2 +") ,
-	BUILTIN_MACRO( "2-",		"2 -") ,
-
-	BUILTIN_MACRO( "accept",      "span @ -rot expect span @ swap span !") ,
-	BUILTIN_MACRO( "allot", 	"0 max 0 ?do 0 c, loop") ,
-	BUILTIN_MACRO( "blank", 	"bl fill") ,
-	BUILTIN_MACRO( "carret",	"h# d") ,
-	BUILTIN_MACRO( ".d",		"base @ swap h# a base ! . base !") ,
+	BUILTIN_MACRO("accept", "span @ -rot expect span @ swap span !"),
+	BUILTIN_MACRO("allot", "0 max 0 ?do 0 c, loop"),
+	BUILTIN_MACRO("blank", "bl fill"),
+	BUILTIN_MACRO("carret", "h# d"),
+	BUILTIN_MACRO(".d", "base @ swap h# a base ! . base !"),
 
 	/*  Note:  The Standard gives:  ">r over r@ + swap r@ - rot r>"
 	 *      as its example of the macro for  decode-bytes
@@ -304,23 +300,23 @@ static tic_mac_hdr_t macros_tbl[] = {
 	 *      using return-stack operations.  And it's one step
 	 *      shorter, into the bargain!
 	 */
-	BUILTIN_MACRO( "decode-bytes",  "tuck - -rot 2dup + swap 2swap rot") ,
+	BUILTIN_MACRO("decode-bytes", "tuck - -rot 2dup + swap 2swap rot"),
 
-	BUILTIN_MACRO( "3drop", 	"drop 2drop") ,
-	BUILTIN_MACRO( "3dup",		"2 pick 2 pick 2 pick") ,
-	BUILTIN_MACRO( "erase", 	"0 fill") ,
-	BUILTIN_MACRO( ".h",		"base @ swap h# 10 base ! . base !") ,
-	BUILTIN_MACRO( "linefeed",	"h# a") ,
+	BUILTIN_MACRO("3drop", "drop 2drop"),
+	BUILTIN_MACRO("3dup", "2 pick 2 pick 2 pick"),
+	BUILTIN_MACRO("erase", "0 fill"),
+	BUILTIN_MACRO(".h", "base @ swap h# 10 base ! . base !"),
+	BUILTIN_MACRO("linefeed", "h# a"),
 
-	BUILTIN_MACRO( "s.",		"(.) type space") ,
-	BUILTIN_MACRO( "space", 	"bl emit") ,
-	BUILTIN_MACRO( "spaces",	"0 max 0 ?do space loop") ,
-	BUILTIN_MACRO( "(u.)",		"<# u#s u#>") ,
-	BUILTIN_MACRO( "?leave",	"if leave then"),
+	BUILTIN_MACRO("s.", "(.) type space"),
+	BUILTIN_MACRO("space", "bl emit"),
+	BUILTIN_MACRO("spaces", "0 max 0 ?do space loop"),
+	BUILTIN_MACRO("(u.)", "<# u#s u#>"),
+	BUILTIN_MACRO("?leave", "if leave then"),
 };
 
 static const int number_of_builtin_macros =
-	 sizeof(macros_tbl)/sizeof(tic_mac_hdr_t);
+    sizeof(macros_tbl) / sizeof(tic_mac_hdr_t);
 
 /* **************************************************************************
  *
@@ -345,13 +341,11 @@ static const int number_of_builtin_macros =
  *
  **************************************************************************** */
 
-void init_macros( tic_hdr_t **tic_vocab_ptr )
+void init_macros(tic_hdr_t ** tic_vocab_ptr)
 {
-    init_tic_vocab( (tic_hdr_t *)macros_tbl,
-        number_of_builtin_macros,
-	    tic_vocab_ptr );
+	init_tic_vocab((tic_hdr_t *) macros_tbl,
+		       number_of_builtin_macros, tic_vocab_ptr);
 }
-
 
 /* **************************************************************************
  *
@@ -371,17 +365,15 @@ void init_macros( tic_hdr_t **tic_vocab_ptr )
  *             Error message, if  failure  is TRUE.
  *
  **************************************************************************** */
-static void print_if_mac_err( bool failure, char *func_cpy)
+static void print_if_mac_err(bool failure, char *func_cpy)
 {
-    if ( failure )
-    {
-	tokenization_error( TKERROR,
-	   "%s directive expects name and definition on the same line\n",
-	       strupr(func_cpy));
-    }
-    free( func_cpy);
+	if (failure) {
+		tokenization_error(TKERROR,
+				   "%s directive expects name and definition on the same line\n",
+				   strupr(func_cpy));
+	}
+	free(func_cpy);
 }
-
 
 /* **************************************************************************
  *
@@ -453,54 +445,53 @@ static void print_if_mac_err( bool failure, char *func_cpy)
  **************************************************************************** */
 
 /*  This pointer is exported to this file only  */
-extern tic_hdr_t *tokz_esc_vocab ;
+extern tic_hdr_t *tokz_esc_vocab;
 
-void add_user_macro( void)
+void add_user_macro(void)
 {
-    char *macroname;
-    char *macrobody;
-    bool failure = TRUE;
+	char *macroname;
+	char *macrobody;
+	bool failure = TRUE;
 
-    /*  Copy of function name, for error message  */
-    char *func_cpy = strdup( statbuf);
+	/*  Copy of function name, for error message  */
+	char *func_cpy = strdup(statbuf);
 
-    if ( get_word_in_line( NULL ) )
-    {
-        /*  This is the Macro name  */
-	macroname = strdup( statbuf);
+	if (get_word_in_line(NULL)) {
+		/*  This is the Macro name  */
+		macroname = strdup(statbuf);
 
-	if ( INVERSE(get_rest_of_line() ) )
-	{
-	    /*  No body on line  */
-	    free( macroname);
-	
-	}else{
-	    /*  We have valid Macro body on line  */
-	    int mac_body_len = 0;
+		if (INVERSE(get_rest_of_line())) {
+			/*  No body on line  */
+			free(macroname);
 
-	    tic_hdr_t **target_vocab = current_definitions;
-	    if ( in_tokz_esc ) target_vocab = &tokz_esc_vocab ;
+		} else {
+			/*  We have valid Macro body on line  */
+			int mac_body_len = 0;
 
-	    /*  Tack on a new-line, so that a remark will appear
-	     *      to be properly terminated.   This might trigger
-	     *      an undeserved multi-line warning if the Macro
-	     *      is an improperly terminated quote; we will work
-	     *      around that problem by temporarily suspending
-	     *      multi-line warnings during macro processing.
-	     */
-	    strcat( statbuf, "\n");
-	    macrobody = strdup( statbuf);
-	    mac_body_len = strlen(macrobody);
+			tic_hdr_t **target_vocab = current_definitions;
+			if (in_tokz_esc)
+				target_vocab = &tokz_esc_vocab;
 
-	    add_tic_entry( macroname, EVAL_MAC_FUNC,
-	                       (TIC_P_DEFLT_TYPE)macrobody,
-			           MACRO_DEF, mac_body_len, FALSE,
-				       EVAL_MAC_FUNC, target_vocab );
-	    failure = FALSE;
+			/*  Tack on a new-line, so that a remark will appear
+			 *      to be properly terminated.   This might trigger
+			 *      an undeserved multi-line warning if the Macro
+			 *      is an improperly terminated quote; we will work
+			 *      around that problem by temporarily suspending
+			 *      multi-line warnings during macro processing.
+			 */
+			strcat(statbuf, "\n");
+			macrobody = strdup(statbuf);
+			mac_body_len = strlen(macrobody);
+
+			add_tic_entry(macroname, EVAL_MAC_FUNC,
+				      (TIC_P_DEFLT_TYPE) macrobody,
+				      MACRO_DEF, mac_body_len, FALSE,
+				      EVAL_MAC_FUNC, target_vocab);
+			failure = FALSE;
+		}
 	}
-    }
 
-    print_if_mac_err( failure, func_cpy);
+	print_if_mac_err(failure, func_cpy);
 }
 
 /* **************************************************************************
@@ -533,18 +524,16 @@ void add_user_macro( void)
  *              invokes a directive that alters Conditional processing...
  *
  **************************************************************************** */
-void skip_user_macro( tic_bool_param_t pfield )
+void skip_user_macro(tic_bool_param_t pfield)
 {
-    bool failure = TRUE;
-    char *func_cpy = strdup( statbuf);
-    if ( get_word_in_line( NULL ) )
-    {
-	if ( get_rest_of_line() )
-	{
-	    failure = FALSE;
+	bool failure = TRUE;
+	char *func_cpy = strdup(statbuf);
+	if (get_word_in_line(NULL)) {
+		if (get_rest_of_line()) {
+			failure = FALSE;
+		}
 	}
-    }
 
-    print_if_mac_err( failure, func_cpy);
+	print_if_mac_err(failure, func_cpy);
 
 }

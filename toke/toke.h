@@ -33,9 +33,7 @@
  *      Modifications Author:  David L. Paktor    dlpaktor@us.ibm.com
  **************************************************************************** */
 
-
 #include "types.h"
-
 
 /* ************************************************************************** *
  *
@@ -48,4 +46,4 @@ extern bool noerrors;
 extern bool fload_list;
 extern bool dependency_list;
 
-#endif   /* _TOKE_TOKE_H */
+#endif /* _TOKE_TOKE_H */

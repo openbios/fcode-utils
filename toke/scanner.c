@@ -66,73 +66,71 @@
  *
  **************************************************************************** */
 
-u8  *statbuf=NULL;      /*  The word just read from the input stream  */
-u8   base=0x0a;         /*  The numeric-interpretation base           */
+u8 *statbuf = NULL;		/*  The word just read from the input stream  */
+u8 base = 0x0a;			/*  The numeric-interpretation base           */
 
 /* pci data */
-bool pci_is_last_image=TRUE;
-u16  pci_image_rev=0x0001;  /*  Vendor's Image, NOT PCI Data Structure Rev */
-u16  pci_vpd=0x0000;
-
+bool pci_is_last_image = TRUE;
+u16 pci_image_rev = 0x0001;	/*  Vendor's Image, NOT PCI Data Structure Rev */
+u16 pci_vpd = 0x0000;
 
 /*  Having to do with the state of the tokenization  */
-bool offs16       = TRUE;    /*  We are using 16-bit branch- (etc) -offsets */
-bool in_tokz_esc  = FALSE;   /*  TRUE if in "Tokenizer Escape" mode   */
-bool incolon      = FALSE;   /*  TRUE if inside a colon definition    */
-bool haveend      = FALSE;   /*  TRUE if the "end" code was read.     */
-int do_loop_depth = 0;       /*  How deep we are inside DO ... LOOP variants  */
+bool offs16 = TRUE;		/*  We are using 16-bit branch- (etc) -offsets */
+bool in_tokz_esc = FALSE;	/*  TRUE if in "Tokenizer Escape" mode   */
+bool incolon = FALSE;		/*  TRUE if inside a colon definition    */
+bool haveend = FALSE;		/*  TRUE if the "end" code was read.     */
+int do_loop_depth = 0;		/*  How deep we are inside DO ... LOOP variants  */
 
 /*  State of headered-ness for name-creation  */
-headeredness hdr_flag = FLAG_HEADERLESS ;  /*  Init'l default state  */
+headeredness hdr_flag = FLAG_HEADERLESS;	/*  Init'l default state  */
 
 /*  Used for error-checking of IBM-style Locals  */
-int lastcolon;   /*  Location in output stream of latest colon-definition. */
+int lastcolon;			/*  Location in output stream of latest colon-definition. */
 
 /*  Used for error reporting   */
-char *last_colon_defname = NULL;   /*  Name of last colon-definition        */
-char *last_colon_filename = NULL;  /*  File where last colon-def'n made     */
-unsigned int last_colon_lineno;    /*  Line number of last colon-def'n      */
-bool report_multiline = TRUE;      /*  False to suspend multiline warning   */
+char *last_colon_defname = NULL;	/*  Name of last colon-definition        */
+char *last_colon_filename = NULL;	/*  File where last colon-def'n made     */
+unsigned int last_colon_lineno;	/*  Line number of last colon-def'n      */
+bool report_multiline = TRUE;	/*  False to suspend multiline warning   */
 unsigned int last_colon_abs_token_no;
 
-           /*  Shared phrases                                               */
+	   /*  Shared phrases                                               */
 char *in_tkz_esc_mode = "in Tokenizer-Escape mode.\n";
-char *wh_defined      = ", which is defined as a ";
+char *wh_defined = ", which is defined as a ";
 
 /* **************************************************************************
  *  Local variables
  **************************************************************************** */
-static u16  last_colon_fcode;  /*  FCode-number assigned to last colon-def'n  */
-                               /*      Used for RECURSE  */
+static u16 last_colon_fcode;	/*  FCode-number assigned to last colon-def'n  */
+			       /*      Used for RECURSE  */
 
-static bool do_not_overload = TRUE ;  /*  False to suspend dup-name-test     */
-static bool got_until_eof = FALSE ;   /*  TRUE to signal "unterminated"      */
+static bool do_not_overload = TRUE;	/*  False to suspend dup-name-test     */
+static bool got_until_eof = FALSE;	/*  TRUE to signal "unterminated"      */
 
 static unsigned int last_colon_do_depth = 0;
 
 /*  Local variables having to do with:                                      */
 /*       ...  the state of the tokenization                                 */
-static bool is_instance = FALSE;        /*  Is "instance" is in effect?     */
-static char *instance_filename = NULL;  /*  File where "instance" invoked   */
-static unsigned int instance_lineno;    /*  Line number of "instance"       */
-static bool fcode_started = FALSE ;     /*  Only 1 fcode_starter per block. */
-static bool first_fc_starter = TRUE;    /*  Only once per tokenization...   */
+static bool is_instance = FALSE;	/*  Is "instance" is in effect?     */
+static char *instance_filename = NULL;	/*  File where "instance" invoked   */
+static unsigned int instance_lineno;	/*  Line number of "instance"       */
+static bool fcode_started = FALSE;	/*  Only 1 fcode_starter per block. */
+static bool first_fc_starter = TRUE;	/*  Only once per tokenization...   */
 
 /*       ... with the state of the input stream,                            */
 static bool need_to_pop_source;
 
 /*       ... with the use of the return stack,                              */
-static int ret_stk_depth = 0;          /*  Return-Stack-Usage-Depth counter */
+static int ret_stk_depth = 0;	/*  Return-Stack-Usage-Depth counter */
 
 /*       ... and with control of error-messaging.                           */
-           /*  Should a warning about a dangling "instance" 
+	   /*  Should a warning about a dangling "instance" 
 	    *      be issued at the next device-node change?
 	    */
 static bool dev_change_instance_warning = TRUE;
 
-           /*  Has a gap developed between "instance" and its application?  */
+	   /*  Has a gap developed between "instance" and its application?  */
 static bool instance_definer_gap = FALSE;
-
 
 /* **************************************************************************
  *
@@ -161,20 +159,19 @@ static bool instance_definer_gap = FALSE;
 
 static bool skip_ws(void)
 {
-    bool retval = TRUE;
-    char ch_tmp;
+	bool retval = TRUE;
+	char ch_tmp;
 
-    for (  ; pc < end; pc++ )
-{
-        ch_tmp = *pc;
-	if ( (ch_tmp != '\t') && (ch_tmp != ' ') && (ch_tmp != '\n' ) )
-	{
-	    retval = FALSE;
-	    break;
+	for (; pc < end; pc++) {
+		ch_tmp = *pc;
+		if ((ch_tmp != '\t') && (ch_tmp != ' ') && (ch_tmp != '\n')) {
+			retval = FALSE;
+			break;
+		}
+		if (ch_tmp == '\n')
+			lineno++;
 	}
-        if ( ch_tmp == '\n')  lineno++;
-    }
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -204,24 +201,22 @@ static bool skip_ws(void)
  *
  **************************************************************************** */
 
-bool skip_until( char lim_ch)
+bool skip_until(char lim_ch)
 {
-    bool retval = TRUE;
-    char ch_tmp;
+	bool retval = TRUE;
+	char ch_tmp;
 
-    for (  ; pc < end; pc++ )
-    {
-        ch_tmp = *pc;
-        if ( ch_tmp == lim_ch )
-	{
-	    retval = FALSE;
-	    break;
+	for (; pc < end; pc++) {
+		ch_tmp = *pc;
+		if (ch_tmp == lim_ch) {
+			retval = FALSE;
+			break;
+		}
+		if (ch_tmp == '\n')
+			lineno++;
 	}
-        if ( ch_tmp == '\n')  lineno++;
-	}
-    return ( retval );
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -270,34 +265,33 @@ bool skip_until( char lim_ch)
  *                  Involved replacing  firstchar()
  *
  **************************************************************************** */
-	
+
 static signed long get_until(char needle)
-{                                                                               
-	u8 *safe;                                                         
+{
+	u8 *safe;
 	unsigned long len = 0;
 
-	safe=pc;
+	safe = pc;
 
 	got_until_eof = skip_until(needle);
 
 	len = pc - safe;
-	if (len >= GET_BUF_MAX )
-	{
-	    tokenization_error( TKERROR,
-		"get_until buffer overflow.  Max is %d.\n", GET_BUF_MAX-1 );
-	    len = GET_BUF_MAX-1;
-}
+	if (len >= GET_BUF_MAX) {
+		tokenization_error(TKERROR,
+				   "get_until buffer overflow.  Max is %d.\n",
+				   GET_BUF_MAX - 1);
+		len = GET_BUF_MAX - 1;
+	}
 
 	memcpy(statbuf, safe, len);
-	statbuf[len]=0;
+	statbuf[len] = 0;
 
-	if ( INVERSE(got_until_eof) )
-{
-	    if ( needle != '\n' )  pc++;
+	if (INVERSE(got_until_eof)) {
+		if (needle != '\n')
+			pc++;
 	}
 	return len;
 }
-
 
 /* **************************************************************************
  *
@@ -333,22 +327,20 @@ static signed long get_until(char needle)
  *
  **************************************************************************** */
 
-typedef struct source_state
-    {
-	struct source_state   *next;
-	u8                    *old_start;
-	u8                    *old_pc;
-	u8                    *old_end;
-	char                  *old_iname;
-	unsigned int           old_lineno;
-	bool                   pause_before_pop;
-	bool                   sav_rep_multlin;
-	void                 (*resump_func)();
-	_PTR                   resump_param;
-    } source_state_t ;
+typedef struct source_state {
+	struct source_state *next;
+	u8 *old_start;
+	u8 *old_pc;
+	u8 *old_end;
+	char *old_iname;
+	unsigned int old_lineno;
+	bool pause_before_pop;
+	bool sav_rep_multlin;
+	void (*resump_func)();
+	_PTR resump_param;
+} source_state_t;
 
-static source_state_t  *saved_source = NULL;
-
+static source_state_t *saved_source = NULL;
 
 /* **************************************************************************
  *
@@ -388,24 +380,25 @@ static source_state_t  *saved_source = NULL;
  *
  **************************************************************************** */
 
-void push_source( void (*res_func)(), _PTR res_parm, bool file_chg )
+void push_source(void (*res_func)(), _PTR res_parm, bool file_chg)
 {
-    source_state_t  *new_sav_src;
+	source_state_t *new_sav_src;
 
-    new_sav_src = safe_malloc( sizeof(source_state_t), "pushing Source state");
+	new_sav_src =
+	    safe_malloc(sizeof(source_state_t), "pushing Source state");
 
-    new_sav_src->next = saved_source;
-    new_sav_src->old_start = start;
-    new_sav_src->old_pc = pc;
-    new_sav_src->old_end = end;
-    new_sav_src->old_iname = iname;
-    new_sav_src->old_lineno = lineno;
-    new_sav_src->pause_before_pop = file_chg;
-    new_sav_src->sav_rep_multlin = report_multiline;
-    new_sav_src->resump_func = res_func;
-    new_sav_src->resump_param = res_parm;
+	new_sav_src->next = saved_source;
+	new_sav_src->old_start = start;
+	new_sav_src->old_pc = pc;
+	new_sav_src->old_end = end;
+	new_sav_src->old_iname = iname;
+	new_sav_src->old_lineno = lineno;
+	new_sav_src->pause_before_pop = file_chg;
+	new_sav_src->sav_rep_multlin = report_multiline;
+	new_sav_src->resump_func = res_func;
+	new_sav_src->resump_param = res_parm;
 
-    saved_source = new_sav_src;
+	saved_source = new_sav_src;
 }
 
 /* **************************************************************************
@@ -432,12 +425,12 @@ void push_source( void (*res_func)(), _PTR res_parm, bool file_chg )
  *
  **************************************************************************** */
 
-static void drop_source( void)
+static void drop_source(void)
 {
-    source_state_t  *former_sav_src = saved_source;
+	source_state_t *former_sav_src = saved_source;
 
-    saved_source = saved_source->next ;
-    free( former_sav_src);
+	saved_source = saved_source->next;
+	free(former_sav_src);
 }
 
 /* **************************************************************************
@@ -481,40 +474,35 @@ static void drop_source( void)
  *
  **************************************************************************** */
 
-static bool pop_source( void )
+static bool pop_source(void)
 {
-    bool retval = TRUE;
+	bool retval = TRUE;
 
-    if ( saved_source != NULL )
-    {
-	retval = FALSE;
-	if ( need_to_pop_source )
-	{
-	    need_to_pop_source = FALSE;
-	}else{
-	    if ( saved_source->pause_before_pop )
-	    {
-	        need_to_pop_source = TRUE;
-		return( retval);
-	    }
+	if (saved_source != NULL) {
+		retval = FALSE;
+		if (need_to_pop_source) {
+			need_to_pop_source = FALSE;
+		} else {
+			if (saved_source->pause_before_pop) {
+				need_to_pop_source = TRUE;
+				return (retval);
+			}
+		}
+
+		if (saved_source->resump_func != NULL) {
+			saved_source->resump_func(saved_source->resump_param);
+		}
+		report_multiline = saved_source->sav_rep_multlin;
+		lineno = saved_source->old_lineno;
+		iname = saved_source->old_iname;
+		end = saved_source->old_end;
+		pc = saved_source->old_pc;
+		start = saved_source->old_start;
+
+		drop_source();
 	}
-
-	if ( saved_source->resump_func != NULL )
-	{
-	    saved_source->resump_func( saved_source->resump_param);
-	}
-	report_multiline = saved_source->sav_rep_multlin;
-	lineno = saved_source->old_lineno ;
-	iname = saved_source->old_iname ;
-	end = saved_source->old_end ;
-	pc = saved_source->old_pc ;
-	start = saved_source->old_start ;
-
-	drop_source();
-    }
-    return( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -589,58 +577,54 @@ static bool pop_source( void )
  *
  **************************************************************************** */
 
-signed long get_word( void)
+signed long get_word(void)
 {
 	size_t len;
 	u8 *str;
 	bool keep_skipping;
 	bool pop_result;
 
-	if ( need_to_pop_source )
-	{
-	    pop_result = pop_source();
+	if (need_to_pop_source) {
+		pop_result = pop_source();
 	}
 
 	do {
-	    keep_skipping = skip_ws();
-	    if ( keep_skipping )
-	    {
-		pop_result = pop_source();
-		if ( pop_result || need_to_pop_source )
-		{
-		    statbuf[0] = 0;
-		    if ( pop_result )
-		    {
-			return -1;
-		    }
-		return 0;
+		keep_skipping = skip_ws();
+		if (keep_skipping) {
+			pop_result = pop_source();
+			if (pop_result || need_to_pop_source) {
+				statbuf[0] = 0;
+				if (pop_result) {
+					return -1;
+				}
+				return 0;
+			}
 		}
-	    }
-	} while ( keep_skipping );
+	} while (keep_skipping);
 
-	str=pc;
-	while ( (str < end) && *str && *str!='\n' && *str!='\t' && *str!=' ')
+	str = pc;
+	while ((str < end) && *str && *str != '\n' && *str != '\t'
+	       && *str != ' ')
 		str++;
 
-	len=(size_t)(str-pc);
-	if (len >= GET_BUF_MAX )
-	{
-	    tokenization_error ( FATAL,
-		"get_word buffer overflow.  Max is %d.", GET_BUF_MAX-1 );
+	len = (size_t)(str - pc);
+	if (len >= GET_BUF_MAX) {
+		tokenization_error(FATAL,
+				   "get_word buffer overflow.  Max is %d.",
+				   GET_BUF_MAX - 1);
 	}
 
-	memcpy(statbuf, pc, len); 
-	statbuf[len]=0;
+	memcpy(statbuf, pc, len);
+	statbuf[len] = 0;
 
 #ifdef DEBUG_SCANNER
 	printf("%s:%d: debug: read token '%s', length=%ld\n",
-			iname, lineno, statbuf, len);
+	       iname, lineno, statbuf, len);
 #endif
-	pc+=len;
+	pc += len;
 	abs_token_no++;
 	return len;
 }
-
 
 /* **************************************************************************
  *
@@ -675,41 +659,37 @@ signed long get_word( void)
  *
  **************************************************************************** */
 
-bool get_word_in_line( char *func_nam)
-{                                                                               
-    signed long wlen;
-    bool retval = TRUE;
-    u8 *save_pc = pc;
-    unsigned int save_lineno = lineno;
-    unsigned int save_abs_token_no = abs_token_no;
+bool get_word_in_line(char *func_nam)
+{
+	signed long wlen;
+	bool retval = TRUE;
+	u8 *save_pc = pc;
+	unsigned int save_lineno = lineno;
+	unsigned int save_abs_token_no = abs_token_no;
 
-    /*  Copy of function name, for error message  */
-    char func_cpy[FUNC_CPY_BUF_SIZE+1];
+	/*  Copy of function name, for error message  */
+	char func_cpy[FUNC_CPY_BUF_SIZE + 1];
 
-    /*  Do this first, in the likely event that  func_nam  was  statbuf   */
-    if ( func_nam != NULL )
-    {
-	strncpy( func_cpy, func_nam, FUNC_CPY_BUF_SIZE);
-	func_cpy[FUNC_CPY_BUF_SIZE] = 0;  /*  Guarantee a null terminator  */
-    }
-
-    wlen = get_word();
-    if ( ( lineno != save_lineno ) || ( wlen <= 0 ) )
-    {
-	abs_token_no = save_abs_token_no;
-	lineno = save_lineno;
-	pc = save_pc;
-	retval = FALSE;
-	if ( func_nam != NULL )
-	{
-	    tokenization_error ( TKERROR,
-	       "Operator %s expects its target on the same line\n",
-		   strupr(func_cpy));
+	/*  Do this first, in the likely event that  func_nam  was  statbuf   */
+	if (func_nam != NULL) {
+		strncpy(func_cpy, func_nam, FUNC_CPY_BUF_SIZE);
+		func_cpy[FUNC_CPY_BUF_SIZE] = 0;	/*  Guarantee a null terminator  */
 	}
-    }
-    return ( retval );
-}
 
+	wlen = get_word();
+	if ((lineno != save_lineno) || (wlen <= 0)) {
+		abs_token_no = save_abs_token_no;
+		lineno = save_lineno;
+		pc = save_pc;
+		retval = FALSE;
+		if (func_nam != NULL) {
+			tokenization_error(TKERROR,
+					   "Operator %s expects its target on the same line\n",
+					   strupr(func_cpy));
+		}
+	}
+	return (retval);
+}
 
 /* **************************************************************************
  *
@@ -739,28 +719,26 @@ bool get_word_in_line( char *func_nam)
  *
  **************************************************************************** */
 
-bool get_rest_of_line( void)
+bool get_rest_of_line(void)
 {
-    bool retval = FALSE;
-    u8 *save_pc = pc;
-    unsigned int save_lineno = lineno;
-    unsigned int save_abs_token_no = abs_token_no;
+	bool retval = FALSE;
+	u8 *save_pc = pc;
+	unsigned int save_lineno = lineno;
+	unsigned int save_abs_token_no = abs_token_no;
 
-    if ( INVERSE( skip_ws() ) )
-    {
-        if ( lineno == save_lineno )
-	{
-	    signed long wlen = get_until('\n');
-	    if ( wlen > 0 ) retval = TRUE;
-	}else{
-	    abs_token_no = save_abs_token_no;
-	    lineno = save_lineno;
-	    pc = save_pc;
+	if (INVERSE(skip_ws())) {
+		if (lineno == save_lineno) {
+			signed long wlen = get_until('\n');
+			if (wlen > 0)
+				retval = TRUE;
+		} else {
+			abs_token_no = save_abs_token_no;
+			lineno = save_lineno;
+			pc = save_pc;
+		}
 	}
-    }
-    return( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -807,20 +785,19 @@ bool get_rest_of_line( void)
  **************************************************************************** */
 
 static bool unterm_is_colon = FALSE;
-void warn_unterm( int severity, char *something, unsigned int saved_lineno)
+void warn_unterm(int severity, char *something, unsigned int saved_lineno)
 {
-    unsigned int tmp = lineno;
-    lineno = saved_lineno;
-    if ( unterm_is_colon )
-    {
-	tokenization_error( severity, "Unterminated %s of %s\n",
-	    something, strupr( last_colon_defname) );
-	unterm_is_colon = FALSE;
-    }else{
-	tokenization_error( severity, "Unterminated %s", something);
-	in_last_colon( TRUE);
-    }
-    lineno = tmp;
+	unsigned int tmp = lineno;
+	lineno = saved_lineno;
+	if (unterm_is_colon) {
+		tokenization_error(severity, "Unterminated %s of %s\n",
+				   something, strupr(last_colon_defname));
+		unterm_is_colon = FALSE;
+	} else {
+		tokenization_error(severity, "Unterminated %s", something);
+		in_last_colon(TRUE);
+	}
+	lineno = tmp;
 }
 
 /* **************************************************************************
@@ -856,16 +833,15 @@ void warn_unterm( int severity, char *something, unsigned int saved_lineno)
  *
  **************************************************************************** */
 
-void warn_if_multiline( char *something, unsigned int start_lineno )
+void warn_if_multiline(char *something, unsigned int start_lineno)
 {
-    if ( report_multiline && ( start_lineno != lineno ) )
-    {
-	tokenization_error( WARNING, "Multi-line %s, started", something);
-	where_started( iname, start_lineno);
-    }
-    report_multiline = TRUE;
+	if (report_multiline && (start_lineno != lineno)) {
+		tokenization_error(WARNING, "Multi-line %s, started",
+				   something);
+		where_started(iname, start_lineno);
+	}
+	report_multiline = TRUE;
 }
-
 
 /* **************************************************************************
  *
@@ -893,19 +869,16 @@ void warn_if_multiline( char *something, unsigned int start_lineno )
 
 static void string_remark(char *errmsg_txt)
 {
-    unsigned int sav_lineno = lineno;
-    bool eof = skip_until('\n');
-    if ( ! eof )
-    {
-	eof = skip_ws();
-    }
-    if ( eof )
-    {
-	warn_unterm(WARNING, errmsg_txt, sav_lineno);
+	unsigned int sav_lineno = lineno;
+	bool eof = skip_until('\n');
+	if (!eof) {
+		eof = skip_ws();
 	}
-	
-}
+	if (eof) {
+		warn_unterm(WARNING, errmsg_txt, sav_lineno);
+	}
 
+}
 
 /*  Convert the given string to a number in the supplied base   */
 /*  Allow -- and ignore -- embedded periods.    */
@@ -917,24 +890,23 @@ static void string_remark(char *errmsg_txt)
  *  the calling routine is responsible for ascertaining
  *  the validity of the string being passed.
  */
-static long parse_number(u8 *start, u8 **endptr, int lbase) 
+static long parse_number(u8 * start, u8 ** endptr, int lbase)
 {
 	long val = 0;
-	bool negative = FALSE ;
-	int  curr;
-	u8 *nptr=start;
+	bool negative = FALSE;
+	int curr;
+	u8 *nptr = start;
 
 	curr = *nptr;
-	if (curr == '-')
-	{
-		negative = TRUE ;
+	if (curr == '-') {
+		negative = TRUE;
 		nptr++;
 	}
-	
+
 	for (curr = *nptr; (curr = *nptr); nptr++) {
-		if ( curr == '.' )
+		if (curr == '.')
 			continue;
-		if ( curr >= '0' && curr <= '9')
+		if (curr >= '0' && curr <= '9')
 			curr -= '0';
 		else if (curr >= 'a' && curr <= 'f')
 			curr += 10 - 'a';
@@ -942,25 +914,24 @@ static long parse_number(u8 *start, u8 **endptr, int lbase)
 			curr += 10 - 'A';
 		else
 			break;
-		
+
 		if (curr >= lbase)
 			break;
-		
+
 		val *= lbase;
 		val += curr;
 	}
 
 #ifdef DEBUG_SCANNER
 	if (curr)
-		printf( "%s:%d: warning: couldn't parse number '%s' (%d/%d)\n",
-				iname, lineno, start,curr,lbase);
+		printf("%s:%d: warning: couldn't parse number '%s' (%d/%d)\n",
+		       iname, lineno, start, curr, lbase);
 #endif
 
 	if (endptr)
-		*endptr=nptr;
+		*endptr = nptr;
 
-	if (negative)
-	{
+	if (negative) {
 		val = -val;
 	}
 	return val;
@@ -996,14 +967,13 @@ static long parse_number(u8 *start, u8 **endptr, int lbase)
  *              Calling routine will detect overflow.
  *
  **************************************************************************** */
-				
-static void add_byte_to_string( u8 nu_byte, u8 **walk )
+
+static void add_byte_to_string(u8 nu_byte, u8 ** walk)
 {
-    if ( *walk - statbuf < GET_BUF_MAX )
-    {
-	**walk = nu_byte;
+	if (*walk - statbuf < GET_BUF_MAX) {
+		**walk = nu_byte;
 	}
-    (*walk)++;
+	(*walk)++;
 }
 
 /* **************************************************************************
@@ -1054,102 +1024,99 @@ static void add_byte_to_string( u8 nu_byte, u8 **walk )
  *
  **************************************************************************** */
 
-static void c_string_escape( u8 **walk)
+static void c_string_escape(u8 ** walk)
 {
-    char c = *pc;
-    u8 val;
-    /*  We will come out of this "switch" statement
-     *      with a value for  val  and a decision
-     *      as to whether to write it.
-     */
-    bool write_val = TRUE;
-	
-    switch (c)
-    {
-			case 'n':
-				/* newline */
-	    val = '\n';
-				break;
-			case 't':
-				/* tab */
-	    val = '\t';
-				break;
-			default:
+	char c = *pc;
+	u8 val;
+	/*  We will come out of this "switch" statement
+	 *      with a value for  val  and a decision
+	 *      as to whether to write it.
+	 */
+	bool write_val = TRUE;
 
-	    /*  Digit-string?  Convert it to a number, using the current base.
-	     *  The first non-numeric character ends the numeric sequence
-	     *      and gets swallowed up.
-	     *  If the number exceeds the size of a byte, use the truncated
-	     *      value and issue a WARNING.
-	     *  If the first character in the "digit"-string was non-numeric,
-	     *      use the character literally and issue a WARNING.
-	     */
+	switch (c) {
+	case 'n':
+		/* newline */
+		val = '\n';
+		break;
+	case 't':
+		/* tab */
+		val = '\t';
+		break;
+	default:
 
-	     /*
-	     *  If the sequence ender is a quote, it might be the end of
-	     *      the string, or the start of a special-character or even
-	     *      of an "( ... ) hex-sequence, so don't swallow it up.
-	     */
-	    {
-		long lval;
-		u8 *sav_pc = pc;
-		lval=parse_number(pc, &pc, base);
-		val = (u8)lval;
+		/*  Digit-string?  Convert it to a number, using the current base.
+		 *  The first non-numeric character ends the numeric sequence
+		 *      and gets swallowed up.
+		 *  If the number exceeds the size of a byte, use the truncated
+		 *      value and issue a WARNING.
+		 *  If the first character in the "digit"-string was non-numeric,
+		 *      use the character literally and issue a WARNING.
+		 */
+
+		/*
+		 *  If the sequence ender is a quote, it might be the end of
+		 *      the string, or the start of a special-character or even
+		 *      of an "( ... ) hex-sequence, so don't swallow it up.
+		 */
+		{
+			long lval;
+			u8 *sav_pc = pc;
+			lval = parse_number(pc, &pc, base);
+			val = (u8) lval;
 #ifdef DEBUG_SCANNER
-				if (verbose)
-					printf( "%s:%d: debug: escape code "
-						"0x%x\n",iname, lineno, val);
+			if (verbose)
+				printf("%s:%d: debug: escape code "
+				       "0x%x\n", iname, lineno, val);
 #endif
-		if ( lval > 0x0ff )
-		{
-		    tokenization_error ( WARNING,
-			"Numeric String after \\ overflows byte.  "
-			    "Using 0x%02x.\n", val);
+			if (lval > 0x0ff) {
+				tokenization_error(WARNING,
+						   "Numeric String after \\ overflows byte.  "
+						   "Using 0x%02x.\n", val);
 			}
 
-		if ( pc == sav_pc )
-		{
-		    /*  NOTE:  Here, PC hasn't been advanced past its
-		     *      saved value, so we can count on  C  remaining
-		     *      unchanged since the start of the routine.
-		     */ 
-		    /*  Don't use the null-byte at the end of the buffer  */
-		    if ( ( pc >= end ) 
-		    /*        or a sequence-ending quote.                 */
-			 || ( c == '"' ) )
-		    {
-			write_val = FALSE;
-		    }else{
-			/*  In the WARNING message, print the character
-			 *      if it's printable or show it in hex
-			 *      if it's not.
-			 */
-			if ( (c > 0x20 ) && ( c <= 0x7e) )
-			{
-			    tokenization_error ( WARNING,
-				"Unrecognized character, %c, "
-				    "after \\ in string.  "
-					"Using it literally.\n", c);
-			}else{
-			    tokenization_error ( WARNING,
-				"Unrecognized character, 0x%02x, "
-				    "after \\ in string.  "
-					"Using it literally.\n", c);
+			if (pc == sav_pc) {
+				/*  NOTE:  Here, PC hasn't been advanced past its
+				 *      saved value, so we can count on  C  remaining
+				 *      unchanged since the start of the routine.
+				 */
+				/*  Don't use the null-byte at the end of the buffer  */
+				if ((pc >= end)
+				    /*        or a sequence-ending quote.                 */
+				    || (c == '"')) {
+					write_val = FALSE;
+				} else {
+					/*  In the WARNING message, print the character
+					 *      if it's printable or show it in hex
+					 *      if it's not.
+					 */
+					if ((c > 0x20) && (c <= 0x7e)) {
+						tokenization_error(WARNING,
+								   "Unrecognized character, %c, "
+								   "after \\ in string.  "
+								   "Using it literally.\n",
+								   c);
+					} else {
+						tokenization_error(WARNING,
+								   "Unrecognized character, 0x%02x, "
+								   "after \\ in string.  "
+								   "Using it literally.\n",
+								   c);
+					}
+					val = c;
+				}
 			}
-			val = c;
-		    }
-		}
-		/*  NOTE:  Here, however, PC may have been advanced...  */
-		/*  Don't swallow the sequence-ender if it's a quote.   */
-		if ( *pc == '"' )
-		{
-		    pc--;
-		}
+			/*  NOTE:  Here, however, PC may have been advanced...  */
+			/*  Don't swallow the sequence-ender if it's a quote.   */
+			if (*pc == '"') {
+				pc--;
+			}
 
-	    }   /*  End of the  "default"  clause  */
-    }    /*  End of the  "switch"  statement  */
+		}		/*  End of the  "default"  clause  */
+	}			/*  End of the  "switch"  statement  */
 
-    if ( write_val ) add_byte_to_string( val, walk );
+	if (write_val)
+		add_byte_to_string(val, walk);
 
 }
 
@@ -1238,68 +1205,61 @@ static void c_string_escape( u8 **walk)
  *
  **************************************************************************** */
 
-static bool get_sequence(u8 **walk)
+static bool get_sequence(u8 ** walk)
 {
-    int pv_indx = 0;
-    bool retval = FALSE;   /*  "Abnormal Completion" indicator  */
-    bool ready_to_parse = FALSE;
-    char next_ch;
-    char pval[3];
+	int pv_indx = 0;
+	bool retval = FALSE;	/*  "Abnormal Completion" indicator  */
+	bool ready_to_parse = FALSE;
+	char next_ch;
+	char pval[3];
 
 #ifdef DEBUG_SCANNER
 	printf("%s:%d: debug: hex field:", iname, lineno);
 #endif
-    pval[2]=0;
+	pval[2] = 0;
 
-    while ( pc < end )
-    {
-	next_ch = *pc;
-	if ( next_ch == ')' )
-	{
-	    retval = TRUE;
-				break;
-	}
-	if ( hex_remark_escape )
-	{
-	    if ( next_ch == '\\' )
-	    {
-		string_remark("string hex-sequence remark");
-		continue;
-	    }
-	}
-	if ( isxdigit(next_ch) )
-	{
-	    pval[pv_indx] = next_ch;
-	    if ( pv_indx == 0 )
-	    {
-		pv_indx++;
-	    }else{
-		ready_to_parse = TRUE;
-	    }
-	}else{
-	    if ( next_ch == '\n' )  lineno++ ;
-	    if ( pv_indx != 0 )
-	    {
-		pval[1] = 0;
-		ready_to_parse = TRUE;
-	    }
-	}
-	if ( ready_to_parse )
-	{
-	    u8 val = parse_number(pval, NULL, 16);
-	    *((*walk)++)=val;
+	while (pc < end) {
+		next_ch = *pc;
+		if (next_ch == ')') {
+			retval = TRUE;
+			break;
+		}
+		if (hex_remark_escape) {
+			if (next_ch == '\\') {
+				string_remark("string hex-sequence remark");
+				continue;
+			}
+		}
+		if (isxdigit(next_ch)) {
+			pval[pv_indx] = next_ch;
+			if (pv_indx == 0) {
+				pv_indx++;
+			} else {
+				ready_to_parse = TRUE;
+			}
+		} else {
+			if (next_ch == '\n')
+				lineno++;
+			if (pv_indx != 0) {
+				pval[1] = 0;
+				ready_to_parse = TRUE;
+			}
+		}
+		if (ready_to_parse) {
+			u8 val = parse_number(pval, NULL, 16);
+			*((*walk)++) = val;
 #ifdef DEBUG_SCANNER
-		printf(" %02x",val);
+			printf(" %02x", val);
 #endif
-	    pv_indx = 0;
-	    ready_to_parse = FALSE;
+			pv_indx = 0;
+			ready_to_parse = FALSE;
+		}
+		pc++;
 	}
-	pc++;
-    }
 #ifdef DEBUG_SCANNER
 	printf("\n");
 #endif
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -1331,14 +1291,14 @@ static bool get_sequence(u8 **walk)
  *
  ************************************************************************** */
 
-static signed long get_string( bool pack_str)
+static signed long get_string(bool pack_str)
 {
 	u8 *walk;
 	unsigned long len;
 	char c;
 	bool run = TRUE;
-	unsigned long start_lineno = lineno;    /*  For warning message  */
-	
+	unsigned long start_lineno = lineno;	/*  For warning message  */
+
 	/*
 	 *  Bump past the single whitespace character that delimits
 	 *      the command -- e.g.,  ."  or  "  or suchlike -- that
@@ -1346,63 +1306,61 @@ static signed long get_string( bool pack_str)
 	 *      -delimiting whitespace character.  Regard any sub-
 	 *      sequent whitespace characters as part of the string
 	 */
-	if ( *pc == '\n' ) lineno++;
+	if (*pc == '\n')
+		lineno++;
 	pc++;
 
-	got_until_eof = TRUE ;
+	got_until_eof = TRUE;
 
-	walk=statbuf;
+	walk = statbuf;
 	while (run) {
-		switch ((c=*pc))
-		{
-		    /*  Standard use of '"' (Quote)  for special-char escape  */
-		    case '\"':
+		switch ((c = *pc)) {
+			/*  Standard use of '"' (Quote)  for special-char escape  */
+		case '\"':
 			/*  Skip the '"' (Quote) */
-				pc++;
+			pc++;
 			/*  End of the buffer also ends the string cleanly  */
-			if ( pc >= end )
-			{
-			    run = FALSE;
-			    got_until_eof = FALSE ;
+			if (pc >= end) {
+				run = FALSE;
+				got_until_eof = FALSE;
 				break;
 			}
 			/*  Pick up the next char after the '"' (Quote) */
-			c=*pc;
-			switch (c)
-			{
-			    case '(':
-				pc++; /* skip the '(' */
+			c = *pc;
+			switch (c) {
+			case '(':
+				pc++;	/* skip the '(' */
 				run = get_sequence(&walk);
 				break;
 
 			case 'n':
-				add_byte_to_string( '\n', &walk);
+				add_byte_to_string('\n', &walk);
 				break;
 			case 'r':
-				add_byte_to_string( '\r', &walk);
+				add_byte_to_string('\r', &walk);
 				break;
 			case 't':
-				add_byte_to_string( '\t', &walk);
+				add_byte_to_string('\t', &walk);
 				break;
 			case 'f':
-				add_byte_to_string( '\f', &walk);
+				add_byte_to_string('\f', &walk);
 				break;
 			case 'l':
-				add_byte_to_string( '\n', &walk);
+				add_byte_to_string('\n', &walk);
 				break;
 			case 'b':
-				add_byte_to_string( 0x08, &walk);
+				add_byte_to_string(0x08, &walk);
 				break;
 			case '!':
-				add_byte_to_string( 0x07, &walk);
+				add_byte_to_string(0x07, &walk);
 				break;
 			case '^':
-				pc++;    /*   Skip the up-arrow (Caret) */
-				add_byte_to_string( *pc & 0x1f , &walk);
+				pc++;	/*   Skip the up-arrow (Caret) */
+				add_byte_to_string(*pc & 0x1f, &walk);
 				break;
-			    /*  We're done after any of the whitespace
-			     *     characters follows a quote.
-			     */
+				/*  We're done after any of the whitespace
+				 *     characters follows a quote.
+				 */
 			case ' ':
 			case '\t':
 				/*  Advance past the terminating whitespace
@@ -1410,32 +1368,31 @@ static signed long get_string( bool pack_str)
 				 *  Let  get_word()  handle that.
 				 */
 				pc++;
-			    case '\n':
-				run=FALSE;
-				got_until_eof = FALSE ;
+			case '\n':
+				run = FALSE;
+				got_until_eof = FALSE;
 				break;
 			default:
 				/*  Control allowability of Quote-Backslash
 				 *      as a String-Remark by means of a
 				 *      command-line switch.
 				 */
-				if ( string_remark_escape )
-				{
-				    if ( c == '\\' )
-				    {
-					string_remark("string-escape remark");
-					/* The first non-blank in the new line
-					 *     has not been processed yet.
-					 *     Back up to allow it to be.
-					 */
-					pc--;
-				break;
-			}
+				if (string_remark_escape) {
+					if (c == '\\') {
+						string_remark
+						    ("string-escape remark");
+						/* The first non-blank in the new line
+						 *     has not been processed yet.
+						 *     Back up to allow it to be.
+						 */
+						pc--;
+						break;
+					}
 				}
-				add_byte_to_string( c, &walk);
+				add_byte_to_string(c, &walk);
 			}
 			break;
-		    case '\n':
+		case '\n':
 			/*  Allow strings to cross lines.  Include the
 			 *      newline in the string.  Account for it.
 			 */
@@ -1444,57 +1401,53 @@ static signed long get_string( bool pack_str)
 			/*  Control allowability of C-style escape-character
 			 *      syntax by means of a command-line switch.
 			 */
-			if ( c_style_string_escape )
-			{
-			    if ( c == '\\' )
-			    {
-				pc++;
-				c_string_escape(&walk );
-				break;
-			    }
+			if (c_style_string_escape) {
+				if (c == '\\') {
+					pc++;
+					c_string_escape(&walk);
+					break;
+				}
 			}
-			add_byte_to_string( c, &walk);
+			add_byte_to_string(c, &walk);
 		}
 		/*  Advance past the char processed, unless we're done.     */
-		if ( run ) pc++;
+		if (run)
+			pc++;
 		/*  Done if we hit end of file before string was concluded  */
-		if ( pc >= end )
-		{
-		    run = FALSE;
-		    if ( got_until_eof )
-		    {
-			warn_unterm( WARNING, "string", start_lineno);
-			/*  Prevent multiple messages for one error  */
-			got_until_eof = FALSE;
-		    }
+		if (pc >= end) {
+			run = FALSE;
+			if (got_until_eof) {
+				warn_unterm(WARNING, "string", start_lineno);
+				/*  Prevent multiple messages for one error  */
+				got_until_eof = FALSE;
+			}
 		}
 	}
-	
-	warn_if_multiline( "string", start_lineno);
+
+	warn_if_multiline("string", start_lineno);
 
 	len = walk - statbuf;
-	if (len >= GET_BUF_MAX )
-	{
-	    tokenization_error ( TKERROR,
-		"get_string buffer overflow.  Max is %d\n.", GET_BUF_MAX-1 );
-	    len = GET_BUF_MAX-1;
+	if (len >= GET_BUF_MAX) {
+		tokenization_error(TKERROR,
+				   "get_string buffer overflow.  Max is %d\n.",
+				   GET_BUF_MAX - 1);
+		len = GET_BUF_MAX - 1;
 	}
 #ifdef DEBUG_SCANNER
 	if (verbose)
-		printf("%s:%d: debug: scanned string: '%s'\n", 
-					iname, lineno, statbuf);
+		printf("%s:%d: debug: scanned string: '%s'\n",
+		       iname, lineno, statbuf);
 #endif
-	if ( pack_str && (len > STRING_LEN_MAX) )
-	{
-	    tokenization_error ( WARNING,
-		"String length being truncated to %d.\n", STRING_LEN_MAX );
-	    len = STRING_LEN_MAX;
+	if (pack_str && (len > STRING_LEN_MAX)) {
+		tokenization_error(WARNING,
+				   "String length being truncated to %d.\n",
+				   STRING_LEN_MAX);
+		len = STRING_LEN_MAX;
 	}
 	statbuf[len] = 0;
 
-	return len ;
+	return len;
 }
-
 
 /* **************************************************************************
  *
@@ -1537,60 +1490,57 @@ static signed long get_string( bool pack_str)
  *
  **************************************************************************** */
 
-static void handle_user_message( char delim, bool print_it )
+static void handle_user_message(char delim, bool print_it)
 {
-    signed long wlen;
-    unsigned int start_lineno = lineno;
-    unsigned int multiline_start = lineno;    /*  For warning message  */
-    bool check_multiline = FALSE;
-    const char *ug_msg = "user-generated message";
+	signed long wlen;
+	unsigned int start_lineno = lineno;
+	unsigned int multiline_start = lineno;	/*  For warning message  */
+	bool check_multiline = FALSE;
+	const char *ug_msg = "user-generated message";
 
-    if ( delim == '"' )
-    {
-	wlen = get_string( FALSE);
-    }else{
-	/*
-	 *  When the message-delimiter is a new-line, and the
-	 *      command-delimiter was a new-line, it means the
-	 *      string length is zero; we won't bump the PC.
-	 *  Otherwise, we will honor the convention we extend
-	 *      to  .(  whereby, if the command is delimited
-	 *      by a new-line, we allow the string to begin
-	 *      on the next line.
-	 */
-	if ( delim == '\n' )
-	{
-	    if ( *pc != '\n') pc++;
-	}else{
-	    if ( *pc == '\n' ) lineno++;
-	    pc++;
-	    multiline_start = lineno;
-	    check_multiline = TRUE;
+	if (delim == '"') {
+		wlen = get_string(FALSE);
+	} else {
+		/*
+		 *  When the message-delimiter is a new-line, and the
+		 *      command-delimiter was a new-line, it means the
+		 *      string length is zero; we won't bump the PC.
+		 *  Otherwise, we will honor the convention we extend
+		 *      to  .(  whereby, if the command is delimited
+		 *      by a new-line, we allow the string to begin
+		 *      on the next line.
+		 */
+		if (delim == '\n') {
+			if (*pc != '\n')
+				pc++;
+		} else {
+			if (*pc == '\n')
+				lineno++;
+			pc++;
+			multiline_start = lineno;
+			check_multiline = TRUE;
+		}
+		wlen = get_until(delim);
 	}
-	wlen = get_until( delim );
-    }
 
-    if ( print_it )
-    {
-	unsigned int tmp_lineno = lineno;
-	lineno = start_lineno;
-	/*  Don't add a new-line to body of the message.
-	 *  Routine already takes care of that.
-	 *  Besides, buffer might be full...
-	 */
-	tokenization_error( MESSAGE, statbuf);
-	lineno = tmp_lineno;
-    }
-
-    if ( got_until_eof )   /*  Crude but effective retrofit... */
-    {
-	warn_unterm(WARNING, (char *)ug_msg, start_lineno);
-    }else{
-	if ( check_multiline )
-	{
-	    warn_if_multiline( (char *)ug_msg, multiline_start);
+	if (print_it) {
+		unsigned int tmp_lineno = lineno;
+		lineno = start_lineno;
+		/*  Don't add a new-line to body of the message.
+		 *  Routine already takes care of that.
+		 *  Besides, buffer might be full...
+		 */
+		tokenization_error(MESSAGE, statbuf);
+		lineno = tmp_lineno;
 	}
-    }
+
+	if (got_until_eof) {	/*  Crude but effective retrofit... */
+		warn_unterm(WARNING, (char *)ug_msg, start_lineno);
+	} else {
+		if (check_multiline) {
+			warn_if_multiline((char *)ug_msg, multiline_start);
+		}
+	}
 }
 
 /* **************************************************************************
@@ -1623,10 +1573,10 @@ static void handle_user_message( char delim, bool print_it )
  *
  **************************************************************************** */
 
-void user_message( tic_param_t pfield )
+void user_message(tic_param_t pfield)
 {
-    char delim = (char)pfield.fw_token ;
-    handle_user_message( delim, TRUE);
+	char delim = (char)pfield.fw_token;
+	handle_user_message(delim, TRUE);
 }
 
 /* **************************************************************************
@@ -1654,13 +1604,11 @@ void user_message( tic_param_t pfield )
  *
  **************************************************************************** */
 
-void skip_user_message( tic_param_t pfield )
+void skip_user_message(tic_param_t pfield)
 {
-    char delim = (char)pfield.deflt_elem ;
-    handle_user_message( delim, FALSE);
+	char delim = (char)pfield.deflt_elem;
+	handle_user_message(delim, FALSE);
 }
-
-
 
 /* **************************************************************************
  *
@@ -1689,30 +1637,29 @@ void skip_user_message( tic_param_t pfield )
  *
  **************************************************************************** */
 
-bool get_number( long *result)
+bool get_number(long *result)
 {
-    u8 *until;
-    long val;
-    bool retval = FALSE ;
+	u8 *until;
+	long val;
+	bool retval = FALSE;
 
-    val = parse_number(statbuf, &until, base);
-	
+	val = parse_number(statbuf, &until, base);
+
 #ifdef DEBUG_SCANNER
-    printf("%s:%d: debug: parsing number: base 0x%x, val 0x%lx, "
-		"processed %ld of %ld bytes\n", iname, lineno, 
-		 base, val,(size_t)(until-statbuf), strlen((char *)statbuf));
+	printf("%s:%d: debug: parsing number: base 0x%x, val 0x%lx, "
+	       "processed %ld of %ld bytes\n", iname, lineno,
+	       base, val, (size_t)(until - statbuf), strlen((char *)statbuf));
 #endif
 
-    /*  If number-parsing ended before the end of the input word,
-     *      then the input word was not a valid number.
-     */
-    if (until==(statbuf+strlen((char *)statbuf)))
-    {
-	*result=val;
-	retval = TRUE;
-    }
+	/*  If number-parsing ended before the end of the input word,
+	 *      then the input word was not a valid number.
+	 */
+	if (until == (statbuf + strlen((char *)statbuf))) {
+		*result = val;
+		retval = TRUE;
+	}
 
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -1741,15 +1688,15 @@ bool get_number( long *result)
  *
  **************************************************************************** */
 
-static void deliver_number( long numval)
+static void deliver_number(long numval)
 {
-    if ( in_tokz_esc )
-    {
-        dpush( numval );
-    } else {
-        emit_literal(numval);
-    }
+	if (in_tokz_esc) {
+		dpush(numval);
+	} else {
+		emit_literal(numval);
+	}
 }
+
 /* **************************************************************************
  *
  *      Function name:  handle_number
@@ -1770,18 +1717,17 @@ static void deliver_number( long numval)
  *
  **************************************************************************** */
 
-static bool handle_number( void )
+static bool handle_number(void)
 {
-    bool retval ;
-    long numval;
+	bool retval;
+	long numval;
 
-    retval = get_number( &numval );
-    if ( retval )
-    {
-        deliver_number( numval );
-    }
+	retval = get_number(&numval);
+	if (retval) {
+		deliver_number(numval);
+	}
 
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -1811,21 +1757,17 @@ static bool handle_number( void )
  *
  **************************************************************************** */
 
-static void ascii_right_number( char *in_str)
+static void ascii_right_number(char *in_str)
 {
-    u8 nxt_ch;
-    char *str_ptr = in_str;
-    long numval = 0;
+	u8 nxt_ch;
+	char *str_ptr = in_str;
+	long numval = 0;
 
-    for ( nxt_ch = (u8)*str_ptr ;
-	    ( nxt_ch = (u8)*str_ptr ) != 0 ;
-        	str_ptr++ )
-    {
-        numval = ( numval << 8 ) + nxt_ch ;
-    }
-    deliver_number( numval );
+	for (nxt_ch = (u8) * str_ptr; (nxt_ch = (u8) * str_ptr) != 0; str_ptr++) {
+		numval = (numval << 8) + nxt_ch;
+	}
+	deliver_number(numval);
 }
-
 
 /* **************************************************************************
  *
@@ -1850,24 +1792,24 @@ static void ascii_right_number( char *in_str)
  *
  **************************************************************************** */
 
-static void ascii_left_number( char *in_str)
+static void ascii_left_number(char *in_str)
 {
-    u8 nxt_ch;
-    char *str_ptr = in_str;
-    long numval = 0;
-    int shift_amt = 24;
-    bool shift_over = FALSE ;
+	u8 nxt_ch;
+	char *str_ptr = in_str;
+	long numval = 0;
+	int shift_amt = 24;
+	bool shift_over = FALSE;
 
-    for ( nxt_ch = (u8)*str_ptr ;
-	    ( nxt_ch = (u8)*str_ptr ) != 0 ;
-        	str_ptr++ )
-    {
-        if ( shift_over )  numval <<= 8;
-	if ( shift_amt == 0 )  shift_over = TRUE ;
-	numval += ( nxt_ch << shift_amt );
-	if ( shift_amt > 0 ) shift_amt -= 8;
-    }
-    deliver_number( numval );
+	for (nxt_ch = (u8) * str_ptr; (nxt_ch = (u8) * str_ptr) != 0; str_ptr++) {
+		if (shift_over)
+			numval <<= 8;
+		if (shift_amt == 0)
+			shift_over = TRUE;
+		numval += (nxt_ch << shift_amt);
+		if (shift_amt > 0)
+			shift_amt -= 8;
+	}
+	deliver_number(numval);
 
 }
 
@@ -1881,7 +1823,7 @@ static void ascii_left_number( char *in_str)
 
 void init_scanner(void)
 {
-	statbuf=safe_malloc(GET_BUF_MAX, "initting scanner");
+	statbuf = safe_malloc(GET_BUF_MAX, "initting scanner");
 }
 
 /* **************************************************************************
@@ -1925,34 +1867,32 @@ void exit_scanner(void)
  *
  **************************************************************************** */
 
-static void set_hdr_flag( headeredness new_flag)
+static void set_hdr_flag(headeredness new_flag)
 {
-    headeredness new_state = new_flag;
-    switch ( new_flag)
-    {
+	headeredness new_state = new_flag;
+	switch (new_flag) {
 	case FLAG_HEADERLESS:
-	    {
-		if ( always_headers )
-		{   new_state = FLAG_HEADERS;
+		{
+			if (always_headers) {
+				new_state = FLAG_HEADERS;
+			}
+			/*  No  break.  Intentional...   */
 		}
-	    /*  No  break.  Intentional...   */
-	    }
 	case FLAG_HEADERS:
-	    {
-		if ( always_external )
-		{   new_state = FLAG_EXTERNAL;
+		{
+			if (always_external) {
+				new_state = FLAG_EXTERNAL;
+			}
+			/*  No  break.  Intentional...   */
 		}
-	    /*  No  break.  Intentional...   */
-	    }
 	case FLAG_EXTERNAL:
-	    break;  /*  Satisfy compiler's error-checking...   */
-	/*  No default needed here...   */
-    }
+		break;		/*  Satisfy compiler's error-checking...   */
+		/*  No default needed here...   */
+	}
 
-    hdr_flag = new_state;
+	hdr_flag = new_state;
 
 }
-
 
 /* **************************************************************************
  *
@@ -1986,25 +1926,26 @@ static void set_hdr_flag( headeredness new_flag)
  *
  **************************************************************************** */
 
-void init_scan_state( void)
+void init_scan_state(void)
 {
-    base = 0x0a;
-    pci_is_last_image = TRUE;
-    incolon = FALSE;
-    is_instance = FALSE;
-    set_hdr_flag( FLAG_HEADERLESS);
-    reset_fcode_ranges();
-    first_fc_starter = TRUE;
-    if ( last_colon_filename != NULL ) free( last_colon_filename);
-    if ( instance_filename != NULL ) free( instance_filename);
-    last_colon_filename = NULL;
-    instance_filename = NULL;
-    dev_change_instance_warning = TRUE;
-    instance_definer_gap = FALSE;
-    need_to_pop_source = FALSE;
-    ret_stk_depth = 0;
+	base = 0x0a;
+	pci_is_last_image = TRUE;
+	incolon = FALSE;
+	is_instance = FALSE;
+	set_hdr_flag(FLAG_HEADERLESS);
+	reset_fcode_ranges();
+	first_fc_starter = TRUE;
+	if (last_colon_filename != NULL)
+		free(last_colon_filename);
+	if (instance_filename != NULL)
+		free(instance_filename);
+	last_colon_filename = NULL;
+	instance_filename = NULL;
+	dev_change_instance_warning = TRUE;
+	instance_definer_gap = FALSE;
+	need_to_pop_source = FALSE;
+	ret_stk_depth = 0;
 }
-
 
 /* **************************************************************************
  *
@@ -2038,24 +1979,21 @@ void init_scan_state( void)
  *
  **************************************************************************** */
 
-static void collect_input_filename( char **saved_nam)
+static void collect_input_filename(char **saved_nam)
 {
-    bool update_lcfn = TRUE;    /*  Need to re-allocate?  */
-    if ( *saved_nam != NULL )
-    {
-	if ( strcmp( *saved_nam, iname) == 0 )
-	{
-	    /*  Last collected filename unchanged from iname  */
-	    update_lcfn = FALSE;
-	}else{
-	    free( *saved_nam);
+	bool update_lcfn = TRUE;	/*  Need to re-allocate?  */
+	if (*saved_nam != NULL) {
+		if (strcmp(*saved_nam, iname) == 0) {
+			/*  Last collected filename unchanged from iname  */
+			update_lcfn = FALSE;
+		} else {
+			free(*saved_nam);
+		}
 	}
-    }
-    if ( update_lcfn )
-    {
-	*saved_nam = strdup(iname);
-    }
-} 
+	if (update_lcfn) {
+		*saved_nam = strdup(iname);
+	}
+}
 
 /* **************************************************************************
  *
@@ -2092,32 +2030,29 @@ static void collect_input_filename( char **saved_nam)
  *
  **************************************************************************** */
 
-static bool test_in_colon ( char *wname,
-                           bool sb_in_colon,    /*  "Should Be IN colon"  */
-			        int severity,
-				     char *use_instead)
+static bool test_in_colon(char *wname, bool sb_in_colon,	/*  "Should Be IN colon"  */
+			  int severity, char *use_instead)
 {
-    bool is_wrong;
-    bool retval = TRUE ;
+	bool is_wrong;
+	bool retval = TRUE;
 
-    is_wrong = BOOLVAL(( sb_in_colon != FALSE ) != ( incolon != FALSE )) ;
-    if ( is_wrong )
-    {  
-        char *ui_pt1 = "";
-        char *ui_pt2 = "";
-        char *ui_pt3 = "";
-	retval = FALSE;
-	if ( use_instead != NULL )
-	{
-	    ui_pt1 = "  Use  ";
-	    ui_pt2 = use_instead;
-	    ui_pt3 = "  instead.";
+	is_wrong = BOOLVAL((sb_in_colon != FALSE) != (incolon != FALSE));
+	if (is_wrong) {
+		char *ui_pt1 = "";
+		char *ui_pt2 = "";
+		char *ui_pt3 = "";
+		retval = FALSE;
+		if (use_instead != NULL) {
+			ui_pt1 = "  Use  ";
+			ui_pt2 = use_instead;
+			ui_pt3 = "  instead.";
+		}
+		tokenization_error(severity, "The word  %s  should not be used "
+				   "%sside of a colon definition.%s%s%s\n",
+				   strupr(wname), sb_in_colon ? "out" : "in",
+				   ui_pt1, ui_pt2, ui_pt3);
 	}
-	tokenization_error ( severity, "The word  %s  should not be used "
-	    "%sside of a colon definition.%s%s%s\n", strupr(wname),
-	        sb_in_colon ? "out" : "in", ui_pt1, ui_pt2, ui_pt3 );
-    }
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -2131,37 +2066,33 @@ static bool test_in_colon ( char *wname,
  *
  **************************************************************************** */
 
-static void must_be_deep_in_do( int how_deep )
+static void must_be_deep_in_do(int how_deep)
 {
-    int functional_depth = do_loop_depth;
-    if ( incolon )
-    {
-        functional_depth -= last_colon_do_depth;
-    }
-    if ( functional_depth < how_deep )
-    {
-	char deep_do[64] = "";
-	int indx;
-	bool prefix = FALSE;
-
-	for ( indx = 0; indx < how_deep ; indx ++ )
-	{
-	    strcat( deep_do, "DO ... ");
+	int functional_depth = do_loop_depth;
+	if (incolon) {
+		functional_depth -= last_colon_do_depth;
 	}
-	for ( indx = 0; indx < how_deep ; indx ++ )
-	{
-	    if ( prefix )
-	    {
-		strcat( deep_do, " ... ");
-	    }
-	    strcat( deep_do, "LOOP");
-	    prefix = TRUE;
-	}
+	if (functional_depth < how_deep) {
+		char deep_do[64] = "";
+		int indx;
+		bool prefix = FALSE;
 
-	tokenization_error( TKERROR,
-	    "%s outside of  %s  structure", strupr(statbuf), deep_do);
-	in_last_colon( TRUE);
-    }
+		for (indx = 0; indx < how_deep; indx++) {
+			strcat(deep_do, "DO ... ");
+		}
+		for (indx = 0; indx < how_deep; indx++) {
+			if (prefix) {
+				strcat(deep_do, " ... ");
+			}
+			strcat(deep_do, "LOOP");
+			prefix = TRUE;
+		}
+
+		tokenization_error(TKERROR,
+				   "%s outside of  %s  structure",
+				   strupr(statbuf), deep_do);
+		in_last_colon(TRUE);
+	}
 
 }
 
@@ -2219,11 +2150,10 @@ static void must_be_deep_in_do( int how_deep )
  *
  **************************************************************************** */
 
-static void bump_ret_stk_depth( int bump)
+static void bump_ret_stk_depth(int bump)
 {
-    ret_stk_depth += bump;
+	ret_stk_depth += bump;
 }
-
 
 /* **************************************************************************
  *
@@ -2278,24 +2208,23 @@ static void bump_ret_stk_depth( int bump)
  *
  **************************************************************************** */
 
-static void ret_stk_balance_rpt( char *before_what, bool clear_it)
+static void ret_stk_balance_rpt(char *before_what, bool clear_it)
 {
-    if ( ret_stk_depth != 0 )
-    {
-	char *what_flow = ret_stk_depth < 0 ? "deficit" : "excess" ;
-	char *what_phr =  before_what != NULL ? before_what : strupr(statbuf);
+	if (ret_stk_depth != 0) {
+		char *what_flow = ret_stk_depth < 0 ? "deficit" : "excess";
+		char *what_phr =
+		    before_what != NULL ? before_what : strupr(statbuf);
 
-	tokenization_error( WARNING,
-	    "Possible Return-Stack %s before %s", what_flow, what_phr);
-	in_last_colon( TRUE);
+		tokenization_error(WARNING,
+				   "Possible Return-Stack %s before %s",
+				   what_flow, what_phr);
+		in_last_colon(TRUE);
 
-	if ( clear_it )
-	{
-	    ret_stk_depth = 0;
+		if (clear_it) {
+			ret_stk_depth = 0;
+		}
 	}
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -2326,19 +2255,16 @@ static void ret_stk_balance_rpt( char *before_what, bool clear_it)
  *
  **************************************************************************** */
 
-static void ret_stk_access_rpt( void)
+static void ret_stk_access_rpt(void)
 {
-    if ( ret_stk_depth <= 0 )
-    {
-	tokenization_error( WARNING,
-	    "Possible Return-Stack access attempt by %s "
-		"without value having been placed there",
-		strupr(statbuf) );
-	in_last_colon( TRUE);
-    }
+	if (ret_stk_depth <= 0) {
+		tokenization_error(WARNING,
+				   "Possible Return-Stack access attempt by %s "
+				   "without value having been placed there",
+				   strupr(statbuf));
+		in_last_colon(TRUE);
+	}
 }
-
-
 
 /* **************************************************************************
  *
@@ -2354,28 +2280,26 @@ static void ret_stk_access_rpt( void)
  *
  **************************************************************************** */
 
-static void encode_file( const char *filename )
+static void encode_file(const char *filename)
 {
 	FILE *f;
 	size_t s;
-	int num_encoded=0;
-	
-	tokenization_error( INFO, "ENCODing File %s\n", filename );
+	int num_encoded = 0;
 
-	f = open_expanded_file( filename, "rb", "encoding");
-	if( f != NULL )
-	{
-	    while( (s=fread(statbuf, 1, STRING_LEN_MAX, f)) )
-	    {
-		    emit_token("b(\")");
-		    emit_string(statbuf, s);
-		    emit_token("encode-bytes");
-		    if( num_encoded )
-			    emit_token("encode+");
-		    num_encoded += s;
-	    }
-	    fclose( f );
-	    tokenization_error ( INFO, "ENCODed %d bytes.\n", num_encoded);
+	tokenization_error(INFO, "ENCODing File %s\n", filename);
+
+	f = open_expanded_file(filename, "rb", "encoding");
+	if (f != NULL) {
+		while ((s = fread(statbuf, 1, STRING_LEN_MAX, f))) {
+			emit_token("b(\")");
+			emit_string(statbuf, s);
+			emit_token("encode-bytes");
+			if (num_encoded)
+				emit_token("encode+");
+			num_encoded += s;
+		}
+		fclose(f);
+		tokenization_error(INFO, "ENCODed %d bytes.\n", num_encoded);
 	}
 }
 
@@ -2419,25 +2343,23 @@ static void encode_file( const char *filename )
  *
  **************************************************************************** */
 
-void check_name_length( signed long wlen )
+void check_name_length(signed long wlen)
 {
-    if ( wlen > 31 )
-    {
-	int severity = TKERROR;
-	if ( in_tokz_esc )
-	{   severity = INFO;
-	}else{
-	    if (hdr_flag == FLAG_HEADERLESS)
-	    {   severity = WARNING;
-	    }
+	if (wlen > 31) {
+		int severity = TKERROR;
+		if (in_tokz_esc) {
+			severity = INFO;
+		} else {
+			if (hdr_flag == FLAG_HEADERLESS) {
+				severity = WARNING;
+			}
+		}
+		tokenization_error(severity,
+				   "ANSI Forth does not permit definition of names "
+				   "longer than 31 characters.\n");
 	}
-	tokenization_error( severity,
-	    "ANSI Forth does not permit definition of names "
-		"longer than 31 characters.\n" );
-    }
 
 }
-
 
 /* **************************************************************************
  *
@@ -2463,49 +2385,47 @@ void check_name_length( signed long wlen )
 
 bool definer_name(fwtoken definer, char **reslt_ptr)
 {
-    bool retval = TRUE;
-    switch (definer)
-    {
+	bool retval = TRUE;
+	switch (definer) {
 	case VARIABLE:
-	    *reslt_ptr = "VARIABLE";
-	    break;
+		*reslt_ptr = "VARIABLE";
+		break;
 	case DEFER:
-	    *reslt_ptr = "DEFER";
-	    break;
+		*reslt_ptr = "DEFER";
+		break;
 	case VALUE:
-	    *reslt_ptr = "VALUE";
-	    break;
+		*reslt_ptr = "VALUE";
+		break;
 	case BUFFER:
-	    *reslt_ptr = "BUFFER";
-	    break;
+		*reslt_ptr = "BUFFER";
+		break;
 	case CONST:
-	    *reslt_ptr = "CONSTANT";
-	    break;
+		*reslt_ptr = "CONSTANT";
+		break;
 	case COLON:
-	    *reslt_ptr = "COLON";
-	    break;
+		*reslt_ptr = "COLON";
+		break;
 	case CREATE:
-	    *reslt_ptr = "CREATE";
-	    break;
+		*reslt_ptr = "CREATE";
+		break;
 	case FIELD:
-	    *reslt_ptr = "FIELD";
-	    break;
+		*reslt_ptr = "FIELD";
+		break;
 	case MACRO_DEF:
-	    *reslt_ptr = "MACRO";
-	    break;
+		*reslt_ptr = "MACRO";
+		break;
 	case ALIAS:
-	    *reslt_ptr = "ALIAS";
-	    break;
+		*reslt_ptr = "ALIAS";
+		break;
 	case LOCAL_VAL:
-	    *reslt_ptr = "Local Value name";
-	    break;
+		*reslt_ptr = "Local Value name";
+		break;
 	default:
-	    retval = FALSE;
-    }
+		retval = FALSE;
+	}
 
-    return ( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -2539,30 +2459,29 @@ bool definer_name(fwtoken definer, char **reslt_ptr)
  *
  **************************************************************************** */
 
-bool as_a_what( fwtoken definer, char *as_what)
+bool as_a_what(fwtoken definer, char *as_what)
 {
-    char *defn_type_name;
-    bool retval = definer_name(definer, &defn_type_name);
-    if ( retval )
-    {
-	strcat( as_what, "as a");
-	/*  Handle article preceding definer name
-	 *      that starts with a vowel.
-	 */
-	/*  HACK:  Only one definer name -- ALIAS --
-	 *      begins with a vowel.  Take advantage
-	 *      of that...
-	 *  Otherwise, we'd need to do something involving
-	 *      strchr( "AEIOU", defn_type_name[0] )
-	 */
-	if ( definer == ALIAS ) strcat( as_what, "n" );
+	char *defn_type_name;
+	bool retval = definer_name(definer, &defn_type_name);
+	if (retval) {
+		strcat(as_what, "as a");
+		/*  Handle article preceding definer name
+		 *      that starts with a vowel.
+		 */
+		/*  HACK:  Only one definer name -- ALIAS --
+		 *      begins with a vowel.  Take advantage
+		 *      of that...
+		 *  Otherwise, we'd need to do something involving
+		 *      strchr( "AEIOU", defn_type_name[0] )
+		 */
+		if (definer == ALIAS)
+			strcat(as_what, "n");
 
-	strcat( as_what, " ");
-	strcat( as_what, defn_type_name);
-    }
-    return( retval);
+		strcat(as_what, " ");
+		strcat(as_what, defn_type_name);
+	}
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -2645,70 +2564,61 @@ bool as_a_what( fwtoken definer, char *as_what)
 
 static char lookup_where_pt1_buf[AS_WHAT_BUF_SIZE];
 
-tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
+tic_hdr_t *lookup_word(char *stat_name, char **where_pt1, char **where_pt2)
 {
-    tic_hdr_t *found = NULL;
-    bool trail_space = TRUE;
-    bool doing_lookup = BOOLVAL( ( where_pt1 != NULL )
-			      && ( where_pt2 != NULL ) );
-    char *temp_where_pt2 = "in the core vocabulary.\n";
+	tic_hdr_t *found = NULL;
+	bool trail_space = TRUE;
+	bool doing_lookup = BOOLVAL((where_pt1 != NULL)
+				    && (where_pt2 != NULL));
+	char *temp_where_pt2 = "in the core vocabulary.\n";
 
-    lookup_where_pt1_buf[0] = 0;             /*  Init'lz part-1 buffer  */
+	lookup_where_pt1_buf[0] = 0;	/*  Init'lz part-1 buffer  */
 
-    /*  "Core vocab" refers both to shared fwords and built-in tokens.  */
+	/*  "Core vocab" refers both to shared fwords and built-in tokens.  */
 
-    /*  Distinguish between "Normal" and "Tokenizer Escape" mode  */
-    if ( in_tokz_esc )
-    {   /*  "Tokenizer Escape" mode.  */
-	found = lookup_tokz_esc( stat_name);
-	if ( found != NULL )
-	{
-	    temp_where_pt2 = in_tkz_esc_mode;
-	}else{
-	    /*  "Core vocabulary".  */
-	    found = lookup_shared_word( stat_name);
-	}
-    }else{
-	/*  "Normal" tokenization mode  */
-	if ( ibm_locals )
-	{
-	    found = lookup_local( stat_name);
-	    if ( doing_lookup && ( found != NULL ) )
-	    {
-		trail_space = FALSE;
-		temp_where_pt2 = ".\n";
-	    }
-	}
-
-	if ( found == NULL )
-	{
-	    found = lookup_in_dev_node( stat_name);
-	    if ( found != NULL )
-	    {
-		if ( doing_lookup )
-		{
-		    temp_where_pt2 = in_what_node( current_device_node);
+	/*  Distinguish between "Normal" and "Tokenizer Escape" mode  */
+	if (in_tokz_esc) {	/*  "Tokenizer Escape" mode.  */
+		found = lookup_tokz_esc(stat_name);
+		if (found != NULL) {
+			temp_where_pt2 = in_tkz_esc_mode;
+		} else {
+			/*  "Core vocabulary".  */
+			found = lookup_shared_word(stat_name);
 		}
-	    }else{
-		/*  "Core vocabulary".  */
-		found = lookup_core_word( stat_name);
-	    }
-	}
-    }
+	} else {
+		/*  "Normal" tokenization mode  */
+		if (ibm_locals) {
+			found = lookup_local(stat_name);
+			if (doing_lookup && (found != NULL)) {
+				trail_space = FALSE;
+				temp_where_pt2 = ".\n";
+			}
+		}
 
-    if ( ( doing_lookup ) && ( found != NULL ) )
-    {
-	if ( as_a_what( found->fword_defr, lookup_where_pt1_buf) )
-	{
-	    if ( trail_space )
-	    {
-		strcat(lookup_where_pt1_buf, " ");
-	    }
+		if (found == NULL) {
+			found = lookup_in_dev_node(stat_name);
+			if (found != NULL) {
+				if (doing_lookup) {
+					temp_where_pt2 =
+					    in_what_node(current_device_node);
+				}
+			} else {
+				/*  "Core vocabulary".  */
+				found = lookup_core_word(stat_name);
+			}
+		}
 	}
-	*where_pt1 = lookup_where_pt1_buf;
-	*where_pt2 = temp_where_pt2;
-    }
-    return( found);
+
+	if ((doing_lookup) && (found != NULL)) {
+		if (as_a_what(found->fword_defr, lookup_where_pt1_buf)) {
+			if (trail_space) {
+				strcat(lookup_where_pt1_buf, " ");
+			}
+		}
+		*where_pt1 = lookup_where_pt1_buf;
+		*where_pt2 = temp_where_pt2;
+	}
+	return (found);
 }
 
 /* **************************************************************************
@@ -2743,17 +2653,16 @@ tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
  *
  **************************************************************************** */
 
-bool word_exists( char *stat_name, char **where_pt1, char **where_pt2 )
+bool word_exists(char *stat_name, char **where_pt1, char **where_pt2)
 {
-    bool retval = FALSE;
-    tic_hdr_t *found = lookup_word( stat_name, where_pt1, where_pt2 );
+	bool retval = FALSE;
+	tic_hdr_t *found = lookup_word(stat_name, where_pt1, where_pt2);
 
-    if ( found != NULL )
-    {
-	retval = TRUE;
-    }
+	if (found != NULL) {
+		retval = TRUE;
+	}
 
-    return( retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -2801,23 +2710,20 @@ bool word_exists( char *stat_name, char **where_pt1, char **where_pt2 )
  *
  **************************************************************************** */
 
-void warn_if_duplicate( char *stat_name)
+void warn_if_duplicate(char *stat_name)
 {
-    if ( verbose_dup_warning && do_not_overload )
-    {
-	char *where_pt1;
-	char *where_pt2; 
-	if ( word_exists( stat_name, &where_pt1, &where_pt2) )
-	{
-	    tokenization_error( WARNING, 
-		"Duplicate definition:   %s  already exists %s%s",
-		    stat_name, where_pt1, where_pt2 );
-	    show_node_start();
+	if (verbose_dup_warning && do_not_overload) {
+		char *where_pt1;
+		char *where_pt2;
+		if (word_exists(stat_name, &where_pt1, &where_pt2)) {
+			tokenization_error(WARNING,
+					   "Duplicate definition:   %s  already exists %s%s",
+					   stat_name, where_pt1, where_pt2);
+			show_node_start();
+		}
 	}
-    }
-    do_not_overload = TRUE;
+	do_not_overload = TRUE;
 }
-
 
 /* **************************************************************************
  *
@@ -2840,16 +2746,14 @@ void warn_if_duplicate( char *stat_name)
  *
  **************************************************************************** */
 
-static void glob_not_allowed( int severity, bool not_ignoring)
+static void glob_not_allowed(int severity, bool not_ignoring)
 {
-    tokenization_error( severity, "Global Scope is in effect; "
-			"%s not allowed.  %s.\n",
-			    strupr(statbuf), 
-				 not_ignoring ?
-				     "Attempting to compensate.." :
-					  "Ignoring" );
+	tokenization_error(severity, "Global Scope is in effect; "
+			   "%s not allowed.  %s.\n",
+			   strupr(statbuf),
+			   not_ignoring ?
+			   "Attempting to compensate.." : "Ignoring");
 }
-
 
 /* **************************************************************************
  *
@@ -2867,10 +2771,10 @@ static void glob_not_allowed( int severity, bool not_ignoring)
  *
  **************************************************************************** */
 
-static void not_in_dict( char *stat_name)
+static void not_in_dict(char *stat_name)
 {
-    tokenization_error ( TKERROR,
-        "Word  %s  is not in dictionary.\n", stat_name);
+	tokenization_error(TKERROR,
+			   "Word  %s  is not in dictionary.\n", stat_name);
 }
 
 /* **************************************************************************
@@ -2909,40 +2813,37 @@ static void not_in_dict( char *stat_name)
  *
  **************************************************************************** */
 
-static void tokenized_word_error( char *stat_name)
+static void tokenized_word_error(char *stat_name)
 {
-    char *where_pt1;
-    char *where_pt2;
-    bool found_somewhere;
-    
-    bool sav_in_tokz_esc = in_tokz_esc;
-    in_tokz_esc = INVERSE(sav_in_tokz_esc);
+	char *where_pt1;
+	char *where_pt2;
+	bool found_somewhere;
 
-    traced_name_error( stat_name);
+	bool sav_in_tokz_esc = in_tokz_esc;
+	in_tokz_esc = INVERSE(sav_in_tokz_esc);
 
-    found_somewhere = word_exists( stat_name, &where_pt1, &where_pt2);
-    if ( found_somewhere )
-    {
-	tokenization_error ( TKERROR, "The word %s is %s recognized "
-	    "in tokenizer-escape mode.\n",
-		 stat_name, sav_in_tokz_esc ? "not" :  "only" );
-    } else {
-	not_in_dict( stat_name);
-    }
+	traced_name_error(stat_name);
 
-    if ( INVERSE(exists_in_ancestor( stat_name)) )
-    {
-        if ( found_somewhere && sav_in_tokz_esc )
-	{
-	    tokenization_error(INFO,
-		"%s is defined %s%s", stat_name, where_pt1, where_pt2 );
-	    show_node_start();
+	found_somewhere = word_exists(stat_name, &where_pt1, &where_pt2);
+	if (found_somewhere) {
+		tokenization_error(TKERROR, "The word %s is %s recognized "
+				   "in tokenizer-escape mode.\n",
+				   stat_name, sav_in_tokz_esc ? "not" : "only");
+	} else {
+		not_in_dict(stat_name);
 	}
-    }
 
-    in_tokz_esc = sav_in_tokz_esc;
+	if (INVERSE(exists_in_ancestor(stat_name))) {
+		if (found_somewhere && sav_in_tokz_esc) {
+			tokenization_error(INFO,
+					   "%s is defined %s%s", stat_name,
+					   where_pt1, where_pt2);
+			show_node_start();
+		}
+	}
+
+	in_tokz_esc = sav_in_tokz_esc;
 }
-
 
 /* **************************************************************************
  *
@@ -2965,12 +2866,11 @@ static void tokenized_word_error( char *stat_name)
  *
  **************************************************************************** */
 
-static void unresolved_instance( int severity)
+static void unresolved_instance(int severity)
 {
-    tokenization_error( severity, "Unresolved \"INSTANCE\"" );
-    just_where_started( instance_filename, instance_lineno );
+	tokenization_error(severity, "Unresolved \"INSTANCE\"");
+	just_where_started(instance_filename, instance_lineno);
 }
-
 
 /* **************************************************************************
  *
@@ -2994,19 +2894,19 @@ static void unresolved_instance( int severity)
  *
  **************************************************************************** */
 
-static void modified_by_instance( fwtoken definer, bool was_modded)
+static void modified_by_instance(fwtoken definer, bool was_modded)
 {
-    char *was_not = was_modded ? "was" : "not" ;
-    char *defn_type_name;
+	char *was_not = was_modded ? "was" : "not";
+	char *defn_type_name;
 
-    /*  No need to check the return value  */
-    definer_name(definer, &defn_type_name);
+	/*  No need to check the return value  */
+	definer_name(definer, &defn_type_name);
 
-    tokenization_error ( WARNING,
-	"%s definition %s modified by \"INSTANCE\"",
-	    defn_type_name, was_not );
-    just_where_started( instance_filename, instance_lineno );
- }
+	tokenization_error(WARNING,
+			   "%s definition %s modified by \"INSTANCE\"",
+			   defn_type_name, was_not);
+	just_where_started(instance_filename, instance_lineno);
+}
 
 /* **************************************************************************
  *
@@ -3047,38 +2947,33 @@ static void modified_by_instance( fwtoken definer, bool was_modded)
 
 static void validate_instance(fwtoken definer)
 {
-    if ( is_instance )
-    {
-	bool is_error = TRUE ;
+	if (is_instance) {
+		bool is_error = TRUE;
 
-	switch ( definer)
-	{
-	    case VALUE:
-	    case VARIABLE:
-	    case DEFER:
-	    case BUFFER:
-		is_error = FALSE;
-	    /*  No default needed, likewise, no breaks;      */
-	    /*  but some compilers get upset without 'em...  */
-	    default:
-		break;
-	}
+		switch (definer) {
+		case VALUE:
+		case VARIABLE:
+		case DEFER:
+		case BUFFER:
+			is_error = FALSE;
+			/*  No default needed, likewise, no breaks;      */
+			/*  but some compilers get upset without 'em...  */
+		default:
+			break;
+		}
 
-	if( is_error )
-	{
-	    modified_by_instance(definer, FALSE );
-	    instance_definer_gap = TRUE;
-	}else{
-	    if ( instance_definer_gap )
-	    {
-		modified_by_instance(definer, TRUE );
-	    }
-	    is_instance = FALSE;
-	    instance_definer_gap = FALSE;
+		if (is_error) {
+			modified_by_instance(definer, FALSE);
+			instance_definer_gap = TRUE;
+		} else {
+			if (instance_definer_gap) {
+				modified_by_instance(definer, TRUE);
+			}
+			is_instance = FALSE;
+			instance_definer_gap = FALSE;
+		}
 	}
-    }
 }
-    
 
 /* **************************************************************************
  *
@@ -3175,103 +3070,95 @@ static void validate_instance(fwtoken definer)
 
 static bool create_word(fwtoken definer)
 {
-    signed long wlen;
-    bool retval = FALSE;
-    char *defn_type_name;
+	signed long wlen;
+	bool retval = FALSE;
+	char *defn_type_name;
 
-    /*  If already inside a colon, ERROR and discontinue processing    */
-    /*  If an alias to a definer is used, show the name of the alias  */
-    if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) ) 
-    {
-	char defn_type_buffr[32] = "";
-	unsigned int old_lineno = lineno;    /*  For error message  */
+	/*  If already inside a colon, ERROR and discontinue processing    */
+	/*  If an alias to a definer is used, show the name of the alias  */
+	if (test_in_colon(statbuf, FALSE, TKERROR, NULL)) {
+		char defn_type_buffr[32] = "";
+		unsigned int old_lineno = lineno;	/*  For error message  */
 
-	define_token = TRUE;
+		define_token = TRUE;
 
-	{   /*  Set up definition-type text for error-message */
+		{		/*  Set up definition-type text for error-message */
 
-	    /*  No need to check the return value  */
-	    definer_name(definer, &defn_type_name);
+			/*  No need to check the return value  */
+			definer_name(definer, &defn_type_name);
 
-	    strcat( defn_type_buffr, defn_type_name);
-	    strcat( defn_type_buffr, " definition");
-	}
-	/*  If in a control-structure, ERROR but continue processing  */
-	if ( control_stack_depth != 0 )
-	{
-	    announce_control_structs( TKERROR, defn_type_buffr, 0);
-	    /*  Leave the new token undefined.  */
-	    define_token = FALSE;
-	}
+			strcat(defn_type_buffr, defn_type_name);
+			strcat(defn_type_buffr, " definition");
+		}
+		/*  If in a control-structure, ERROR but continue processing  */
+		if (control_stack_depth != 0) {
+			announce_control_structs(TKERROR, defn_type_buffr, 0);
+			/*  Leave the new token undefined.  */
+			define_token = FALSE;
+		}
 
-	/*  Get the name of the new token  */
-	wlen = get_word();
+		/*  Get the name of the new token  */
+		wlen = get_word();
 
 #ifdef DEBUG_SCANNER
-	printf("%s:%d: debug: defined new word %s, fcode no 0x%x\n",
-			iname, lineno, name, nextfcode);
+		printf("%s:%d: debug: defined new word %s, fcode no 0x%x\n",
+		       iname, lineno, name, nextfcode);
 #endif
-	if ( wlen <= 0 )
-	{
-	    warn_unterm( TKERROR, defn_type_buffr, old_lineno);
-	}else{
-	    bool emit_token_name = TRUE;
+		if (wlen <= 0) {
+			warn_unterm(TKERROR, defn_type_buffr, old_lineno);
+		} else {
+			bool emit_token_name = TRUE;
 
-	    /*  Other Error or Warnings as applicable  */
-	    validate_instance( definer);
+			/*  Other Error or Warnings as applicable  */
+			validate_instance(definer);
 
-	    /*  Bump FCode; error-check as applicable  */
-	    assigning_fcode();
+			/*  Bump FCode; error-check as applicable  */
+			assigning_fcode();
 
-	    /*  Define the new token, unless disallowed  */
-	    add_to_current( statbuf, nextfcode, definer);
+			/*  Define the new token, unless disallowed  */
+			add_to_current(statbuf, nextfcode, definer);
 
-	    check_name_length( wlen);
+			check_name_length(wlen);
 
-	    /*  Emit appropriate FCodes:  Type of def'n,   */
-	    switch ( hdr_flag )
-	    {
-		case FLAG_HEADERS:
-		    emit_token("named-token");
-		    break;
+			/*  Emit appropriate FCodes:  Type of def'n,   */
+			switch (hdr_flag) {
+			case FLAG_HEADERS:
+				emit_token("named-token");
+				break;
 
-		case FLAG_EXTERNAL:
-		    emit_token("external-token");
-		    break;
+			case FLAG_EXTERNAL:
+				emit_token("external-token");
+				break;
 
-		default:  /*   FLAG_HEADERLESS   */
-		    emit_token("new-token");
-		    emit_token_name = FALSE;
-	    }
+			default:	/*   FLAG_HEADERLESS   */
+				emit_token("new-token");
+				emit_token_name = FALSE;
+			}
 
-	    /*  Emit name of token, if applicable  */
-	    if ( emit_token_name )
-	    {
-		if ( force_tokens_case )
-		{
-		    if ( force_lower_case_tokens )
-		    {
-			strlwr( statbuf);
-		    }else{
-			strupr( statbuf);
-		    }
+			/*  Emit name of token, if applicable  */
+			if (emit_token_name) {
+				if (force_tokens_case) {
+					if (force_lower_case_tokens) {
+						strlwr(statbuf);
+					} else {
+						strupr(statbuf);
+					}
+				}
+				emit_string((u8 *) statbuf, wlen);
+			}
+
+			/*  Emit the new token's FCode   */
+			emit_fcode(nextfcode);
+
+			/*  Prepare FCode Assignment Counter for next definition   */
+			bump_fcode();
+
+			/*  Declare victory   */
+			retval = TRUE;
 		}
-		emit_string((u8 *)statbuf, wlen);	
-	    }
-
-	    /*  Emit the new token's FCode   */
-	    emit_fcode(nextfcode);
-
-	    /*  Prepare FCode Assignment Counter for next definition   */
-	    bump_fcode();
-
-	    /*  Declare victory   */
-	    retval = TRUE;
 	}
-    }
-    return( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -3306,22 +3193,20 @@ static bool create_word(fwtoken definer)
  *
  **************************************************************************** */
 
-static void cannot_apply( char *func_nam, char *targ_nam, fwtoken defr)
+static void cannot_apply(char *func_nam, char *targ_nam, fwtoken defr)
 {
-    char *defr_name = "" ;
-    char *defr_phrase = wh_defined ;
+	char *defr_name = "";
+	char *defr_phrase = wh_defined;
 
-    if ( ! definer_name(defr, &defr_name) )
-    {
-	defr_phrase = "";
-    }
+	if (!definer_name(defr, &defr_name)) {
+		defr_phrase = "";
+	}
 
-    tokenization_error ( TKERROR , 
-	"Cannot apply  %s  to  %s %s%s.\n",
-	     func_nam, targ_nam, defr_phrase, defr_name );
+	tokenization_error(TKERROR,
+			   "Cannot apply  %s  to  %s %s%s.\n",
+			   func_nam, targ_nam, defr_phrase, defr_name);
 
 }
-
 
 /* **************************************************************************
  *
@@ -3355,16 +3240,16 @@ static void cannot_apply( char *func_nam, char *targ_nam, fwtoken defr)
  *
  **************************************************************************** */
 
-static tic_hdr_t *lookup_with_definer( char *stat_name, fwtoken *definr )
+static tic_hdr_t *lookup_with_definer(char *stat_name, fwtoken * definr)
 {
-    tic_hdr_t *retval = lookup_current( stat_name);
-    if ( retval != NULL )
-    {
-         *definr = retval->fword_defr;
-    }else{
-        if ( exists_as_local( stat_name) ) *definr = LOCAL_VAL;
-    }
-    return ( retval );
+	tic_hdr_t *retval = lookup_current(stat_name);
+	if (retval != NULL) {
+		*definr = retval->fword_defr;
+	} else {
+		if (exists_as_local(stat_name))
+			*definr = LOCAL_VAL;
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -3411,59 +3296,54 @@ static tic_hdr_t *lookup_with_definer( char *stat_name, fwtoken *definr )
  *
  **************************************************************************** */
 
-static bool validate_to_target( void )
+static bool validate_to_target(void)
 {
-    signed long wlen;
-    tic_hdr_t *test_entry;
-    u8 *saved_pc = pc;
-    char *cmd_cpy = strupr( strdup( statbuf));    /*  For error message  */
-    unsigned int saved_lineno = lineno;
-    unsigned int saved_abs_token_no = abs_token_no;
-    fwtoken defr = UNSPECIFIED ;
-    bool targ_err = TRUE ;
-    bool retval = FALSE ;
+	signed long wlen;
+	tic_hdr_t *test_entry;
+	u8 *saved_pc = pc;
+	char *cmd_cpy = strupr(strdup(statbuf));	/*  For error message  */
+	unsigned int saved_lineno = lineno;
+	unsigned int saved_abs_token_no = abs_token_no;
+	fwtoken defr = UNSPECIFIED;
+	bool targ_err = TRUE;
+	bool retval = FALSE;
 
-    wlen = get_word();
-    if ( wlen <= 0 )
-    {
-	warn_unterm( TKERROR, cmd_cpy, saved_lineno);
-    }else{
+	wlen = get_word();
+	if (wlen <= 0) {
+		warn_unterm(TKERROR, cmd_cpy, saved_lineno);
+	} else {
 
-	test_entry = lookup_with_definer( statbuf, &defr);
-	if ( test_entry != NULL )
-	{
-	    switch (defr)
-	    {
-		case VARIABLE:
-		    tokenization_error( WARNING,
-			"Applying %s to a VARIABLE (%s) is "
-			"not recommended; use  !  instead.\n",
-			cmd_cpy, statbuf);
-		case DEFER:
-		case VALUE:
-		    targ_err = FALSE ;
-		case CONST:
-		    retval = TRUE ;
-		/*  No default needed, likewise, no breaks;      */
-		/*  but some compilers get upset without 'em...  */
-		default:
-		    break;
-	    }
+		test_entry = lookup_with_definer(statbuf, &defr);
+		if (test_entry != NULL) {
+			switch (defr) {
+			case VARIABLE:
+				tokenization_error(WARNING,
+						   "Applying %s to a VARIABLE (%s) is "
+						   "not recommended; use  !  instead.\n",
+						   cmd_cpy, statbuf);
+			case DEFER:
+			case VALUE:
+				targ_err = FALSE;
+			case CONST:
+				retval = TRUE;
+				/*  No default needed, likewise, no breaks;      */
+				/*  but some compilers get upset without 'em...  */
+			default:
+				break;
+			}
+		}
+
+		if (targ_err) {
+			cannot_apply(cmd_cpy, strupr(statbuf), defr);
+		}
+
+		pc = saved_pc;
+		lineno = saved_lineno;
+		abs_token_no = saved_abs_token_no;
 	}
-
-	if ( targ_err )
-	{
-	    cannot_apply(cmd_cpy, strupr(statbuf), defr );
-	}
-
-	pc = saved_pc;
-	lineno = saved_lineno;
-	abs_token_no = saved_abs_token_no;
-    }
-    free( cmd_cpy);
-    return( retval);
+	free(cmd_cpy);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -3483,13 +3363,11 @@ static bool validate_to_target( void )
  *
  **************************************************************************** */
 
-static void you_are_here( void)
+static void you_are_here(void)
 {
-    tokenization_error( INFO,
-	"%s encountered; processing...\n",
-	    strupr(statbuf) );
+	tokenization_error(INFO,
+			   "%s encountered; processing...\n", strupr(statbuf));
 }
-
 
 /* **************************************************************************
  *
@@ -3550,35 +3428,33 @@ static void you_are_here( void)
  *
  **************************************************************************** */
 
-static void fcode_starter( const char *token_name, int spread, bool is_offs16)
+static void fcode_starter(const char *token_name, int spread, bool is_offs16)
 {
-    you_are_here();
-    if ( spread != 1 )
-    {
-        tokenization_error( WARNING, "spread of %d not supported.\n", spread);
-    }
-    if ( fcode_started )
-    {
-        tokenization_error( WARNING,
-	    "Only one \"FCode Starter\" permitted per tokenization.  "
-		"Ignoring...\n");
-    } else {
-
-	emit_fcodehdr(token_name);
-	offs16 = is_offs16;
-	fcode_started = TRUE;
-
-	current_device_node->ifile_name = strdup(iname);
-	current_device_node->line_no = lineno;
-
-	if ( first_fc_starter )
-	{
-	    reset_fcode_ranges();
-	    first_fc_starter = FALSE;
-	}else{
-	    set_next_fcode( nextfcode);
+	you_are_here();
+	if (spread != 1) {
+		tokenization_error(WARNING, "spread of %d not supported.\n",
+				   spread);
 	}
-    }
+	if (fcode_started) {
+		tokenization_error(WARNING,
+				   "Only one \"FCode Starter\" permitted per tokenization.  "
+				   "Ignoring...\n");
+	} else {
+
+		emit_fcodehdr(token_name);
+		offs16 = is_offs16;
+		fcode_started = TRUE;
+
+		current_device_node->ifile_name = strdup(iname);
+		current_device_node->line_no = lineno;
+
+		if (first_fc_starter) {
+			reset_fcode_ranges();
+			first_fc_starter = FALSE;
+		} else {
+			set_next_fcode(nextfcode);
+		}
+	}
 }
 
 /* **************************************************************************
@@ -3605,17 +3481,16 @@ static void fcode_starter( const char *token_name, int spread, bool is_offs16)
  *
  **************************************************************************** */
 
-static void fcode_end_err_check( void)
+static void fcode_end_err_check(void)
 {
-    bool stack_imbal = BOOLVAL( stackdepth() != 0 );
+	bool stack_imbal = BOOLVAL(stackdepth() != 0);
 
-	if ( stack_imbal )
-	{
-	    tokenization_error( WARNING,
-		"Stack imbalance before end of tokenization.\n");
+	if (stack_imbal) {
+		tokenization_error(WARNING,
+				   "Stack imbalance before end of tokenization.\n");
 	}
-    clear_stack();
-    clear_control_structs("End of tokenization");
+	clear_stack();
+	clear_control_structs("End of tokenization");
 }
 
 /* **************************************************************************
@@ -3674,40 +3549,36 @@ static void fcode_end_err_check( void)
 
 void fcode_ender(void)
 {
-    if ( incolon )
-    {
-	char *tmp_iname = iname;
-	iname = last_colon_filename;
-	unterm_is_colon = TRUE;
-	warn_unterm( TKERROR, "Colon Definition", last_colon_lineno);
-	iname = tmp_iname;    
-    }
-    
-    haveend = TRUE;
+	if (incolon) {
+		char *tmp_iname = iname;
+		iname = last_colon_filename;
+		unterm_is_colon = TRUE;
+		warn_unterm(TKERROR, "Colon Definition", last_colon_lineno);
+		iname = tmp_iname;
+	}
 
-    if ( is_instance )
-    {
-	unresolved_instance( TKERROR);
-    }
+	haveend = TRUE;
 
-    if ( scope_is_global )
-    {
-        tokenization_error( WARNING ,
-	    "No DEVICE-DEFINITIONS directive encountered before end.  "
-		"Compensating...\n");
-	resume_device_scope();
-    }
-    fcode_end_err_check();
-    reset_normal_vocabs();
-    finish_fcodehdr();
-    fcode_started = FALSE;
+	if (is_instance) {
+		unresolved_instance(TKERROR);
+	}
 
-    if ( current_device_node->ifile_name != default_top_dev_ifile_name )
-    {
-	free( current_device_node->ifile_name );
-	current_device_node->ifile_name = default_top_dev_ifile_name;
-	current_device_node->line_no = 0;
-    }
+	if (scope_is_global) {
+		tokenization_error(WARNING,
+				   "No DEVICE-DEFINITIONS directive encountered before end.  "
+				   "Compensating...\n");
+		resume_device_scope();
+	}
+	fcode_end_err_check();
+	reset_normal_vocabs();
+	finish_fcodehdr();
+	fcode_started = FALSE;
+
+	if (current_device_node->ifile_name != default_top_dev_ifile_name) {
+		free(current_device_node->ifile_name);
+		current_device_node->ifile_name = default_top_dev_ifile_name;
+		current_device_node->line_no = 0;
+	}
 }
 
 /* **************************************************************************
@@ -3750,103 +3621,94 @@ void fcode_ender(void)
  *
  **************************************************************************** */
 
-static bool get_token(tic_hdr_t **tok_entry)
+static bool get_token(tic_hdr_t ** tok_entry)
 {
-    bool retval = FALSE;
-    tic_hdr_t *found;
-    u8 *save_pc;
+	bool retval = FALSE;
+	tic_hdr_t *found;
+	u8 *save_pc;
 
-    /*  Copy of command being processed, for error message  */
-    char cmnd_cpy[FUNC_CPY_BUF_SIZE+1];
-    strncpy( cmnd_cpy, statbuf, FUNC_CPY_BUF_SIZE);
-    cmnd_cpy[FUNC_CPY_BUF_SIZE] = 0;   /*  Guarantee null terminator. */
+	/*  Copy of command being processed, for error message  */
+	char cmnd_cpy[FUNC_CPY_BUF_SIZE + 1];
+	strncpy(cmnd_cpy, statbuf, FUNC_CPY_BUF_SIZE);
+	cmnd_cpy[FUNC_CPY_BUF_SIZE] = 0;	/*  Guarantee null terminator. */
 
-    save_pc = pc;
+	save_pc = pc;
 
-    if ( get_word_in_line( statbuf) )
-    {
-	fwtoken defr = UNSPECIFIED;
+	if (get_word_in_line(statbuf)) {
+		fwtoken defr = UNSPECIFIED;
 
-	/*  We need to scan the newest definitions first; they
-	 *      might supercede standard ones.  We need, though,
-	 *      to bypass built-in FWords that need to trigger
-	 *      some tokenizer internals before emitting their
-	 *      synonymous FCode Tokens, (e.g., version1 , end0 ,
-	 *      and start{0-4}); if we find one of those, we will
-	 *      need to search again, specifically within the list
-	 *      of FCode Tokens.
-	 */
-	found = lookup_with_definer( statbuf, &defr);
-	if ( found != NULL )
-	{
-	    /*  Built-in FWords can be uniquely identified by their
-	     *      definer,  BI_FWRD_DEFN .  The definer for "shared"
-	     *      FWords is  COMMON_FWORD  but there are none of
-	     *      those that might be synonymous with legitimate
-	     *      FCode Tokens, nor are any likely ever to be...
-	     */
-	    if ( defr == BI_FWRD_DEFN )
-	    {
-	        found = lookup_token( statbuf);
-		retval = BOOLVAL( found != NULL );
-	    }else{
-		retval = entry_is_token( found);
-	    }
+		/*  We need to scan the newest definitions first; they
+		 *      might supercede standard ones.  We need, though,
+		 *      to bypass built-in FWords that need to trigger
+		 *      some tokenizer internals before emitting their
+		 *      synonymous FCode Tokens, (e.g., version1 , end0 ,
+		 *      and start{0-4}); if we find one of those, we will
+		 *      need to search again, specifically within the list
+		 *      of FCode Tokens.
+		 */
+		found = lookup_with_definer(statbuf, &defr);
+		if (found != NULL) {
+			/*  Built-in FWords can be uniquely identified by their
+			 *      definer,  BI_FWRD_DEFN .  The definer for "shared"
+			 *      FWords is  COMMON_FWORD  but there are none of
+			 *      those that might be synonymous with legitimate
+			 *      FCode Tokens, nor are any likely ever to be...
+			 */
+			if (defr == BI_FWRD_DEFN) {
+				found = lookup_token(statbuf);
+				retval = BOOLVAL(found != NULL);
+			} else {
+				retval = entry_is_token(found);
+			}
+		}
+
+		handle_invocation(found);
+
+		if (retval) {
+			*tok_entry = found;
+		} else {
+			cannot_apply(cmnd_cpy, strupr(statbuf), defr);
+			pc = save_pc;
+		}
 	}
 
-	handle_invocation( found);
-
-	if ( retval)
-	{
-	    *tok_entry = found;
-	}else{
-	    cannot_apply( cmnd_cpy, strupr(statbuf), defr );
-	    pc = save_pc;
-	}
-    }
-
-    return ( retval );
+	return (retval);
 }
 
-
-static void base_change ( int new_base )
+static void base_change(int new_base)
 {
-    if ( incolon && ( INVERSE( in_tokz_esc) ) )
-    {
-        emit_literal(new_base );
-	emit_token("base");
-	emit_token("!");
-    } else {
-        base = new_base;
-    }
-}
-
-static void base_val (int new_base)
-{
-    u8  *old_pc;
-
-    char base_cmnd[FUNC_CPY_BUF_SIZE+1];
-    strncpy( base_cmnd, statbuf, FUNC_CPY_BUF_SIZE);
-    base_cmnd[FUNC_CPY_BUF_SIZE] = 0;  /* Guarantee NULL terminator */
-
-    old_pc=pc;
-    if ( get_word_in_line( statbuf) )
-    {
-	u8 basecpy=base;
-
-	base = new_base;
-	if ( ! handle_number() )
-	{
-	    /*  We did get a word on the line, but it's not a valid number */
-	    tokenization_error( WARNING ,
-		 "Applying %s to non-numeric value.  Ignoring.\n",
-		      strupr(base_cmnd) );
-	    pc = old_pc;
+	if (incolon && (INVERSE(in_tokz_esc))) {
+		emit_literal(new_base);
+		emit_token("base");
+		emit_token("!");
+	} else {
+		base = new_base;
 	}
-	base=basecpy;
-    }
 }
 
+static void base_val(int new_base)
+{
+	u8 *old_pc;
+
+	char base_cmnd[FUNC_CPY_BUF_SIZE + 1];
+	strncpy(base_cmnd, statbuf, FUNC_CPY_BUF_SIZE);
+	base_cmnd[FUNC_CPY_BUF_SIZE] = 0;	/* Guarantee NULL terminator */
+
+	old_pc = pc;
+	if (get_word_in_line(statbuf)) {
+		u8 basecpy = base;
+
+		base = new_base;
+		if (!handle_number()) {
+			/*  We did get a word on the line, but it's not a valid number */
+			tokenization_error(WARNING,
+					   "Applying %s to non-numeric value.  Ignoring.\n",
+					   strupr(base_cmnd));
+			pc = old_pc;
+		}
+		base = basecpy;
+	}
+}
 
 /* **************************************************************************
  *
@@ -3883,12 +3745,11 @@ static void base_val (int new_base)
  *
  **************************************************************************** */
 
-void eval_string( char *inp_bufr)
+void eval_string(char *inp_bufr)
 {
-    push_source( NULL, NULL, FALSE);
-    init_inbuf( inp_bufr, strlen(inp_bufr));
+	push_source(NULL, NULL, FALSE);
+	init_inbuf(inp_bufr, strlen(inp_bufr));
 }
-
 
 /* **************************************************************************
  *
@@ -3945,48 +3806,41 @@ void eval_string( char *inp_bufr)
  *
  **************************************************************************** */
 
-static void finish_or_new_device( bool finishing_device )
+static void finish_or_new_device(bool finishing_device)
 {
-    if ( INVERSE( incolon ) )
-    {
-	if ( INVERSE( is_instance) )
-	{
-	    /*  Arm warning for next time:         */
-	    dev_change_instance_warning = TRUE;
-	}else{
-	    /*  Dangling "instance"                */
-	    instance_definer_gap = TRUE;
-	    /*   Warn only once.                   */
-	    if ( dev_change_instance_warning )
-	    {
-		unresolved_instance( WARNING);
-		dev_change_instance_warning = FALSE;
-	    }
-	}
+	if (INVERSE(incolon)) {
+		if (INVERSE(is_instance)) {
+			/*  Arm warning for next time:         */
+			dev_change_instance_warning = TRUE;
+		} else {
+			/*  Dangling "instance"                */
+			instance_definer_gap = TRUE;
+			/*   Warn only once.                   */
+			if (dev_change_instance_warning) {
+				unresolved_instance(WARNING);
+				dev_change_instance_warning = FALSE;
+			}
+		}
 
-	/*  Note:  "Instance" cannot be in effect during "global" scope  */ 
-	if ( scope_is_global )
-	{
-	    glob_not_allowed( TKERROR, noerrors );
-	    if ( noerrors )
-	    {
-		 resume_device_scope();
-	    }else{
-		 return;
-	    }
-	}
+		/*  Note:  "Instance" cannot be in effect during "global" scope  */
+		if (scope_is_global) {
+			glob_not_allowed(TKERROR, noerrors);
+			if (noerrors) {
+				resume_device_scope();
+			} else {
+				return;
+			}
+		}
 
-	if ( finishing_device )
-	{
-	     finish_device_vocab();
-	}else{
-	     new_device_vocab();
+		if (finishing_device) {
+			finish_device_vocab();
+		} else {
+			new_device_vocab();
+		}
 	}
-    }
-    emit_token( finishing_device ? "finish-device" : "new-device" );
-	}
-	
-	
+	emit_token(finishing_device ? "finish-device" : "new-device");
+}
+
 /* **************************************************************************
  *
  *      Function name:  abort_quote
@@ -4050,62 +3904,61 @@ static void finish_or_new_device( bool finishing_device )
  *              buffer-interpretation scheme somewhat too messy for my tastes.
  *
  **************************************************************************** */
-	
-static bool abort_quote( fwtoken tok)
+
+static bool abort_quote(fwtoken tok)
 {
-    bool retval = FALSE;
-    if ( tok == ABORTTXT )
-    {
-	if ( ! enable_abort_quote )
-	{
-	    /* ABORT" is not enabled; we'd better consume the string  */
-	    char *save_statbuf;
-	    signed long wlen;
-	    save_statbuf = strdup( (char *)statbuf);
-	    wlen = get_string( FALSE);
-	    strcpy( statbuf, save_statbuf);
-	    free( save_statbuf);
-	}else{
-	    /* ABORT" is not to be used in FCODE drivers
-	     * but Apple drivers do use it. Therefore we
-	     * allow it. We push the specified string to
-	     * the stack, do -2 THROW and hope that THROW
-	     * will correctly unwind the stack.
-	     * Presumably, Apple Source supplies its own
-	     *  IF ... THEN
-	     */
-	    char *abort_string;
-	    signed long wlen;
+	bool retval = FALSE;
+	if (tok == ABORTTXT) {
+		if (!enable_abort_quote) {
+			/* ABORT" is not enabled; we'd better consume the string  */
+			char *save_statbuf;
+			signed long wlen;
+			save_statbuf = strdup((char *)statbuf);
+			wlen = get_string(FALSE);
+			strcpy(statbuf, save_statbuf);
+			free(save_statbuf);
+		} else {
+			/* ABORT" is not to be used in FCODE drivers
+			 * but Apple drivers do use it. Therefore we
+			 * allow it. We push the specified string to
+			 * the stack, do -2 THROW and hope that THROW
+			 * will correctly unwind the stack.
+			 * Presumably, Apple Source supplies its own
+			 *  IF ... THEN
+			 */
+			char *abort_string;
+			signed long wlen;
 
-	    retval = TRUE;
-	    tokenization_error (INFO, "ABORT\" in fcode not "
-			    "defined by IEEE 1275-1994\n");
-	    test_in_colon("ABORT\"", TRUE, TKERROR, NULL);
-	    wlen=get_string( TRUE);
+			retval = TRUE;
+			tokenization_error(INFO, "ABORT\" in fcode not "
+					   "defined by IEEE 1275-1994\n");
+			test_in_colon("ABORT\"", TRUE, TKERROR, NULL);
+			wlen = get_string(TRUE);
 
-	    if ( sun_style_abort_quote )  emit_if();
+			if (sun_style_abort_quote)
+				emit_if();
 
-	    emit_token("b(\")");
-	    emit_string(statbuf, wlen);
-	
-	    if ( sun_style_abort_quote )  emit_token("type");
+			emit_token("b(\")");
+			emit_string(statbuf, wlen);
 
-	    if ( abort_quote_throw )
-	    {
-		emit_literal( -2);
-		emit_token("throw");
-	    }else{
-		emit_token("abort");
+			if (sun_style_abort_quote)
+				emit_token("type");
+
+			if (abort_quote_throw) {
+				emit_literal(-2);
+				emit_token("throw");
+			} else {
+				emit_token("abort");
+			}
+
+			if (sun_style_abort_quote)
+				emit_then();
+			/*  Sun Style  */
+			abort_string = " type -2 THROW THEN:";
+		}
 	}
-		
-	    if ( sun_style_abort_quote )  emit_then();
-	        /*  Sun Style  */
-		abort_string = " type -2 THROW THEN:" ;
+	return (retval);
 }
-	}
-    return( retval );
-}
-
 
 /* **************************************************************************
  *
@@ -4182,86 +4035,82 @@ static bool abort_quote( fwtoken tok)
  *
  **************************************************************************** */
 
-static void create_alias( void )
+static void create_alias(void)
 {
-    char *new_alias ;
+	char *new_alias;
 
-    validate_instance(ALIAS);
-    if ( incolon )
-    {
-	 tokenization_error ( WARNING,
-	    "ALIAS during colon-definition "
-		"is not supported by IEEE 1275-1994\n");
-}
-    if ( get_word_in_line( "ALIAS") )
-    {
-
-	new_alias = strdup((char *)statbuf);
-
-	if (get_word_in_line( "ALIAS") )
-{
-	    char *old_name = strdup((char *)statbuf) ;
-
-	    /*
-	     *  Here is where we begin trying the  create_..._alias() 
-	     *      routines for the vocabularies.
-	     */
-
-	    /*
-	     *  Distinguish between "Normal" tokenization mode
-	     *  and "Tokenizer Escape" mode
-	     */
-	    if ( in_tokz_esc )
-	    {
-		if ( create_tokz_esc_alias( new_alias, old_name) )
-		    return;
-	
-		/*
-		 *  Handle the classes of operatives that are common between
-		 *      "Tokenizer Escape" mode and "Normal" tokenization mode.
-		 *  Those classes include selected non-fcode forth constructs
-		 *     and Conditional-Compilation Operators.
-		 */
-		{
-		    tic_hdr_t *found = lookup_shared_word( old_name);
-		    if ( found != NULL )
-		    {
-			if ( create_core_alias( new_alias, old_name) )
-			    return;
-		    }
+	validate_instance(ALIAS);
+	if (incolon) {
+		tokenization_error(WARNING,
+				   "ALIAS during colon-definition "
+				   "is not supported by IEEE 1275-1994\n");
 	}
-	    }else{
-        	/*  "Normal" tokenization mode  */
-	
-		/*  Can create aliases for "Locals", why not?  */
-		if ( create_local_alias( new_alias, old_name) )
-		    return;
+	if (get_word_in_line("ALIAS")) {
 
-		/*
-		 *  All other classes of operatives -- non-fcode forth
-		 *      constructs, Standard and user-defined fcode
-		 *      tokens, Macros, and Conditional-Compilation
-		 *      Operators, -- are included in the "currently
-		 *      active" vocabulary.
-		 */
+		new_alias = strdup((char *)statbuf);
 
-		if ( create_current_alias( new_alias, old_name) )
-		    return;
-	
-	    }    /*  End of separate handling for normal-tokenization mode
-        	  *      versus  "Tokenizer-Escape" mode
-		  */
+		if (get_word_in_line("ALIAS")) {
+			char *old_name = strdup((char *)statbuf);
 
-	    /*  It's not a word, a macro or any of that other stuff.  */
-	    trace_create_failure( new_alias, old_name, 0);
-	    tokenized_word_error(old_name);
-	    free(old_name);
+			/*
+			 *  Here is where we begin trying the  create_..._alias() 
+			 *      routines for the vocabularies.
+			 */
+
+			/*
+			 *  Distinguish between "Normal" tokenization mode
+			 *  and "Tokenizer Escape" mode
+			 */
+			if (in_tokz_esc) {
+				if (create_tokz_esc_alias(new_alias, old_name))
+					return;
+
+				/*
+				 *  Handle the classes of operatives that are common between
+				 *      "Tokenizer Escape" mode and "Normal" tokenization mode.
+				 *  Those classes include selected non-fcode forth constructs
+				 *     and Conditional-Compilation Operators.
+				 */
+				{
+					tic_hdr_t *found =
+					    lookup_shared_word(old_name);
+					if (found != NULL) {
+						if (create_core_alias
+						    (new_alias, old_name))
+							return;
+					}
+				}
+			} else {
+				/*  "Normal" tokenization mode  */
+
+				/*  Can create aliases for "Locals", why not?  */
+				if (create_local_alias(new_alias, old_name))
+					return;
+
+				/*
+				 *  All other classes of operatives -- non-fcode forth
+				 *      constructs, Standard and user-defined fcode
+				 *      tokens, Macros, and Conditional-Compilation
+				 *      Operators, -- are included in the "currently
+				 *      active" vocabulary.
+				 */
+
+				if (create_current_alias(new_alias, old_name))
+					return;
+
+			}	/*  End of separate handling for normal-tokenization mode
+				 *      versus  "Tokenizer-Escape" mode
+				 */
+
+			/*  It's not a word, a macro or any of that other stuff.  */
+			trace_create_failure(new_alias, old_name, 0);
+			tokenized_word_error(old_name);
+			free(old_name);
+		}
+		free(new_alias);
 	}
-	free (new_alias);
-    }
 }
 
-	
 /* **************************************************************************
  *
  *      Function name:  string_err_check
@@ -4288,23 +4137,19 @@ static void create_alias( void )
  *
  **************************************************************************** */
 
-static  bool string_err_check( bool is_paren,
-                                  unsigned int sav_lineno,
-				      unsigned int strt_lineno )
+static bool string_err_check(bool is_paren,
+			     unsigned int sav_lineno, unsigned int strt_lineno)
 {
-    bool retval = noerrors ;
-    char *item_typ = is_paren ?
-	"Dot-Paren" : "Ess-Quote" ;
-    if ( got_until_eof )   /*  Crude retrofit... */
-    {
-	warn_unterm( TKERROR, item_typ, sav_lineno );
-    }else{
-	retval = TRUE;
-	warn_if_multiline( item_typ, strt_lineno );
+	bool retval = noerrors;
+	char *item_typ = is_paren ? "Dot-Paren" : "Ess-Quote";
+	if (got_until_eof) {	/*  Crude retrofit... */
+		warn_unterm(TKERROR, item_typ, sav_lineno);
+	} else {
+		retval = TRUE;
+		warn_if_multiline(item_typ, strt_lineno);
 	}
-    return( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -4355,22 +4200,22 @@ static  bool string_err_check( bool is_paren,
  *
  **************************************************************************** */
 
-void handle_internal( tic_param_t pfield);
-void handle_internal( tic_param_t pfield)
+void handle_internal(tic_param_t pfield);
+void handle_internal(tic_param_t pfield)
 {
 	fwtoken tok = pfield.fw_token;
 
 	signed long wlen;
-	unsigned int sav_lineno = lineno;    /*  For error message  */
+	unsigned int sav_lineno = lineno;	/*  For error message  */
 
-	bool handy_toggle = TRUE ;   /*  Various uses...   */
-	bool handy_toggle_too = TRUE ;   /*  Various other uses...   */
+	bool handy_toggle = TRUE;	/*  Various uses...   */
+	bool handy_toggle_too = TRUE;	/*  Various other uses...   */
 	char *handy_string = "";
 	int handy_int = 0;
-	
+
 #ifdef DEBUG_SCANNER
 	printf("%s:%d: debug: tokenizing control word '%s'\n",
-						iname, lineno, statbuf);
+	       iname, lineno, statbuf);
 #endif
 	switch (tok) {
 	case BEGIN:
@@ -4378,88 +4223,83 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case BUFFER:
-		if ( create_word(tok) )
-		{
-		emit_token("b(buffer:)");
+		if (create_word(tok)) {
+			emit_token("b(buffer:)");
 		}
 		break;
 
 	case CONST:
-		if ( create_word(tok) )
-		{
-		emit_token("b(constant)");
+		if (create_word(tok)) {
+			emit_token("b(constant)");
 		}
 		break;
 
 	case COLON:
 		{
-		    /*  Collect error- -detection or -reporting items,
-		     *      but don't commit until we're sure the
-		     *      creation was a success.
-		     */
-		    u16 maybe_last_colon_fcode = nextfcode ;
-		    unsigned int maybe_last_colon_lineno = lineno;
-		    unsigned int maybe_last_colon_abs_token_no = abs_token_no;
-		    unsigned int maybe_last_colon_do_depth = do_loop_depth;
-		    /*  last_colon_defname
-		     *     has to wait until after call to  create_word()
-		     */
+			/*  Collect error- -detection or -reporting items,
+			 *      but don't commit until we're sure the
+			 *      creation was a success.
+			 */
+			u16 maybe_last_colon_fcode = nextfcode;
+			unsigned int maybe_last_colon_lineno = lineno;
+			unsigned int maybe_last_colon_abs_token_no =
+			    abs_token_no;
+			unsigned int maybe_last_colon_do_depth = do_loop_depth;
+			/*  last_colon_defname
+			 *     has to wait until after call to  create_word()
+			 */
 
-		    if ( create_word(tok) )
-		    {
-			last_colon_fcode = maybe_last_colon_fcode;
-			last_colon_lineno = maybe_last_colon_lineno;
-			last_colon_abs_token_no = maybe_last_colon_abs_token_no;
-			last_colon_do_depth = maybe_last_colon_do_depth;
-			collect_input_filename( &last_colon_filename);
-			/*  Now we can get  last_colon_defname  */
-			if ( last_colon_defname != NULL )
-			{
-			    free( last_colon_defname);
+			if (create_word(tok)) {
+				last_colon_fcode = maybe_last_colon_fcode;
+				last_colon_lineno = maybe_last_colon_lineno;
+				last_colon_abs_token_no =
+				    maybe_last_colon_abs_token_no;
+				last_colon_do_depth = maybe_last_colon_do_depth;
+				collect_input_filename(&last_colon_filename);
+				/*  Now we can get  last_colon_defname  */
+				if (last_colon_defname != NULL) {
+					free(last_colon_defname);
+				}
+				last_colon_defname = strdup(statbuf);
+
+				emit_token("b(:)");
+				incolon = TRUE;
+				hide_last_colon();
+				lastcolon = opc;
 			}
-			last_colon_defname = strdup(statbuf);
-
-		emit_token("b(:)");
-		incolon=TRUE;
-			hide_last_colon();
-			lastcolon = opc;
-		    }
 		}
 		break;
-	
+
 	case SEMICOLON:
-		if ( test_in_colon("SEMICOLON", TRUE, TKERROR, NULL) )
-		{
-		    ret_stk_balance_rpt( "termination,", TRUE);
-		    /*  Clear Control Structures just back to where
-		     *      the current Colon-definition began.
-		     */
-		    clear_control_structs_to_limit(
-			"End of colon-definition", last_colon_abs_token_no);
+		if (test_in_colon("SEMICOLON", TRUE, TKERROR, NULL)) {
+			ret_stk_balance_rpt("termination,", TRUE);
+			/*  Clear Control Structures just back to where
+			 *      the current Colon-definition began.
+			 */
+			clear_control_structs_to_limit
+			    ("End of colon-definition",
+			     last_colon_abs_token_no);
 
-		    if ( ibm_locals )
-		    {
-			finish_locals();
-			forget_locals();
-		    }
+			if (ibm_locals) {
+				finish_locals();
+				forget_locals();
+			}
 
-		emit_token("b(;)");
-		incolon=FALSE;
-		    reveal_last_colon();
+			emit_token("b(;)");
+			incolon = FALSE;
+			reveal_last_colon();
 		}
 		break;
 
 	case CREATE:
-		if ( create_word(tok) )
-		{
-		emit_token("b(create)");
+		if (create_word(tok)) {
+			emit_token("b(create)");
 		}
 		break;
 
 	case DEFER:
-		if ( create_word(tok) )
-		{
-		emit_token("b(defer)");
+		if (create_word(tok)) {
+			emit_token("b(defer)");
 		}
 		break;
 
@@ -4468,48 +4308,42 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case OVERLOAD:
-		if ( test_in_colon(statbuf, FALSE, WARNING, NULL) )
-		{
-		    do_not_overload = FALSE;
+		if (test_in_colon(statbuf, FALSE, WARNING, NULL)) {
+			do_not_overload = FALSE;
 		}
 		break;
 
 	case DEFINED:
-		if (get_word_in_line( statbuf) )
-		{
-		    eval_user_symbol(statbuf);
+		if (get_word_in_line(statbuf)) {
+			eval_user_symbol(statbuf);
 		}
 		break;
 
 	case CL_FLAG:
-		if (get_word_in_line( statbuf) )
-		{
-		     set_cl_flag( statbuf, TRUE);
+		if (get_word_in_line(statbuf)) {
+			set_cl_flag(statbuf, TRUE);
 		}
 		break;
 
 	case SHOW_CL_FLAGS:
-		show_all_cl_flag_settings( TRUE);
+		show_all_cl_flag_settings(TRUE);
 		break;
 
 	case FIELD:
-		if ( create_word(tok) )
-		{
-		emit_token("b(field)");
+		if (create_word(tok)) {
+			emit_token("b(field)");
 		}
 		break;
 
 	case VALUE:
-		if ( create_word(tok) )
-		{
-		emit_token("b(value)");
+		if (create_word(tok)) {
+			emit_token("b(value)");
 		}
 		break;
-		
+
 	case VARIABLE:
-		if ( create_word(tok) )
-		{
-		emit_token("b(variable)");
+		if (create_word(tok)) {
+			emit_token("b(variable)");
 		}
 		break;
 
@@ -4522,9 +4356,8 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case CONTROL:
-		if ( get_word_in_line( statbuf) )
-		{
-		    emit_literal(statbuf[0]&0x1f);
+		if (get_word_in_line(statbuf)) {
+			emit_literal(statbuf[0] & 0x1f);
 		}
 		break;
 
@@ -4553,14 +4386,14 @@ void handle_internal( tic_param_t pfield)
 	case NEW_DEVICE:
 		handy_toggle = FALSE;
 	case FINISH_DEVICE:
-		finish_or_new_device( handy_toggle );
+		finish_or_new_device(handy_toggle);
 		break;
 
 	case FLITERAL:
 		{
-		    u32 val;
-		    val = dpop();
-		    emit_literal(val);
+			u32 val;
+			val = dpop();
+			emit_literal(val);
 		}
 		break;
 
@@ -4571,42 +4404,42 @@ void handle_internal( tic_param_t pfield)
 	case ENDOF:
 		emit_endof();
 		break;
-		
+
 	case EXTERNAL:
-		set_hdr_flag( FLAG_EXTERNAL );
+		set_hdr_flag(FLAG_EXTERNAL);
 		break;
-		
+
 	case HEADERLESS:
-		set_hdr_flag( FLAG_HEADERLESS );
+		set_hdr_flag(FLAG_HEADERLESS);
 		break;
-	
+
 	case HEADERS:
-		set_hdr_flag( FLAG_HEADERS );
+		set_hdr_flag(FLAG_HEADERS);
 		break;
 
 	case DECIMAL:
 		/* in a definition this is expanded as macro "10 base !" */
-		base_change ( 0x0a );
+		base_change(0x0a);
 		break;
-		
+
 	case HEX:
-		base_change ( 0x10 );
+		base_change(0x10);
 		break;
 
 	case OCTAL:
-		base_change ( 0x08 );
+		base_change(0x08);
 		break;
 
 	case OFFSET16:
-		if (!offs16)
-		{
-		    tokenization_error(INFO, "Switching to 16-bit offsets.\n");
-		}else{
-		    tokenization_error(WARNING,
-			"Call of OFFSET16 is redundant.\n");
+		if (!offs16) {
+			tokenization_error(INFO,
+					   "Switching to 16-bit offsets.\n");
+		} else {
+			tokenization_error(WARNING,
+					   "Call of OFFSET16 is redundant.\n");
 		}
 		emit_token("offset16");
-		offs16=TRUE;
+		offs16 = TRUE;
 		break;
 
 	case IF:
@@ -4639,113 +4472,103 @@ void handle_internal( tic_param_t pfield)
 		emit_token("j");
 		must_be_deep_in_do(2);
 		break;
-		
+
 	case LOOP:
 		emit_token("b(loop)");
 		resolve_loop();
 		break;
-		
+
 	case PLUS_LOOP:
 		emit_token("b(+loop)");
 		resolve_loop();
 		break;
 
-
 	case INSTANCE:
 		{
-		    bool set_instance_state = FALSE;
-		    bool emit_instance = TRUE;
-		    /*  We will treat "instance" in a colon-definition as
-		     *      an error, but allow it to be emitted if we're
-		     *      ignoring errors; if we're not ignoring errors,
-		     *      there's no output anyway...
-		     */
-		    if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
-		    {   /*   We are in interpretation (not colon) state.  */
-			/*  "Instance" not allowed during "global" scope  */ 
-			if ( scope_is_global )
-			{
-			    glob_not_allowed( WARNING, FALSE );
-			    emit_instance = FALSE;
-			}else{
-			    set_instance_state = TRUE;
+			bool set_instance_state = FALSE;
+			bool emit_instance = TRUE;
+			/*  We will treat "instance" in a colon-definition as
+			 *      an error, but allow it to be emitted if we're
+			 *      ignoring errors; if we're not ignoring errors,
+			 *      there's no output anyway...
+			 */
+			if (test_in_colon(statbuf, FALSE, TKERROR, NULL)) {	/*   We are in interpretation (not colon) state.  */
+				/*  "Instance" not allowed during "global" scope  */
+				if (scope_is_global) {
+					glob_not_allowed(WARNING, FALSE);
+					emit_instance = FALSE;
+				} else {
+					set_instance_state = TRUE;
+				}
 			}
-		    }
-		    if ( emit_instance )
-		    {
-			if ( set_instance_state )
-			{
-			    /*  "Instance" isn't cumulative....  */
-			    if ( is_instance )
-			    {
-				unresolved_instance( WARNING);
-			    }
-			    collect_input_filename( &instance_filename);
-			    instance_lineno = lineno;
-			    is_instance = TRUE;
-			    dev_change_instance_warning = TRUE;
+			if (emit_instance) {
+				if (set_instance_state) {
+					/*  "Instance" isn't cumulative....  */
+					if (is_instance) {
+						unresolved_instance(WARNING);
+					}
+					collect_input_filename
+					    (&instance_filename);
+					instance_lineno = lineno;
+					is_instance = TRUE;
+					dev_change_instance_warning = TRUE;
+				}
+				emit_token("instance");
 			}
-			emit_token("instance");
-		    }
 		}
 		break;
-		
+
 	case GLOB_SCOPE:
-		if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
-		{
-		    if ( INVERSE( is_instance) )
-		    {
-			enter_global_scope();
-		    }else{
-			tokenization_error( TKERROR,
-			    "Global Scope not allowed.  "
-			    "\"Instance\" is in effect; issued" );
-			just_where_started( instance_filename,
-					        instance_lineno );
-		    }
+		if (test_in_colon(statbuf, FALSE, TKERROR, NULL)) {
+			if (INVERSE(is_instance)) {
+				enter_global_scope();
+			} else {
+				tokenization_error(TKERROR,
+						   "Global Scope not allowed.  "
+						   "\"Instance\" is in effect; issued");
+				just_where_started(instance_filename,
+						   instance_lineno);
+			}
 		}
 		break;
 
 	case DEV_SCOPE:
-		if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
-		{
-		    resume_device_scope();
+		if (test_in_colon(statbuf, FALSE, TKERROR, NULL)) {
+			resume_device_scope();
 		}
 		break;
 
-	case TICK:             /*    '    */
+	case TICK:		/*    '    */
 		test_in_colon(statbuf, FALSE, WARNING, "[']");
-	case BRACK_TICK:       /*   [']   */
+	case BRACK_TICK:	/*   [']   */
 		{
-		    tic_hdr_t *token_entry;
-		    if ( get_token( &token_entry) )
-		    {
-			emit_token("b(')");
-			/* Emit the token; warning or whatever comes gratis */
-			token_entry->funct( token_entry->pfield);
-		    }
+			tic_hdr_t *token_entry;
+			if (get_token(&token_entry)) {
+				emit_token("b(')");
+				/* Emit the token; warning or whatever comes gratis */
+				token_entry->funct(token_entry->pfield);
+			}
 		}
 		break;
 
-	case F_BRACK_TICK:     /*  F['] <name>
-	        		*     emits the token-number for <name>
-				*  Mainly useful to compute the argument
-				*     to   get-token   or  set-token
-				*/
+	case F_BRACK_TICK:	/*  F['] <name>
+				 *     emits the token-number for <name>
+				 *  Mainly useful to compute the argument
+				 *     to   get-token   or  set-token
+				 */
 		{
-		    tic_hdr_t *token_entry;
-		    if ( get_token( &token_entry) )
-		    {
-			/*  "Obsolete" warning doesn't come gratis here...  */
-			token_entry_warning( token_entry);
-			/*  In Tokenizer-Escape mode, push the token  */
-			if ( in_tokz_esc )
-			{
-			    dpush( token_entry->pfield.deflt_elem);
-			}else{
-			    emit_literal( token_entry->pfield.deflt_elem);
+			tic_hdr_t *token_entry;
+			if (get_token(&token_entry)) {
+				/*  "Obsolete" warning doesn't come gratis here...  */
+				token_entry_warning(token_entry);
+				/*  In Tokenizer-Escape mode, push the token  */
+				if (in_tokz_esc) {
+					dpush(token_entry->pfield.deflt_elem);
+				} else {
+					emit_literal(token_entry->pfield.
+						     deflt_elem);
+				}
 			}
-		    }
 		}
 		break;
 
@@ -4753,14 +4576,13 @@ void handle_internal( tic_param_t pfield)
 		handy_toggle = FALSE;
 	case CCHAR:
 		test_in_colon(statbuf, handy_toggle, WARNING,
-		    handy_toggle ? "CHAR" : "[CHAR]" );
+			      handy_toggle ? "CHAR" : "[CHAR]");
 	case ASCII:
-		if ( get_word_in_line( statbuf) )
-		{
-		    emit_literal(statbuf[0]);
+		if (get_word_in_line(statbuf)) {
+			emit_literal(statbuf[0]);
 		}
 		break;
-		
+
 	case UNTIL:
 		emit_until();
 		break;
@@ -4768,139 +4590,130 @@ void handle_internal( tic_param_t pfield)
 	case WHILE:
 		emit_while();
 		break;
-		
+
 	case REPEAT:
 		emit_repeat();
 		break;
-		
+
 	case THEN:
 		emit_then();
 		break;
 
 	case IS:
-		tokenization_error ( INFO,
-		     "Substituting  TO  for deprecated  IS\n");
+		tokenization_error(INFO,
+				   "Substituting  TO  for deprecated  IS\n");
 	case TO:
-		if ( validate_to_target() )
-		{
-		emit_token("b(to)");
+		if (validate_to_target()) {
+			emit_token("b(to)");
 		}
 		break;
 
 	case FLOAD:
-		if ( get_word_in_line( statbuf) )
-		{
-		    bool stream_ok ;
-			
-		    push_source( close_stream, NULL, TRUE) ;
-			
-		    tokenization_error( INFO, "FLOADing %s\n", statbuf );
-			
-		    stream_ok = init_stream( statbuf );
-		    if ( INVERSE( stream_ok) )
-		    {
-			drop_source();
-		    }
+		if (get_word_in_line(statbuf)) {
+			bool stream_ok;
+
+			push_source(close_stream, NULL, TRUE);
+
+			tokenization_error(INFO, "FLOADing %s\n", statbuf);
+
+			stream_ok = init_stream(statbuf);
+			if (INVERSE(stream_ok)) {
+				drop_source();
+			}
 		}
 		break;
 
-	case STRING:         /*  Double-Quote ( " ) string  */
+	case STRING:		/*  Double-Quote ( " ) string  */
 		handy_toggle = FALSE;
-	case PSTRING:        /*  Dot-Quote  ( ." ) string   */
-		wlen=get_string( TRUE);
+	case PSTRING:		/*  Dot-Quote  ( ." ) string   */
+		wlen = get_string(TRUE);
 		emit_token("b(\")");
 		emit_string(statbuf, wlen);
-		if ( handy_toggle )
-		{
-		    emit_token("type");
+		if (handy_toggle) {
+			emit_token("type");
 		}
 		break;
 
-	case SSTRING:        /*  Ess-Quote  ( s"  ) string  */
+	case SSTRING:		/*  Ess-Quote  ( s"  ) string  */
 		handy_toggle = FALSE;
-	case PBSTRING:       /*  Dot-Paren  .(   string  */
-		if (*pc++=='\n') lineno++;
+	case PBSTRING:		/*  Dot-Paren  .(   string  */
+		if (*pc++ == '\n')
+			lineno++;
 		{
-		    unsigned int strt_lineno = lineno;
-		    wlen = get_until( handy_toggle ? ')' : '"' );
-		    if ( string_err_check( handy_toggle,
-		             sav_lineno, strt_lineno) )
-		    {
-		emit_token("b(\")");
-			emit_string(statbuf, wlen);
-			if ( handy_toggle )
-			{
-		emit_token("type");
+			unsigned int strt_lineno = lineno;
+			wlen = get_until(handy_toggle ? ')' : '"');
+			if (string_err_check(handy_toggle,
+					     sav_lineno, strt_lineno)) {
+				emit_token("b(\")");
+				emit_string(statbuf, wlen);
+				if (handy_toggle) {
+					emit_token("type");
+				}
 			}
-		    }
 		}
 		break;
 
 	case FUNC_NAME:
-		    if ( in_tokz_esc )
-		    {
-		    if ( incolon )
-		    {
-			tokenization_error( P_MESSAGE, "Currently" );
-		    }else{
-			tokenization_error( P_MESSAGE, "After" );
-		    }
-		    in_last_colon( incolon);
-		    }else{
-		emit_token("b(\")");
-			emit_string( last_colon_defname,
-		            strlen( last_colon_defname) );
+		if (in_tokz_esc) {
+			if (incolon) {
+				tokenization_error(P_MESSAGE, "Currently");
+			} else {
+				tokenization_error(P_MESSAGE, "After");
+			}
+			in_last_colon(incolon);
+		} else {
+			emit_token("b(\")");
+			emit_string(last_colon_defname,
+				    strlen(last_colon_defname));
 			/*  if ( hdr_flag == FLAG_HEADERLESS ) { WARNING } */
-		    }
+		}
 		break;
 
 	case IFILE_NAME:
 		emit_token("b(\")");
-		emit_string( iname, strlen( iname) );
+		emit_string(iname, strlen(iname));
 		break;
 
 	case ILINE_NUM:
-		emit_literal( lineno);
+		emit_literal(lineno);
 		break;
-			
+
 	case HEXVAL:
-		base_val (0x10);
+		base_val(0x10);
 		break;
-		
+
 	case DECVAL:
-		base_val (0x0a);
+		base_val(0x0a);
 		break;
-		
+
 	case OCTVAL:
-		base_val (8);
+		base_val(8);
 		break;
 
 	case ASC_LEFT_NUM:
 		handy_toggle = FALSE;
 	case ASC_NUM:
-		if (get_word_in_line( statbuf) )
-		{
-		    if ( handy_toggle )
-		    {
-			ascii_right_number( statbuf);
+		if (get_word_in_line(statbuf)) {
+			if (handy_toggle) {
+				ascii_right_number(statbuf);
 			} else {
-			ascii_left_number( statbuf);
+				ascii_left_number(statbuf);
 			}
 		}
 		break;
 
-	case CONDL_ENDER:   /*  Conditional directives out of context  */
+	case CONDL_ENDER:	/*  Conditional directives out of context  */
 	case CONDL_ELSE:
-		tokenization_error ( TKERROR,
-		    "No conditional preceding %s directive\n",
-			strupr(statbuf) );
+		tokenization_error(TKERROR,
+				   "No conditional preceding %s directive\n",
+				   strupr(statbuf));
 		break;
 
 	case PUSH_FCODE:
-		tokenization_error( INFO,
-		    "FCode-token Assignment Counter of 0x%x "
-		    "has been saved on stack.\n", nextfcode );
-		dpush( (long)nextfcode );
+		tokenization_error(INFO,
+				   "FCode-token Assignment Counter of 0x%x "
+				   "has been saved on stack.\n", nextfcode);
+		dpush((long)nextfcode);
 		break;
 
 	case POP_FCODE:
@@ -4908,83 +4721,76 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case RESET_FCODE:
-		tokenization_error( INFO,
-		    "Encountered %s.  Resetting FCode-token "
-			"Assignment Counter.  ", strupr(statbuf) );
-		list_fcode_ranges( FALSE);
+		tokenization_error(INFO,
+				   "Encountered %s.  Resetting FCode-token "
+				   "Assignment Counter.  ", strupr(statbuf));
+		list_fcode_ranges(FALSE);
 		reset_fcode_ranges();
 		break;
-		
+
 	case EXIT:
-		if ( test_in_colon( statbuf, TRUE, TKERROR, NULL)
-		     || noerrors )
-		{
-		    ret_stk_balance_rpt( NULL, FALSE);
-		    if ( ibm_locals )
-		    {
-			finish_locals ();
-		    }
-		    emit_token("exit");
+		if (test_in_colon(statbuf, TRUE, TKERROR, NULL)
+		    || noerrors) {
+			ret_stk_balance_rpt(NULL, FALSE);
+			if (ibm_locals) {
+				finish_locals();
+			}
+			emit_token("exit");
 		}
 		break;
 
 	case ESCAPETOK:
 		enter_tokz_esc();
 		break;
-	
+
 	case VERSION1:
 	case FCODE_V1:
-		fcode_starter( "version1", 1, FALSE) ;
-		tokenization_error( INFO, "Using version1 header "
-		    "(8-bit offsets).\n");
+		fcode_starter("version1", 1, FALSE);
+		tokenization_error(INFO, "Using version1 header "
+				   "(8-bit offsets).\n");
 		break;
-	
+
 	case START1:
 	case FCODE_V2:
-	case FCODE_V3: /* Full IEEE 1275 */
-		fcode_starter( "start1", 1, TRUE);
+	case FCODE_V3:		/* Full IEEE 1275 */
+		fcode_starter("start1", 1, TRUE);
 		break;
-		
+
 	case START0:
-		fcode_starter( "start0", 0, TRUE);
+		fcode_starter("start0", 0, TRUE);
 		break;
-		
+
 	case START2:
-		fcode_starter( "start2", 2, TRUE);
+		fcode_starter("start2", 2, TRUE);
 		break;
-		
+
 	case START4:
-		fcode_starter( "start4", 4, TRUE);
+		fcode_starter("start4", 4, TRUE);
 		break;
-		
+
 	case END1:
-		tokenization_error( WARNING, 
-		    "Appearance of END1 in FCode source code "
-			"is not intended by IEEE 1275-1994\n");
+		tokenization_error(WARNING,
+				   "Appearance of END1 in FCode source code "
+				   "is not intended by IEEE 1275-1994\n");
 		handy_toggle = FALSE;
 	case END0:
 	case FCODE_END:
-		if ( handy_toggle )
-		{
-		    you_are_here();
+		if (handy_toggle) {
+			you_are_here();
 		}
-		emit_token( handy_toggle ? "end0" : "end1" );
+		emit_token(handy_toggle ? "end0" : "end1");
 		fcode_ender();
-		FFLUSH_STDOUT
-		break;
+		FFLUSH_STDOUT break;
 
 	case RECURSE:
-		if ( test_in_colon(statbuf, TRUE, TKERROR, NULL ) )
-		{
-		    emit_fcode(last_colon_fcode);
+		if (test_in_colon(statbuf, TRUE, TKERROR, NULL)) {
+			emit_fcode(last_colon_fcode);
 		}
 		break;
-		
 
 	case RECURSIVE:
-		if ( test_in_colon(statbuf, TRUE, TKERROR, NULL ) )
-		{
-		    reveal_last_colon();
+		if (test_in_colon(statbuf, TRUE, TKERROR, NULL)) {
+			reveal_last_colon();
 		}
 		break;
 
@@ -4995,69 +4801,64 @@ void handle_internal( tic_param_t pfield)
 		 */
 		/*  First in series doesn't need to check handy_toggle  */
 		handy_string = "r@";
-		    /*  Will call ret_stk_access_rpt()       */
-		    /*  handy_toggle_too  is already TRUE    */
-		    /*  Will not call bump_ret_stk_depth()   */
-		    /*  handy_int  is already zero    */
+		/*  Will call ret_stk_access_rpt()       */
+		/*  handy_toggle_too  is already TRUE    */
+		/*  Will not call bump_ret_stk_depth()   */
+		/*  handy_int  is already zero    */
 		handy_toggle = FALSE;
 	case RET_STK_FROM:
-		if ( handy_toggle )
-		{
-		    handy_string = "r>";
-		    /*  Will call ret_stk_access_rpt()  */
-		    /*  handy_toggle_too  is already TRUE    */
-		    /*  Will call bump_ret_stk_depth( -1)    */
-		    handy_int = -1;
-		    handy_toggle = FALSE;
+		if (handy_toggle) {
+			handy_string = "r>";
+			/*  Will call ret_stk_access_rpt()  */
+			/*  handy_toggle_too  is already TRUE    */
+			/*  Will call bump_ret_stk_depth( -1)    */
+			handy_int = -1;
+			handy_toggle = FALSE;
 		}
 	case RET_STK_TO:
-		if ( handy_toggle )
-		{
-		    handy_string = ">r";
-		    /*  Will not call ret_stk_access_rpt()   */
-		    handy_toggle_too  = FALSE;
-		    /*  Will call bump_ret_stk_depth( 1)     */
-		    handy_int =  1;
-		    /*  Last in series doesn't need to reset handy_toggle  */
+		if (handy_toggle) {
+			handy_string = ">r";
+			/*  Will not call ret_stk_access_rpt()   */
+			handy_toggle_too = FALSE;
+			/*  Will call bump_ret_stk_depth( 1)     */
+			handy_int = 1;
+			/*  Last in series doesn't need to reset handy_toggle  */
 		}
 
 		/*  handy_toggle  is now free for other use  */
 		handy_toggle = allow_ret_stk_interp;
-		if ( ! handy_toggle )
-		{
-		    handy_toggle = test_in_colon(statbuf, TRUE, TKERROR, NULL );
+		if (!handy_toggle) {
+			handy_toggle =
+			    test_in_colon(statbuf, TRUE, TKERROR, NULL);
 		}
-		if ( handy_toggle || noerrors )
-		{
-		    if ( handy_toggle_too )
-		    {
-			ret_stk_access_rpt();
-		    }
-		    if ( handy_int != 0 )
-		    {
-			bump_ret_stk_depth( handy_int);
-		    }
-		    emit_token( handy_string);
+		if (handy_toggle || noerrors) {
+			if (handy_toggle_too) {
+				ret_stk_access_rpt();
+			}
+			if (handy_int != 0) {
+				bump_ret_stk_depth(handy_int);
+			}
+			emit_token(handy_string);
 		}
 		break;
 
 	case PCIHDR:
 		emit_pcihdr();
 		break;
-	
+
 	case PCIEND:
 		finish_pcihdr();
 		reset_fcode_ranges();
-		FFLUSH_STDOUT
-		break;
+		FFLUSH_STDOUT break;
 
 	case PCIREV:
 		pci_image_rev = dpop();
-		tokenization_error( INFO,
-		    "PCI header revision=0x%04x%s\n", pci_image_rev,
-			big_end_pci_image_rev ?
-			    ".  Will be saved in Big-Endian format."
-			    : ""  );
+		tokenization_error(INFO,
+				   "PCI header revision=0x%04x%s\n",
+				   pci_image_rev,
+				   big_end_pci_image_rev ?
+				   ".  Will be saved in Big-Endian format." :
+				   "");
 		break;
 
 	case NOTLAST:
@@ -5066,39 +4867,39 @@ void handle_internal( tic_param_t pfield)
 		dpush(handy_toggle);
 	case SETLAST:
 		{
-		    u32 val = dpop();
-		    bool new_pili = BOOLVAL( (val != 0) );
-		    if ( pci_is_last_image != new_pili )
-		    {
-			tokenization_error( INFO,
-			    new_pili ?
-				"Last image for PCI header.\n" :
-				"PCI header not last image.\n" );
-			pci_is_last_image = new_pili;
-		    }
+			u32 val = dpop();
+			bool new_pili = BOOLVAL((val != 0));
+			if (pci_is_last_image != new_pili) {
+				tokenization_error(INFO,
+						   new_pili ?
+						   "Last image for PCI header.\n"
+						   :
+						   "PCI header not last image.\n");
+				pci_is_last_image = new_pili;
+			}
 		}
 		break;
-		
+
 	case SAVEIMG:
-		if (get_word_in_line( statbuf) )
-		{
-		    free(oname);
-		    oname = strdup( statbuf );
-		    tokenization_error( INFO,
-			"Output is redirected to file:  %s\n", oname);
+		if (get_word_in_line(statbuf)) {
+			free(oname);
+			oname = strdup(statbuf);
+			tokenization_error(INFO,
+					   "Output is redirected to file:  %s\n",
+					   oname);
 		}
 		break;
 
 	case RESETSYMBS:
-		tokenization_error( INFO,
-		    "Resetting symbols defined in %s mode.\n",
-			in_tokz_esc ? "tokenizer-escape" : "\"normal\"");
-		if ( in_tokz_esc )
-		{
-		    reset_tokz_esc();
-		}else{
-		    reset_normal_vocabs();
-		}	
+		tokenization_error(INFO,
+				   "Resetting symbols defined in %s mode.\n",
+				   in_tokz_esc ? "tokenizer-escape" :
+				   "\"normal\"");
+		if (in_tokz_esc) {
+			reset_tokz_esc();
+		} else {
+			reset_normal_vocabs();
+		}
 		break;
 
 	case FCODE_DATE:
@@ -5106,78 +4907,82 @@ void handle_internal( tic_param_t pfield)
 	case FCODE_TIME:
 		{
 			time_t tt;
-		    char temp_buffr[32];
-			
-			tt=time(NULL);
-		    if ( handy_toggle )
-		    {
-			strftime(temp_buffr, 32, "%T %Z", localtime(&tt));
-		    }else{
-			strftime(temp_buffr, 32, "%m/%d/%Y", localtime(&tt));
-		    }
-		    if ( in_tokz_esc )
-		    {
-			tokenization_error( MESSAGE, temp_buffr);
-		    }else{
-			emit_token("b(\")");
-			emit_string((u8 *)temp_buffr, strlen(temp_buffr) );
-		    }
+			char temp_buffr[32];
+
+			tt = time(NULL);
+			if (handy_toggle) {
+				strftime(temp_buffr, 32, "%T %Z",
+					 localtime(&tt));
+			} else {
+				strftime(temp_buffr, 32, "%m/%d/%Y",
+					 localtime(&tt));
+			}
+			if (in_tokz_esc) {
+				tokenization_error(MESSAGE, temp_buffr);
+			} else {
+				emit_token("b(\")");
+				emit_string((u8 *) temp_buffr,
+					    strlen(temp_buffr));
+			}
 		}
 		break;
 
 	case ENCODEFILE:
-		if (get_word_in_line( statbuf) )
-		{
-		encode_file( (char*)statbuf );
+		if (get_word_in_line(statbuf)) {
+			encode_file((char *)statbuf);
 		}
 		break;
 
 	default:
-	    /*  IBM-style Locals, under control of a switch  */
-	    if ( ibm_locals )
-	    {
-		bool found_it = TRUE;
-		switch (tok) {
-		    case CURLY_BRACE:
-			declare_locals( FALSE);
-			break;
-		    case DASH_ARROW:
-			assign_local();
-			break;
-		    default:
-			found_it = FALSE;
-	}
-		if ( found_it ) break;
-}
-
-	    /*  Down here, we have our last chance to recognize a token.
-	     *      If  abort_quote  is disallowed, we will still consume
-	     *      the string.  In case the string spans more than one
-	     *      line, we want to make sure the line number displayed
-	     *      in the error-message is the one on which the disallowed
-	     *       abort_quote  token appeared, not the one where the
-	     *      string ended; therefore, we might need to be able to
-	     *      "fake-out" the line number...
-	     */
-{
-		bool fake_out_lineno = FALSE;
-		unsigned int save_lineno = lineno;
-		unsigned int true_lineno;
-		if ( abort_quote( tok) )
-		{   break;
-		}else{
-		    if ( tok == ABORTTXT )  fake_out_lineno = TRUE;
+		/*  IBM-style Locals, under control of a switch  */
+		if (ibm_locals) {
+			bool found_it = TRUE;
+			switch (tok) {
+			case CURLY_BRACE:
+				declare_locals(FALSE);
+				break;
+			case DASH_ARROW:
+				assign_local();
+				break;
+			default:
+				found_it = FALSE;
+			}
+			if (found_it)
+				break;
 		}
-		true_lineno = lineno;
 
-		if ( fake_out_lineno )  lineno = save_lineno;
-		tokenization_error ( TKERROR,
-		    "Unimplemented control word '%s'\n", strupr(statbuf) );
-		if ( fake_out_lineno )  lineno = true_lineno;
-	    }
+		/*  Down here, we have our last chance to recognize a token.
+		 *      If  abort_quote  is disallowed, we will still consume
+		 *      the string.  In case the string spans more than one
+		 *      line, we want to make sure the line number displayed
+		 *      in the error-message is the one on which the disallowed
+		 *       abort_quote  token appeared, not the one where the
+		 *      string ended; therefore, we might need to be able to
+		 *      "fake-out" the line number...
+		 */
+		{
+			bool fake_out_lineno = FALSE;
+			unsigned int save_lineno = lineno;
+			unsigned int true_lineno;
+			if (abort_quote(tok)) {
+				break;
+			} else {
+				if (tok == ABORTTXT)
+					fake_out_lineno = TRUE;
+			}
+			true_lineno = lineno;
+
+			if (fake_out_lineno)
+				lineno = save_lineno;
+			tokenization_error(TKERROR,
+					   "Unimplemented control word '%s'\n",
+					   strupr(statbuf));
+			if (fake_out_lineno)
+				lineno = true_lineno;
+		}
 	}
 }
-	
+
 /* **************************************************************************
  *
  *      Function name:  skip_string
@@ -5217,53 +5022,55 @@ void handle_internal( tic_param_t pfield)
  *
  **************************************************************************** */
 
-void skip_string( tic_param_t pfield);
-void skip_string( tic_param_t pfield)
+void skip_string(tic_param_t pfield);
+void skip_string(tic_param_t pfield)
 {
-    fwtoken tok = pfield.fw_token;
-    unsigned int sav_lineno = lineno;
-    bool handy_toggle = TRUE ;   /*  Various uses...   */
-			
-    switch (tok) {
-    case STRING:         /*  Double-Quote ( " ) string    */
-    case PSTRING:        /*  Dot-Quote  ( ." ) string     */
-    case ABORTTXT:       /*  ABORT", even if not enabled  */
-	get_string( FALSE);   /*  Don't truncate; ignoring anyway  */
-	/*  Will handle multi-line warnings, etc.   */
+	fwtoken tok = pfield.fw_token;
+	unsigned int sav_lineno = lineno;
+	bool handy_toggle = TRUE;	/*  Various uses...   */
+
+	switch (tok) {
+	case STRING:		/*  Double-Quote ( " ) string    */
+	case PSTRING:		/*  Dot-Quote  ( ." ) string     */
+	case ABORTTXT:		/*  ABORT", even if not enabled  */
+		get_string(FALSE);	/*  Don't truncate; ignoring anyway  */
+		/*  Will handle multi-line warnings, etc.   */
+		break;
+
+	case SSTRING:		/*  Ess-Quote  ( s"  ) string  */
+		handy_toggle = FALSE;
+	case PBSTRING:		/*  Dot-Paren  .(   string  */
+		if (*pc++ == '\n')
+			lineno++;
+		{
+			unsigned int strt_lineno = lineno;
+			get_until(handy_toggle ? ')' : '"');
+			string_err_check(handy_toggle, sav_lineno, strt_lineno);
+		}
+		break;
+
+	default:
+		/*  IBM-style Locals, under control of a switch  */
+		if (ibm_locals) {
+			bool found_it = TRUE;
+			switch (tok) {
+			case CURLY_BRACE:
+				declare_locals(TRUE);
 				break;
-			
-    case SSTRING:        /*  Ess-Quote  ( s"  ) string  */
-	handy_toggle = FALSE;
-    case PBSTRING:       /*  Dot-Paren  .(   string  */
-			if (*pc++=='\n') lineno++;
-	{
-	    unsigned int strt_lineno = lineno;
-	    get_until( handy_toggle ? ')' : '"' );
-	    string_err_check( handy_toggle, sav_lineno, strt_lineno );
-	}
-	break;
+			case DASH_ARROW:
+				get_word();
+				break;
+			default:
+				found_it = FALSE;
+			}
+			if (found_it)
+				break;
+		}
 
-    default:
-	/*  IBM-style Locals, under control of a switch  */
-	if ( ibm_locals )
-	{
-	    bool found_it = TRUE;
-	    switch (tok) {
-		case CURLY_BRACE:
-		    declare_locals( TRUE);
-		    break;
-		case DASH_ARROW:
-		    get_word();
-		    break;
-		default:
-		    found_it = FALSE;
-	    }
-	    if ( found_it ) break;
+		tokenization_error(FATAL, "Program Error.  "
+				   "Unimplemented skip-string word '%s'\n",
+				   strupr(statbuf));
 	}
-
-	tokenization_error ( FATAL,  "Program Error.  "
-	    "Unimplemented skip-string word '%s'\n", strupr(statbuf) );
-    }
 }
 
 /* **************************************************************************
@@ -5293,39 +5100,33 @@ void skip_string( tic_param_t pfield)
  *
  **************************************************************************** */
 
-void process_remark( tic_param_t pfield )
+void process_remark(tic_param_t pfield)
 {
-    char until_char = (char)pfield.fw_token ;
-    unsigned int start_lineno = lineno;
+	char until_char = (char)pfield.fw_token;
+	unsigned int start_lineno = lineno;
 
 #ifdef DEBUG_SCANNER
 
-    get_until(until_char);
-			printf ("%s:%d: debug: stack diagram: %s)\n",
-						iname, lineno, statbuf);
+	get_until(until_char);
+	printf("%s:%d: debug: stack diagram: %s)\n", iname, lineno, statbuf);
 #else
 
-    if ( skip_until( until_char) )
-    {
-	if ( until_char == '\n' )
-	{
-	    /*  Don't need any saved line number here ...  */
-	    tokenization_error ( WARNING,
-		"Unterminated remark.\n");
-	}else{
-	    warn_unterm( WARNING, "comment", start_lineno);
+	if (skip_until(until_char)) {
+		if (until_char == '\n') {
+			/*  Don't need any saved line number here ...  */
+			tokenization_error(WARNING, "Unterminated remark.\n");
+		} else {
+			warn_unterm(WARNING, "comment", start_lineno);
+		}
+	} else {
+		if (until_char != '\n') {
+			pc++;
+			warn_if_multiline("comment", start_lineno);
+		}
 	}
-    }else{
-	if ( until_char != '\n' )
-	{
-	    pc++;
-	    warn_if_multiline( "comment", start_lineno);
-	}
-    }
-#endif  /*  DEBUG_SCANNER  */
+#endif /*  DEBUG_SCANNER  */
 }
-		
-			
+
 /* **************************************************************************
  *
  *      Function name:  filter_comments
@@ -5354,34 +5155,29 @@ void process_remark( tic_param_t pfield )
  *
  **************************************************************************** */
 
-bool filter_comments( u8 *inword)
+bool filter_comments(u8 * inword)
 {
-    bool retval = FALSE;
-    tic_hdr_t *found = lookup_word( inword, NULL, NULL );
-			
-    if ( found != NULL )
-    {
-	if ( found->funct == process_remark )
-	{
-	    found->funct( found->pfield);
-	    retval = TRUE;
-	}else{
-	    /*  Permit the "allow-multiline-comments" directive  */
-	    if ( found->funct == handle_internal )
-	    {
-	        if ( found->pfield.fw_token == ALLOW_MULTI_LINE )
-		{
-		    /*   Make sure any intended side-effects occur...  */
-		    found->funct( found->pfield);
-		    retval = TRUE;
-		}
-	    }
-	}
-    }
-    return ( retval );
-		}
+	bool retval = FALSE;
+	tic_hdr_t *found = lookup_word(inword, NULL, NULL);
 
-		
+	if (found != NULL) {
+		if (found->funct == process_remark) {
+			found->funct(found->pfield);
+			retval = TRUE;
+		} else {
+			/*  Permit the "allow-multiline-comments" directive  */
+			if (found->funct == handle_internal) {
+				if (found->pfield.fw_token == ALLOW_MULTI_LINE) {
+					/*   Make sure any intended side-effects occur...  */
+					found->funct(found->pfield);
+					retval = TRUE;
+				}
+			}
+		}
+	}
+	return (retval);
+}
+
 /* **************************************************************************
  *
  *      Function name:  tokenize_one_word
@@ -5440,35 +5236,32 @@ bool filter_comments( u8 *inword)
  *              of coding.
  *
  **************************************************************************** */
-		
-void tokenize_one_word( signed long wlen )
-{
-		
-    /*  The shared lookup routine now handles everything.   */
-    tic_hdr_t *found = lookup_word( statbuf, NULL, NULL );
-		
-    if ( found != NULL )
-    {
-	tic_found = found;
-	if ( found->tracing)
-	{
-	    invoking_traced_name( found);
-	}
-	found->funct( found->pfield);
-	return ;
-    }
-		
-    /*  It's not a word in any of our current contexts.
-     *      Is it a number?
-     */
-    if ( handle_number() )
-    {
-	return ;
-			}
 
-    /*  Could not identify - give a shout. */
-    tokenized_word_error( statbuf );
+void tokenize_one_word(signed long wlen)
+{
+
+	/*  The shared lookup routine now handles everything.   */
+	tic_hdr_t *found = lookup_word(statbuf, NULL, NULL);
+
+	if (found != NULL) {
+		tic_found = found;
+		if (found->tracing) {
+			invoking_traced_name(found);
 		}
+		found->funct(found->pfield);
+		return;
+	}
+
+	/*  It's not a word in any of our current contexts.
+	 *      Is it a number?
+	 */
+	if (handle_number()) {
+		return;
+	}
+
+	/*  Could not identify - give a shout. */
+	tokenized_word_error(statbuf);
+}
 
 /* **************************************************************************
  *
@@ -5486,15 +5279,12 @@ void tokenize_one_word( signed long wlen )
 
 void tokenize(void)
 {
-    signed long wlen = 0;
-		
-    while ( wlen >= 0 )
-    {
-	wlen = get_word();
-	if ( wlen > 0 )
-	{
-	    tokenize_one_word( wlen );
-	}
+	signed long wlen = 0;
+
+	while (wlen >= 0) {
+		wlen = get_word();
+		if (wlen > 0) {
+			tokenize_one_word(wlen);
+		}
 	}
 }
-

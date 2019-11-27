@@ -51,12 +51,11 @@ typedef struct token {
 /*  Macro for creating an entry in a token-table data-array  */
 #define TOKEN_ENTRY(num, name)   { name, (u16)num, (token_t *)NULL }
 
-
 /*  Prototypes for functions exported from
  *   detok.c  decode.c  printformats.c  pcihdr.c  and  dictionary.c
  */
 
-void link_token(token_t *curr_token);
+void link_token(token_t * curr_token);
 void add_token(u16 number, char *name);
 void init_dictionary(void);
 void reset_dictionary(void);
@@ -69,7 +68,6 @@ void printremark(char *str);
 
 int handle_pci_header(u8 * data_ptr);
 void handle_pci_filler(u8 * filler_ptr);
-
 
 /*  External declarations for variables defined in or used by
  *   detok.c  decode.c  printformats.c  pcihdr.c  and  dictionary.c
@@ -90,4 +88,4 @@ extern u8 *pci_image_end;
 extern unsigned int token_streampos;
 extern u16 last_defined_token;
 
-#endif				/*  _UTILS_DETOK_DETOK_H    */
+#endif /*  _UTILS_DETOK_DETOK_H    */
