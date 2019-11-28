@@ -82,9 +82,9 @@
  **************************************************************************** */
 
 /* Input pointers, Position Counters and Length counters */
-u8 *start = NULL;
-u8 *pc;
-u8 *end;
+char *start = NULL;
+char *pc;
+char *end;
 char *iname = NULL;
 unsigned int lineno = 0;
 unsigned int abs_token_no = 0;	/*  Absolute Token Number in all Source Input
@@ -1048,7 +1048,7 @@ FILE *open_expanded_file(const char *path_name, char *mode, char *for_what)
 bool init_stream(const char *name)
 {
 	FILE *infile;
-	u8 *newbuf;
+	char *newbuf;
 	struct stat finfo;
 	bool stat_succ = FALSE;
 	bool tried_stat = FALSE;

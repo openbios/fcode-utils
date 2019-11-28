@@ -411,10 +411,8 @@ static void decode_branch(void)
 
 static void decode_two(void)
 {
-	u16 token;
-
 	output_token();
-	token = next_token();
+	next_token();
 	output_token_name();
 	printf("\n");
 }

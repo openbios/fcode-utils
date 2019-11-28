@@ -42,9 +42,9 @@
  **************************************************************************** */
 
 /* input pointers */
-extern u8 *start;
-extern u8 *pc;
-extern u8 *end;
+extern char *start;
+extern char *pc;
+extern char *end;
 extern char *iname;
 extern unsigned int lineno;	/* Line Number within current input file  */
 extern unsigned int abs_token_no;	/* Absolute Token Number in Source Input  */

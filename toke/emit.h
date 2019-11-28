@@ -110,7 +110,7 @@ void emit_fcode(u16 tok);
 void user_emit_byte(u8 data);
 
 void emit_offset(s16 offs);
-void emit_string(u8 * string, signed int cnt);
+void emit_string(const char *string, signed int cnt);
 void emit_fcodehdr(const char *starter_name);
 void finish_fcodehdr(void);
 void emit_pcihdr(void);

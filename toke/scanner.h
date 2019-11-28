@@ -43,7 +43,7 @@
  *
  **************************************************************************** */
 
-extern u8 *statbuf;		/*  The word just read from the input stream  */
+extern char *statbuf;		/*  The word just read from the input stream  */
 extern u8 base;			/*  The numeric-interpretation base           */
 
 /* pci data */
@@ -103,7 +103,7 @@ bool get_number(long *result);
 void eval_string(char *inp_bufr);
 
 void process_remark(tic_param_t pfield);
-bool filter_comments(u8 * inword);
+bool filter_comments(char *inword);
 bool as_a_what(fwtoken definer, char *as_what);
 tic_hdr_t *lookup_word(char *stat_name, char **where_pt1, char **where_pt2);
 bool word_exists(char *stat_name, char **where_pt1, char **where_pt2);

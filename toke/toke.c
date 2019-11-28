@@ -106,7 +106,7 @@ static void print_copyright(void)
 	       "This program has absolutely no warranty.\n\n");
 #ifdef DEVEL
 	/*  Temporary hack during development... */
-	printf("\tTokenizer Compiled " DATE_STAMP "\n");
+	printf("\tTokenizer compiled " DATE_STAMP "\n");
 #endif /*  DEVEL  */
 
 }

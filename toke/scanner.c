@@ -66,7 +66,7 @@
  *
  **************************************************************************** */
 
-u8 *statbuf = NULL;		/*  The word just read from the input stream  */
+char *statbuf = NULL;		/*  The word just read from the input stream  */
 u8 base = 0x0a;			/*  The numeric-interpretation base           */
 
 /* pci data */
@@ -268,7 +268,7 @@ bool skip_until(char lim_ch)
 
 static signed long get_until(char needle)
 {
-	u8 *safe;
+	char *safe;
 	unsigned long len = 0;
 
 	safe = pc;
@@ -329,9 +329,9 @@ static signed long get_until(char needle)
 
 typedef struct source_state {
 	struct source_state *next;
-	u8 *old_start;
-	u8 *old_pc;
-	u8 *old_end;
+	char *old_start;
+	char *old_pc;
+	char *old_end;
 	char *old_iname;
 	unsigned int old_lineno;
 	bool pause_before_pop;
@@ -580,7 +580,7 @@ static bool pop_source(void)
 signed long get_word(void)
 {
 	size_t len;
-	u8 *str;
+	char *str;
 	bool keep_skipping;
 	bool pop_result;
 
@@ -663,7 +663,7 @@ bool get_word_in_line(char *func_nam)
 {
 	signed long wlen;
 	bool retval = TRUE;
-	u8 *save_pc = pc;
+	char *save_pc = pc;
 	unsigned int save_lineno = lineno;
 	unsigned int save_abs_token_no = abs_token_no;
 
@@ -722,7 +722,7 @@ bool get_word_in_line(char *func_nam)
 bool get_rest_of_line(void)
 {
 	bool retval = FALSE;
-	u8 *save_pc = pc;
+	char *save_pc = pc;
 	unsigned int save_lineno = lineno;
 	unsigned int save_abs_token_no = abs_token_no;
 
@@ -890,12 +890,12 @@ static void string_remark(char *errmsg_txt)
  *  the calling routine is responsible for ascertaining
  *  the validity of the string being passed.
  */
-static long parse_number(u8 * start, u8 ** endptr, int lbase)
+static long parse_number(char *start, char **endptr, int lbase)
 {
 	long val = 0;
 	bool negative = FALSE;
 	int curr;
-	u8 *nptr = start;
+	char *nptr = start;
 
 	curr = *nptr;
 	if (curr == '-') {
@@ -968,7 +968,7 @@ static long parse_number(u8 * start, u8 ** endptr, int lbase)
  *
  **************************************************************************** */
 
-static void add_byte_to_string(u8 nu_byte, u8 ** walk)
+static void add_byte_to_string(char nu_byte, char **walk)
 {
 	if (*walk - statbuf < GET_BUF_MAX) {
 		**walk = nu_byte;
@@ -1024,10 +1024,10 @@ static void add_byte_to_string(u8 nu_byte, u8 ** walk)
  *
  **************************************************************************** */
 
-static void c_string_escape(u8 ** walk)
+static void c_string_escape(char **walk)
 {
 	char c = *pc;
-	u8 val;
+	char val;
 	/*  We will come out of this "switch" statement
 	 *      with a value for  val  and a decision
 	 *      as to whether to write it.
@@ -1061,7 +1061,7 @@ static void c_string_escape(u8 ** walk)
 		 */
 		{
 			long lval;
-			u8 *sav_pc = pc;
+			char *sav_pc = pc;
 			lval = parse_number(pc, &pc, base);
 			val = (u8) lval;
 #ifdef DEBUG_SCANNER
@@ -1205,7 +1205,7 @@ static void c_string_escape(u8 ** walk)
  *
  **************************************************************************** */
 
-static bool get_sequence(u8 ** walk)
+static bool get_sequence(char **walk)
 {
 	int pv_indx = 0;
 	bool retval = FALSE;	/*  "Abnormal Completion" indicator  */
@@ -1293,7 +1293,7 @@ static bool get_sequence(u8 ** walk)
 
 static signed long get_string(bool pack_str)
 {
-	u8 *walk;
+	char *walk;
 	unsigned long len;
 	char c;
 	bool run = TRUE;
@@ -1492,14 +1492,13 @@ static signed long get_string(bool pack_str)
 
 static void handle_user_message(char delim, bool print_it)
 {
-	signed long wlen;
 	unsigned int start_lineno = lineno;
 	unsigned int multiline_start = lineno;	/*  For warning message  */
 	bool check_multiline = FALSE;
 	const char *ug_msg = "user-generated message";
 
 	if (delim == '"') {
-		wlen = get_string(FALSE);
+		get_string(FALSE);
 	} else {
 		/*
 		 *  When the message-delimiter is a new-line, and the
@@ -1520,7 +1519,7 @@ static void handle_user_message(char delim, bool print_it)
 			multiline_start = lineno;
 			check_multiline = TRUE;
 		}
-		wlen = get_until(delim);
+		get_until(delim);
 	}
 
 	if (print_it) {
@@ -1639,7 +1638,7 @@ void skip_user_message(tic_param_t pfield)
 
 bool get_number(long *result)
 {
-	u8 *until;
+	char *until;
 	long val;
 	bool retval = FALSE;
 
@@ -3144,7 +3143,7 @@ static bool create_word(fwtoken definer)
 						strupr(statbuf);
 					}
 				}
-				emit_string((u8 *) statbuf, wlen);
+				emit_string(statbuf, wlen);
 			}
 
 			/*  Emit the new token's FCode   */
@@ -3300,7 +3299,7 @@ static bool validate_to_target(void)
 {
 	signed long wlen;
 	tic_hdr_t *test_entry;
-	u8 *saved_pc = pc;
+	char *saved_pc = pc;
 	char *cmd_cpy = strupr(strdup(statbuf));	/*  For error message  */
 	unsigned int saved_lineno = lineno;
 	unsigned int saved_abs_token_no = abs_token_no;
@@ -3625,7 +3624,7 @@ static bool get_token(tic_hdr_t ** tok_entry)
 {
 	bool retval = FALSE;
 	tic_hdr_t *found;
-	u8 *save_pc;
+	char *save_pc;
 
 	/*  Copy of command being processed, for error message  */
 	char cmnd_cpy[FUNC_CPY_BUF_SIZE + 1];
@@ -3688,7 +3687,7 @@ static void base_change(int new_base)
 
 static void base_val(int new_base)
 {
-	u8 *old_pc;
+	char *old_pc;
 
 	char base_cmnd[FUNC_CPY_BUF_SIZE + 1];
 	strncpy(base_cmnd, statbuf, FUNC_CPY_BUF_SIZE);
@@ -3912,9 +3911,8 @@ static bool abort_quote(fwtoken tok)
 		if (!enable_abort_quote) {
 			/* ABORT" is not enabled; we'd better consume the string  */
 			char *save_statbuf;
-			signed long wlen;
 			save_statbuf = strdup((char *)statbuf);
-			wlen = get_string(FALSE);
+			get_string(FALSE);
 			strcpy(statbuf, save_statbuf);
 			free(save_statbuf);
 		} else {
@@ -3926,7 +3924,6 @@ static bool abort_quote(fwtoken tok)
 			 * Presumably, Apple Source supplies its own
 			 *  IF ... THEN
 			 */
-			char *abort_string;
 			signed long wlen;
 
 			retval = TRUE;
@@ -3953,8 +3950,6 @@ static bool abort_quote(fwtoken tok)
 
 			if (sun_style_abort_quote)
 				emit_then();
-			/*  Sun Style  */
-			abort_string = " type -2 THROW THEN:";
 		}
 	}
 	return (retval);
@@ -4921,8 +4916,7 @@ void handle_internal(tic_param_t pfield)
 				tokenization_error(MESSAGE, temp_buffr);
 			} else {
 				emit_token("b(\")");
-				emit_string((u8 *) temp_buffr,
-					    strlen(temp_buffr));
+				emit_string(temp_buffr, strlen(temp_buffr));
 			}
 		}
 		break;
@@ -5155,7 +5149,7 @@ void process_remark(tic_param_t pfield)
  *
  **************************************************************************** */
 
-bool filter_comments(u8 * inword)
+bool filter_comments(char *inword)
 {
 	bool retval = FALSE;
 	tic_hdr_t *found = lookup_word(inword, NULL, NULL);

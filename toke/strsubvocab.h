@@ -48,8 +48,8 @@
 #include "types.h"
 
 typedef struct str_sub_vocab {
-	u8 *name;
-	u8 *alias;
+	char *name;
+	char *alias;
 	struct str_sub_vocab *next;
 } str_sub_vocab_t;
 

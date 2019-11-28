@@ -369,10 +369,8 @@ bool add_fcodes_from_list(char *vf_file_name)
 			bool found_spf = FALSE;
 			int indx;
 			for (indx = 0; indx < spcl_func_count; indx++) {
-				if (strcmp
-				    (vs_fc_name,
-				     spcl_func_list[indx].name) == 0) {
-					char strbuf[64];
+				if (strcmp(vs_fc_name, spcl_func_list[indx].name) == 0) {
+					char strbuf[85];
 					found_spf = TRUE;
 					spcl_func_list[indx].fcode =
 					    vs_fc_number;

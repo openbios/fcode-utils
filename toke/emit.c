@@ -130,7 +130,7 @@ static bool fcode_written = FALSE;
  *
  **************************************************************************** */
 
-extern u8 *ostart;
+extern char *ostart;
 extern int olen;
 extern void increase_output_buffer(void);
 
@@ -172,7 +172,7 @@ static void emit_byte(u8 data)
 		increase_output_buffer();
 	}
 
-	*(ostart + opc) = data;
+	*(ostart + opc) = (char)data;
 	opc++;
 }
 
@@ -223,7 +223,7 @@ void emit_literal(u32 num)
 	emit_num32(num);
 }
 
-void emit_string(u8 * string, signed int cnt)
+void emit_string(const char *string, signed int cnt)
 {
 	signed int i = 0;
 	signed int cnt_cpy = cnt;
@@ -310,8 +310,8 @@ void finish_fcodehdr(void)
 		u32 checksum;
 		int length;
 
-		u8 *fcode_body = ostart + fcode_body_ob_off;
-		u8 *ob_end = ostart + opc;
+		char *fcode_body = ostart + fcode_body_ob_off;
+		char *ob_end = ostart + opc;
 		fcode_header_t *fcode_hdr =
 		    (fcode_header_t *) (ostart + fcode_hdr_ob_off);
 
@@ -547,7 +547,6 @@ void finish_pcihdr(void)
 	u32 imageblocks;
 	int padding;
 
-	rom_header_t *pci_hdr;
 	pci_data_t *pci_data_blk;
 
 	if (pci_data_blk_ob_off == -1) {
@@ -556,7 +555,6 @@ void finish_pcihdr(void)
 		return;
 	}
 
-	pci_hdr = (rom_header_t *) (ostart + pci_hdr_ob_off);
 	pci_data_blk = (pci_data_t *) (ostart + pci_data_blk_ob_off);
 
 	/* fix up vpd */
