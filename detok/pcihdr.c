@@ -62,7 +62,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Still to be done:
@@ -77,7 +76,6 @@
 #include <stdio.h>
 
 #include "detok.h"
-
 
 /* **************************************************************************
  *
@@ -96,7 +94,6 @@ u8 *pci_image_end = NULL;
  **************************************************************************** */
 
 static int pci_image_len = 0;
-
 
 /* **************************************************************************
  *
@@ -143,7 +140,8 @@ static int is_pci_header(rom_header_t * pci_rom_hdr)
 
 	retval = 0;
 
-	if (BIG_ENDIAN_WORD_FETCH(pci_rom_hdr->signature) == pci_header_signature) {
+	if (BIG_ENDIAN_WORD_FETCH(pci_rom_hdr->signature) ==
+	    pci_header_signature) {
 		retval = LITTLE_ENDIAN_WORD_FETCH(pci_rom_hdr->data_ptr);
 	}
 	return (retval);
@@ -206,7 +204,6 @@ static int is_pci_data_struct(pci_data_t * pci_data_ptr)
 	}
 	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -272,7 +269,8 @@ static void announce_pci_data_struct(pci_data_t * pci_data_ptr)
 	printremark("PCI Data Structure identified");
 
 	temp = (u32) LITTLE_ENDIAN_WORD_FETCH(pci_data_ptr->dlen);
-	sprintf(temp_buf, "  Data Structure Length = 0x%04x (%d)\n", temp, temp);
+	sprintf(temp_buf, "  Data Structure Length = 0x%04x (%d)\n", temp,
+		temp);
 	printremark(temp_buf);
 
 	sprintf(temp_buf, "  Vendor ID: 0x%04x\n",
@@ -316,7 +314,6 @@ static void announce_pci_data_struct(pci_data_t * pci_data_ptr)
 	printremark(temp_buf);
 
 }
-
 
 /* **************************************************************************
  *
@@ -384,7 +381,9 @@ int handle_pci_header(u8 * data_ptr)
 		/* if hdrlen == 0 then we don't need to check a Data Structure  */
 		if (hdrlen > 0) {
 			announce_pci_hdr((rom_header_t *) data_ptr);
-			data_struc_len = is_pci_data_struct((pci_data_t *) & data_ptr[hdrlen]);
+			data_struc_len =
+			    is_pci_data_struct((pci_data_t *) &
+					       data_ptr[hdrlen]);
 			/*
 			 *  A Data Structure Length of Zero would be an error
 			 *  that could be detected by  is_pci_data_struct()
@@ -395,7 +394,8 @@ int handle_pci_header(u8 * data_ptr)
 				/*  It might need to do a premature EXIT here...  */
 				/*  retval = -1;   *//*  Not needed yet...  */
 			} else {
-				announce_pci_data_struct((pci_data_t *) & data_ptr[hdrlen]);
+				announce_pci_data_struct((pci_data_t *) &
+							 data_ptr[hdrlen]);
 				pci_image_end = data_ptr + pci_image_len;
 				/* retval = hdrlen+data_struc_len; *//*  Not needed yet... */
 			}
@@ -403,7 +403,6 @@ int handle_pci_header(u8 * data_ptr)
 	}
 	return (hdrlen + data_struc_len);
 }
-
 
 /* **************************************************************************
  *
@@ -457,7 +456,8 @@ void handle_pci_filler(u8 * filler_ptr)
 	}
 
 	if (all_zero) {
-		sprintf(temp_buf, "PCI Image padded with %d bytes of zero", filler_len);
+		sprintf(temp_buf, "PCI Image padded with %d bytes of zero",
+			filler_len);
 	} else {
 		sprintf(temp_buf, "PCI Image padding-field of %d bytes "
 			"had first non-zero byte at offset %ld",

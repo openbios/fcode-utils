@@ -81,7 +81,6 @@
 #include "clflags.h"
 #include "errhandler.h"
 
-
 /* **************************************************************************
  *
  *          Global Variables Exported
@@ -89,23 +88,23 @@
  *
  **************************************************************************** */
 
-bool ibm_locals = FALSE ;
-bool ibm_locals_legacy_separator = TRUE ;
-bool ibm_legacy_separator_message = TRUE ;
-bool enable_abort_quote = TRUE ;
-bool sun_style_abort_quote = TRUE ;
-bool sun_style_checksum = FALSE ;
-bool abort_quote_throw = TRUE ;
-bool string_remark_escape = TRUE ;
-bool hex_remark_escape = TRUE ;
-bool c_style_string_escape = TRUE ;
-bool always_headers = FALSE ;
-bool always_external = FALSE ;
-bool verbose_dup_warning = TRUE ;
-bool obso_fcode_warning = TRUE ;
-bool trace_conditionals = FALSE ;
-bool big_end_pci_image_rev = FALSE ;
-bool allow_ret_stk_interp = TRUE ;
+bool ibm_locals = FALSE;
+bool ibm_locals_legacy_separator = TRUE;
+bool ibm_legacy_separator_message = TRUE;
+bool enable_abort_quote = TRUE;
+bool sun_style_abort_quote = TRUE;
+bool sun_style_checksum = FALSE;
+bool abort_quote_throw = TRUE;
+bool string_remark_escape = TRUE;
+bool hex_remark_escape = TRUE;
+bool c_style_string_escape = TRUE;
+bool always_headers = FALSE;
+bool always_external = FALSE;
+bool verbose_dup_warning = TRUE;
+bool obso_fcode_warning = TRUE;
+bool trace_conditionals = FALSE;
+bool big_end_pci_image_rev = FALSE;
+bool allow_ret_stk_interp = TRUE;
 
 /*  And one to trigger a "help" message  */
 bool clflag_help = FALSE;
@@ -118,8 +117,8 @@ bool clflag_help = FALSE;
  *
  **************************************************************************** */
 
-bool force_tokens_case       = FALSE ;
-bool force_lower_case_tokens = FALSE ;
+bool force_tokens_case = FALSE;
+bool force_lower_case_tokens = FALSE;
 
 /* **************************************************************************
  *
@@ -127,10 +126,10 @@ bool force_lower_case_tokens = FALSE ;
  *         and keep two more to detect when a change is made...
  *
  **************************************************************************** */
-static bool upper_case_tokens = FALSE ;
-static bool lower_case_tokens = FALSE ;
-static bool was_upper_case_tk = FALSE ;
-static bool was_lower_case_tk = FALSE ;
+static bool upper_case_tokens = FALSE;
+static bool lower_case_tokens = FALSE;
+static bool was_upper_case_tk = FALSE;
+static bool was_lower_case_tk = FALSE;
 
 /* **************************************************************************
  *
@@ -144,129 +143,125 @@ static bool was_lower_case_tk = FALSE ;
 static bool cl_flag_change = FALSE;
 
 static const cl_flag_t cl_flags_list[] = {
-  /*  The clflag_tabs field takes at least one tab.
-   *  If the name has fewer than 16 characters,
-   *  stick in an extra tab, and yet another tab
-   *  if the name is shorter than 8 characters
-   *  to make the formatting of the "explanation"
-   *  come out prettier.
-   */
-  { "Local-Values",
-        &ibm_locals,
-	"\t\t",
-	    "Support IBM-style Local Values (\"LV\"s)"     } ,
+	/*  The clflag_tabs field takes at least one tab.
+	 *  If the name has fewer than 16 characters,
+	 *  stick in an extra tab, and yet another tab
+	 *  if the name is shorter than 8 characters
+	 *  to make the formatting of the "explanation"
+	 *  come out prettier.
+	 */
+	{ "Local-Values",
+	 &ibm_locals,
+	 "\t\t",
+	 "Support IBM-style Local Values (\"LV\"s)" },
 
-  { "LV-Legacy-Separator",
-        &ibm_locals_legacy_separator,
-	"\t",
-	    "Allow Semicolon for Local Values Separator (\"Legacy\")"     } ,
+	{ "LV-Legacy-Separator",
+	 &ibm_locals_legacy_separator,
+	 "\t",
+	 "Allow Semicolon for Local Values Separator (\"Legacy\")" },
 
-  { "LV-Legacy-Message",
-        &ibm_legacy_separator_message,
-	"\t",
-	    "Display a Message when Semicolon is used as the "
-		"Local Values Separator" } ,
+	{ "LV-Legacy-Message",
+	 &ibm_legacy_separator_message,
+	 "\t",
+	 "Display a Message when Semicolon is used as the "
+	 "Local Values Separator" },
 
-  { "ABORT-Quote",
-        &enable_abort_quote,
-	"\t\t",
-	    "Allow ABORT\" macro"     } ,
+	{ "ABORT-Quote",
+	 &enable_abort_quote,
+	 "\t\t",
+	 "Allow ABORT\" macro" },
 
-  { "Sun-ABORT-Quote",
-        &sun_style_abort_quote,
-	"\t\t",
-	    "ABORT\" with implicit IF ... THEN"     } ,
+	{ "Sun-ABORT-Quote",
+	 &sun_style_abort_quote,
+	 "\t\t",
+	 "ABORT\" with implicit IF ... THEN" },
 
-  { "ABORT-Quote-Throw",
-        &abort_quote_throw,
-	"\t",
-	    "Use -2 THROW in an Abort\" phrase, rather than ABORT"     } ,
+	{ "ABORT-Quote-Throw",
+	 &abort_quote_throw,
+	 "\t",
+	 "Use -2 THROW in an Abort\" phrase, rather than ABORT" },
 
-  { "Sun-Style-Checksum",
-        &sun_style_checksum,
-	"\t\t",
-	    "Use this for SPARC (Enterprise) platforms (especially): M3000, M4000, M9000"     } ,
+	{ "Sun-Style-Checksum",
+	 &sun_style_checksum,
+	 "\t\t",
+	 "Use this for SPARC (Enterprise) platforms (especially): M3000, M4000, M9000"
+	 },
 
-  { "String-remark-escape",
-        &string_remark_escape,
-	"\t",
-	    "Allow \"\\ (Quote-Backslash) to interrupt string parsing"     } ,
+	{ "String-remark-escape",
+	 &string_remark_escape,
+	 "\t",
+	 "Allow \"\\ (Quote-Backslash) to interrupt string parsing" },
 
-  { "Hex-remark-escape",
-        &hex_remark_escape,
-	"\t",
-	    "Allow \\ (Backslash) to interrupt "
-		"hex-sequence parsing within a string"     } ,
+	{ "Hex-remark-escape",
+	 &hex_remark_escape,
+	 "\t",
+	 "Allow \\ (Backslash) to interrupt "
+	 "hex-sequence parsing within a string" },
 
-  { "C-Style-string-escape",
-        &c_style_string_escape ,
-	"\t",
-	    "Allow \\n \\t and \\xx\\ for special chars in string parsing"  } ,
+	{ "C-Style-string-escape",
+	 &c_style_string_escape,
+	 "\t",
+	 "Allow \\n \\t and \\xx\\ for special chars in string parsing" },
 
-  { "Always-Headers",
-        &always_headers ,
-	"\t\t",
-	    "Override \"headerless\" and force to \"headers\"" } ,
+	{ "Always-Headers",
+	 &always_headers,
+	 "\t\t",
+	 "Override \"headerless\" and force to \"headers\"" },
 
-  { "Always-External",
-        &always_external ,
-	"\t\t",
-	    "Override \"headerless\" and \"headers\" and "
-		"force to \"external\"" } ,
+	{ "Always-External",
+	 &always_external,
+	 "\t\t",
+	 "Override \"headerless\" and \"headers\" and "
+	 "force to \"external\"" },
 
-  { "Warn-if-Duplicate",
-        &verbose_dup_warning ,
-	"\t",
-	    "Display a WARNING message when a duplicate definition is made" } ,
+	{ "Warn-if-Duplicate",
+	 &verbose_dup_warning,
+	 "\t",
+	 "Display a WARNING message when a duplicate definition is made" },
 
-  { "Obsolete-FCode-Warning",
-        &obso_fcode_warning ,
-	"\t",
-	    "Display a WARNING message when an \"obsolete\" "
-		"(per the Standard) FCode is used" } ,
+	{ "Obsolete-FCode-Warning",
+	 &obso_fcode_warning,
+	 "\t",
+	 "Display a WARNING message when an \"obsolete\" "
+	 "(per the Standard) FCode is used" },
 
-  { "Trace-Conditionals",
-        &trace_conditionals,
-	"\t",
-	    "Display ADVISORY messages about the state of "
-		"Conditional Tokenization" } ,
+	{ "Trace-Conditionals",
+	 &trace_conditionals,
+	 "\t",
+	 "Display ADVISORY messages about the state of "
+	 "Conditional Tokenization" },
 
-  { "Upper-Case-Token-Names",
-        &upper_case_tokens,
-	"\t",
-	    "Convert Token-Names to UPPER-Case" } ,
+	{ "Upper-Case-Token-Names",
+	 &upper_case_tokens,
+	 "\t",
+	 "Convert Token-Names to UPPER-Case" },
 
+	{ "Lower-Case-Token-Names",
+	 &lower_case_tokens,
+	 "\t",
+	 "Convert Token-Names to lower-Case" },
 
-  { "Lower-Case-Token-Names",
-        &lower_case_tokens,
-	"\t",
-	    "Convert Token-Names to lower-Case" } ,
+	{ "Big-End-PCI-Rev-Level",
+	 &big_end_pci_image_rev,
+	 "\t",
+	 "Save the Vendor's Rev Level field of the PCI Header"
+	 " in Big-Endian format" },
 
+	{ "Ret-Stk-Interp",
+	 &allow_ret_stk_interp,
+	 "\t\t",
+	 "Allow Return-Stack Operations during Interpretation" },
 
-  { "Big-End-PCI-Rev-Level",
-        &big_end_pci_image_rev,
-	"\t",
-	    "Save the Vendor's Rev Level field of the PCI Header"
-		" in Big-Endian format" } ,
-
-  { "Ret-Stk-Interp",
-        &allow_ret_stk_interp,
-	"\t\t",
-	    "Allow Return-Stack Operations during Interpretation" } ,
-
-
-  /*  Keep the "help" pseudo-flag last in the list  */
-  { "help",
-        &clflag_help,
-	    /*  Two extra tabs if the name is shorter than 8 chars  */
-	"\t\t\t",
-	    "Print this \"Help\" message for the Special-Feature Flags" }
+	/*  Keep the "help" pseudo-flag last in the list  */
+	{ "help",
+	 &clflag_help,
+	 /*  Two extra tabs if the name is shorter than 8 chars  */
+	 "\t\t\t",
+	 "Print this \"Help\" message for the Special-Feature Flags" }
 
 };
 
-static const int number_of_cl_flags =
-	 sizeof(cl_flags_list)/sizeof(cl_flag_t);
-
+static const int number_of_cl_flags = sizeof(cl_flags_list) / sizeof(cl_flag_t);
 
 /* **************************************************************************
  *
@@ -327,39 +322,34 @@ static long int cl_flags_bit_map;
  *
  **************************************************************************** */
 
-static void adjust_case_flags( void)
+static void adjust_case_flags(void)
 {
-    static bool *case_tokens[2] = { &upper_case_tokens, &lower_case_tokens };
-    static bool *was_case_tk[2] = { &was_upper_case_tk, &was_lower_case_tk };
-    int the_one = 0;
-    int the_other = 1;
+	static bool *case_tokens[2] =
+	    { &upper_case_tokens, &lower_case_tokens };
+	static bool *was_case_tk[2] =
+	    { &was_upper_case_tk, &was_lower_case_tk };
+	int the_one = 0;
+	int the_other = 1;
 
-    for ( ; the_one < 2 ; the_one++ , the_other-- )
-    {
-	/*  If one has changed state   */
-	if ( *(case_tokens[the_one]) != *(was_case_tk[the_one]) )
-	{
-	    if ( *(case_tokens[the_one]) )
-	    {
-	        /*  If it has gone to TRUE, force the other to FALSE.  */
-		*(case_tokens[the_other]) = FALSE;
-	        /*      and set  force_tokens_case  to TRUE  */
-		force_tokens_case = TRUE;
-	    }else{
-		/*  If it has gone to FALSE turn  force_tokens_case FALSE  */
-		force_tokens_case = FALSE;
-	    }
-	    if ( force_tokens_case )
-	    {
-	        force_lower_case_tokens = lower_case_tokens;
-	    }
-	    break;  /*  Only one can have changed state.   */
+	for (; the_one < 2; the_one++, the_other--) {
+		/*  If one has changed state   */
+		if (*(case_tokens[the_one]) != *(was_case_tk[the_one])) {
+			if (*(case_tokens[the_one])) {
+				/*  If it has gone to TRUE, force the other to FALSE.  */
+				*(case_tokens[the_other]) = FALSE;
+				/*      and set  force_tokens_case  to TRUE  */
+				force_tokens_case = TRUE;
+			} else {
+				/*  If it has gone to FALSE turn  force_tokens_case FALSE  */
+				force_tokens_case = FALSE;
+			}
+			if (force_tokens_case) {
+				force_lower_case_tokens = lower_case_tokens;
+			}
+			break;	/*  Only one can have changed state.   */
+		}
 	}
-    }
 }
-
-
-
 
 /* **************************************************************************
  *
@@ -408,67 +398,62 @@ static void adjust_case_flags( void)
  *          Adjust the "upper/lower-case-tokens" flags if one has changed.
  *
  **************************************************************************** */
-static bool first_err_msg = TRUE;  /*  Need extra carr-ret for first err msg  */
+static bool first_err_msg = TRUE;	/*  Need extra carr-ret for first err msg  */
 bool set_cl_flag(char *flag_name, bool from_src)
 {
-    bool retval = TRUE;
+	bool retval = TRUE;
 
-    was_upper_case_tk = upper_case_tokens;
-    was_lower_case_tk = lower_case_tokens;
+	was_upper_case_tk = upper_case_tokens;
+	was_lower_case_tk = lower_case_tokens;
 
-    if ( strlen(flag_name) > 3 )
-    {
-	int indx;
-	bool flagval = TRUE;
-	char *compar = flag_name;
+	if (strlen(flag_name) > 3) {
+		int indx;
+		bool flagval = TRUE;
+		char *compar = flag_name;
 
-	if ( strncasecmp( flag_name, "no", 2) == 0 )
-	{
-	    flagval = FALSE;
-	    compar += 2;
-	}
-	for ( indx = 0 ; indx < number_of_cl_flags ; indx++ )
-	{
-	    if ( strcasecmp( compar, cl_flags_list[indx].clflag_name ) == 0 )
-	    {
-		retval = FALSE;
-		*(cl_flags_list[indx].flag_var) = flagval;
-
-		/*  The "help" flag is the last one in the list  */
-		if ( indx != number_of_cl_flags - 1 )
-		{
-		    cl_flag_change = TRUE;
+		if (strncasecmp(flag_name, "no", 2) == 0) {
+			flagval = FALSE;
+			compar += 2;
 		}
-		if ( from_src )
-		{
-		    tokenization_error(INFO,
-		    "%sabling:  %s\n",
-		    flagval ? "En" : "Dis", cl_flags_list[indx].clflag_expln);
+		for (indx = 0; indx < number_of_cl_flags; indx++) {
+			if (strcasecmp(compar, cl_flags_list[indx].clflag_name)
+			    == 0) {
+				retval = FALSE;
+				*(cl_flags_list[indx].flag_var) = flagval;
+
+				/*  The "help" flag is the last one in the list  */
+				if (indx != number_of_cl_flags - 1) {
+					cl_flag_change = TRUE;
+				}
+				if (from_src) {
+					tokenization_error(INFO,
+							   "%sabling:  %s\n",
+							   flagval ? "En" :
+							   "Dis",
+							   cl_flags_list[indx].
+							   clflag_expln);
+				}
+				break;
+			}
 		}
-		break;
-	    }
 	}
-    }
 
-    if ( retval )
-    {
-       const char* msg_txt = "Unknown Special-Feature Flag:  %s\n" ;
-       if ( from_src )
-       {
-           tokenization_error( TKERROR, (char *)msg_txt, flag_name);
-       }else{
-	   if ( first_err_msg )
-	   {
-	       printf( "\n");
-	       first_err_msg = FALSE;
-	   }
-	   printf( msg_txt, flag_name);
-       }
-    }
+	if (retval) {
+		const char *msg_txt = "Unknown Special-Feature Flag:  %s\n";
+		if (from_src) {
+			tokenization_error(TKERROR, (char *)msg_txt, flag_name);
+		} else {
+			if (first_err_msg) {
+				printf("\n");
+				first_err_msg = FALSE;
+			}
+			printf(msg_txt, flag_name);
+		}
+	}
 
-    adjust_case_flags();
+	adjust_case_flags();
 
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -510,24 +495,23 @@ bool set_cl_flag(char *flag_name, bool from_src)
 
 void show_all_cl_flag_settings(bool from_src)
 {
-    const char* hdr_txt = "Special-Feature Flag settings:" ;
-    int indx;
+	const char *hdr_txt = "Special-Feature Flag settings:";
+	int indx;
 
-    if ( from_src )
-    {
-	tokenization_error(MESSAGE, (char *)hdr_txt);
-    }else{
-	printf("\n%s\n", hdr_txt);
-    }
+	if (from_src) {
+		tokenization_error(MESSAGE, (char *)hdr_txt);
+	} else {
+		printf("\n%s\n", hdr_txt);
+	}
 
-    for ( indx = 0 ; indx < (number_of_cl_flags - 1) ; indx++ )
-    {
-	fprintf( from_src ? ERRMSG_DESTINATION : stdout ,
-	    "\t%s%s\n",
-		*(cl_flags_list[indx].flag_var) ? "  " : "No" ,
-		    cl_flags_list[indx].clflag_name );
-    }
-    if ( from_src )   fprintf( ERRMSG_DESTINATION, "\n");
+	for (indx = 0; indx < (number_of_cl_flags - 1); indx++) {
+		fprintf(from_src ? ERRMSG_DESTINATION : stdout,
+			"\t%s%s\n",
+			*(cl_flags_list[indx].flag_var) ? "  " : "No",
+			cl_flags_list[indx].clflag_name);
+	}
+	if (from_src)
+		fprintf(ERRMSG_DESTINATION, "\n");
 }
 
 /* **************************************************************************
@@ -554,12 +538,10 @@ void show_all_cl_flag_settings(bool from_src)
 void list_cl_flag_settings(void)
 {
 
-    if ( cl_flag_change )
-    {
-	show_all_cl_flag_settings( FALSE);
-    }
+	if (cl_flag_change) {
+		show_all_cl_flag_settings(FALSE);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -582,13 +564,12 @@ void list_cl_flag_settings(void)
 
 void list_cl_flag_names(void)
 {
-    int indx;
+	int indx;
 
-    printf("Valid Special-Feature Flags are:\n");
-    for ( indx = 0 ; indx < number_of_cl_flags ; indx++ )
-    {
-        printf("\t%s\n", cl_flags_list[indx].clflag_name );
-    }
+	printf("Valid Special-Feature Flags are:\n");
+	for (indx = 0; indx < number_of_cl_flags; indx++) {
+		printf("\t%s\n", cl_flags_list[indx].clflag_name);
+	}
 }
 
 /* **************************************************************************
@@ -632,30 +613,27 @@ void list_cl_flag_names(void)
  *
  **************************************************************************** */
 
-void cl_flags_help(void )
+void cl_flags_help(void)
 {
-    int indx;
+	int indx;
 
-    printf("\n"
-           "Special-Feature Flags usage:\n"
-           "  -f   FlagName   to enable the feature associated with FlagName,\n"
-           "or\n"
-           "  -f noFlagName   to disable the feature.\n\n"
-                "%s   Flag-Name\t\t  Feature:\n\n",
-	            cl_flag_change ? "Setting" : "Default" );
+	printf("\n"
+	       "Special-Feature Flags usage:\n"
+	       "  -f   FlagName   to enable the feature associated with FlagName,\n"
+	       "or\n"
+	       "  -f noFlagName   to disable the feature.\n\n"
+	       "%s   Flag-Name\t\t  Feature:\n\n",
+	       cl_flag_change ? "Setting" : "Default");
 
-   for ( indx = 0 ; indx < number_of_cl_flags ; indx++ )
-    {
-	printf(" %s    %s%s%s\n",
-	    *(cl_flags_list[indx].flag_var) ? "  " : "no" ,
-	    cl_flags_list[indx].clflag_name,
-	    cl_flags_list[indx].clflag_tabs,
-	    cl_flags_list[indx].clflag_expln);
-    }
+	for (indx = 0; indx < number_of_cl_flags; indx++) {
+		printf(" %s    %s%s%s\n",
+		       *(cl_flags_list[indx].flag_var) ? "  " : "no",
+		       cl_flags_list[indx].clflag_name,
+		       cl_flags_list[indx].clflag_tabs,
+		       cl_flags_list[indx].clflag_expln);
+	}
 
 }
-
-
 
 /* **************************************************************************
  *
@@ -686,18 +664,16 @@ void cl_flags_help(void )
 
 void save_cl_flags(void)
 {
-    int indx;
-    long int moving_bit = 1;
+	int indx;
+	long int moving_bit = 1;
 
-    cl_flags_bit_map = 0;
-    for ( indx = 0 ; indx < (number_of_cl_flags - 1) ; indx++ )
-    {
-	if ( *(cl_flags_list[indx].flag_var) )
-	{
-	    cl_flags_bit_map |= moving_bit;  /*  The moving finger writes,  */
+	cl_flags_bit_map = 0;
+	for (indx = 0; indx < (number_of_cl_flags - 1); indx++) {
+		if (*(cl_flags_list[indx].flag_var)) {
+			cl_flags_bit_map |= moving_bit;	/*  The moving finger writes,  */
+		}
+		moving_bit <<= 1;	/*  and having writ, moves on. */
 	}
-	moving_bit <<= 1;                    /*  and having writ, moves on. */
-    }
 }
 
 /* **************************************************************************
@@ -729,13 +705,12 @@ void save_cl_flags(void)
 
 void reset_cl_flags(void)
 {
-    int indx;
-    long int moving_bit = 1;
+	int indx;
+	long int moving_bit = 1;
 
-    for ( indx = 0 ; indx < (number_of_cl_flags - 1) ; indx++ )
-    {
-	*(cl_flags_list[indx].flag_var) =
-	    BOOLVAL( cl_flags_bit_map & moving_bit) ;
-	moving_bit <<= 1;
-    }
+	for (indx = 0; indx < (number_of_cl_flags - 1); indx++) {
+		*(cl_flags_list[indx].flag_var) =
+		    BOOLVAL(cl_flags_bit_map & moving_bit);
+		moving_bit <<= 1;
+	}
 }

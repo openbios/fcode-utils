@@ -56,7 +56,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Functions Exported:
@@ -85,7 +84,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Still to be done:
@@ -98,8 +96,6 @@
  *              but, again, only display one message per overlapped Range.
  *
  **************************************************************************** */
-
-
 
 /* **************************************************************************
  *
@@ -119,7 +115,6 @@
 #include "stream.h"
 #include "scanner.h"
 
-
 /* **************************************************************************
  *
  *          Global Variables Exported
@@ -127,7 +122,7 @@
  *
  **************************************************************************** */
 
-u16  nextfcode;         /*  The next FCode-number to be assigned              */
+u16 nextfcode;			/*  The next FCode-number to be assigned              */
 
 /* **************************************************************************
  *
@@ -153,16 +148,14 @@ u16  nextfcode;         /*  The next FCode-number to be assigned              */
  *
  **************************************************************************** */
 
-typedef struct fcode_range
-    {
-        u16                 fcr_start;
-	u16                 fcr_end ;
-	char               *fcr_infile;
-	int                 fcr_linenum;
-	bool                fcr_not_lapped;
+typedef struct fcode_range {
+	u16 fcr_start;
+	u16 fcr_end;
+	char *fcr_infile;
+	int fcr_linenum;
+	bool fcr_not_lapped;
 	struct fcode_range *fcr_next;
-    }  fcode_range_t ;
-
+} fcode_range_t;
 
 /* **************************************************************************
  *
@@ -194,16 +187,16 @@ typedef struct fcode_range
  *
  **************************************************************************** */
 
-static bool           ranges_exist      = FALSE;
-static bool           changes_listed    = FALSE;
+static bool ranges_exist = FALSE;
+static bool changes_listed = FALSE;
 
-static u16            range_start       = FCODE_START;
-static u16            range_end         = 0;
-static char          *first_fcr_infile  = NULL;
-static int            first_fcr_linenum = 0;
+static u16 range_start = FCODE_START;
+static u16 range_end = 0;
+static char *first_fcr_infile = NULL;
+static int first_fcr_linenum = 0;
 
-static fcode_range_t *first_fc_range    = NULL;
-static fcode_range_t *current_fc_range  = NULL;
+static fcode_range_t *first_fc_range = NULL;
+static fcode_range_t *current_fc_range = NULL;
 
 /* **************************************************************************
  *
@@ -258,39 +251,34 @@ static fcode_range_t *current_fc_range  = NULL;
  *
  **************************************************************************** */
 
-void reset_fcode_ranges( void)
+void reset_fcode_ranges(void)
 {
-    if ( ranges_exist )
-    {
-	while ( current_fc_range != NULL )
-	{
-	    current_fc_range = first_fc_range->fcr_next;
-	    free( first_fc_range->fcr_infile);
-	    free( first_fc_range);
-	    first_fc_range = current_fc_range;
+	if (ranges_exist) {
+		while (current_fc_range != NULL) {
+			current_fc_range = first_fc_range->fcr_next;
+			free(first_fc_range->fcr_infile);
+			free(first_fc_range);
+			first_fc_range = current_fc_range;
+		}
+		ranges_exist = FALSE;
+	} else {
+		if (first_fcr_infile != NULL) {
+			if (strcmp(first_fcr_infile, iname) != 0) {
+				free(first_fcr_infile);
+				first_fcr_infile = NULL;
+			}
+		}
 	}
-	ranges_exist = FALSE;
-    }else{
-	if ( first_fcr_infile != NULL )
-	{
-	    if ( strcmp( first_fcr_infile, iname) != 0 )
-	    {
-		free( first_fcr_infile);
-		first_fcr_infile = NULL;
-	    }
+
+	changes_listed = FALSE;
+	range_start = FCODE_START;
+	range_end = 0;
+
+	if (first_fcr_infile == NULL) {
+		first_fcr_infile = strdup(iname);
 	}
-    }
-
-    changes_listed    = FALSE;
-    range_start       = FCODE_START;
-    range_end         = 0;
-
-    if ( first_fcr_infile == NULL )
-    {
-	first_fcr_infile = strdup( iname);
-    }
-    first_fcr_linenum = lineno;
-    nextfcode         = FCODE_START;
+	first_fcr_linenum = lineno;
+	nextfcode = FCODE_START;
 }
 
 /* **************************************************************************
@@ -338,72 +326,74 @@ void reset_fcode_ranges( void)
  *
  **************************************************************************** */
 
-void list_fcode_ranges( bool final_tally)
+void list_fcode_ranges(bool final_tally)
 {
-    if ( verbose )
-    {
-	FILE *message_dest = ( final_tally ? stdout : ERRMSG_DESTINATION );
-	if ( changes_listed )
-	{
-	    fprintf(message_dest, "\n");
-	}else{
-	    changes_listed = TRUE;
+	if (verbose) {
+		FILE *message_dest =
+		    (final_tally ? stdout : ERRMSG_DESTINATION);
+		if (changes_listed) {
+			fprintf(message_dest, "\n");
+		} else {
+			changes_listed = TRUE;
 
-	    if ( INVERSE(ranges_exist) )
-	    {   /*  List the first and only range  */
-		if ( range_end == 0 )
-		{
-		    fprintf(message_dest, "No FCodes assigned.\n");
-		}else{
-		    if ( range_start == FCODE_START )
-		    {
-			fprintf(message_dest,
-			    "Last assigned FCode = 0x%x\n", range_end);
-		    }else{
-			fprintf(message_dest,
-			    "FCodes assigned:  0x%x to 0x%x\n",
-				range_start, range_end);
-		    }
-		}
-		/*  We are done listing the first and only range  */
-	    }else{   /*  List the collection of Ranges  */
+			if (INVERSE(ranges_exist)) {	/*  List the first and only range  */
+				if (range_end == 0) {
+					fprintf(message_dest,
+						"No FCodes assigned.\n");
+				} else {
+					if (range_start == FCODE_START) {
+						fprintf(message_dest,
+							"Last assigned FCode = 0x%x\n",
+							range_end);
+					} else {
+						fprintf(message_dest,
+							"FCodes assigned:  0x%x to 0x%x\n",
+							range_start, range_end);
+					}
+				}
+				/*  We are done listing the first and only range  */
+			} else {	/*  List the collection of Ranges  */
 
-		/*  Pionter to function returning void  */
-		typedef void (*vfunct)();
+				/*  Pionter to function returning void  */
+				typedef void (*vfunct)();
 
-		/*  Function for the  started_at()  part of the message  */
-		vfunct start_at_funct =
-	            ( final_tally ? print_started_at : started_at );
+				/*  Function for the  started_at()  part of the message  */
+				vfunct start_at_funct =
+				    (final_tally ? print_started_at :
+				     started_at);
 
+				fcode_range_t *next_range = first_fc_range;
 
-		fcode_range_t *next_range = first_fc_range;
+				fprintf(message_dest, "FCodes assigned:\n");
 
-		fprintf(message_dest, "FCodes assigned:\n");
+				while (next_range != NULL) {
+					if (next_range->fcr_end == 0) {
+						fprintf(message_dest,
+							"    None assigned");
+					} else {
+						fprintf(message_dest,
+							"    From 0x%x to 0x%x",
+							next_range->fcr_start,
+							next_range->fcr_end);
+						if (INVERSE
+						    (next_range->
+						     fcr_not_lapped)) {
+							fprintf(message_dest,
+								" ***Overlap***");
+						}
+					}
+					fprintf(message_dest, " in the range");
+					(*start_at_funct) (next_range->
+							   fcr_infile,
+							   next_range->
+							   fcr_linenum);
 
-		while ( next_range != NULL )
-		{
-		    if ( next_range->fcr_end == 0 )
-		    {
-			fprintf(message_dest, "    None assigned");
-		    }else{
-			fprintf(message_dest, "    From 0x%x to 0x%x",
-			    next_range->fcr_start, next_range->fcr_end );
-			if ( INVERSE( next_range->fcr_not_lapped) )
-			{
-			    fprintf(message_dest, " ***Overlap***" );
+					next_range = next_range->fcr_next;
+				}
 			}
-		    }
-		    fprintf(message_dest, " in the range");
-		    (*start_at_funct)(
-			next_range->fcr_infile, next_range->fcr_linenum );
-
-		    next_range = next_range->fcr_next;
 		}
-	    }
 	}
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -485,66 +475,62 @@ void list_fcode_ranges( bool final_tally)
  *
  **************************************************************************** */
 
-void set_next_fcode( u16  new_fcode)
+void set_next_fcode(u16 new_fcode)
 {
-    if ( INVERSE( ranges_exist) )
-    {    /*  The current range is the first and only.  */
+	if (INVERSE(ranges_exist)) {	/*  The current range is the first and only.  */
 
-	if ( new_fcode == nextfcode )
-	{
-	    /*  Do nothing here  */
-	    return;
+		if (new_fcode == nextfcode) {
+			/*  Do nothing here  */
+			return;
+		}
+
+		if (range_end == 0) {	/*  No FCode assignments have been made in the current range  */
+			/*  This is still the first and only range.                   */
+
+			reset_fcode_ranges();	/*  Update file name and line number  */
+			range_start = new_fcode;
+			nextfcode = new_fcode;
+
+			/*  We are done here  */
+			return;
+
+		} else {	/*  Create the data structure for the first Range  */
+			first_fc_range = safe_malloc(sizeof(fcode_range_t),
+						     "creating first FCode Range");
+			first_fc_range->fcr_start = range_start;
+			first_fc_range->fcr_end = range_end;
+			first_fc_range->fcr_infile = first_fcr_infile;
+			first_fc_range->fcr_linenum = first_fcr_linenum;
+			first_fc_range->fcr_not_lapped = TRUE;
+			first_fc_range->fcr_next = NULL;
+
+			first_fcr_infile = NULL;
+			first_fcr_linenum = 0;
+			range_start = FCODE_START;
+			range_end = 0;
+
+			current_fc_range = first_fc_range;
+
+			ranges_exist = TRUE;
+		}
 	}
 
-	if ( range_end == 0 )
-	{   /*  No FCode assignments have been made in the current range  */
-	    /*  This is still the first and only range.                   */
+	/*  Previous Ranges exist now for sure!  */
+	current_fc_range->fcr_next = safe_malloc(sizeof(fcode_range_t),
+						 "creating new FCode Range");
+	current_fc_range = current_fc_range->fcr_next;
 
-	    reset_fcode_ranges();   /*  Update file name and line number  */
-	    range_start = new_fcode;
-	    nextfcode = new_fcode;
+	nextfcode = new_fcode;
+	current_fc_range->fcr_start = nextfcode;
+	current_fc_range->fcr_end = 0;
+	/*  Will be filled in by first assignment  */
+	current_fc_range->fcr_infile = strdup(iname);
+	current_fc_range->fcr_linenum = lineno;
+	current_fc_range->fcr_not_lapped = TRUE;
+	current_fc_range->fcr_next = NULL;
 
-	    /*  We are done here  */
-	    return;
-
-	}else{  /*  Create the data structure for the first Range  */
-	    first_fc_range = safe_malloc( sizeof( fcode_range_t),
-				 "creating first FCode Range" );
-	    first_fc_range->fcr_start        = range_start;
-	    first_fc_range->fcr_end          = range_end;
-	    first_fc_range->fcr_infile       = first_fcr_infile;
-	    first_fc_range->fcr_linenum      = first_fcr_linenum;
-	    first_fc_range->fcr_not_lapped   = TRUE;
-	    first_fc_range->fcr_next         = NULL;
-
-	    first_fcr_infile  = NULL;
-	    first_fcr_linenum = 0;
-	    range_start       = FCODE_START;
-	    range_end         = 0;
-
-	    current_fc_range  = first_fc_range;
-
-	    ranges_exist      = TRUE;
-	}
-    }
-
-    /*  Previous Ranges exist now for sure!  */
-    current_fc_range->fcr_next  = safe_malloc( sizeof( fcode_range_t),
-				      "creating new FCode Range" );
-    current_fc_range = current_fc_range->fcr_next;
-
-    nextfcode                         = new_fcode;
-    current_fc_range->fcr_start       = nextfcode;
-    current_fc_range->fcr_end         = 0;
-                                  /*  Will be filled in by first assignment  */
-    current_fc_range->fcr_infile      = strdup( iname);
-    current_fc_range->fcr_linenum     = lineno;
-    current_fc_range->fcr_not_lapped  = TRUE;
-    current_fc_range->fcr_next        = NULL;
-
-    changes_listed                    = FALSE;
+	changes_listed = FALSE;
 }
-
 
 /* **************************************************************************
  *
@@ -576,27 +562,23 @@ void set_next_fcode( u16  new_fcode)
  *
  **************************************************************************** */
 
-static fcode_range_t *find_overlap( u16 test_fcode)
+static fcode_range_t *find_overlap(u16 test_fcode)
 {
-    fcode_range_t *retval = NULL;
-    if ( ranges_exist )
-    {
-	fcode_range_t *test_range = first_fc_range;
-	while ( test_range != current_fc_range )
-	{
-	    if ( ( test_fcode <= test_range->fcr_end ) &&
-	         ( test_fcode >= test_range->fcr_start )  )
-	    {
-		retval = test_range;
-		break;
-	    }
-	    test_range = test_range->fcr_next;
+	fcode_range_t *retval = NULL;
+	if (ranges_exist) {
+		fcode_range_t *test_range = first_fc_range;
+		while (test_range != current_fc_range) {
+			if ((test_fcode <= test_range->fcr_end) &&
+			    (test_fcode >= test_range->fcr_start)) {
+				retval = test_range;
+				break;
+			}
+			test_range = test_range->fcr_next;
+		}
 	}
-    }
 
-    return( retval);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -630,50 +612,47 @@ static fcode_range_t *find_overlap( u16 test_fcode)
  *
  **************************************************************************** */
 
-void assigning_fcode( void)
+void assigning_fcode(void)
 {
-    if ( nextfcode > FCODE_LIMIT )
-    {
-	/*  Let's give a last summarization before we crap out */
-	tokenization_error( INFO, "");
-	list_fcode_ranges( FALSE);
+	if (nextfcode > FCODE_LIMIT) {
+		/*  Let's give a last summarization before we crap out */
+		tokenization_error(INFO, "");
+		list_fcode_ranges(FALSE);
 
-	tokenization_error( FATAL,
-	    "Too many definitions.  "
-	    "Assigned FCode exceeds limit "
-	    "specified by IEEE-1275.");
-	/*
-	 *  No need to  return()  from here.
-	 *  FATAL error exits program.
-	 */
-    }
-
-    changes_listed = FALSE;
-
-    if ( INVERSE(ranges_exist) )
-    {    /*  No Overlap Error checking needed here.  */
-	range_end = nextfcode;
-    }else{
-	current_fc_range->fcr_end = nextfcode;
-
-	/*   Detect and report Overlap Error only once per Range  */
-	if ( current_fc_range->fcr_not_lapped )
-	{
-	    fcode_range_t *found_lap = find_overlap( nextfcode);
-	    if ( found_lap != NULL )
-	    {
-		tokenization_error( TKERROR,
-		    "Assigning FCode of 0x%x, "
-			"which overlaps the range", nextfcode);
-		started_at( found_lap->fcr_infile, found_lap->fcr_linenum);
-
-		current_fc_range->fcr_not_lapped = FALSE;
-	    }
+		tokenization_error(FATAL,
+				   "Too many definitions.  "
+				   "Assigned FCode exceeds limit "
+				   "specified by IEEE-1275.");
+		/*
+		 *  No need to  return()  from here.
+		 *  FATAL error exits program.
+		 */
 	}
-    }
+
+	changes_listed = FALSE;
+
+	if (INVERSE(ranges_exist)) {	/*  No Overlap Error checking needed here.  */
+		range_end = nextfcode;
+	} else {
+		current_fc_range->fcr_end = nextfcode;
+
+		/*   Detect and report Overlap Error only once per Range  */
+		if (current_fc_range->fcr_not_lapped) {
+			fcode_range_t *found_lap = find_overlap(nextfcode);
+			if (found_lap != NULL) {
+				tokenization_error(TKERROR,
+						   "Assigning FCode of 0x%x, "
+						   "which overlaps the range",
+						   nextfcode);
+				started_at(found_lap->fcr_infile,
+					   found_lap->fcr_linenum);
+
+				current_fc_range->fcr_not_lapped = FALSE;
+			}
+		}
+	}
 
 }
-
 
 /* **************************************************************************
  *
@@ -699,7 +678,7 @@ void assigning_fcode( void)
  *
  **************************************************************************** */
 
-void bump_fcode( void)
+void bump_fcode(void)
 {
-    nextfcode++;
+	nextfcode++;
 }

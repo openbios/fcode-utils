@@ -42,16 +42,15 @@
  **************************************************************************** */
 
 /* input pointers */
-extern u8 *start;
-extern u8 *pc;
-extern u8 *end;
-extern char		*iname;
-extern unsigned int lineno;         /* Line Number within current input file  */
-extern unsigned int abs_token_no;   /* Absolute Token Number in Source Input  */
+extern char *start;
+extern char *pc;
+extern char *end;
+extern char *iname;
+extern unsigned int lineno;	/* Line Number within current input file  */
+extern unsigned int abs_token_no;	/* Absolute Token Number in Source Input  */
 
 /* output pointers */
-extern char *oname;         /* output file name  */
-
+extern char *oname;		/* output file name  */
 
 /* **************************************************************************
  *
@@ -74,20 +73,19 @@ extern char *oname;         /* output file name  */
 
 #define OUTPUT_SIZE	131072
 
-
 /* **************************************************************************
  *
  *          Exported Functions
  *
  **************************************************************************** */
 
-void add_to_include_list( char *dir_compt);
-void display_include_list( void);
-FILE *open_expanded_file( const char *path_name, char *mode, char *for_what);
-bool init_stream( const char *name );
-void close_stream( _PTR dummy);
-void init_output( const char *inname, const char *outname );
+void add_to_include_list(char *dir_compt);
+void display_include_list(void);
+FILE *open_expanded_file(const char *path_name, char *mode, char *for_what);
+bool init_stream(const char *name);
+void close_stream(_PTR dummy);
+void init_output(const char *inname, const char *outname);
 bool close_output(void);
 void init_inbuf(char *inbuf, unsigned int buflen);
 
-#endif   /* _H_STREAM */
+#endif /* _H_STREAM */

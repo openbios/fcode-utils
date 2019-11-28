@@ -37,7 +37,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Structures:
@@ -110,7 +109,6 @@
 /*  Fetch a little-endian triplet from 3 unsigned chars in sequence  */
 #define LITTLE_ENDIAN_TRIPLET_FETCH(x)   (u32)( (x[2] << 16) | (x[1] << 8) | x[0] )
 
-
 /*  Special case for Class-Code triplet:  lo, mid, hi  */
 #define class_code_u24(x) u8  x[3]
 /*  Special fetch for Class-Code triplet  */
@@ -140,37 +138,33 @@
 /* Store an integer into 3 unsigned chars in little-endian triplet sequence */
 #define LITTLE_ENDIAN_TRIPLET_STORE(dest,x)    \
     dest[2] = (u8)( x >> 16); dest[1] = (u8)(x >>  8);  dest[0] = (u8)x;
-  
 
 typedef struct {
-    be_u16(signature);
-    u8	reserved[0x16];
-    le_u16(data_ptr);
-    le_u16(padd);
+	be_u16(signature);
+	u8 reserved[0x16];
+	 le_u16(data_ptr);
+	 le_u16(padd);
 } rom_header_t;
 
-
 typedef struct {
-    be_u32	(signature);
-    le_u16	(vendor);
-    le_u16	(device);
-    le_u16	(vpd);
-    le_u16	(dlen);
-    u8	 drevision;
-    class_code_u24	(class_code);
-    le_u16	(ilen);
-    le_u16	(irevision);
-    u8	code_type;
-    u8	last_image_flag;
-    u16	reserved_2;
+	be_u32(signature);
+	le_u16(vendor);
+	le_u16(device);
+	le_u16(vpd);
+	le_u16(dlen);
+	u8 drevision;
+	 class_code_u24(class_code);
+	 le_u16(ilen);
+	 le_u16(irevision);
+	u8 code_type;
+	u8 last_image_flag;
+	u16 reserved_2;
 } pci_data_t;
 
 #define PCI_DATA_STRUCT_REV  0
 
 /*  Prototypes for functions exported from  devsupp/pci/classcodes.c   */
-char *pci_device_class_name( u32 code);
+char *pci_device_class_name(u32 code);
 char *pci_code_type_name(u8 code);
 
-
-
-#endif   /*  _PCIHDR_H   */
+#endif /*  _PCIHDR_H   */

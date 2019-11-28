@@ -46,7 +46,6 @@
 /*  For "special function" identification  */
 extern u16 *double_lit_code;
 
-
 /* ************************************************************************** *
  *
  *      Function Prototypes / Functions Exported:
@@ -55,4 +54,4 @@ extern u16 *double_lit_code;
 
 bool add_fcodes_from_list(char *vf_file_name);
 
-#endif				/*  _DETOK_VSFCODES_H    */
+#endif /*  _DETOK_VSFCODES_H    */

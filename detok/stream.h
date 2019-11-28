@@ -37,7 +37,6 @@
 
 /*  Prototypes for functions exported from  stream.c     */
 
-
 int init_stream(char *name);
 void close_stream(void);
 bool more_to_go(void);
@@ -65,4 +64,4 @@ extern u8 *indata;
 extern u8 *pc;
 extern u8 *max;
 
-#endif				/*  _UTILS_DETOK_STREAM_H    */
+#endif /*  _UTILS_DETOK_STREAM_H    */

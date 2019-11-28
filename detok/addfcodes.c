@@ -53,7 +53,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *          Global Variables Imported
@@ -61,7 +60,6 @@
  *              stream_max            Size of the file buffer.
  *
  **************************************************************************** */
-
 
 /* **************************************************************************
  *
@@ -104,11 +102,11 @@ static u8 *vfc_buf_end;
 
 /*  Special Functions List  */
 /*  Initial fcode-field value of  -1  guarantees they won't be used  */
-token_t spcl_func_list[]  =  {
-	TOKEN_ENTRY( -1, "double(lit)" ),  /*  Entry  [0]  */
+token_t spcl_func_list[] = {
+	TOKEN_ENTRY(-1, "double(lit)"),	/*  Entry  [0]  */
 };
 
-static const int spcl_func_count = (sizeof(spcl_func_list)/sizeof(token_t)) ;
+static const int spcl_func_count = (sizeof(spcl_func_list) / sizeof(token_t));
 
 /*  Global Variables for "special function" identification  */
 /*  Each is a pointer to the FCode field of the entry in
@@ -116,7 +114,6 @@ static const int spcl_func_count = (sizeof(spcl_func_list)/sizeof(token_t)) ;
  */
 
 u16 *double_lit_code = &spcl_func_list[0].fcode;
-
 
 /* **************************************************************************
  *
@@ -174,7 +171,8 @@ static bool get_next_vfc_line(void)
 	bool retval = FALSE;	/*  TRUE = not at end yet  */
 	while (vfc_remainder < vfc_buf_end) {
 		current_vfc_line = (char *)vfc_remainder;
-		vfc_remainder = (u8 *)strchr((const char *)current_vfc_line, '\n');
+		vfc_remainder =
+		    (u8 *) strchr((const char *)current_vfc_line, '\n');
 		*vfc_remainder = 0;
 		vfc_remainder++;
 		vfc_line_no++;
@@ -332,8 +330,7 @@ bool add_fcodes_from_list(char *vf_file_name)
 		}
 
 		if (scan_result != 2) {	/*  That's it... */
-			char *strbfr =
-			    malloc(strlen(current_vfc_line) + 65);
+			char *strbfr = malloc(strlen(current_vfc_line) + 65);
 			vfc_splash(vf_file_name);
 			sprintf(strbfr,
 				"Line #%d, invalid format.  Ignoring:  %s\n",
@@ -372,20 +369,23 @@ bool add_fcodes_from_list(char *vf_file_name)
 			bool found_spf = FALSE;
 			int indx;
 			for (indx = 0; indx < spcl_func_count; indx++) {
-				if ( strcmp( vs_fc_name, spcl_func_list[indx].name) == 0 ) {
-					char strbuf[64];
+				if (strcmp(vs_fc_name, spcl_func_list[indx].name) == 0) {
+					char strbuf[85];
 					found_spf = TRUE;
-					spcl_func_list[indx].fcode = vs_fc_number;
-					link_token( &spcl_func_list[indx]);
+					spcl_func_list[indx].fcode =
+					    vs_fc_number;
+					link_token(&spcl_func_list[indx]);
 					added_fc_count++;
-					sprintf( strbuf,  "Added Special Function FCode "
-						 "number 0x%03x, name %s\n", vs_fc_number, vs_fc_name);
-					printremark( strbuf);
+					sprintf(strbuf,
+						"Added Special Function FCode "
+						"number 0x%03x, name %s\n",
+						vs_fc_number, vs_fc_name);
+					printremark(strbuf);
 					break;
 				}
 			}
 
-			if (found_spf) 
+			if (found_spf)
 				continue;
 		}
 
@@ -397,9 +397,8 @@ bool add_fcodes_from_list(char *vf_file_name)
 	}
 
 	if (verbose) {
-		char strbfr[32]; 
-		sprintf(strbfr,
-			"Added %d FCode numbers\n", added_fc_count);
+		char strbfr[32];
+		sprintf(strbfr, "Added %d FCode numbers\n", added_fc_count);
 		printremark(strbfr);
 	}
 

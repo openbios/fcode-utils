@@ -23,21 +23,72 @@
 
 VERSION:=$(shell grep "^\#.*TOKE_VERSION" < toke/toke.c |cut -f2 -d\" )
 
-all:
-	$(MAKE) -C toke
-	$(MAKE) -C detok
-	$(MAKE) -C romheaders
+DESTDIR = /usr/local
+CC      ?= gcc
+STRIP	= strip
+INCLUDES=-I shared -I.
+
+# Normal Flags:
+CFLAGS  = -O2 -Wall #-Wextra
+LDFLAGS =
+
+# Coverage:
+#CFLAGS  := $(CFLAGS) -fprofile-arcs -ftest-coverage
+#LDFLAGS := $(LDFLAGS) -lgcov
+
+# Debugging:
+#CFLAGS := $(CFLAGS) -g
+
+PROGRAMS = toke/toke detok/detok romheaders/romheaders
+
+TOKE_SOURCE  = toke/clflags.c toke/conditl.c toke/devnode.c toke/dictionary.c
+TOKE_SOURCE += toke/emit.c toke/errhandler.c toke/flowcontrol.c toke/macros.c
+TOKE_SOURCE += toke/nextfcode.c toke/parselocals.c toke/scanner.c toke/stack.c
+TOKE_SOURCE += toke/stream.c toke/strsubvocab.c toke/ticvocab.c toke/toke.c
+TOKE_SOURCE += toke/tokzesc.c toke/tracesyms.c toke/usersymbols.c shared/classcodes.c
+TOKE_OBJECTS := $(TOKE_SOURCE:.c=.o)
+
+DETOK_SOURCE  = detok/addfcodes.c detok/decode.c detok/detok.c detok/dictionary.c
+DETOK_SOURCE += detok/pcihdr.c detok/printformats.c detok/stream.c shared/classcodes.c
+DETOK_OBJECTS := $(DETOK_SOURCE:.c=.o)
+
+ROMHEADERS_SOURCE = romheaders/romheaders.c shared/classcodes.c
+ROMHEADERS_OBJECTS := $(ROMHEADERS_SOURCE:.c=.o)
+
+all: .dependencies $(PROGRAMS)
+
+toke/toke: $(TOKE_OBJECTS)
+	@echo "    LD    $@"
+	@$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
+	@$(STRIP) -s $@
+
+detok/detok: $(DETOK_OBJECTS)
+	@echo "    LD    $@"
+	@$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
+	@$(STRIP) -s $@
+
+romheaders/romheaders: $(ROMHEADERS_OBJECTS)
+	@echo "    LD    $@"
+	@$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
+	@$(STRIP) -s $@
+
+%.o: %.c
+	@echo "    CC    $@"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $^
+
+.dependencies: $(TOKE_SOURCE)  $(DETOK_SOURCE) $(ROMHEADERS_SOURCE)
+	@$(CC) $(CFLAGS) $(INCLUDES) -MM $^ > .dependencies
+
+clean:
+	rm -rf $(PROGRAMS) $(TOKE_OBJECTS) $(DETOK_OBJECTS) $(ROMHEADERS_OBJECTS)
+	rm -f .dependencies
+	$(MAKE) -C testsuite clean
+
+-include .dependencies
 
 install:
-	$(MAKE) -C toke install
-	$(MAKE) -C detok install
-	$(MAKE) -C romheaders install
-
-clean:	
-	$(MAKE) -C toke clean
-	$(MAKE) -C detok clean
-	$(MAKE) -C romheaders clean
-	$(MAKE) -C testsuite clean
+	mkdir -p $(DESTDIR)/bin
+	cp -a $(PROGRAMS) $(DESTDIR)/bin
 
 distclean: clean
 	$(MAKE) -C testsuite distclean
@@ -56,5 +107,5 @@ coverage:
 	@testsuite/GenCoverage . fcode-suite-$(VERSION) "FCode suite $(VERSION)"
 	@testsuite/GenCoverage toke toke-$(VERSION) "Toke $(VERSION)"
 
-.PHONY: all clean distclean toke detok romheaders tests
+.PHONY: all clean distclean tests
 

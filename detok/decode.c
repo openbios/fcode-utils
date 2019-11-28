@@ -126,7 +126,7 @@ static void pretty_print_string(void)
 static void decode_lines(void)
 {
 	if (show_linenumbers) {
-		printf("%6d: ",show_offsets ? token_streampos : linenum++);
+		printf("%6d: ", show_offsets ? token_streampos : linenum++);
 	}
 }
 
@@ -195,7 +195,6 @@ static void output_token_name(void)
 		return;
 	}
 
-
 	tname = lookup_token(fcode);
 	printf("%s ", tname);
 
@@ -238,7 +237,6 @@ static void output_token(void)
 	decode_indent();
 	output_token_name();
 }
-
 
 /* **************************************************************************
  *
@@ -330,8 +328,7 @@ static s16 decode_offset(void)
 		if (offs == 0) {
 			printremark("Error:  Unresolved offset.");
 		} else {
-			printremark
-			    ("Error:  Invalid offset.  Ignoring...");
+			printremark("Error:  Invalid offset.  Ignoring...");
 			set_streampos(streampos);
 		}
 	}
@@ -414,10 +411,8 @@ static void decode_branch(void)
 
 static void decode_two(void)
 {
-	u16 token;
-
 	output_token();
-	token = next_token();
+	next_token();
 	output_token_name();
 	printf("\n");
 }
@@ -446,7 +441,6 @@ static void decode_start(void)
 	fcformat = get_num8();
 	printf("  format:    0x%02x\n", fcformat);
 
-
 	/* Check for checksum correctness. */
 
 	token_streampos = get_streampos();
@@ -466,7 +460,6 @@ static void decode_start(void)
 	fclen = get_num32();
 	printf("  len:       0x%04x ( %d bytes)\n", fclen, fclen);
 }
-
 
 /* **************************************************************************
  *
@@ -549,28 +542,26 @@ static void decode_token(u16 token)
 		decode_default();
 		break;
 
-#if  0  /*  Fooey on C's petty limitations!  */
-        /*  I'd like to be able to do this:  */
-	/*  Special Functions  */
+#if  0				/*  Fooey on C's petty limitations!  */
+		/*  I'd like to be able to do this:  */
+		/*  Special Functions  */
 	case *double_lit_code:
 		double_length_literal();
 		break;
-#endif  /*  Fooey on C's petty limitations!  */
+#endif /*  Fooey on C's petty limitations!  */
 
 	default:
-	{
-	    /*  Have to do this clumsy thing instead  */
-	    if ( token == *double_lit_code )
-	    {
-		double_length_literal();
-		break;
-	    }
+		{
+			/*  Have to do this clumsy thing instead  */
+			if (token == *double_lit_code) {
+				double_length_literal();
+				break;
+			}
 
-		decode_default();
+			decode_default();
+		}
 	}
 }
-}
-
 
 /* **************************************************************************
  *
@@ -763,8 +754,7 @@ static bool another_fcode_block(void)
 	case 0x0f2:		/* start2 */
 	case 0x0f3:		/* start4 */
 		retval = TRUE;
-		printremark
-		    ("Subsequent FCode Block detected.  Detokenizing.");
+		printremark("Subsequent FCode Block detected.  Detokenizing.");
 		break;
 	case 0:		/* Start of a zero-fill field  */
 		/* retval already = FALSE .  Nothing else to be done.  */
@@ -815,6 +805,5 @@ void detokenize(void)
 
 		}
 	}
-
 
 }

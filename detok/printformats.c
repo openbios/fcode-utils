@@ -46,7 +46,6 @@
 
 #include "detok.h"
 
-
 /* **************************************************************************
  *
  *      Function name:  printremark ( string )
@@ -94,12 +93,11 @@ void printremark(char *str)
 	char *strbfr;		/*  Temporary substring buffer                */
 
 	/*  Guarantee that the malloc will be big enough.  */
-	strbfr = (char *) malloc(strlen((char *) str) + 1);
+	strbfr = (char *)malloc(strlen((char *)str) + 1);
 	if (!strbfr) {
 		printf("No memory.\n");
 		exit(-1);
 	}
-
 
 	strtmp = str;
 	strend = &str[strlen(str)];
@@ -125,7 +123,7 @@ void printremark(char *str)
 		 *  so we have to.
 		 *
 		 ************************************************************ */
-		strbfr[substrlen] = (char) 0;
+		strbfr[substrlen] = (char)0;
 
 		printf("\\  %s\n", strbfr);
 

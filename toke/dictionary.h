@@ -43,136 +43,136 @@
  **************************************************************************** */
 
 typedef enum fword_token {
-      UNSPECIFIED  = 0xBAADD00D ,  /*  Default (absence-of) "definer"        */
-      COMMON_FWORD = 0xC0EDC0DE ,  /*  Definer indicating a "shared" FWord   */
-      BI_FWRD_DEFN = 0xB1F4409D ,  /*  Definer indicating a "built-in FWord" */
-      COLON = 1 ,
-      SEMICOLON ,
-      TICK ,
-      AGAIN ,
-      ALIAS ,
-      BRACK_TICK ,
-      F_BRACK_TICK ,
-      ASCII ,
-      BEGIN ,
-      BUFFER ,
-      CASE ,
-      CONST ,
-      CONTROL ,
-      CREATE ,
-      DECIMAL ,
-      DEFER ,
-      DEFINED ,
-      CDO ,
-      DO ,
-      ELSE ,
-      ENDCASE ,
-      ENDOF ,
-      EXTERNAL ,
-      INSTANCE ,
-      FIELD ,
-      NEW_DEVICE ,
-      FINISH_DEVICE ,
-      FLITERAL ,
-      HEADERLESS ,
-      HEADERS ,
-      HEX ,
-      IF ,
-      UNLOOP ,
-      LEAVE ,
-      LOOP_I ,
-      LOOP_J ,
-      LOOP ,
-      PLUS_LOOP ,
-      OCTAL ,
-      OF ,
-      REPEAT ,
-      THEN ,
-      TO ,
-      IS ,
-      UNTIL ,
-      VALUE ,
-      VARIABLE ,
-      WHILE ,
-      OFFSET16 ,
-      ESCAPETOK ,
-      EMITBYTE ,
-      FLOAD ,
-      STRING ,
-      PSTRING ,
-      PBSTRING ,
-      SSTRING ,
-      RECURSIVE ,
-      RECURSE ,
-      RET_STK_FETCH ,
-      RET_STK_FROM ,
-      RET_STK_TO ,
-      HEXVAL ,
-      DECVAL ,
-      OCTVAL ,
+	UNSPECIFIED = 0xBAADD00D,	/*  Default (absence-of) "definer"        */
+	COMMON_FWORD = 0xC0EDC0DE,	/*  Definer indicating a "shared" FWord   */
+	BI_FWRD_DEFN = 0xB1F4409D,	/*  Definer indicating a "built-in FWord" */
+	COLON = 1,
+	SEMICOLON,
+	TICK,
+	AGAIN,
+	ALIAS,
+	BRACK_TICK,
+	F_BRACK_TICK,
+	ASCII,
+	BEGIN,
+	BUFFER,
+	CASE,
+	CONST,
+	CONTROL,
+	CREATE,
+	DECIMAL,
+	DEFER,
+	DEFINED,
+	CDO,
+	DO,
+	ELSE,
+	ENDCASE,
+	ENDOF,
+	EXTERNAL,
+	INSTANCE,
+	FIELD,
+	NEW_DEVICE,
+	FINISH_DEVICE,
+	FLITERAL,
+	HEADERLESS,
+	HEADERS,
+	HEX,
+	IF,
+	UNLOOP,
+	LEAVE,
+	LOOP_I,
+	LOOP_J,
+	LOOP,
+	PLUS_LOOP,
+	OCTAL,
+	OF,
+	REPEAT,
+	THEN,
+	TO,
+	IS,
+	UNTIL,
+	VALUE,
+	VARIABLE,
+	WHILE,
+	OFFSET16,
+	ESCAPETOK,
+	EMITBYTE,
+	FLOAD,
+	STRING,
+	PSTRING,
+	PBSTRING,
+	SSTRING,
+	RECURSIVE,
+	RECURSE,
+	RET_STK_FETCH,
+	RET_STK_FROM,
+	RET_STK_TO,
+	HEXVAL,
+	DECVAL,
+	OCTVAL,
 
-       ret_stk_from ,
-     ASC_NUM ,          /*  Convert char seq to number  */
-      ASC_LEFT_NUM ,     /*  same, only left-justified.  */
+	ret_stk_from,
+	ASC_NUM,		/*  Convert char seq to number  */
+	ASC_LEFT_NUM,		/*  same, only left-justified.  */
 
-      CONDL_ENDER ,      /*  Conditional "[THEN] / [ENDIF]" variants  */
-      CONDL_ELSE ,       /*  Conditional "[ELSE]" directive variants  */
+	CONDL_ENDER,		/*  Conditional "[THEN] / [ENDIF]" variants  */
+	CONDL_ELSE,		/*  Conditional "[ELSE]" directive variants  */
 
-      PUSH_FCODE ,	/*  Save the FCode Assignment number  */
-      POP_FCODE ,	/*  Retrieve the FCode Assignment number  */
-      RESET_FCODE ,	/*  Reset FCode Ass't nr and overlap checking  */
+	PUSH_FCODE,		/*  Save the FCode Assignment number  */
+	POP_FCODE,		/*  Retrieve the FCode Assignment number  */
+	RESET_FCODE,		/*  Reset FCode Ass't nr and overlap checking  */
 
-      CURLY_BRACE ,      /*  Support for IBM-style Locals  */
-      DASH_ARROW ,
-      LOCAL_VAL ,
-      EXIT ,
+	CURLY_BRACE,		/*  Support for IBM-style Locals  */
+	DASH_ARROW,
+	LOCAL_VAL,
+	EXIT,
 
-      FUNC_NAME ,
-      IFILE_NAME ,
-      ILINE_NUM ,
+	FUNC_NAME,
+	IFILE_NAME,
+	ILINE_NUM,
 
-      CL_FLAG ,
-      SHOW_CL_FLAGS ,
+	CL_FLAG,
+	SHOW_CL_FLAGS,
 
-      OVERLOAD ,
-      ALLOW_MULTI_LINE ,
-      MACRO_DEF ,
-      GLOB_SCOPE ,
-      DEV_SCOPE ,
+	OVERLOAD,
+	ALLOW_MULTI_LINE,
+	MACRO_DEF,
+	GLOB_SCOPE,
+	DEV_SCOPE,
 
-      /*  This value has to be adjusted
-       *      so that  FCODE_END  comes
-       *      out to be  0xff
-       */
-      END0 = 0xd7 ,      /*   0xd7   */
-      END1 ,             /*   0xd8   */
-      CHAR ,             /*   0xd9   */
-      CCHAR ,            /*   0xda   */
-      ABORTTXT ,         /*   0xdb   */
+	/*  This value has to be adjusted
+	 *      so that  FCODE_END  comes
+	 *      out to be  0xff
+	 */
+	END0 = 0xd7,		/*   0xd7   */
+	END1,			/*   0xd8   */
+	CHAR,			/*   0xd9   */
+	CCHAR,			/*   0xda   */
+	ABORTTXT,		/*   0xdb   */
 
-      NEXTFCODE ,        /*   0xdc   */
+	NEXTFCODE,		/*   0xdc   */
 
-      ENCODEFILE ,       /*   0xdd   */
+	ENCODEFILE,		/*   0xdd   */
 
-      FCODE_V1 ,         /*   0xde   */
-      FCODE_V3 ,         /*   0xdf   */
-      NOTLAST ,          /*   0xef   */
-      ISLAST ,           /*   0xf0   */
-      SETLAST ,          /*   0xf1   */
-      PCIREV ,           /*   0xf2   */
-      PCIHDR ,           /*   0xf3   */
-      PCIEND ,           /*   0xf4   */
-      RESETSYMBS ,       /*   0xf5   */
-      SAVEIMG ,          /*   0xf6   */
-      START0 ,           /*   0xf7   */
-      START1 ,           /*   0xf8   */
-      START2 ,           /*   0xf9   */
-      START4 ,           /*   0xfa   */
-      VERSION1 ,         /*   0xfb   */
-      FCODE_TIME ,       /*   0xfc   */
-      FCODE_DATE ,       /*   0xfd   */
-      FCODE_V2 ,         /*   0xfe   */
-      FCODE_END = 0xff   /*   0xff   */
-}  fwtoken ;
+	FCODE_V1,		/*   0xde   */
+	FCODE_V3,		/*   0xdf   */
+	NOTLAST,		/*   0xef   */
+	ISLAST,			/*   0xf0   */
+	SETLAST,		/*   0xf1   */
+	PCIREV,			/*   0xf2   */
+	PCIHDR,			/*   0xf3   */
+	PCIEND,			/*   0xf4   */
+	RESETSYMBS,		/*   0xf5   */
+	SAVEIMG,		/*   0xf6   */
+	START0,			/*   0xf7   */
+	START1,			/*   0xf8   */
+	START2,			/*   0xf9   */
+	START4,			/*   0xfa   */
+	VERSION1,		/*   0xfb   */
+	FCODE_TIME,		/*   0xfc   */
+	FCODE_DATE,		/*   0xfd   */
+	FCODE_V2,		/*   0xfe   */
+	FCODE_END = 0xff	/*   0xff   */
+} fwtoken;
 
-#endif   /*  _TOKE_DICTIONARY_H    */
+#endif /*  _TOKE_DICTIONARY_H    */

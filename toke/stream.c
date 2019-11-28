@@ -55,7 +55,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Still to be done:
@@ -68,7 +67,6 @@
  *              maintainability down the proverbial road...
  *
  **************************************************************************** */
-
 
 /* **************************************************************************
  *
@@ -83,29 +81,27 @@
  *
  **************************************************************************** */
 
-
 /* Input pointers, Position Counters and Length counters */
-u8 *start = NULL;
-u8 *pc;
-u8 *end;
+char *start = NULL;
+char *pc;
+char *end;
 char *iname = NULL;
 unsigned int lineno = 0;
-unsigned int abs_token_no = 0;  /*  Absolute Token Number in all Source Input
-                                 *      Will be used to identify position
-                                 *      where colon-definition begins and
-                                 *      to limit clearing of control-structs.
-                                 */
-static unsigned int ilen;   /*  Length of Input Buffer   */
+unsigned int abs_token_no = 0;	/*  Absolute Token Number in all Source Input
+				 *      Will be used to identify position
+				 *      where colon-definition begins and
+				 *      to limit clearing of control-structs.
+				 */
+static unsigned int ilen;	/*  Length of Input Buffer   */
 
 /* output pointers */
 u8 *ostart;
 char *oname = NULL;
 
-
 /* We want to limit exposure of this v'ble, so don't put it in  .h  file  */
-unsigned int olen;          /*  Length of Output Buffer  */
+unsigned int olen;		/*  Length of Output Buffer  */
 /* We want to limit exposure of this Imported Function, likewise.  */
-void init_emit( void);
+void init_emit(void);
 
 /* **************************************************************************
  *
@@ -136,11 +132,10 @@ static bool no_files_missing = TRUE;
  *
  **************************************************************************** */
 
-typedef struct incl_list
-{
-        char             *dir_path;
+typedef struct incl_list {
+	char *dir_path;
 	struct incl_list *next;
-    } incl_list_t;
+} incl_list_t;
 
 /* **************************************************************************
  *
@@ -156,7 +151,6 @@ static incl_list_t *include_list_start = NULL;
 static incl_list_t *include_list_next = NULL;
 static unsigned int max_dir_path_len = 0;
 static char *include_list_full_path = NULL;
-
 
 /* **************************************************************************
  *
@@ -196,24 +190,24 @@ static char *include_list_full_path = NULL;
  *
  **************************************************************************** */
 
-void add_to_include_list( char *dir_compt)
+void add_to_include_list(char *dir_compt)
 {
-    unsigned int new_path_len = strlen( dir_compt);
-    incl_list_t *new_i_l_e = safe_malloc( sizeof( incl_list_t),
-        "adding to include-list" );
+	unsigned int new_path_len = strlen(dir_compt);
+	incl_list_t *new_i_l_e = safe_malloc(sizeof(incl_list_t),
+					     "adding to include-list");
 
-    new_i_l_e->dir_path = strdup( dir_compt);
-    new_i_l_e->next = NULL;
+	new_i_l_e->dir_path = strdup(dir_compt);
+	new_i_l_e->next = NULL;
 
-    if ( include_list_start == NULL )
-    {
-	include_list_start = new_i_l_e;
-    }else{
-       include_list_next->next = new_i_l_e;
-    }
-    
-    include_list_next = new_i_l_e;
-    if ( new_path_len > max_dir_path_len  ) max_dir_path_len = new_path_len;
+	if (include_list_start == NULL) {
+		include_list_start = new_i_l_e;
+	} else {
+		include_list_next->next = new_i_l_e;
+	}
+
+	include_list_next = new_i_l_e;
+	if (new_path_len > max_dir_path_len)
+		max_dir_path_len = new_path_len;
 }
 
 #define   DISPLAY_WIDTH  80
@@ -247,31 +241,26 @@ void add_to_include_list( char *dir_compt)
  *
  **************************************************************************** */
 
-void display_include_list( void)
+void display_include_list(void)
 {
-    if ( include_list_start != NULL )
-    {
-        int curr_wid = DISPLAY_WIDTH;     /*  Current width; force new line  */
-	printf("\nInclude-List:");
-	include_list_next = include_list_start ;
-	while ( include_list_next != NULL )
-	{
-	    int this_wid = strlen( include_list_next->dir_path) + 1;
-	    char *separator = " ";
-	    if ( curr_wid + this_wid > DISPLAY_WIDTH )
-	    {
-	        separator = "\n\t";
-		curr_wid = 7;  /*  Allow 1 for the theoretical space  */
-	    }
-	    printf("%s%s", separator, include_list_next->dir_path);
-	    curr_wid += this_wid;
-	    include_list_next = include_list_next->next ;
+	if (include_list_start != NULL) {
+		int curr_wid = DISPLAY_WIDTH;	/*  Current width; force new line  */
+		printf("\nInclude-List:");
+		include_list_next = include_list_start;
+		while (include_list_next != NULL) {
+			int this_wid = strlen(include_list_next->dir_path) + 1;
+			char *separator = " ";
+			if (curr_wid + this_wid > DISPLAY_WIDTH) {
+				separator = "\n\t";
+				curr_wid = 7;	/*  Allow 1 for the theoretical space  */
+			}
+			printf("%s%s", separator, include_list_next->dir_path);
+			curr_wid += this_wid;
+			include_list_next = include_list_next->next;
+		}
+		printf("\n");
 	}
-	printf("\n");
-    }
 }
-
-
 
 /* **************************************************************************
  *
@@ -324,19 +313,19 @@ void display_include_list( void)
  *
  **************************************************************************** */
 
-static void init_incl_list_scan( char *base_name)
+static void init_incl_list_scan(char *base_name)
 {
-    if ( include_list_start != NULL )
-    {
-	/*  Allocate memory for the file-name buffer.
-	 *      maximum path-element length plus base-name length
-	 *      plus one for the slash plus one for the ending NULL
-	 */
-	unsigned int new_path_len = max_dir_path_len + strlen( base_name) + 2;
-	include_list_full_path = safe_malloc( new_path_len,
-	    "scanning include-list" );
-	include_list_next = include_list_start;
-    }
+	if (include_list_start != NULL) {
+		/*  Allocate memory for the file-name buffer.
+		 *      maximum path-element length plus base-name length
+		 *      plus one for the slash plus one for the ending NULL
+		 */
+		unsigned int new_path_len =
+		    max_dir_path_len + strlen(base_name) + 2;
+		include_list_full_path =
+		    safe_malloc(new_path_len, "scanning include-list");
+		include_list_next = include_list_start;
+	}
 }
 
 /* **************************************************************************
@@ -397,39 +386,37 @@ static void init_incl_list_scan( char *base_name)
  *
  **************************************************************************** */
 
-static bool scan_incl_list( char *base_name)
+static bool scan_incl_list(char *base_name)
 {
-    bool retval = FALSE;   /*  default to "Done"  */
-	
-    if ( include_list_full_path == NULL )
-    {
-	include_list_full_path = base_name;
-	retval = TRUE;
-    }else{
-	if ( include_list_next != NULL )
-	{
+	bool retval = FALSE;	/*  default to "Done"  */
 
-	    /*  Special case:  If the next Directory Component is
-	     *      an empty string, do not prepend a slash; that
-	     *      would either become a root-based absolute path,
-	     *      or, if the base-name is itself an absolute path,
-	     *      it would be a path that begins with two slashes,
-	     *      and *some* Host Operating Systems ***REALLY***
-	     *      DO NOT LIKE that!
-	     */
-	    if ( strlen( include_list_next->dir_path) == 0 )
-	    {
-		sprintf( include_list_full_path, "%s", base_name);
-	    }else{
-		sprintf( include_list_full_path, "%s/%s",
-	            include_list_next->dir_path, base_name);
-	    }
-	    include_list_next = include_list_next->next;
-	    retval = TRUE;
+	if (include_list_full_path == NULL) {
+		include_list_full_path = base_name;
+		retval = TRUE;
+	} else {
+		if (include_list_next != NULL) {
+
+			/*  Special case:  If the next Directory Component is
+			 *      an empty string, do not prepend a slash; that
+			 *      would either become a root-based absolute path,
+			 *      or, if the base-name is itself an absolute path,
+			 *      it would be a path that begins with two slashes,
+			 *      and *some* Host Operating Systems ***REALLY***
+			 *      DO NOT LIKE that!
+			 */
+			if (strlen(include_list_next->dir_path) == 0) {
+				sprintf(include_list_full_path, "%s",
+					base_name);
+			} else {
+				sprintf(include_list_full_path, "%s/%s",
+					include_list_next->dir_path, base_name);
+			}
+			include_list_next = include_list_next->next;
+			retval = TRUE;
+		}
 	}
-    }
 
-    return( retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -457,19 +444,18 @@ static bool scan_incl_list( char *base_name)
  *
  **************************************************************************** */
 
-static void finish_incl_list_scan( bool op_succeeded)
+static void finish_incl_list_scan(bool op_succeeded)
 {
-    if ( include_list_start != NULL )
-    {
-	if ( op_succeeded )
-	{
-	    tokenization_error( INFO,
-		"File was found in %s\n" ,include_list_full_path );
+	if (include_list_start != NULL) {
+		if (op_succeeded) {
+			tokenization_error(INFO,
+					   "File was found in %s\n",
+					   include_list_full_path);
+		}
+		free(include_list_full_path);
 	}
-	free( include_list_full_path);
-    }
-    include_list_full_path = NULL;
-    include_list_next = NULL;
+	include_list_full_path = NULL;
+	include_list_next = NULL;
 }
 
 /* **************************************************************************
@@ -500,21 +486,19 @@ static void finish_incl_list_scan( bool op_succeeded)
  *
  **************************************************************************** */
 
-static FILE *open_incl_list_file( char *base_name, char *mode)
+static FILE *open_incl_list_file(char *base_name, char *mode)
 {
-    FILE *retval = NULL;
+	FILE *retval = NULL;
 
-    init_incl_list_scan( base_name);
-    while ( scan_incl_list( base_name) )
-    {
-        retval = fopen( include_list_full_path, mode);
-	if ( retval != NULL )
-	{
-	    break; 
+	init_incl_list_scan(base_name);
+	while (scan_incl_list(base_name)) {
+		retval = fopen(include_list_full_path, mode);
+		if (retval != NULL) {
+			break;
+		}
 	}
-    }
 
-    return (retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -548,23 +532,21 @@ static FILE *open_incl_list_file( char *base_name, char *mode)
  *
  **************************************************************************** */
 
-static bool stat_incl_list_file( char *base_name, struct stat *file_info)
+static bool stat_incl_list_file(char *base_name, struct stat *file_info)
 {
-    bool retval = FALSE;
-    int stat_reslt = -1;    /*  Success = 0   */
+	bool retval = FALSE;
+	int stat_reslt = -1;	/*  Success = 0   */
 
-    init_incl_list_scan( base_name);
-    while ( scan_incl_list( base_name) )
-    {
-        stat_reslt = stat( include_list_full_path, file_info);
-	if ( stat_reslt == 0 )
-	{
-	    retval = TRUE;
-	    break; 
+	init_incl_list_scan(base_name);
+	while (scan_incl_list(base_name)) {
+		stat_reslt = stat(include_list_full_path, file_info);
+		if (stat_reslt == 0) {
+			retval = TRUE;
+			break;
+		}
 	}
-    }
 
-    return (retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -588,9 +570,9 @@ static bool stat_incl_list_file( char *base_name, struct stat *file_info)
 
 void init_inbuf(char *inbuf, unsigned int buflen)
 {
-    start = inbuf;
-    pc = start;
-    end = pc + buflen;
+	start = inbuf;
+	pc = start;
+	end = pc + buflen;
 }
 
 /* **************************************************************************
@@ -616,8 +598,8 @@ void init_inbuf(char *inbuf, unsigned int buflen)
 
 static void could_not_open(int severity, char *fle_nam, char *for_what)
 {
-    tokenization_error( severity, "Could not open file %s for %s.\n",
-	fle_nam, for_what);
+	tokenization_error(severity, "Could not open file %s for %s.\n",
+			   fle_nam, for_what);
 
 }
 
@@ -645,13 +627,12 @@ static void could_not_open(int severity, char *fle_nam, char *for_what)
  *
  **************************************************************************** */
 
-static void file_is_missing( char *fle_nam)
+static void file_is_missing(char *fle_nam)
 {
-    if ( missing_list_file != NULL )
-    {
-	fprintf( missing_list_file, "%s\n", fle_nam);
-	no_files_missing = FALSE;
-    }
+	if (missing_list_file != NULL) {
+		fprintf(missing_list_file, "%s\n", fle_nam);
+		no_files_missing = FALSE;
+	}
 }
 
 /* **************************************************************************
@@ -683,18 +664,15 @@ static void file_is_missing( char *fle_nam)
  *
  **************************************************************************** */
 
-static void add_to_load_lists( const char *in_name)
+static void add_to_load_lists(const char *in_name)
 {
-    if ( load_list_file != NULL )
-    {
-	fprintf( load_list_file, "%s\n", in_name);
-    }
-    if ( depncy_file != NULL )
-    {
-	fprintf( depncy_file, "%s\n", include_list_full_path);
-    }
+	if (load_list_file != NULL) {
+		fprintf(load_list_file, "%s\n", in_name);
+	}
+	if (depncy_file != NULL) {
+		fprintf(depncy_file, "%s\n", include_list_full_path);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -708,7 +686,7 @@ static void add_to_load_lists( const char *in_name)
  *
  **************************************************************************** */
 
-static char expansion_buffer[ 2*GET_BUF_MAX];
+static char expansion_buffer[2 * GET_BUF_MAX];
 static bool was_expanded;
 static int expansion_msg_severity = INFO;
 
@@ -734,15 +712,14 @@ static int expansion_msg_severity = INFO;
  *
  **************************************************************************** */
 
-static void expanded_name( void )
+static void expanded_name(void)
 {
-    if ( was_expanded )
-    {
-	tokenization_error( expansion_msg_severity,
-	    "File name expanded to:  %s\n", expansion_buffer);
-    }
+	if (was_expanded) {
+		tokenization_error(expansion_msg_severity,
+				   "File name expanded to:  %s\n",
+				   expansion_buffer);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -783,16 +760,14 @@ static void expanded_name( void )
  *
  **************************************************************************** */
 
-static void expansion_error( void )
+static void expansion_error(void)
 {
-    if ( INVERSE( verbose) )
-    {
-	expansion_msg_severity |= FORCE_MSG;
-	expanded_name();
-	expansion_msg_severity ^= FORCE_MSG;
-    }
+	if (INVERSE(verbose)) {
+		expansion_msg_severity |= FORCE_MSG;
+		expanded_name();
+		expansion_msg_severity ^= FORCE_MSG;
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -897,56 +872,52 @@ static void expansion_error( void )
  *
  **************************************************************************** */
 
-static char *expand_pathname( const char *input_pathname)
+static char *expand_pathname(const char *input_pathname)
 {
-    static const int buffer_max = GET_BUF_MAX * 2;
+	static const int buffer_max = GET_BUF_MAX * 2;
 
-    char *retval = (char *)input_pathname;
-    was_expanded = FALSE;
+	char *retval = (char *)input_pathname;
+	was_expanded = FALSE;
 
-    /*  If no '$' is found, expansion is unnecessary.  */
-    if ( strchr( input_pathname, '$') != NULL )
-    {
-	FILE *temp_file;
-	int syst_stat;
-	const char *temp_file_name = tmpnam( NULL);
+	/*  If no '$' is found, expansion is unnecessary.  */
+	if (strchr(input_pathname, '$') != NULL) {
+		FILE *temp_file;
+		int syst_stat;
+		const char *temp_file_name = tmpnam(NULL);
 
-	/*  Use the expansion buffer for our temporary command string  */
-	sprintf( expansion_buffer,
-	    "echo %s>%s\n", input_pathname, temp_file_name);
-	syst_stat = system( expansion_buffer);
-	if ( syst_stat != 0 )
-	{
-	    tokenization_error( TKERROR,
-		"Expansion Syntax.\n");
-	    /*  The "File-Opening" error message will show the input string */
-	    return( NULL);
+		/*  Use the expansion buffer for our temporary command string  */
+		sprintf(expansion_buffer,
+			"echo %s>%s\n", input_pathname, temp_file_name);
+		syst_stat = system(expansion_buffer);
+		if (syst_stat != 0) {
+			tokenization_error(TKERROR, "Expansion Syntax.\n");
+			/*  The "File-Opening" error message will show the input string */
+			return (NULL);
+		}
+
+		temp_file = fopen(temp_file_name, "r");	/*  Cannot fail.   */
+		syst_stat = fread(expansion_buffer, 1, buffer_max, temp_file);
+		/*  Error test.  Length of what we read is not a good indicator;
+		 *      it's limited anyway by buffer_max.
+		 *  Valid test is if last character read was the new-line.
+		 */
+		if (expansion_buffer[syst_stat - 1] != '\n') {
+			tokenization_error(TKERROR,
+					   "Expansion buffer overflow.  Max length is %d.\n",
+					   buffer_max);
+			retval = NULL;
+		} else {
+			expansion_buffer[syst_stat - 1] = 0;
+			was_expanded = TRUE;
+			retval = expansion_buffer;
+			expanded_name();
+		}
+
+		fclose(temp_file);
+		remove(temp_file_name);
 	}
 
-	temp_file = fopen( temp_file_name, "r");  /*  Cannot fail.   */
-	syst_stat = fread( expansion_buffer, 1, buffer_max, temp_file);
-	/*  Error test.  Length of what we read is not a good indicator;
-	 *      it's limited anyway by buffer_max.
-	 *  Valid test is if last character read was the new-line.
-	 */
-	if ( expansion_buffer[syst_stat-1] != '\n' )
-	{
-	    tokenization_error( TKERROR,
-		"Expansion buffer overflow.  Max length is %d.\n",
-		    buffer_max);
-	    retval = NULL;
-	}else{
-	    expansion_buffer[syst_stat-1] =0;
-	    was_expanded = TRUE;
-	    retval = expansion_buffer;
-	    expanded_name();
-	}
-
-	fclose( temp_file);
-	remove( temp_file_name);
-    }
-
-    return( retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -975,27 +946,26 @@ static char *expand_pathname( const char *input_pathname)
  *
  **************************************************************************** */
 
-FILE *open_expanded_file( const char *path_name, char *mode, char *for_what)
+FILE *open_expanded_file(const char *path_name, char *mode, char *for_what)
 {
 
-    FILE *retval = NULL;
+	FILE *retval = NULL;
 
-    char *infile_name = expand_pathname( path_name);
-    if ( infile_name != NULL )
-    {
-        retval = open_incl_list_file( infile_name, mode);
-    }
+	char *infile_name = expand_pathname(path_name);
+	if (infile_name != NULL) {
+		retval = open_incl_list_file(infile_name, mode);
+	}
 
-    if ( retval == NULL )
-    {
-        expansion_error();
-	tokenization_error ( TKERROR,
-	    "Failed to open file %s for %s\n", path_name, for_what );
-    }
+	if (retval == NULL) {
+		expansion_error();
+		tokenization_error(TKERROR,
+				   "Failed to open file %s for %s\n", path_name,
+				   for_what);
+	}
 
-    finish_incl_list_scan( BOOLVAL( retval != NULL) );
+	finish_incl_list_scan(BOOLVAL(retval != NULL));
 
-    return( retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -1075,144 +1045,136 @@ FILE *open_expanded_file( const char *path_name, char *mode, char *for_what)
  *
  **************************************************************************** */
 
-bool init_stream( const char *name)
+bool init_stream(const char *name)
 {
-    FILE *infile;
-    u8 *newbuf;
+	FILE *infile;
+	char *newbuf;
 	struct stat finfo;
-    bool stat_succ = FALSE;
-    bool tried_stat = FALSE;
-    bool retval = FALSE;
-    bool inp_fil_acc_err = FALSE;
-    bool inp_fil_open_err = FALSE;
-    bool inp_fil_read_err = FALSE;
+	bool stat_succ = FALSE;
+	bool tried_stat = FALSE;
+	bool retval = FALSE;
+	bool inp_fil_acc_err = FALSE;
+	bool inp_fil_open_err = FALSE;
+	bool inp_fil_read_err = FALSE;
 
-    char *infile_name = expand_pathname( name);
+	char *infile_name = expand_pathname(name);
 
-    if ( (infile_name != NULL) )
-    {
-	tried_stat = TRUE;
-	stat_succ = stat_incl_list_file( infile_name, &finfo);
-    }
-
-    if ( INVERSE( stat_succ) )
-    {
-	inp_fil_acc_err = TRUE;
-    }else{
-	
-	infile = fopen( include_list_full_path, "r");
-	if ( infile == NULL )
-	{
-	    inp_fil_open_err = TRUE;
-	}else{
-	
-	ilen=finfo.st_size;
-	    newbuf = safe_malloc(ilen+1, "initting stream");
-
-	    if ( fread( newbuf, ilen, 1, infile) != 1 )
-	    {
-		inp_fil_read_err = TRUE;
-		free( newbuf );
-	    } else {
-		unsigned int i;
-
-		retval = TRUE ;
-		/*  Replace zeroes in the file with LineFeeds. */
-		/*  Replace carr-rets with spaces.  */
-		for (i=0; i<ilen; i++)
-		{
-		    char test_c = newbuf[i];
-		    if ( test_c == 0    ) newbuf[i] = 0x0a;
-		    if ( test_c == 0x0d ) newbuf[i] = ' ';
+	if ((infile_name != NULL)) {
+		tried_stat = TRUE;
+		stat_succ = stat_incl_list_file(infile_name, &finfo);
 	}
-		newbuf[ilen]=0;
 
-		init_inbuf(newbuf, ilen);
+	if (INVERSE(stat_succ)) {
+		inp_fil_acc_err = TRUE;
+	} else {
 
-		/*   If the -l option was specified, write the name of the
-		 *       new input-file to the Load-List file...  UNLESS
-		 *       this is the first time through and we haven't yet
-		 *       opened the Load-List file, in which case we'll
-		 *       just open it here and wait until we create the
-		 *       output-file name (since the Load-List file name
-		 *       depends on the output-file name anyway) before
-		 *       we write the initial input-file name to it.
-		 */
-		/*   Looking for the option-flag _and_ for a non-NULL value
-		 *       of the file-structure pointer is redundandundant:
-		 *       The non-NULL pointer is sufficient, once the List
-		 *       File has been created...
-		 */
-		/*   Same thing applies if the -P option was specified,
-		 *       for the Dependency-List file, except there we'll
-		 *       write the full path to where the file was found.
-		 */
-		/*   We have a routine to do both of those.   */
-		add_to_load_lists( name);
-		/*
-		 *   And... there's one slight complication:  If this is
-		 *       the first time through, (i.e., we're opening the
-		 *       Primary Input File) then we haven't yet opened the
-		 *       Dependency-List file, and we need to preserve the
-		 *       Full file-name Buffer until the call to  init_output()
-		 *       where the include-list scan will be "finish"ed.
-		 *   Actually, we want to postpone "finish"ing the inc-l scan
-		 *       for several reasons beyond the Dependency-List file, 
-		 *       such as completing the File Name Announcement first.
-		 *   A NULL output-name buffer is our indicator.
-		 */
-		if ( oname == NULL )
-		{
-		    /*  Quick way to suppress "finish"ing the i-l scan */
-		    tried_stat = FALSE; 
+		infile = fopen(include_list_full_path, "r");
+		if (infile == NULL) {
+			inp_fil_open_err = TRUE;
+		} else {
+
+			ilen = finfo.st_size;
+			newbuf = safe_malloc(ilen + 1, "initting stream");
+
+			if (fread(newbuf, ilen, 1, infile) != 1) {
+				inp_fil_read_err = TRUE;
+				free(newbuf);
+			} else {
+				unsigned int i;
+
+				retval = TRUE;
+				/*  Replace zeroes in the file with LineFeeds. */
+				/*  Replace carr-rets with spaces.  */
+				for (i = 0; i < ilen; i++) {
+					char test_c = newbuf[i];
+					if (test_c == 0)
+						newbuf[i] = 0x0a;
+					if (test_c == 0x0d)
+						newbuf[i] = ' ';
+				}
+				newbuf[ilen] = 0;
+
+				init_inbuf(newbuf, ilen);
+
+				/*   If the -l option was specified, write the name of the
+				 *       new input-file to the Load-List file...  UNLESS
+				 *       this is the first time through and we haven't yet
+				 *       opened the Load-List file, in which case we'll
+				 *       just open it here and wait until we create the
+				 *       output-file name (since the Load-List file name
+				 *       depends on the output-file name anyway) before
+				 *       we write the initial input-file name to it.
+				 */
+				/*   Looking for the option-flag _and_ for a non-NULL value
+				 *       of the file-structure pointer is redundandundant:
+				 *       The non-NULL pointer is sufficient, once the List
+				 *       File has been created...
+				 */
+				/*   Same thing applies if the -P option was specified,
+				 *       for the Dependency-List file, except there we'll
+				 *       write the full path to where the file was found.
+				 */
+				/*   We have a routine to do both of those.   */
+				add_to_load_lists(name);
+				/*
+				 *   And... there's one slight complication:  If this is
+				 *       the first time through, (i.e., we're opening the
+				 *       Primary Input File) then we haven't yet opened the
+				 *       Dependency-List file, and we need to preserve the
+				 *       Full file-name Buffer until the call to  init_output()
+				 *       where the include-list scan will be "finish"ed.
+				 *   Actually, we want to postpone "finish"ing the inc-l scan
+				 *       for several reasons beyond the Dependency-List file, 
+				 *       such as completing the File Name Announcement first.
+				 *   A NULL output-name buffer is our indicator.
+				 */
+				if (oname == NULL) {
+					/*  Quick way to suppress "finish"ing the i-l scan */
+					tried_stat = FALSE;
+				}
+			}
+			fclose(infile);
 		}
-	    }
-	fclose(infile);
 	}
-    }
-	
-    FFLUSH_STDOUT	/*   Do this first  */
-    /*  Now we can deliver our postponed error and advisory messages  */
-    if ( INVERSE( retval) )
-    {
-	file_is_missing( (char *)name);
-	if ( inp_fil_acc_err )
-	{
-	    expansion_error();
-	    tokenization_error( TKERROR, 
-		"Could not access input file %s\n", name);
-	}else{
-	    if ( inp_fil_open_err )
-	    {
-		expansion_error();
-		could_not_open( TKERROR, (char *)name, "input");
-	    }else{
-		if ( inp_fil_read_err )
-		{
-		    expansion_error();
-		    tokenization_error( TKERROR, 
-			"Could not read input file %s\n", name);
-		}
-	    }
-	}
-	}
-	
-    if ( tried_stat )
-    {
-        finish_incl_list_scan( stat_succ);
-    }
 
-    /*  Don't change the input file name and line-number until after
-     *      the Advisory showing where the file was found.
-     */
-    if ( retval )
-    {
-	iname=strdup(name);
-	lineno=1;
-    }
-	
-    return ( retval );
-	
+	FFLUSH_STDOUT		/*   Do this first  */
+	    /*  Now we can deliver our postponed error and advisory messages  */
+	    if (INVERSE(retval)) {
+		file_is_missing((char *)name);
+		if (inp_fil_acc_err) {
+			expansion_error();
+			tokenization_error(TKERROR,
+					   "Could not access input file %s\n",
+					   name);
+		} else {
+			if (inp_fil_open_err) {
+				expansion_error();
+				could_not_open(TKERROR, (char *)name, "input");
+			} else {
+				if (inp_fil_read_err) {
+					expansion_error();
+					tokenization_error(TKERROR,
+							   "Could not read input file %s\n",
+							   name);
+				}
+			}
+		}
+	}
+
+	if (tried_stat) {
+		finish_incl_list_scan(stat_succ);
+	}
+
+	/*  Don't change the input file name and line-number until after
+	 *      the Advisory showing where the file was found.
+	 */
+	if (retval) {
+		iname = strdup(name);
+		lineno = 1;
+	}
+
+	return (retval);
+
 }
 
 /* **************************************************************************
@@ -1253,32 +1215,31 @@ bool init_stream( const char *name)
  *
  **************************************************************************** */
 
-static char *extend_filename( const char *base_name, const char *new_ext)
+static char *extend_filename(const char *base_name, const char *new_ext)
 {
-    char *retval;
-    char *ext;
-  	unsigned int len; /* should this be size_t? */
-    const char *root;
+	char *retval;
+	char *ext;
+	unsigned int len;	/* should this be size_t? */
+	const char *root;
 
-    root = strrchr(base_name, '/');
-    if ( root == NULL )  root = base_name;
+	root = strrchr(base_name, '/');
+	if (root == NULL)
+		root = base_name;
 
-    ext = strrchr(root, '.');
-    if ( ext != NULL )
-    {
-        if ( strcasecmp(ext, new_ext) == 0 )
-	{
-	    ext = NULL;
+	ext = strrchr(root, '.');
+	if (ext != NULL) {
+		if (strcasecmp(ext, new_ext) == 0) {
+			ext = NULL;
+		}
 	}
-    }
 
-    len = ext ? (ext - base_name) : (unsigned int)strlen(base_name) ;
-    retval = safe_malloc(len+strlen(new_ext)+1, "extending file-name");
-    memcpy( retval, base_name, len);
-    retval[len] = 0;
-    strcat(retval, new_ext);
+	len = ext ? (ext - base_name) : (unsigned int)strlen(base_name);
+	retval = safe_malloc(len + strlen(new_ext) + 1, "extending file-name");
+	memcpy(retval, base_name, len);
+	retval[len] = 0;
+	strcat(retval, new_ext);
 
-    return( retval);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -1370,80 +1331,72 @@ static char *extend_filename( const char *base_name, const char *new_ext)
  *
  **************************************************************************** */
 
-void init_output( const char *in_name, const char *out_name )
+void init_output(const char *in_name, const char *out_name)
 {
 	/* preparing output */
 
-	if( out_name != NULL )
-	{
-		oname = strdup( out_name );
-	}else{
-		oname = extend_filename( in_name, ".fc"); 
+	if (out_name != NULL) {
+		oname = strdup(out_name);
+	} else {
+		oname = extend_filename(in_name, ".fc");
 	}
-	
+
 	/* output buffer size. this is 128k per default now, but we
 	 * could reallocate if we run out. KISS for now.
 	 */
 	olen = OUTPUT_SIZE;
-	ostart=safe_malloc(olen, "initting output buffer");
+	ostart = safe_malloc(olen, "initting output buffer");
 
-	init_emit();  /* Init'l'zns needed by our companion file, emit.c  */
+	init_emit();		/* Init'l'zns needed by our companion file, emit.c  */
 
 	printf("Binary output to %s ", oname);
-	if ( fload_list )
-	{
-	    load_list_name = extend_filename( oname, ".fl");
-	    load_list_file = fopen( load_list_name,"w");
-	    printf("  FLoad-list to %s ", load_list_name);
+	if (fload_list) {
+		load_list_name = extend_filename(oname, ".fl");
+		load_list_file = fopen(load_list_name, "w");
+		printf("  FLoad-list to %s ", load_list_name);
 	}
-	if ( dependency_list )
-	{
-	    depncy_list_name = extend_filename( oname, ".P");
-	    depncy_file = fopen( depncy_list_name,"w");
-	    printf("  Dependency-list to %s ", depncy_list_name);
+	if (dependency_list) {
+		depncy_list_name = extend_filename(oname, ".P");
+		depncy_file = fopen(depncy_list_name, "w");
+		printf("  Dependency-list to %s ", depncy_list_name);
 	}
 	printf("\n");
 
-	add_to_load_lists( in_name);
-	
+	add_to_load_lists(in_name);
+
 	/*  Let's avoid collisions between stdout and stderr  */
 	FFLUSH_STDOUT
-
-	/*  Now we can deliver our advisory and error messages  */
-	
+	    /*  Now we can deliver our advisory and error messages  */
 	{
-	    /* Suspend showing filename in advisory and error messages. */
-	    char *temp_iname = iname;
-	    iname = NULL; 
-	
-	    finish_incl_list_scan( TRUE);
+		/* Suspend showing filename in advisory and error messages. */
+		char *temp_iname = iname;
+		iname = NULL;
 
-	    if ( fload_list && (load_list_file == NULL) )
-	    {
-	    	could_not_open( TKERROR, load_list_name, "Load-List");
-		free( load_list_name);
-	    }
-	    if ( dependency_list && (depncy_file == NULL) )
-	    {
-	    	could_not_open( TKERROR, depncy_list_name,
-		    "Dependency-List");
-		free( depncy_list_name);
-}
+		finish_incl_list_scan(TRUE);
 
-	    if ( fload_list || dependency_list )
-	    {
-		missing_list_name = extend_filename( oname, ".fl.missing");
-		missing_list_file = fopen( missing_list_name,"w");
-		no_files_missing = TRUE;
-
-		if ( missing_list_file == NULL )
-		{
-		    could_not_open( WARNING, missing_list_name,
-			"Missing-Files List" );
-	            free( missing_list_name);
+		if (fload_list && (load_list_file == NULL)) {
+			could_not_open(TKERROR, load_list_name, "Load-List");
+			free(load_list_name);
 		}
-	    }
-	    iname = temp_iname;
+		if (dependency_list && (depncy_file == NULL)) {
+			could_not_open(TKERROR, depncy_list_name,
+				       "Dependency-List");
+			free(depncy_list_name);
+		}
+
+		if (fload_list || dependency_list) {
+			missing_list_name =
+			    extend_filename(oname, ".fl.missing");
+			missing_list_file = fopen(missing_list_name, "w");
+			no_files_missing = TRUE;
+
+			if (missing_list_file == NULL) {
+				could_not_open(WARNING, missing_list_name,
+					       "Missing-Files List");
+				free(missing_list_name);
+			}
+		}
+		iname = temp_iname;
 	}
 	abs_token_no = 1;
 }
@@ -1494,38 +1447,36 @@ void init_output( const char *in_name, const char *out_name )
  *              nor the variable  olen  , but we will limit their exposure.
  *
  **************************************************************************** */
-void increase_output_buffer( void );  /*  Keep the prototype local  */
-void increase_output_buffer( void )
+void increase_output_buffer(void);	/*  Keep the prototype local  */
+void increase_output_buffer(void)
 {
-    u8 *newout;
+	u8 *newout;
 
-    if ( olen == 0 )
-    {
-	tokenization_error( FATAL,
-		"Output Buffer reallocation overflow.");
-    }else{
-	unsigned int rea_len;
-	olen = olen * 2;
-	rea_len = olen;
-	if ( rea_len == 0 )
-	{
-	    rea_len = (unsigned int)-1;
+	if (olen == 0) {
+		tokenization_error(FATAL,
+				   "Output Buffer reallocation overflow.");
+	} else {
+		unsigned int rea_len;
+		olen = olen * 2;
+		rea_len = olen;
+		if (rea_len == 0) {
+			rea_len = (unsigned int)-1;
+		}
+		tokenization_error(INFO,
+				   "Output Buffer overflow.  "
+				   "Relocating and increasing to %d bytes.\n",
+				   rea_len);
+
+		newout = realloc(ostart, rea_len);
+		if (newout == NULL) {
+			tokenization_error(FATAL,
+					   "Could not reallocate %d bytes for Output Buffer",
+					   rea_len);
+		}
+
+		ostart = newout;
 	}
-	tokenization_error( INFO,
-	    "Output Buffer overflow.  "
-		"Relocating and increasing to %d bytes.\n", rea_len);
-
-	newout = realloc(ostart, rea_len);
-	if ( newout == NULL)
-	{
-	    tokenization_error( FATAL,
-		"Could not reallocate %d bytes for Output Buffer", rea_len);
-	}
-
-	ostart = newout;
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -1539,7 +1490,7 @@ void increase_output_buffer( void )
  *
  **************************************************************************** */
 
-void close_stream( _PTR dummy)
+void close_stream(_PTR dummy)
 {
 	free(start);
 	free(iname);
@@ -1556,75 +1507,68 @@ void close_stream( _PTR dummy)
  *
  **************************************************************************** */
 
-
 bool close_output(void)
 {
-    bool retval = TRUE;  /*  "Failure"  */
-    if ( error_summary() )
-    { 
-	if ( opc == 0 )
-{
-	    retval = FALSE;  /*  "Not a problem"  */
-	}else{
-	FILE *outfile;
+	bool retval = TRUE;	/*  "Failure"  */
+	if (error_summary()) {
+		if (opc == 0) {
+			retval = FALSE;	/*  "Not a problem"  */
+		} else {
+			FILE *outfile;
 
-	    outfile=fopen( oname,"w");
-	    if (!outfile)
-	    {
-		/*  Don't do this as a  tokenization_error( TKERROR
-		 *      because those are all counted, among other reasons...
-		 */ 
-		printf( "Could not open file %s for output.\n", oname);
-	    }else{
-	
-		if ( fwrite(ostart, opc, 1, outfile) != 1 )
-		{
-		    tokenization_error( FATAL, "While writing output.");
-	}
-	
-	fclose(outfile);
+			outfile = fopen(oname, "w");
+			if (!outfile) {
+				/*  Don't do this as a  tokenization_error( TKERROR
+				 *      because those are all counted, among other reasons...
+				 */
+				printf("Could not open file %s for output.\n",
+				       oname);
+			} else {
 
-		printf("toke: wrote %d bytes to bytecode file '%s'\n",
-		    opc, oname);
-		retval = FALSE;  /*  "No problem"  */
-	    }
+				if (fwrite(ostart, opc, 1, outfile) != 1) {
+					tokenization_error(FATAL,
+							   "While writing output.");
+				}
+
+				fclose(outfile);
+
+				printf
+				    ("toke: wrote %d bytes to bytecode file '%s'\n",
+				     opc, oname);
+				retval = FALSE;	/*  "No problem"  */
+			}
+		}
 	}
-    }
-	
+
 	free(oname);
-    free(ostart);
-    oname = NULL;
-    ostart = NULL;
-    opc = 0;
-    olen = OUTPUT_SIZE;
+	free(ostart);
+	oname = NULL;
+	ostart = NULL;
+	opc = 0;
+	olen = OUTPUT_SIZE;
 
-    if ( load_list_file != NULL )
-    {
-	fclose(load_list_file);
-	free(load_list_name);
-    }
-    if ( depncy_file != NULL )
-    {
-	fclose(depncy_file);
-	free(depncy_list_name);
-    }
-    if ( missing_list_file != NULL )
-    {
-	fclose( missing_list_file);
-	if ( no_files_missing )
-	{
-	    remove( missing_list_name);
+	if (load_list_file != NULL) {
+		fclose(load_list_file);
+		free(load_list_name);
 	}
-	free( missing_list_name);
-    }
+	if (depncy_file != NULL) {
+		fclose(depncy_file);
+		free(depncy_list_name);
+	}
+	if (missing_list_file != NULL) {
+		fclose(missing_list_file);
+		if (no_files_missing) {
+			remove(missing_list_name);
+		}
+		free(missing_list_name);
+	}
 
-    load_list_file = NULL;
-    load_list_name = NULL;
-    missing_list_file = NULL;
-    missing_list_name = NULL;
-    depncy_file = NULL;
-    depncy_list_name = NULL;
+	load_list_file = NULL;
+	load_list_name = NULL;
+	missing_list_file = NULL;
+	missing_list_name = NULL;
+	depncy_file = NULL;
+	depncy_list_name = NULL;
 
-    return ( retval );
+	return (retval);
 }
-

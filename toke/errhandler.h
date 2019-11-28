@@ -49,17 +49,16 @@
 #define  P_MESSAGE   0x00000040
 #define  FORCE_MSG   0x00000001
 
-void init_error_handler( void);
-void tokenization_error( int err_type, char* msg, ... );
-void started_at( char * saved_ifile, unsigned int saved_lineno);
-void print_started_at( char * saved_ifile, unsigned int saved_lineno);
-void just_started_at( char * saved_ifile, unsigned int saved_lineno);
-void where_started( char * saved_ifile, unsigned int saved_lineno);
-void just_where_started( char * saved_ifile, unsigned int saved_lineno);
-void in_last_colon( bool say_in );
-_PTR safe_malloc( size_t size, char *phrase);
-bool error_summary( void );   /*  Return TRUE if OK to produce output. */
-
+void init_error_handler(void);
+void tokenization_error(int err_type, char *msg, ...);
+void started_at(char *saved_ifile, unsigned int saved_lineno);
+void print_started_at(char *saved_ifile, unsigned int saved_lineno);
+void just_started_at(char *saved_ifile, unsigned int saved_lineno);
+void where_started(char *saved_ifile, unsigned int saved_lineno);
+void just_where_started(char *saved_ifile, unsigned int saved_lineno);
+void in_last_colon(bool say_in);
+_PTR safe_malloc(size_t size, char *phrase);
+bool error_summary(void);	/*  Return TRUE if OK to produce output. */
 
 /* **************************************************************************
  *
@@ -83,12 +82,11 @@ bool error_summary( void );   /*  Return TRUE if OK to produce output. */
 /*  We're no longer switching the above.
  *  The below is left here to show what had been done formerly.
  */
-#if -1     /*  Switchable error-message destination  */ 
-#else      /*  Switchable error-message destination  */
+#if -1				/*  Switchable error-message destination  */
+#else /*  Switchable error-message destination  */
 #define ERRMSG_DESTINATION stdout
-#define FFLUSH_STDOUT  /*  Don't need to do anything here  */
-#endif     /*  Switchable error-message destination  */
-
+#define FFLUSH_STDOUT		/*  Don't need to do anything here  */
+#endif /*  Switchable error-message destination  */
 
 /* **************************************************************************
  *
@@ -98,11 +96,10 @@ bool error_summary( void );   /*  Return TRUE if OK to produce output. */
  *
  **************************************************************************** */
 
-extern char *strupper( char *strung);
+extern char *strupper(char *strung);
 #define strupr strupper
 
-extern char *strlower( char *strung);
+extern char *strlower(char *strung);
 #define strlwr strlower
 
-
-#endif  /*   _TOKE_ERRHANDLER_H   */
+#endif /*   _TOKE_ERRHANDLER_H   */

@@ -1,7 +1,6 @@
 #ifndef _TOKE_USERSYMBOLS_H
 #define _TOKE_USERSYMBOLS_H
 
-
 /*
  *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
@@ -39,7 +38,7 @@
 
 void add_user_symbol(char *raw_symb);
 bool exists_as_user_symbol(char *symb_nam);
-void eval_user_symbol(char *symbol );
-void list_user_symbols(void );
+void eval_user_symbol(char *symbol);
+void list_user_symbols(void);
 
-#endif   /* _TOKE_USERSYMBOLS_H    */
+#endif /* _TOKE_USERSYMBOLS_H    */

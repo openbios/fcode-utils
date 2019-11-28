@@ -111,7 +111,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Support function:  is_a_type
@@ -128,28 +127,28 @@
  *
  **************************************************************************** */
 
-
-static bool is_a_type( char *tname, fwtoken fw_type)
+static bool is_a_type(char *tname, fwtoken fw_type)
 {
-    bool retval = FALSE;
-    tic_fwt_hdr_t *found = (tic_fwt_hdr_t *)lookup_shared_f_exec_word( tname );
-    if ( found != NULL )
-    {
-        if ( found->pfield.fw_token == fw_type )  retval = TRUE;
-    }
-    return ( retval );
+	bool retval = FALSE;
+	tic_fwt_hdr_t *found =
+	    (tic_fwt_hdr_t *) lookup_shared_f_exec_word(tname);
+	if (found != NULL) {
+		if (found->pfield.fw_token == fw_type)
+			retval = TRUE;
+	}
+	return (retval);
 }
 
-static bool is_a_then( char *a_word)
+static bool is_a_then(char *a_word)
 {
-    bool retval = is_a_type( a_word, CONDL_ENDER);
-    return ( retval );
+	bool retval = is_a_type(a_word, CONDL_ENDER);
+	return (retval);
 }
 
-static bool is_an_else( char *a_word)
+static bool is_an_else(char *a_word)
 {
-    bool retval = is_a_type( a_word, CONDL_ELSE);
-    return ( retval );
+	bool retval = is_a_type(a_word, CONDL_ELSE);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -176,7 +175,6 @@ static bool already_ignoring = FALSE;
  * 
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      We also need a few common routines to pass as "Ignoring" functions
@@ -193,7 +191,7 @@ static bool already_ignoring = FALSE;
  *          the "word" is strictly an input token, delimited by whitespace.
  *
  **************************************************************************** */
- 
+
 /* **************************************************************************
  *
  *      Function name:  skip_a_word
@@ -210,9 +208,9 @@ static bool already_ignoring = FALSE;
  *
  **************************************************************************** */
 
-void skip_a_word( tic_bool_param_t pfield )
+void skip_a_word(tic_bool_param_t pfield)
 {
-    /* signed long wlen = */ get_word();
+	/* signed long wlen = */ get_word();
 }
 
 /* **************************************************************************
@@ -238,9 +236,9 @@ void skip_a_word( tic_bool_param_t pfield )
  *          get_word_in_line() will check and report if no word on same line.
  *
  **************************************************************************** */
-void skip_a_word_in_line( tic_bool_param_t pfield )
+void skip_a_word_in_line(tic_bool_param_t pfield)
 {
-    /* bool isokay = */ get_word_in_line( statbuf);
+	/* bool isokay = */ get_word_in_line(statbuf);
 }
 
 /* **************************************************************************
@@ -271,16 +269,14 @@ void skip_a_word_in_line( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-void skip_two_words_in_line( tic_bool_param_t pfield )
+void skip_two_words_in_line(tic_bool_param_t pfield)
 {
-    char *func_cpy = strupr( strdup( statbuf));
-    if ( get_word_in_line( func_cpy) )
-    {
-        /* bool isokay = */ get_word_in_line( func_cpy);
-    }
-    free( func_cpy);
+	char *func_cpy = strupr(strdup(statbuf));
+	if (get_word_in_line(func_cpy)) {
+		/* bool isokay = */ get_word_in_line(func_cpy);
+	}
+	free(func_cpy);
 }
-
 
 /* **************************************************************************
  *
@@ -319,22 +315,21 @@ void skip_two_words_in_line( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void ignore_one_word( char *tname)
+static void ignore_one_word(char *tname)
 {
-    tic_bool_hdr_t *found = (tic_bool_hdr_t *)lookup_word( tname, NULL, NULL);
-    if ( found != NULL )
-    {
-        if ( found->ign_func != NULL )
-	{
-	    bool save_already_ignoring = already_ignoring;
-	    already_ignoring = TRUE ;
-	    tic_found = (tic_hdr_t *)found;
+	tic_bool_hdr_t *found =
+	    (tic_bool_hdr_t *) lookup_word(tname, NULL, NULL);
+	if (found != NULL) {
+		if (found->ign_func != NULL) {
+			bool save_already_ignoring = already_ignoring;
+			already_ignoring = TRUE;
+			tic_found = (tic_hdr_t *) found;
 
-	    found->ign_func( found->pfield);
+			found->ign_func(found->pfield);
 
-	    already_ignoring = save_already_ignoring;
+			already_ignoring = save_already_ignoring;
+		}
 	}
-    }
 }
 
 /* **************************************************************************
@@ -422,112 +417,109 @@ static void ignore_one_word( char *tname)
  *
  **************************************************************************** */
 
-static void conditionally_tokenize( bool cond, bool alr_ign )
+static void conditionally_tokenize(bool cond, bool alr_ign)
 {
-    
-    signed long wlen;
 
-    /*  Note:  The following variables *must* remain within
-     *      the scope of this routine; a distinct instance
-     *      is needed each time this routine is re-entered
-     *     (aka "a nested call").
-     */
-    bool ignoring;
-    bool first_else = TRUE;  /*  The "else" we see is the first.  */
-    bool not_done = TRUE;
-    unsigned int cond_strt_lineno = lineno;
-    char *cond_strt_ifile_nam = strdup( iname);
+	signed long wlen;
 
-    ignoring = BOOLVAL( ( cond == FALSE ) || ( alr_ign != FALSE ) );
-
-    if ( trace_conditionals )
-    {
-        char *cond_val = cond ? "True" : "False" ;
-	char *cond_junct = alr_ign ? ", but Already " : "; ";
-	char *processg = ignoring ? "Ignoring" : "Processing" ;
-	tokenization_error( INFO,
-	    "Tokenization-Condition is %s%s%s.\n",
-		cond_val, cond_junct, processg);
-    }
-
-    while ( not_done )
-    {
-        wlen = get_word();
-	if ( wlen == 0 )
-	{
-	    continue;
-	}
-
-	if ( wlen < 0 )
-	{
-	    tokenization_error( TKERROR,
-	        "Conditional without conclusion; started");
-	    just_where_started( cond_strt_ifile_nam, cond_strt_lineno);
-	    not_done = FALSE ;
-	    continue;
-	}
-
-	if ( is_a_then ( statbuf ) )
-	{
-	    if ( trace_conditionals )
-	    {
-		tokenization_error( INFO,
-		    "Concluding Conditional");
-		just_started_at( cond_strt_ifile_nam, cond_strt_lineno);
-	    }
-	    not_done = FALSE ;
-	    continue;
-	}
-
-	if ( is_an_else( statbuf ) )
-	{
-	    if ( ! alr_ign )
-	    {
-		if ( first_else )
-		{
-		    ignoring = INVERSE( ignoring);
-		}
-	    }
-
-	    if ( ! first_else )
-	    {
-		int severity = ignoring ? WARNING : TKERROR ;
-		char *the_scop = ignoring ? "(ignored)" : "the" ;
-		tokenization_error( severity, "Multiple %s directives "
-		    "within %s scope of the Conditional",
-			 strupr(statbuf), the_scop);
-		just_started_at( cond_strt_ifile_nam, cond_strt_lineno);
-	    }else{
-		first_else = FALSE;
-		if ( trace_conditionals )
-		{
-		    char *when_enc = alr_ign ? "While already" : "Now" ;
-		    char *processg = alr_ign ? "ignoring" :
-				    ignoring ? "Ignoring" : "Processing" ;
-		    char *enc       = alr_ign ? ", e" : ".  E" ;
-
-		    tokenization_error( INFO,
-			"%s %s%sncountered %s belonging to Conditional",
-			    when_enc, processg, enc, strupr(statbuf) );
-		    just_started_at( cond_strt_ifile_nam, cond_strt_lineno);
-		}
-	    }
-
-	    continue;
-	}
-
-	/*  If we are ignoring source input, for whatever reason, we still
-	 *      need to be sensitive to the nesting of Conditional Operators
-	 *      and some other commands and directives, as indicated...
+	/*  Note:  The following variables *must* remain within
+	 *      the scope of this routine; a distinct instance
+	 *      is needed each time this routine is re-entered
+	 *     (aka "a nested call").
 	 */
-	if ( ignoring )
-	{
-	    ignore_one_word( statbuf );
-	}else{
-	    /*  And if we're not ignoring source input, process it! */
-	    tokenize_one_word ( wlen );
+	bool ignoring;
+	bool first_else = TRUE;	/*  The "else" we see is the first.  */
+	bool not_done = TRUE;
+	unsigned int cond_strt_lineno = lineno;
+	char *cond_strt_ifile_nam = strdup(iname);
+
+	ignoring = BOOLVAL((cond == FALSE) || (alr_ign != FALSE));
+
+	if (trace_conditionals) {
+		char *cond_val = cond ? "True" : "False";
+		char *cond_junct = alr_ign ? ", but Already " : "; ";
+		char *processg = ignoring ? "Ignoring" : "Processing";
+		tokenization_error(INFO,
+				   "Tokenization-Condition is %s%s%s.\n",
+				   cond_val, cond_junct, processg);
 	}
-    }
+
+	while (not_done) {
+		wlen = get_word();
+		if (wlen == 0) {
+			continue;
+		}
+
+		if (wlen < 0) {
+			tokenization_error(TKERROR,
+					   "Conditional without conclusion; started");
+			just_where_started(cond_strt_ifile_nam,
+					   cond_strt_lineno);
+			not_done = FALSE;
+			continue;
+		}
+
+		if (is_a_then(statbuf)) {
+			if (trace_conditionals) {
+				tokenization_error(INFO,
+						   "Concluding Conditional");
+				just_started_at(cond_strt_ifile_nam,
+						cond_strt_lineno);
+			}
+			not_done = FALSE;
+			continue;
+		}
+
+		if (is_an_else(statbuf)) {
+			if (!alr_ign) {
+				if (first_else) {
+					ignoring = INVERSE(ignoring);
+				}
+			}
+
+			if (!first_else) {
+				int severity = ignoring ? WARNING : TKERROR;
+				char *the_scop = ignoring ? "(ignored)" : "the";
+				tokenization_error(severity,
+						   "Multiple %s directives "
+						   "within %s scope of the Conditional",
+						   strupr(statbuf), the_scop);
+				just_started_at(cond_strt_ifile_nam,
+						cond_strt_lineno);
+			} else {
+				first_else = FALSE;
+				if (trace_conditionals) {
+					char *when_enc =
+					    alr_ign ? "While already" : "Now";
+					char *processg =
+					    alr_ign ? "ignoring" : ignoring ?
+					    "Ignoring" : "Processing";
+					char *enc = alr_ign ? ", e" : ".  E";
+
+					tokenization_error(INFO,
+							   "%s %s%sncountered %s belonging to Conditional",
+							   when_enc, processg,
+							   enc,
+							   strupr(statbuf));
+					just_started_at(cond_strt_ifile_nam,
+							cond_strt_lineno);
+				}
+			}
+
+			continue;
+		}
+
+		/*  If we are ignoring source input, for whatever reason, we still
+		 *      need to be sensitive to the nesting of Conditional Operators
+		 *      and some other commands and directives, as indicated...
+		 */
+		if (ignoring) {
+			ignore_one_word(statbuf);
+		} else {
+			/*  And if we're not ignoring source input, process it! */
+			tokenize_one_word(wlen);
+		}
+	}
 }
 
 /* **************************************************************************
@@ -592,22 +584,18 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
  *
  **************************************************************************** */
 
-static void conditional_word_in_line( bool alr_ign,
-                                          bool exist_test,
-                                              bool (*exist_funct)() )
+static void conditional_word_in_line(bool alr_ign,
+				     bool exist_test, bool (*exist_funct)())
 {
-    if ( get_word_in_line( statbuf) )
-    {
-    	bool cond = FALSE;
-	if ( INVERSE( alr_ign) )
-	{
-	    bool exists = exist_funct( statbuf);
-	    cond = BOOLVAL( exists == exist_test);
+	if(get_word_in_line(statbuf)) {
+		bool cond = FALSE;
+		if (INVERSE(alr_ign)) {
+			bool exists = exist_funct(statbuf);
+			cond = BOOLVAL(exists == exist_test);
+		}
+		conditionally_tokenize(cond, alr_ign);
 	}
-	conditionally_tokenize( cond, alr_ign );
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -624,10 +612,10 @@ static void conditional_word_in_line( bool alr_ign,
  *
  **************************************************************************** */
 
-static void if_exists( tic_param_t pfield )
+static void if_exists(tic_param_t pfield)
 {
-    bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, TRUE, exists_in_current );
+	bool alr_ign = *pfield.bool_ptr;
+	conditional_word_in_line(alr_ign, TRUE, exists_in_current);
 }
 
 /* **************************************************************************
@@ -646,10 +634,10 @@ static void if_exists( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_not_exist( tic_bool_param_t pfield )
+static void if_not_exist(tic_bool_param_t pfield)
 {
-    bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, FALSE, exists_in_current );
+	bool alr_ign = *pfield.bool_ptr;
+	conditional_word_in_line(alr_ign, FALSE, exists_in_current);
 }
 
 /* **************************************************************************
@@ -663,10 +651,10 @@ static void if_not_exist( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_defined( tic_bool_param_t pfield )
+static void if_defined(tic_bool_param_t pfield)
 {
-    bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, TRUE, exists_as_user_symbol );
+	bool alr_ign = *pfield.bool_ptr;
+	conditional_word_in_line(alr_ign, TRUE, exists_as_user_symbol);
 }
 
 /* **************************************************************************
@@ -680,12 +668,11 @@ static void if_defined( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_not_defined( tic_bool_param_t pfield )
+static void if_not_defined(tic_bool_param_t pfield)
 {
-    bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, FALSE, exists_as_user_symbol );
+	bool alr_ign = *pfield.bool_ptr;
+	conditional_word_in_line(alr_ign, FALSE, exists_as_user_symbol);
 }
-
 
 /* **************************************************************************
  *
@@ -704,20 +691,18 @@ static void if_not_defined( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_from_stack( tic_bool_param_t pfield )
+static void if_from_stack(tic_bool_param_t pfield)
 {
-    bool alr_ign = *pfield.bool_ptr;
-    bool cond = FALSE;
+	bool alr_ign = *pfield.bool_ptr;
+	bool cond = FALSE;
 
-    if ( ! alr_ign )
-    {
-        long num = dpop();
-	if (num != 0)
-	{
-	    cond = TRUE;
+	if (!alr_ign) {
+		long num = dpop();
+		if (num != 0) {
+			cond = TRUE;
+		}
 	}
-    }
-    conditionally_tokenize( cond, alr_ign );
+	conditionally_tokenize(cond, alr_ign);
 }
 
 /*  For future functions, use  conditl.BlankTemplate.c  */
@@ -732,24 +717,23 @@ static void if_from_stack( tic_bool_param_t pfield )
 #define ADD_CONDL(str, func )   BUILTIN_BOOL_TIC(str, func, already_ignoring )
 
 static tic_bool_hdr_t conditionals_vocab_tbl[] = {
-    ADD_CONDL ("[ifexist]"   , if_exists      ) ,
-    ADD_CONDL ("[ifexists]"  , if_exists      ) ,
-    ADD_CONDL ("#ifexist"    , if_exists      ) ,
-    ADD_CONDL ("#ifexists"   , if_exists      ) ,
-    ADD_CONDL ("[#ifexist]"  , if_exists      ) ,
-    ADD_CONDL ("[#ifexists]" , if_exists      ) ,
-    ADD_CONDL ("[ifnexist]"  , if_not_exist   ) ,
-    ADD_CONDL ("#ifnexist"   , if_not_exist   ) ,
-    ADD_CONDL ("[#ifnexist]" , if_not_exist   ) ,
-    ADD_CONDL ("[ifdef]"     , if_defined     ) ,
-    ADD_CONDL ("#ifdef"      , if_defined     ) ,
-    ADD_CONDL ("[#ifdef]"    , if_defined     ) ,
-    ADD_CONDL ("[ifndef]"    , if_not_defined ) ,
-    ADD_CONDL ("#ifndef"     , if_not_defined ) ,
-    ADD_CONDL ("[#ifndef]"   , if_not_defined ) ,
-    ADD_CONDL ("[if]"        , if_from_stack  )
+	ADD_CONDL("[ifexist]", if_exists),
+	ADD_CONDL("[ifexists]", if_exists),
+	ADD_CONDL("#ifexist", if_exists),
+	ADD_CONDL("#ifexists", if_exists),
+	ADD_CONDL("[#ifexist]", if_exists),
+	ADD_CONDL("[#ifexists]", if_exists),
+	ADD_CONDL("[ifnexist]", if_not_exist),
+	ADD_CONDL("#ifnexist", if_not_exist),
+	ADD_CONDL("[#ifnexist]", if_not_exist),
+	ADD_CONDL("[ifdef]", if_defined),
+	ADD_CONDL("#ifdef", if_defined),
+	ADD_CONDL("[#ifdef]", if_defined),
+	ADD_CONDL("[ifndef]", if_not_defined),
+	ADD_CONDL("#ifndef", if_not_defined),
+	ADD_CONDL("[#ifndef]", if_not_defined),
+	ADD_CONDL("[if]", if_from_stack)
 };
-
 
 /* **************************************************************************
  *
@@ -760,13 +744,11 @@ static tic_bool_hdr_t conditionals_vocab_tbl[] = {
  *
  **************************************************************************** */
 
-void init_conditionals_vocab( tic_hdr_t **tic_vocab_ptr )
+void init_conditionals_vocab(tic_hdr_t ** tic_vocab_ptr)
 {
-    static const int conditionals_vocab_max_indx =
-	 sizeof(conditionals_vocab_tbl)/sizeof(tic_bool_hdr_t);
+	static const int conditionals_vocab_max_indx =
+	    sizeof(conditionals_vocab_tbl) / sizeof(tic_bool_hdr_t);
 
-    init_tic_vocab( (tic_hdr_t *)conditionals_vocab_tbl,
-                        conditionals_vocab_max_indx,
-                            tic_vocab_ptr );
+	init_tic_vocab((tic_hdr_t *) conditionals_vocab_tbl,
+		       conditionals_vocab_max_indx, tic_vocab_ptr);
 }
-

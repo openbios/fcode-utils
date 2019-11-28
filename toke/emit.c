@@ -68,7 +68,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Global Variables Exported:
@@ -80,8 +79,8 @@
  *
  **************************************************************************** */
 
-unsigned int opc                = 0;
-unsigned int pci_hdr_end_ob_off = 0;   /*  0 means "Not initialized"  */
+unsigned int opc = 0;
+unsigned int pci_hdr_end_ob_off = 0;	/*  0 means "Not initialized"  */
 
 /* **************************************************************************
  *
@@ -91,7 +90,6 @@ unsigned int pci_hdr_end_ob_off = 0;   /*  0 means "Not initialized"  */
  **************************************************************************** */
 
 #define EMIT_STRUCT(x)  {int j; for (j=0; j < sizeof(x) ; j++ ) emit_byte(0); }
-
 
 /* **************************************************************************
  *
@@ -106,11 +104,11 @@ unsigned int pci_hdr_end_ob_off = 0;   /*  0 means "Not initialized"  */
  *
  *************************************************************************** */
 
-static  int fcode_start_ob_off = -1;
-static  int fcode_hdr_ob_off = -1;
-static  int fcode_body_ob_off = -1;
-static  int pci_hdr_ob_off = -1;
-static  int pci_data_blk_ob_off = -1;
+static int fcode_start_ob_off = -1;
+static int fcode_hdr_ob_off = -1;
+static int fcode_body_ob_off = -1;
+static int pci_hdr_ob_off = -1;
+static int pci_data_blk_ob_off = -1;
 
 /* **************************************************************************
  *
@@ -132,10 +130,9 @@ static bool fcode_written = FALSE;
  *
  **************************************************************************** */
 
-extern u8 *ostart;
+extern char *ostart;
 extern int olen;
-extern void increase_output_buffer( void);
-
+extern void increase_output_buffer(void);
 
 /* **************************************************************************
  *
@@ -145,20 +142,19 @@ extern void increase_output_buffer( void);
  *                      Exposure as Limited as possible.
  *
  **************************************************************************** */
-void init_emit( void);       /*    Prototype.  Limit Exposure.   */
-void init_emit( void)
+void init_emit(void);		/*    Prototype.  Limit Exposure.   */
+void init_emit(void)
 {
-    fcode_start_ob_off  = -1;
-    fcode_hdr_ob_off    = -1;
-    fcode_body_ob_off   = -1;
-    pci_hdr_ob_off      = -1;
-    pci_data_blk_ob_off = -1;
-    opc                 =  0;
-    pci_hdr_end_ob_off  =  0;
-    fcode_written       = FALSE;
-    haveend             = FALSE;   /*  Get this one too...  */
+	fcode_start_ob_off = -1;
+	fcode_hdr_ob_off = -1;
+	fcode_body_ob_off = -1;
+	pci_hdr_ob_off = -1;
+	pci_data_blk_ob_off = -1;
+	opc = 0;
+	pci_hdr_end_ob_off = 0;
+	fcode_written = FALSE;
+	haveend = FALSE;	/*  Get this one too...  */
 }
-
 
 /* **************************************************************************
  *
@@ -172,31 +168,29 @@ void init_emit( void)
 
 static void emit_byte(u8 data)
 {
-	if ( opc == olen)
-	{
-	    increase_output_buffer();
+	if (opc == olen) {
+		increase_output_buffer();
 	}
-	
 
-	*(ostart+opc) = data ;
+	*(ostart + opc) = (char)data;
 	opc++;
 }
 
 void emit_fcode(u16 tok)
 {
-	if ((tok>>8))
-		emit_byte(tok>>8);
+	if ((tok >> 8))
+		emit_byte(tok >> 8);
 
-	emit_byte(tok&0xff);
+	emit_byte(tok & 0xff);
 	fcode_written = TRUE;
 }
 
 static void emit_num32(u32 num)
 {
-	emit_byte(num>>24);
-	emit_byte((num>>16)&0xff);
-	emit_byte((num>>8)&0xff);
-	emit_byte(num&0xff);
+	emit_byte(num >> 24);
+	emit_byte((num >> 16) & 0xff);
+	emit_byte((num >> 8) & 0xff);
+	emit_byte(num & 0xff);
 
 }
 
@@ -211,58 +205,58 @@ static void emit_num32(u32 num)
 
 void user_emit_byte(u8 data)
 {
-	emit_byte( data);
+	emit_byte(data);
 	fcode_written = TRUE;
 }
 
 void emit_offset(s16 offs)
 {
-    /*  Calling routine will test for out-of-range FCode-Offset  */
+	/*  Calling routine will test for out-of-range FCode-Offset  */
 	if (offs16)
-		emit_byte(offs>>8);
-	emit_byte(offs&0xff);
+		emit_byte(offs >> 8);
+	emit_byte(offs & 0xff);
 }
 
 void emit_literal(u32 num)
 {
-    emit_token("b(lit)");
-    emit_num32(num);
+	emit_token("b(lit)");
+	emit_num32(num);
 }
 
-void emit_string(u8 *string, signed int cnt)
+void emit_string(const char *string, signed int cnt)
 {
-	signed int i=0;
+	signed int i = 0;
 	signed int cnt_cpy = cnt;
-	
-	if ( cnt_cpy > STRING_LEN_MAX )
-	{
-	    tokenization_error( TKERROR,
-		"String too long:  %d characters.  Truncating.\n",cnt);
-	    cnt_cpy = STRING_LEN_MAX ;
+
+	if (cnt_cpy > STRING_LEN_MAX) {
+		tokenization_error(TKERROR,
+				   "String too long:  %d characters.  Truncating.\n",
+				   cnt);
+		cnt_cpy = STRING_LEN_MAX;
 	}
 	emit_byte(cnt_cpy);
-	for (i=0; i<cnt_cpy; i++)
+	for (i = 0; i < cnt_cpy; i++)
 		emit_byte(string[i]);
 }
 
 void emit_fcodehdr(const char *starter_name)
 {
-	
-   /*  Check for error conditions   */
-    if ( fcode_written )
-    {
-        tokenization_error( TKERROR ,
-	    "Cannot create FCode header after FCode output has begun.\n");
-        if ( ! noerrors ) return ;
-    }
+
+	/*  Check for error conditions   */
+	if (fcode_written) {
+		tokenization_error(TKERROR,
+				   "Cannot create FCode header after FCode output has begun.\n");
+		if (!noerrors)
+			return;
+	}
 
 	fcode_header_t *fcode_hdr;
 
 	fcode_start_ob_off = opc;
-	emit_token( starter_name );
+	emit_token(starter_name);
 
 	fcode_hdr_ob_off = opc;
-	fcode_hdr = (fcode_header_t *)(ostart+fcode_hdr_ob_off);
+	fcode_hdr = (fcode_header_t *) (ostart + fcode_hdr_ob_off);
 
 	EMIT_STRUCT(fcode_header_t);
 
@@ -297,67 +291,61 @@ void emit_fcodehdr(const char *starter_name)
 void finish_fcodehdr(void)
 {
 
-	if( fcode_hdr_ob_off == -1 )
-	{
-		tokenization_error( TKERROR,
-		    "Missing FCode header.\n");
-		return ;
+	if (fcode_hdr_ob_off == -1) {
+		tokenization_error(TKERROR, "Missing FCode header.\n");
+		return;
 	}
 
 	/* If the program did not end cleanly, we'll handle it */
-	if (!haveend)
-	{
-	    tokenization_error ( WARNING,
-	    "End-of-file encountered without END0 or FCODE-END.  "
-		"Supplying END0\n");
+	if (!haveend) {
+		tokenization_error(WARNING,
+				   "End-of-file encountered without END0 or FCODE-END.  "
+				   "Supplying END0\n");
 		emit_token("end0");
-	    fcode_ender();
+		fcode_ender();
 	}
 
 	/*  Calculate and place checksum and length, if haven't already  */
-	if ( fcode_start_ob_off != -1 )
-	{
-	    u32 checksum;
-	    int length;
+	if (fcode_start_ob_off != -1) {
+		u32 checksum;
+		int length;
 
-	    u8 *fcode_body = ostart+fcode_body_ob_off;
-	    u8 *ob_end = ostart+opc;
-	    fcode_header_t *fcode_hdr =
-	         (fcode_header_t *)(ostart+fcode_hdr_ob_off);
-	
-	    length = opc - fcode_start_ob_off;
+		char *fcode_body = ostart + fcode_body_ob_off;
+		char *ob_end = ostart + opc;
+		fcode_header_t *fcode_hdr =
+		    (fcode_header_t *) (ostart + fcode_hdr_ob_off);
 
-	    for ( checksum = 0;
-	              fcode_body < ob_end ;
-		          checksum += *(fcode_body++) ) ;
+		length = opc - fcode_start_ob_off;
 
-	    if (sun_style_checksum) {
-		/* SUN OPB on the SPARC (Enterprise) platforms (especially):
-                 * M3000, M4000, M9000 expects a checksum algorithm that is
-                 * not compliant with IEEE 1275-1994 section 5.2.2.5.
-		 */
-		checksum = (checksum & 0xffff) + (checksum >> 16);
-		checksum = (checksum & 0xffff) + (checksum >> 16);
-	    }
+		for (checksum = 0;
+		     fcode_body < ob_end; checksum += *(fcode_body++)) ;
 
-	    BIG_ENDIAN_WORD_STORE(fcode_hdr->checksum, 
-		    (u16)(checksum & 0xffff));
-	    BIG_ENDIAN_LONG_STORE(fcode_hdr->length , length);
+		if (sun_style_checksum) {
+			/* SUN OPB on the SPARC (Enterprise) platforms (especially):
+			 * M3000, M4000, M9000 expects a checksum algorithm that is
+			 * not compliant with IEEE 1275-1994 section 5.2.2.5.
+			 */
+			checksum = (checksum & 0xffff) + (checksum >> 16);
+			checksum = (checksum & 0xffff) + (checksum >> 16);
+		}
 
-	if (verbose)
-	    {
-		printf( "toke: checksum is 0x%04x (%d bytes).  ",
-                        (u16)checksum, length);
-		list_fcode_ranges( TRUE);
-	    }
+		BIG_ENDIAN_WORD_STORE(fcode_hdr->checksum,
+				      (u16) (checksum & 0xffff));
+		BIG_ENDIAN_LONG_STORE(fcode_hdr->length, length);
+
+		if (verbose) {
+			printf("toke: checksum is 0x%04x (%d bytes).  ",
+			       (u16) checksum, length);
+			list_fcode_ranges(TRUE);
+		}
 	}
 
 	/*  Reset things for the next image...   */
 	fcode_start_ob_off = -1;
-	fcode_hdr_ob_off   = -1;
-	fcode_body_ob_off  = -1;
-	fcode_written      = FALSE;
-	haveend=FALSE;
+	fcode_hdr_ob_off = -1;
+	fcode_body_ob_off = -1;
+	fcode_written = FALSE;
+	haveend = FALSE;
 }
 
 /* **************************************************************************
@@ -390,15 +378,15 @@ void finish_fcodehdr(void)
 
 static void emit_pci_rom_hdr(void)
 {
-    rom_header_t *pci_hdr;
-    pci_hdr_ob_off = opc;
-    pci_hdr = (rom_header_t *)(ostart + pci_hdr_ob_off);
+	rom_header_t *pci_hdr;
+	pci_hdr_ob_off = opc;
+	pci_hdr = (rom_header_t *) (ostart + pci_hdr_ob_off);
 
-    EMIT_STRUCT(rom_header_t);
-	
+	EMIT_STRUCT(rom_header_t);
+
 	/* PCI start signature */
-    LITTLE_ENDIAN_WORD_STORE(pci_hdr->signature,0xaa55);
-	
+	LITTLE_ENDIAN_WORD_STORE(pci_hdr->signature, 0xaa55);
+
 	/* Processor architecture */
 	/*  Note:
 	 *  The legacy code used to read:
@@ -414,16 +402,16 @@ static void emit_pci_rom_hdr(void)
 	 *      and that the following would be preferable:
 	 */
 
-    LITTLE_ENDIAN_WORD_STORE( pci_hdr->reserved ,
-	(sizeof(rom_header_t) + sizeof(pci_data_t)) ) ;
+	LITTLE_ENDIAN_WORD_STORE(pci_hdr->reserved,
+				 (sizeof(rom_header_t) + sizeof(pci_data_t)));
 
 	/* already handled padding */
 
 	/* pointer to start of PCI data structure */
-    LITTLE_ENDIAN_WORD_STORE(pci_hdr->data_ptr, sizeof(rom_header_t) );
+	LITTLE_ENDIAN_WORD_STORE(pci_hdr->data_ptr, sizeof(rom_header_t));
 
 }
-	
+
 /* **************************************************************************
  *
  *      Function name:  emit_pci_data_block
@@ -458,36 +446,36 @@ static void emit_pci_rom_hdr(void)
 
 static void emit_pci_data_block(void)
 {
-    pci_data_t *pci_data_blk;
-    u32 class_id = dpop();
-    u16 dev_id   = dpop();
-    u16 vend_id  = dpop();
+	pci_data_t *pci_data_blk;
+	u32 class_id = dpop();
+	u16 dev_id = dpop();
+	u16 vend_id = dpop();
 
-    pci_data_blk_ob_off = opc;
-    pci_data_blk = (pci_data_t *)(ostart + pci_data_blk_ob_off);
+	pci_data_blk_ob_off = opc;
+	pci_data_blk = (pci_data_t *) (ostart + pci_data_blk_ob_off);
 
-    EMIT_STRUCT(pci_data_t);
+	EMIT_STRUCT(pci_data_t);
 
-    BIG_ENDIAN_LONG_STORE(pci_data_blk->signature , PCI_DATA_HDR );
+	BIG_ENDIAN_LONG_STORE(pci_data_blk->signature, PCI_DATA_HDR);
 
-    LITTLE_ENDIAN_WORD_STORE(pci_data_blk->vendor , vend_id );
-    LITTLE_ENDIAN_WORD_STORE(pci_data_blk->device , dev_id );
-    LITTLE_ENDIAN_TRIPLET_STORE(pci_data_blk->class_code , class_id );
+	LITTLE_ENDIAN_WORD_STORE(pci_data_blk->vendor, vend_id);
+	LITTLE_ENDIAN_WORD_STORE(pci_data_blk->device, dev_id);
+	LITTLE_ENDIAN_TRIPLET_STORE(pci_data_blk->class_code, class_id);
 
-    LITTLE_ENDIAN_WORD_STORE(pci_data_blk->dlen ,  sizeof(pci_data_t) );
+	LITTLE_ENDIAN_WORD_STORE(pci_data_blk->dlen, sizeof(pci_data_t));
 
-    pci_data_blk->drevision = PCI_DATA_STRUCT_REV ;
+	pci_data_blk->drevision = PCI_DATA_STRUCT_REV;
 
 	/* code type = open firmware = 1 */
-    pci_data_blk->code_type = 1;
+	pci_data_blk->code_type = 1;
 
 	/* last image flag */
-    pci_data_blk->last_image_flag = pci_is_last_image ? 0x80 : 0 ;
+	pci_data_blk->last_image_flag = pci_is_last_image ? 0x80 : 0;
 
-    tokenization_error(INFO ,
-	"PCI header vendor id=0x%04x, "
-	    "device id=0x%04x, class=%06x\n",
-		vend_id, dev_id, class_id );
+	tokenization_error(INFO,
+			   "PCI header vendor id=0x%04x, "
+			   "device id=0x%04x, class=%06x\n",
+			   vend_id, dev_id, class_id);
 
 }
 
@@ -525,17 +513,16 @@ static void emit_pci_data_block(void)
 void emit_pcihdr(void)
 {
 
-    /*  Check for error conditions   */
-    if (
-    /*  FCODE-START<n>  has already been issued  */
-              ( fcode_start_ob_off != -1 )
-    /*  Other FCode has been written             */
-	      ||  fcode_written
-	 )
-    {
-        tokenization_error( TKERROR ,
-	    "Cannot create PCI header after FCode output has begun.\n");
-        if ( ! noerrors ) return ;
+	/*  Check for error conditions   */
+	if (
+		   /*  FCODE-START<n>  has already been issued  */
+		   (fcode_start_ob_off != -1)
+		   /*  Other FCode has been written             */
+		   || fcode_written) {
+		tokenization_error(TKERROR,
+				   "Cannot create PCI header after FCode output has begun.\n");
+		if (!noerrors)
+			return;
 	}
 
 	emit_pci_rom_hdr();
@@ -556,61 +543,56 @@ void emit_pcihdr(void)
 void finish_pcihdr(void)
 {
 
-	u32 imagesize ;
+	u32 imagesize;
 	u32 imageblocks;
 	int padding;
-	
-	rom_header_t *pci_hdr;
-	pci_data_t   *pci_data_blk;
 
-	if( pci_data_blk_ob_off == -1 )
-	{
-	    tokenization_error( TKERROR,
-		"%s without PCI-HEADER\n", strupr(statbuf) );
-	    return ;
+	pci_data_t *pci_data_blk;
+
+	if (pci_data_blk_ob_off == -1) {
+		tokenization_error(TKERROR,
+				   "%s without PCI-HEADER\n", strupr(statbuf));
+		return;
 	}
 
-	pci_hdr = (rom_header_t *)(ostart + pci_hdr_ob_off);
-	pci_data_blk = (pci_data_t *)(ostart + pci_data_blk_ob_off);
+	pci_data_blk = (pci_data_t *) (ostart + pci_data_blk_ob_off);
 
 	/* fix up vpd */
 	LITTLE_ENDIAN_WORD_STORE(pci_data_blk->vpd, pci_vpd);
 
 	/*   Calculate image size and padding */
-	imagesize = opc - pci_hdr_ob_off;     /*  Padding includes PCI hdr  */
-	imageblocks = (imagesize + 511) >> 9; /*  Size in 512-byte blocks   */
+	imagesize = opc - pci_hdr_ob_off;	/*  Padding includes PCI hdr  */
+	imageblocks = (imagesize + 511) >> 9;	/*  Size in 512-byte blocks   */
 	padding = (imageblocks << 9) - imagesize;
 
 	/* fix up image size. */
 	LITTLE_ENDIAN_WORD_STORE(pci_data_blk->ilen, imageblocks);
-	
+
 	/* fix up revision */
-	if ( big_end_pci_image_rev )
-	{
-	    BIG_ENDIAN_WORD_STORE(pci_data_blk->irevision, pci_image_rev);
-	}else{
-	    LITTLE_ENDIAN_WORD_STORE(pci_data_blk->irevision, pci_image_rev);
+	if (big_end_pci_image_rev) {
+		BIG_ENDIAN_WORD_STORE(pci_data_blk->irevision, pci_image_rev);
+	} else {
+		LITTLE_ENDIAN_WORD_STORE(pci_data_blk->irevision,
+					 pci_image_rev);
 	}
-	
+
 	/* fix up last image flag */
-	pci_data_blk->last_image_flag = pci_is_last_image ? 0x80 : 0 ;
-	
+	pci_data_blk->last_image_flag = pci_is_last_image ? 0x80 : 0;
+
 	/* align to 512bytes */
-	
-	printf("Adding %d bytes of zero padding to PCI image.\n",padding);
+
+	printf("Adding %d bytes of zero padding to PCI image.\n", padding);
 	while (padding--)
 		emit_byte(0);
-	if ( ! pci_is_last_image )
-	{
-	    printf("Note:  PCI header is not last image.\n");
+	if (!pci_is_last_image) {
+		printf("Note:  PCI header is not last image.\n");
 	}
 	printf("\n");
-	
-	pci_hdr_ob_off      = -1;
-	pci_data_blk_ob_off = -1;
-	pci_hdr_end_ob_off  =  0;
-}
 
+	pci_hdr_ob_off = -1;
+	pci_data_blk_ob_off = -1;
+	pci_hdr_end_ob_off = 0;
+}
 
 /* **************************************************************************
  *
@@ -622,7 +604,8 @@ void finish_pcihdr(void)
 
 void finish_headers(void)
 {
-	if (fcode_hdr_ob_off != -1) finish_fcodehdr();
-	if (pci_hdr_ob_off != -1) finish_pcihdr();
+	if (fcode_hdr_ob_off != -1)
+		finish_fcodehdr();
+	if (pci_hdr_ob_off != -1)
+		finish_pcihdr();
 }
-

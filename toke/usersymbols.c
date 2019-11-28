@@ -102,8 +102,6 @@
  *
  **************************************************************************** */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #if defined(__linux__) && ! defined(__USE_BSD)
@@ -115,7 +113,6 @@
 #include "strsubvocab.h"
 #include "usersymbols.h"
 #include "scanner.h"
-
 
 /* **************************************************************************
  *
@@ -164,20 +161,18 @@ static int user_symbol_count = 0;
 
 void add_user_symbol(char *raw_symb)
 {
-    char *symb_nam;
-    char *symb_valu;
+	char *symb_nam;
+	char *symb_valu;
 
-    symb_nam = strdup(raw_symb);
-    symb_valu = strchr(symb_nam,'=');
-    if ( symb_valu != NULL )
-    {
-	*symb_valu = 0;
-	symb_valu++;
-    }
-    add_str_sub_entry(symb_nam, symb_valu, &user_symbol_list );
-    user_symbol_count++;
+	symb_nam = strdup(raw_symb);
+	symb_valu = strchr(symb_nam, '=');
+	if (symb_valu != NULL) {
+		*symb_valu = 0;
+		symb_valu++;
+	}
+	add_str_sub_entry(symb_nam, symb_valu, &user_symbol_list);
+	user_symbol_count++;
 }
-
 
 /* **************************************************************************
  *
@@ -198,10 +193,10 @@ void add_user_symbol(char *raw_symb)
 
 bool exists_as_user_symbol(char *symb_nam)
 {
-    bool retval;
+	bool retval;
 
-    retval = exists_in_str_sub(symb_nam, user_symbol_list );
-    return (retval);
+	retval = exists_in_str_sub(symb_nam, user_symbol_list);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -250,29 +245,29 @@ bool exists_as_user_symbol(char *symb_nam)
  *
  **************************************************************************** */
 
-void eval_user_symbol( char *symb_nam)
+void eval_user_symbol(char *symb_nam)
 {
-    str_sub_vocab_t *found = NULL;
+	str_sub_vocab_t *found = NULL;
 
+	found = lookup_str_sub(symb_nam, user_symbol_list);
+	if (found == NULL) {
+		tokenization_error(TKERROR,
+				   "Command-line symbol %s is not defined.\n",
+				   symb_nam);
+	} else {
+		char *symb_valu = found->alias;
 
-    found = lookup_str_sub( symb_nam, user_symbol_list );
-    if ( found == NULL )
-    {
-        tokenization_error ( TKERROR,
-	    "Command-line symbol %s is not defined.\n", symb_nam); 
-    }else{
-	char *symb_valu = found->alias;
-
-	if ( symb_valu == NULL )
-	{
-            tokenization_error ( WARNING,
-		"No value assigned to command-line symbol %s\n", symb_nam );
-	}else{
-	    eval_string( symb_valu );
+		if (symb_valu == NULL) {
+			tokenization_error(WARNING,
+					   "No value assigned to command-line symbol %s\n",
+					   symb_nam);
+		} else {
+			eval_string(symb_valu);
+		}
 	}
-    }
 
 }
+
 /* **************************************************************************
  *
  *      Function name:  list_user_symbols
@@ -320,74 +315,67 @@ void eval_user_symbol( char *symb_nam)
  *
  **************************************************************************** */
 
-void list_user_symbols(void )
+void list_user_symbols(void)
 {
-    str_sub_vocab_t *curr;
+	str_sub_vocab_t *curr;
 
-    if ( user_symbol_list != NULL )
-    {
-	/*  Collect the pointers and max length  */
-	str_sub_vocab_t **symb_ptr;
-	int indx = 0;
-	int maxlen = 0;
-	
-	symb_ptr = (str_sub_vocab_t **)safe_malloc(
-	   (sizeof(str_sub_vocab_t *) * user_symbol_count),
-	       "collecting user-symbol pointers" );
-	
-	for (curr = user_symbol_list ; curr != NULL ; curr=curr->next)
-	{
-            symb_ptr[indx] = curr;
-	    indx++;
-	    if ( strlen(curr->name) > maxlen ) maxlen = strlen(curr->name);
-	}
-	
-	/*  Now print 'em out  */
-	printf("\nUser-Defined Symbols:\n");
-	while ( indx > 0 )
-	{
-	    bool is_dup;
-	    int dup_srch_indx;
-	    indx--;
-	    curr = symb_ptr[indx];
+	if (user_symbol_list != NULL) {
+		/*  Collect the pointers and max length  */
+		str_sub_vocab_t **symb_ptr;
+		int indx = 0;
+		int maxlen = 0;
 
-	    /*  Detect duplicate names.  */
-	    dup_srch_indx = indx;
-	    is_dup = FALSE;
-	    while ( dup_srch_indx > 0 )
-	    {
-		str_sub_vocab_t *dup_cand;
-		dup_srch_indx--;
-		dup_cand = symb_ptr[dup_srch_indx];
-		if ( strcmp( curr->name, dup_cand->name) == 0 )
-		{
-		    is_dup = TRUE;
-		    break;
+		symb_ptr = (str_sub_vocab_t **) safe_malloc((sizeof
+							     (str_sub_vocab_t *)
+							     *
+							     user_symbol_count),
+							    "collecting user-symbol pointers");
+
+		for (curr = user_symbol_list; curr != NULL; curr = curr->next) {
+			symb_ptr[indx] = curr;
+			indx++;
+			if (strlen(curr->name) > maxlen)
+				maxlen = strlen(curr->name);
 		}
-	    }
 
-	    printf("\t%s",curr->name);
+		/*  Now print 'em out  */
+		printf("\nUser-Defined Symbols:\n");
+		while (indx > 0) {
+			bool is_dup;
+			int dup_srch_indx;
+			indx--;
+			curr = symb_ptr[indx];
 
-	    if ( ( curr->alias != NULL ) || is_dup )
-	    {
-	        int strindx;
-		for ( strindx = strlen(curr->name) ;
-		      strindx < maxlen ;
-		      strindx++ )
-		{
-		    printf(" ");
+			/*  Detect duplicate names.  */
+			dup_srch_indx = indx;
+			is_dup = FALSE;
+			while (dup_srch_indx > 0) {
+				str_sub_vocab_t *dup_cand;
+				dup_srch_indx--;
+				dup_cand = symb_ptr[dup_srch_indx];
+				if (strcmp(curr->name, dup_cand->name) == 0) {
+					is_dup = TRUE;
+					break;
+				}
+			}
+
+			printf("\t%s", curr->name);
+
+			if ((curr->alias != NULL) || is_dup) {
+				int strindx;
+				for (strindx = strlen(curr->name);
+				     strindx < maxlen; strindx++) {
+					printf(" ");
+				}
+			}
+			if (curr->alias != NULL) {
+				printf(" = %s", curr->alias);
+			}
+			if (is_dup) {
+				printf(" *** Over-ridden");
+			}
+			printf("\n");
 		}
-	    }
-	    if ( curr->alias != NULL )
-	    {
-		printf(" = %s",curr->alias);
-	    }
-	    if ( is_dup )
-	    {
-		printf(" *** Over-ridden" );
-	    }
-	    printf("\n");
+		free(symb_ptr);
 	}
-	free(symb_ptr);
-    }
 }

@@ -54,12 +54,11 @@
  **************************************************************************** */
 
 typedef struct device_node {
-        struct device_node *parent_node ;
-	char *ifile_name ;
-	unsigned int line_no ;
-	tic_hdr_t *tokens_vocab ;
+	struct device_node *parent_node;
+	char *ifile_name;
+	unsigned int line_no;
+	tic_hdr_t *tokens_vocab;
 } device_node_t;
-
 
 /* ************************************************************************** *
  *
@@ -76,11 +75,11 @@ extern tic_hdr_t **current_definitions;
  *      Function Prototypes / Functions Exported:
  *
  **************************************************************************** */
-void new_device_vocab( void );
-void delete_device_vocab( void );
-void finish_device_vocab( void );
-char *in_what_node(device_node_t *the_node);
-void show_node_start( void);
-bool exists_in_ancestor( char *m_name);
+void new_device_vocab(void);
+void delete_device_vocab(void);
+void finish_device_vocab(void);
+char *in_what_node(device_node_t * the_node);
+void show_node_start(void);
+bool exists_in_ancestor(char *m_name);
 
-#endif   /*  _TOKE_DEVNODE_H    */
+#endif /*  _TOKE_DEVNODE_H    */

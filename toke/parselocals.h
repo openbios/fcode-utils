@@ -37,12 +37,12 @@
 
 #include "ticvocab.h"
 
-void declare_locals ( bool ignoring);
-tic_hdr_t *lookup_local( char *lname);
-bool exists_as_local( char *stat_name );
+void declare_locals(bool ignoring);
+tic_hdr_t *lookup_local(char *lname);
+bool exists_as_local(char *stat_name);
 bool create_local_alias(char *new_name, char *old_name);
-void assign_local ( void );
-void finish_locals ( void );
-void forget_locals ( void );
+void assign_local(void);
+void finish_locals(void);
+void forget_locals(void);
 
-#endif   /*  _TOKE_LOCALX_H    */
+#endif /*  _TOKE_LOCALX_H    */

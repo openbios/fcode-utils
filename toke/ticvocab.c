@@ -70,7 +70,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *      Functions Exported:
@@ -87,7 +86,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *          Global Variables Exported
@@ -98,7 +96,6 @@
  *                                  should occur only rarely).
  *
  **************************************************************************** */
-
 
 #include <stdlib.h>
 #include <string.h>
@@ -145,19 +142,16 @@ tic_hdr_t *tic_found;
  *
  **************************************************************************** */
 
-void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
-                         int max_indx,
-			     tic_hdr_t **tic_vocab_ptr)
+void init_tic_vocab(tic_hdr_t * tic_vocab_tbl,
+		    int max_indx, tic_hdr_t ** tic_vocab_ptr)
 {
-    int indx;
-    for ( indx = 0 ; indx < max_indx ; indx++ )
-    {
-        tic_vocab_tbl[indx].next = *tic_vocab_ptr;
-	*tic_vocab_ptr = &tic_vocab_tbl[indx];
-	trace_builtin( &tic_vocab_tbl[indx]);
-    }
+	int indx;
+	for (indx = 0; indx < max_indx; indx++) {
+		tic_vocab_tbl[indx].next = *tic_vocab_ptr;
+		*tic_vocab_ptr = &tic_vocab_tbl[indx];
+		trace_builtin(&tic_vocab_tbl[indx]);
+	}
 }
-
 
 /* **************************************************************************
  *
@@ -207,32 +201,30 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
  *
  **************************************************************************** */
 
-static tic_hdr_t *make_tic_entry( char *tname,
-                        void (*tfunct)(),
-                             TIC_P_DEFLT_TYPE tparam,
-                                 fwtoken fw_defr,
-				     int pfldsiz,
-                                         bool is_single,
-                                         void (*ign_fnc)(),
-                                               bool trace_this,
-                                             tic_hdr_t **tic_vocab )
+static tic_hdr_t *make_tic_entry(char *tname,
+				 void (*tfunct)(),
+				 TIC_P_DEFLT_TYPE tparam,
+				 fwtoken fw_defr,
+				 int pfldsiz,
+				 bool is_single,
+				 void(*ign_fnc)(),
+				 bool trace_this, tic_hdr_t ** tic_vocab)
 {
-    tic_hdr_t *new_entry;
+	tic_hdr_t *new_entry;
 
-    new_entry = safe_malloc(sizeof(tic_hdr_t), "adding tic_entry");
-    new_entry->name              =  tname;
-    new_entry->next              = *tic_vocab;
-    new_entry->funct             =  tfunct;
-    new_entry->pfield.deflt_elem =  tparam;
-    new_entry->fword_defr        =  fw_defr;
-    new_entry->is_token          =  is_single;
-    new_entry->ign_func          =  ign_fnc;
-    new_entry->pfld_size         =  pfldsiz;
-    new_entry->tracing           =  trace_this;
+	new_entry = safe_malloc(sizeof(tic_hdr_t), "adding tic_entry");
+	new_entry->name = tname;
+	new_entry->next = *tic_vocab;
+	new_entry->funct = tfunct;
+	new_entry->pfield.deflt_elem = tparam;
+	new_entry->fword_defr = fw_defr;
+	new_entry->is_token = is_single;
+	new_entry->ign_func = ign_fnc;
+	new_entry->pfld_size = pfldsiz;
+	new_entry->tracing = trace_this;
 
-    return( new_entry);
+	return (new_entry);
 }
-
 
 /* **************************************************************************
  *
@@ -284,31 +276,28 @@ static tic_hdr_t *make_tic_entry( char *tname,
  *
  **************************************************************************** */
 
-void add_tic_entry( char *tname,
-                        void (*tfunct)(),
-                             TIC_P_DEFLT_TYPE tparam,
-                                 fwtoken fw_defr,
-				     int pfldsiz,
-                                         bool is_single,
-					   void (*ign_fnc)(),
-					       tic_hdr_t **tic_vocab )
+void add_tic_entry(char *tname,
+		   void (*tfunct)(),
+		   TIC_P_DEFLT_TYPE tparam,
+		   fwtoken fw_defr,
+		   int pfldsiz,
+		   bool is_single, void(*ign_fnc)(), tic_hdr_t ** tic_vocab)
 {
-    bool trace_this = is_on_trace_list( tname);
-    tic_hdr_t *new_entry = make_tic_entry( tname,
-			       tfunct,
-			           tparam,
-				       fw_defr, pfldsiz,
-				           is_single,
-					       ign_fnc,
-						   trace_this,
-						       tic_vocab );
+	bool trace_this = is_on_trace_list(tname);
+	tic_hdr_t *new_entry = make_tic_entry(tname,
+					      tfunct,
+					      tparam,
+					      fw_defr, pfldsiz,
+					      is_single,
+					      ign_fnc,
+					      trace_this,
+					      tic_vocab);
 
-    if ( trace_this )
-    {
-	trace_creation( new_entry, NULL, scope_is_global);
-    }
-    warn_if_duplicate( tname);
-    *tic_vocab = new_entry;
+	if (trace_this) {
+		trace_creation(new_entry, NULL, scope_is_global);
+	}
+	warn_if_duplicate(tname);
+	*tic_vocab = new_entry;
 
 }
 
@@ -334,20 +323,18 @@ void add_tic_entry( char *tname,
  *              for instance, duplicate-name checking...
  *
  **************************************************************************** */
- 
-tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab )
+
+tic_hdr_t *lookup_tic_entry(char *tname, tic_hdr_t * tic_vocab)
 {
-    tic_hdr_t *curr ;
+	tic_hdr_t *curr;
 
-    for (curr = tic_vocab ; curr != NULL ; curr=curr->next)
-    {
-        if ( strcasecmp(tname, curr->name) == 0 )
-	{
-	    break;
+	for (curr = tic_vocab; curr != NULL; curr = curr->next) {
+		if (strcasecmp(tname, curr->name) == 0) {
+			break;
+		}
 	}
-    }
 
-    return ( curr ) ;
+	return (curr);
 }
 
 /* **************************************************************************
@@ -366,20 +353,18 @@ tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab )
  *
  **************************************************************************** */
 
-bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
+bool exists_in_tic_vocab(char *tname, tic_hdr_t * tic_vocab)
 {
-    tic_hdr_t *found ;
-    bool retval = FALSE;
+	tic_hdr_t *found;
+	bool retval = FALSE;
 
-    found = lookup_tic_entry( tname, tic_vocab );
-    if ( found != NULL )
-    {
-	retval = TRUE;
-    }
+	found = lookup_tic_entry(tname, tic_vocab);
+	if (found != NULL) {
+		retval = TRUE;
+	}
 
-    return ( retval );
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -439,39 +424,35 @@ bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
  *
  **************************************************************************** */
 
-bool create_split_alias( char *new_name, char *old_name,
-                              tic_hdr_t **src_vocab, tic_hdr_t **dest_vocab )
+bool create_split_alias(char *new_name, char *old_name,
+			tic_hdr_t ** src_vocab, tic_hdr_t ** dest_vocab)
 {
-    tic_hdr_t *found ;
-    bool retval = FALSE;
+	tic_hdr_t *found;
+	bool retval = FALSE;
 
-    found = lookup_tic_entry( old_name, *src_vocab );
-    if ( found != NULL )
-    {
-	bool trace_it = found->tracing;
-	if ( ! trace_it )
-	{
-	    trace_it = is_on_trace_list( new_name);
+	found = lookup_tic_entry(old_name, *src_vocab);
+	if (found != NULL) {
+		bool trace_it = found->tracing;
+		if (!trace_it) {
+			trace_it = is_on_trace_list(new_name);
+		}
+		if (trace_it) {
+			bool old_is_global = BOOLVAL(src_vocab != dest_vocab);
+			trace_creation(found, new_name, old_is_global);
+		}
+		warn_if_duplicate(new_name);
+
+		*dest_vocab = make_tic_entry(new_name,
+					     found->funct,
+					     found->pfield.deflt_elem,
+					     found->fword_defr, 0,
+					     found->is_token,
+					     found->ign_func,
+					     trace_it, dest_vocab);
+		retval = TRUE;
 	}
-	if ( trace_it )
-	{
-	    bool old_is_global = BOOLVAL( src_vocab != dest_vocab );
-	    trace_creation( found, new_name, old_is_global);
-	}
-	warn_if_duplicate( new_name);
 
-	*dest_vocab = make_tic_entry( new_name,
-			   found->funct,
-			   found->pfield.deflt_elem,
-				   found->fword_defr, 0,
-			               found->is_token,
-					   found->ign_func,
-					       trace_it,
-						   dest_vocab );
-	retval = TRUE;
-    }
-
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -504,11 +485,10 @@ bool create_split_alias( char *new_name, char *old_name,
 
  **************************************************************************** */
 
-bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab )
+bool create_tic_alias(char *new_name, char *old_name, tic_hdr_t ** tic_vocab)
 {
-    return ( create_split_alias( new_name, old_name, tic_vocab, tic_vocab ) );
+	return (create_split_alias(new_name, old_name, tic_vocab, tic_vocab));
 }
-
 
 /* **************************************************************************
  *
@@ -536,19 +516,18 @@ bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab )
  *              to decide how to proceed.
  *
  **************************************************************************** */
- 
-bool handle_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
-{
-    bool retval = FALSE;
-    
-    tic_found = lookup_tic_entry( tname, tic_vocab );
-    if ( tic_found != NULL )
-    {
-        tic_found->funct( tic_found->pfield);
-	retval = TRUE;
-    }
 
-    return ( retval ) ;
+bool handle_tic_vocab(char *tname, tic_hdr_t * tic_vocab)
+{
+	bool retval = FALSE;
+
+	tic_found = lookup_tic_entry(tname, tic_vocab);
+	if (tic_found != NULL) {
+		tic_found->funct(tic_found->pfield);
+		retval = TRUE;
+	}
+
+	return (retval);
 }
 
 /* **************************************************************************
@@ -580,21 +559,19 @@ bool handle_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
  *
  **************************************************************************** */
 
-void reset_tic_vocab( tic_hdr_t **tic_vocab, tic_hdr_t *reset_position )
+void reset_tic_vocab(tic_hdr_t ** tic_vocab, tic_hdr_t * reset_position)
 {
-    tic_hdr_t *next_t;
+	tic_hdr_t *next_t;
 
-    next_t = *tic_vocab;
-    while ( next_t != reset_position  )
-    {
-	next_t = (*tic_vocab)->next ;
+	next_t = *tic_vocab;
+	while (next_t != reset_position) {
+		next_t = (*tic_vocab)->next;
 
-	free( (*tic_vocab)->name );
-	if ( (*tic_vocab)->pfld_size != 0 )
-	{
-	    free( (*tic_vocab)->pfield.chr_ptr );
+		free((*tic_vocab)->name);
+		if ((*tic_vocab)->pfld_size != 0) {
+			free((*tic_vocab)->pfield.chr_ptr);
+		}
+		free(*tic_vocab);
+		*tic_vocab = next_t;
 	}
-	free( *tic_vocab );
-	*tic_vocab = next_t ;
-    }
 }

@@ -54,13 +54,12 @@
  **************************************************************************** */
 
 /*  Note that the enclosing curly-braces are part of the name  */
-static const char* push_locals = "{push-locals}"; /* ( #ilocals #ulocals -- ) */
-static const char* pop_locals = "{pop-locals}";   /* ( #locals -- )           */
-static const char* local_addr = "_{local}";       /* ( local# -- addr )       */
+static const char *push_locals = "{push-locals}";	/* ( #ilocals #ulocals -- ) */
+static const char *pop_locals = "{pop-locals}";	/* ( #locals -- )           */
+static const char *local_addr = "_{local}";	/* ( local# -- addr )       */
 
 /*  Switchable Fetch or Store operator to apply to  local_addr.   */
-static const char* local_op = "@";   /*  Initially Fetch  */
-
+static const char *local_op = "@";	/*  Initially Fetch  */
 
 /* **************************************************************************
  *
@@ -121,7 +120,7 @@ static int num_ilocals = 0;
 static int num_ulocals = 0;
 static int localno = 0;
 static char eval_buf[64];
-static unsigned int l_d_lineno;  	/*  For Error Messages   */
+static unsigned int l_d_lineno;	/*  For Error Messages   */
 
 /* **************************************************************************
  *
@@ -169,15 +168,14 @@ static unsigned int l_d_lineno;  	/*  For Error Messages   */
  *
  **************************************************************************** */
 
-static char *int_to_str( int num, char *bufr)
+static char *int_to_str(int num, char *bufr)
 {
-     char* prefix = "d# ";
-     if ( num < 8 ) prefix = "";
-     sprintf(bufr,"%s%d",prefix, num);
-     return (bufr);
+	char *prefix = "d# ";
+	if (num < 8)
+		prefix = "";
+	sprintf(bufr, "%s%d", prefix, num);
+	return (bufr);
 }
-
-
 
 /* **************************************************************************
  *
@@ -226,17 +224,16 @@ static char *int_to_str( int num, char *bufr)
  *
  **************************************************************************** */
 
-static void invoke_local( tic_param_t pfield )
+static void invoke_local(tic_param_t pfield)
 {
-    char local_num_buf[10];
-    int loc_num = (int)pfield.deflt_elem;
+	char local_num_buf[14];
+	int loc_num = (int)pfield.deflt_elem;
 
-    int_to_str(loc_num, local_num_buf);
-    sprintf( eval_buf, "%s %s %s", local_num_buf, local_addr, local_op );
-    eval_string( eval_buf);
+	int_to_str(loc_num, local_num_buf);
+	sprintf(eval_buf, "%s %s %s", local_num_buf, local_addr, local_op);
+	eval_string(eval_buf);
 
 }
-
 
 /* **************************************************************************
  *
@@ -277,29 +274,26 @@ static void invoke_local( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static bool locals_separator( char subj )
+static bool locals_separator(char subj)
 {
-    bool retval = FALSE;
-    /*  Is it the preferred (i.e., non-legacy) separator?   */
-    if ( subj == '|' )
-    {  
-	retval = TRUE;
-	return ( retval );
-    }
-	
-    if ( ibm_locals_legacy_separator )
-    {
-	if ( subj == ';' )
-	{
-	    retval = TRUE;
-	    if ( ibm_legacy_separator_message )
-	    {
-		tokenization_error ( WARNING , "Semicolon as separator in "
-		    "Locals declaration is deprecated in favor of '|'\n");
-	    }
+	bool retval = FALSE;
+	/*  Is it the preferred (i.e., non-legacy) separator?   */
+	if (subj == '|') {
+		retval = TRUE;
+		return (retval);
 	}
-    }
-    return ( retval );
+
+	if (ibm_locals_legacy_separator) {
+		if (subj == ';') {
+			retval = TRUE;
+			if (ibm_legacy_separator_message) {
+				tokenization_error(WARNING,
+						   "Semicolon as separator in "
+						   "Locals declaration is deprecated in favor of '|'\n");
+			}
+		}
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -332,16 +326,14 @@ static bool locals_separator( char subj )
  *
  **************************************************************************** */
 
-static void add_local( TIC_P_DEFLT_TYPE lnum, char *lname)
+static void add_local(TIC_P_DEFLT_TYPE lnum, char *lname)
 {
-    char *lnamecopy ;
+	char *lnamecopy;
 
-    lnamecopy = strdup( lname);
-    add_tic_entry( lnamecopy, invoke_local, lnum,
-		       LOCAL_VAL, 0, FALSE,  NULL,
-			       &local_names );
+	lnamecopy = strdup(lname);
+	add_tic_entry(lnamecopy, invoke_local, lnum,
+		      LOCAL_VAL, 0, FALSE, NULL, &local_names);
 }
-
 
 /* **************************************************************************
  *
@@ -390,90 +382,85 @@ static void add_local( TIC_P_DEFLT_TYPE lnum, char *lname)
  *
  **************************************************************************** */
 
-static bool gather_locals( bool initted, int *counter )
+static bool gather_locals(bool initted, int *counter)
 {
-    signed long wlen;
-    bool retval = FALSE;
+	signed long wlen;
+	bool retval = FALSE;
 
-    while ( TRUE )
-    {
-        wlen = get_word();
+	while (TRUE) {
+		wlen = get_word();
 
-	if ( wlen <= 0 )
-	{
-	    warn_unterm( TKERROR, "Local-Values Declaration", l_d_lineno);
-	    break;
-	}
-
-	/*  Allow comments to be interspersed among the declarations.  */
-	if ( filter_comments( statbuf) )
-	{
-	    /*  Unterminated and Multi-line checking already handled   */
-	    continue;
-	}
-	/*  Is this the terminator or the separator? */
-	if ( wlen == 1 )    /*  Maybe   */
-	{
-	    /*  Check for separator   */
-	    if (locals_separator( statbuf[0] ) )
-	    {
-	        /*  If gathering initted Local names, separator is legit  */
-	        if ( initted )
-		{
-		    retval = TRUE;
-		    break;
-		}else{
-		    tokenization_error ( TKERROR,
-		        "Excess separator -- %s -- found "
-			    "in Local-Values declaration", statbuf);
-		    in_last_colon( TRUE);
-		    continue;
+		if (wlen <= 0) {
+			warn_unterm(TKERROR, "Local-Values Declaration",
+				    l_d_lineno);
+			break;
 		}
-	    }
-	    /*  Haven't found the separator.  Check for the terminator  */
-	    if ( statbuf[0] == '}' )
-	    {
-		break;
-	    }
+
+		/*  Allow comments to be interspersed among the declarations.  */
+		if (filter_comments(statbuf)) {
+			/*  Unterminated and Multi-line checking already handled   */
+			continue;
+		}
+		/*  Is this the terminator or the separator? */
+		if (wlen == 1) {	/*  Maybe   */
+			/*  Check for separator   */
+			if (locals_separator(statbuf[0])) {
+				/*  If gathering initted Local names, separator is legit  */
+				if (initted) {
+					retval = TRUE;
+					break;
+				} else {
+					tokenization_error(TKERROR,
+							   "Excess separator -- %s -- found "
+							   "in Local-Values declaration",
+							   statbuf);
+					in_last_colon(TRUE);
+					continue;
+				}
+			}
+			/*  Haven't found the separator.  Check for the terminator  */
+			if (statbuf[0] == '}') {
+				break;
+			}
+		}
+		/*  It was not the terminator or the separator  */
+		{
+			long tmp;
+			char *where_pt1;
+			char *where_pt2;
+			/*  Error-check for duplicated names  */
+			if (word_exists(statbuf, &where_pt1, &where_pt2)) {
+				tokenization_error(TKERROR, "Cannot declare %s "
+						   "as a Local-Name; it's already defined %s%s",
+						   statbuf, where_pt1,
+						   where_pt2);
+				show_node_start();
+				continue;
+			}
+			/*  Error-check for numbers.  */
+			if (get_number(&tmp)) {
+				tokenization_error(TKERROR, "Cannot declare %s "
+						   "as a Local-Name; it's a number.\n",
+						   statbuf);
+				continue;
+			}
+
+			/*  We've got a valid new local-name    */
+			/*  Don't need to check name length; it won't go into the FCode  */
+
+			/*  Increment our counting-v'ble  */
+			*counter += 1;
+
+			/*  Define our new local-name in the Locals' vocabulary  */
+			add_local(localno, statbuf);
+
+			/*  Bump the running Local-Number  */
+			localno++;
+
+		}
 	}
-	/*  It was not the terminator or the separator  */
-	{
-	    long tmp;
-	    char *where_pt1;  char *where_pt2;
-	    /*  Error-check for duplicated names  */
-	    if ( word_exists ( statbuf, &where_pt1, &where_pt2 ) )
-	    {
-		tokenization_error ( TKERROR, "Cannot declare %s "
-		    "as a Local-Name; it's already defined %s%s",
-			statbuf, where_pt1, where_pt2 );
-		show_node_start();
-		continue;
-	    }
-	    /*  Error-check for numbers.  */
-	    if ( get_number(&tmp) )
-	    {
-		tokenization_error ( TKERROR, "Cannot declare %s "
-		    "as a Local-Name; it's a number.\n", statbuf );
-		continue;
-	    }
-
-	    /*  We've got a valid new local-name    */
-	    /*  Don't need to check name length; it won't go into the FCode  */
-
-	    /*  Increment our counting-v'ble  */
-	    *counter += 1;
-
-	    /*  Define our new local-name in the Locals' vocabulary  */
-	    add_local( localno, statbuf );
-
-	    /*  Bump the running Local-Number  */
-	    localno++;
-
-	}
-    }
-    return ( retval );
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -513,15 +500,15 @@ static bool gather_locals( bool initted, int *counter )
  *
  **************************************************************************** */
 
-static void activate_locals( void )
+static void activate_locals(void)
 {
-    char ilocals_buf[10];
-    char ulocals_buf[10];
-     
-    int_to_str(num_ilocals, ilocals_buf ); 
-    int_to_str(num_ulocals, ulocals_buf );
-    sprintf( eval_buf,"%s %s %s",ilocals_buf, ulocals_buf, push_locals);
-    eval_string( eval_buf);
+	char ilocals_buf[14];
+	char ulocals_buf[14];
+
+	int_to_str(num_ilocals, ilocals_buf);
+	int_to_str(num_ulocals, ulocals_buf);
+	sprintf(eval_buf, "%s %s %s", ilocals_buf, ulocals_buf, push_locals);
+	eval_string(eval_buf);
 }
 
 /* **************************************************************************
@@ -560,35 +547,33 @@ static void activate_locals( void )
  */
 static int last_local_colon = 0;
 
-static bool error_check_locals ( void )
+static bool error_check_locals(void)
 {
-    bool retval = FALSE;
-    
-    if ( ! incolon )
-    {
-	tokenization_error ( TKERROR,
-	    "Can only declare Locals inside of a Colon-definition.\n");
-        retval = TRUE;
-    } else {
-	if ( last_local_colon == lastcolon )
-	{
-	    tokenization_error ( TKERROR, "Excess Locals Declaration");
-	    in_last_colon( TRUE);
-	    retval = TRUE;
-	}else{
-            last_local_colon = lastcolon;
-	    if ( opc > lastcolon )
-	    {
-		tokenization_error ( WARNING,
-		    "Declaring Locals after the body of a Colon-definition "
-		    "has begun is not recommended.\n");
-	    }
-	    announce_control_structs( TKERROR,
-		"Local-Values Declaration encountered",
-		    last_colon_abs_token_no);
+	bool retval = FALSE;
+
+	if (!incolon) {
+		tokenization_error(TKERROR,
+				   "Can only declare Locals inside of a Colon-definition.\n");
+		retval = TRUE;
+	} else {
+		if (last_local_colon == lastcolon) {
+			tokenization_error(TKERROR,
+					   "Excess Locals Declaration");
+			in_last_colon(TRUE);
+			retval = TRUE;
+		} else {
+			last_local_colon = lastcolon;
+			if (opc > lastcolon) {
+				tokenization_error(WARNING,
+						   "Declaring Locals after the body of a Colon-definition "
+						   "has begun is not recommended.\n");
+			}
+			announce_control_structs(TKERROR,
+						 "Local-Values Declaration encountered",
+						 last_colon_abs_token_no);
+		}
 	}
-    }
-    return ( retval );
+	return (retval);
 }
 
 /* **************************************************************************
@@ -629,50 +614,46 @@ static bool error_check_locals ( void )
  *
  **************************************************************************** */
 
-void declare_locals ( bool ignoring)
+void declare_locals(bool ignoring)
 {
-    num_ilocals = 0;
-    num_ulocals = 0;
-    localno = 0;
-    
-    l_d_lineno = lineno;
-    bool sav_rep_mul_lin = report_multiline;
-    report_multiline = TRUE;
+	num_ilocals = 0;
+	num_ulocals = 0;
+	localno = 0;
 
-    if ( ignoring || error_check_locals() )
-    {
-       if ( skip_until ( '}' ) )
-       {
-	   warn_unterm(TKERROR,
-	       "misplaced Local-Values Declaration", l_d_lineno);
-       }else{
-	   pc++ ;  /*  Get past the close-curly-brace  */
-       }
-    }else{
-       if (gather_locals( TRUE,  &num_ilocals ) )
-       {
-	   gather_locals( FALSE, &num_ulocals );
-       }
-    }
+	l_d_lineno = lineno;
+	bool sav_rep_mul_lin = report_multiline;
+	report_multiline = TRUE;
 
-    /*  If PC has reached the END,  gather_locals()  will
-     *      have already issued an "unterminated" Error;
-     *      a "multiline" warning would be redundant
-     *      repetitive, unnecessary, excessive, unaesthetic
-     *      and -- did I already mention? -- redundant.
-     */
-    if ( pc < end )
-    {
-	report_multiline = sav_rep_mul_lin;
-	warn_if_multiline( "Local-Values declaration", l_d_lineno);
-    }
+	if (ignoring || error_check_locals()) {
+		if (skip_until('}')) {
+			warn_unterm(TKERROR,
+				    "misplaced Local-Values Declaration",
+				    l_d_lineno);
+		} else {
+			pc++;	/*  Get past the close-curly-brace  */
+		}
+	} else {
+		if (gather_locals(TRUE, &num_ilocals)) {
+			gather_locals(FALSE, &num_ulocals);
+		}
+	}
 
-    /*  Don't do anything if no Locals were declared    */
-    /*  This could happen if the  {  }  field is empty  */
-    if ( localno != 0 )
-    {
-	activate_locals();
-    }
+	/*  If PC has reached the END,  gather_locals()  will
+	 *      have already issued an "unterminated" Error;
+	 *      a "multiline" warning would be redundant
+	 *      repetitive, unnecessary, excessive, unaesthetic
+	 *      and -- did I already mention? -- redundant.
+	 */
+	if (pc < end) {
+		report_multiline = sav_rep_mul_lin;
+		warn_if_multiline("Local-Values declaration", l_d_lineno);
+	}
+
+	/*  Don't do anything if no Locals were declared    */
+	/*  This could happen if the  {  }  field is empty  */
+	if (localno != 0) {
+		activate_locals();
+	}
 }
 
 /* **************************************************************************
@@ -692,10 +673,10 @@ void declare_locals ( bool ignoring)
  *
  **************************************************************************** */
 
-static bool handle_local( char *lname)
+static bool handle_local(char *lname)
 {
-    bool retval = handle_tic_vocab( lname, local_names );
-    return ( retval ) ;
+	bool retval = handle_tic_vocab(lname, local_names);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -716,12 +697,11 @@ static bool handle_local( char *lname)
  *
  **************************************************************************** */
 
-tic_hdr_t *lookup_local( char *lname)
+tic_hdr_t *lookup_local(char *lname)
 {
-    tic_hdr_t *retval = lookup_tic_entry( lname, local_names );
-    return ( retval ) ;
+	tic_hdr_t *retval = lookup_tic_entry(lname, local_names);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -749,8 +729,8 @@ tic_hdr_t *lookup_local( char *lname)
 
 bool create_local_alias(char *new_name, char *old_name)
 {
-    bool retval = create_tic_alias( new_name, old_name, &local_names );
-    return ( retval );
+	bool retval = create_tic_alias(new_name, old_name, &local_names);
+	return (retval);
 }
 
 /* **************************************************************************
@@ -768,12 +748,11 @@ bool create_local_alias(char *new_name, char *old_name)
  *
  **************************************************************************** */
 
-bool exists_as_local( char *stat_name )
+bool exists_as_local(char *stat_name)
 {
-    bool retval = exists_in_tic_vocab(stat_name, local_names );
-    return ( retval );
+	bool retval = exists_in_tic_vocab(stat_name, local_names);
+	return (retval);
 }
-
 
 /* **************************************************************************
  *
@@ -816,32 +795,31 @@ bool exists_as_local( char *stat_name )
  *
  **************************************************************************** */
 
-void assign_local ( void )
+void assign_local(void)
 {
-    signed long wlen;
-    bool is_okay;
-    u8 *savd_pc = pc;
-    unsigned int savd_lineno = lineno;
+	signed long wlen;
+	bool is_okay;
+	char *savd_pc = pc;
+	unsigned int savd_lineno = lineno;
 
-    wlen = get_word();
+	wlen = get_word();
 
-	if ( wlen <= 0 )
-	{
-	    warn_unterm(TKERROR, "Locals Assignment", lineno);
-	    return;
+	if (wlen <= 0) {
+		warn_unterm(TKERROR, "Locals Assignment", lineno);
+		return;
 	}
 
-    local_op = "!";   /*  Set to Store  */
+	local_op = "!";		/*  Set to Store  */
 
-    is_okay = handle_local( statbuf);
-    if( INVERSE(is_okay)  )
-    {
-        tokenization_error ( TKERROR,
-	    "Cannot apply -> to %s, only to a declared Local.\n", statbuf );
-        pc = savd_pc;
-	lineno = savd_lineno;
-    }
-    local_op = "@";   /*  Reset to Fetch  */
+	is_okay = handle_local(statbuf);
+	if (INVERSE(is_okay)) {
+		tokenization_error(TKERROR,
+				   "Cannot apply -> to %s, only to a declared Local.\n",
+				   statbuf);
+		pc = savd_pc;
+		lineno = savd_lineno;
+	}
+	local_op = "@";		/*  Reset to Fetch  */
 }
 
 /* **************************************************************************
@@ -891,19 +869,18 @@ void assign_local ( void )
  *
  **************************************************************************** */
 
-void finish_locals ( void )
+void finish_locals(void)
 {
-     /*    Don't do anything if Locals are not in use    */
-    if ( localno > 0 )
-    {
-        char nlocals_buf[10];
-     
-        int_to_str(localno, nlocals_buf ); 
-        sprintf( eval_buf,"%s %s",nlocals_buf, pop_locals);
-        eval_string( eval_buf);
-	tokenize_one_word( get_word() );
-	tokenize_one_word( get_word() );
-    }
+	/*    Don't do anything if Locals are not in use    */
+	if (localno > 0) {
+		char nlocals_buf[14];
+
+		int_to_str(localno, nlocals_buf);
+		sprintf(eval_buf, "%s %s", nlocals_buf, pop_locals);
+		eval_string(eval_buf);
+		tokenize_one_word(get_word());
+		tokenize_one_word(get_word());
+	}
 }
 
 /* **************************************************************************
@@ -933,15 +910,14 @@ void finish_locals ( void )
  *
  **************************************************************************** */
 
-void forget_locals ( void )
+void forget_locals(void)
 {
-     /*    Don't do anything if Locals are not in use    */
-    if ( localno != 0 )
-    {
-        reset_tic_vocab( &local_names, NULL ) ;
+	/*    Don't do anything if Locals are not in use    */
+	if (localno != 0) {
+		reset_tic_vocab(&local_names, NULL);
 
-        num_ilocals = 0;
-        num_ulocals = 0;
-        localno = 0;
-    }
+		num_ilocals = 0;
+		num_ulocals = 0;
+		localno = 0;
+	}
 }

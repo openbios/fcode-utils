@@ -74,9 +74,9 @@
  *
  **************************************************************************** */
 
-bool verbose         = FALSE;
-bool noerrors        = FALSE;
-bool fload_list      = FALSE;
+bool verbose = FALSE;
+bool noerrors = FALSE;
+bool fload_list = FALSE;
 bool dependency_list = FALSE;
 
 /* **************************************************************************
@@ -99,14 +99,14 @@ static char *outputname = NULL;
  **************************************************************************** */
 static void print_copyright(void)
 {
-	printf( "Welcome to toke - FCode tokenizer v" TOKE_VERSION "\n"
-		CORE_COPYR "\n" IBM_COPYR "\n"
-		"This program is free software; you may redistribute it "
-		"under the terms of\nthe GNU General Public License v2. "
-		"This program has absolutely no warranty.\n\n");
+	printf("Welcome to toke - FCode tokenizer v" TOKE_VERSION "\n"
+	       CORE_COPYR "\n" IBM_COPYR "\n"
+	       "This program is free software; you may redistribute it "
+	       "under the terms of\nthe GNU General Public License v2. "
+	       "This program has absolutely no warranty.\n\n");
 #ifdef DEVEL
-        /*  Temporary hack during development... */
-	printf( "\tTokenizer Compiled " DATE_STAMP "\n" );
+	/*  Temporary hack during development... */
+	printf("\tTokenizer compiled " DATE_STAMP "\n");
 #endif /*  DEVEL  */
 
 }
@@ -121,8 +121,8 @@ static void print_copyright(void)
 static void usage(char *name)
 {
 	printf("usage: %s [-v] [-i] [-l] [-P] [-o target] <[-d name[=value]]> "
-				"<[-f [no]flagname]> <[-I dir-path]> "
-				"<[-T symbol]> <forth-file>\n\n",name);
+	       "<[-f [no]flagname]> <[-I dir-path]> "
+	       "<[-T symbol]> <forth-file>\n\n", name);
 	printf("  -v|--verbose          print Advisory messages\n");
 	printf("  -i|--ignore-errors    don't suppress output after errors\n");
 	printf("  -l|--load-list        create list of FLoaded file names\n");
@@ -225,9 +225,9 @@ static void usage(char *name)
  *
  **************************************************************************** */
 
-static void get_args( int argc, char **argv )
+static void get_args(int argc, char **argv)
 {
-	const char *optstring="vhilPo:d:f:I:T:?";
+	const char *optstring = "vhilPo:d:f:I:T:?";
 	int c;
 	int argindx = 0;
 	bool inval_opt = FALSE;
@@ -241,20 +241,20 @@ static void get_args( int argc, char **argv )
 			{ "verbose", 0, 0, 'v' },
 			{ "help", 0, 0, 'h' },
 			{ "ignore-errors", 0, 0, 'i' },
-			{ "load-list",     0, 0, 'l' },
-			{ "dependencies",  0, 0, 'P' },
-			{ "output-name",   1, 0, 'o' },
-			{ "define",        1, 0, 'd' },
-			{ "flag",          1, 0, 'f' },
-			{ "Include",       1, 0, 'I' },
-			{ "Trace",         1, 0, 'T' },
+			{ "load-list", 0, 0, 'l' },
+			{ "dependencies", 0, 0, 'P' },
+			{ "output-name", 1, 0, 'o' },
+			{ "define", 1, 0, 'd' },
+			{ "flag", 1, 0, 'f' },
+			{ "Include", 1, 0, 'I' },
+			{ "Trace", 1, 0, 'T' },
 			{ 0, 0, 0, 0 }
 		};
 
-		c = getopt_long (argc, argv, optstring,
-				 long_options, &option_index);
+		c = getopt_long(argc, argv, optstring,
+				long_options, &option_index);
 #else
-		c = getopt (argc, argv, optstring);
+		c = getopt(argc, argv, optstring);
 #endif
 		if (c == -1)
 			break;
@@ -262,7 +262,7 @@ static void get_args( int argc, char **argv )
 		argindx++;
 		switch (c) {
 		case 'v':
-			verbose=TRUE;
+			verbose = TRUE;
 			break;
 		case 'o':
 			outputname = optarg;
@@ -278,17 +278,17 @@ static void get_args( int argc, char **argv )
 			break;
 		case 'd':
 			{
-			    char *user_symb = optarg;
-			    add_user_symbol(user_symb);
+				char *user_symb = optarg;
+				add_user_symbol(user_symb);
 			}
 			break;
 		case 'f':
-			cl_flag_error = set_cl_flag(optarg, FALSE) ;
+			cl_flag_error = set_cl_flag(optarg, FALSE);
 			break;
 		case 'I':
 			{
-			    char *incl_list_elem = optarg;
-			    add_to_include_list(incl_list_elem);
+				char *incl_list_elem = optarg;
+				add_to_include_list(incl_list_elem);
 			}
 			break;
 		case 'T':
@@ -298,14 +298,13 @@ static void get_args( int argc, char **argv )
 			/*  Distinguish between a '?' from the user
 			 *  and one  getopt()  returned
 			 */
-			if ( argv[argindx][1] != '?' )
-			{
-			    inval_opt = TRUE;
-			    break;
+			if (argv[argindx][1] != '?') {
+				inval_opt = TRUE;
+				break;
 			}
 		case 'h':
 		case 'H':
-			 help_mssg = TRUE;		
+			help_mssg = TRUE;
 			break;
 		default:
 			/*  This is never executed
@@ -313,44 +312,42 @@ static void get_args( int argc, char **argv )
 			 *    "unknown option -- X"
 			 *  message and returns a '?'
 			 */
-			printf ("%s: unknown options.\n",argv[0]);
+			printf("%s: unknown options.\n", argv[0]);
 			usage(argv[0]);
-			exit( 1 );
+			exit(1);
 		}
 	}
 
-	if ( help_mssg )
-	{
-	    usage(argv[0]);
-	    if ( ! clflag_help )
-	    {
-	        list_cl_flag_names();
-	    }
+	if (help_mssg) {
+		usage(argv[0]);
+		if (!clflag_help) {
+			list_cl_flag_names();
+		}
 	}
-	if ( clflag_help )  cl_flags_help();
-	if ( help_mssg || clflag_help )
-	{
-	    exit( 0 );
+	if (clflag_help)
+		cl_flags_help();
+	if (help_mssg || clflag_help) {
+		exit(0);
 	}
 
-	if ( inval_opt )      printf ("unknown options.\n");
-	if (optind >= argc)   printf ("Input file name missing.\n");
-	if ( inval_opt || (optind >= argc) )
-	{
+	if (inval_opt)
+		printf("unknown options.\n");
+	if (optind >= argc)
+		printf("Input file name missing.\n");
+	if (inval_opt || (optind >= argc)) {
 		usage(argv[0]);
 	}
-	if ( cl_flag_error )  list_cl_flag_names();
+	if (cl_flag_error)
+		list_cl_flag_names();
 
-	if ( inval_opt || (optind >= argc) || cl_flag_error )
-	{
-	    exit( 1);
+	if (inval_opt || (optind >= argc) || cl_flag_error) {
+		exit(1);
 	}
 
-	if (verbose)
-	{
-	    list_user_symbols();
-	    list_cl_flag_settings();
-	    display_include_list();
+	if (verbose) {
+		list_user_symbols();
+		list_cl_flag_settings();
+		display_include_list();
 	}
 	show_trace_list();
 	save_cl_flags();
@@ -377,7 +374,7 @@ int main(int argc, char **argv)
 	int retval = 0;
 
 	print_copyright();
-	get_args( argc, argv );
+	get_args(argc, argv);
 
 	init_error_handler();
 
@@ -385,46 +382,42 @@ int main(int argc, char **argv)
 	init_dictionary();
 
 	init_scanner();
-	
-	if ( outputname != NULL )
-	{
-	    if ( argc > optind + 1 )
-	    {
-	    /*  Multiple input file names w/ single output file name  */
-		/*  Work-around  */
-		printf( "Cannot specify single output file name "
-			"with multiple input file names.\n"
-			"Please either remove output-file-name specification,\n"
-			"or use multiple commands.\n");
-	        exit ( -2 );
-	    }
+
+	if (outputname != NULL) {
+		if (argc > optind + 1) {
+			/*  Multiple input file names w/ single output file name  */
+			/*  Work-around  */
+			printf("Cannot specify single output file name "
+			       "with multiple input file names.\n"
+			       "Please either remove output-file-name specification,\n"
+			       "or use multiple commands.\n");
+			exit(-2);
 		}
-
-	for ( ; optind < argc ; optind++ )
-	{
-	    bool stream_ok ;
-
-	    printf("\nTokenizing  %s   ", argv[optind]);
-	    init_error_handler();
-	    stream_ok = init_stream( argv[optind]);
-	    if ( stream_ok )
-	    {
-		init_output(argv[optind], outputname);
-
-		init_scan_state();
-
-		reset_vocabs();
-		reset_cl_flags();
-
-		tokenize();
-		finish_headers();
-		
-		close_stream( NULL);
-		if ( close_output() )  retval = 1;
-	    }
 	}
-	
+
+	for (; optind < argc; optind++) {
+		bool stream_ok;
+
+		printf("\nTokenizing  %s   ", argv[optind]);
+		init_error_handler();
+		stream_ok = init_stream(argv[optind]);
+		if (stream_ok) {
+			init_output(argv[optind], outputname);
+
+			init_scan_state();
+
+			reset_vocabs();
+			reset_cl_flags();
+
+			tokenize();
+			finish_headers();
+
+			close_stream(NULL);
+			if (close_output())
+				retval = 1;
+		}
+	}
+
 	exit_scanner();
 	return retval;
 }
-

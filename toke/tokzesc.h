@@ -38,11 +38,11 @@
 #include "types.h"
 #include "ticvocab.h"
 
-void init_tokz_esc_vocab( void );
+void init_tokz_esc_vocab(void);
 bool create_tokz_esc_alias(char *new_name, char *old_name);
-void enter_tokz_esc( void );
+void enter_tokz_esc(void);
 tic_hdr_t *lookup_tokz_esc(char *name);
-void reset_tokz_esc( void );
-void pop_next_fcode( void);
+void reset_tokz_esc(void);
+void pop_next_fcode(void);
 
-#endif   /*  _TOKE_TOKZESC_H    */
+#endif /*  _TOKE_TOKZESC_H    */

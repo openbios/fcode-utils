@@ -37,15 +37,13 @@
 
 #include "types.h"
 
-
 /* ************************************************************************** *
  *
  *      Global Variables Exported
  *
  **************************************************************************** */
 
-extern u16  nextfcode;         /*  The next FCode-number to be assigned      */
-
+extern u16 nextfcode;		/*  The next FCode-number to be assigned      */
 
 /* ************************************************************************** *
  *
@@ -53,11 +51,11 @@ extern u16  nextfcode;         /*  The next FCode-number to be assigned      */
  *
  **************************************************************************** */
 
-void reset_fcode_ranges( void);
-void list_fcode_ranges( bool final_tally);
-void set_next_fcode( u16  new_fcode);
-void assigning_fcode( void);
-void bump_fcode( void);
+void reset_fcode_ranges(void);
+void list_fcode_ranges(bool final_tally);
+void set_next_fcode(u16 new_fcode);
+void assigning_fcode(void);
+void bump_fcode(void);
 
 /* **************************************************************************
  *
@@ -77,4 +75,4 @@ void bump_fcode( void);
 #define FCODE_START  0x0800
 #define FCODE_LIMIT  0x0fff
 
-#endif   /*  _TOKE_NEXTFCODE_H    */
+#endif /*  _TOKE_NEXTFCODE_H    */

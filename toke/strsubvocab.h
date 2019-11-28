@@ -1,7 +1,6 @@
 #ifndef _TOKE_STRSUBVOCAB_H
 #define _TOKE_STRSUBVOCAB_H
 
-
 /*
  *                     OpenBIOS - free your system!
  *                         ( FCode tokenizer )
@@ -48,19 +47,15 @@
 
 #include "types.h"
 
-
 typedef struct str_sub_vocab {
-	u8  *name;
-	u8  *alias;
+	char *name;
+	char *alias;
 	struct str_sub_vocab *next;
 } str_sub_vocab_t;
 
+void add_str_sub_entry(char *ename,
+		       char *subst_str, str_sub_vocab_t ** str_sub_vocab);
+str_sub_vocab_t *lookup_str_sub(char *tname, str_sub_vocab_t * str_sub_vocab);
+bool exists_in_str_sub(char *tname, str_sub_vocab_t * str_sub_vocab);
 
-void add_str_sub_entry( char *ename,
-                        	    char *subst_str,
-			        	str_sub_vocab_t **str_sub_vocab );
-str_sub_vocab_t *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab );
-bool exists_in_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab );
-
-
-#endif   /*  _TOKE_STRSUBVOCAB_H    */
+#endif /*  _TOKE_STRSUBVOCAB_H    */

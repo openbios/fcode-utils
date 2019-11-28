@@ -67,7 +67,6 @@
  *
  **************************************************************************** */
 
-
 /* **************************************************************************
  *
  *          We will define a set of bit-valued error-types and a
@@ -163,19 +162,19 @@
  *
  **************************************************************************** */
 
-static bool  print_msg ;
-static int errs_to_print = ( FATAL | TKERROR | WARNING | 
-                             MESSAGE | P_MESSAGE | TRACER | FORCE_MSG ) ;
-static int err_types_found =  0 ;
-static int err_count       =  0 ;
-static int warn_count      =  0 ;
-static int info_count      =  0 ;
-static int user_msg_count  =  0 ;
-static int trace_msg_count =  0 ;
-static int fatal_err_exit  = -1 ;
-static FILE *message_dest;     /*  Would like to init to  ERRMSG_DESTINATION
-				*      here, but the compiler complains...
-				*/
+static bool print_msg;
+static int errs_to_print = (FATAL | TKERROR | WARNING |
+			    MESSAGE | P_MESSAGE | TRACER | FORCE_MSG);
+static int err_types_found = 0;
+static int err_count = 0;
+static int warn_count = 0;
+static int info_count = 0;
+static int user_msg_count = 0;
+static int trace_msg_count = 0;
+static int fatal_err_exit = -1;
+static FILE *message_dest;	/*  Would like to init to  ERRMSG_DESTINATION
+				 *      here, but the compiler complains...
+				 */
 
 /* **************************************************************************
  *
@@ -188,30 +187,29 @@ static FILE *message_dest;     /*  Would like to init to  ERRMSG_DESTINATION
  **************************************************************************** */
 
 typedef struct {
-    int  type_bit ;		/*  Error-type single-bit code        */
-    char *category_name ;	/*  Printable-name base               */
-    char *single ;		/*  Suffix to print singular of name  */
-    char *plural ;		/*  Suffix to print plural of name    */
-    int  *counter ;		/*  Associated Counter-variable       */
-    bool new_line ;		/*  Whether to print new-line at end  */
-} err_category ;
+	int type_bit;		/*  Error-type single-bit code        */
+	char *category_name;	/*  Printable-name base               */
+	char *single;		/*  Suffix to print singular of name  */
+	char *plural;		/*  Suffix to print plural of name    */
+	int *counter;		/*  Associated Counter-variable       */
+	bool new_line;		/*  Whether to print new-line at end  */
+} err_category;
 
-static const err_category  error_categories[] = {
-    /*  FATAL  must be the first entry in the table.   */
-    /*  No plural is needed; only one is allowed....   */
-    { FATAL,    "Fatal Error", "", "",     &err_count      , TRUE  },
+static const err_category error_categories[] = {
+	/*  FATAL  must be the first entry in the table.   */
+	/*  No plural is needed; only one is allowed....   */
+	{ FATAL, "Fatal Error", "", "", &err_count, TRUE },
 
-    { TKERROR,    "Error"     , "", "s",    &err_count      , FALSE },
-    { WARNING,    "Warning"   , "", "s",    &warn_count     , FALSE },
-    { INFO,       "Advisor"   , "y", "ies", &info_count     , FALSE },
-    { MESSAGE ,   "Message"   , "", "s",    &user_msg_count , TRUE  },
-    { P_MESSAGE , "Message"   , "", "s",    &user_msg_count  , FALSE },
-    { TRACER , "Trace-Note"   , "", "s",    &trace_msg_count , FALSE }
+	{ TKERROR, "Error", "", "s", &err_count, FALSE },
+	{ WARNING, "Warning", "", "s", &warn_count, FALSE },
+	{ INFO, "Advisor", "y", "ies", &info_count, FALSE },
+	{ MESSAGE, "Message", "", "s", &user_msg_count, TRUE },
+	{ P_MESSAGE, "Message", "", "s", &user_msg_count, FALSE },
+	{ TRACER, "Trace-Note", "", "s", &trace_msg_count, FALSE }
 };
 
 static const int num_categories =
-    ( sizeof(error_categories) / sizeof(err_category) );
-
+    (sizeof(error_categories) / sizeof(err_category));
 
 /* **************************************************************************
  *
@@ -235,13 +233,12 @@ static const int num_categories =
  *
  **************************************************************************** */
 
-static void toup( char *chr_ptr)
+static void toup(char *chr_ptr)
 {
-    const unsigned char upcas_diff = ( 'a' - 'A' );
-    if ( ( *chr_ptr >= 'a' ) && ( *chr_ptr <= 'z' ) )
-    {
-	*chr_ptr -= upcas_diff ;
-    }
+	const unsigned char upcas_diff = ('a' - 'A');
+	if ((*chr_ptr >= 'a') && (*chr_ptr <= 'z')) {
+		*chr_ptr -= upcas_diff;
+	}
 }
 
 /* **************************************************************************
@@ -266,14 +263,13 @@ static void toup( char *chr_ptr)
  *
  **************************************************************************** */
 
-char *strupper( char *strung)
+char *strupper(char *strung)
 {
-    char *strindx;
-    for (strindx = strung; *strindx != 0; strindx++)
-    {
-        toup( strindx);
-    }
-    return strung;
+	char *strindx;
+	for (strindx = strung; *strindx != 0; strindx++) {
+		toup(strindx);
+	}
+	return strung;
 }
 
 /* **************************************************************************
@@ -304,13 +300,12 @@ char *strupper( char *strung)
  *
  **************************************************************************** */
 
-static void tolow( char *chr_ptr)
+static void tolow(char *chr_ptr)
 {
-    const unsigned char lowcas_diff = ( 'A' - 'a' );
-    if ( ( *chr_ptr >= 'A' ) && ( *chr_ptr <= 'Z' ) )
-    {
-	*chr_ptr -= lowcas_diff ;
-    }
+	const unsigned char lowcas_diff = ('A' - 'a');
+	if ((*chr_ptr >= 'A') && (*chr_ptr <= 'Z')) {
+		*chr_ptr -= lowcas_diff;
+	}
 }
 
 /* **************************************************************************
@@ -335,16 +330,14 @@ static void tolow( char *chr_ptr)
  *
  **************************************************************************** */
 
-char *strlower( char *strung)
+char *strlower(char *strung)
 {
-    char *strindx;
-    for (strindx = strung; *strindx != 0; strindx++)
-    {
-        tolow( strindx);
-    }
-    return strung;
+	char *strindx;
+	for (strindx = strung; *strindx != 0; strindx++) {
+		tolow(strindx);
+	}
+	return strung;
 }
-
 
 /* **************************************************************************
  *
@@ -386,22 +379,21 @@ char *strlower( char *strung)
  *
  **************************************************************************** */
 
-void init_error_handler( void)
+void init_error_handler(void)
 {
-    int indx ;
+	int indx;
 
-    message_dest  =  ERRMSG_DESTINATION;
-    if ( verbose )  errs_to_print |= INFO ;
-    err_types_found = 0 ;
+	message_dest = ERRMSG_DESTINATION;
+	if (verbose)
+		errs_to_print |= INFO;
+	err_types_found = 0;
 
-    /*  Start at indx = 1 to skip resetting FATALs   */
-    for ( indx = 1; indx < num_categories ; indx ++ )
-    {
-	*(error_categories[indx].counter) = 0 ;
-    }
+	/*  Start at indx = 1 to skip resetting FATALs   */
+	for (indx = 1; indx < num_categories; indx++) {
+		*(error_categories[indx].counter) = 0;
+	}
 
-    FFLUSH_STDOUT
-}
+FFLUSH_STDOUT}
 
 /* **************************************************************************
  *
@@ -479,83 +471,77 @@ void init_error_handler( void)
  *
  **************************************************************************** */
 
-void tokenization_error( int err_type, char* msg, ... )
+void tokenization_error(int err_type, char *msg, ...)
 {
-    int indx ;
+	int indx;
 
-    /*  Initial settings:  treat as an Error.  */
-    char *catgy_name = "Error";
-    char *catgy_suffx = "";
-    int *catgy_counter = &err_count;
-    bool print_new_line = FALSE;
+	/*  Initial settings:  treat as an Error.  */
+	char *catgy_name = "Error";
+	char *catgy_suffx = "";
+	int *catgy_counter = &err_count;
+	bool print_new_line = FALSE;
 
-    /*  Accumulated the Error-type into  err_types_found  */
-    err_types_found |= err_type;
+	/*  Accumulated the Error-type into  err_types_found  */
+	err_types_found |= err_type;
 
-    /*  Identify the Error-Category.  */
-    for ( indx = 0 ; indx < num_categories ; indx ++ )
-    {
-        if ( ( error_categories[indx].type_bit & err_type ) != 0 )
-        {
-            catgy_name = error_categories[indx].category_name;
-            catgy_suffx = error_categories[indx].single;
-            catgy_counter = error_categories[indx].counter;
-	    print_new_line = error_categories[indx].new_line;
-            break;
-        }
-    }
-
-    /*  Special message if  err_type  not in list; treat as an Error.  */
-    if ( catgy_name == NULL )
-    {
-         fprintf(ERRMSG_DESTINATION,
-	      "Program error: Unknown Error-Type, 0x%08x.  "
-              "  Will treat as Error.\n", err_type) ;
-         err_types_found |= TKERROR;
-         print_msg = TRUE ;
-    } else {
-         /*  Check the Error-Type against the Error Verbosity Mask  */
-         print_msg = BOOLVAL( ( errs_to_print & err_type ) != 0 );
-    }
-
-    if ( print_msg )
-    {
-        va_list argp;
-
-	fprintf(ERRMSG_DESTINATION, "%s%s:  ",
-             catgy_name, catgy_suffx);
-        if ( iname != NULL )
-	{
-	    /*  Don't print iname or lineno if no file opened.  */
-	    fprintf(ERRMSG_DESTINATION, "File %s, Line %d.  ",
-        	 iname, lineno);
-	}
-        if ( opc > 0 )
-	{
-	    /*  Don't print Output Position if no output started.  */
-	    fprintf(ERRMSG_DESTINATION, "(Output Position = %d).  ", opc);
-	}
-        if ( pci_hdr_end_ob_off > 0 )
-	{
-	    /*  Don't print PCI-Block Position if no PCI-Block in effect.  */
-	    fprintf(ERRMSG_DESTINATION, "(PCI-Block Position = %d).  ",
-	        opc - pci_hdr_end_ob_off );
+	/*  Identify the Error-Category.  */
+	for (indx = 0; indx < num_categories; indx++) {
+		if ((error_categories[indx].type_bit & err_type) != 0) {
+			catgy_name = error_categories[indx].category_name;
+			catgy_suffx = error_categories[indx].single;
+			catgy_counter = error_categories[indx].counter;
+			print_new_line = error_categories[indx].new_line;
+			break;
+		}
 	}
 
-        va_start(argp, msg);
-        vfprintf(ERRMSG_DESTINATION, msg, argp);
-        va_end(argp);
-	if ( print_new_line ) fprintf(ERRMSG_DESTINATION, "\n");
+	/*  Special message if  err_type  not in list; treat as an Error.  */
+	if (catgy_name == NULL) {
+		fprintf(ERRMSG_DESTINATION,
+			"Program error: Unknown Error-Type, 0x%08x.  "
+			"  Will treat as Error.\n", err_type);
+		err_types_found |= TKERROR;
+		print_msg = TRUE;
+	} else {
+		/*  Check the Error-Type against the Error Verbosity Mask  */
+		print_msg = BOOLVAL((errs_to_print & err_type) != 0);
+	}
 
-	/*   Increment the category-counter.  */
-	*catgy_counter += 1;
-    }
-    if ( err_type == FATAL )
-    {
-        fprintf(ERRMSG_DESTINATION, "Tokenization terminating.\n");
-        error_summary();
-        exit ( fatal_err_exit );
-    }
+	if (print_msg) {
+		va_list argp;
+
+		fprintf(ERRMSG_DESTINATION, "%s%s:  ", catgy_name, catgy_suffx);
+		if (iname != NULL) {
+			/*  Don't print iname or lineno if no file opened.  */
+			fprintf(ERRMSG_DESTINATION, "File %s, Line %d.  ",
+				iname, lineno);
+		}
+		if (opc > 0) {
+			/*  Don't print Output Position if no output started.  */
+			fprintf(ERRMSG_DESTINATION, "(Output Position = %d).  ",
+				opc);
+		}
+		if (pci_hdr_end_ob_off > 0) {
+			/*  Don't print PCI-Block Position if no PCI-Block in effect.  */
+			fprintf(ERRMSG_DESTINATION,
+				"(PCI-Block Position = %d).  ",
+				opc - pci_hdr_end_ob_off);
+		}
+
+		va_start(argp, msg);
+		vfprintf(ERRMSG_DESTINATION, msg, argp);
+		va_end(argp);
+		if (print_new_line)
+			fprintf(ERRMSG_DESTINATION, "\n");
+
+		/*   Increment the category-counter.  */
+		*catgy_counter += 1;
+	}
+	if (err_type == FATAL) {
+		fprintf(ERRMSG_DESTINATION, "Tokenization terminating.\n");
+		error_summary();
+		exit(fatal_err_exit);
+	}
 }
 
 /* **************************************************************************
@@ -625,46 +611,41 @@ void tokenization_error( int err_type, char* msg, ... )
  *
  **************************************************************************** */
 
-static void print_where_started( bool show_started,
-                                   bool show_that_st,
-				   char * saved_ifile,
-				       unsigned int saved_lineno,
-                                           bool may_show_incolon)
+static void print_where_started(bool show_started,
+				bool show_that_st,
+				char *saved_ifile,
+				unsigned int saved_lineno,
+				bool may_show_incolon)
 {
-    if ( print_msg )
-    {
-	bool fil_is_diff;
-	bool lin_is_diff;
+	if (print_msg) {
+		bool fil_is_diff;
+		bool lin_is_diff;
 
-	/*  File names are case-sensitive  */
-	fil_is_diff = BOOLVAL(strcmp(saved_ifile, iname) != 0 );
-	lin_is_diff = BOOLVAL(saved_lineno != lineno );
-	if ( fil_is_diff || lin_is_diff )
-	{
-	    if ( show_started )
-	    {
-		if ( show_that_st )
-		{
-		    fprintf(message_dest, " that");
-		}else{
-		    fprintf(message_dest, " , which");
+		/*  File names are case-sensitive  */
+		fil_is_diff = BOOLVAL(strcmp(saved_ifile, iname) != 0);
+		lin_is_diff = BOOLVAL(saved_lineno != lineno);
+		if (fil_is_diff || lin_is_diff) {
+			if (show_started) {
+				if (show_that_st) {
+					fprintf(message_dest, " that");
+				} else {
+					fprintf(message_dest, " , which");
+				}
+				fprintf(message_dest, " started");
+			}
+			fprintf(message_dest, " on line %d", saved_lineno);
+			if (fil_is_diff) {
+				fprintf(message_dest, " of file %s",
+					saved_ifile);
+			}
 		}
-		fprintf(message_dest, " started");
-	    }
-	    fprintf(message_dest, " on line %d", saved_lineno);
-	    if ( fil_is_diff )
-	    {
-	        fprintf(message_dest, " of file %s", saved_ifile);
-	    }
-	}
 
-	if ( may_show_incolon )
-	{
-	    in_last_colon( TRUE );
-	}else{
-	    fprintf(message_dest, "\n");
+		if (may_show_incolon) {
+			in_last_colon(TRUE);
+		} else {
+			fprintf(message_dest, "\n");
+		}
 	}
-    }
 }
 
 /* **************************************************************************
@@ -691,11 +672,10 @@ static void print_where_started( bool show_started,
  *
  **************************************************************************** */
 
-void started_at( char * saved_ifile, unsigned int saved_lineno)
+void started_at(char *saved_ifile, unsigned int saved_lineno)
 {
-    print_where_started( TRUE, TRUE, saved_ifile, saved_lineno, TRUE);
+	print_where_started(TRUE, TRUE, saved_ifile, saved_lineno, TRUE);
 }
-
 
 /* **************************************************************************
  *
@@ -707,14 +687,13 @@ void started_at( char * saved_ifile, unsigned int saved_lineno)
  *          A retrofit.  Can you tell?
  *
  **************************************************************************** */
- 
-void print_started_at( char * saved_ifile, unsigned int saved_lineno)
-{
-    message_dest = stdout;
-	started_at( saved_ifile, saved_lineno);
-    message_dest = ERRMSG_DESTINATION;
-}
 
+void print_started_at(char *saved_ifile, unsigned int saved_lineno)
+{
+	message_dest = stdout;
+	started_at(saved_ifile, saved_lineno);
+	message_dest = ERRMSG_DESTINATION;
+}
 
 /* **************************************************************************
  *
@@ -739,9 +718,9 @@ void print_started_at( char * saved_ifile, unsigned int saved_lineno)
  *
  **************************************************************************** */
 
-void just_started_at( char * saved_ifile, unsigned int saved_lineno)
+void just_started_at(char *saved_ifile, unsigned int saved_lineno)
 {
-    print_where_started( TRUE, TRUE, saved_ifile, saved_lineno, FALSE);
+	print_where_started(TRUE, TRUE, saved_ifile, saved_lineno, FALSE);
 }
 
 /* **************************************************************************
@@ -767,9 +746,9 @@ void just_started_at( char * saved_ifile, unsigned int saved_lineno)
  *
  **************************************************************************** */
 
-void where_started( char * saved_ifile, unsigned int saved_lineno)
+void where_started(char *saved_ifile, unsigned int saved_lineno)
 {
-    print_where_started( FALSE, FALSE, saved_ifile, saved_lineno, TRUE);
+	print_where_started(FALSE, FALSE, saved_ifile, saved_lineno, TRUE);
 }
 
 /* **************************************************************************
@@ -794,9 +773,9 @@ void where_started( char * saved_ifile, unsigned int saved_lineno)
  *
  **************************************************************************** */
 
-void just_where_started( char * saved_ifile, unsigned int saved_lineno)
+void just_where_started(char *saved_ifile, unsigned int saved_lineno)
 {
-    print_where_started( FALSE, FALSE, saved_ifile, saved_lineno, FALSE);
+	print_where_started(FALSE, FALSE, saved_ifile, saved_lineno, FALSE);
 }
 
 /* **************************************************************************
@@ -836,22 +815,20 @@ void just_where_started( char * saved_ifile, unsigned int saved_lineno)
  *
  **************************************************************************** */
 
-void in_last_colon( bool say_in )
+void in_last_colon(bool say_in)
 {
-    if ( print_msg )
-    {
-	if ( incolon || ( ! say_in ) )
-	{
-	    fprintf( message_dest, "%s definition of  %s ", say_in ? " in" : "",
-		strupr( last_colon_defname) );
-	    print_where_started( TRUE, FALSE,
-		last_colon_filename, last_colon_lineno, FALSE);
-	}else{
-	    fprintf(message_dest, "\n");
+	if (print_msg) {
+		if (incolon || (!say_in)) {
+			fprintf(message_dest, "%s definition of  %s ",
+				say_in ? " in" : "",
+				strupr(last_colon_defname));
+			print_where_started(TRUE, FALSE, last_colon_filename,
+					    last_colon_lineno, FALSE);
+		} else {
+			fprintf(message_dest, "\n");
+		}
 	}
-    }
 }
-
 
 /* **************************************************************************
  *
@@ -882,16 +859,15 @@ void in_last_colon( bool say_in )
  *
  **************************************************************************** */
 
-_PTR safe_malloc( size_t size, char *phrase)
+_PTR safe_malloc(size_t size, char *phrase)
 {
-    _PTR retval ;
-    retval = malloc (size);
-    if ( !retval )
-    {
-        fatal_err_exit = -ENOMEM ;
-        tokenization_error( FATAL, "Out of memory while %s.", phrase);
-    }
-    return ( retval );
+	_PTR retval;
+	retval = malloc(size);
+	if (!retval) {
+		fatal_err_exit = -ENOMEM;
+		tokenization_error(FATAL, "Out of memory while %s.", phrase);
+	}
+	return (retval);
 }
 
 /* **************************************************************************
@@ -923,79 +899,73 @@ _PTR safe_malloc( size_t size, char *phrase)
  *      
  **************************************************************************** */
 
-bool error_summary( void )
+bool error_summary(void)
 {
-    /*  Bit-mask of error-types that require suppressing output   */
-    static const int suppress_mask = ( FATAL | TKERROR );
-    bool retval = TRUE;
-    bool suppressing = FALSE;
+	/*  Bit-mask of error-types that require suppressing output   */
+	static const int suppress_mask = (FATAL | TKERROR);
+	bool retval = TRUE;
+	bool suppressing = FALSE;
 
-    /*  There's no escaping a FATAL error   */
-    if ( ( err_types_found & FATAL ) != 0 )
-    {
-	/*   FATAL error.  Don't even bother with the tally.   */
-	suppressing = TRUE;
-    } else {
-
-	if ( opc == 0 )
-	{
-	    printf ( "Nothing Tokenized");
-	}else{
-	    printf ( "Tokenization Completed");
-	}
-
-	if ( err_types_found != 0 )
-	{
-	    int indx;
-	    bool tally_started = FALSE ;
-	    printf (". ");
-	    /*
-	     *  Print a tally of the error-types;
-	     *  handle plurals and punctuation appropriately.
-	     */
-	    /*  Start at indx = 1 to skip examining FATALs   */
-	    for ( indx = 1; indx < num_categories ; indx ++ )
-	    {
-		if ( *(error_categories[indx].counter) > 0 )
-		{
-		    printf ("%s %d %s%s",
-	        	tally_started ? "," : "" ,
-			    *(error_categories[indx].counter),
-				error_categories[indx].category_name,
-				    *(error_categories[indx].counter) > 1 ?
-					 error_categories[indx].plural :
-					     error_categories[indx].single );
-		    /*  Zero out the counter, to prevent displaying the
-		     *      number of Messages twice, since it's shared
-		     *      by the "Messages" and "P_Messages" categories.
-		     */
-		    *(error_categories[indx].counter) = 0;
-		    tally_started = TRUE;
-		}
-	    }
-	}
-        printf (".\n");
-
-	if ( ( err_types_found & suppress_mask ) != 0 )
-	{    /*  Errors found.  Not  OK to produce output    */
-             /*  Unless "Ignore Errors" flag set...          */
-	    if ( INVERSE(noerrors) )
-            {
+	/*  There's no escaping a FATAL error   */
+	if ((err_types_found & FATAL) != 0) {
+		/*   FATAL error.  Don't even bother with the tally.   */
 		suppressing = TRUE;
-            }else{
-		if ( opc > 0 )
-		{
-		    printf ("Error-detection over-ridden; "
-				"producing binary output.\n");
-		}
-            }
-	}
-    }
-    if ( suppressing )
-    {
-	retval = FALSE ;
-	printf ("Suppressing binary output.\n");
-    }
-    return ( retval );
-}
+	} else {
 
+		if (opc == 0) {
+			printf("Nothing Tokenized");
+		} else {
+			printf("Tokenization Completed");
+		}
+
+		if (err_types_found != 0) {
+			int indx;
+			bool tally_started = FALSE;
+			printf(". ");
+			/*
+			 *  Print a tally of the error-types;
+			 *  handle plurals and punctuation appropriately.
+			 */
+			/*  Start at indx = 1 to skip examining FATALs   */
+			for (indx = 1; indx < num_categories; indx++) {
+				if (*(error_categories[indx].counter) > 0) {
+					printf("%s %d %s%s",
+					       tally_started ? "," : "",
+					       *(error_categories[indx].
+						 counter),
+					       error_categories[indx].
+					       category_name,
+					       *(error_categories[indx].
+						 counter) >
+					       1 ? error_categories[indx].
+					       plural : error_categories[indx].
+					       single);
+					/*  Zero out the counter, to prevent displaying the
+					 *      number of Messages twice, since it's shared
+					 *      by the "Messages" and "P_Messages" categories.
+					 */
+					*(error_categories[indx].counter) = 0;
+					tally_started = TRUE;
+				}
+			}
+		}
+		printf(".\n");
+
+		if ((err_types_found & suppress_mask) != 0) {	/*  Errors found.  Not  OK to produce output    */
+			/*  Unless "Ignore Errors" flag set...          */
+			if (INVERSE(noerrors)) {
+				suppressing = TRUE;
+			} else {
+				if (opc > 0) {
+					printf("Error-detection over-ridden; "
+					       "producing binary output.\n");
+				}
+			}
+		}
+	}
+	if (suppressing) {
+		retval = FALSE;
+		printf("Suppressing binary output.\n");
+	}
+	return (retval);
+}
