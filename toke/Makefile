@@ -41,7 +41,7 @@ LDFLAGS =
 # CFLAGS  := $(CFLAGS) -g
 
 # for gcc 4. remove if you fixed the code.
-_GCC4_CFLAGS=$(shell echo 'main(int argc, char **argv){return 0;}' > .test.c;   \
+_GCC4_CFLAGS=$(shell echo 'int main(int argc, char **argv){return 0;}' > .test.c;   \
 		$(CC) -Wno-pointer-sign -c .test.c -o .test.o > /dev/null 2>&1 \
 		&& echo -Wno-pointer-sign; rm .test.c .test.o )
 CFLAGS  := $(CFLAGS) $(_GCC4_CFLAGS)
