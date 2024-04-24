@@ -1,3 +1,3 @@
-FROM debian:11.2
+FROM debian:12.5
 
 COPY build-x86_64/bin/* /usr/bin
