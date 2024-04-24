@@ -24,13 +24,13 @@
 
 PROGRAM = toke
 
-DESTDIR = /usr/local
+DESTDIR ?= /usr/local
 CC      ?= gcc
-STRIP	= strip
+STRIP	?= strip
 INCLUDES = -I../shared
 
 # Normal flags
-CFLAGS  = -O2 -Wall #-Wextra 
+CFLAGS  ?= -O2 -Wall #-Wextra
 LDFLAGS =
 
 # Coverage:
