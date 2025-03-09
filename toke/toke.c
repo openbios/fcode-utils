@@ -298,7 +298,7 @@ static void get_args( int argc, char **argv )
 			/*  Distinguish between a '?' from the user
 			 *  and one  getopt()  returned
 			 */
-			if ( argv[argindx][1] != '?' )
+			if ( optopt )
 			{
 			    inval_opt = TRUE;
 			    break;
