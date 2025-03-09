@@ -31,7 +31,7 @@ INCLUDES = -I../shared
 
 # Normal Flags:
 CFLAGS  ?= -O2 -Wall #-Wextra
-LDFLAGS = 
+LDFLAGS ?=
 
 # Coverage:
 #CFLAGS  := $(CFLAGS) -fprofile-arcs -ftest-coverage
