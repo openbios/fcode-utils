@@ -28,6 +28,7 @@ DESTDIR  ?= /usr/local
 CC	 ?= gcc
 STRIP    ?= strip
 CFLAGS   ?= -O2 -Wall -Wextra
+LDFLAGS  ?=
 INCLUDES = -I../shared
 
 SOURCES = romheaders.c ../shared/classcodes.c
@@ -37,7 +38,7 @@ SOURCES = romheaders.c ../shared/classcodes.c
 all: romheaders
 
 romheaders: $(SOURCES)
-	$(CC) $(CFLAGS) $(INCLUDES) $(SOURCES) -o $@
+	$(CC) $(LDFLAGS) $(CFLAGS) $(INCLUDES) $(SOURCES) -o $@
 	$(STRIP) romheaders
 
 clean:
