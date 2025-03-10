@@ -218,7 +218,7 @@ int main(int argc, char **argv)
 	do {
 		printf("\nImage %d:\n",i);
 		if (!dump_rom_header(rom_header)) {
-			printf("Rom Header error occured. Bailing out.\n");
+			printf("Rom Header error occurred. Bailing out.\n");
 			break;
 		}
 
@@ -226,7 +226,7 @@ int main(int argc, char **argv)
 			     LITTLE_ENDIAN_WORD_FETCH(rom_header->data_ptr));
 
 		if (!dump_pci_data(pci_data)) {
-			printf("PCI Data error occured. Bailing out.\n");
+			printf("PCI Data error occurred. Bailing out.\n");
 			break;
 		}
 
