@@ -133,7 +133,7 @@ static bool fcode_written = FALSE;
  **************************************************************************** */
 
 extern u8 *ostart;
-extern int olen;
+extern unsigned int olen;
 extern void increase_output_buffer( void);
 
 
