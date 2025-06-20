@@ -70,16 +70,16 @@ u8  *statbuf=NULL;      /*  The word just read from the input stream  */
 u8   base=0x0a;         /*  The numeric-interpretation base           */
 
 /* pci data */
-bool pci_is_last_image=TRUE;
+bool pci_is_last_image=true;
 u16  pci_image_rev=0x0001;  /*  Vendor's Image, NOT PCI Data Structure Rev */
 u16  pci_vpd=0x0000;
 
 
 /*  Having to do with the state of the tokenization  */
-bool offs16       = TRUE;    /*  We are using 16-bit branch- (etc) -offsets */
-bool in_tokz_esc  = FALSE;   /*  TRUE if in "Tokenizer Escape" mode   */
-bool incolon      = FALSE;   /*  TRUE if inside a colon definition    */
-bool haveend      = FALSE;   /*  TRUE if the "end" code was read.     */
+bool offs16       = true;    /*  We are using 16-bit branch- (etc) -offsets */
+bool in_tokz_esc  = false;   /*  TRUE if in "Tokenizer Escape" mode   */
+bool incolon      = false;   /*  TRUE if inside a colon definition    */
+bool haveend      = false;   /*  TRUE if the "end" code was read.     */
 int do_loop_depth = 0;       /*  How deep we are inside DO ... LOOP variants  */
 
 /*  State of headered-ness for name-creation  */
@@ -92,7 +92,7 @@ int lastcolon;   /*  Location in output stream of latest colon-definition. */
 char *last_colon_defname = NULL;   /*  Name of last colon-definition        */
 char *last_colon_filename = NULL;  /*  File where last colon-def'n made     */
 unsigned int last_colon_lineno;    /*  Line number of last colon-def'n      */
-bool report_multiline = TRUE;      /*  False to suspend multiline warning   */
+bool report_multiline = true;      /*  False to suspend multiline warning   */
 unsigned int last_colon_abs_token_no;
 
            /*  Shared phrases                                               */
@@ -105,18 +105,18 @@ char *wh_defined      = ", which is defined as a ";
 static u16  last_colon_fcode;  /*  FCode-number assigned to last colon-def'n  */
                                /*      Used for RECURSE  */
 
-static bool do_not_overload = TRUE ;  /*  False to suspend dup-name-test     */
-static bool got_until_eof = FALSE ;   /*  TRUE to signal "unterminated"      */
+static bool do_not_overload = true ;  /*  False to suspend dup-name-test     */
+static bool got_until_eof = false ;   /*  TRUE to signal "unterminated"      */
 
 static unsigned int last_colon_do_depth = 0;
 
 /*  Local variables having to do with:                                      */
 /*       ...  the state of the tokenization                                 */
-static bool is_instance = FALSE;        /*  Is "instance" is in effect?     */
+static bool is_instance = false;        /*  Is "instance" is in effect?     */
 static char *instance_filename = NULL;  /*  File where "instance" invoked   */
 static unsigned int instance_lineno;    /*  Line number of "instance"       */
-static bool fcode_started = FALSE ;     /*  Only 1 fcode_starter per block. */
-static bool first_fc_starter = TRUE;    /*  Only once per tokenization...   */
+static bool fcode_started = false ;     /*  Only 1 fcode_starter per block. */
+static bool first_fc_starter = true;    /*  Only once per tokenization...   */
 
 /*       ... with the state of the input stream,                            */
 static bool need_to_pop_source;
@@ -128,10 +128,10 @@ static int ret_stk_depth = 0;          /*  Return-Stack-Usage-Depth counter */
            /*  Should a warning about a dangling "instance" 
 	    *      be issued at the next device-node change?
 	    */
-static bool dev_change_instance_warning = TRUE;
+static bool dev_change_instance_warning = true;
 
            /*  Has a gap developed between "instance" and its application?  */
-static bool instance_definer_gap = FALSE;
+static bool instance_definer_gap = false;
 
 
 /* **************************************************************************
@@ -161,7 +161,7 @@ static bool instance_definer_gap = FALSE;
 
 static bool skip_ws(void)
 {
-    bool retval = TRUE;
+    bool retval = true;
     char ch_tmp;
 
     for (  ; pc < end; pc++ )
@@ -169,7 +169,7 @@ static bool skip_ws(void)
         ch_tmp = *pc;
 	if ( (ch_tmp != '\t') && (ch_tmp != ' ') && (ch_tmp != '\n' ) )
 	{
-	    retval = FALSE;
+	    retval = false;
 	    break;
 	}
         if ( ch_tmp == '\n')  lineno++;
@@ -206,7 +206,7 @@ static bool skip_ws(void)
 
 bool skip_until( char lim_ch)
 {
-    bool retval = TRUE;
+    bool retval = true;
     char ch_tmp;
 
     for (  ; pc < end; pc++ )
@@ -214,7 +214,7 @@ bool skip_until( char lim_ch)
         ch_tmp = *pc;
         if ( ch_tmp == lim_ch )
 	{
-	    retval = FALSE;
+	    retval = false;
 	    break;
 	}
         if ( ch_tmp == '\n')  lineno++;
@@ -291,7 +291,7 @@ static signed long get_until(char needle)
 	memcpy(statbuf, safe, len);
 	statbuf[len]=0;
 
-	if ( INVERSE(got_until_eof) )
+	if ( !got_until_eof )
 {
 	    if ( needle != '\n' )  pc++;
 	}
@@ -483,18 +483,18 @@ static void drop_source( void)
 
 static bool pop_source( void )
 {
-    bool retval = TRUE;
+    bool retval = true;
 
     if ( saved_source != NULL )
     {
-	retval = FALSE;
+	retval = false;
 	if ( need_to_pop_source )
 	{
-	    need_to_pop_source = FALSE;
+	    need_to_pop_source = false;
 	}else{
 	    if ( saved_source->pause_before_pop )
 	    {
-	        need_to_pop_source = TRUE;
+	        need_to_pop_source = true;
 		return( retval);
 	    }
 	}
@@ -678,7 +678,7 @@ signed long get_word( void)
 bool get_word_in_line( char *func_nam)
 {                                                                               
     signed long wlen;
-    bool retval = TRUE;
+    bool retval = true;
     u8 *save_pc = pc;
     unsigned int save_lineno = lineno;
     unsigned int save_abs_token_no = abs_token_no;
@@ -699,7 +699,7 @@ bool get_word_in_line( char *func_nam)
 	abs_token_no = save_abs_token_no;
 	lineno = save_lineno;
 	pc = save_pc;
-	retval = FALSE;
+	retval = false;
 	if ( func_nam != NULL )
 	{
 	    tokenization_error ( TKERROR,
@@ -741,17 +741,17 @@ bool get_word_in_line( char *func_nam)
 
 bool get_rest_of_line( void)
 {
-    bool retval = FALSE;
+    bool retval = false;
     u8 *save_pc = pc;
     unsigned int save_lineno = lineno;
     unsigned int save_abs_token_no = abs_token_no;
 
-    if ( INVERSE( skip_ws() ) )
+    if ( !skip_ws() )
     {
         if ( lineno == save_lineno )
 	{
 	    signed long wlen = get_until('\n');
-	    if ( wlen > 0 ) retval = TRUE;
+	    if ( wlen > 0 ) retval = true;
 	}else{
 	    abs_token_no = save_abs_token_no;
 	    lineno = save_lineno;
@@ -806,7 +806,7 @@ bool get_rest_of_line( void)
  *
  **************************************************************************** */
 
-static bool unterm_is_colon = FALSE;
+static bool unterm_is_colon = false;
 void warn_unterm( int severity, char *something, unsigned int saved_lineno)
 {
     unsigned int tmp = lineno;
@@ -815,10 +815,10 @@ void warn_unterm( int severity, char *something, unsigned int saved_lineno)
     {
 	tokenization_error( severity, "Unterminated %s of %s\n",
 	    something, strupr( last_colon_defname) );
-	unterm_is_colon = FALSE;
+	unterm_is_colon = false;
     }else{
 	tokenization_error( severity, "Unterminated %s", something);
-	in_last_colon( TRUE);
+	in_last_colon( true);
     }
     lineno = tmp;
 }
@@ -863,7 +863,7 @@ void warn_if_multiline( char *something, unsigned int start_lineno )
 	tokenization_error( WARNING, "Multi-line %s, started", something);
 	where_started( iname, start_lineno);
     }
-    report_multiline = TRUE;
+    report_multiline = true;
 }
 
 
@@ -920,14 +920,14 @@ static void string_remark(char *errmsg_txt)
 static long parse_number(u8 *start, u8 **endptr, int lbase) 
 {
 	long val = 0;
-	bool negative = FALSE ;
+	bool negative = false ;
 	int  curr;
 	u8 *nptr=start;
 
 	curr = *nptr;
 	if (curr == '-')
 	{
-		negative = TRUE ;
+		negative = true ;
 		nptr++;
 	}
 	
@@ -1062,7 +1062,7 @@ static void c_string_escape( u8 **walk)
      *      with a value for  val  and a decision
      *      as to whether to write it.
      */
-    bool write_val = TRUE;
+    bool write_val = true;
 	
     switch (c)
     {
@@ -1118,7 +1118,7 @@ static void c_string_escape( u8 **walk)
 		    /*        or a sequence-ending quote.                 */
 			 || ( c == '"' ) )
 		    {
-			write_val = FALSE;
+			write_val = false;
 		    }else{
 			/*  In the WARNING message, print the character
 			 *      if it's printable or show it in hex
@@ -1241,8 +1241,8 @@ static void c_string_escape( u8 **walk)
 static bool get_sequence(u8 **walk)
 {
     int pv_indx = 0;
-    bool retval = FALSE;   /*  "Abnormal Completion" indicator  */
-    bool ready_to_parse = FALSE;
+    bool retval = false;   /*  "Abnormal Completion" indicator  */
+    bool ready_to_parse = false;
     char next_ch;
     char pval[3];
 
@@ -1256,7 +1256,7 @@ static bool get_sequence(u8 **walk)
 	next_ch = *pc;
 	if ( next_ch == ')' )
 	{
-	    retval = TRUE;
+	    retval = true;
 				break;
 	}
 	if ( hex_remark_escape )
@@ -1274,14 +1274,14 @@ static bool get_sequence(u8 **walk)
 	    {
 		pv_indx++;
 	    }else{
-		ready_to_parse = TRUE;
+		ready_to_parse = true;
 	    }
 	}else{
 	    if ( next_ch == '\n' )  lineno++ ;
 	    if ( pv_indx != 0 )
 	    {
 		pval[1] = 0;
-		ready_to_parse = TRUE;
+		ready_to_parse = true;
 	    }
 	}
 	if ( ready_to_parse )
@@ -1292,7 +1292,7 @@ static bool get_sequence(u8 **walk)
 		printf(" %02x",val);
 #endif
 	    pv_indx = 0;
-	    ready_to_parse = FALSE;
+	    ready_to_parse = false;
 	}
 	pc++;
     }
@@ -1336,7 +1336,7 @@ static signed long get_string( bool pack_str)
 	u8 *walk;
 	unsigned long len;
 	char c;
-	bool run = TRUE;
+	bool run = true;
 	unsigned long start_lineno = lineno;    /*  For warning message  */
 	
 	/*
@@ -1349,7 +1349,7 @@ static signed long get_string( bool pack_str)
 	if ( *pc == '\n' ) lineno++;
 	pc++;
 
-	got_until_eof = TRUE ;
+	got_until_eof = true ;
 
 	walk=statbuf;
 	while (run) {
@@ -1362,8 +1362,8 @@ static signed long get_string( bool pack_str)
 			/*  End of the buffer also ends the string cleanly  */
 			if ( pc >= end )
 			{
-			    run = FALSE;
-			    got_until_eof = FALSE ;
+			    run = false;
+			    got_until_eof = false ;
 				break;
 			}
 			/*  Pick up the next char after the '"' (Quote) */
@@ -1411,8 +1411,8 @@ static signed long get_string( bool pack_str)
 				 */
 				pc++;
 			    case '\n':
-				run=FALSE;
-				got_until_eof = FALSE ;
+				run=false;
+				got_until_eof = false ;
 				break;
 			default:
 				/*  Control allowability of Quote-Backslash
@@ -1460,12 +1460,12 @@ static signed long get_string( bool pack_str)
 		/*  Done if we hit end of file before string was concluded  */
 		if ( pc >= end )
 		{
-		    run = FALSE;
+		    run = false;
 		    if ( got_until_eof )
 		    {
 			warn_unterm( WARNING, "string", start_lineno);
 			/*  Prevent multiple messages for one error  */
-			got_until_eof = FALSE;
+			got_until_eof = false;
 		    }
 		}
 	}
@@ -1542,12 +1542,12 @@ static void handle_user_message( char delim, bool print_it )
     signed long wlen;
     unsigned int start_lineno = lineno;
     unsigned int multiline_start = lineno;    /*  For warning message  */
-    bool check_multiline = FALSE;
+    bool check_multiline = false;
     const char *ug_msg = "user-generated message";
 
     if ( delim == '"' )
     {
-	wlen = get_string( FALSE);
+	wlen = get_string( false);
     }else{
 	/*
 	 *  When the message-delimiter is a new-line, and the
@@ -1565,7 +1565,7 @@ static void handle_user_message( char delim, bool print_it )
 	    if ( *pc == '\n' ) lineno++;
 	    pc++;
 	    multiline_start = lineno;
-	    check_multiline = TRUE;
+	    check_multiline = true;
 	}
 	wlen = get_until( delim );
     }
@@ -1626,7 +1626,7 @@ static void handle_user_message( char delim, bool print_it )
 void user_message( tic_param_t pfield )
 {
     char delim = (char)pfield.fw_token ;
-    handle_user_message( delim, TRUE);
+    handle_user_message( delim, true);
 }
 
 /* **************************************************************************
@@ -1657,7 +1657,7 @@ void user_message( tic_param_t pfield )
 void skip_user_message( tic_param_t pfield )
 {
     char delim = (char)pfield.deflt_elem ;
-    handle_user_message( delim, FALSE);
+    handle_user_message( delim, false);
 }
 
 
@@ -1693,7 +1693,7 @@ bool get_number( long *result)
 {
     u8 *until;
     long val;
-    bool retval = FALSE ;
+    bool retval = false ;
 
     val = parse_number(statbuf, &until, base);
 	
@@ -1709,7 +1709,7 @@ bool get_number( long *result)
     if (until==(statbuf+strlen((char *)statbuf)))
     {
 	*result=val;
-	retval = TRUE;
+	retval = true;
     }
 
     return ( retval );
@@ -1856,14 +1856,14 @@ static void ascii_left_number( char *in_str)
     char *str_ptr = in_str;
     long numval = 0;
     int shift_amt = 24;
-    bool shift_over = FALSE ;
+    bool shift_over = false ;
 
     for ( nxt_ch = (u8)*str_ptr ;
 	    ( nxt_ch = (u8)*str_ptr ) != 0 ;
         	str_ptr++ )
     {
         if ( shift_over )  numval <<= 8;
-	if ( shift_amt == 0 )  shift_over = TRUE ;
+	if ( shift_amt == 0 )  shift_over = true ;
 	numval += ( nxt_ch << shift_amt );
 	if ( shift_amt > 0 ) shift_amt -= 8;
     }
@@ -1989,19 +1989,19 @@ static void set_hdr_flag( headeredness new_flag)
 void init_scan_state( void)
 {
     base = 0x0a;
-    pci_is_last_image = TRUE;
-    incolon = FALSE;
-    is_instance = FALSE;
+    pci_is_last_image = true;
+    incolon = false;
+    is_instance = false;
     set_hdr_flag( FLAG_HEADERLESS);
     reset_fcode_ranges();
-    first_fc_starter = TRUE;
+    first_fc_starter = true;
     if ( last_colon_filename != NULL ) free( last_colon_filename);
     if ( instance_filename != NULL ) free( instance_filename);
     last_colon_filename = NULL;
     instance_filename = NULL;
-    dev_change_instance_warning = TRUE;
-    instance_definer_gap = FALSE;
-    need_to_pop_source = FALSE;
+    dev_change_instance_warning = true;
+    instance_definer_gap = false;
+    need_to_pop_source = false;
     ret_stk_depth = 0;
 }
 
@@ -2040,13 +2040,13 @@ void init_scan_state( void)
 
 static void collect_input_filename( char **saved_nam)
 {
-    bool update_lcfn = TRUE;    /*  Need to re-allocate?  */
+    bool update_lcfn = true;    /*  Need to re-allocate?  */
     if ( *saved_nam != NULL )
     {
 	if ( strcmp( *saved_nam, iname) == 0 )
 	{
 	    /*  Last collected filename unchanged from iname  */
-	    update_lcfn = FALSE;
+	    update_lcfn = false;
 	}else{
 	    free( *saved_nam);
 	}
@@ -2098,15 +2098,15 @@ static bool test_in_colon ( char *wname,
 				     char *use_instead)
 {
     bool is_wrong;
-    bool retval = TRUE ;
+    bool retval = true ;
 
-    is_wrong = BOOLVAL(( sb_in_colon != FALSE ) != ( incolon != FALSE )) ;
+    is_wrong = (( sb_in_colon != false ) != ( incolon != false )) ;
     if ( is_wrong )
     {  
         char *ui_pt1 = "";
         char *ui_pt2 = "";
         char *ui_pt3 = "";
-	retval = FALSE;
+	retval = false;
 	if ( use_instead != NULL )
 	{
 	    ui_pt1 = "  Use  ";
@@ -2142,7 +2142,7 @@ static void must_be_deep_in_do( int how_deep )
     {
 	char deep_do[64] = "";
 	int indx;
-	bool prefix = FALSE;
+	bool prefix = false;
 
 	for ( indx = 0; indx < how_deep ; indx ++ )
 	{
@@ -2155,12 +2155,12 @@ static void must_be_deep_in_do( int how_deep )
 		strcat( deep_do, " ... ");
 	    }
 	    strcat( deep_do, "LOOP");
-	    prefix = TRUE;
+	    prefix = true;
 	}
 
 	tokenization_error( TKERROR,
 	    "%s outside of  %s  structure", strupr(statbuf), deep_do);
-	in_last_colon( TRUE);
+	in_last_colon( true);
     }
 
 }
@@ -2287,7 +2287,7 @@ static void ret_stk_balance_rpt( char *before_what, bool clear_it)
 
 	tokenization_error( WARNING,
 	    "Possible Return-Stack %s before %s", what_flow, what_phr);
-	in_last_colon( TRUE);
+	in_last_colon( true);
 
 	if ( clear_it )
 	{
@@ -2334,7 +2334,7 @@ static void ret_stk_access_rpt( void)
 	    "Possible Return-Stack access attempt by %s "
 		"without value having been placed there",
 		strupr(statbuf) );
-	in_last_colon( TRUE);
+	in_last_colon( true);
     }
 }
 
@@ -2463,7 +2463,7 @@ void check_name_length( signed long wlen )
 
 bool definer_name(fwtoken definer, char **reslt_ptr)
 {
-    bool retval = TRUE;
+    bool retval = true;
     switch (definer)
     {
 	case VARIABLE:
@@ -2500,7 +2500,7 @@ bool definer_name(fwtoken definer, char **reslt_ptr)
 	    *reslt_ptr = "Local Value name";
 	    break;
 	default:
-	    retval = FALSE;
+	    retval = false;
     }
 
     return ( retval);
@@ -2648,8 +2648,8 @@ static char lookup_where_pt1_buf[AS_WHAT_BUF_SIZE];
 tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
 {
     tic_hdr_t *found = NULL;
-    bool trail_space = TRUE;
-    bool doing_lookup = BOOLVAL( ( where_pt1 != NULL )
+    bool trail_space = true;
+    bool doing_lookup = ( ( where_pt1 != NULL )
 			      && ( where_pt2 != NULL ) );
     char *temp_where_pt2 = "in the core vocabulary.\n";
 
@@ -2675,7 +2675,7 @@ tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
 	    found = lookup_local( stat_name);
 	    if ( doing_lookup && ( found != NULL ) )
 	    {
-		trail_space = FALSE;
+		trail_space = false;
 		temp_where_pt2 = ".\n";
 	    }
 	}
@@ -2745,12 +2745,12 @@ tic_hdr_t *lookup_word( char *stat_name, char **where_pt1, char **where_pt2 )
 
 bool word_exists( char *stat_name, char **where_pt1, char **where_pt2 )
 {
-    bool retval = FALSE;
+    bool retval = false;
     tic_hdr_t *found = lookup_word( stat_name, where_pt1, where_pt2 );
 
     if ( found != NULL )
     {
-	retval = TRUE;
+	retval = true;
     }
 
     return( retval);
@@ -2815,7 +2815,7 @@ void warn_if_duplicate( char *stat_name)
 	    show_node_start();
 	}
     }
-    do_not_overload = TRUE;
+    do_not_overload = true;
 }
 
 
@@ -2916,7 +2916,7 @@ static void tokenized_word_error( char *stat_name)
     bool found_somewhere;
     
     bool sav_in_tokz_esc = in_tokz_esc;
-    in_tokz_esc = INVERSE(sav_in_tokz_esc);
+    in_tokz_esc = !sav_in_tokz_esc;
 
     traced_name_error( stat_name);
 
@@ -2930,7 +2930,7 @@ static void tokenized_word_error( char *stat_name)
 	not_in_dict( stat_name);
     }
 
-    if ( INVERSE(exists_in_ancestor( stat_name)) )
+    if ( !exists_in_ancestor( stat_name) )
     {
         if ( found_somewhere && sav_in_tokz_esc )
 	{
@@ -3049,7 +3049,7 @@ static void validate_instance(fwtoken definer)
 {
     if ( is_instance )
     {
-	bool is_error = TRUE ;
+	bool is_error = true ;
 
 	switch ( definer)
 	{
@@ -3057,7 +3057,7 @@ static void validate_instance(fwtoken definer)
 	    case VARIABLE:
 	    case DEFER:
 	    case BUFFER:
-		is_error = FALSE;
+		is_error = false;
 	    /*  No default needed, likewise, no breaks;      */
 	    /*  but some compilers get upset without 'em...  */
 	    default:
@@ -3066,15 +3066,15 @@ static void validate_instance(fwtoken definer)
 
 	if( is_error )
 	{
-	    modified_by_instance(definer, FALSE );
-	    instance_definer_gap = TRUE;
+	    modified_by_instance(definer, false );
+	    instance_definer_gap = true;
 	}else{
 	    if ( instance_definer_gap )
 	    {
-		modified_by_instance(definer, TRUE );
+		modified_by_instance(definer, true );
 	    }
-	    is_instance = FALSE;
-	    instance_definer_gap = FALSE;
+	    is_instance = false;
+	    instance_definer_gap = false;
 	}
     }
 }
@@ -3176,17 +3176,17 @@ static void validate_instance(fwtoken definer)
 static bool create_word(fwtoken definer)
 {
     signed long wlen;
-    bool retval = FALSE;
+    bool retval = false;
     char *defn_type_name;
 
     /*  If already inside a colon, ERROR and discontinue processing    */
     /*  If an alias to a definer is used, show the name of the alias  */
-    if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) ) 
+    if ( test_in_colon(statbuf, false, TKERROR, NULL) )
     {
 	char defn_type_buffr[32] = "";
 	unsigned int old_lineno = lineno;    /*  For error message  */
 
-	define_token = TRUE;
+	define_token = true;
 
 	{   /*  Set up definition-type text for error-message */
 
@@ -3201,7 +3201,7 @@ static bool create_word(fwtoken definer)
 	{
 	    announce_control_structs( TKERROR, defn_type_buffr, 0);
 	    /*  Leave the new token undefined.  */
-	    define_token = FALSE;
+	    define_token = false;
 	}
 
 	/*  Get the name of the new token  */
@@ -3215,7 +3215,7 @@ static bool create_word(fwtoken definer)
 	{
 	    warn_unterm( TKERROR, defn_type_buffr, old_lineno);
 	}else{
-	    bool emit_token_name = TRUE;
+	    bool emit_token_name = true;
 
 	    /*  Other Error or Warnings as applicable  */
 	    validate_instance( definer);
@@ -3241,7 +3241,7 @@ static bool create_word(fwtoken definer)
 
 		default:  /*   FLAG_HEADERLESS   */
 		    emit_token("new-token");
-		    emit_token_name = FALSE;
+		    emit_token_name = false;
 	    }
 
 	    /*  Emit name of token, if applicable  */
@@ -3266,7 +3266,7 @@ static bool create_word(fwtoken definer)
 	    bump_fcode();
 
 	    /*  Declare victory   */
-	    retval = TRUE;
+	    retval = true;
 	}
     }
     return( retval);
@@ -3420,8 +3420,8 @@ static bool validate_to_target( void )
     unsigned int saved_lineno = lineno;
     unsigned int saved_abs_token_no = abs_token_no;
     fwtoken defr = UNSPECIFIED ;
-    bool targ_err = TRUE ;
-    bool retval = FALSE ;
+    bool targ_err = true ;
+    bool retval = false ;
 
     wlen = get_word();
     if ( wlen <= 0 )
@@ -3441,9 +3441,9 @@ static bool validate_to_target( void )
 			cmd_cpy, statbuf);
 		case DEFER:
 		case VALUE:
-		    targ_err = FALSE ;
+		    targ_err = false ;
 		case CONST:
-		    retval = TRUE ;
+		    retval = true ;
 		/*  No default needed, likewise, no breaks;      */
 		/*  but some compilers get upset without 'em...  */
 		default:
@@ -3566,7 +3566,7 @@ static void fcode_starter( const char *token_name, int spread, bool is_offs16)
 
 	emit_fcodehdr(token_name);
 	offs16 = is_offs16;
-	fcode_started = TRUE;
+	fcode_started = true;
 
 	current_device_node->ifile_name = strdup(iname);
 	current_device_node->line_no = lineno;
@@ -3574,7 +3574,7 @@ static void fcode_starter( const char *token_name, int spread, bool is_offs16)
 	if ( first_fc_starter )
 	{
 	    reset_fcode_ranges();
-	    first_fc_starter = FALSE;
+	    first_fc_starter = false;
 	}else{
 	    set_next_fcode( nextfcode);
 	}
@@ -3607,7 +3607,7 @@ static void fcode_starter( const char *token_name, int spread, bool is_offs16)
 
 static void fcode_end_err_check( void)
 {
-    bool stack_imbal = BOOLVAL( stackdepth() != 0 );
+    bool stack_imbal = ( stackdepth() != 0 );
 
 	if ( stack_imbal )
 	{
@@ -3678,12 +3678,12 @@ void fcode_ender(void)
     {
 	char *tmp_iname = iname;
 	iname = last_colon_filename;
-	unterm_is_colon = TRUE;
+	unterm_is_colon = true;
 	warn_unterm( TKERROR, "Colon Definition", last_colon_lineno);
 	iname = tmp_iname;    
     }
     
-    haveend = TRUE;
+    haveend = true;
 
     if ( is_instance )
     {
@@ -3700,7 +3700,7 @@ void fcode_ender(void)
     fcode_end_err_check();
     reset_normal_vocabs();
     finish_fcodehdr();
-    fcode_started = FALSE;
+    fcode_started = false;
 
     if ( current_device_node->ifile_name != default_top_dev_ifile_name )
     {
@@ -3752,7 +3752,7 @@ void fcode_ender(void)
 
 static bool get_token(tic_hdr_t **tok_entry)
 {
-    bool retval = FALSE;
+    bool retval = false;
     tic_hdr_t *found;
     u8 *save_pc;
 
@@ -3788,7 +3788,7 @@ static bool get_token(tic_hdr_t **tok_entry)
 	    if ( defr == BI_FWRD_DEFN )
 	    {
 	        found = lookup_token( statbuf);
-		retval = BOOLVAL( found != NULL );
+		retval = ( found != NULL );
 	    }else{
 		retval = entry_is_token( found);
 	    }
@@ -3811,7 +3811,7 @@ static bool get_token(tic_hdr_t **tok_entry)
 
 static void base_change ( int new_base )
 {
-    if ( incolon && ( INVERSE( in_tokz_esc) ) )
+    if ( incolon && ( !in_tokz_esc ) )
     {
         emit_literal(new_base );
 	emit_token("base");
@@ -3885,7 +3885,7 @@ static void base_val (int new_base)
 
 void eval_string( char *inp_bufr)
 {
-    push_source( NULL, NULL, FALSE);
+    push_source( NULL, NULL, false);
     init_inbuf( inp_bufr, strlen(inp_bufr));
 }
 
@@ -3947,20 +3947,20 @@ void eval_string( char *inp_bufr)
 
 static void finish_or_new_device( bool finishing_device )
 {
-    if ( INVERSE( incolon ) )
+    if ( !incolon )
     {
-	if ( INVERSE( is_instance) )
+	if ( !is_instance )
 	{
 	    /*  Arm warning for next time:         */
-	    dev_change_instance_warning = TRUE;
+	    dev_change_instance_warning = true;
 	}else{
 	    /*  Dangling "instance"                */
-	    instance_definer_gap = TRUE;
+	    instance_definer_gap = true;
 	    /*   Warn only once.                   */
 	    if ( dev_change_instance_warning )
 	    {
 		unresolved_instance( WARNING);
-		dev_change_instance_warning = FALSE;
+		dev_change_instance_warning = false;
 	    }
 	}
 
@@ -4053,7 +4053,7 @@ static void finish_or_new_device( bool finishing_device )
 	
 static bool abort_quote( fwtoken tok)
 {
-    bool retval = FALSE;
+    bool retval = false;
     if ( tok == ABORTTXT )
     {
 	if ( ! enable_abort_quote )
@@ -4062,7 +4062,7 @@ static bool abort_quote( fwtoken tok)
 	    char *save_statbuf;
 	    signed long wlen;
 	    save_statbuf = strdup( (char *)statbuf);
-	    wlen = get_string( FALSE);
+	    wlen = get_string( false);
 	    strcpy( statbuf, save_statbuf);
 	    free( save_statbuf);
 	}else{
@@ -4077,11 +4077,11 @@ static bool abort_quote( fwtoken tok)
 	    char *abort_string;
 	    signed long wlen;
 
-	    retval = TRUE;
+	    retval = true;
 	    tokenization_error (INFO, "ABORT\" in fcode not "
 			    "defined by IEEE 1275-1994\n");
-	    test_in_colon("ABORT\"", TRUE, TKERROR, NULL);
-	    wlen=get_string( TRUE);
+	    test_in_colon("ABORT\"", true, TKERROR, NULL);
+	    wlen=get_string( true);
 
 	    if ( sun_style_abort_quote )  emit_if();
 
@@ -4299,7 +4299,7 @@ static  bool string_err_check( bool is_paren,
     {
 	warn_unterm( TKERROR, item_typ, sav_lineno );
     }else{
-	retval = TRUE;
+	retval = true;
 	warn_if_multiline( item_typ, strt_lineno );
 	}
     return( retval);
@@ -4363,8 +4363,8 @@ void handle_internal( tic_param_t pfield)
 	signed long wlen;
 	unsigned int sav_lineno = lineno;    /*  For error message  */
 
-	bool handy_toggle = TRUE ;   /*  Various uses...   */
-	bool handy_toggle_too = TRUE ;   /*  Various other uses...   */
+	bool handy_toggle = true ;   /*  Various uses...   */
+	bool handy_toggle_too = true ;   /*  Various other uses...   */
 	char *handy_string = "";
 	int handy_int = 0;
 	
@@ -4420,7 +4420,7 @@ void handle_internal( tic_param_t pfield)
 			last_colon_defname = strdup(statbuf);
 
 		emit_token("b(:)");
-		incolon=TRUE;
+		incolon=true;
 			hide_last_colon();
 			lastcolon = opc;
 		    }
@@ -4428,9 +4428,9 @@ void handle_internal( tic_param_t pfield)
 		break;
 	
 	case SEMICOLON:
-		if ( test_in_colon("SEMICOLON", TRUE, TKERROR, NULL) )
+		if ( test_in_colon("SEMICOLON", true, TKERROR, NULL) )
 		{
-		    ret_stk_balance_rpt( "termination,", TRUE);
+		    ret_stk_balance_rpt( "termination,", true);
 		    /*  Clear Control Structures just back to where
 		     *      the current Colon-definition began.
 		     */
@@ -4444,7 +4444,7 @@ void handle_internal( tic_param_t pfield)
 		    }
 
 		emit_token("b(;)");
-		incolon=FALSE;
+		incolon=false;
 		    reveal_last_colon();
 		}
 		break;
@@ -4464,13 +4464,13 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case ALLOW_MULTI_LINE:
-		report_multiline = FALSE;
+		report_multiline = false;
 		break;
 
 	case OVERLOAD:
-		if ( test_in_colon(statbuf, FALSE, WARNING, NULL) )
+		if ( test_in_colon(statbuf, false, WARNING, NULL) )
 		{
-		    do_not_overload = FALSE;
+		    do_not_overload = false;
 		}
 		break;
 
@@ -4484,12 +4484,12 @@ void handle_internal( tic_param_t pfield)
 	case CL_FLAG:
 		if (get_word_in_line( statbuf) )
 		{
-		     set_cl_flag( statbuf, TRUE);
+		     set_cl_flag( statbuf, true);
 		}
 		break;
 
 	case SHOW_CL_FLAGS:
-		show_all_cl_flag_settings( TRUE);
+		show_all_cl_flag_settings( true);
 		break;
 
 	case FIELD:
@@ -4551,7 +4551,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case NEW_DEVICE:
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case FINISH_DEVICE:
 		finish_or_new_device( handy_toggle );
 		break;
@@ -4606,7 +4606,7 @@ void handle_internal( tic_param_t pfield)
 			"Call of OFFSET16 is redundant.\n");
 		}
 		emit_token("offset16");
-		offs16=TRUE;
+		offs16=true;
 		break;
 
 	case IF:
@@ -4653,22 +4653,22 @@ void handle_internal( tic_param_t pfield)
 
 	case INSTANCE:
 		{
-		    bool set_instance_state = FALSE;
-		    bool emit_instance = TRUE;
+		    bool set_instance_state = false;
+		    bool emit_instance = true;
 		    /*  We will treat "instance" in a colon-definition as
 		     *      an error, but allow it to be emitted if we're
 		     *      ignoring errors; if we're not ignoring errors,
 		     *      there's no output anyway...
 		     */
-		    if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
+		    if ( test_in_colon(statbuf, false, TKERROR, NULL) )
 		    {   /*   We are in interpretation (not colon) state.  */
 			/*  "Instance" not allowed during "global" scope  */ 
 			if ( scope_is_global )
 			{
-			    glob_not_allowed( WARNING, FALSE );
-			    emit_instance = FALSE;
+			    glob_not_allowed( WARNING, false );
+			    emit_instance = false;
 			}else{
-			    set_instance_state = TRUE;
+			    set_instance_state = true;
 			}
 		    }
 		    if ( emit_instance )
@@ -4682,8 +4682,8 @@ void handle_internal( tic_param_t pfield)
 			    }
 			    collect_input_filename( &instance_filename);
 			    instance_lineno = lineno;
-			    is_instance = TRUE;
-			    dev_change_instance_warning = TRUE;
+			    is_instance = true;
+			    dev_change_instance_warning = true;
 			}
 			emit_token("instance");
 		    }
@@ -4691,9 +4691,9 @@ void handle_internal( tic_param_t pfield)
 		break;
 		
 	case GLOB_SCOPE:
-		if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
+		if ( test_in_colon(statbuf, false, TKERROR, NULL) )
 		{
-		    if ( INVERSE( is_instance) )
+		    if ( !is_instance )
 		    {
 			enter_global_scope();
 		    }else{
@@ -4707,14 +4707,14 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case DEV_SCOPE:
-		if ( test_in_colon(statbuf, FALSE, TKERROR, NULL) )
+		if ( test_in_colon(statbuf, false, TKERROR, NULL) )
 		{
 		    resume_device_scope();
 		}
 		break;
 
 	case TICK:             /*    '    */
-		test_in_colon(statbuf, FALSE, WARNING, "[']");
+		test_in_colon(statbuf, false, WARNING, "[']");
 	case BRACK_TICK:       /*   [']   */
 		{
 		    tic_hdr_t *token_entry;
@@ -4750,7 +4750,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case CHAR:
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case CCHAR:
 		test_in_colon(statbuf, handy_toggle, WARNING,
 		    handy_toggle ? "CHAR" : "[CHAR]" );
@@ -4792,12 +4792,12 @@ void handle_internal( tic_param_t pfield)
 		{
 		    bool stream_ok ;
 			
-		    push_source( close_stream, NULL, TRUE) ;
+		    push_source( close_stream, NULL, true) ;
 			
 		    tokenization_error( INFO, "FLOADing %s\n", statbuf );
 			
 		    stream_ok = init_stream( statbuf );
-		    if ( INVERSE( stream_ok) )
+		    if ( !stream_ok )
 		    {
 			drop_source();
 		    }
@@ -4805,9 +4805,9 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case STRING:         /*  Double-Quote ( " ) string  */
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case PSTRING:        /*  Dot-Quote  ( ." ) string   */
-		wlen=get_string( TRUE);
+		wlen=get_string( true);
 		emit_token("b(\")");
 		emit_string(statbuf, wlen);
 		if ( handy_toggle )
@@ -4817,7 +4817,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case SSTRING:        /*  Ess-Quote  ( s"  ) string  */
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case PBSTRING:       /*  Dot-Paren  .(   string  */
 		if (*pc++=='\n') lineno++;
 		{
@@ -4876,7 +4876,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case ASC_LEFT_NUM:
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case ASC_NUM:
 		if (get_word_in_line( statbuf) )
 		{
@@ -4911,15 +4911,15 @@ void handle_internal( tic_param_t pfield)
 		tokenization_error( INFO,
 		    "Encountered %s.  Resetting FCode-token "
 			"Assignment Counter.  ", strupr(statbuf) );
-		list_fcode_ranges( FALSE);
+		list_fcode_ranges( false);
 		reset_fcode_ranges();
 		break;
 		
 	case EXIT:
-		if ( test_in_colon( statbuf, TRUE, TKERROR, NULL)
+		if ( test_in_colon( statbuf, true, TKERROR, NULL)
 		     || noerrors )
 		{
-		    ret_stk_balance_rpt( NULL, FALSE);
+		    ret_stk_balance_rpt( NULL, false);
 		    if ( ibm_locals )
 		    {
 			finish_locals ();
@@ -4934,7 +4934,7 @@ void handle_internal( tic_param_t pfield)
 	
 	case VERSION1:
 	case FCODE_V1:
-		fcode_starter( "version1", 1, FALSE) ;
+		fcode_starter( "version1", 1, false) ;
 		tokenization_error( INFO, "Using version1 header "
 		    "(8-bit offsets).\n");
 		break;
@@ -4942,26 +4942,26 @@ void handle_internal( tic_param_t pfield)
 	case START1:
 	case FCODE_V2:
 	case FCODE_V3: /* Full IEEE 1275 */
-		fcode_starter( "start1", 1, TRUE);
+		fcode_starter( "start1", 1, true);
 		break;
 		
 	case START0:
-		fcode_starter( "start0", 0, TRUE);
+		fcode_starter( "start0", 0, true);
 		break;
 		
 	case START2:
-		fcode_starter( "start2", 2, TRUE);
+		fcode_starter( "start2", 2, true);
 		break;
 		
 	case START4:
-		fcode_starter( "start4", 4, TRUE);
+		fcode_starter( "start4", 4, true);
 		break;
 		
 	case END1:
 		tokenization_error( WARNING, 
 		    "Appearance of END1 in FCode source code "
 			"is not intended by IEEE 1275-1994\n");
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case END0:
 	case FCODE_END:
 		if ( handy_toggle )
@@ -4974,7 +4974,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case RECURSE:
-		if ( test_in_colon(statbuf, TRUE, TKERROR, NULL ) )
+		if ( test_in_colon(statbuf, true, TKERROR, NULL ) )
 		{
 		    emit_fcode(last_colon_fcode);
 		}
@@ -4982,7 +4982,7 @@ void handle_internal( tic_param_t pfield)
 		
 
 	case RECURSIVE:
-		if ( test_in_colon(statbuf, TRUE, TKERROR, NULL ) )
+		if ( test_in_colon(statbuf, true, TKERROR, NULL ) )
 		{
 		    reveal_last_colon();
 		}
@@ -4999,7 +4999,7 @@ void handle_internal( tic_param_t pfield)
 		    /*  handy_toggle_too  is already TRUE    */
 		    /*  Will not call bump_ret_stk_depth()   */
 		    /*  handy_int  is already zero    */
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case RET_STK_FROM:
 		if ( handy_toggle )
 		{
@@ -5008,14 +5008,14 @@ void handle_internal( tic_param_t pfield)
 		    /*  handy_toggle_too  is already TRUE    */
 		    /*  Will call bump_ret_stk_depth( -1)    */
 		    handy_int = -1;
-		    handy_toggle = FALSE;
+		    handy_toggle = false;
 		}
 	case RET_STK_TO:
 		if ( handy_toggle )
 		{
 		    handy_string = ">r";
 		    /*  Will not call ret_stk_access_rpt()   */
-		    handy_toggle_too  = FALSE;
+		    handy_toggle_too  = false;
 		    /*  Will call bump_ret_stk_depth( 1)     */
 		    handy_int =  1;
 		    /*  Last in series doesn't need to reset handy_toggle  */
@@ -5025,7 +5025,7 @@ void handle_internal( tic_param_t pfield)
 		handy_toggle = allow_ret_stk_interp;
 		if ( ! handy_toggle )
 		{
-		    handy_toggle = test_in_colon(statbuf, TRUE, TKERROR, NULL );
+		    handy_toggle = test_in_colon(statbuf, true, TKERROR, NULL );
 		}
 		if ( handy_toggle || noerrors )
 		{
@@ -5061,13 +5061,13 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case NOTLAST:
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case ISLAST:
 		dpush(handy_toggle);
 	case SETLAST:
 		{
 		    u32 val = dpop();
-		    bool new_pili = BOOLVAL( (val != 0) );
+		    bool new_pili = ( (val != 0) );
 		    if ( pci_is_last_image != new_pili )
 		    {
 			tokenization_error( INFO,
@@ -5102,7 +5102,7 @@ void handle_internal( tic_param_t pfield)
 		break;
 
 	case FCODE_DATE:
-		handy_toggle = FALSE;
+		handy_toggle = false;
 	case FCODE_TIME:
 		{
 			time_t tt;
@@ -5136,16 +5136,16 @@ void handle_internal( tic_param_t pfield)
 	    /*  IBM-style Locals, under control of a switch  */
 	    if ( ibm_locals )
 	    {
-		bool found_it = TRUE;
+		bool found_it = true;
 		switch (tok) {
 		    case CURLY_BRACE:
-			declare_locals( FALSE);
+			declare_locals( false);
 			break;
 		    case DASH_ARROW:
 			assign_local();
 			break;
 		    default:
-			found_it = FALSE;
+			found_it = false;
 	}
 		if ( found_it ) break;
 }
@@ -5160,13 +5160,13 @@ void handle_internal( tic_param_t pfield)
 	     *      "fake-out" the line number...
 	     */
 {
-		bool fake_out_lineno = FALSE;
+		bool fake_out_lineno = false;
 		unsigned int save_lineno = lineno;
 		unsigned int true_lineno;
 		if ( abort_quote( tok) )
 		{   break;
 		}else{
-		    if ( tok == ABORTTXT )  fake_out_lineno = TRUE;
+		    if ( tok == ABORTTXT )  fake_out_lineno = true;
 		}
 		true_lineno = lineno;
 
@@ -5222,18 +5222,18 @@ void skip_string( tic_param_t pfield)
 {
     fwtoken tok = pfield.fw_token;
     unsigned int sav_lineno = lineno;
-    bool handy_toggle = TRUE ;   /*  Various uses...   */
+    bool handy_toggle = true ;   /*  Various uses...   */
 			
     switch (tok) {
     case STRING:         /*  Double-Quote ( " ) string    */
     case PSTRING:        /*  Dot-Quote  ( ." ) string     */
     case ABORTTXT:       /*  ABORT", even if not enabled  */
-	get_string( FALSE);   /*  Don't truncate; ignoring anyway  */
+	get_string( false);   /*  Don't truncate; ignoring anyway  */
 	/*  Will handle multi-line warnings, etc.   */
 				break;
 			
     case SSTRING:        /*  Ess-Quote  ( s"  ) string  */
-	handy_toggle = FALSE;
+	handy_toggle = false;
     case PBSTRING:       /*  Dot-Paren  .(   string  */
 			if (*pc++=='\n') lineno++;
 	{
@@ -5247,16 +5247,16 @@ void skip_string( tic_param_t pfield)
 	/*  IBM-style Locals, under control of a switch  */
 	if ( ibm_locals )
 	{
-	    bool found_it = TRUE;
+	    bool found_it = true;
 	    switch (tok) {
 		case CURLY_BRACE:
-		    declare_locals( TRUE);
+		    declare_locals( true);
 		    break;
 		case DASH_ARROW:
 		    get_word();
 		    break;
 		default:
-		    found_it = FALSE;
+		    found_it = false;
 	    }
 	    if ( found_it ) break;
 	}
@@ -5356,7 +5356,7 @@ void process_remark( tic_param_t pfield )
 
 bool filter_comments( u8 *inword)
 {
-    bool retval = FALSE;
+    bool retval = false;
     tic_hdr_t *found = lookup_word( inword, NULL, NULL );
 			
     if ( found != NULL )
@@ -5364,7 +5364,7 @@ bool filter_comments( u8 *inword)
 	if ( found->funct == process_remark )
 	{
 	    found->funct( found->pfield);
-	    retval = TRUE;
+	    retval = true;
 	}else{
 	    /*  Permit the "allow-multiline-comments" directive  */
 	    if ( found->funct == handle_internal )
@@ -5373,7 +5373,7 @@ bool filter_comments( u8 *inword)
 		{
 		    /*   Make sure any intended side-effects occur...  */
 		    found->funct( found->pfield);
-		    retval = TRUE;
+		    retval = true;
 		}
 	    }
 	}

@@ -353,7 +353,7 @@ void list_user_symbols(void )
 
 	    /*  Detect duplicate names.  */
 	    dup_srch_indx = indx;
-	    is_dup = FALSE;
+	    is_dup = false;
 	    while ( dup_srch_indx > 0 )
 	    {
 		str_sub_vocab_t *dup_cand;
@@ -361,7 +361,7 @@ void list_user_symbols(void )
 		dup_cand = symb_ptr[dup_srch_indx];
 		if ( strcmp( curr->name, dup_cand->name) == 0 )
 		{
-		    is_dup = TRUE;
+		    is_dup = true;
 		    break;
 		}
 	    }

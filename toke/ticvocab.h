@@ -311,7 +311,7 @@ typedef struct tic_bool_hdr
  **************************************************************************** */
 #define NO_PARAM_TIC(nam, func )  \
   { nam , (tic_hdr_t *)NULL , func ,   \
-        { 0 }, UNSPECIFIED , FALSE , NULL , 0 , FALSE }
+        { 0 }, UNSPECIFIED , false , NULL , 0 , false }
 
 
 /* **************************************************************************
@@ -328,7 +328,7 @@ typedef struct tic_bool_hdr
  **************************************************************************** */
 #define NO_PARAM_IGN(nam, func )  \
   { nam , (tic_hdr_t *)NULL , func ,   \
-        { 0 }, UNSPECIFIED , FALSE , func , 0 , FALSE }
+        { 0 }, UNSPECIFIED , false , func , 0 , false }
 
 
 /* **************************************************************************
@@ -356,7 +356,7 @@ typedef struct tic_bool_hdr
 
 #define VALPARAM_TIC(nam, func, pval, definr, is_tok )  \
     { nam , (tic_hdr_t *)NULL , func ,  \
-        { (TIC_P_DEFLT_TYPE)(pval) }, definr , is_tok , NULL , 0 , FALSE }
+        { (TIC_P_DEFLT_TYPE)(pval) }, definr , is_tok , NULL , 0 , false }
 
 
 /* **************************************************************************
@@ -380,12 +380,12 @@ typedef struct tic_bool_hdr
  **************************************************************************** */
 #define DUALFUNC_TIC(nam, afunc, pval, ifunc, definr )  \
     { nam , (tic_hdr_t *)NULL , afunc ,  \
-        { (TIC_P_DEFLT_TYPE)(pval) }, definr , FALSE , ifunc , 0 , FALSE }
+        { (TIC_P_DEFLT_TYPE)(pval) }, definr , false , ifunc , 0 , false }
 
 /*  Similar but a  tic_fwt_hdr_t  type structure  */
 #define DUFNC_FWT_PARM(nam, afunc, pval, ifunc, definr )  \
     { nam , (tic_fwt_hdr_t *)NULL , afunc ,  \
-        { (TIC_FWT_P_DEFLT_TYPE)(pval) }, definr , FALSE , ifunc , 0 , FALSE }
+        { (TIC_FWT_P_DEFLT_TYPE)(pval) }, definr , false , ifunc , 0 , false }
 
 
 /* **************************************************************************
@@ -406,7 +406,7 @@ typedef struct tic_bool_hdr
 
 #define FWORD_TKN_TIC(nam, func, fw_tokval, definr )    \
     { nam , (tic_fwt_hdr_t *)NULL , func , { fw_tokval },  \
-      definr , FALSE , NULL , 0 , FALSE }
+      definr , false , NULL , 0 , false }
 
 /* **************************************************************************
  *          Macro Name:   DUALFUNC_FWT_TIC
@@ -427,7 +427,7 @@ typedef struct tic_bool_hdr
  **************************************************************************** */
 #define DUALFUNC_FWT_TIC(nam, afunc, fw_tokval, ifunc, definr )    \
     { nam , (tic_fwt_hdr_t *)NULL , afunc , { fw_tokval }, \
-      definr , FALSE , ifunc , 0 , FALSE }
+      definr , false , ifunc , 0 , false }
 
 /* **************************************************************************
  *          Macro Name:   BUILTIN_MAC_TIC
@@ -449,7 +449,7 @@ typedef struct tic_bool_hdr
 
 #define BUILTIN_MAC_TIC(nam, func, alias )    \
     { nam , (tic_mac_hdr_t *)NULL , func , { alias }, \
-      MACRO_DEF , FALSE , NULL , 0 , FALSE }
+      MACRO_DEF , false , NULL , 0 , false }
 
 
 /* **************************************************************************
@@ -472,7 +472,7 @@ typedef struct tic_bool_hdr
 
 #define BUILTIN_BOOL_TIC(nam, func, bool_vbl )    \
     { nam , (tic_bool_hdr_t *)NULL , func , { &bool_vbl },   \
-        COMMON_FWORD , FALSE , func , 0 , FALSE }
+        COMMON_FWORD , false , func , 0 , false }
 
 
 /* **************************************************************************

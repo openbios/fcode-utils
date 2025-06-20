@@ -171,7 +171,7 @@ static void skip_whitespace(char **string_line_ptr)
 
 static bool get_next_vfc_line(void)
 {
-	bool retval = FALSE;	/*  TRUE = not at end yet  */
+	bool retval = false;	/*  TRUE = not at end yet  */
 	while (vfc_remainder < vfc_buf_end) {
 		current_vfc_line = (char *)vfc_remainder;
 		vfc_remainder = (u8 *)strchr((const char *)current_vfc_line, '\n');
@@ -185,7 +185,7 @@ static bool get_next_vfc_line(void)
 			continue;	/*  Comment  */
 		if (*current_vfc_line == '\\')
 			continue;	/*  Comment  */
-		retval = TRUE;
+		retval = true;
 		break;		/*  Found something  */
 	}
 	return (retval);
@@ -212,7 +212,7 @@ static bool get_next_vfc_line(void)
  *             "Splash" message...
  *
  **************************************************************************** */
-static bool did_not_splash = TRUE;
+static bool did_not_splash = true;
 static void vfc_splash(char *vf_file_name)
 {
 	if (did_not_splash) {
@@ -224,7 +224,7 @@ static void vfc_splash(char *vf_file_name)
 			vf_file_name);
 		printremark(strbfr);
 		free(strbfr);
-		did_not_splash = FALSE;
+		did_not_splash = false;
 	}
 }
 
@@ -286,9 +286,9 @@ static void vfc_splash(char *vf_file_name)
 
 bool add_fcodes_from_list(char *vf_file_name)
 {
-	bool retval = FALSE;
+	bool retval = false;
 	int added_fc_count = 0;
-	check_tok_seq = FALSE;
+	check_tok_seq = false;
 
 	if (verbose)
 		vfc_splash(vf_file_name);
@@ -369,12 +369,12 @@ bool add_fcodes_from_list(char *vf_file_name)
 
 		/*    Check if the name is on the "Special Functions List"  */
 		{
-			bool found_spf = FALSE;
+			bool found_spf = false;
 			int indx;
 			for (indx = 0; indx < spcl_func_count; indx++) {
 				if ( strcmp( vs_fc_name, spcl_func_list[indx].name) == 0 ) {
 					char strbuf[64];
-					found_spf = TRUE;
+					found_spf = true;
 					spcl_func_list[indx].fcode = vs_fc_number;
 					link_token( &spcl_func_list[indx]);
 					added_fc_count++;
@@ -393,7 +393,7 @@ bool add_fcodes_from_list(char *vf_file_name)
 		fc_name_cpy = strdup(vs_fc_name);
 		add_token((u16) vs_fc_number, fc_name_cpy);
 		added_fc_count++;
-		retval = TRUE;
+		retval = true;
 	}
 
 	if (verbose) {
@@ -404,6 +404,6 @@ bool add_fcodes_from_list(char *vf_file_name)
 	}
 
 	close_stream();
-	check_tok_seq = TRUE;
+	check_tok_seq = true;
 	return (retval);
 }

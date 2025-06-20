@@ -98,7 +98,7 @@ static void stackerror(bool stat)
  */
 bool min_stack_depth(int mindep)
 {
-    bool retval = TRUE ;
+    bool retval = true ;
     long *stack_result;
 
     stack_result = dstack + mindep;
@@ -116,8 +116,8 @@ bool min_stack_depth(int mindep)
 
     if ( stack_result > enddstack )
     {
-	retval = FALSE;
-	stackerror(TRUE);
+	retval = false;
+	stackerror(true);
     }
 
     return ( retval );
@@ -128,7 +128,7 @@ bool min_stack_depth(int mindep)
  */
 static bool room_on_stack_for(int newdep)
 {
-    bool retval = TRUE ;
+    bool retval = true ;
     long *stack_result;
 
     stack_result = dstack - newdep;
@@ -136,8 +136,8 @@ static bool room_on_stack_for(int newdep)
 
     if ( stack_result < startdstack )
     {
-	retval = FALSE;
-	stackerror(FALSE);
+	retval = false;
+	stackerror(false);
     }
 
     return ( retval );

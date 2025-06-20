@@ -51,10 +51,10 @@
 		     "(C) Copyright 2006 coresystems GmbH"
 #define IBM_COPYR    "(C) Copyright 2005 IBM Corporation.  All Rights Reserved."
 
-bool verbose = FALSE;
-bool decode_all = FALSE;
-bool show_linenumbers = FALSE;
-bool show_offsets = FALSE;
+bool verbose = false;
+bool decode_all = false;
+bool show_linenumbers = false;
+bool show_offsets = false;
 
 /*   Param is FALSE when beginning to detokenize,
  *       TRUE preceding error-exit   */
@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 	int c;
 	const char *optstring = "vhanof:?";
 	int linenumbers = 0;
-	bool add_vfcodes = FALSE;
+	bool add_vfcodes = false;
 	char *vfc_filnam = NULL;
 
 	while (1) {
@@ -119,31 +119,31 @@ int main(int argc, char **argv)
 
 		switch (c) {
 		case 'v':
-			verbose = TRUE;
+			verbose = true;
 			break;
 		case 'a':
-			decode_all = TRUE;
+			decode_all = true;
 			break;
 		case 'n':
 			linenumbers |= 1;
-			show_linenumbers = TRUE;
+			show_linenumbers = true;
 			break;
 		case 'o':
 			linenumbers |= 2;
-			show_linenumbers = TRUE;
-			show_offsets = TRUE;
+			show_linenumbers = true;
+			show_offsets = true;
 			break;
 		case 'f':
-			add_vfcodes = TRUE;
+			add_vfcodes = true;
 			vfc_filnam = optarg;
 			break;
 		case 'h':
 		case '?':
-			print_copyright(TRUE);
+			print_copyright(true);
 			usage(argv[0]);
 			return 0;
 		default:
-			print_copyright(TRUE);
+			print_copyright(true);
 			printf("%s: unknown option.\n", argv[0]);
 			usage(argv[0]);
 			return 1;
@@ -151,14 +151,14 @@ int main(int argc, char **argv)
 	}
 
 	if (verbose)
-		print_copyright(FALSE);
+		print_copyright(false);
 
 	if (linenumbers > 2)
 		printremark
 		    ("Line numbers will be disabled in favour of offsets.\n");
 
 	if (optind >= argc) {
-		print_copyright(TRUE);
+		print_copyright(true);
 		printf("%s: filename missing.\n", argv[0]);
 		usage(argv[0]);
 		return 1;

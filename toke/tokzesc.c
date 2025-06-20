@@ -159,7 +159,7 @@ void enter_tokz_esc( void )
 {
     saved_base = base ;
     base = 16;
-    in_tokz_esc = TRUE;
+    in_tokz_esc = true;
 }
 
 /* **************************************************************************
@@ -178,7 +178,7 @@ void enter_tokz_esc( void )
 
 static void end_tokz_esc( tic_param_t pfield )
 {
-    in_tokz_esc = FALSE;
+    in_tokz_esc = false;
     base = saved_base ;
 }
 
@@ -254,7 +254,7 @@ static void tokz_esc_emit_byte ( tic_param_t pfield )
 
 static bool get_fcode_from_stack( u16 *the_num, bool setting_fc)
 {
-    bool retval = FALSE;
+    bool retval = false;
     char *the_action = "emit FCode value of";
     u16 legal_minimum = 0x10;
     long num_on_stk = dpop();
@@ -274,7 +274,7 @@ static bool get_fcode_from_stack( u16 *the_num, bool setting_fc)
     }
     if ( ( test_fcode >= legal_minimum ) && ( test_fcode <= 0xfff ) )
     {
-	retval = TRUE;
+	retval = true;
 	*the_num = test_fcode;
     }else{	tokenization_error( TKERROR, "Attempt to %s "
 	    "0x%x, which violates limit specified by IEEE-1275.  "
@@ -305,7 +305,7 @@ static void tokz_esc_next_fcode( tic_param_t pfield )
 {
     u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, TRUE) )
+    if ( get_fcode_from_stack( &test_fcode, true) )
     {
 	if ( test_fcode == nextfcode )
 	{
@@ -344,7 +344,7 @@ static void tokz_emit_fcode( tic_param_t pfield )
 {
     u16 test_fcode;
 
-    if ( get_fcode_from_stack( &test_fcode, FALSE) )
+    if ( get_fcode_from_stack( &test_fcode, false) )
     {
 	tokenization_error( INFO,
 	    "Emitting FCode value of 0x%x\n", test_fcode);
@@ -526,7 +526,7 @@ static void create_constant( tic_param_t pfield )
 	     do_constant,
 		  (TIC_P_DEFLT_TYPE)valu,
 		       CONST ,
-			  0 , FALSE , NULL,
+			  0 , false , NULL,
 		               &tokz_esc_vocab );
 
     check_name_length( wlen );
@@ -561,7 +561,7 @@ static const char close_paren = ')' ;
  **************************************************************************** */
 
 #define TKZESC_CONST(nam, pval)   \
-                        VALPARAM_TIC(nam, do_constant, pval, CONST, FALSE )
+                        VALPARAM_TIC(nam, do_constant, pval, CONST, false )
 #define TKZ_ESC_FUNC(nam, afunc, pval, ifunc)   \
                         DUALFUNC_TIC(nam, afunc, pval, ifunc, UNSPECIFIED)
 
@@ -621,12 +621,12 @@ void init_tokz_esc_vocab ( void )
     static const int tokz_esc_vocab_max_indx =
 	 sizeof(tokz_esc_vocab_tbl)/sizeof(tic_hdr_t) ;
 
-    in_tokz_esc = TRUE;
+    in_tokz_esc = true;
     tokz_esc_vocab = NULL ;   /*  Belt-and-suspenders...  */
     init_tic_vocab(tokz_esc_vocab_tbl,
                        tokz_esc_vocab_max_indx,
 		           &tokz_esc_vocab );
-    in_tokz_esc = FALSE;
+    in_tokz_esc = false;
 }
 
 /* **************************************************************************

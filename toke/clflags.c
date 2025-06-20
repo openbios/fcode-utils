@@ -89,26 +89,26 @@
  *
  **************************************************************************** */
 
-bool ibm_locals = FALSE ;
-bool ibm_locals_legacy_separator = TRUE ;
-bool ibm_legacy_separator_message = TRUE ;
-bool enable_abort_quote = TRUE ;
-bool sun_style_abort_quote = TRUE ;
-bool sun_style_checksum = FALSE ;
-bool abort_quote_throw = TRUE ;
-bool string_remark_escape = TRUE ;
-bool hex_remark_escape = TRUE ;
-bool c_style_string_escape = TRUE ;
-bool always_headers = FALSE ;
-bool always_external = FALSE ;
-bool verbose_dup_warning = TRUE ;
-bool obso_fcode_warning = TRUE ;
-bool trace_conditionals = FALSE ;
-bool big_end_pci_image_rev = FALSE ;
-bool allow_ret_stk_interp = TRUE ;
+bool ibm_locals = false;
+bool ibm_locals_legacy_separator = true;
+bool ibm_legacy_separator_message = true;
+bool enable_abort_quote = true;
+bool sun_style_abort_quote = true;
+bool sun_style_checksum = false;
+bool abort_quote_throw = true;
+bool string_remark_escape = true;
+bool hex_remark_escape = true;
+bool c_style_string_escape = true;
+bool always_headers = false;
+bool always_external = false;
+bool verbose_dup_warning = true;
+bool obso_fcode_warning = true;
+bool trace_conditionals = false;
+bool big_end_pci_image_rev = false;
+bool allow_ret_stk_interp = true;
 
 /*  And one to trigger a "help" message  */
-bool clflag_help = FALSE;
+bool clflag_help = false;
 
 /* **************************************************************************
  *
@@ -118,8 +118,8 @@ bool clflag_help = FALSE;
  *
  **************************************************************************** */
 
-bool force_tokens_case       = FALSE ;
-bool force_lower_case_tokens = FALSE ;
+bool force_tokens_case       = false;
+bool force_lower_case_tokens = false;
 
 /* **************************************************************************
  *
@@ -127,10 +127,10 @@ bool force_lower_case_tokens = FALSE ;
  *         and keep two more to detect when a change is made...
  *
  **************************************************************************** */
-static bool upper_case_tokens = FALSE ;
-static bool lower_case_tokens = FALSE ;
-static bool was_upper_case_tk = FALSE ;
-static bool was_lower_case_tk = FALSE ;
+static bool upper_case_tokens = false;
+static bool lower_case_tokens = false;
+static bool was_upper_case_tk = false;
+static bool was_lower_case_tk = false;
 
 /* **************************************************************************
  *
@@ -141,7 +141,7 @@ static bool was_lower_case_tk = FALSE ;
  *
  **************************************************************************** */
 
-static bool cl_flag_change = FALSE;
+static bool cl_flag_change = false;
 
 static const cl_flag_t cl_flags_list[] = {
   /*  The clflag_tabs field takes at least one tab.
@@ -342,12 +342,12 @@ static void adjust_case_flags( void)
 	    if ( *(case_tokens[the_one]) )
 	    {
 	        /*  If it has gone to TRUE, force the other to FALSE.  */
-		*(case_tokens[the_other]) = FALSE;
+		*(case_tokens[the_other]) = false;
 	        /*      and set  force_tokens_case  to TRUE  */
-		force_tokens_case = TRUE;
+		force_tokens_case = true;
 	    }else{
 		/*  If it has gone to FALSE turn  force_tokens_case FALSE  */
-		force_tokens_case = FALSE;
+		force_tokens_case = false;
 	    }
 	    if ( force_tokens_case )
 	    {
@@ -408,10 +408,10 @@ static void adjust_case_flags( void)
  *          Adjust the "upper/lower-case-tokens" flags if one has changed.
  *
  **************************************************************************** */
-static bool first_err_msg = TRUE;  /*  Need extra carr-ret for first err msg  */
+static bool first_err_msg = true;  /*  Need extra carr-ret for first err msg  */
 bool set_cl_flag(char *flag_name, bool from_src)
 {
-    bool retval = TRUE;
+    bool retval = true;
 
     was_upper_case_tk = upper_case_tokens;
     was_lower_case_tk = lower_case_tokens;
@@ -419,25 +419,25 @@ bool set_cl_flag(char *flag_name, bool from_src)
     if ( strlen(flag_name) > 3 )
     {
 	int indx;
-	bool flagval = TRUE;
+	bool flagval = true;
 	char *compar = flag_name;
 
 	if ( strncasecmp( flag_name, "no", 2) == 0 )
 	{
-	    flagval = FALSE;
+	    flagval = false;
 	    compar += 2;
 	}
 	for ( indx = 0 ; indx < number_of_cl_flags ; indx++ )
 	{
 	    if ( strcasecmp( compar, cl_flags_list[indx].clflag_name ) == 0 )
 	    {
-		retval = FALSE;
+		retval = false;
 		*(cl_flags_list[indx].flag_var) = flagval;
 
 		/*  The "help" flag is the last one in the list  */
 		if ( indx != number_of_cl_flags - 1 )
 		{
-		    cl_flag_change = TRUE;
+		    cl_flag_change = true;
 		}
 		if ( from_src )
 		{
@@ -460,7 +460,7 @@ bool set_cl_flag(char *flag_name, bool from_src)
 	   if ( first_err_msg )
 	   {
 	       printf( "\n");
-	       first_err_msg = FALSE;
+	       first_err_msg = false;
 	   }
 	   printf( msg_txt, flag_name);
        }
@@ -556,7 +556,7 @@ void list_cl_flag_settings(void)
 
     if ( cl_flag_change )
     {
-	show_all_cl_flag_settings( FALSE);
+	show_all_cl_flag_settings( false);
     }
 }
 
@@ -735,7 +735,7 @@ void reset_cl_flags(void)
     for ( indx = 0 ; indx < (number_of_cl_flags - 1) ; indx++ )
     {
 	*(cl_flags_list[indx].flag_var) =
-	    BOOLVAL( cl_flags_bit_map & moving_bit) ;
+	    ( cl_flags_bit_map & moving_bit) ;
 	moving_bit <<= 1;
     }
 }

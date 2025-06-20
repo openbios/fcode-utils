@@ -126,7 +126,7 @@ static char *depncy_list_name;
 static FILE *depncy_file;
 static char *missing_list_name;
 static FILE *missing_list_file;
-static bool no_files_missing = TRUE;
+static bool no_files_missing = true;
 
 /* **************************************************************************
  *
@@ -399,12 +399,12 @@ static void init_incl_list_scan( char *base_name)
 
 static bool scan_incl_list( char *base_name)
 {
-    bool retval = FALSE;   /*  default to "Done"  */
+    bool retval = false;   /*  default to "Done"  */
 	
     if ( include_list_full_path == NULL )
     {
 	include_list_full_path = base_name;
-	retval = TRUE;
+	retval = true;
     }else{
 	if ( include_list_next != NULL )
 	{
@@ -425,7 +425,7 @@ static bool scan_incl_list( char *base_name)
 	            include_list_next->dir_path, base_name);
 	    }
 	    include_list_next = include_list_next->next;
-	    retval = TRUE;
+	    retval = true;
 	}
     }
 
@@ -550,7 +550,7 @@ static FILE *open_incl_list_file( char *base_name, char *mode)
 
 static bool stat_incl_list_file( char *base_name, struct stat *file_info)
 {
-    bool retval = FALSE;
+    bool retval = false;
     int stat_reslt = -1;    /*  Success = 0   */
 
     init_incl_list_scan( base_name);
@@ -559,7 +559,7 @@ static bool stat_incl_list_file( char *base_name, struct stat *file_info)
         stat_reslt = stat( include_list_full_path, file_info);
 	if ( stat_reslt == 0 )
 	{
-	    retval = TRUE;
+	    retval = true;
 	    break; 
 	}
     }
@@ -650,7 +650,7 @@ static void file_is_missing( char *fle_nam)
     if ( missing_list_file != NULL )
     {
 	fprintf( missing_list_file, "%s\n", fle_nam);
-	no_files_missing = FALSE;
+	no_files_missing = false;
     }
 }
 
@@ -785,7 +785,7 @@ static void expanded_name( void )
 
 static void expansion_error( void )
 {
-    if ( INVERSE( verbose) )
+    if ( !verbose )
     {
 	expansion_msg_severity |= FORCE_MSG;
 	expanded_name();
@@ -902,7 +902,7 @@ static char *expand_pathname( const char *input_pathname)
     static const int buffer_max = GET_BUF_MAX * 2;
 
     char *retval = (char *)input_pathname;
-    was_expanded = FALSE;
+    was_expanded = false;
 
     /*  If no '$' is found, expansion is unnecessary.  */
     if ( strchr( input_pathname, '$') != NULL )
@@ -937,7 +937,7 @@ static char *expand_pathname( const char *input_pathname)
 	    retval = NULL;
 	}else{
 	    expansion_buffer[syst_stat-1] =0;
-	    was_expanded = TRUE;
+	    was_expanded = true;
 	    retval = expansion_buffer;
 	    expanded_name();
 	}
@@ -993,7 +993,7 @@ FILE *open_expanded_file( const char *path_name, char *mode, char *for_what)
 	    "Failed to open file %s for %s\n", path_name, for_what );
     }
 
-    finish_incl_list_scan( BOOLVAL( retval != NULL) );
+    finish_incl_list_scan( ( retval != NULL) );
 
     return( retval);
 }
@@ -1080,30 +1080,30 @@ bool init_stream( const char *name)
     FILE *infile;
     u8 *newbuf;
 	struct stat finfo;
-    bool stat_succ = FALSE;
-    bool tried_stat = FALSE;
-    bool retval = FALSE;
-    bool inp_fil_acc_err = FALSE;
-    bool inp_fil_open_err = FALSE;
-    bool inp_fil_read_err = FALSE;
+    bool stat_succ = false;
+    bool tried_stat = false;
+    bool retval = false;
+    bool inp_fil_acc_err = false;
+    bool inp_fil_open_err = false;
+    bool inp_fil_read_err = false;
 
     char *infile_name = expand_pathname( name);
 
     if ( (infile_name != NULL) )
     {
-	tried_stat = TRUE;
+	tried_stat = true;
 	stat_succ = stat_incl_list_file( infile_name, &finfo);
     }
 
-    if ( INVERSE( stat_succ) )
+    if ( !stat_succ )
     {
-	inp_fil_acc_err = TRUE;
+	inp_fil_acc_err = true;
     }else{
 	
 	infile = fopen( include_list_full_path, "r");
 	if ( infile == NULL )
 	{
-	    inp_fil_open_err = TRUE;
+	    inp_fil_open_err = true;
 	}else{
 	
 	ilen=finfo.st_size;
@@ -1111,12 +1111,12 @@ bool init_stream( const char *name)
 
 	    if ( fread( newbuf, ilen, 1, infile) != 1 )
 	    {
-		inp_fil_read_err = TRUE;
+		inp_fil_read_err = true;
 		free( newbuf );
 	    } else {
 		unsigned int i;
 
-		retval = TRUE ;
+		retval = true ;
 		/*  Replace zeroes in the file with LineFeeds. */
 		/*  Replace carr-rets with spaces.  */
 		for (i=0; i<ilen; i++)
@@ -1164,7 +1164,7 @@ bool init_stream( const char *name)
 		if ( oname == NULL )
 		{
 		    /*  Quick way to suppress "finish"ing the i-l scan */
-		    tried_stat = FALSE; 
+		    tried_stat = false;
 		}
 	    }
 	fclose(infile);
@@ -1173,7 +1173,7 @@ bool init_stream( const char *name)
 	
     FFLUSH_STDOUT	/*   Do this first  */
     /*  Now we can deliver our postponed error and advisory messages  */
-    if ( INVERSE( retval) )
+    if ( !retval )
     {
 	file_is_missing( (char *)name);
 	if ( inp_fil_acc_err )
@@ -1416,7 +1416,7 @@ void init_output( const char *in_name, const char *out_name )
 	    char *temp_iname = iname;
 	    iname = NULL; 
 	
-	    finish_incl_list_scan( TRUE);
+	    finish_incl_list_scan( true);
 
 	    if ( fload_list && (load_list_file == NULL) )
 	    {
@@ -1434,7 +1434,7 @@ void init_output( const char *in_name, const char *out_name )
 	    {
 		missing_list_name = extend_filename( oname, ".fl.missing");
 		missing_list_file = fopen( missing_list_name,"w");
-		no_files_missing = TRUE;
+		no_files_missing = true;
 
 		if ( missing_list_file == NULL )
 		{
@@ -1559,12 +1559,12 @@ void close_stream( _PTR dummy)
 
 bool close_output(void)
 {
-    bool retval = TRUE;  /*  "Failure"  */
+    bool retval = true;  /*  "Failure"  */
     if ( error_summary() )
     { 
 	if ( opc == 0 )
 {
-	    retval = FALSE;  /*  "Not a problem"  */
+	    retval = false;  /*  "Not a problem"  */
 	}else{
 	FILE *outfile;
 
@@ -1586,7 +1586,7 @@ bool close_output(void)
 
 		printf("toke: wrote %d bytes to bytecode file '%s'\n",
 		    opc, oname);
-		retval = FALSE;  /*  "No problem"  */
+		retval = false;  /*  "No problem"  */
 	    }
 	}
     }
