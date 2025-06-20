@@ -117,8 +117,8 @@
  *
  **************************************************************************** */
 
-bool scope_is_global = FALSE;
-bool define_token = TRUE;      /*    TRUE = Normal definition process;
+bool scope_is_global = false;
+bool define_token = true;      /*    TRUE = Normal definition process;
                                 *        FALSE when definition is an Error.
                                 *        We enter definition state anyway,
                                 *            but must still suppress:
@@ -319,20 +319,20 @@ static void emit_fc_token( tic_param_t pfield)
 #define FC_TOKEN_FUNC  emit_fc_token
 
 #define BUILTIN_FCODE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , UNSPECIFIED, TRUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , UNSPECIFIED, true )
 
 /*  Built-in FCodes with known definers:  */
 #define BI_FCODE_VALUE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VALUE, TRUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VALUE, true )
 
 #define BI_FCODE_VRBLE( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VARIABLE, TRUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , VARIABLE, true )
 
 #define BI_FCODE_DEFER( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , DEFER, TRUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , DEFER, true )
 
 #define BI_FCODE_CONST( tok, nam)   \
-     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , CONST, TRUE )
+     VALPARAM_TIC(nam, FC_TOKEN_FUNC, tok , CONST, true )
 
 /* **************************************************************************
  *
@@ -363,10 +363,10 @@ static void obsolete_fc_token( tic_param_t pfield)
 #define OBSO_FC_FUNC  obsolete_fc_token
 
 #define OBSOLETE_FCODE( tok, nam)   \
-     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , UNSPECIFIED, TRUE )
+     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , UNSPECIFIED, true )
 
 #define OBSOLETE_VALUE( tok, nam)   \
-     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , VALUE, TRUE )
+     VALPARAM_TIC(nam, OBSO_FC_FUNC, tok , VALUE, true )
 
 
 /* **************************************************************************
@@ -509,7 +509,7 @@ void enter_global_scope( void )
     }else{
 	tokenization_error( INFO,
 	    "Initiating Global Scope definitions.\n" );
-	scope_is_global = TRUE;
+	scope_is_global = true;
 	save_device_definitions = current_definitions;
 	current_definitions = &global_voc_dict_ptr;
     }
@@ -523,7 +523,7 @@ void resume_device_scope( void )
 	    "Terminating Global Scope definitions; "
 		"resuming Device-node definitions.\n" );
 	current_definitions = save_device_definitions;
-	scope_is_global = FALSE;
+	scope_is_global = false;
     }else{
 	tokenization_error( WARNING,
 	    "%s -- Device-node Scope already in effect; ignoring.\n",
@@ -570,7 +570,7 @@ tic_hdr_t *lookup_current( char *tname)
     /*  Search Current Device Vocabulary ahead of global (core) vocabulary  */
     tic_hdr_t *retval;
     retval = lookup_tic_entry( tname, *current_definitions);
-    if ( (retval == NULL) && INVERSE(scope_is_global) )
+    if ( (retval == NULL) && !scope_is_global )
 {
 	retval = lookup_core_word( tname);
     }
@@ -597,7 +597,7 @@ tic_hdr_t *lookup_current( char *tname)
 bool exists_in_current( char *tname)
 {
     tic_hdr_t *found = lookup_word( tname, NULL, NULL);
-    bool retval = BOOLVAL ( found != NULL);
+    bool retval = ( found != NULL);
     return( retval);
 	}
 
@@ -626,7 +626,7 @@ tic_hdr_t *lookup_in_dev_node( char *tname)
 {
     tic_hdr_t *retval = NULL;
 
-    if ( INVERSE(scope_is_global) )
+    if ( !scope_is_global )
 {
 	retval = lookup_tic_entry( tname, *current_definitions);
 }
@@ -715,7 +715,7 @@ void add_to_current( char *name,
 
 	save_current = *current_definitions;
 	add_tic_entry( nu_name, FC_TOKEN_FUNC, fc_token,
-			   definer, 0 , TRUE , NULL, current_definitions );
+			   definer, 0 , true , NULL, current_definitions );
     }else{
 	trace_create_failure( name, NULL, fc_token);
 	warn_if_duplicate( name);
@@ -835,15 +835,15 @@ void reveal_last_colon ( void )
 
 bool create_current_alias( char *new_name, char *old_name )
 {
-    bool retval = FALSE;
-    bool split_alias = FALSE;
+    bool retval = false;
+    bool split_alias = false;
 
     /*  Rules 1 & 2 are implemented in the same code.  */
     if ( create_tic_alias( new_name, old_name, current_definitions) )
     {
-	 retval = TRUE;
+	 retval = true;
     }else{
-    if ( INVERSE(scope_is_global) )
+    if ( !scope_is_global )
     {
 	    /*  Rule 3.
 	     *  Because the vocab into which the new definition will go is
@@ -857,7 +857,7 @@ bool create_current_alias( char *new_name, char *old_name )
 	     *      have to disturb the other callers of  create_tic_alias()
 	     *  Yes!  Excellent!  Make it so!
 	     */
-	    split_alias = TRUE;
+	    split_alias = true;
 	    split_alias_message = INFO;
 	    retval = create_split_alias(
 			 new_name, old_name,
@@ -1450,7 +1450,7 @@ tic_hdr_t *lookup_token( char *tname)
 
 bool entry_is_token( tic_hdr_t *test_entry )
 {
-    bool retval = FALSE;
+    bool retval = false;
     if ( test_entry != NULL )
     {
 	retval = test_entry->is_token;

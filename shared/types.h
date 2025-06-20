@@ -40,7 +40,7 @@
  **************************************************************************** */
 
 #include <stdint.h>
-
+#include <stdbool.h>
 
 typedef int8_t s8;
 typedef uint8_t u8;
@@ -53,39 +53,6 @@ typedef uint32_t u32;
 
 typedef int64_t s64;
 typedef uint64_t u64;
-
-
-#ifdef FALSE            /*  Hack for AIX.     */
-#undef FALSE
-#undef TRUE
-#endif                  /*  Hack for AIX.     */
-
-typedef  enum boolean  {  FALSE = 0 ,  TRUE = -1 } bool ;
-
-
-/* **************************************************************************
- *          Macro Name:    BOOLVAL
- *                        Convert the supplied variable or expression to
- *                            a formal boolean.
- *   Argument:
- *       x        (bool)           Variable or expression, operand.
- *
- **************************************************************************** */
-
-#define BOOLVAL(x)   (x ? TRUE : FALSE)
-
-
-/* **************************************************************************
- *          Macro Name:    INVERSE
- *                        Return the logical inversion of the
- *                            supplied boolean variable or expression.
- *   Argument:
- *       x        (bool)           Variable or expression, operand.
- *
- **************************************************************************** */
-
-#define INVERSE(x)   (x ? FALSE : TRUE)
-
 
 /* **************************************************************************
 *

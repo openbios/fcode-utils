@@ -54,11 +54,11 @@ static int indent;		/*  Current level of indentation   */
  *
  **************************************************************************** */
 
-static bool ended_okay = TRUE;	/*  FALSE if finished prematurely  */
+static bool ended_okay = true;	/*  FALSE if finished prematurely  */
 
-bool offs16 = TRUE;
+bool offs16 = true;
 unsigned int linenum;
-bool end_found = FALSE;
+bool end_found = false;
 unsigned int token_streampos;	/*  Streampos() of currently-gotten token  */
 u16 last_defined_token = 0;
 
@@ -86,7 +86,7 @@ static void pretty_print_string(void)
 	u8 len;
 	u8 *strptr;
 	int indx;
-	bool in_parens = FALSE;	/*  Are we already inside parentheses?  */
+	bool in_parens = false;	/*  Are we already inside parentheses?  */
 
 	strptr = get_string(&len);
 
@@ -104,7 +104,7 @@ static void pretty_print_string(void)
 		if (isprint(c)) {
 			if (in_parens) {
 				printf(" )");
-				in_parens = FALSE;
+				in_parens = false;
 			}
 			printf("%c", c);
 			/*  Quote-mark must escape itself  */
@@ -113,7 +113,7 @@ static void pretty_print_string(void)
 		} else {
 			if (!in_parens) {
 				printf("\"(");
-				in_parens = TRUE;
+				in_parens = true;
 			}
 			printf(" %02x", c);
 		}
@@ -308,7 +308,7 @@ static s16 decode_offset(void)
 	 *      theoretically possible, so we'll treat it as valid.
 	 *  An offset of zero is also, of course, invalid.
 	 */
-	invalid_dest = BOOLVAL((dest <= 0)
+	invalid_dest = ((dest <= 0)
 			       || (dest > stream_max)
 			       || (offs == 0));
 
@@ -399,7 +399,7 @@ static void double_length_literal(void)
 static void offset16(void)
 {
 	decode_default();
-	offs16 = TRUE;
+	offs16 = true;
 }
 
 static void decode_branch(void)
@@ -482,7 +482,7 @@ static void decode_start(void)
 
 static void decode_token(u16 token)
 {
-	bool handy_flag = TRUE;
+	bool handy_flag = true;
 	switch (token) {
 	case 0x0b5:
 		new_token();
@@ -533,7 +533,7 @@ static void decode_token(u16 token)
 		decode_two();
 		break;
 	case 0x0fd:		/* version1 */
-		handy_flag = FALSE;
+		handy_flag = false;
 	case 0x0f0:		/* start0 */
 	case 0x0f1:		/* start1 */
 	case 0x0f2:		/* start2 */
@@ -545,7 +545,7 @@ static void decode_token(u16 token)
 		break;
 	case 0:		/* end0  */
 	case 0xff:		/* end1  */
-		end_found = TRUE;
+		end_found = true;
 		decode_default();
 		break;
 
@@ -611,7 +611,7 @@ static void decode_fcode_header(void)
 {
 	long err_pos;
 	u16 token;
-	bool new_offs16 = TRUE;
+	bool new_offs16 = true;
 
 	err_pos = get_streampos();
 	indent = 0;
@@ -619,7 +619,7 @@ static void decode_fcode_header(void)
 
 	switch (token) {
 	case 0x0fd:		/* version1 */
-		new_offs16 = FALSE;
+		new_offs16 = false;
 	case 0x0f0:		/* start0 */
 	case 0x0f1:		/* start1 */
 	case 0x0f2:		/* start2 */
@@ -685,7 +685,7 @@ static void decode_fcode_block(void)
 	unsigned int fc_block_start;
 	unsigned int fc_block_end;
 
-	end_found = FALSE;
+	end_found = false;
 	fc_block_start = get_streampos();
 
 	decode_fcode_header();
@@ -714,7 +714,7 @@ static void decode_fcode_block(void)
 				"Detokenization finished prematurely after %d of %d bytes.",
 				get_streampos() - fc_block_start,
 				fc_block_end - fc_block_start);
-			ended_okay = FALSE;
+			ended_okay = false;
 		}
 		printremark(temp_bufr);
 	}
@@ -750,7 +750,7 @@ static void decode_fcode_block(void)
 
 static bool another_fcode_block(void)
 {
-	bool retval = FALSE;
+	bool retval = false;
 	u16 token;
 
 	token = next_token();
@@ -762,7 +762,7 @@ static bool another_fcode_block(void)
 	case 0x0f1:		/* start1 */
 	case 0x0f2:		/* start2 */
 	case 0x0f3:		/* start4 */
-		retval = TRUE;
+		retval = true;
 		printremark
 		    ("Subsequent FCode Block detected.  Detokenizing.");
 		break;
@@ -799,7 +799,7 @@ void detokenize(void)
 			if (ended_okay) {
 				init_fcode_block();
 			}
-			ended_okay = TRUE;
+			ended_okay = true;
 
 			adjust_for_pci_header();
 

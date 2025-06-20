@@ -142,7 +142,7 @@ typedef struct trace_entry {
 static trace_entry_t *trace_list = NULL;
 static trace_entry_t *trace_list_last = NULL;
 
-static bool tracing_symbols = FALSE;
+static bool tracing_symbols = false;
 
 /* **************************************************************************
  *
@@ -192,7 +192,7 @@ void add_to_trace_list( char *trace_symb)
 	trace_list_last->next = new_t_l_entry;
     }else{
     trace_list = new_t_l_entry;
-	tracing_symbols = TRUE;
+	tracing_symbols = true;
     }
     trace_list_last = new_t_l_entry;
 }
@@ -217,7 +217,7 @@ void add_to_trace_list( char *trace_symb)
 
 bool is_on_trace_list( char *symb_name)
 {
-    bool retval = FALSE;
+    bool retval = false;
     if ( tracing_symbols )
     {
     trace_entry_t *test_entry = trace_list;
@@ -225,7 +225,7 @@ bool is_on_trace_list( char *symb_name)
     {
         if ( strcasecmp( symb_name, test_entry->tracee) == 0 )
 	{
-	    retval = TRUE;
+	    retval = true;
 	    break;
 	}
 	    test_entry = test_entry->next;
@@ -342,8 +342,8 @@ void trace_creation( tic_hdr_t *trace_entry,
     char *defr_name = "" ;
     char *defr_phrase = "" ;
     char *with_scope = "" ;
-    bool def_is_local = BOOLVAL( trace_entry->fword_defr == LOCAL_VAL);
-    bool creating_alias = BOOLVAL( nu_name != NULL );
+    bool def_is_local = ( trace_entry->fword_defr == LOCAL_VAL);
+    bool creating_alias = ( nu_name != NULL );
 
     if ( creating_alias )
     {
@@ -451,7 +451,7 @@ void trace_creation( tic_hdr_t *trace_entry,
     {
 	if ( def_is_local )
 	{
-	    in_last_colon( TRUE);
+	    in_last_colon( true);
 	}else{
 	    show_node_start();
 	}
@@ -484,7 +484,7 @@ void trace_creation( tic_hdr_t *trace_entry,
 
 void trace_create_failure( char *new_name, char *old_name, u16 fc_tokn)
 {
-    bool not_alias   = BOOLVAL( old_name == NULL );
+    bool not_alias   = ( old_name == NULL );
     bool do_it       = is_on_trace_list( new_name);
 
     if ( ( ! do_it ) && ( ! not_alias ) )
@@ -727,7 +727,7 @@ void trace_builtin( tic_hdr_t *trace_entry)
 		           (u16)trace_entry->pfield.deflt_elem );
 	}
 	definer_name(trace_entry->fword_defr, &defr_name);
-	trace_entry->tracing = TRUE;
+	trace_entry->tracing = true;
 	tokenization_error(TRACER,
 	    "%s"                             /*  <name>                 */
 	    "%s "                            /*  fc_token_display       */

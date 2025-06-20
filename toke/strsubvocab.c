@@ -172,13 +172,13 @@ str_sub_vocab_t *lookup_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab )
 
 bool exists_in_str_sub( char *tname, str_sub_vocab_t *str_sub_vocab )
 {
-    bool retval = FALSE;
+    bool retval = false;
     str_sub_vocab_t *found = NULL;
 
     found = lookup_str_sub( tname, str_sub_vocab );
     if ( found != NULL )
     {
-        retval = TRUE;
+        retval = true;
     }
     return ( retval );
 

@@ -279,11 +279,11 @@ static void invoke_local( tic_param_t pfield )
 
 static bool locals_separator( char subj )
 {
-    bool retval = FALSE;
+    bool retval = false;
     /*  Is it the preferred (i.e., non-legacy) separator?   */
     if ( subj == '|' )
     {  
-	retval = TRUE;
+	retval = true;
 	return ( retval );
     }
 	
@@ -291,7 +291,7 @@ static bool locals_separator( char subj )
     {
 	if ( subj == ';' )
 	{
-	    retval = TRUE;
+	    retval = true;
 	    if ( ibm_legacy_separator_message )
 	    {
 		tokenization_error ( WARNING , "Semicolon as separator in "
@@ -338,7 +338,7 @@ static void add_local( TIC_P_DEFLT_TYPE lnum, char *lname)
 
     lnamecopy = strdup( lname);
     add_tic_entry( lnamecopy, invoke_local, lnum,
-		       LOCAL_VAL, 0, FALSE,  NULL,
+		       LOCAL_VAL, 0, false,  NULL,
 			       &local_names );
 }
 
@@ -393,9 +393,9 @@ static void add_local( TIC_P_DEFLT_TYPE lnum, char *lname)
 static bool gather_locals( bool initted, int *counter )
 {
     signed long wlen;
-    bool retval = FALSE;
+    bool retval = false;
 
-    while ( TRUE )
+    while ( true )
     {
         wlen = get_word();
 
@@ -420,13 +420,13 @@ static bool gather_locals( bool initted, int *counter )
 	        /*  If gathering initted Local names, separator is legit  */
 	        if ( initted )
 		{
-		    retval = TRUE;
+		    retval = true;
 		    break;
 		}else{
 		    tokenization_error ( TKERROR,
 		        "Excess separator -- %s -- found "
 			    "in Local-Values declaration", statbuf);
-		    in_last_colon( TRUE);
+		    in_last_colon( true);
 		    continue;
 		}
 	    }
@@ -562,19 +562,19 @@ static int last_local_colon = 0;
 
 static bool error_check_locals ( void )
 {
-    bool retval = FALSE;
+    bool retval = false;
     
     if ( ! incolon )
     {
 	tokenization_error ( TKERROR,
 	    "Can only declare Locals inside of a Colon-definition.\n");
-        retval = TRUE;
+        retval = true;
     } else {
 	if ( last_local_colon == lastcolon )
 	{
 	    tokenization_error ( TKERROR, "Excess Locals Declaration");
-	    in_last_colon( TRUE);
-	    retval = TRUE;
+	    in_last_colon( true);
+	    retval = true;
 	}else{
             last_local_colon = lastcolon;
 	    if ( opc > lastcolon )
@@ -637,7 +637,7 @@ void declare_locals ( bool ignoring)
     
     l_d_lineno = lineno;
     bool sav_rep_mul_lin = report_multiline;
-    report_multiline = TRUE;
+    report_multiline = true;
 
     if ( ignoring || error_check_locals() )
     {
@@ -649,9 +649,9 @@ void declare_locals ( bool ignoring)
 	   pc++ ;  /*  Get past the close-curly-brace  */
        }
     }else{
-       if (gather_locals( TRUE,  &num_ilocals ) )
+       if (gather_locals( true,  &num_ilocals ) )
        {
-	   gather_locals( FALSE, &num_ulocals );
+	   gather_locals( false, &num_ulocals );
        }
     }
 
@@ -834,7 +834,7 @@ void assign_local ( void )
     local_op = "!";   /*  Set to Store  */
 
     is_okay = handle_local( statbuf);
-    if( INVERSE(is_okay)  )
+    if( !is_okay  )
     {
         tokenization_error ( TKERROR,
 	    "Cannot apply -> to %s, only to a declared Local.\n", statbuf );

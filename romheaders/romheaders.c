@@ -78,7 +78,7 @@ static bool dump_rom_header(rom_header_t *data)
 	printf ("\n  Pointer to PCI Data Structure: 0x%04x\n\n",
 				LITTLE_ENDIAN_WORD_FETCH(data->data_ptr));
 
-	return (BOOLVAL(sig == pci_header_signature) );
+	return ( (sig == pci_header_signature) );
 }
 
 static bool dump_pci_data(pci_data_t *data)
@@ -113,7 +113,7 @@ static bool dump_pci_data(pci_data_t *data)
 			data->last_image_flag&0x80?"":"not ");
 	printf("  Reserved: 0x%04x\n\n", little_word(data->reserved_2));
 
-	return (BOOLVAL(sig==PCI_DATA_HDR) );
+	return ( (sig==PCI_DATA_HDR) );
 }
 
 static void dump_platform_extensions(u8 type, rom_header_t *data)

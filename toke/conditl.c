@@ -131,11 +131,11 @@
 
 static bool is_a_type( char *tname, fwtoken fw_type)
 {
-    bool retval = FALSE;
+    bool retval = false;
     tic_fwt_hdr_t *found = (tic_fwt_hdr_t *)lookup_shared_f_exec_word( tname );
     if ( found != NULL )
     {
-        if ( found->pfield.fw_token == fw_type )  retval = TRUE;
+        if ( found->pfield.fw_token == fw_type )  retval = true;
     }
     return ( retval );
 }
@@ -162,7 +162,7 @@ static bool is_an_else( char *a_word)
  *
  **************************************************************************** */
 
-static bool already_ignoring = FALSE;
+static bool already_ignoring = false;
 
 /* **************************************************************************
  *
@@ -327,7 +327,7 @@ static void ignore_one_word( char *tname)
         if ( found->ign_func != NULL )
 	{
 	    bool save_already_ignoring = already_ignoring;
-	    already_ignoring = TRUE ;
+	    already_ignoring = true ;
 	    tic_found = (tic_hdr_t *)found;
 
 	    found->ign_func( found->pfield);
@@ -433,12 +433,12 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
      *     (aka "a nested call").
      */
     bool ignoring;
-    bool first_else = TRUE;  /*  The "else" we see is the first.  */
-    bool not_done = TRUE;
+    bool first_else = true;  /*  The "else" we see is the first.  */
+    bool not_done = true;
     unsigned int cond_strt_lineno = lineno;
     char *cond_strt_ifile_nam = strdup( iname);
 
-    ignoring = BOOLVAL( ( cond == FALSE ) || ( alr_ign != FALSE ) );
+    ignoring = ( cond == false ) || ( alr_ign != false ) ;
 
     if ( trace_conditionals )
     {
@@ -463,7 +463,7 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
 	    tokenization_error( TKERROR,
 	        "Conditional without conclusion; started");
 	    just_where_started( cond_strt_ifile_nam, cond_strt_lineno);
-	    not_done = FALSE ;
+	    not_done = false ;
 	    continue;
 	}
 
@@ -475,7 +475,7 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
 		    "Concluding Conditional");
 		just_started_at( cond_strt_ifile_nam, cond_strt_lineno);
 	    }
-	    not_done = FALSE ;
+	    not_done = false ;
 	    continue;
 	}
 
@@ -485,7 +485,7 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
 	    {
 		if ( first_else )
 		{
-		    ignoring = INVERSE( ignoring);
+		    ignoring = !ignoring;
 		}
 	    }
 
@@ -498,7 +498,7 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
 			 strupr(statbuf), the_scop);
 		just_started_at( cond_strt_ifile_nam, cond_strt_lineno);
 	    }else{
-		first_else = FALSE;
+		first_else = false;
 		if ( trace_conditionals )
 		{
 		    char *when_enc = alr_ign ? "While already" : "Now" ;
@@ -598,11 +598,11 @@ static void conditional_word_in_line( bool alr_ign,
 {
     if ( get_word_in_line( statbuf) )
     {
-    	bool cond = FALSE;
-	if ( INVERSE( alr_ign) )
+	bool cond = false;
+	if ( !alr_ign )
 	{
 	    bool exists = exist_funct( statbuf);
-	    cond = BOOLVAL( exists == exist_test);
+	    cond = ( exists == exist_test);
 	}
 	conditionally_tokenize( cond, alr_ign );
     }
@@ -627,7 +627,7 @@ static void conditional_word_in_line( bool alr_ign,
 static void if_exists( tic_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, TRUE, exists_in_current );
+    conditional_word_in_line( alr_ign, true, exists_in_current );
 }
 
 /* **************************************************************************
@@ -649,7 +649,7 @@ static void if_exists( tic_param_t pfield )
 static void if_not_exist( tic_bool_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, FALSE, exists_in_current );
+    conditional_word_in_line( alr_ign, false, exists_in_current );
 }
 
 /* **************************************************************************
@@ -666,7 +666,7 @@ static void if_not_exist( tic_bool_param_t pfield )
 static void if_defined( tic_bool_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, TRUE, exists_as_user_symbol );
+    conditional_word_in_line( alr_ign, true, exists_as_user_symbol );
 }
 
 /* **************************************************************************
@@ -683,7 +683,7 @@ static void if_defined( tic_bool_param_t pfield )
 static void if_not_defined( tic_bool_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
-    conditional_word_in_line( alr_ign, FALSE, exists_as_user_symbol );
+    conditional_word_in_line( alr_ign, false, exists_as_user_symbol );
 }
 
 
@@ -707,14 +707,14 @@ static void if_not_defined( tic_bool_param_t pfield )
 static void if_from_stack( tic_bool_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
-    bool cond = FALSE;
+    bool cond = false;
 
     if ( ! alr_ign )
     {
         long num = dpop();
 	if (num != 0)
 	{
-	    cond = TRUE;
+	    cond = true;
 	}
     }
     conditionally_tokenize( cond, alr_ign );

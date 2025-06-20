@@ -120,7 +120,7 @@ static  int pci_data_blk_ob_off = -1;
  *
  **************************************************************************** */
 
-static bool fcode_written = FALSE;
+static bool fcode_written = false;
 
 /* **************************************************************************
  *
@@ -155,8 +155,8 @@ void init_emit( void)
     pci_data_blk_ob_off = -1;
     opc                 =  0;
     pci_hdr_end_ob_off  =  0;
-    fcode_written       = FALSE;
-    haveend             = FALSE;   /*  Get this one too...  */
+    fcode_written       = false;
+    haveend             = false;   /*  Get this one too...  */
 }
 
 
@@ -188,7 +188,7 @@ void emit_fcode(u16 tok)
 		emit_byte(tok>>8);
 
 	emit_byte(tok&0xff);
-	fcode_written = TRUE;
+	fcode_written = true;
 }
 
 static void emit_num32(u32 num)
@@ -212,7 +212,7 @@ static void emit_num32(u32 num)
 void user_emit_byte(u8 data)
 {
 	emit_byte( data);
-	fcode_written = TRUE;
+	fcode_written = true;
 }
 
 void emit_offset(s16 offs)
@@ -348,7 +348,7 @@ void finish_fcodehdr(void)
 	    {
 		printf( "toke: checksum is 0x%04x (%d bytes).  ",
                         (u16)checksum, length);
-		list_fcode_ranges( TRUE);
+		list_fcode_ranges( true);
 	    }
 	}
 
@@ -356,8 +356,8 @@ void finish_fcodehdr(void)
 	fcode_start_ob_off = -1;
 	fcode_hdr_ob_off   = -1;
 	fcode_body_ob_off  = -1;
-	fcode_written      = FALSE;
-	haveend=FALSE;
+	fcode_written      = false;
+	haveend=false;
 }
 
 /* **************************************************************************

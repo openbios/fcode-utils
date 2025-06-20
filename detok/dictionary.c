@@ -36,7 +36,7 @@
 
 #include "detok.h"
 
-bool check_tok_seq = TRUE;
+bool check_tok_seq = true;
 static token_t *dictionary;	/*  Initialize dynamically to accommodate AIX  */
 
 static char *fcerror = "ferror";

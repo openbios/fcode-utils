@@ -248,8 +248,8 @@ static void eval_mac_string( tic_param_t pfield)
     sav_mac_funct = *tic_found->funct;
     (*tic_found).funct = macro_recursion_error;
     (*tic_found).ign_func = macro_recursion_error;
-    push_source( mac_string_recovery, tic_found, FALSE);
-    report_multiline = FALSE;  /*  Must be done AFTER call to push_source()
+    push_source( mac_string_recovery, tic_found, false);
+    report_multiline = false;  /*  Must be done AFTER call to push_source()
                                 *      because  report_multiline  is part of
                                 *      the state that  push_source()  saves.
 				*/
@@ -459,7 +459,7 @@ void add_user_macro( void)
 {
     char *macroname;
     char *macrobody;
-    bool failure = TRUE;
+    bool failure = true;
 
     /*  Copy of function name, for error message  */
     char *func_cpy = strdup( statbuf);
@@ -469,7 +469,7 @@ void add_user_macro( void)
         /*  This is the Macro name  */
 	macroname = strdup( statbuf);
 
-	if ( INVERSE(get_rest_of_line() ) )
+	if ( !get_rest_of_line() )
 	{
 	    /*  No body on line  */
 	    free( macroname);
@@ -494,9 +494,9 @@ void add_user_macro( void)
 
 	    add_tic_entry( macroname, EVAL_MAC_FUNC,
 	                       (TIC_P_DEFLT_TYPE)macrobody,
-			           MACRO_DEF, mac_body_len, FALSE,
+			           MACRO_DEF, mac_body_len, false,
 				       EVAL_MAC_FUNC, target_vocab );
-	    failure = FALSE;
+	    failure = false;
 	}
     }
 
@@ -535,13 +535,13 @@ void add_user_macro( void)
  **************************************************************************** */
 void skip_user_macro( tic_bool_param_t pfield )
 {
-    bool failure = TRUE;
+    bool failure = true;
     char *func_cpy = strdup( statbuf);
     if ( get_word_in_line( NULL ) )
     {
 	if ( get_rest_of_line() )
 	{
-	    failure = FALSE;
+	    failure = false;
 	}
     }
 

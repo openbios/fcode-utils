@@ -443,7 +443,7 @@ void handle_pci_filler(u8 * filler_ptr)
 	u8 *scan_ptr;
 	int filler_len;
 	char temp_buf[80];
-	bool all_zero = TRUE;
+	bool all_zero = true;
 	u8 filler_byte = *filler_ptr;
 
 	filler_len = pci_image_end - filler_ptr;
@@ -451,7 +451,7 @@ void handle_pci_filler(u8 * filler_ptr)
 	for (scan_ptr = filler_ptr;
 	     scan_ptr < pci_image_end; filler_byte = *(++scan_ptr)) {
 		if (filler_byte != 0) {
-			all_zero = FALSE;
+			all_zero = false;
 			break;
 		}
 	}

@@ -337,8 +337,8 @@ static bool not_cs_underflow;  /*  No need to initialize.  */
  *
  **************************************************************************** */
 
-static bool not_consuming_two = TRUE;
-static bool didnt_print_otl = TRUE;
+static bool not_consuming_two = true;
+static bool didnt_print_otl = true;
 
 
 /* **************************************************************************
@@ -388,7 +388,7 @@ static void push_cstag( unsigned long cstag, unsigned long datum)
     control_stack->cs_line_num = lineno;
     control_stack->cs_abs_token_num = abs_token_no;
     control_stack->cs_word = strdup(statbuf);
-    control_stack->cs_not_dup = TRUE;
+    control_stack->cs_not_dup = true;
     control_stack->cs_datum = datum;
     control_stack->prev = cs_temp;
 
@@ -472,16 +472,16 @@ static void pop_cstag( void)
 
 static bool control_stack_size_test( int min_depth )
 {
-    bool retval = TRUE;
+    bool retval = true;
 
     if ( control_stack_depth < min_depth )
     {
-	retval = FALSE;
+	retval = false;
 	tokenization_error ( TKERROR,
 		"Control-Stack underflow at %s", strupr(statbuf) );
-	in_last_colon( TRUE);
+	in_last_colon( true);
 
-	not_cs_underflow = FALSE;   /*  See expl'n early on in this file  */
+	not_cs_underflow = false;   /*  See expl'n early on in this file  */
     }
 
     return( retval );
@@ -587,7 +587,7 @@ static void offset_too_large( bool too_large_for_16 )
 	    "Branch offset is too large between %s and the %s" ,
 		strupr(statbuf), strupr(control_stack->cs_word));
 	where_started( control_stack->cs_inp_fil, control_stack->cs_line_num );
-	if ( INVERSE( offs16 ) )
+	if ( !offs16 )
 	{
 	    if ( too_large_for_16 )
 	    {
@@ -601,7 +601,7 @@ static void offset_too_large( bool too_large_for_16 )
 	    }
 	}
     }
-    didnt_print_otl = FALSE;
+    didnt_print_otl = false;
 }
 
 /* **************************************************************************
@@ -642,10 +642,10 @@ static void emit_fc_offset( int fc_offset)
 {
     int fc_offs_s16 = (s16)fc_offset;
     int fc_offs_s8  =  (s8)fc_offset;
-    bool too_large_for_8  = BOOLVAL( fc_offset != fc_offs_s8 );
-    bool too_large_for_16 = BOOLVAL( fc_offset != fc_offs_s16);
+    bool too_large_for_8  = ( fc_offset != fc_offs_s8 );
+    bool too_large_for_16 = ( fc_offset != fc_offs_s16);
 
-    if ( too_large_for_16 || ( INVERSE(offs16) && too_large_for_8 ) )
+    if ( too_large_for_16 || ( !offs16 && too_large_for_8 ) )
     {
 	offset_too_large( too_large_for_16 );
 	if ( noerrors )
@@ -725,22 +725,22 @@ static void emit_fc_offset( int fc_offset)
 
 static bool matchup_control_structure( unsigned long cstag )
 {
-    bool retval = FALSE;
+    bool retval = false;
 
     if ( control_stack_size_test( 1) )
     {
-	retval = TRUE;
+	retval = true;
 
 	if ( control_stack->cs_tag != cstag )
 	{
 	    control_structure_mismatch();
 
-	    if (    ( INVERSE(noerrors) )
+	    if (    ( !noerrors )
 		 || ( cstag == CASE_CSTAG )
 		 || ( control_stack->cs_tag == CASE_CSTAG )
 	            )
 	    {
-		retval = FALSE;
+		retval = false;
 	    }
 	}
 
@@ -856,12 +856,12 @@ static bool matchup_two_control_structures( unsigned long top_cstag,
 {
     bool retval;
     bool topmatch;
-    bool nextmatch = FALSE;
+    bool nextmatch = false;
     bool sav_noerrors = noerrors;
-    noerrors = FALSE;
-    not_consuming_two = FALSE;
+    noerrors = false;
+    not_consuming_two = false;
 
-    not_cs_underflow = TRUE;
+    not_cs_underflow = true;
     topmatch = matchup_control_structure( top_cstag);
     if ( not_cs_underflow )
     {
@@ -873,15 +873,15 @@ static bool matchup_two_control_structures( unsigned long top_cstag,
 	}
     }
 
-    retval = BOOLVAL( topmatch && nextmatch);
+    retval = ( topmatch && nextmatch);
 
-    if ( INVERSE( retval) )
+    if ( !retval )
     {
         pop_cstag();
         pop_cstag();
     }
 
-    not_consuming_two = TRUE;
+    not_consuming_two = true;
     noerrors = sav_noerrors;
     return ( retval );
 }
@@ -1091,7 +1091,7 @@ static void resolve_forward( unsigned long cstag)
     unsigned long resvd_opc;
     bool sav_noerrors = noerrors;
     bool cs_match_result;
-    noerrors = FALSE;
+    noerrors = false;
     /*  Restore the "ignore-errors" flag before we act on our match result
      *      because we want it to remain in effect for  emit_fc_offset()
      */
@@ -1262,7 +1262,7 @@ void emit_else( void )
 	emit_token("bbranch");
 	mark_forward_branch( IF_CSTAG );
     }
-    not_cs_underflow = TRUE;
+    not_cs_underflow = true;
     control_structure_swap();
     if ( not_cs_underflow )
     {
@@ -1453,15 +1453,15 @@ void emit_repeat( void )
 {
     if ( matchup_two_control_structures( BEGIN_CSTAG, WHILE_CSTAG ) )
     {
-	not_cs_underflow = TRUE;
-	not_consuming_two = FALSE;
+	not_cs_underflow = true;
+	not_consuming_two = false;
 	emit_again();
 	if ( not_cs_underflow )
 	{
             emit_token("b(>resolve)");
 	    resolve_forward( WHILE_CSTAG );
 	}
-	not_consuming_two = TRUE;
+	not_consuming_two = true;
     }
 }
 
@@ -1518,7 +1518,7 @@ void emit_repeat( void )
 void mark_do( void )
 {
     mark_forward_branch( DO_CSTAG);
-    control_stack->cs_not_dup = FALSE;
+    control_stack->cs_not_dup = false;
     mark_backward_target( DO_CSTAG);
     do_loop_depth++;
 }
@@ -1598,21 +1598,21 @@ void mark_do( void )
 
 void resolve_loop( void )
 {
-    if ( INVERSE( matchup_two_control_structures( DO_CSTAG, DO_CSTAG) ) )
+    if ( !matchup_two_control_structures( DO_CSTAG, DO_CSTAG) )
     {
 	emit_offset( 0 );
     }else{
-	not_cs_underflow = TRUE;
-	didnt_print_otl = TRUE;
-	not_consuming_two = FALSE;
+	not_cs_underflow = true;
+	didnt_print_otl = true;
+	not_consuming_two = false;
 	resolve_backward( DO_CSTAG);
 	if ( not_cs_underflow )
 	{
 	    resolve_forward( DO_CSTAG);
 	}
 	if ( do_loop_depth > 0 ) do_loop_depth--;
-	not_consuming_two = TRUE;
-	didnt_print_otl = TRUE;   /*  Might have gotten cleared   */
+	not_consuming_two = true;
+	didnt_print_otl = true;   /*  Might have gotten cleared   */
     }
 }
 

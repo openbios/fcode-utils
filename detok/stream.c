@@ -75,7 +75,7 @@ u8 *max;
  **************************************************************************** */
 u8 *indata;
 static u8 *fc_start;
-static bool pci_image_found = FALSE;
+static bool pci_image_found = false;
 
 
 int init_stream(char *name)
@@ -230,10 +230,10 @@ static u8 *get_bytes(int nbytes)
 {
 	u8 *retval = pc;
 	if (pc == max) {
-		throw_eof(FALSE);
+		throw_eof(false);
 	}
 	if (pc + nbytes > max) {
-		throw_eof(TRUE);
+		throw_eof(true);
 	}
 	pc += nbytes;
 	return retval;
@@ -251,7 +251,7 @@ static u8 *get_bytes(int nbytes)
 bool more_to_go(void)
 {
 	bool retval;
-	retval = INVERSE(pc == max);
+	retval = !(pc == max);
 	return retval;
 }
 
@@ -505,7 +505,7 @@ void adjust_for_pci_header(void)
 	int pci_header_size;
 
 	pci_header_size = handle_pci_header(pc);
-	pci_image_found = pci_header_size > 0 ? TRUE : FALSE;
+	pci_image_found = pci_header_size > 0 ? true : false;
 	pc += pci_header_size;
 	fc_start += pci_header_size;
 	last_defined_token = 0;
@@ -543,6 +543,6 @@ void adjust_for_pci_filler(void)
 		pci_filler_len = pci_image_end - pc;
 		pci_filler_ptr = get_bytes(pci_filler_len);
 		handle_pci_filler(pci_filler_ptr);
-		pci_image_found = FALSE;
+		pci_image_found = false;
 	}
 }

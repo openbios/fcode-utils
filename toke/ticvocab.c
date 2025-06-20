@@ -369,12 +369,12 @@ tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab )
 bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
 {
     tic_hdr_t *found ;
-    bool retval = FALSE;
+    bool retval = false;
 
     found = lookup_tic_entry( tname, tic_vocab );
     if ( found != NULL )
     {
-	retval = TRUE;
+	retval = true;
     }
 
     return ( retval );
@@ -443,7 +443,7 @@ bool create_split_alias( char *new_name, char *old_name,
                               tic_hdr_t **src_vocab, tic_hdr_t **dest_vocab )
 {
     tic_hdr_t *found ;
-    bool retval = FALSE;
+    bool retval = false;
 
     found = lookup_tic_entry( old_name, *src_vocab );
     if ( found != NULL )
@@ -455,7 +455,7 @@ bool create_split_alias( char *new_name, char *old_name,
 	}
 	if ( trace_it )
 	{
-	    bool old_is_global = BOOLVAL( src_vocab != dest_vocab );
+	    bool old_is_global = ( src_vocab != dest_vocab );
 	    trace_creation( found, new_name, old_is_global);
 	}
 	warn_if_duplicate( new_name);
@@ -468,7 +468,7 @@ bool create_split_alias( char *new_name, char *old_name,
 					   found->ign_func,
 					       trace_it,
 						   dest_vocab );
-	retval = TRUE;
+	retval = true;
     }
 
     return ( retval );
@@ -539,13 +539,13 @@ bool create_tic_alias( char *new_name, char *old_name, tic_hdr_t **tic_vocab )
  
 bool handle_tic_vocab( char *tname, tic_hdr_t *tic_vocab )
 {
-    bool retval = FALSE;
+    bool retval = false;
     
     tic_found = lookup_tic_entry( tname, tic_vocab );
     if ( tic_found != NULL )
     {
         tic_found->funct( tic_found->pfield);
-	retval = TRUE;
+	retval = true;
     }
 
     return ( retval ) ;

@@ -74,10 +74,10 @@
  *
  **************************************************************************** */
 
-bool verbose         = FALSE;
-bool noerrors        = FALSE;
-bool fload_list      = FALSE;
-bool dependency_list = FALSE;
+bool verbose         = false;
+bool noerrors        = false;
+bool fload_list      = false;
+bool dependency_list = false;
 
 /* **************************************************************************
  *
@@ -230,9 +230,9 @@ static void get_args( int argc, char **argv )
 	const char *optstring="vhilPo:d:f:I:T:?";
 	int c;
 	int argindx = 0;
-	bool inval_opt = FALSE;
-	bool help_mssg = FALSE;
-	bool cl_flag_error = FALSE;
+	bool inval_opt = false;
+	bool help_mssg = false;
+	bool cl_flag_error = false;
 
 	while (1) {
 #ifdef __GLIBC__
@@ -262,19 +262,19 @@ static void get_args( int argc, char **argv )
 		argindx++;
 		switch (c) {
 		case 'v':
-			verbose=TRUE;
+			verbose=true;
 			break;
 		case 'o':
 			outputname = optarg;
 			break;
 		case 'i':
-			noerrors = TRUE;
+			noerrors = true;
 			break;
 		case 'l':
-			fload_list = TRUE;
+			fload_list = true;
 			break;
 		case 'P':
-			dependency_list = TRUE;
+			dependency_list = true;
 			break;
 		case 'd':
 			{
@@ -283,7 +283,7 @@ static void get_args( int argc, char **argv )
 			}
 			break;
 		case 'f':
-			cl_flag_error = set_cl_flag(optarg, FALSE) ;
+			cl_flag_error = set_cl_flag(optarg, false) ;
 			break;
 		case 'I':
 			{
@@ -300,12 +300,12 @@ static void get_args( int argc, char **argv )
 			 */
 			if ( optopt )
 			{
-			    inval_opt = TRUE;
+			    inval_opt = true;
 			    break;
 			}
 		case 'h':
 		case 'H':
-			 help_mssg = TRUE;		
+			 help_mssg = true;
 			break;
 		default:
 			/*  This is never executed

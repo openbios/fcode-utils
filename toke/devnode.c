@@ -141,7 +141,7 @@ tic_hdr_t **current_definitions = &(top_level_dev_node.tokens_vocab);
  **************************************************************************** */
 
 static char in_what_buffr[50];   /*  Ought to be more than enough.  */
-static bool show_where = FALSE;
+static bool show_where = false;
 static bool show_which;
 static int in_what_line;
 static char *in_what_file;
@@ -356,7 +356,7 @@ void finish_device_vocab( void )
      *       so we need to test whether we're about to.
      */
 
-    at_top_level = BOOLVAL( current_device_node == &top_level_dev_node );
+    at_top_level = ( current_device_node == &top_level_dev_node );
     if ( at_top_level )
     {
         tokenization_error( TKERROR,
@@ -377,7 +377,7 @@ void finish_device_vocab( void )
     /*   Did we just get to the top-level device-node vocabulary
      *       when we weren't before?
      */
-    if ( INVERSE(at_top_level) )
+    if ( !at_top_level )
     {
 	if ( current_device_node == &top_level_dev_node )
 	{
@@ -456,18 +456,18 @@ void finish_device_vocab( void )
 
 char *in_what_node(device_node_t *the_node)
 {
-    bool top_node    = BOOLVAL( the_node == &top_level_dev_node);
-    bool curr_node   = BOOLVAL( the_node == current_device_node);
-    bool known_node  = BOOLVAL( top_node || curr_node );
-    bool no_line     = BOOLVAL( the_node->line_no == 0);
+    bool top_node    = ( the_node == &top_level_dev_node);
+    bool curr_node   = ( the_node == current_device_node);
+    bool known_node  = ( top_node || curr_node );
+    bool no_line     = ( the_node->line_no == 0);
 
-    show_where   = INVERSE( no_line  );
+    show_where   = !no_line;
     show_which   = known_node;
     in_what_line = the_node->line_no;
     in_what_file = the_node->ifile_name;
 
     sprintf( in_what_buffr, "in the%s device-node%s",
-	INVERSE( known_node )  ? ""
+	!known_node            ? ""
 	        :  top_node    ?    " top-level"   :  " current" ,
 	
 	no_line                ?  ".\n"
@@ -520,7 +520,7 @@ void show_node_start( void)
 	}else{
 	    just_started_at( in_what_file, in_what_line);
 	}
-	show_where = FALSE;
+	show_where = false;
     }
 }
 
@@ -562,7 +562,7 @@ void show_node_start( void)
 bool exists_in_ancestor( char *m_name)
 {
     tic_hdr_t *found;
-    bool retval = FALSE;
+    bool retval = false;
     if ( current_device_node != NULL )
     {
 	device_node_t *grandpa = current_device_node->parent_node;
@@ -574,7 +574,7 @@ bool exists_in_ancestor( char *m_name)
 	    found = lookup_tic_entry( m_name, grandpa->tokens_vocab);
 	    if ( found != NULL )
 	    {
-		retval = TRUE;
+		retval = true;
 		break;
 	    }
 	}
