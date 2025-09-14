@@ -24,7 +24,7 @@
 
 PROGRAM = detok
 
-DESTDIR ?= /usr/local
+prefix ?= /usr/local
 CC      ?= gcc
 STRIP	?= strip
 INCLUDES = -I../shared
@@ -65,5 +65,5 @@ clean:
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@ 
 
 install:
-	mkdir -p $(DESTDIR)/bin
-	cp $(PROGRAM) $(DESTDIR)/bin/$(PROGRAM)
+	mkdir -p $(DESTDIR)/$(prefix)/bin
+	cp $(PROGRAM) $(DESTDIR)/$(prefix)/bin/$(PROGRAM)
