@@ -594,7 +594,7 @@ static void conditionally_tokenize( bool cond, bool alr_ign )
 
 static void conditional_word_in_line( bool alr_ign,
                                           bool exist_test,
-                                              bool (*exist_funct)() )
+                                              bool (*exist_funct)(char *) )
 {
     if ( get_word_in_line( statbuf) )
     {

@@ -179,7 +179,7 @@ typedef struct tic_hdr
     {
         char             *name;
 	struct tic_hdr   *next;
-	void            (*funct)();      /*  Function for active processing  */
+	void            (*funct)(tic_param_t);      /*  Function for active processing  */
 	tic_param_t       pfield;
 	fwtoken           fword_defr;    /*  FWord Token of entry's Definer  */
 	bool              is_token;      /*  Is entry a single-token FCode?  */
@@ -278,7 +278,7 @@ typedef struct tic_bool_hdr
 	tic_bool_param_t     pfield;
 	fwtoken              fword_defr;
 	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void               (*ign_func)();
+	void               (*ign_func)(tic_bool_param_t);
 	int                  pfld_size;
 	bool                 tracing;    /*  TRUE if Invoc'n Msg required    */
     }  tic_bool_hdr_t ;

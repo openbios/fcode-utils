@@ -369,7 +369,7 @@ void list_fcode_ranges( bool final_tally)
 	    }else{   /*  List the collection of Ranges  */
 
 		/*  Pionter to function returning void  */
-		typedef void (*vfunct)();
+		typedef void (*vfunct)(char *, unsigned int);
 
 		/*  Function for the  started_at()  part of the message  */
 		vfunct start_at_funct =
