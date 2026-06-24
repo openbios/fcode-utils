@@ -38,7 +38,7 @@ jobs:
           args: "bash -c \"cp -R localvalues build-$(uname -m)\""
 
       - name: Store x86_64 artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: fcode-utils-x86_64
           path: |
