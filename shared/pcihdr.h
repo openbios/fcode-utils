@@ -149,6 +149,19 @@ typedef struct {
     le_u16(padd);
 } rom_header_t;
 
+typedef struct {
+    be_u16(signature);
+    le_u16(initialization_size);
+    le_u32(efi_signature);
+    le_u16(efi_subsystem);
+    le_u16(efi_machine_type);
+    le_u16(compression_type);
+    u8	reserved[0x8];
+    le_u16(efi_image_header_offset);
+    le_u16(data_ptr);
+    le_u16(padd);
+} efirom_header_t;
+
 
 typedef struct {
     be_u32	(signature);

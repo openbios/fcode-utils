@@ -31,7 +31,7 @@ CFLAGS   ?= -O2 -Wall -Wextra
 LDFLAGS  ?=
 INCLUDES = -I../shared
 
-SOURCES = romheaders.c ../shared/classcodes.c
+SOURCES = romheaders.c ../shared/classcodes.c ../shared/eficodes.c
 
 .SUFFIXES: .c
 
