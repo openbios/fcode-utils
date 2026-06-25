@@ -24,7 +24,7 @@
 
 PROGRAM = romheaders
 
-DESTDIR  ?= /usr/local
+prefix  ?= /usr/local
 CC	 ?= gcc
 STRIP    ?= strip
 CFLAGS   ?= -O2 -Wall -Wextra
@@ -46,5 +46,5 @@ clean:
 	rm -f $(PROGRAM)
 
 install:
-	mkdir -p $(DESTDIR)/bin
-	cp $(PROGRAM) $(DESTDIR)/bin/$(PROGRAM)
+	mkdir -p $(DESTDIR)/$(prefix)/bin
+	cp $(PROGRAM) $(DESTDIR)/$(prefix)/bin/$(PROGRAM)
