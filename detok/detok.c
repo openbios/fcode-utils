@@ -60,7 +60,7 @@ bool show_offsets = false;
  *       TRUE preceding error-exit   */
 static void print_copyright(bool is_error)
 {
-	typedef void (*vfunct) ();	/*  Pointer to function returning void  */
+	typedef void (*vfunct) (char *);	/*  Pointer to function returning void  */
 	vfunct pfunct;
 	char buffr[512];
 

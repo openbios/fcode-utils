@@ -343,7 +343,7 @@ typedef struct source_state
 	unsigned int           old_lineno;
 	bool                   pause_before_pop;
 	bool                   sav_rep_multlin;
-	void                 (*resump_func)();
+	void                 (*resump_func)(_PTR);
 	_PTR                   resump_param;
     } source_state_t ;
 
