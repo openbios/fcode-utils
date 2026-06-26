@@ -388,7 +388,7 @@ static source_state_t  *saved_source = NULL;
  *
  **************************************************************************** */
 
-void push_source( void (*res_func)(), _PTR res_parm, bool file_chg )
+void push_source( void (*res_func)(_PTR), _PTR res_parm, bool file_chg )
 {
     source_state_t  *new_sav_src;
 

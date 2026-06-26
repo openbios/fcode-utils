@@ -210,7 +210,7 @@ static bool already_ignoring = false;
  *
  **************************************************************************** */
 
-void skip_a_word( tic_bool_param_t pfield )
+void skip_a_word( tic_param_t pfield )
 {
     /* signed long wlen = */ get_word();
 }
@@ -238,7 +238,7 @@ void skip_a_word( tic_bool_param_t pfield )
  *          get_word_in_line() will check and report if no word on same line.
  *
  **************************************************************************** */
-void skip_a_word_in_line( tic_bool_param_t pfield )
+void skip_a_word_in_line( tic_param_t pfield )
 {
     /* bool isokay = */ get_word_in_line( statbuf);
 }
@@ -271,7 +271,7 @@ void skip_a_word_in_line( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-void skip_two_words_in_line( tic_bool_param_t pfield )
+void skip_two_words_in_line( tic_param_t pfield )
 {
     char *func_cpy = strupr( strdup( statbuf));
     if ( get_word_in_line( func_cpy) )
@@ -646,7 +646,7 @@ static void if_exists( tic_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_not_exist( tic_bool_param_t pfield )
+static void if_not_exist( tic_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
     conditional_word_in_line( alr_ign, false, exists_in_current );
@@ -663,7 +663,7 @@ static void if_not_exist( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_defined( tic_bool_param_t pfield )
+static void if_defined( tic_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
     conditional_word_in_line( alr_ign, true, exists_as_user_symbol );
@@ -680,7 +680,7 @@ static void if_defined( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_not_defined( tic_bool_param_t pfield )
+static void if_not_defined( tic_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
     conditional_word_in_line( alr_ign, false, exists_as_user_symbol );
@@ -704,7 +704,7 @@ static void if_not_defined( tic_bool_param_t pfield )
  *
  **************************************************************************** */
 
-static void if_from_stack( tic_bool_param_t pfield )
+static void if_from_stack( tic_param_t pfield )
 {
     bool alr_ign = *pfield.bool_ptr;
     bool cond = false;

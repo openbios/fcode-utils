@@ -183,7 +183,7 @@ typedef struct tic_hdr
 	tic_param_t       pfield;
 	fwtoken           fword_defr;    /*  FWord Token of entry's Definer  */
 	bool              is_token;      /*  Is entry a single-token FCode?  */
-	void            (*ign_func)();   /*  Function in "Ignored" segment   */
+	void            (*ign_func)(tic_param_t);   /*  Function in "Ignored" segment   */
 	int               pfld_size;
 	bool              tracing;       /*  TRUE if Invoc'n Msg required    */
     }  tic_hdr_t ;
@@ -208,11 +208,11 @@ typedef struct tic_fwt_hdr
     {
         char               *name;
 	struct tic_fwt_hdr *next;
-	void              (*funct)();    /*  Function for active processing  */
+	void              (*funct)(tic_param_t);    /*  Function for active processing  */
 	tic_fwt_param_t     pfield;
 	fwtoken             fword_defr;  /*  FWord Token of entry's Definer  */
 	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void              (*ign_func)(); /*  Function in "Ignored" segment   */
+	void              (*ign_func)(tic_param_t); /*  Function in "Ignored" segment   */
 	int                 pfld_size;
 	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
     }  tic_fwt_hdr_t ;
@@ -244,11 +244,11 @@ typedef struct tic_mac_hdr
     {
         char               *name;
 	struct tic_mac_hdr *next;
-	void              (*funct)();
+	void              (*funct)(tic_param_t);
 	tic_mac_param_t     pfield;
 	fwtoken             fword_defr;
 	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void              (*ign_func)();
+	void              (*ign_func)(tic_param_t);
 	int                 pfld_size;
 	bool                tracing;     /*  TRUE if Invoc'n Msg required    */
     }  tic_mac_hdr_t ;
@@ -274,11 +274,11 @@ typedef struct tic_bool_hdr
     {
         char                *name;
 	struct tic_bool_hdr *next;
-	void               (*funct)();
-	tic_bool_param_t     pfield;
+	void               (*funct)(tic_param_t);
+	tic_param_t          pfield;
 	fwtoken              fword_defr;
 	bool                is_token;    /*  Is entry a single-token FCode?  */
-	void               (*ign_func)(tic_bool_param_t);
+	void               (*ign_func)(tic_param_t);
 	int                  pfld_size;
 	bool                 tracing;    /*  TRUE if Invoc'n Msg required    */
     }  tic_bool_hdr_t ;
@@ -471,7 +471,7 @@ typedef struct tic_bool_hdr
  **************************************************************************** */
 
 #define BUILTIN_BOOL_TIC(nam, func, bool_vbl )    \
-    { nam , (tic_bool_hdr_t *)NULL , func , { &bool_vbl },   \
+    { nam , (tic_bool_hdr_t *)NULL , func , { .bool_ptr = &bool_vbl },   \
         COMMON_FWORD , false , func , 0 , false }
 
 
@@ -487,12 +487,12 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
                          int max_indx,
 			     tic_hdr_t **tic_vocab_ptr);
 void add_tic_entry( char *tname,
-                        void (*tfunct)(),
+                        void (*tfunct)(tic_param_t),
                              TIC_P_DEFLT_TYPE tparam,
                                  fwtoken fw_defr,
 				     int pfldsiz,
                                          bool is_single,
-                                         void (*ign_fnc)(),
+                                         void (*ign_fnc)(tic_param_t),
                                              tic_hdr_t **tic_vocab );
 tic_hdr_t *lookup_tic_entry( char *tname, tic_hdr_t *tic_vocab );
 bool exists_in_tic_vocab( char *tname, tic_hdr_t *tic_vocab );
