@@ -1256,7 +1256,7 @@ bool init_stream( const char *name)
 static char *extend_filename( const char *base_name, const char *new_ext)
 {
     char *retval;
-    char *ext;
+    const char *ext;
   	unsigned int len; /* should this be size_t? */
     const char *root;
 
