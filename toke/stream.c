@@ -909,13 +909,11 @@ static char *expand_pathname( const char *input_pathname)
     {
 	FILE *temp_file;
 	int syst_stat;
-	const char *temp_file_name = tmpnam( NULL);
 
 	/*  Use the expansion buffer for our temporary command string  */
-	sprintf( expansion_buffer,
-	    "echo %s>%s\n", input_pathname, temp_file_name);
-	syst_stat = system( expansion_buffer);
-	if ( syst_stat != 0 )
+	sprintf( expansion_buffer, "echo %s\n", input_pathname);
+	temp_file = popen( expansion_buffer, "r" );
+	if ( temp_file == NULL )
 	{
 	    tokenization_error( TKERROR,
 		"Expansion Syntax.\n");
@@ -923,13 +921,12 @@ static char *expand_pathname( const char *input_pathname)
 	    return( NULL);
 	}
 
-	temp_file = fopen( temp_file_name, "r");  /*  Cannot fail.   */
 	syst_stat = fread( expansion_buffer, 1, buffer_max, temp_file);
 	/*  Error test.  Length of what we read is not a good indicator;
 	 *      it's limited anyway by buffer_max.
 	 *  Valid test is if last character read was the new-line.
 	 */
-	if ( expansion_buffer[syst_stat-1] != '\n' )
+	if ( syst_stat == 0 || expansion_buffer[syst_stat-1] != '\n' )
 	{
 	    tokenization_error( TKERROR,
 		"Expansion buffer overflow.  Max length is %d.\n",
@@ -942,8 +939,7 @@ static char *expand_pathname( const char *input_pathname)
 	    expanded_name();
 	}
 
-	fclose( temp_file);
-	remove( temp_file_name);
+	pclose( temp_file);
     }
 
     return( retval);
