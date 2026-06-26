@@ -228,7 +228,7 @@ static char *int_to_str( int num, char *bufr)
 
 static void invoke_local( tic_param_t pfield )
 {
-    char local_num_buf[10];
+    char local_num_buf[14];
     int loc_num = (int)pfield.deflt_elem;
 
     int_to_str(loc_num, local_num_buf);
@@ -515,8 +515,8 @@ static bool gather_locals( bool initted, int *counter )
 
 static void activate_locals( void )
 {
-    char ilocals_buf[10];
-    char ulocals_buf[10];
+    char ilocals_buf[14];
+    char ulocals_buf[14];
      
     int_to_str(num_ilocals, ilocals_buf ); 
     int_to_str(num_ulocals, ulocals_buf );
@@ -896,7 +896,7 @@ void finish_locals ( void )
      /*    Don't do anything if Locals are not in use    */
     if ( localno > 0 )
     {
-        char nlocals_buf[10];
+        char nlocals_buf[14];
      
         int_to_str(localno, nlocals_buf ); 
         sprintf( eval_buf,"%s %s",nlocals_buf, pop_locals);
