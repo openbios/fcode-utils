@@ -1539,7 +1539,6 @@ static signed long get_string( bool pack_str)
 
 static void handle_user_message( char delim, bool print_it )
 {
-    signed long wlen;
     unsigned int start_lineno = lineno;
     unsigned int multiline_start = lineno;    /*  For warning message  */
     bool check_multiline = false;
@@ -1547,7 +1546,7 @@ static void handle_user_message( char delim, bool print_it )
 
     if ( delim == '"' )
     {
-	wlen = get_string( false);
+	get_string( false);
     }else{
 	/*
 	 *  When the message-delimiter is a new-line, and the
@@ -1567,7 +1566,7 @@ static void handle_user_message( char delim, bool print_it )
 	    multiline_start = lineno;
 	    check_multiline = true;
 	}
-	wlen = get_until( delim );
+	get_until( delim );
     }
 
     if ( print_it )
@@ -4060,9 +4059,8 @@ static bool abort_quote( fwtoken tok)
 	{
 	    /* ABORT" is not enabled; we'd better consume the string  */
 	    char *save_statbuf;
-	    signed long wlen;
 	    save_statbuf = strdup( (char *)statbuf);
-	    wlen = get_string( false);
+	    get_string( false);
 	    strcpy( statbuf, save_statbuf);
 	    free( save_statbuf);
 	}else{
@@ -4074,7 +4072,6 @@ static bool abort_quote( fwtoken tok)
 	     * Presumably, Apple Source supplies its own
 	     *  IF ... THEN
 	     */
-	    char *abort_string;
 	    signed long wlen;
 
 	    retval = true;
@@ -4099,8 +4096,7 @@ static bool abort_quote( fwtoken tok)
 	}
 		
 	    if ( sun_style_abort_quote )  emit_then();
-	        /*  Sun Style  */
-		abort_string = " type -2 THROW THEN:" ;
+	        /*  Sun Style: type -2 THROW THEN:" */
 }
 	}
     return( retval );

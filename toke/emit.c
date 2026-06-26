@@ -560,7 +560,6 @@ void finish_pcihdr(void)
 	u32 imageblocks;
 	int padding;
 	
-	rom_header_t *pci_hdr;
 	pci_data_t   *pci_data_blk;
 
 	if( pci_data_blk_ob_off == -1 )
@@ -570,7 +569,6 @@ void finish_pcihdr(void)
 	    return ;
 	}
 
-	pci_hdr = (rom_header_t *)(ostart + pci_hdr_ob_off);
 	pci_data_blk = (pci_data_t *)(ostart + pci_data_blk_ob_off);
 
 	/* fix up vpd */
