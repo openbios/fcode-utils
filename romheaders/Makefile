@@ -27,7 +27,7 @@ PROGRAM = romheaders
 DESTDIR  ?= /usr/local
 CC	 ?= gcc
 STRIP    ?= strip
-CFLAGS   ?= -O2 -Wall -Wextra
+CFLAGS   ?= -O2 -Wall -Werror -Wextra
 LDFLAGS  ?=
 INCLUDES = -I../shared
 
