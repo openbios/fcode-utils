@@ -210,8 +210,7 @@ static void macro_recursion_error( tic_param_t pfield)
  *
  **************************************************************************** */
 
-typedef void (*vfunct)();  /*  Pointer to function returning void  */
-static vfunct sav_mac_funct ;
+static void (*sav_mac_funct)(tic_param_t);
 
 
 /* **************************************************************************
@@ -222,8 +221,9 @@ static vfunct sav_mac_funct ;
  *
  **************************************************************************** */
 
-static void mac_string_recovery( tic_hdr_t *macro_entry)
+static void mac_string_recovery( _PTR param)
 {
+    tic_hdr_t *macro_entry = (tic_hdr_t *)param;
     (*macro_entry).funct = sav_mac_funct;
     (*macro_entry).ign_func = sav_mac_funct;
 }
@@ -455,8 +455,9 @@ static void print_if_mac_err( bool failure, char *func_cpy)
 /*  This pointer is exported to this file only  */
 extern tic_hdr_t *tokz_esc_vocab ;
 
-void add_user_macro( void)
+void add_user_macro( tic_param_t pfield )
 {
+    (void)pfield;
     char *macroname;
     char *macrobody;
     bool failure = true;
@@ -533,7 +534,7 @@ void add_user_macro( void)
  *              invokes a directive that alters Conditional processing...
  *
  **************************************************************************** */
-void skip_user_macro( tic_bool_param_t pfield )
+void skip_user_macro( tic_param_t pfield )
 {
     bool failure = true;
     char *func_cpy = strdup( statbuf);

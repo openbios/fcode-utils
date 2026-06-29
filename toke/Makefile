@@ -30,7 +30,7 @@ STRIP	?= strip
 INCLUDES = -I../shared
 
 # Normal flags
-CFLAGS  ?= -O2 -Wall #-Wextra
+CFLAGS  ?= -O2 -Wall -Werror #-Wextra
 LDFLAGS ?=
 
 # Coverage:

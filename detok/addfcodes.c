@@ -373,7 +373,7 @@ bool add_fcodes_from_list(char *vf_file_name)
 			int indx;
 			for (indx = 0; indx < spcl_func_count; indx++) {
 				if ( strcmp( vs_fc_name, spcl_func_list[indx].name) == 0 ) {
-					char strbuf[64];
+					char strbuf[90];
 					found_spf = true;
 					spcl_func_list[indx].fcode = vs_fc_number;
 					link_token( &spcl_func_list[indx]);

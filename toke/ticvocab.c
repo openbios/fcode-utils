@@ -208,12 +208,12 @@ void init_tic_vocab( tic_hdr_t *tic_vocab_tbl,
  **************************************************************************** */
 
 static tic_hdr_t *make_tic_entry( char *tname,
-                        void (*tfunct)(),
+                        void (*tfunct)(tic_param_t),
                              TIC_P_DEFLT_TYPE tparam,
                                  fwtoken fw_defr,
 				     int pfldsiz,
                                          bool is_single,
-                                         void (*ign_fnc)(),
+                                         void (*ign_fnc)(tic_param_t),
                                                bool trace_this,
                                              tic_hdr_t **tic_vocab )
 {
@@ -285,12 +285,12 @@ static tic_hdr_t *make_tic_entry( char *tname,
  **************************************************************************** */
 
 void add_tic_entry( char *tname,
-                        void (*tfunct)(),
+                        void (*tfunct)(tic_param_t),
                              TIC_P_DEFLT_TYPE tparam,
                                  fwtoken fw_defr,
 				     int pfldsiz,
                                          bool is_single,
-					   void (*ign_fnc)(),
+					   void (*ign_fnc)(tic_param_t),
 					       tic_hdr_t **tic_vocab )
 {
     bool trace_this = is_on_trace_list( tname);

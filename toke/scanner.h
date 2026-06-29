@@ -93,7 +93,7 @@ void init_scan_state( void );
 void	 fcode_ender( void );
 
 bool skip_until( char lim_ch);
-void push_source( void (*res_func)(), _PTR res_parm, bool is_f_chg );
+void push_source( void (*res_func)(_PTR), _PTR res_parm, bool is_f_chg );
 signed long get_word( void);
 bool get_word_in_line( char *func_nam);
 bool get_rest_of_line( void);

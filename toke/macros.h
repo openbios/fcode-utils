@@ -46,8 +46,8 @@
  **************************************************************************** */
 
 void init_macros( tic_hdr_t **tic_vocab_ptr );
-void add_user_macro( void);
-void skip_user_macro( tic_bool_param_t pfield );
+void add_user_macro( tic_param_t pfield );
+void skip_user_macro( tic_param_t pfield );
 #if  0  /*  What's this doing here?  */
 char *lookup_macro(char *name);
 bool exists_as_macro(char *name);
