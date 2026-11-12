@@ -229,7 +229,6 @@ static void get_args( int argc, char **argv )
 {
 	const char *optstring="vhilPo:d:f:I:T:?";
 	int c;
-	int argindx = 0;
 	bool inval_opt = false;
 	bool help_mssg = false;
 	bool cl_flag_error = false;
@@ -259,7 +258,6 @@ static void get_args( int argc, char **argv )
 		if (c == -1)
 			break;
 
-		argindx++;
 		switch (c) {
 		case 'v':
 			verbose=true;
